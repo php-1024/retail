@@ -68,11 +68,7 @@
                                     @foreach($stock_list as $key=>$val)
                                     <tr>
                                         <td>{{$val->goods_id}}</td>
-                                        @if($val->RetailGoods == null)
-                                            <td style="color:#FF0000">商品已删除</td>
-                                        @else
-                                            <td>{{$val->RetailGoods->name}}</td>
-                                        @endif
+                                        <td>{{$val->RetailGoods->name}}</td>
                                         @if($val->RetailCategory == null)
                                         <td style="color:#FF0000">栏目已删除</td>
                                         @else
