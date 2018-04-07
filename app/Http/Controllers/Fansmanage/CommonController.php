@@ -53,10 +53,16 @@ class CommonController extends Controller
      * 添加操作记录
      * @param $program_id
      * @param $info
+     * @param $organization_id
+     * @param $id
      */
-    public function insertOperationLog($program_id, $info)
+    public function insertOperationLog($program_id, $info, $organization_id = '', $id = '')
     {
         $this->getRequestInfo();
-        OperationLog::addOperationLog($program_id, $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, $info);
+        // 判断是否有传送组织id
+        $organization_id = $organization_id ?? $this->admin_data['organization_id'];
+        // 判断是否有传送id
+        $id = $id ?? $this->admin_data['id'];
+        OperationLog::addOperationLog($program_id, $organization_id, $id, $this->route_name, $info);
     }
 }
