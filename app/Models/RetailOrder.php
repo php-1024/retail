@@ -88,7 +88,7 @@ class RetailOrder extends Model{
             //如果存在用户账号，订单号码，支付方式，，以及订单状态
             $model = $model->where(['paytype'=>$search_data['paytype']]);
         }
-        if(!empty($search_data['status'])){
+        if(!empty($search_data['status']) && $search_data['status'] != '0'){
             //如果存在用户账号，订单号码，支付方式，，以及订单状态
             $model = $model->where(['status'=>$search_data['status']]);
         }
