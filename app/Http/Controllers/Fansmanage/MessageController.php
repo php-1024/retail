@@ -49,6 +49,7 @@ class MessageController extends Controller
     {
         // 中间件参数 集合
         $this->getRequestInfo();
+        var_dump($this->admin_data);
         // 获取微信公众号关键字回复信息 并且 进行分页
         $list = WechatReply::getPaginage([['organization_id', $this->admin_data['organization_id']]], 15, 'id', 'desc');
         // 渲染关键字回复页面，并且将系统信息输出
@@ -84,7 +85,7 @@ class MessageController extends Controller
         // 中间件产生的 角色权限节点-组织id, 公众号管理组织
         $organization_id = $this->admin_data['organization_id'];
 
-        var_dump($this->admin_data);
+
         //
         $appinfo = WechatAuthorization::getOne([['organization_id', $organization_id]]);
         $authorizer_appid = $appinfo['authorizer_appid'];
