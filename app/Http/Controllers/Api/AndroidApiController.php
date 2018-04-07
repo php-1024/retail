@@ -385,7 +385,7 @@ class AndroidApiController extends Controller{
      * @order_id 订单id
      * @status 1表示加库存，-1表示加库存
      */
-    protected function reduce_stock($order_id,$status){
+    private function reduce_stock($order_id,$status){
         $data =RetailOrder::getOne([['id',$order_id]]);//订单详情
         $config = RetailConfig::getPluck([['retail_id',$data['retail_id']],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
