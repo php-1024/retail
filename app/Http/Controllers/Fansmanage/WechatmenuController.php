@@ -128,8 +128,6 @@ class WechatmenuController extends CommonController
             DB::rollBack();
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
         }
-
-
         return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
     }
 
