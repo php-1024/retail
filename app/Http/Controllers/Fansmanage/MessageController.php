@@ -27,6 +27,7 @@ class MessageController extends CommonController
      */
     public function auto_reply()
     {
+        dump($this->getResponseMsg("1","3213132"));
         // 中间件参数 集合
         $this->getRequestInfo();
         // 获取微信公众号关键字回复信息 并且 进行分页

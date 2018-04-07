@@ -32,4 +32,13 @@ class CommonController extends Controller
         // 获取当前的页面路由
         $this->route_name = request()->path();
     }
+
+    public function getResponseMsg($status, $data)
+    {
+        $responseData = [
+            "status" => $status,
+            "data" => $data
+        ];
+        return response()->json($responseData);
+    }
 }
