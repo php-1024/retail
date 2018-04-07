@@ -619,7 +619,6 @@ class RetailCheckAjax
         if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
-
         return self::res(1, $request);
     }
 
