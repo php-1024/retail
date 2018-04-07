@@ -183,7 +183,7 @@ class GoodsController extends Controller
         $goods_name = $request->get('goods_name');          //接收搜索参数
         $category_id = $request->get('category_id');        //接收搜索参数
         $search_data = ['goods_name' => $goods_name,'category_id' => $category_id]; //处理搜索参数
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();    //获取粉丝管理平台的组织id
         dump($fansmanage_id);
         $where = ['fansmanage_id'=>$fansmanage_id,'retail_id' => $admin_data['organization_id']];
         $category = RetailCategory::getList($where,0,'created_at','DESC');
