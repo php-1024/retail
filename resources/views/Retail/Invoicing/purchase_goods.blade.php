@@ -95,6 +95,15 @@
                                                placeholder="公司名称">
 
 
+                                        <select name="company_name" class="form-control m-b">
+                                            <option value="0">请选择公司名称</option>
+                                            @foreach($supplier as $key=>$val)
+                                        <option value="{{$val->id}}">{{$val->company_name}}</option>
+                                            @endforeach
+                                            </select>
+
+
+
                                     </div>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" name="contactmobile" value=""
