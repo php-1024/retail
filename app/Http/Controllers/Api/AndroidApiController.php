@@ -138,7 +138,7 @@ class AndroidApiController extends Controller{
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
-                    echo $this->reduce_stock($order_id);exit;
+                    print_r($this->reduce_stock($order_id));exit;
 
 //                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
 //                    if($power != '1') {//说明下单减库存
@@ -420,8 +420,10 @@ class AndroidApiController extends Controller{
      * @remarks 备注信息
      */
     public function reduce_stock($order_id){
-        return $order_id;exit;
-        $data = RetailGoods::getOne([['id',$id]]);
+        $data =RetailOrder::getOne([['id',$order_id]]);
+        return $data;
+//        $data = RetailGoods::getOne([['id',$id]]);
+
         DB::beginTransaction();
         try{
             if($status == '1'){
