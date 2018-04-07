@@ -28,9 +28,10 @@ class MessageController extends Controller
 
     public function __construct(Request $request)
     {
+        dump($request->all());
         // 中间件产生的 管理员数据参数
         $this->admin_data = $request->get('admin_data');
-        dump($this->admin_data);
+
 
         // 中间件产生的 菜单参数
         $this->menu_data = $request->get('menu_data');
