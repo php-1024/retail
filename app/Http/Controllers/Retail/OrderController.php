@@ -41,11 +41,9 @@ class OrderController extends Controller
             $where[] = ['paytype' , $paytype];
         }
         if (!empty($status)) {
-            $asd = ['status' , $status];
-            dd($asd);
+            $where[] = ['status' , $status];
         }elseif ($status == 0){
-//            $asd = ['status' , $status];
-//            dd($asd);
+            $where[] = ['status' , $status];
         }
         dump($status);
         dump($where);
