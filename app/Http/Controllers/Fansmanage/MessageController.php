@@ -45,8 +45,10 @@ class MessageController extends Controller
      */
     public function auto_reply(Request $request)
     {
-        $this->getRequestInfo();
-        dump(request()->all());
+//        $this->getRequestInfo();
+        dd($request->all());
+
+
         // 获取微信公众号关键字回复信息 并且 进行分页
         $list = WechatReply::getPaginage([['organization_id', $this->admin_data['organization_id']]], 15, 'id', 'desc');
         // 渲染关键字回复页面，并且将系统信息输出
