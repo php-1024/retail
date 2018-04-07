@@ -47,7 +47,9 @@ class UserController extends Controller{
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
+
         DB::beginTransaction();
+
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
@@ -66,9 +68,11 @@ class UserController extends Controller{
                 'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
-                'wechat_id'=>$re['tag']['id'],
+//                'wechat_id'=>$re['tag']['id'],
+                'wechat_id'=>111,
             ];
             Label::addLabel($dataLabel);
+
             if ($admin_data['is_super'] != 2) {
                 OperationLog::addOperationLog('3', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
             }
