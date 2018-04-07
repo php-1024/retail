@@ -71,16 +71,12 @@
                                         @if($val->RetailGoods == null)
                                             <td style="color:#FF0000">商品已删除</td>
                                         @else
-                                            <td>{{$val->RetailGoods->name}}</td>
-                                        @endif
-                                        @if($val->RetailCategory == null)
-                                        <td style="color:#FF0000">栏目已删除</td>
-                                        @else
+                                        <td>{{$val->RetailGoods->name}}</td>
                                         <td>{{$val->RetailCategory->name}}</td>
-                                        @endif
                                         <td>{{$val->RetailGoods->barcode}}</td>
                                         <td>{{$val->RetailGoods->number}}</td>
                                         <td>{{$val->stock}}</td>
+                                        @endif
                                     </tr>
                                     @endforeach
                                     </tbody>
