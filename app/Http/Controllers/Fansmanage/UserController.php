@@ -54,7 +54,6 @@ class UserController extends Controller{
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
             $re = json_decode($re,true);
-            dd($re);
 
             if(!empty($re['errcode'])){
                 if($re['errcode'] == '45157'){
