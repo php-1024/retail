@@ -141,8 +141,7 @@ class AndroidApiController extends Controller{
             }
             $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
             if($power != '1') {//说明下单减库存
-              echo $this->reduce_stock($order_id,'1');exit;//减库存
-
+              $this->reduce_stock($order_id,'1');//减库存
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
