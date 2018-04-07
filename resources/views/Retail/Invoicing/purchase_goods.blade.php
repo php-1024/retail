@@ -386,7 +386,7 @@
                 price:price
             }
             ordersObj.goods.push(goods);
-            $('.goods-table2 tbody').append('<tr id="hs'+id+'_'+optionid+'"><td>'+id+'</td><td class="search-goods-name">'+name+'</td><td>'+price+'</td><td class="search-goods-action"><button type="button" class="btn btn-danger btn-xs goods-number-sub" onclick="goodsSub('+id+','+optionid+')"><i class="fa fa-minus"></i></button><input id="input'+id+'_'+optionid+'" onchange="update_num('+id+','+optionid+')" type="text" class="text-center goods-number-input" value="" size="4"/><button type="button" class="btn btn-success btn-xs goods-number-add" onclick="goodsAdd('+id+','+optionid+')"><i class="fa fa-plus"></i></button><button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel('+id+','+optionid+')">删除</button></td></tr>');
+            $('.goods-table2 tbody').append('<tr id="hs'+id+'_'+optionid+'"><td>'+id+'</td><td class="search-goods-name">'+name+'</td><td>'+price+'</td><td class="search-goods-action"><button type="button" class="btn btn-danger btn-xs goods-number-sub" onclick="goodsSub('+id+','+optionid+')"><i class="fa fa-minus"></i></button><input id="input'+id+'_'+optionid+'" onchange="update_num('+id+','+optionid+')" type="number" class="text-center goods-number-input" value="" size="4"/><button type="button" class="btn btn-success btn-xs goods-number-add" onclick="goodsAdd('+id+','+optionid+')"><i class="fa fa-plus"></i></button><button type="button" class="btn btn-danger btn-xs" onclick="goodsCancel('+id+','+optionid+')">删除</button></td></tr>');
             $('#input'+id+'_'+optionid).val('1');
         }
         canculate();
