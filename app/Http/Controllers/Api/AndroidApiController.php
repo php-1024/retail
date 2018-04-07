@@ -412,33 +412,33 @@ class AndroidApiController extends Controller{
      */
     public function reduce_stock($order_id){
         echo 1;exit;
-        $re = RetailOrder::getOne([['id',$order_id]]);
-        DB::beginTransaction();
-        try{
-            if($status == '1'){
-                $stock = $data['stock'] - $num;
-                RetailGoods::editRetailGoods([['id', $id]], ['stock' => $stock]);//修改商品库存
-                $stock_data = [
-                    'fansmanage_id' => $data['fansmanage_id'],
-                    'retail_id' => $data['retail_id'],
-                    'goods_id' => $id,
-                    'amount' => $num,
-                    'ordersn' => $ordersn,
-                    'operator_id' => $account_id,
-                    'remark' => $remarks,
-                    'type' => '6',
-                    'status' => '1',
-                ];
-                RetailStockLog::addStockLog($stock_data);
-            }else{
-                $stock = $data['stock'] + $num;
-                RetailGoods::editRetailGoods([['id', $id]], ['stock' => $stock]);//修改商品库存
-            }
-            DB::commit();//提交事务
-        }catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
-        }
+//        $re = RetailOrder::getOne([['id',$order_id]]);
+//        DB::beginTransaction();
+//        try{
+//            if($status == '1'){
+//                $stock = $data['stock'] - $num;
+//                RetailGoods::editRetailGoods([['id', $id]], ['stock' => $stock]);//修改商品库存
+//                $stock_data = [
+//                    'fansmanage_id' => $data['fansmanage_id'],
+//                    'retail_id' => $data['retail_id'],
+//                    'goods_id' => $id,
+//                    'amount' => $num,
+//                    'ordersn' => $ordersn,
+//                    'operator_id' => $account_id,
+//                    'remark' => $remarks,
+//                    'type' => '6',
+//                    'status' => '1',
+//                ];
+//                RetailStockLog::addStockLog($stock_data);
+//            }else{
+//                $stock = $data['stock'] + $num;
+//                RetailGoods::editRetailGoods([['id', $id]], ['stock' => $stock]);//修改商品库存
+//            }
+//            DB::commit();//提交事务
+//        }catch (\Exception $e) {
+//            DB::rollBack();//事件回滚
+//            return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
+//        }
 
     }
 
