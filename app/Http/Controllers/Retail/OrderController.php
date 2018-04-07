@@ -37,10 +37,10 @@ class OrderController extends Controller
         if (!empty($ordersn) && $ordersn != null) {
             $where[] = ['ordersn' , $ordersn];
         }
-        if (!empty($paytype) && $paytype != '请选择' || $paytype == 0) {
+        if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
             $where[] = ['paytype' , $paytype];
         }
-        if (!empty($status) && $status != '请选择' || $status == 0) {
+        if (!empty($status) && $status != '请选择' || $status == '0') {
             $where[] = ['status' , $status];
         }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
