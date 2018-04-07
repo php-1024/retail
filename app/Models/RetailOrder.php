@@ -80,6 +80,10 @@ class RetailOrder extends Model{
             $model = $model->where([['user_id',$search_data['user_id']]]);
             return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
+        if(!empty($search_data['user_id']) && !empty($search_data['ordersn'])){
+            $model = $model->where([['user_id',$search_data['user_id']]]);
+            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        }
         if(!empty($search_data['ordersn'])){
             $model = $model->where([['ordersn',$search_data['ordersn']]]);
             return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
