@@ -427,8 +427,11 @@ class ApiController extends Controller{
         }
 
     }
-    /*
+
+    /**
      * 图片选择页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function material_image_select(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -436,8 +439,4 @@ class ApiController extends Controller{
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
         return view('Wechat/Catering/material_image_select',['list'=>$list,'i'=>$i]);
     }
-
-
-
 }
-?>
