@@ -76,12 +76,12 @@ class RetailOrder extends Model{
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
         $model = self::with('User');
-        if(!empty($search_data['user_id'])){
+        if(!empty($search_data['user_id']) && !empty($search_data['ordersn'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
             return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
-        }elseif(!empty($search_data['user_id']) && !empty($search_data['ordersn'])){
-            $model = $model->where([['user_id',$search_data['user_id']],['ordersn',$search_data['ordersn']]]);
-            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        }elseif(!empty($search_data['user_id'])){
+            $model = $model->where([['user_id',$search_data['user_id']]]);
+            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
         }elseif(!empty($search_data['ordersn'])){
             $model = $model->where([['ordersn',$search_data['ordersn']]]);
             return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
