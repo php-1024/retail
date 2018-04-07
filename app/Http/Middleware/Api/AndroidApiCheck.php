@@ -290,9 +290,9 @@ class AndroidApiCheck{
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
-        if (empty(json_decode($request->input('goodsdata'),TRUE))) {
-            return self::res(0, response()->json(['msg' => '商品数据不能为空', 'status' => '0', 'data' => '']));
-        }
+//        if (empty(json_decode($request->input('goodsdata'),TRUE))) {
+//            return self::res(0, response()->json(['msg' => '商品数据不能为空', 'status' => '0', 'data' => '']));
+//        }
         return self::res(1,$request);
     }
 
