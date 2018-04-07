@@ -114,7 +114,6 @@ class AndroidApiController extends Controller{
             'operator_id' => $account_id,
             'status' => '0',
         ];
-        $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
             $order_id = RetailOrder::addRetailOrder($orderData);//添加入订单表
@@ -122,11 +121,6 @@ class AndroidApiController extends Controller{
                 foreach($value as $k=>$v){
                     $onedata = RetailGoods::getOne([['id',$v['id']]]);//查询商品库存数量
                     $thumb=RetailGoodsThumb::getPluck([['goods_id',$v['id']]],'thumb')->first();//商品图片一张
-                    if($config != '1'){//如果不允许零库存开单
-                        if($onedata['stock'] - $v['num'] < 0){//库存小于0 打回
-                            return response()->json(['msg' => '商品'.$onedata['name'].'库存不足', 'status' => '0', 'data' => '']);
-                        }
-                    }
                     $data = [
                         'order_id'=>$order_id,
                         'goods_id'=>$v['id'],
@@ -143,7 +137,7 @@ class AndroidApiController extends Controller{
             if($power != '1') {//说明下单减库存
               $re = $this->reduce_stock($order_id,'1');//减库存
               if($re != 'ok'){
-                  return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                  return $re;
               }
             }
             DB::commit();//提交事务
@@ -164,7 +158,6 @@ class AndroidApiController extends Controller{
         $order_id = $request->order_id;//订单id
         $organization_id = $request->organization_id;//店铺
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
-        $data = RetailOrder::getOne([['id',$order_id]]);
         DB::beginTransaction();
         try{
             if($power != '1'){//说明下单减库存 所以要把库存归还
@@ -282,20 +275,12 @@ class AndroidApiController extends Controller{
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
-        $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
             if($power == '1'){//说明付款减库存
-                $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
-                foreach($list as $key=>$value){
-                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
-                    if($config != '1'){//如果不允许零库存开单
-                        if($goods['stock'] - $value['num'] < 0){//库存小于0 打回
-                            return response()->json(['msg' => '商品'.$goods['name'].'库存不足', 'status' => '0', 'data' => '']);
-                        }
-                    }
-                    $num = $goods['stock'] - $value['total'];//减库存
-                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
+                $re = $this->reduce_stock($order_id,'1');//减库存
+                if($re != 'ok'){
+                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
                 }
             }
             RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1']);//修改订单状态
@@ -320,20 +305,12 @@ class AndroidApiController extends Controller{
         $paytype = $request->paytype;//支付方式
         $payment_company = $request->payment_company;//支付公司名字
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
-        $config = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
             if($power == '1'){//说明付款减库存
-                $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
-                foreach($list as $key=>$value){
-                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
-                    if($config != '1'){//如果不允许零库存开单
-                        if($goods['stock'] - $value['num'] < 0){//库存小于0 打回
-                            return response()->json(['msg' => '商品'.$goods['name'].'库存不足', 'status' => '0', 'data' => '']);
-                        }
-                    }
-                    $num = $goods['stock'] - $value['total'];//减库存
-                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
+                $re = $this->reduce_stock($order_id,'1');//减库存
+                if($re != 'ok'){
+                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
                 }
             }
             RetailOrder::editRetailOrder([['id',$order_id]],['paytype'=>$paytype,'status'=>'1','payment_company'=>$payment_company]);//修改订单状态
@@ -409,14 +386,20 @@ class AndroidApiController extends Controller{
      * @status 1表示加库存，-1表示加库存
      */
     public function reduce_stock($order_id,$status){
-        $data =RetailOrder::getOne([['id',$order_id]]);
+        $data =RetailOrder::getOne([['id',$order_id]]);//订单详情
+        $config = RetailConfig::getPluck([['retail_id',$data['retail_id']],['cfg_name','allow_zero_stock']],'cfg_value')->first();//查询是否可零库存开单
         DB::beginTransaction();
         try{
             if($status == '1'){
-                $goodsdata = RetailOrderGoods::where([['order_id',$order_id]])->get();
+                $goodsdata = RetailOrderGoods::where([['order_id',$order_id]])->get();//订单快照中的商品
                 foreach($goodsdata as $key=>$value){
-                    $stock = RetailGoods::getPluck([['id',$value['goods_id']]],'stock')->first();
-                    $stock = $stock - $value['total'];
+                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//商品详情
+                    if($config != '1'){//如果不允许零库存开单
+                        if($goods['stock'] - $value['total'] < 0){//库存小于0 打回
+                            return response()->json(['msg' => '商品'.$goods['name'].'库存不足', 'status' => '0', 'data' => '']);
+                        }
+                    }
+                    $stock = $goods['stock'] - $value['total'];
                     RetailGoods::editRetailGoods([['id', $value['goods_id']]], ['stock' => $stock]);//修改商品库存
                     $stock_data = [
                         'fansmanage_id' => $data['fansmanage_id'],
@@ -429,12 +412,12 @@ class AndroidApiController extends Controller{
                         'type' => '6',
                         'status' => '1',
                     ];
-                    RetailStockLog::addStockLog($stock_data);
+                    RetailStockLog::addStockLog($stock_data);//商品操作记录
                 }
             }else{
-                $goodsdata = RetailOrderGoods::where([['order_id',$order_id]])->get();
+                $goodsdata = RetailOrderGoods::where([['order_id',$order_id]])->get();//订单快照中的商品
                 foreach($goodsdata as $key=>$value){
-                    $stock = RetailGoods::getPluck([['id',$value['goods_id']]],'stock')->first();
+                    $stock = RetailGoods::getPluck([['id',$value['goods_id']]],'stock')->first();//商品剩下的库存
                     $stock = $stock + $value['total'];
                     RetailGoods::editRetailGoods([['id', $value['goods_id']]], ['stock' => $stock]);//修改商品库存
                     $stock_data = [
@@ -448,13 +431,13 @@ class AndroidApiController extends Controller{
                         'type' => '7',
                         'status' => '1',
                     ];
-                    RetailStockLog::addStockLog($stock_data);
+                    RetailStockLog::addStockLog($stock_data);//商品操作记录
                 }
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return false;
+            return response()->json(['msg' => '提交失败', 'status' => '0', 'data' => '']);
         }
         return 'ok';
     }
