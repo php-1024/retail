@@ -373,6 +373,7 @@ class WechatmenuController extends CommonController
             }
         }
         dump($data);
+        dump(json_encode($data,JSON_UNESCAPED_UNICODE));
         // 刷新并获取授权令牌
         $auth_info = \Wechat::refresh_authorization_info($organization_id);
         // 创建微信菜单
@@ -384,7 +385,7 @@ class WechatmenuController extends CommonController
         if ($re['errmsg'] == 'ok') {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
-            return response()->json(['data' => '同步失败！', 'status' => '1']);
+            return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
     }
     // +----------------------------------------------------------------------
