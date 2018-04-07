@@ -75,5 +75,3 @@ class WechatReply extends Model
     }
 
 }
-
-?>
