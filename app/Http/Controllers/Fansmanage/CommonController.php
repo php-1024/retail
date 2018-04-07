@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
 
-class BaseController extends Controller
+class CommonController extends Controller
 {
     protected $admin_data = [];
     protected $menu_data = [];

@@ -19,9 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class MessageController extends BaseController
+class MessageController extends CommonController
 {
-
     /**
      * 关键字自动回复列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -30,7 +29,6 @@ class MessageController extends BaseController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-        var_dump($this->admin_data);
         // 获取微信公众号关键字回复信息 并且 进行分页
         $list = WechatReply::getPaginage([['organization_id', $this->admin_data['organization_id']]], 15, 'id', 'desc');
         // 渲染关键字回复页面，并且将系统信息输出
