@@ -1,7 +1,7 @@
 <form method="post" role="form" id="currentForm" action="{{ url('fansmanage/ajax/defined_menu_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{$id}}">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
