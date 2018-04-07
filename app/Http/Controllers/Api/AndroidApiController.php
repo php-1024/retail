@@ -12,6 +12,7 @@ use App\Models\RetailGoods;
 use App\Models\RetailGoodsThumb;
 use App\Models\RetailOrder;
 use App\Models\RetailOrderGoods;
+use App\Models\RetailStockLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -136,6 +137,21 @@ class AndroidApiController extends Controller{
                         'price'=>$v['price'],
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
+
+
+                    $stock_data = [
+                        'fansmanage_id' => $fansmanage_id,
+                        'retail_id' => $organization_id,
+                        'goods_id' => $v['id'],
+                        'amount' => $v['num'],
+                        'ordersn' => $ordersn,
+                        'operator_id' => $account_id,
+                        'remark' => $remarks,
+                        'type' => '6',
+                        'status' => '1',
+                    ];
+                    RetailStockLog::addStockLog($stock_data);
+
 
                     $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
                     if($power != '1') {//说明下单减库存
@@ -403,6 +419,12 @@ class AndroidApiController extends Controller{
         return response()->json(['status' => '1', 'msg' => '查询成功', 'data' => ['cfglist' => $cfglist]]);
     }
 
+    /**
+     * 减库存
+     */
+    public function reduce_stock(Request $request){
+
+    }
 
 }
 ?>
