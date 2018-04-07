@@ -81,9 +81,11 @@ class MessageController extends Controller
         // 中间件产生的 关键字类型:  1-精确 2-模糊
         $type = $request->input('type');
 
-        // 中间件产生的 角色权限节点-组织id
+        // 中间件产生的 角色权限节点-组织id, 公众号管理组织
         $organization_id = $this->admin_data['organization_id'];
 
+        var_dump($this->admin_data);
+        //
         $appinfo = WechatAuthorization::getOne([['organization_id', $organization_id]]);
         $authorizer_appid = $appinfo['authorizer_appid'];
 
