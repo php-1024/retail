@@ -43,10 +43,9 @@ class MessageController extends Controller
 
     /**
      * 关键字自动回复列表
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function auto_reply(Request $request)
+    public function auto_reply()
     {
         // 中间件参数 集合
         $this->getRequestInfo();
