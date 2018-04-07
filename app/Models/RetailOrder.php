@@ -79,22 +79,19 @@ class RetailOrder extends Model{
         if(!empty(!empty($search_data['ordersn']) && $search_data['user_id']) && !empty($search_data['paytype']) && !empty($search_data['status'])){
             //如果存在用户账号，订单号码，支付方式，，以及订单状态
             $model = $model->where(['user_id'=>$search_data['user_id']],['ordersn'=>$search_data['ordersn']]);
-            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
         }elseif(!empty($search_data['user_id']) && !empty($search_data['paytype']) && !empty($search_data['status'])){
             //如果存在用户账号，支付方式，订单状态
             $model = $model->where(['user_id'=>$search_data['user_id'],['paytype'=>$search_data['paytype']],['status'=>$search_data['status']]]);
-            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
         }elseif(!empty($search_data['user_id']) && !empty($search_data['paytype'])){
             //如果存在用户账号，支付方式
             $model = $model->where(['user_id'=>$search_data['user_id'],['paytype'=>$search_data['paytype']]]);
-            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
         }elseif(!empty($search_data['user_id']) && !empty($search_data['status'])){
             //如果存在用户账号，支付方式
             $model = $model->where(['user_id'=>$search_data['user_id'],['status'=>$search_data['status']]]);
-            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
         }else{
             return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
+        return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
 
     }
 
