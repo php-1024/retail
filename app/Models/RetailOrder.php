@@ -76,10 +76,6 @@ class RetailOrder extends Model{
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
         $model = self::with('User');
-        if(!empty(!empty($search_data['ordersn']) && $search_data['user_id']) && !empty($search_data['paytype']) && !empty($search_data['status'])){
-            //如果存在用户账号，订单号码，支付方式，，以及订单状态
-            $model = $model->where(['user_id'=>$search_data['user_id']],['ordersn'=>$search_data['ordersn']]);
-        }
         if(!empty($search_data['user_id'])){
             //如果存在用户账号，订单号码，支付方式，，以及订单状态
             $model = $model->where(['user_id'=>$search_data['user_id']]);
