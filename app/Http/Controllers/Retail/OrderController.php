@@ -43,6 +43,9 @@ class OrderController extends Controller
         if (!empty($status)) {
             $asd = ['status' , $status];
             dd($asd);
+        }elseif ($status == 0){
+            $asd = ['status' , $status];
+            dd($asd);
         }
         dump($status);
         dump($where);
