@@ -46,7 +46,8 @@ class OperationLog extends Model{
         $operation_log->account_id = $account_id;
         $operation_log->route_name = $route_name;
         $operation_log->operation_info = $info;
-        $operation_log->save();
+        $res = $operation_log->save();
+        return $res;
     }
     //获取联表的分页数据
     public static function getUnionPaginate($account,$time_st_format,$time_nd_format,$paginate,$orderby,$sort='DESC'){
