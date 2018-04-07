@@ -19,28 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class MessageController extends Controller
+class MessageController extends CommonController
 {
-    protected $admin_data = [];
-    protected $menu_data = [];
-    protected $son_menu_data = [];
-    protected $route_name = '';
-
-    /**
-     * 请求参数的获取
-     */
-    public function getRequestInfo()
-    {
-        // 中间件产生的 管理员数据参数
-        $this->admin_data = request()->get('admin_data');
-        // 中间件产生的 菜单参数
-        $this->menu_data = request()->get('menu_data');
-        // 中间件产生的 子菜单参数
-        $this->son_menu_data = request()->get('son_menu_data');
-        // 获取当前的页面路由
-        $this->route_name = request()->path();
-    }
-
     /**
      * 关键字自动回复列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -49,13 +29,11 @@ class MessageController extends Controller
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-        var_dump($this->admin_data);
         // 获取微信公众号关键字回复信息 并且 进行分页
         $list = WechatReply::getPaginage([['organization_id', $this->admin_data['organization_id']]], 15, 'id', 'desc');
         // 渲染关键字回复页面，并且将系统信息输出
         return view('Fansmanage/Message/auto_reply', ['list' => $list, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
-
 
     /**
      * 关键字添加页面
@@ -70,76 +48,98 @@ class MessageController extends Controller
 
     /**
      * 添加关键字数据
-     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function auto_reply_add_check(Request $request)
+    public function auto_reply_add_check()
     {
+        // 中间件参数 集合
         $this->getRequestInfo();
         // 中间件产生的 关键字
-        $keyword = $request->input('keyword');
+        $keyword = request()->input('keyword');
         // 中间件产生的 关键字类型:  1-精确 2-模糊
-        $type = $request->input('type');
-
+        $type = request()->input('type');
         // 中间件产生的 角色权限节点-组织id, 公众号管理组织
         $organization_id = $this->admin_data['organization_id'];
-
-
-        //
+        // 通过组织id 获取公众号基础信息
         $appinfo = WechatAuthorization::getOne([['organization_id', $organization_id]]);
+        // 授权appid
         $authorizer_appid = $appinfo['authorizer_appid'];
 
+        // 检测在该组织里面,所对应的 关键字是否已经 添加过
+        // 是：添加过就进行 已添加 的消息提示
+        // 否：进行添加
         if (WechatReply::checkRowExists([['organization_id', $organization_id], ['keyword', $keyword]])) {//判断是否添加过相同的的角色
-            return response()->json(['data' => '您添加的关键字已经存在', 'status' => '0']);
+            return $this->getResponseMsg("0", "您添加的关键字已经存在");
         } else {
+            // 事务处理
             DB::beginTransaction();
             try {
+                // 成功就进行数据提交，并且添加操作记录
                 $data = ['organization_id' => $organization_id, 'authorizer_appid' => $authorizer_appid, 'keyword' => $keyword, 'type' => $type];
+                // 添加到 关键字回复表
                 WechatReply::addWechatReply($data);
-                OperationLog::addOperationLog('1', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '添加了自动回复关键字' . $keyword);//保存操作记录
+                // 保存操作记录
+                $this->insertOperationLog("1", '添加了自动回复关键字' . $keyword);
                 DB::commit();
             } catch (\Exception $e) {
-                DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加关键字失败，请检查', 'status' => '0']);
+                // 失败就进行数据回滚，然后返回 添加失败 的提示
+                DB::rollBack();
+                return $this->getResponseMsg("0", "添加关键字失败，请检查");
             }
-            return response()->json(['data' => '添加关键字成功', 'status' => '1']);
+            // 返回添加成功的提示
+            return $this->getResponseMsg("1", "添加关键字成功");
         }
     }
 
-    /*
-    * 添加关键字文本回复
-    */
-    public function auto_reply_edit_text(Request $request)
+    /**
+     * 添加关键字文本回复 页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function auto_reply_edit_text()
     {
-        $id = $request->input('id');
+        // 获取中间件产生的 要编辑的关键字 的记录数的 id值
+        $id = request()->input('id');
+        // 获取该关键字数据信息
         $info = WechatReply::getOne([['id', $id]]);
+        // 渲染页面，并且返回的关键字信息
         return view('Fansmanage/Message/auto_reply_edit_text', ['id' => $id, 'info' => $info]);
     }
 
-    /*
+
+    /**
      * 编辑自动回复文本内容
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
-    public function auto_reply_edit_text_check(Request $request)
+    public function auto_reply_edit_text_check()
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // 中间件产生的 关于关键字回复的id
+        $id = request()->input('id');
+        // 文本回复：值为1
         $reply_type = 1;
-        $reply_info = $request->input('reply_info');
+        // 回复的内容
+        $reply_info = request()->input('reply_info');
+        // 获取关键字信息
         $info = WechatReply::getOne([['id', $id]]);
 
+        // 事务处理
         DB::beginTransaction();
         try {
             $data = ['reply_type' => $reply_type, 'reply_info' => $reply_info, 'media_id' => ''];
+            // 添加关键字回复主体内容
             WechatReply::editWechatReply([['id', $id]], $data);
-            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了自动回复关键字' . $info['keyword'] . '的文本回复内容');//保存操作记录
+            // 添加操作记录
+            $this->insertOperationLog("1", "修改了自动回复关键字{$info['keyword']}的文本回复内容");
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '修改自动回复关键字的文本回复失败，请检查', 'status' => '0']);
+            // 事件回滚
+            DB::rollBack();
+            return $this->getResponseMsg("0", "修改自动回复关键字的文本回复失败，请检查");
         }
-        return response()->json(['data' => '修改自动回复关键字的文本回复成功', 'status' => '1']);
+        return $this->getResponseMsg("1", "修改自动回复关键字的文本回复成功");
     }
 
     /*
@@ -588,6 +588,6 @@ class MessageController extends Controller
         }
         return response()->json(['data' => '修改关注自动回复的图文回复内容成功', 'status' => '1']);
     }
-    /**************************************************************************消息回复管理结束*********************************************************************************/
+
 
 }

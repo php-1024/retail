@@ -54,12 +54,26 @@ class AccountController extends Controller{
     {
         $admin_data = $request->get('admin_data');  //中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
+        $organization_id = $admin_data['organization_id'];
         $realname = $request->input('realname');    //真实姓名
         $mobile = $request->input('mobile');        //手机号码
+        $oneAcc = Account::getOne([['id',$admin_data['id']]]);
         $id = AccountInfo::checkRowExists([['account_id',$admin_data['id']]]);//查询是否存在该数据false/true
         DB::beginTransaction();
         try {
-            Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);
+            if($oneAcc['mobile']!=$mobile){
+                if(Account::checkRowExists([['mobile',$mobile],['organization_id',$organization_id]])){//判断手机号在服务商存不存在
+                    return response()->json(['data' => '手机号已存在', 'status' => '0']);
+                }
+                if($admin_data['is_super'] != 1) {
+                    if(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
+                        return response()->json(['data' => '手机号码已存在', 'status' => '0']);
+                    }
+                }
+                Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);//修改用户手机号
+            }
+
+
             if ($id){//判断是否存在该数据
                 AccountInfo::editAccountInfo([['account_id',$admin_data['id']]],['realname'=>$realname]);
             }else{

@@ -57,7 +57,7 @@
                                                     <select name="category_id" class="form-control m-b">
                                                         <option value ="0">请选择</option>
                                                         @foreach($category as $key=>$val)
-                                                            <option value ="{{$val->id}}" @if($val->id == $goods->category->id)selected @endif>{{$val->name}}</option>
+                                                            <option value ="{{$val->id}}" @if($goods->category != null && $val->id == $goods->category->id)selected @endif>{{$val->name}}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
