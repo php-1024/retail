@@ -32,16 +32,16 @@ class OrderController extends Controller
         $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = ['retail_id' => $admin_data['organization_id']];
         if (!empty($user_id)) {
-            $where[] = ['user_id' => $user_id];
+            $where[] = ['user_id' , $user_id];
         }
         if (!empty($ordersn)) {
-            $where[] = ['ordersn' => $ordersn];
+            $where[] = ['ordersn' , $ordersn];
         }
         if (!empty($paytype) && $paytype != '请选择') {
-            $where[] = ['paytype' => $paytype];
+            $where[] = ['paytype' , $paytype];
         }
         if (!empty($status)) {
-            $where[] = ['status' => $status];
+            $where[] = ['status' , $status];
         }
         dump($where);
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
