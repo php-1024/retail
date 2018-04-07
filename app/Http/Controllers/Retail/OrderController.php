@@ -37,11 +37,11 @@ class OrderController extends Controller
         if (!empty($ordersn)) {
             $where[] = ['ordersn' , $ordersn];
         }
-//        if (!empty($paytype) && $paytype != '请选择') {
-//            $where[] = ['paytype' , $paytype];
-//        }elseif ($paytype != null && $paytype == 0){
-//            $where[] = ['paytype' , $paytype];
-//        }
+        if (!empty($paytype) && $paytype != '请选择') {
+            $where[] = ['paytype' , $paytype];
+        }elseif ($paytype == 0){
+            $where[] = ['paytype' , $paytype];
+        }
 //        if (!empty($status)) {
 //            $where[] = ['status' , $status];
 //        }elseif ($status != null && $status == 0){
