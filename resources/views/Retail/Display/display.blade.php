@@ -448,10 +448,6 @@
 
 
 
-
-
-
-
             $this.option.defaultPoint = new BMap.Point($this.option.point.lng, $this.option.point.lat);
 
 
