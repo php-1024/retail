@@ -6,6 +6,7 @@
 
 namespace App\Http\Controllers\Fansmanage;
 
+
 use App\Http\Controllers\Controller;
 use App\Models\Label;
 use App\Models\OperationLog;
@@ -323,16 +324,25 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
+        // 获取组织id
         $organization_id = $this->admin_data['organization_id'];
+        // 获取主菜单列表
         $list = WechatDefinedMenu::ListWechatDefinedMenu([['parent_id', '0'], ['organization_id', $organization_id]]);
+        // 处理菜单数据结构
         foreach ($list as $key => $value) {
+            // 子菜单结构
             $parent_tree = $value['parent_tree'] . $value['id'] . ',';
+            // 获取子菜单结构
             $re = WechatDefinedMenu::ListWechatDefinedMenu([['parent_tree', $parent_tree]])->toArray();
+            // 判断是否存在子菜单
             if ($re) {
+                // 如果存在子菜单，拼接数据结构
                 foreach ($re as $k => $v) {
+                    // 获取菜单类型名称
                     $type = $this->getEventType($v['event_type']);
+                    // 获取菜单的名称
                     $data['button'][$key]['name'] = $value['menu_name'];
+                    // 如果菜单类型为 1 ：跳转地址
                     if ($v['event_type'] == 1) {
                         $data['button'][$key]['sub_button'][] = [
                             'name' => $v['menu_name'],
@@ -340,6 +350,7 @@ class WechatmenuController extends CommonController
                             'url' => $v['response_url']
                         ];
                     } else {
+                        // 其他：通过 key 值去渲染
                         $data['button'][$key]['sub_button'][] = [
                             'name' => $v['menu_name'],
                             'type' => $type,
@@ -348,9 +359,12 @@ class WechatmenuController extends CommonController
                     }
                 }
             } else {
+                // 没有子菜单的情况
                 $type = $this->getEventType($value['event_type']);
+                // 渲染数据
                 $data['button'][$key]['name'] = $value['menu_name'];
                 $data['button'][$key]['type'] = $type;
+                // 判断主菜单的类型
                 if ($value['event_type'] == 1) {
                     $data['button'][$key]['url'] = $value['response_url'];
                 } else {
@@ -358,20 +372,26 @@ class WechatmenuController extends CommonController
                 }
             }
         }
-        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
+        dump($data);
+        dump(json_encode($data,JSON_UNESCAPED_UNICODE));
+        // 刷新并获取授权令牌
+        $auth_info = \Wechat::refresh_authorization_info($organization_id);
+        // 创建微信菜单
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
+        dump($re);
 
+        // 返回创建的数据结构
         if ($re['errmsg'] == 'ok') {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
-            return response()->json(['data' => '同步失败！', 'status' => '1']);
+            return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
     }
-
     // +----------------------------------------------------------------------
     // | End - 自定义菜单
     // +----------------------------------------------------------------------
+
 
 
     // +----------------------------------------------------------------------
@@ -381,7 +401,7 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
+        // 渲染页面
         return view('Fansmanage/Wechatmenu/conditional_menu', ['admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
 
