@@ -81,7 +81,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                <button data-dismiss="modal" class="btn btn-success" type="button">确定</button>
             </div>
         </div>
     </div>
