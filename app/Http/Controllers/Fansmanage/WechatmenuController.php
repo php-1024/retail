@@ -108,11 +108,13 @@ class WechatmenuController extends CommonController
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
 
-        dump($defined_menu);
+        $res = WechatDefinedMenu::addDefinedMenu($defined_menu);
+        dump($res);
 
         // 事务处理
         DB::beginTransaction();
         try {
+            dump(1);
             // 添加微信自定义菜单
             $res = WechatDefinedMenu::addDefinedMenu($defined_menu);
             dump($res);
@@ -130,6 +132,7 @@ class WechatmenuController extends CommonController
 
             DB::commit();
         } catch (\Exception $e) {
+            dump(2);
             dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
