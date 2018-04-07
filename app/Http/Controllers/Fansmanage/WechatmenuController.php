@@ -709,9 +709,11 @@ class WechatmenuController extends CommonController
         $data['matchrule'] = [
             'tag_id' => $tag_id
         ];
+
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
+        dd($re);
         if (!empty($re['menuid'])) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
