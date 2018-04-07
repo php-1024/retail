@@ -109,7 +109,7 @@ class WechatmenuController extends CommonController
         }
 
         $res = WechatDefinedMenu::addDefinedMenu($defined_menu);
-        dump($res);
+        dd($res);
 
         // 事务处理
         DB::beginTransaction();
