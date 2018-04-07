@@ -107,10 +107,7 @@ class WechatmenuController extends CommonController
         if ($parent_id <> '0' && $count >= 5) {
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
-        dump($this->admin_data['is_super']);
-        $this->insertOperationLog("4", "添加了公众号自定义菜单！");
 
-        dd(2);
         // 事务处理
         DB::beginTransaction();
         try {

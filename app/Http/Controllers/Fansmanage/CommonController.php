@@ -63,11 +63,6 @@ class CommonController extends Controller
         $organization_id = !empty($organization_id) ? $organization_id : $this->admin_data["organization_id"];
         // 判断是否有传送id
         $id = !empty($id) ? $id : $this->admin_data['id'];
-        dump($organization_id);
-        dump($id);
-
-        $res = OperationLog::addOperationLog($program_id, $organization_id, $id, $this->route_name, $info);
-
-        dd($res);
+        OperationLog::addOperationLog($program_id, $organization_id, $id, $this->route_name, $info);
     }
 }
