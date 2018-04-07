@@ -4,8 +4,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                确认删除菜单
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">确认删除菜单</h4>
             </div>
+
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">安全密码</label>
