@@ -69,13 +69,12 @@ class UserController extends Controller{
                 'wechat_id'=>$re['tag']['id'],
             ];
             Label::addLabel($dataLabel);
-            dump($admin_data['is_super']);
-
             if ($admin_data['is_super'] != 2) {
                 OperationLog::addOperationLog('3', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
         }
