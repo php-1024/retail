@@ -92,7 +92,6 @@ class RetailOrder extends Model{
             //如果存在用户账号，订单号码，支付方式，，以及订单状态
             $model = $model->where(['status'=>$search_data['status']]);
         }
-
         return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
 
     }
