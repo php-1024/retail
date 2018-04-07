@@ -53,12 +53,12 @@
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
                                                 <option @if($search_data['paytype'] == null ) selected @endif>请选择</option>
-                                                <option value="-1" @if($search_data['paytype']=='-1') selected @endif >现金支付，其他支付</option>
                                                 <option value="0" @if($search_data['paytype']=='0') selected @endif >银行卡支付</option>
                                                 <option value="1" @if($search_data['paytype']=='1') selected @endif >支付宝扫码</option>
                                                 <option value="2" @if($search_data['paytype']=='2') selected @endif >支付宝二维码</option>
                                                 <option value="3" @if($search_data['paytype']=='3') selected @endif >微信扫码</option>
                                                 <option value="4" @if($search_data['paytype']=='4') selected @endif >微信二维码</option>
+                                                <option value="-1" @if($search_data['paytype']=='-1') selected @endif >现金支付，其他支付</option>
                                             </select>
                                         </div>
                                         <label class="col-sm-1 control-label">订单状态</label>
@@ -104,21 +104,17 @@
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td><label class="label label-info">
                                         @if($val->paytype==1)
-                                            余额支付
+                                            支付宝扫码
                                         @elseif($val->paytype==2)
-                                            在线支付
+                                            支付宝二维码
                                         @elseif($val->paytype==3)
-                                            货到付款
+                                            微信扫码
                                         @elseif($val->paytype==4)
-                                            现场现金支付
-                                        @elseif($val->paytype==5)
-                                            现场刷卡支付
-                                        @elseif($val->paytype==6)
-                                            现场支付宝支付
-                                        @elseif($val->paytype==7)
-                                            现场微信支付
-                                        @elseif($val->paytype==8)
-                                            线上手动确认付款
+                                            微信二维码
+                                        @elseif($val->paytype==-1)
+                                            现金支付，其他支付
+                                        @elseif($val->paytype==0)
+                                            银行卡支付
                                         @endif
                                         </label></td>
 
