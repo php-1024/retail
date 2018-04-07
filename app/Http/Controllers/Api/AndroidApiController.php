@@ -168,17 +168,11 @@ class AndroidApiController extends Controller{
         DB::beginTransaction();
         try{
             if($power != '1'){//说明下单减库存 所以要把库存归还
-                $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
-
-                foreach($list as $key=>$value){
-//                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
-//                    $num = $goods['stock'] + $value['total'];//把库存加回去
-//                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
-                   $re =  $this->reduce_stock($value['goods_id'],$value['total'],'-1',$data['ordersn'],$data['operator_id'],$data['remarks']);
-                   echo $re;
+                $re = $this->reduce_stock($order_id,'-1');//加库存
+                if($re != 'ok'){
+                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
                 }
             }
-            exit;
             RetailOrder::editRetailOrder([['id',$order_id]],['status'=>'-1']);
             DB::commit();//提交事务
         }catch (\Exception $e) {
@@ -437,23 +431,26 @@ class AndroidApiController extends Controller{
                     ];
                     RetailStockLog::addStockLog($stock_data);
                 }
+            }else{
+                $goodsdata = RetailOrderGoods::where([['order_id',$order_id]])->get();
+                foreach($goodsdata as $key=>$value){
+                    $stock = RetailGoods::getPluck([['id',$value['goods_id']]],'stock')->first();
+                    $stock = $stock + $value['total'];
+                    RetailGoods::editRetailGoods([['id', $value['goods_id']]], ['stock' => $stock]);//修改商品库存
+                    $stock_data = [
+                        'fansmanage_id' => $data['fansmanage_id'],
+                        'retail_id' => $data['retail_id'],
+                        'goods_id' => $value['goods_id'],
+                        'amount' => $value['total'],
+                        'ordersn' => $data['ordersn'],
+                        'operator_id' => $data['operator_id'],
+                        'remark' => $data['remarks'],
+                        'type' => '7',
+                        'status' => '1',
+                    ];
+                    RetailStockLog::addStockLog($stock_data);
+                }
             }
-//            else{
-//                $stock = $data['stock'] + $num;
-//                RetailGoods::editRetailGoods([['id', $id]], ['stock' => $stock]);//修改商品库存
-//                $stock_data = [
-//                    'fansmanage_id' => $data['fansmanage_id'],
-//                    'retail_id' => $data['retail_id'],
-//                    'goods_id' => $id,
-//                    'amount' => $num,
-//                    'ordersn' => $ordersn,
-//                    'operator_id' => $account_id,
-//                    'remark' => $remarks,
-//                    'type' => '6',
-//                    'status' => '1',
-//                ];
-//                RetailStockLog::addStockLog($stock_data);
-//            }
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
