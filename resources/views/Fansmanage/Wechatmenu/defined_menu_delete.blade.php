@@ -9,9 +9,12 @@
             </div>
 
             <div class="modal-body">
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">安全密码</label>
-                    <div class="col-sm-10"><input type="password" class="form-control" id="safe_password" name="safe_password"></div>
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">安全密码</label>
+                        <div class="col-sm-10"><input type="password" class="form-control" id="safe_password"
+                                                      name="safe_password"></div>
+                    </div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -33,16 +36,16 @@
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if (json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
+            } else {
                 swal({
                     title: "提示信息",
                     text: json.data,

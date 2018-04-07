@@ -377,7 +377,6 @@ class WechatmenuController extends CommonController
     // +----------------------------------------------------------------------
     // | Start - 个性化菜单
     // +----------------------------------------------------------------------
-
     public function conditional_menu()
     {
         // 中间件参数 集合
