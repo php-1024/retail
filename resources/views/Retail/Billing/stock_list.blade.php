@@ -67,7 +67,7 @@
                                     <tbody>
                                     @foreach($stock_list as $key=>$val)
                                     <tr>
-                                        <td>{{$val->goods_id}}****{{$val->id}}</td>
+                                        <td>{{$val->goods_id}}</td>
                                         @if($val->RetailGoods == null)
                                             <td style="color:#FF0000">商品已删除</td>
                                         @else
