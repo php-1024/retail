@@ -173,7 +173,8 @@ class AndroidApiController extends Controller{
 //                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
 //                    $num = $goods['stock'] + $value['total'];//把库存加回去
 //                    RetailGoods::editRetailGoods([['id',$value['goods_id']]],['stock'=>$num]);//修改库存
-                   echo $this->reduce_stock($value['goods_id'],$value['total'],'-1',$data['ordersn'],$data['operator_id'],$data['remarks']);
+                   $re =  $this->reduce_stock($value['goods_id'],$value['total'],'-1',$data['ordersn'],$data['operator_id'],$data['remarks']);
+                   echo $re;
                 }
             }
             exit;
@@ -454,9 +455,9 @@ class AndroidApiController extends Controller{
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return false;
+            return 11;
         }
-        return true;
+        return 22;
     }
 
 }
