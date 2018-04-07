@@ -153,7 +153,9 @@ class WechatmenuController extends CommonController
             }
             unset($sm);
         }
-        dd($list);
+        dump($list);
+        dump($son_menu);
+        dd(1);
         return view('Fansmanage/Wechatmenu/defined_menu_get', ['list' => $list, 'son_menu' => $son_menu]);
     }
 
