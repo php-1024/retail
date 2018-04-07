@@ -33,6 +33,8 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         return view('Fansmanage/User/label_add',['admin_data'=>$admin_data]);
     }
+
+
     //添加会员标签功能提交
     public function label_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -45,11 +47,14 @@ class UserController extends Controller{
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
+
         DB::beginTransaction();
+
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
             $re = json_decode($re,true);
+
             if(!empty($re['errcode'])){
                 if($re['errcode'] == '45157'){
                     return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
@@ -65,6 +70,7 @@ class UserController extends Controller{
                 'label_name'=>$label_name,
                 'label_number'=>0,
                 'wechat_id'=>$re['tag']['id'],
+//                'wechat_id'=>111,
             ];
             Label::addLabel($dataLabel);
             if ($admin_data['is_super'] != 2) {

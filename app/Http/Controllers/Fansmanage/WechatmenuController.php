@@ -372,20 +372,17 @@ class WechatmenuController extends CommonController
                 }
             }
         }
-        dump($data);
-        dump(json_encode($data,JSON_UNESCAPED_UNICODE));
         // 刷新并获取授权令牌
         $auth_info = \Wechat::refresh_authorization_info($organization_id);
         // 创建微信菜单
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
-        dump($re);
-
+        dd($re);
         // 返回创建的数据结构
         if ($re['errmsg'] == 'ok') {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
-            return response()->json(['data' => '同步失败！', 'status' => '0']);
+            return response()->json(['data' => '同步失败！', 'status' => '1']);
         }
     }
     // +----------------------------------------------------------------------
@@ -415,7 +412,7 @@ class WechatmenuController extends CommonController
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
         // 获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']]], 0, 'id', 'DESC');
-
+        // 渲染页面
         return view('Fansmanage/Wechatmenu/conditional_menu_add', ['label_list' => $label_list, 'wechatreply' => $wechatreply]);
     }
 
@@ -713,6 +710,7 @@ class WechatmenuController extends CommonController
         $data['matchrule'] = [
             'tag_id' => $tag_id
         ];
+
         $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);

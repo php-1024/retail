@@ -30,19 +30,24 @@ class OrderController extends Controller
         $paytype = $request->get('paytype');                //接收支付方式
         $status = $request->get('status');                  //接收订单状态
         $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
-        $where = ['retail_id' => $admin_data['organization_id']];
+        $where = [['retail_id' , $admin_data['organization_id']]];
         if (!empty($user_id)) {
-            $where[] = ['user_id' => $user_id];
+            $where[] = ['user_id' , $user_id];
         }
         if (!empty($ordersn)) {
-            $where[] = ['ordersn' => $ordersn];
+            $where[] = ['ordersn' , $ordersn];
         }
         if (!empty($paytype) && $paytype != '请选择') {
-            $where[] = ['paytype' => $paytype];
+            $where[] = ['paytype' , $paytype];
+        }elseif ($paytype != null && $paytype == 0){
+            $where[] = ['paytype' , $paytype];
         }
         if (!empty($status)) {
-            $where[] = ['status' => $status];
+            $where[] = ['status' , $status];
+        }elseif ($status != null && $status == 0){
+            $where[] = ['status' , $status];
         }
+        dump($where);
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
