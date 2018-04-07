@@ -437,6 +437,6 @@ class ApiController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $i = $request->input('i');
         $list = WechatImage::getList([['organization_id',$admin_data['organization_id']]],'','id','desc');
-        return view('Wechat/Catering/material_image_select',['list'=>$list,'i'=>$i]);
+        return view('Fansmanage/Api/material_image_select',['list'=>$list,'i'=>$i]);
     }
 }
