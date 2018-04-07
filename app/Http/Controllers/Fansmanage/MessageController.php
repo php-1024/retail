@@ -26,19 +26,16 @@ class MessageController extends Controller
     protected $son_menu_data = [];
     protected $route_name = '';
 
-    public function __construct(Request $request)
+    public function getRequestInfo()
     {
-        dump($request->all());
-
-
         // 中间件产生的 管理员数据参数
-        $this->admin_data = $request->get('admin_data');
+        $this->admin_data = request()->get('admin_data');
         // 中间件产生的 菜单参数
-        $this->menu_data = $request->get('menu_data');
+        $this->menu_data = request()->get('menu_data');
         // 中间件产生的 子菜单参数
-        $this->son_menu_data = $request->get('son_menu_data');
+        $this->son_menu_data = request()->get('son_menu_data');
         // 获取当前的页面路由
-        $this->route_name = $request->path();
+        $this->route_name = request()->path();
     }
 
     /**
@@ -48,6 +45,7 @@ class MessageController extends Controller
      */
     public function auto_reply(Request $request)
     {
+        $this->getRequestInfo();
         // 获取微信公众号关键字回复信息 并且 进行分页
         $list = WechatReply::getPaginage([['organization_id', $this->admin_data['organization_id']]], 15, 'id', 'desc');
         // 渲染关键字回复页面，并且将系统信息输出
