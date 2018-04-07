@@ -69,7 +69,7 @@
                                     <tr>
                                         <td>{{$val->goods_id}}</td>
                                         @if($val->RetailGoods == null)
-                                            <td style="color:#FF0000">{{$val->RetailGoods->name}}</td>
+                                            <td style="color:#FF0000">商品已删除</td>
                                         @else
                                             <td>{{$val->RetailGoods->name}}</td>
                                         @endif
