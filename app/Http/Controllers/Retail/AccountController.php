@@ -69,7 +69,6 @@ class AccountController extends Controller{
                     if(Account::checkRowExists([['organization_id','0'],[ 'mobile',$mobile ]])) {//判断手机号码是否超级管理员手机号码
                         return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                     }
-                    OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $organization_id]], ['agent_owner_mobile' => $mobile]);//修改服务商表服务商手机号码
                 }
                 Account::editAccount([['id',$admin_data['id']]],['mobile'=>$mobile]);//修改用户手机号
             }
