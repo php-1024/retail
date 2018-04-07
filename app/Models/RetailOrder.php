@@ -82,15 +82,6 @@ class RetailOrder extends Model{
         }elseif(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
             return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
-        }elseif(!empty($search_data['ordersn'])){
-            $model = $model->where([['ordersn',$search_data['ordersn']]]);
-            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
-        }elseif(!empty($search_data['paytype'])){
-            $model = $model->where([['paytype',$search_data['paytype']]]);
-            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
-        }elseif(!empty($search_data['status'])){
-            $model = $model->where([['status',$search_data['status']]]);
-            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }else{
             return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
