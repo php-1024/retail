@@ -34,19 +34,19 @@ class OrderController extends Controller
         if (!empty($user_id)) {
             $where[] = ['user_id' , $user_id];
         }
-        if (!empty($ordersn)) {
-            $where[] = ['ordersn' , $ordersn];
-        }
-        if (!empty($paytype) && $paytype != '请选择') {
-            $where[] = ['paytype' , $paytype];
-        }elseif ($paytype != null && $paytype == 0){
-            $where[] = ['paytype' , $paytype];
-        }
-        if (!empty($status)) {
-            $where[] = ['status' , $status];
-        }elseif ($status != null && $status == 0){
-            $where[] = ['status' , $status];
-        }
+//        if (!empty($ordersn)) {
+//            $where[] = ['ordersn' , $ordersn];
+//        }
+//        if (!empty($paytype) && $paytype != '请选择') {
+//            $where[] = ['paytype' , $paytype];
+//        }elseif ($paytype != null && $paytype == 0){
+//            $where[] = ['paytype' , $paytype];
+//        }
+//        if (!empty($status)) {
+//            $where[] = ['status' , $status];
+//        }elseif ($status != null && $status == 0){
+//            $where[] = ['status' , $status];
+//        }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         dump($list);
         foreach ( $list as $key=>$val){
