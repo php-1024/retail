@@ -56,7 +56,6 @@
                                                 <div class="col-sm-8">
                                                     <select name="category_id" class="form-control m-b">
                                                         <option value ="0">请选择</option>
-                                                        @if($category)
                                                         @foreach($category as $key=>$val)
                                                             <option value ="{{$val->id}}" @if($val->id == $goods->category->id)selected @endif>{{$val->name}}</option>
                                                         @endforeach
