@@ -187,6 +187,7 @@ class GoodsController extends Controller
         $where = ['fansmanage_id'=>$fansmanage_id,'retail_id' => $admin_data['organization_id']];
         $category = RetailCategory::getList($where,0,'created_at','DESC');
         $goods = RetailGoods::getPaginage($where,$search_data,'10','displayorder','ASC'); //查询商品信息
+        dump($goods);
         return view('Retail/Goods/goods_list', ['goods' => $goods,'search_data'=>$search_data,'category'=>$category,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
