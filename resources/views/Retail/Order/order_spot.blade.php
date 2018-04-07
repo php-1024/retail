@@ -97,7 +97,7 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->ordersn}}</td>
-                                        <td>{{$val->user->account}}</td>
+                                        {{--<td>{{$val->user->account}}</td>--}}
                                         <td>{{$val->user->UserInfo->nickname}}</td>
                                         <td>{{$val->user->mobile}}</td>
 
