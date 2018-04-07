@@ -11,9 +11,10 @@
             <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">安全密码</label>
-                        <div class="col-sm-10"><input type="password" class="form-control" id="safe_password"
-                                                      name="safe_password"></div>
+                        <label for="safe_password" class="col-sm-2 control-label">安全密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="safe_password" name="safe_password">
+                        </div>
                     </div>
                 </div>
                 <div style="clear:both"></div>
