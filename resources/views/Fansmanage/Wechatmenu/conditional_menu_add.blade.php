@@ -28,7 +28,6 @@
         <div class="col-sm-10">
             <input type="text" class="form-control" placeholder="限制四个字" name="menu_name" value="" maxlength="4">
         </div>
-
     </div>
 
     <div class="line line-dashed b-b line-lg pull-in"></div>
