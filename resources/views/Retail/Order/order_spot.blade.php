@@ -122,7 +122,7 @@
                                         <td>{{$val->seatfee}}</td>
 
                                         <th>
-                                                {{---1取消状态，0普通状态，1为已付款，2为已发货，3为成功--}}
+                                                {{---0待付款，-1取消状态，1为已付款，2为已发货，3为成功--}}
                                                 @if($val->status==-1)
                                                     <label class="label label-default">已取消</label>
                                                 @elseif($val->status==0)
@@ -130,7 +130,7 @@
                                                 @elseif($val->status==1)
                                                     <label class="label label-warning">已付款</label>
                                                 @elseif($val->status==2)
-                                                    <label class="label label-success">配送中</label>
+                                                    <label class="label label-success">已发货</label>
                                                 @elseif($val->status==3)
                                                     <label class="label label-info">已完成</label>
                                                 @endif
