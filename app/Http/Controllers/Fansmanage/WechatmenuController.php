@@ -143,6 +143,7 @@ class WechatmenuController extends CommonController
 
         // 获取菜单列表
         $list = WechatDefinedMenu::getList([['organization_id', $this->admin_data['organization_id']], ['parent_id', '0']], 0, 'id', 'asc');
+
         $son_menu = [];
         foreach ($list as $key => $val) {
             $sm = WechatDefinedMenu::getList([['organization_id', $this->admin_data['organization_id']], ['parent_id', $val->id]], 0, 'id', 'asc');
@@ -152,6 +153,7 @@ class WechatmenuController extends CommonController
             }
             unset($sm);
         }
+        dd($list);
         return view('Fansmanage/Wechatmenu/defined_menu_get', ['list' => $list, 'son_menu' => $son_menu]);
     }
 
