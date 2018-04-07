@@ -59,6 +59,7 @@
                                                 <option value="2" @if($search_data['paytype']=='2') selected @endif >支付宝二维码</option>
                                                 <option value="3" @if($search_data['paytype']=='3') selected @endif >微信扫码</option>
                                                 <option value="4" @if($search_data['paytype']=='4') selected @endif >微信二维码</option>
+
                                             </select>
                                         </div>
                                         <label class="col-sm-1 control-label">订单状态</label>
