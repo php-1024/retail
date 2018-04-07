@@ -31,9 +31,9 @@ class OrderController extends Controller
         $status = $request->get('status');                  //接收订单状态
         $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = ['retail_id' => $admin_data['organization_id']];
-        if (!empty($user_id)) {
-            $where = ['user_id' => $user_id];
-        }
+//        if (!empty($user_id)) {
+//            $where = ['user_id' => $user_id];
+//        }
         if (!empty($ordersn)) {
             $where = ['ordersn' => $ordersn];
         }
