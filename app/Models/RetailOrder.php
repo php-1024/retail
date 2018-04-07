@@ -78,17 +78,21 @@ class RetailOrder extends Model{
         $model = self::with('User');
         if(!empty($search_data['user_id'])){
             $model = $model->where([['user_id',$search_data['user_id']]]);
+            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
         if(!empty($search_data['ordersn'])){
             $model = $model->where([['ordersn',$search_data['ordersn']]]);
+            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
         if(!empty($search_data['paytype'])){
             $model = $model->where([['paytype',$search_data['paytype']]]);
+            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
         if(!empty($search_data['status'])){
             $model = $model->where([['status',$search_data['status']]]);
+            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
-        return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+
     }
 
     //获取单行数据的其中一列
