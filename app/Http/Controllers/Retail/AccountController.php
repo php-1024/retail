@@ -59,6 +59,7 @@ class AccountController extends Controller{
         $mobile = $request->input('mobile');        //手机号码
         $oneAcc = Account::getOne([['id',$admin_data['id']]]);
         $id = AccountInfo::checkRowExists([['account_id',$admin_data['id']]]);//查询是否存在该数据false/true
+        dd($admin_data);
         DB::beginTransaction();
         try {
             if($oneAcc['mobile']!=$mobile){
