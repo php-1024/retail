@@ -52,7 +52,7 @@
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
-                                                <option @if($search_data['paytype'] == '请选择' ) selected @endif>请选择</option>
+                                                <option @if($search_data['paytype'] == null ) selected @endif>请选择</option>
                                                 <option value="-1" @if($search_data['paytype']=='-1') selected @endif >现金支付，其他支付</option>
                                                 <option value="0" @if($search_data['paytype']=='0') selected @endif >银行卡支付</option>
                                                 <option value="1" @if($search_data['paytype']=='1') selected @endif >支付宝扫码</option>

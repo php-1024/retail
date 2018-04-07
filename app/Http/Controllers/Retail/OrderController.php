@@ -29,9 +29,6 @@ class OrderController extends Controller
         $ordersn = $request->get('ordersn');                //接收订单编号
         $paytype = $request->get('paytype');                //接收支付方式
         $status = $request->get('status');                  //接收订单状态
-        if ($paytype == null){
-            $paytype = '请选择';
-        }
         $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = [
             'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
