@@ -42,11 +42,11 @@ class OrderController extends Controller
         }elseif ($paytype == 0){
             $where[] = ['paytype' , $paytype];
         }
-//        if (!empty($status)) {
-//            $where[] = ['status' , $status];
-//        }elseif ($status != null && $status == 0){
-//            $where[] = ['status' , $status];
-//        }
+        if (!empty($status)) {
+            $where[] = ['status' , $status];
+        }elseif ($status == 0){
+            $where[] = ['status' , $status];
+        }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         dump($list);
         foreach ( $list as $key=>$val){
