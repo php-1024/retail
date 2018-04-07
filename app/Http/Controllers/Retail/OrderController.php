@@ -44,8 +44,8 @@ class OrderController extends Controller
             $asd = ['status' , $status];
             dd($asd);
         }elseif ($status == 0){
-            $asd = ['status' , $status];
-            dd($asd);
+//            $asd = ['status' , $status];
+//            dd($asd);
         }
         dump($status);
         dump($where);
