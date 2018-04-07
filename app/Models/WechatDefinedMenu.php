@@ -44,7 +44,14 @@ class WechatDefinedMenu extends Model
         return self::where($where)->get();
     }
 
-    //获取列表
+    /**
+     * 获取菜单列表
+     * @param $where
+     * @param int $limit
+     * @param $orderby
+     * @param string $sort
+     * @return mixed
+     */
     public static function getList($where, $limit = 0, $orderby, $sort = 'DESC')
     {
         $model = new WechatDefinedMenu();
@@ -54,38 +61,58 @@ class WechatDefinedMenu extends Model
         return $model->where($where)->orderBy($orderby, $sort)->get();
     }
 
+    /**
+     * 添加菜单数据
+     * @param $param
+     * @return mixed
+     */
     public static function addDefinedMenu($param)
     {
         $res = self::create($param);
         return $res->toArray();
     }
 
-    //删除菜单
+    /**
+     * 删除菜单
+     * @param $where
+     * @return mixed
+     */
     public static function removeDefinedMenu($where)
     {
         return self::where($where)->forceDelete();
     }
 
+    /**
+     * 编辑菜单
+     * @param $where
+     * @param $param
+     */
     public static function editDefinedMenu($where, $param)
     {
-        if ($model = self::where($where)->first()) {
-            foreach ($param as $key => $val) {
-                $model->$key = $val;
-            }
-            $model->save();
+        $res = self::where($where)->first();
+        if (!empty($res)) {
+            self::where($where)->update($param);
         }
     }
 
+    /**
+     * 获取菜单数量
+     * @param $where
+     * @return mixed
+     */
     public static function getCount($where)
     {
         return self::where($where)->count();
     }
 
-    //获取单行数据的其中一列
+    /**
+     * 获取单行数据的其中一列
+     * @param $where
+     * @param $pluck
+     * @return mixed
+     */
     public static function getPluck($where, $pluck)
     {
         return self::where($where)->pluck($pluck);
     }
 }
-
-?>

@@ -31,7 +31,6 @@ class OrderController extends Controller
         $status = $request->get('status');                  //接收订单状态
         $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = [
-            'order_type' => '1',    //0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'retail_id' => $admin_data['organization_id'],
         ];
         $list = RetailOrder::getPaginage($where,$search_data,10,'created_at','DESC');
