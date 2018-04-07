@@ -410,8 +410,10 @@ class AndroidApiController extends Controller{
      * @num 操作库存数量
      * @status 1表示加库存，-1表示加库存
      */
-    public function reduce_stock(){
-        echo 1;exit;
+    public function reduce_stock(Request $request){
+        $order_id = $request->order_id;//店铺
+
+        echo $order_id;exit;
 //        $re = RetailOrder::getOne([['id',$order_id]]);
 //        DB::beginTransaction();
 //        try{
