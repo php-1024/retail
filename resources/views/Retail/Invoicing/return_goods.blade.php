@@ -89,8 +89,17 @@
                                                placeholder="供应商id">
                                     </div>
                                     <div class="col-sm-2">
+                                        <!--
                                         <input class="input-sm form-control" size="16" type="text" name="company_name" value=""
                                                placeholder="公司名称">
+                                        -->
+                                        <select name="company_name" class="form-control m-b">
+                                            <option value="0">请选择公司名称</option>
+                                            @foreach($supplier as $key=>$val)
+                                                <option value="{{$val->company_name}}">{{$val->company_name}}</option>
+                                            @endforeach
+                                        </select>
+
                                     </div>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" name="contactmobile" value=""
