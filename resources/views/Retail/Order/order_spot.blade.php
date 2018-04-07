@@ -52,15 +52,13 @@
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
-                                                <option value="0" @if($search_data['paytype']==0) selected @endif >请选择</option>
-                                                <option value="1" @if($search_data['paytype']==1) selected @endif >余额支付</option>
-                                                <option value="2" @if($search_data['paytype']==2) selected @endif >在线支付</option>
-                                                <option value="3" @if($search_data['paytype']==3) selected @endif >货到付款</option>
-                                                <option value="4" @if($search_data['paytype']==4) selected @endif >现场现金支付</option>
-                                                <option value="5" @if($search_data['paytype']==5) selected @endif >现场刷卡支付</option>
-                                                <option value="6" @if($search_data['paytype']==6) selected @endif >现场支付宝支付</option>
-                                                <option value="7" @if($search_data['paytype']==7) selected @endif >现场微信支付</option>
-                                                <option value="8" @if($search_data['paytype']==8) selected @endif >线上手动确认付款</option>
+                                                <option>请选择</option>
+                                                <option value="-1" @if($search_data['paytype']==-1) selected @endif >现金支付，其他支付</option>
+                                                <option value="0" @if($search_data['paytype']==0) selected @endif >银行卡支付</option>
+                                                <option value="1" @if($search_data['paytype']==1) selected @endif >支付宝扫码</option>
+                                                <option value="2" @if($search_data['paytype']==2) selected @endif >支付宝二维码</option>
+                                                <option value="3" @if($search_data['paytype']==3) selected @endif >微信扫码</option>
+                                                <option value="4" @if($search_data['paytype']==4) selected @endif >微信二维码</option>
                                             </select>
                                         </div>
                                         <label class="col-sm-1 control-label">订单状态</label>
