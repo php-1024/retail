@@ -138,12 +138,13 @@ class AndroidApiController extends Controller{
                     ];
                     RetailOrderGoods::addOrderGoods($data);//添加商品快照
 
+                    print_r($this->reduce_stock($order_id));exit;
 
-                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
-                    if($power != '1') {//说明下单减库存
-                        $stock = $onedata['stock'] - $v['num'];
-                        RetailGoods::editRetailGoods([['id', $v['id']]], ['stock' => $stock]);//修改商品库存
-                    }
+//                    $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
+//                    if($power != '1') {//说明下单减库存
+//                        $stock = $onedata['stock'] - $v['num'];
+//                        RetailGoods::editRetailGoods([['id', $v['id']]], ['stock' => $stock]);//修改商品库存
+//                    }
                 }
             }
             DB::commit();//提交事务
@@ -418,9 +419,11 @@ class AndroidApiController extends Controller{
      * @account_id 操作用户id
      * @remarks 备注信息
      */
-    public function reduce_stock($id,$num,$status,$ordersn,$account_id,$remarks=''){
-        return 1;exit;
-        $data = RetailGoods::getOne([['id',$id]]);
+    public function reduce_stock($order_id){
+        $data =RetailOrder::getOne([['id',$order_id]]);
+        return true;
+//        $data = RetailGoods::getOne([['id',$id]]);
+
         DB::beginTransaction();
         try{
             if($status == '1'){
@@ -457,9 +460,9 @@ class AndroidApiController extends Controller{
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return 11;
+            return false;
         }
-        return 22;
+        return true;
     }
 
 }
