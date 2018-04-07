@@ -16,6 +16,9 @@ class WechatDefinedMenu extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+    // 设置允许注入到数据库的字段
+    protected $guarded = [];
+
 
     //和organization表一对一的关系
     public function organization()
