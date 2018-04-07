@@ -124,6 +124,7 @@ class WechatmenuController extends CommonController
             }
             DB::commit();
         } catch (\Exception $e) {
+            dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
@@ -132,6 +133,7 @@ class WechatmenuController extends CommonController
     }
 
     /**
+     * 获取菜单列表
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function defined_menu_get()
