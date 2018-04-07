@@ -19,27 +19,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class MessageController extends Controller
+class MessageController extends BaseController
 {
-    protected $admin_data = [];
-    protected $menu_data = [];
-    protected $son_menu_data = [];
-    protected $route_name = '';
-
-    /**
-     * 请求参数的获取
-     */
-    public function getRequestInfo()
-    {
-        // 中间件产生的 管理员数据参数
-        $this->admin_data = request()->get('admin_data');
-        // 中间件产生的 菜单参数
-        $this->menu_data = request()->get('menu_data');
-        // 中间件产生的 子菜单参数
-        $this->son_menu_data = request()->get('son_menu_data');
-        // 获取当前的页面路由
-        $this->route_name = request()->path();
-    }
 
     /**
      * 关键字自动回复列表
@@ -55,7 +36,6 @@ class MessageController extends Controller
         // 渲染关键字回复页面，并且将系统信息输出
         return view('Fansmanage/Message/auto_reply', ['list' => $list, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
-
 
     /**
      * 关键字添加页面
@@ -81,22 +61,27 @@ class MessageController extends Controller
         $keyword = $request->input('keyword');
         // 中间件产生的 关键字类型:  1-精确 2-模糊
         $type = $request->input('type');
-
         // 中间件产生的 角色权限节点-组织id, 公众号管理组织
         $organization_id = $this->admin_data['organization_id'];
-
-
-        //
+        // 通过组织id 获取公众号基础信息
         $appinfo = WechatAuthorization::getOne([['organization_id', $organization_id]]);
+        // 授权appid
         $authorizer_appid = $appinfo['authorizer_appid'];
 
+        // 检测在该组织里面,所对应的 关键字是否已经 添加过
+        // 是：添加过就进行 已添加 的消息提示
+        // 否：进行添加
         if (WechatReply::checkRowExists([['organization_id', $organization_id], ['keyword', $keyword]])) {//判断是否添加过相同的的角色
             return response()->json(['data' => '您添加的关键字已经存在', 'status' => '0']);
         } else {
+            // 事务处理
             DB::beginTransaction();
+
             try {
                 $data = ['organization_id' => $organization_id, 'authorizer_appid' => $authorizer_appid, 'keyword' => $keyword, 'type' => $type];
+                // 添加到 关键字回复表
                 WechatReply::addWechatReply($data);
+                // 添加操作记录
                 OperationLog::addOperationLog('1', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '添加了自动回复关键字' . $keyword);//保存操作记录
                 DB::commit();
             } catch (\Exception $e) {
@@ -588,6 +573,6 @@ class MessageController extends Controller
         }
         return response()->json(['data' => '修改关注自动回复的图文回复内容成功', 'status' => '1']);
     }
-    /**************************************************************************消息回复管理结束*********************************************************************************/
+
 
 }
