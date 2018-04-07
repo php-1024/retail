@@ -33,6 +33,8 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         return view('Fansmanage/User/label_add',['admin_data'=>$admin_data]);
     }
+
+
     //添加会员标签功能提交
     public function label_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -72,6 +74,7 @@ class UserController extends Controller{
             }
             DB::commit();
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollBack();//事件回滚
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
         }

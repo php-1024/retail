@@ -68,8 +68,10 @@ class InvoicingController extends Controller
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        return  view('Retail/Invoicing/return_goods',['account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $supplier = RetailSupplier::getList($where,'0', 'displayorder', 'DESC');   //供应商信息
+        return  view('Retail/Invoicing/return_goods',['supplier'=>$supplier,'account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
+
 
     //零售进销存开单--供应商搜索
     public function search_company(Request $request)
