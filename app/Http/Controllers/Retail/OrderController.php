@@ -48,7 +48,7 @@ class OrderController extends Controller
             $where[] = ['status' , $status];
         }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
-        dump($list);
+        dump($search_data);
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
