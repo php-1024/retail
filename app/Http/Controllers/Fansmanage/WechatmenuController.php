@@ -124,7 +124,6 @@ class WechatmenuController extends CommonController
             }
             DB::commit();
         } catch (\Exception $e) {
-            dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
@@ -141,23 +140,28 @@ class WechatmenuController extends CommonController
         // 中间件参数 集合
         $this->getRequestInfo();
 
-        // 获取菜单列表
+        // 获取主菜单列表
         $list = WechatDefinedMenu::getList([['organization_id', $this->admin_data['organization_id']], ['parent_id', '0']], 0, 'id', 'asc');
 
+        // 处理菜单数据
         $son_menu = [];
         foreach ($list as $key => $val) {
+            // 获取其他多级菜单
             $sm = WechatDefinedMenu::getList([['organization_id', $this->admin_data['organization_id']], ['parent_id', $val->id]], 0, 'id', 'asc');
-
+            // 处理数据
             if (!empty($sm)) {
                 $son_menu[$val->id] = $sm;
             }
             unset($sm);
         }
+        // 渲染已有菜单数据
         return view('Fansmanage/Wechatmenu/defined_menu_get', ['list' => $list, 'son_menu' => $son_menu]);
     }
 
-
-    //自定义菜单编辑页面
+    /**
+     * 自定义菜单编辑页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function defined_menu_edit()
     {
         // 中间件参数 集合
