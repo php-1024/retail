@@ -118,15 +118,15 @@ class WechatmenuController extends CommonController
             dump($res);
 
 
-            if ($this->admin_data['is_super'] == 1) {
-                // 超级管理员操作商户的记录
-                // 添加操作日志
-                $this->insertOperationLog("1", "在餐饮系统添加了公众号自定义菜单！", "1", "1");
-            } else {
-                // 商户本人操作记录
-                // 保存操作记录
-                $this->insertOperationLog("4", "添加了公众号自定义菜单！");
-            }
+//            if ($this->admin_data['is_super'] == 1) {
+//                // 超级管理员操作商户的记录
+//                // 添加操作日志
+//                $this->insertOperationLog("1", "在餐饮系统添加了公众号自定义菜单！", "1", "1");
+//            } else {
+//                // 商户本人操作记录
+//                // 保存操作记录
+//                $this->insertOperationLog("4", "添加了公众号自定义菜单！");
+//            }
 
             DB::commit();
         } catch (\Exception $e) {
