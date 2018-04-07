@@ -45,8 +45,8 @@ class MessageController extends Controller
      */
     public function auto_reply(Request $request)
     {
-//        $this->getRequestInfo();
-        dd(request()->get('admin_data'));
+        $this->getRequestInfo();
+        dd($this->admin_data);
 
 
         // 获取微信公众号关键字回复信息 并且 进行分页
