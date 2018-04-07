@@ -162,7 +162,6 @@ class AndroidApiController extends Controller{
      */
     public function cancel_order(Request $request){
         $order_id = $request->order_id;//订单id
-        echo $order_id;exit;
         $organization_id = $request->organization_id;//店铺
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
         $data = RetailOrder::getOne([['id',$order_id]]);
@@ -170,6 +169,7 @@ class AndroidApiController extends Controller{
         try{
             if($power != '1'){//说明下单减库存 所以要把库存归还
                 $list = RetailOrderGoods::where([['order_id',$order_id]])->get();//查询订单快照里的商品信息
+
                 foreach($list as $key=>$value){
 //                    $goods = RetailGoods::getOne([['id',$value['goods_id']]]);//查询现在商品的信息
 //                    $num = $goods['stock'] + $value['total'];//把库存加回去
@@ -419,6 +419,7 @@ class AndroidApiController extends Controller{
      * @remarks 备注信息
      */
     public function reduce_stock($id,$num,$status,$ordersn,$account_id,$remarks=''){
+        return 1;exit;
         $data = RetailGoods::getOne([['id',$id]]);
         DB::beginTransaction();
         try{
