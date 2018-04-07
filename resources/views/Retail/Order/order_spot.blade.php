@@ -53,12 +53,12 @@
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
                                                 <option @if($search_data['paytype'] == null ) selected @endif>请选择</option>
-                                                <option value="-1" @if($search_data['paytype']=='-1') selected @endif >现金支付，其他支付</option>
                                                 <option value="0" @if($search_data['paytype']=='0') selected @endif >银行卡支付</option>
                                                 <option value="1" @if($search_data['paytype']=='1') selected @endif >支付宝扫码</option>
                                                 <option value="2" @if($search_data['paytype']=='2') selected @endif >支付宝二维码</option>
                                                 <option value="3" @if($search_data['paytype']=='3') selected @endif >微信扫码</option>
                                                 <option value="4" @if($search_data['paytype']=='4') selected @endif >微信二维码</option>
+                                                <option value="-1" @if($search_data['paytype']=='-1') selected @endif >现金支付，其他支付</option>
                                             </select>
                                         </div>
                                         <label class="col-sm-1 control-label">订单状态</label>
@@ -103,22 +103,18 @@
 
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td><label class="label label-info">
-                                        @if($val->paytype==1)
-                                            余额支付
-                                        @elseif($val->paytype==2)
-                                            在线支付
-                                        @elseif($val->paytype==3)
-                                            货到付款
-                                        @elseif($val->paytype==4)
-                                            现场现金支付
-                                        @elseif($val->paytype==5)
-                                            现场刷卡支付
-                                        @elseif($val->paytype==6)
-                                            现场支付宝支付
-                                        @elseif($val->paytype==7)
-                                            现场微信支付
-                                        @elseif($val->paytype==8)
-                                            线上手动确认付款
+                                        @if($val->paytype=='1')
+                                            支付宝扫码
+                                        @elseif($val->paytype=='2')
+                                            支付宝二维码
+                                        @elseif($val->paytype=='3')
+                                            微信扫码
+                                        @elseif($val->paytype=='4')
+                                            微信二维码
+                                        @elseif($val->paytype=='-1')
+                                            现金支付，其他支付
+                                        @elseif($val->paytype=='0')
+                                            银行卡支付
                                         @endif
                                         </label></td>
 
@@ -126,7 +122,7 @@
                                         <td>{{$val->seatfee}}</td>
 
                                         <th>
-                                                {{---1取消状态，0普通状态，1为已付款，2为已发货，3为成功--}}
+                                                {{---0待付款，-1取消状态，1为已付款，2为已发货，3为成功--}}
                                                 @if($val->status==-1)
                                                     <label class="label label-default">已取消</label>
                                                 @elseif($val->status==0)
@@ -134,7 +130,7 @@
                                                 @elseif($val->status==1)
                                                     <label class="label label-warning">已付款</label>
                                                 @elseif($val->status==2)
-                                                    <label class="label label-success">配送中</label>
+                                                    <label class="label label-success">已发货</label>
                                                 @elseif($val->status==3)
                                                     <label class="label label-info">已完成</label>
                                                 @endif
@@ -166,82 +162,6 @@
     </section>
 </section>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">店铺信息编辑</h4>
-                </div>
-                <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王【龙岗店】" placeholder="店铺名称" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">负责人</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="张老三" placeholder="负责人" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺地址</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="广东省深圳市龙岗区万汇大厦1606" placeholder="店铺地址" class="form-control">
-                            </div>
-                        </div>
-
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
-                        </div>
-                        <div style="clear:both;"></div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -255,18 +175,5 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
-        $('.selected_btn').click(function(){
-            $('.selected_btn').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
-        });
-        $('.selected_table').click(function(){
-            $('.selected_table').removeClass('btn-success').addClass('btn-info');
-            $(this).addClass('btn-success').removeClass('btn-info');
-        });
-    });
-</script>
 </body>
 </html>

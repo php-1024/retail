@@ -76,19 +76,26 @@ class RetailOrder extends Model{
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
         $model = self::with('User');
-        if(!empty($search_data['user_id'])){
-            $model = $model->where([['user_id',$search_data['user_id']]]);
+        if(!empty(!empty($search_data['ordersn']) && $search_data['user_id']) && !empty($search_data['paytype']) && !empty($search_data['status'])){
+            //如果存在用户账号，订单号码，支付方式，，以及订单状态
+            $model = $model->where(['user_id'=>$search_data['user_id']],['ordersn'=>$search_data['ordersn']]);
+            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
+        }elseif(!empty($search_data['user_id']) && !empty($search_data['paytype']) && !empty($search_data['status'])){
+            //如果存在用户账号，支付方式，订单状态
+            $model = $model->where(['user_id'=>$search_data['user_id'],['paytype'=>$search_data['paytype']],['status'=>$search_data['status']]]);
+            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
+        }elseif(!empty($search_data['user_id']) && !empty($search_data['paytype'])){
+            //如果存在用户账号，支付方式
+            $model = $model->where(['user_id'=>$search_data['user_id'],['paytype'=>$search_data['paytype']]]);
+            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
+        }elseif(!empty($search_data['user_id']) && !empty($search_data['status'])){
+            //如果存在用户账号，支付方式
+            $model = $model->where(['user_id'=>$search_data['user_id'],['status'=>$search_data['status']]]);
+            return $model->with('RetailOrderGoods')->orderBy($orderby,$sort)->paginate($paginate);
+        }else{
+            return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
         }
-        if(!empty($search_data['ordersn'])){
-            $model = $model->where([['ordersn',$search_data['ordersn']]]);
-        }
-        if(!empty($search_data['paytype'])){
-            $model = $model->where([['paytype',$search_data['paytype']]]);
-        }
-        if(!empty($search_data['status'])){
-            $model = $model->where([['status',$search_data['status']]]);
-        }
-        return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+
     }
 
     //获取单行数据的其中一列
