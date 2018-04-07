@@ -162,6 +162,7 @@ class AndroidApiController extends Controller{
      */
     public function cancel_order(Request $request){
         $order_id = $request->order_id;//订单id
+        echo $order_id;exit;
         $organization_id = $request->organization_id;//店铺
         $power = RetailConfig::getPluck([['retail_id',$organization_id],['cfg_name','change_stock_role']],'cfg_value')->first();//查询是下单减库存/付款减库存
         $data = RetailOrder::getOne([['id',$order_id]]);
