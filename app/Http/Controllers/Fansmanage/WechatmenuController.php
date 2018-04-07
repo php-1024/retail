@@ -714,6 +714,7 @@ class WechatmenuController extends CommonController
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
         dd($re);
+
         if (!empty($re['menuid'])) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
