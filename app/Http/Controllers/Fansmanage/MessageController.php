@@ -75,6 +75,7 @@ class MessageController extends Controller
      */
     public function auto_reply_add_check(Request $request)
     {
+        $this->getRequestInfo();
         // 中间件产生的 关键字
         $keyword = $request->input('keyword');
         // 中间件产生的 关键字类型:  1-精确 2-模糊
