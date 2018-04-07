@@ -108,6 +108,9 @@ class WechatmenuController extends CommonController
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
 
+        $this->insertOperationLog("4", "xxx添加了公众号自定义菜单！");
+
+        dd(2);
         // 事务处理
         DB::beginTransaction();
         try {
