@@ -421,7 +421,7 @@ class AndroidApiController extends Controller{
      */
     public function reduce_stock($order_id){
         $data =RetailOrder::getOne([['id',$order_id]]);
-        return $data;
+        return true;
 //        $data = RetailGoods::getOne([['id',$id]]);
 
         DB::beginTransaction();
@@ -460,9 +460,9 @@ class AndroidApiController extends Controller{
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return 11;
+            return false;
         }
-        return 22;
+        return true;
     }
 
 }
