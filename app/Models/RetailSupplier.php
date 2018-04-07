@@ -24,8 +24,9 @@ class RetailSupplier extends Model{
     }
 
     //搜索供应商信息
-    public static function SearchCompany($company_id,$company_name,$contactmobile){
+    public static function SearchCompany($retail_id,$company_id,$company_name,$contactmobile){
         $model = new RetailSupplier();
+        $model = $model->where(['retail_id'=>$retail_id]);
         if(!empty($company_id)){
             $model = $model->where(['id'=>$company_id]);
         }

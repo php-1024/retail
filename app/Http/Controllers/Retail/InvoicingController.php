@@ -72,10 +72,12 @@ class InvoicingController extends Controller
     //零售进销存开单--供应商搜索
     public function search_company(Request $request)
     {
+        $admin_data = $request->get('admin_data');
+        $retail_id = $admin_data['organization_id'];
         $company_id = $request->get('company_id');      //供应商ID
         $company_name = $request->get('company_name');      //供应商ID
         $contactmobile = $request->get('contactmobile');      //供应商ID
-        $company = RetailSupplier::SearchCompany($company_id,$company_name,$contactmobile);
+        $company = RetailSupplier::SearchCompany($retail_id,$company_id,$company_name,$contactmobile);
         if ($company == null){
             return response()->json(['data' => '商户不存在！请重新选择！', 'status' => '0']);
         }else{
