@@ -47,12 +47,12 @@ class OrderController extends Controller
         }elseif ($status != null && $status == 0){
             $where[] = ['status' , $status];
         }
-        dump($where);
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
         }
+        dump($where);
         return view('Retail/Order/order_spot',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
