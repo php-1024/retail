@@ -33,6 +33,8 @@ class UserController extends Controller{
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         return view('Fansmanage/User/label_add',['admin_data'=>$admin_data]);
     }
+
+
     //添加会员标签功能提交
     public function label_add_check(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
@@ -67,6 +69,8 @@ class UserController extends Controller{
                 'wechat_id'=>$re['tag']['id'],
             ];
             Label::addLabel($dataLabel);
+            dump($admin_data['is_super']);
+
             if ($admin_data['is_super'] != 2) {
                 OperationLog::addOperationLog('3', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
             }
