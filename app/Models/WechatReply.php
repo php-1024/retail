@@ -1,8 +1,12 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class WechatReply extends Model{
+
+class WechatReply extends Model
+{
     use SoftDeletes;
     protected $table = 'wechat_reply';
     protected $primaryKey = 'id';
@@ -16,7 +20,8 @@ class WechatReply extends Model{
         return self::where($where)->first();
     }
 
-    public static function addWechatReply($param){
+    public static function addWechatReply($param)
+    {
         $model = new WechatReply();
         $model->organization_id = $param['organization_id'];
         $model->authorizer_appid = $param['authorizer_appid'];
@@ -27,41 +32,48 @@ class WechatReply extends Model{
     }
 
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
-    public static function checkRowExists($where){
-        $row = self::getPluck($where,'id')->toArray();
-        if(empty($row)){
+    public static function checkRowExists($where)
+    {
+        $row = self::getPluck($where, 'id')->toArray();
+        if (empty($row)) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
+
     //获取单行数据的其中一列
-    public static function getPluck($where,$pluck){
+    public static function getPluck($where, $pluck)
+    {
         return self::where($where)->pluck($pluck);
     }
 
     //获取分页数据-服务商
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
+    {
+        return self::where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
     //获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
-        $model = self::where($where)->orderBy($orderby,$sort);
-        if(!empty($limit)){
+    public static function getList($where, $limit = 0, $orderby, $sort = 'DESC')
+    {
+        $model = self::where($where)->orderBy($orderby, $sort);
+        if (!empty($limit)) {
             $model = $model->limit($limit);
         }
         return $model->get();
     }
 
     //修改
-    public static function editWechatReply($where,$param){
+    public static function editWechatReply($where, $param)
+    {
         $model = self::where($where)->first();
-        foreach($param as $key=>$val){
-            $model->$key=$val;
+        foreach ($param as $key => $val) {
+            $model->$key = $val;
         }
         $model->save();
     }
 
 }
+
 ?>

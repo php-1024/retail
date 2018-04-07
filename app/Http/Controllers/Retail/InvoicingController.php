@@ -72,10 +72,12 @@ class InvoicingController extends Controller
     //零售进销存开单--供应商搜索
     public function search_company(Request $request)
     {
+        $admin_data = $request->get('admin_data');
+        $retail_id = $admin_data['organization_id'];
         $company_id = $request->get('company_id');      //供应商ID
         $company_name = $request->get('company_name');      //供应商ID
         $contactmobile = $request->get('contactmobile');      //供应商ID
-        $company = RetailSupplier::SearchCompany($company_id,$company_name,$contactmobile);
+        $company = RetailSupplier::SearchCompany($retail_id,$company_id,$company_name,$contactmobile);
         if ($company == null){
             return response()->json(['data' => '商户不存在！请重新选择！', 'status' => '0']);
         }else{
@@ -150,7 +152,14 @@ class InvoicingController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
+
+
+        $organization_id = $admin_data['organization_id'];
+        $num = RetailPurchaseOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        $num += 1;
+        $sort = 100000 + $num;
+        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
+
         $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
         if ($type == 1){
             $tips = '进货开单';
@@ -224,7 +233,13 @@ class InvoicingController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
+
+        $organization_id = $admin_data['organization_id'];
+        $num = RetailLossOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        $num += 1;
+        $sort = 100000 + $num;
+        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
+
         $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
         if ($type == 3){
             $tips = '报损开单';
@@ -298,7 +313,14 @@ class InvoicingController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
-        $ordersn = date('YmdHis').rand(1000,9999);        //生成订单编号
+
+        $organization_id = $admin_data['organization_id'];
+        $num = RetailCheckOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        $num += 1;
+        $sort = 100000 + $num;
+        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
+
+
         $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
         if ($type == 4){
             $tips = '盘点操作';
