@@ -30,7 +30,8 @@ class AndroidApiCheck{
                 $re = $this->checkTokenAndOrderCheck($request);
                 return self::format_response($re, $next);
                 break;
-            case "api/androidapi/cancel_order"://检测Token和订单提交数据
+            case "api/androidapi/cancel_order"://检测Token和关闭订单
+            case "api/androidapi/reduce_stock"://检测Token和关闭订单
                 $re = $this->checkTokenAndCancelOrder($request);
                 return self::format_response($re, $next);
                 break;
