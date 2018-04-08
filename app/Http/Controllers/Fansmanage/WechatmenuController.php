@@ -378,6 +378,7 @@ class WechatmenuController extends CommonController
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
         dd($re);
+
         // 返回创建的数据结构
         if ($re['errmsg'] == 'ok') {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
