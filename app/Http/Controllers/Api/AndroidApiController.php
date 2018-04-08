@@ -97,7 +97,7 @@ class AndroidApiController extends Controller
         $remarks = $request->remarks;//备注
         $order_type = $request->order_type;//订单类型
         if (empty($order_type)) {
-            $order_type = 1;
+            $order_type = '1';
         }
 
         $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
