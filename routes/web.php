@@ -696,7 +696,6 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('upload_thumb_check', 'Retail\GoodsController@upload_thumb_check')->middleware('RetailCheckAjax');             //上传文件检测
         Route::post('dispatch_add_check', 'Retail\DispatchController@dispatch_add_check')->middleware('RetailCheckAjax');             //上传文件检测
 
-
         Route::post('user_list_edit', 'Retail\UserController@user_list_edit')->middleware('RetailCheckAjax');                 //列表编辑ajax显示
         Route::post('user_list_edit_check', 'Retail\UserController@user_list_edit_check')->middleware('RetailCheckAjax');     //列表编辑功能提交
         Route::post('user_list_lock', 'Retail\UserController@user_list_lock')->middleware('RetailCheckAjax');                 //列表冻结ajax显示
