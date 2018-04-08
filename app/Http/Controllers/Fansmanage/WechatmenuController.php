@@ -382,14 +382,16 @@ class WechatmenuController extends CommonController
 
         // 返回创建的数据结构
         if ($re['errcode'] == 0) {
-            return response()->json(['data' => '同步成功！', 'status' => '1']);
+            $response = $this->getResponseMsg(1, "同步成功！");
         } else {
+            // 如果存在微信公众号报错信息
             if (!empty($re['errmsg'])) {
-                return response()->json(['data' => $re["errmsg"], 'status' => 0]);
+                $response = $this->getResponseMsg(0, $re["errmsg"]);
             } else {
-                return response()->json(['data' => '同步失败！', 'status' => 0]);
+                $response = $this->getResponseMsg(0, "同步失败！");
             }
         }
+        return $response;
     }
     // +----------------------------------------------------------------------
     // | End - 自定义菜单
@@ -399,6 +401,10 @@ class WechatmenuController extends CommonController
     // +----------------------------------------------------------------------
     // | Start - 个性化菜单
     // +----------------------------------------------------------------------
+    /**
+     * 渲染个性化菜单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function conditional_menu()
     {
         // 中间件参数 集合
@@ -407,7 +413,10 @@ class WechatmenuController extends CommonController
         return view('Fansmanage/Wechatmenu/conditional_menu', ['admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
 
-    //自定义菜单添加页面
+    /**
+     * 自定义菜单添加页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function conditional_menu_add()
     {
         // 中间件参数 集合
@@ -421,20 +430,28 @@ class WechatmenuController extends CommonController
         return view('Fansmanage/Wechatmenu/conditional_menu_add', ['label_list' => $label_list, 'wechatreply' => $wechatreply]);
     }
 
-    //显示上级菜单
+    /**
+     * 显示上级菜单
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function conditional_menu_list()
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $label_id = request()->label_id;//会员标签id
-        if (empty($label_id)) {
-            $list = [];
-        } else {
-            //获取授权APPID
+        // 获取会员标签id
+        $label_id = request()->label_id;
+        // 声明菜单列表
+        $list = [];
+        // 判断是否存在会员标签
+        if (!empty($label_id)) {
+            // 如果存在会员标签，那么就将该标签对应的 菜单列出来
+            // 获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
+            // 获取标签信息
             $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-            //获取菜单列表
+            dump($tag_id);
+
+            // 获取个性化菜单列表
             $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
         }
         return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list]);
@@ -458,12 +475,16 @@ class WechatmenuController extends CommonController
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]); //获取授权APPID
         $menu_name = request()->get('menu_name');                //获取菜单名称
         $parent_id = request()->get('parent_id');                //获取上级菜单ID
+
+
         // 菜单的级别数据结构 : 第一级为 0
         if ($parent_id == 0) {
             $parent_tree = '0,';
         } else {
             $parent_tree = '0,' . $parent_id . ',';
         }
+
+
         $response_url = request()->get('response_url');          //获取响应网址
         $response_keyword = request()->get('response_keyword');  //获取响应关键字
         $defined_menu = [
