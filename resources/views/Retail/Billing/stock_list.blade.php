@@ -116,54 +116,5 @@
 <script src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
-<script>
-
-    //编辑分类信息
-    function getEditForm(id) {
-        var url = $('#supplier_edit_url').val();
-        var token = $('#_token').val();
-        var data = {'id': id, '_token': token};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
-                    window.location.reload();
-                });
-                return;
-            } else {
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
-
-    //删除分类信息
-    function getDeleteForm(id){
-        var url = $('#supplier_delete_comfirm_url').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'id':id};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-</script>
 </body>
 </html>
