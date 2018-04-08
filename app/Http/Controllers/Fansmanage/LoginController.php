@@ -30,15 +30,15 @@ class LoginController extends Controller
      */
     public function captcha()
     {
-        //生成验证码图片的Builder对象，配置相应属性
+        // 生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder;
-        //可以设置图片宽高及字体
+        // 可以设置图片宽高及字体
         $builder->build($width = 150, $height = 35, $font = null);
-        //获取验证码的内容
+        // 获取验证码的内容
         $phrase = $builder->getPhrase();
-        //把内容存入session
+        // 把内容存入session
         Session::flash('fansmanage_system_captcha', $phrase);
-        //生成图片
+        // 生成图片
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
@@ -47,9 +47,12 @@ class LoginController extends Controller
     //检测登录
     public function login_check()
     {
-        $ip = Request::getClientIp();//获取访问者IP
-        $addr_arr = \IP2Attr::find($ip);//获取访问者地址
-        $addr = $addr_arr[0] . $addr_arr[1] . $addr_arr[2] . $addr_arr[3];//获取访问者地址
+        // 获取访问者IP
+        $ip = Request::getClientIp();
+        // 获取访问者地址
+        $addr_arr = \IP2Attr::find($ip);
+        // 获取访问者地址
+        $addr = $addr_arr[0] . $addr_arr[1] . $addr_arr[2] . $addr_arr[3];
         $ip = ip2long($ip);//IP查询完地址后转化为整型。便于存储和查询
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名

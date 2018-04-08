@@ -332,8 +332,9 @@ class AndroidApiController extends Controller
             DB::commit();//提交事务
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
+            return response()->json(['msg' => '付款失败', 'status' => '0', 'data' => '']);
         }
+        
         return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
     }
 
