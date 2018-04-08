@@ -48,7 +48,7 @@
                             <div class="line line-border b-b pull-in"></div>
                             <div style="clear:both"></div>
                             <div class="col-sm-12">
-                                <form method="post" class="form-horizontal" role="form" id="search" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
+                                {{--<form method="post" class="form-horizontal" role="form" id="search" action="{{ url('retail/ajax/dispatch_province_add_check') }}">--}}
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->name}}" name="dispatch_name">
@@ -57,14 +57,14 @@
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
                                     </div>
-                                </form>
+                                {{--</form>--}}
                             </div>
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
