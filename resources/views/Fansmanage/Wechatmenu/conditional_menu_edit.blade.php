@@ -13,7 +13,7 @@
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
                 <select class="form-control m-b" disabled="true" id="member_label">
-                    <option>{{$label_name}}</option>
+                    <option value="{{$conditionalmenu['tag_id']}}">{{$label_name}}</option>
                 </select>
             </div>
         </div>
@@ -197,29 +197,6 @@
             }
         });
         // getEditData($("#edit_id").val())
-    }
-
-
-    function getEditData(menu_id) {
-        var url = $("#conditional_menu_edit").val();
-        var token = $('._token').val();
-        var data = {'_token': token, 'id': menu_id};
-
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
-                    window.location.reload();
-                });
-                return;
-            } else {
-                $('#ctrl_box').html(response);
-            }
-        });
     }
 
     $(function () {
