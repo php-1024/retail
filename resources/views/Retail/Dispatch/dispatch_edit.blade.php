@@ -55,18 +55,12 @@
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="全国包邮"
-                                               name="goods_name">
-
+                                        <input class="input-sm form-control" size="16" type="text" value="全国包邮" name="goods_name">
                                     </div>
                                     <label class="col-sm-1 control-label">模板编号</label>
-
-
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="152014521021"
-                                               name="goods_name" readonly="readonly">
+                                        <input class="input-sm form-control" size="16" type="text" value="152014521021" name="goods_name" readonly="readonly">
                                     </div>
-
                                 </form>
                             </div>
                             <div style="clear:both"></div>
