@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>编辑运费模板 | 零壹云管理平台 | 零售版店铺管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Branch')}}/library/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Branch')}}/library/wizard/css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css"/>
+    <link href="{{asset('public/Branch')}}/library/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link href="{{asset('public/Branch')}}/library/wizard/css/custom.css" rel="stylesheet"/>
     <!--[if lt IE 9]>
     <script src="{{asset('public/Branch')}}/library/ie/html5shiv.js"></script>
     <script src="{{asset('public/Branch')}}/library/ie/respond.min.js"></script>
@@ -26,8 +26,8 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('Retail/Public/Nav')
-            <!-- /.aside -->
+        @include('Retail/Public/Nav')
+        <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
@@ -36,7 +36,9 @@
                         </div>
                         <div class="row wrapper">
                             <div class="col-sm-12">
-                                <button type="button" class="btn btn-s-md btn-success" onclick="window.history.back()">返回上一级</button>
+                                <button type="button" class="btn btn-s-md btn-success" onclick="window.history.back()">
+                                    返回上一级
+                                </button>
                             </div>
                         </div>
                         <section class="panel panel-default">
@@ -69,8 +71,6 @@
                             </div>
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-
-
                             <form method="post" class="form-horizontal" role="form" id="purchase_goods"
                                   action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
                                 <div class="tab-pane">
@@ -141,7 +141,8 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true"></div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -154,28 +155,28 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script type="text/javascript"
+        src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
 
 
-
     //订单详情
-    function getwalletForm(id,type){
+    function getwalletForm(id, type) {
         var url = $('#order_list_details').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'id':id,'type':type};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'_token': token, 'id': id, 'type': type};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
@@ -183,71 +184,77 @@
     }
 
 
-
     //审核订单
-    function getlockForm(id,status){
+    function getlockForm(id, status) {
         var url = $('#purchase_list_confirm').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'id':id,'status':status};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'_token': token, 'id': id, 'status': status};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 console.log(response);
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
         });
     }
+
     //添加会员标签
-    function getEditForm(id){
+    function getEditForm(id) {
         var url = $('#user_list_edit').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'id':id};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'_token': token, 'id': id};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
         });
     }
 
-    function changeUserTag(obj,user_id,store_id,nickname){
+    function changeUserTag(obj, user_id, store_id, nickname) {
         var label_id = $(obj).val();
         var url = $('#store_label_add_check').val();
         var token = $('#_token').val();
-        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'store_id':store_id,'nickname':nickname};
-        $.post(url,data,function(json){
+        var data = {
+            '_token': token,
+            'label_id': label_id,
+            'user_id': user_id,
+            'store_id': store_id,
+            'nickname': nickname
+        };
+        $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if (json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
+            } else {
                 swal({
                     title: "提示信息",
                     text: json.data,
