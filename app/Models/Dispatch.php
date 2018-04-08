@@ -65,7 +65,6 @@ class Dispatch extends Model{
         }
         return $model->with('create_account')->with('Organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
-
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
         $model = Self::find($id);
