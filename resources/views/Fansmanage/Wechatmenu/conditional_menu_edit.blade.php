@@ -13,7 +13,7 @@
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
                 <select class="form-control m-b" disabled="true" id="member_label">
-                    <option value="{{$label_id}}">{{$label_name}}</option>
+                    <option value="{{$label_info["id"]}}">{{$label_info['label_name']}}</option>
                 </select>
             </div>
         </div>
