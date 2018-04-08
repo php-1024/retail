@@ -49,7 +49,7 @@
                             <div style="clear:both"></div>
                             <div class="col-sm-12">
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
-                                    <input type="hidden" name="_token" value="gXrfjYLgVjSqVznCZOEWuDXxXCeIdWCEq4tuYcB6">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->name}}" name="dispatch_name">
@@ -63,7 +63,8 @@
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-                            <form method="post" class="form-horizontal" role="form" id="purchase_goods" action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
+                            <form method="post" class="form-horizontal" role="form" id="dispatch_province_add_check" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
+                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="tab-pane">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
@@ -98,7 +99,7 @@
                                                         <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
                                                     <td>
-                                                        <button onclick="goodsSelect(30);" class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>添加选择</button>
+                                                        <button onclick="postForm();" class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>添加选择</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -191,7 +192,7 @@
     });
     //提交表单
     function postForm() {
-        var target = $("#currentForm");
+        var target = $("#dispatch_province_add_check");
         var url = target.attr("action");
         var _token = $('#_token').val();
         var province = '';
