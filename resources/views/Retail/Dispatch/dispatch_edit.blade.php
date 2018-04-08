@@ -82,8 +82,6 @@
                                                 <tr>
                                                     <th>配送区域</th>
                                                     <th>首重(克)</th>
-
-
                                                     <th>运费(元/千克)</th>
                                                     <th>续重(克)</th>
                                                     <th>续费(元/千克)</th>
@@ -98,33 +96,22 @@
                                                         <label class="label label-success" style="display:inline-block">湖北省</label>
                                                         <label class="label label-success" style="display:inline-block">湖南省</label>
                                                     </td>
-                                                    <td class="name"><input type="text" name="firstweight175"
-                                                                            id="firstweight175" value="0"></td>
-
-                                                    <td class="price"><input type="text" name="firstprice175"
-                                                                             id="firstprice175" value="0.00"></td>
-                                                    <td class="price"><input type="text" name="secondweight175"
-                                                                             id="secondweight175" value="0"></td>
-                                                    <td class="price"><input type="text" name="secondprice175"
-                                                                             id="secondprice175" value="0.00"></td>
+                                                    <td class="name"><input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs"
-                                                                onclick="getDeleteForm(7)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button class="btn btn-danger btn-xs" onclick="getDeleteForm(7)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
-
-
                                                 </tbody>
                                             </table>
                                             <div style="clear: both;"></div>
                                         </section>
                                     </div>
-
-
                                     <div style="clear: both;"></div>
                                 </div>
-
                                 <footer class="panel-footer">
                                     <div class="row">
                                         <div class="col-sm-12 col-sm-offset-6">
