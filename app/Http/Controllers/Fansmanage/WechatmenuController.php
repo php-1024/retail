@@ -372,23 +372,28 @@ class WechatmenuController extends CommonController
                 }
             }
         }
+
         // 刷新并获取授权令牌
         $auth_info = \Wechat::refresh_authorization_info($organization_id);
+
         // 创建微信菜单
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
-        dd($re);
+
         // 返回创建的数据结构
-        if ($re['errmsg'] == 'ok') {
+        if ($re['errcode'] == 0) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
-            return response()->json(['data' => '同步失败！', 'status' => '1']);
+            if (!empty($re['errmsg'])) {
+                return response()->json(['data' => $re["errmsg"], 'status' => 0]);
+            } else {
+                return response()->json(['data' => '同步失败！', 'status' => 0]);
+            }
         }
     }
     // +----------------------------------------------------------------------
     // | End - 自定义菜单
     // +----------------------------------------------------------------------
-
 
 
     // +----------------------------------------------------------------------
