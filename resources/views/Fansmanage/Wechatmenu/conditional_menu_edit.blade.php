@@ -13,7 +13,7 @@
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
                 <select class="form-control m-b" disabled="true" id="member_label">
-                    <option value="{{$conditionalmenu['tag_id']}}">{{$label_name}}</option>
+                    <option value="{{$label_id}}">{{$label_name}}</option>
                 </select>
             </div>
         </div>
@@ -179,10 +179,7 @@
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
         var $parent_id = $("#parent_id").val();
-        // var $label_id = $("#member_label").val();
-        var $label_id = 56;
-
-
+        var $label_id = $("#member_label").val();
         var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
@@ -199,7 +196,6 @@
                 $('#menu_box').html(response);
             }
         });
-        // getEditData($("#edit_id").val())
     }
 
     $(function () {
