@@ -93,11 +93,11 @@
                                             </label>
                                         </td>
                                         <td>
-                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
+                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
                                         </td>
                                         <td>212125151</td>
                                         <td>
-                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('{{$val->id}}','{{$val->type}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('1','0')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
                                     </tbody>
