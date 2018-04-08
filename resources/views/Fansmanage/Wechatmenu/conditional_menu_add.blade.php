@@ -216,7 +216,6 @@
         });
     });
 
-
     function addPostForm() {
         console.log(123);
         var target = $("#conditional_menu_add_check");
