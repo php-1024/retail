@@ -229,7 +229,6 @@
                     confirmButtonText: "确定"
                 }, function () {
 
-
                     console.log($("#member_label").val())
                     // window.location.reload();
                 });
