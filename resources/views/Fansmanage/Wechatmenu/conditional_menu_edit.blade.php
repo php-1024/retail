@@ -1,6 +1,7 @@
 <header class="panel-heading font-bold" style="color:#FF0000">
     个性化菜单修改
 </header>
+
 <div class="panel-body">
     <form class="form-horizontal" role="form" id="conditional_menu_edit_check" action="{{ url('fansmanage/ajax/conditional_menu_edit_check') }}">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
