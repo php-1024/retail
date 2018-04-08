@@ -64,12 +64,12 @@ class Label extends Model
         }
     }
 
-    public static function getInfo($where,$field)
+    public static function getInfo($where = [], $field = [])
     {
         $res = self::select($field)->where($where)->first();
-        if(!empty($res)){
+        if (!empty($res)) {
             return $res->toArray();
-        }else{
+        } else {
             return false;
         }
     }
