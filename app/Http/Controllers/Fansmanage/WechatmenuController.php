@@ -381,16 +381,19 @@ class WechatmenuController extends CommonController
         $re = json_decode($re, true);
 
         // 返回创建的数据结构
-        if ($re['errmsg'] == 'ok') {
+        if ($re['errcode'] == 0) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
-            return response()->json(['data' => '同步失败！', 'status' => '1']);
+            if (!empty($re['errmsg'])) {
+                return response()->json(['data' => $re["errmsg"], 'status' => 0]);
+            } else {
+                return response()->json(['data' => '同步失败！', 'status' => 0]);
+            }
         }
     }
     // +----------------------------------------------------------------------
     // | End - 自定义菜单
     // +----------------------------------------------------------------------
-
 
 
     // +----------------------------------------------------------------------
