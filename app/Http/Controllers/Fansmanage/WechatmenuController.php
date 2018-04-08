@@ -599,6 +599,7 @@ class WechatmenuController extends CommonController
 
         if ($data['$parent_id'] != $parent_id) {//如果id有改变
             $res_menu = $this->judgeMenuStandard($parent_id, "conditional", $data["tag_id"]);
+            dd($res_menu);
             if ($res_menu !== true) {
                 return $res_menu;
             }
@@ -849,6 +850,7 @@ class WechatmenuController extends CommonController
             $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id], ['tag_id', $tag_id]]);
         }
 
+        var_dump($count);
         // 如果为第一级菜单并且已有的第一级菜单 >= 3 就报错
         if ($parent_id == '0' && $count >= 3) {
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
