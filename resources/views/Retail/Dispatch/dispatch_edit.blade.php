@@ -36,7 +36,7 @@
                         </div>
                         <div class="row wrapper">
                             <div class="col-sm-12">
-                                <button type="button" class="btn btn-s-md btn-success" onclick="window.location='dispatch_add'">添加运费模板</button>
+                                <button type="button" class="btn btn-s-md btn-success" onclick="window.history.back()">添加运费模板</button>
                             </div>
                         </div>
                         <section class="panel panel-default">
