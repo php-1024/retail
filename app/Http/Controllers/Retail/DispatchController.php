@@ -66,6 +66,7 @@ class DispatchController extends Controller
         return response()->json(['data' => '添加运费模板信息成功', 'status' => '1']);
     }
 
+
     //运费模板列表
     public function dispatch_list(Request $request)
     {
@@ -87,7 +88,6 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_id = $request->get('id');                //模板ID
         $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);
-        dump($dispatch);
         return view('Retail/Dispatch/dispatch_edit',['dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
