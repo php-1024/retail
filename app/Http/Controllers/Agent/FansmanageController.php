@@ -4,15 +4,11 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Models\Assets;
-use App\Models\AssetsOperation;
 use App\Models\Organization;
 use App\Models\OrganizationAssets;
 use App\Models\OrganizationAssetsallocation;
 use App\Models\OrganizationFansmanageapply;
-use App\Models\Package;
 use App\Models\Program;
-use App\Models\ProxyApply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
