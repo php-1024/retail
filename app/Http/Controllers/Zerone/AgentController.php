@@ -28,7 +28,7 @@ class AgentController extends Controller
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
+        $route_name = $request->path(); //获取当前的页面路由/**/
         $agent_name = $request->input('agent_name');
         $agent_owner_mobile = $request->input('agent_owner_mobile');
         $search_data = ['agent_name' => $agent_name, 'agent_owner_mobile' => $agent_owner_mobile];

@@ -258,7 +258,6 @@ class WechatmenuController extends CommonController
 
     /**
      * 自定义菜单删除弹窗
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function defined_menu_delete()
     {
@@ -271,7 +270,7 @@ class WechatmenuController extends CommonController
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function defined_menu_delete_check()
+    public function defined_menu_delete_check($a)
     {
         // 中间件参数 集合
         $this->getRequestInfo();
