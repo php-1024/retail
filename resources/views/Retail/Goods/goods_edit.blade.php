@@ -206,6 +206,10 @@
             autoAjustHeight: true,
             autogrow: true
         });
+
+        $('#deleteBtn').click(function(){
+            $('#myModal').modal();
+        });
     });
     //弹出上传图片窗口
     function addthumb() {
@@ -297,6 +301,30 @@
             }
         });
     }
+
+    //删除商品图片信息
+    function getDeleteForm(id){
+        var url = $('#goods_thumb_delete_comfirm_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
 </script>
 
 
