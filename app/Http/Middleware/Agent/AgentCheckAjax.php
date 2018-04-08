@@ -2,7 +2,9 @@
 /**
  * 检测中间件囖
  */
+
 namespace App\Http\Middleware\Agent;
+
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -39,17 +41,17 @@ class AgentCheckAjax
 
             case "agent/ajax/fansmanage_assets_check"://检测是否登录 权限 安全密码 数字不能为空
                 $re = $this->checkLoginAndRuleAndSafeAndAssets($request);
-                return self::format_response($re,$next);
+                return self::format_response($re, $next);
                 break;
 
 
             case "proxy/ajax/role_edit_check"://检测是否登录 权限 安全密码
 
                 $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re,$next);
+                return self::format_response($re, $next);
                 break;
             case "agent/ajax/fansmanage_assets":   //商户资产划入检测弹出登入和权限
-            $re = $this->checkLoginAndRule($request);
+                $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
@@ -59,16 +61,17 @@ class AgentCheckAjax
 
     /********公共部分**********/
     //检测登录和权限和安全密码
-    public function checkLoginAndRuleAndSafe($request){
+    public function checkLoginAndRuleAndSafe($request)
+    {
         $re = $this->checkLoginAndRule($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkSafePassword($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
@@ -76,114 +79,116 @@ class AgentCheckAjax
 
     /********系统管理**********/
     //检测登录和权限和安全密码和服务商修改信息
-    public function checkLoginAndRuleAndSafeAndAgentInfo($request){
+    public function checkLoginAndRuleAndSafeAndAgentInfo($request)
+    {
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkAgentInfo($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
+
     //检测登录和权限和安全密码和个人修改信息
-    public function checkLoginAndRuleAndSafeAndAccountInfo($request){
+    public function checkLoginAndRuleAndSafeAndAccountInfo($request)
+    {
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkAccountInfo($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
+
     //检测登录和权限和安全密码和登入密码修改信息
-    public function checkLoginAndRuleAndSafeAndPassword($request){
+    public function checkLoginAndRuleAndSafeAndPassword($request)
+    {
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkPassword($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
+
     //检测是否登录 权限 修改安全密码
-    public function checkLoginAndRuleAndSafeEdit($request){
+    public function checkLoginAndRuleAndSafeEdit($request)
+    {
         $re = $this->checkLoginAndRule($request);//判断是否登录和权限
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkSafeEdit($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
-
-
-
-
-
-
-
 
 
     //检测登录和权限和安全密码和ID是否为空
-    public function checkLoginAndRuleAndSafeAndID($request){
+    public function checkLoginAndRuleAndSafeAndID($request)
+    {
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkID($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
 
 
     //检测登录和权限
-    public function checkLoginAndRule($request){
+    public function checkLoginAndRule($request)
+    {
         $re = $this->checkIsLogin($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkHasRule($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
 
 
-
     //检测是否登录 权限 安全密码 数字不能为空
-    public function checkLoginAndRuleAndSafeAndAssets($request){
+    public function checkLoginAndRuleAndSafeAndAssets($request)
+    {
         $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录
-        if($re['status']=='0'){//检测是否登录
+        if ($re['status'] == '0') {//检测是否登录
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkAssets($re['response']);//检测是否具有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
@@ -192,43 +197,46 @@ class AgentCheckAjax
     /******************************单项检测*********************************/
 
 
-
     /*****公共部分*****/
 
     //检测安全密码是否输入正确
-    public function checkSafePassword($request){
+    public function checkSafePassword($request)
+    {
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
 
-        if($admin_data['is_super'] == '2'){
+        if ($admin_data['is_super'] == '2') {
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
-        }else{
+        } else {
             $key = config("app.agent_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
-        if(empty($safe_password)){
-            return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+        if (empty($safe_password)) {
+            return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
-        if(empty($admin_data['safe_password']) && $admin_data['is_super'] != '2'){
-            return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
+        if (empty($admin_data['safe_password']) && $admin_data['is_super'] != '2') {
+            return self::res(0, response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
         }
-        if($encryptPwd != $admin_data['safe_password']){
-            return self::res(0,response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
+        if ($encryptPwd != $admin_data['safe_password']) {
+            return self::res(0, response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
         }
-        return self::res(1,$request);
+        return self::res(1, $request);
     }
+
     //部分页面检测用户是否admin，否则检测是否有权限
-    public function checkHasRule($request){
+    public function checkHasRule($request)
+    {
         $admin_data = $request->get('admin_data');
-        if($admin_data['id']!=1){
+        if ($admin_data['id'] != 1) {
             //暂定除admin外所有用户都没有权限
             //return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
-            return self::res(1,$request);
-        }else{
-            return self::res(1,$request);
+            return self::res(1, $request);
+        } else {
+            return self::res(1, $request);
         }
     }
+
     //检测是否登录
     public function checkIsLogin($request)
     {
@@ -251,7 +259,8 @@ class AgentCheckAjax
 
     /*****系统管理*****/
     //检测公司信息设置
-    public function checkAgentInfo($request){
+    public function checkAgentInfo($request)
+    {
         if (empty($request->input('organization_name'))) {
             return self::res(0, response()->json(['data' => '请输入服务商名称', 'status' => '0']));
         }
@@ -261,82 +270,79 @@ class AgentCheckAjax
         if (empty($request->input('idcard'))) {
             return self::res(0, response()->json(['data' => '请输入负责人身份证号', 'status' => '0']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
     }
+
     //检测个人信息修改
-    public function checkAccountInfo($request){
+    public function checkAccountInfo($request)
+    {
 
         if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入负责人姓名', 'status' => '0']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
     }
-    //检测登入密码修改
-    public function checkPassword($request){
 
-        if(empty($request->input('old_password'))){
-            return self::res(0,response()->json(['data' => '请输入原密码', 'status' => '0']));
+    //检测登入密码修改
+    public function checkPassword($request)
+    {
+
+        if (empty($request->input('old_password'))) {
+            return self::res(0, response()->json(['data' => '请输入原密码', 'status' => '0']));
         }
-        if(empty($request->input('password'))){
-            return self::res(0,response()->json(['data' => '请输入新密码', 'status' => '0']));
+        if (empty($request->input('password'))) {
+            return self::res(0, response()->json(['data' => '请输入新密码', 'status' => '0']));
         }
-        if(empty($request->input('re_password'))){
-            return self::res(0,response()->json(['data' => '请重复新密码', 'status' => '0']));
+        if (empty($request->input('re_password'))) {
+            return self::res(0, response()->json(['data' => '请重复新密码', 'status' => '0']));
         }
-        if($request->input('password') <> $request->input('re_password')){
-            return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+        if ($request->input('password') <> $request->input('re_password')) {
+            return self::res(0, response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
         }
         return self::res(1, $request);
     }
+
     //检测修改设置安全密码
-    public function checkSafeEdit($request){
-        if(empty($request->input('is_editing'))){
-            return self::res(0,response()->json(['data' => '数据传输错误', 'status' => '0']));
+    public function checkSafeEdit($request)
+    {
+        if (empty($request->input('is_editing'))) {
+            return self::res(0, response()->json(['data' => '数据传输错误', 'status' => '0']));
         }
 
-        if($request->input('is_editing')=='-1'){//设置安全密码时
-            if(empty($request->input('safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
+        if ($request->input('is_editing') == '-1') {//设置安全密码时
+            if (empty($request->input('safe_password'))) {
+                return self::res(0, response()->json(['data' => '请输入安全密码', 'status' => '0']));
             }
-            if(empty($request->input('re_safe_password'))){
-                return self::res(0,response()->json(['data' => '请重复安全密码', 'status' => '0']));
+            if (empty($request->input('re_safe_password'))) {
+                return self::res(0, response()->json(['data' => '请重复安全密码', 'status' => '0']));
             }
-            if($request->input('safe_password') <> $request->input('re_safe_password')){
-                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            if ($request->input('safe_password') <> $request->input('re_safe_password')) {
+                return self::res(0, response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
             }
-        }elseif($request->input('is_editing')=='1'){//修改安全密码时
-            if(empty($request->input('old_safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
+        } elseif ($request->input('is_editing') == '1') {//修改安全密码时
+            if (empty($request->input('old_safe_password'))) {
+                return self::res(0, response()->json(['data' => '请输入旧安全密码', 'status' => '0']));
             }
-            if(empty($request->input('safe_password'))){
-                return self::res(0,response()->json(['data' => '请输入新安全密码', 'status' => '0']));
+            if (empty($request->input('safe_password'))) {
+                return self::res(0, response()->json(['data' => '请输入新安全密码', 'status' => '0']));
             }
-            if(empty($request->input('re_safe_password'))){
-                return self::res(0,response()->json(['data' => '请重复新安全密码', 'status' => '0']));
+            if (empty($request->input('re_safe_password'))) {
+                return self::res(0, response()->json(['data' => '请重复新安全密码', 'status' => '0']));
             }
-            if($request->input('safe_password') <> $request->input('re_safe_password')){
-                return self::res(0,response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
+            if ($request->input('safe_password') <> $request->input('re_safe_password')) {
+                return self::res(0, response()->json(['data' => '两次安全密码输入不一致', 'status' => '0']));
             }
         }
-        return self::res(1,$request);
+        return self::res(1, $request);
     }
-
-
-
-
-
-
-
-
-
 
 
     //检测登录提交数据
@@ -353,7 +359,7 @@ class AgentCheckAjax
         }
 //        if (Session::get('zerone_system_captcha') == $request->input('captcha')) {
 //            //把参数传递到下一个程序
-            return self::res(1, $request);
+        return self::res(1, $request);
 //        } else {
 //            //用户输入验证码错误
 //            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
@@ -361,13 +367,13 @@ class AgentCheckAjax
     }
 
 
-
     //检测商户编辑表信息
-    public function checkAssets($request){
+    public function checkAssets($request)
+    {
         $num = $request->input('num');
-        if (preg_match("/^[1-9]{1}\d{0,9}$/",$num)){
+        if (preg_match("/^[1-9]{1}\d{0,9}$/", $num)) {
             return self::res(1, $request);
-        }else{
+        } else {
             return self::res(0, response()->json(['data' => '请输入正确的数量', 'status' => '0']));
         }
     }
@@ -381,11 +387,13 @@ class AgentCheckAjax
         }
         return self::res(1, $request);
     }
+
     //工厂方法返回结果
     public static function res($status, $response)
     {
         return ['status' => $status, 'response' => $response];
     }
+
     //格式化返回值
     public static function format_response($re, Closure $next)
     {
