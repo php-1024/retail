@@ -447,10 +447,8 @@ class WechatmenuController extends CommonController
             // 如果存在会员标签，那么就将该标签对应的 菜单列出来
             // 获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
-            // 获取标签信息
+            // 获取某个条件下 的 wechat_id 信息
             $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-            dump($tag_id);
-
             // 获取个性化菜单列表
             $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
         }
