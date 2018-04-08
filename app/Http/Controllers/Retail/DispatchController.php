@@ -75,6 +75,7 @@ class DispatchController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //模板名称
+
         $list = Dispatch::getPaginage(['retail_id'=>$admin_data['organization_id']],$dispatch_name,'10','displayorder','DESC');
         dump($list);
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
