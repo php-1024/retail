@@ -25,13 +25,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>服务商注册审核</h2>
+                <h2>代理注册审核</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">服务商管理</a>
+                        <a href="JavaScript:;">代理管理</a>
                     </li>
                     <li >
-                        <strong>服务商注册审核</strong>
+                        <strong>代理注册审核</strong>
                     </li>
                 </ol>
             </div>
@@ -46,8 +46,8 @@
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label class="control-label" for="amount">服务商名称</label>
-                                <input type="text" id="agent_name" name="agent_name" value="{{ $search_data['agent_name'] }}" placeholder="请输入服务商名称" class="form-control">
+                                <label class="control-label" for="amount">代理名称</label>
+                                <input type="text" id="agent_name" name="agent_name" value="{{ $search_data['agent_name'] }}" placeholder="请输入代理名称" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -76,7 +76,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>服务商名称</th>
+                                    <th>代理名称</th>
                                     <th>所在战区</th>
                                     <th>负责人姓名</th>
                                     <th>身份证号</th>
@@ -86,6 +86,7 @@
                                     <th class="col-sm-2 text-right" >操作</th>
                                 </tr>
                                 </thead>
+                                
                                 <tbody>
                                 @foreach($list as $key=>$value)
                                     <tr>
