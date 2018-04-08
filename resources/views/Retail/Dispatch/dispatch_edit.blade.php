@@ -67,7 +67,6 @@
                             <form method="post" class="form-horizontal" role="form" id="purchase_goods"
                                   action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
                                 <div class="tab-pane">
-
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
@@ -85,45 +84,179 @@
                                                 </thead>
                                                 <tbody id="goods_list">
                                                 <tr id="30">
-                                                    <td class="id">
+                                                    <td class="id"><select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
 
-                                                        <ul>
-                                                            <li id="beijin">北京市<button><a href="javascript:add('beijin')">添加</a></button></li>
-                                                            <li id="tianjin">天津市<button><a href="javascript:add('tianjin')">添加</a></button></li>
-                                                            <li id="hebei">河北省<button><a href="javascript:add('hebei')">添加</a></button></li>
-                                                            <li id="shan_xi">山西省<button><a href="javascript:add('shan_xi')">添加</a></button></li>
-                                                            <li id="neimenggu">内蒙古区<button><a href="javascript:add('neimenggu')">添加</a></button></li>
-                                                            <li id="liaoning">辽宁省<button><a href="javascript:add('liaoning')">添加</a></button></li>
-                                                            <li id="jilin">吉林省<button><a href="javascript:add('jilin')">添加</a></button></li>
-                                                            <li id="heilongjiang">黑龙江省<button><a href="javascript:add('heilongjiang')">添加</a></button></li>
-                                                            <li id="shanghai">上海市<button><a href="javascript:add('shanghai')">添加</a></button></li>
-                                                            <li id="jiangsu">江苏省<button><a href="javascript:add('jiangsu')">添加</a></button></li>
-                                                            <li id="zhejiang">浙江省<button><a href="javascript:add('zhejiang')">添加</a></button></li>
-                                                            <li id="anhui">安徽省<button><a href="javascript:add('anhui')">添加</a></button></li>
-                                                            <li id="fujian">福建省<button><a href="javascript:add('fujian')">添加</a></button></li>
-                                                            <li id="jiangxi">江西省<button><a href="javascript:add('jiangxi')">添加</a></button></li>
-                                                            <li id="shandong">山东省<button><a href="javascript:add('shandong')">添加</a></button></li>
-                                                            <li id="henan">河南省<button><a href="javascript:add('henan')">添加</a></button></li>
-                                                            <li id="hubei">湖北省<button><a href="javascript:add('hubei')">添加</a></button></li>
-                                                            <li id="hunan">湖南省<button><a href="javascript:add('hunan')">添加</a></button></li>
-                                                            <li id="guangdong">广东省<button><a href="javascript:add('guangdong')">添加</a></button></li>
-                                                            <li id="guangxi">广西区<button><a href="javascript:add('guangxi')">添加</a></button></li>
-                                                            <li id="hainan">海南省<button><a href="javascript:add('hainan')">添加</a></button></li>
-                                                            <li id="chongqing">重庆市<button><a href="javascript:add('chongqing')">添加</a></button></li>
-                                                            <li id="sichuan">四川省<button><a href="javascript:add('sichuan')">添加</a></button></li>
-                                                            <li id="guizhou">贵州省<button><a href="javascript:add('guizhou')">添加</a></button></li>
-                                                            <li id="yunnan">云南省<button><a href="javascript:add('yunnan')">添加</a></button></li>
-                                                            <li id="xizang">西藏区<button><a href="javascript:add('xizang')">添加</a></button></li>
-                                                            <li id="shanxi">陕西省<button><a href="javascript:add('shanxi')">添加</a></button></li>
-                                                            <li id="gansu">甘肃省<button><a href="javascript:add('gansu')">添加</a></button></li>
-                                                            <li id="qinghai">青海省<button><a href="javascript:add('qinghai')">添加</a></button></li>
-                                                            <li id="ningxia">宁夏区<button><a href="javascript:add('ningxia')">添加</a></button></li>
-                                                            <li id="xinjiang">新疆区<button><a href="javascript:add('xinjiang')">添加</a></button></li>
-                                                            <li id="taiwan">台湾省<button><a href="javascript:add('taiwan')">添加</a></button></li>
-                                                            <li id="xianggang">香港特区<button><a href="javascript:add('xianggang')">添加</a></button></li>
-                                                            <li id="aomeng">澳门特区<button><a href="javascript:add('aomeng')">添加</a></button></li>
 
-                                                        </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                            <option value="10" data-position="163">添加战区（零壹平台管理系统）</option>
+                                                            <option value="9" data-position="164">战区管理（零壹平台管理系统）</option>
+                                                            <option value="4" data-position="165">测试节点4</option>
+                                                            <option value="3" data-position="166">测试节点3</option>
+                                                            <option value="2" data-position="167">测试节点2</option>
+                                                            <option value="1" data-position="168">测试节点1</option>
+                                                        </select>
+
+
 
 
 
@@ -132,7 +265,8 @@
 
                                                     </td>
                                                     <td class="name">
-                                                        <select name="nodes[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"><option value="175" data-position="2">零售管理系统（修改店铺信息提交）</option><option value="172" data-position="3">零售管理系统（微信支付设置）</option><option value="171" data-position="4">零售管理系统（冻结粉丝提交）</option><option value="170" data-position="5">零售管理系统（冻结粉丝弹窗）</option><option value="169" data-position="6">零售管理系统（粉丝钱包）</option><option value="168" data-position="7">零售管理系统（粉丝信息修改提交）</option></select>
+                                                        <select name="nodes[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
+
                                                     </td>
 
 
