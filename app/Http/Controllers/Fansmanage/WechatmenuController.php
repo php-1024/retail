@@ -618,7 +618,7 @@ class WechatmenuController extends CommonController
 //        }
 
         // 如果id有改变
-        if ($data['$parent_id'] != $parent_id) {
+        if ($data['parent_id'] != $parent_id) {
             $res_menu = $this->judgeMenuStandard($parent_id, "conditional", $data["tag_id"]);
             if ($res_menu !== true) {
                 return $res_menu;
