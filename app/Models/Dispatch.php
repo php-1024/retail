@@ -1,6 +1,6 @@
 <?php
 /**
- * retail_category表的模型
+ * dispatch表的模型
  *
  */
 namespace App\Models;
