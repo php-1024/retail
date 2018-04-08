@@ -42,6 +42,7 @@ class RetailCheck{
 
             case "retail/dispatch/dispatch_add":      //运费模板-添加运费模板
             case "retail/dispatch/dispatch_list":     //运费模板-运费模板列表
+            case "retail/dispatch/dispatch_edit":     //运费模板-编辑运费模板
 
             case "retail/billing/purchase_goods":     //从供应商进货管理
             case "retail/billing/loss_goods":         //进销存管理--报损开单管理

@@ -12,8 +12,8 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
-                <select class="form-control m-b" disabled="true">
-                    <option>{{$label_name}}</option>
+                <select class="form-control m-b" disabled="true" id="member_label">
+                    <option value="{{$label_info["id"]}}">{{$label_info['label_name']}}</option>
                 </select>
             </div>
         </div>
@@ -22,7 +22,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
-                <select name="parent_id" class="form-control m-b"
+                <select name="parent_id" class="form-control m-b" id="parent_id"
                         @if($conditionalmenu->parent_id == 0) disabled="true" @endif>
                     <option value="0">无</option>
                     @foreach($list as $key=>$val)
@@ -165,10 +165,39 @@
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
     </form>
+
+    <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
+    <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
+    <input type="hidden" id="tag_id" value="0">
+    <input type="hidden" id="edit_id" value="{{$edit_id}}">
 </div>
 
 
 <script>
+    // 获取列表主体
+    function changeConditionalMennuEdit() {
+        var url = $('#conditional_menu_get').val();
+        var token = $('#_token').val();
+        var $parent_id = $("#parent_id").val();
+        var $label_id = $("#member_label").val();
+        var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+                $('#menu_box').html(response);
+            }
+        });
+    }
+
     $(function () {
         $('.onclick').click(function () {
             $('#response_type').val(2);
@@ -192,6 +221,8 @@
         var target = $("#conditional_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
+        var $parent_id = $("#parent_id").val();
+        var $member_label = $("#member_label").val();
         $.post(url, data, function (json) {
             if (json.status == 1) {
                 swal({
@@ -200,9 +231,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 }, function () {
-
-                    window.location.reload();
-
+                    changeConditionalMennuEdit($member_label);
                 });
             } else {
                 swal({

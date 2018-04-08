@@ -595,6 +595,7 @@ Route::group(['prefix' => 'retail'], function () {
     Route::group(['prefix' => 'dispatch'], function () {
         Route::get('dispatch_add', 'Retail\DispatchController@dispatch_add')->middleware('RetailCheck');   //添加运费模板                    //订单管理-现场订单
         Route::get('dispatch_list', 'Retail\DispatchController@dispatch_list')->middleware('RetailCheck'); //运费模板列表                              //订单管理-现场订单
+        Route::get('dispatch_edit', 'Retail\DispatchController@dispatch_edit')->middleware('RetailCheck'); //运费模板列表                              //订单管理-现场订单
     });
 
 
@@ -695,7 +696,6 @@ Route::group(['prefix' => 'retail'], function () {
         Route::any('goods_thumb', 'Retail\GoodsController@goods_thumb')->middleware('RetailCheckAjax');                           //商品规格异步加载页面
         Route::post('upload_thumb_check', 'Retail\GoodsController@upload_thumb_check')->middleware('RetailCheckAjax');             //上传文件检测
         Route::post('dispatch_add_check', 'Retail\DispatchController@dispatch_add_check')->middleware('RetailCheckAjax');             //上传文件检测
-
 
         Route::post('user_list_edit', 'Retail\UserController@user_list_edit')->middleware('RetailCheckAjax');                 //列表编辑ajax显示
         Route::post('user_list_edit_check', 'Retail\UserController@user_list_edit_check')->middleware('RetailCheckAjax');     //列表编辑功能提交

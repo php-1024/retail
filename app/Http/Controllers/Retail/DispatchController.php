@@ -17,7 +17,7 @@ use Session;
 
 class DispatchController extends Controller
 {
-    //添加与非模板页面
+    //添加运费模板页面
     public function dispatch_add(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -26,7 +26,6 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         return view('Retail/Dispatch/dispatch_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
-
 
     //添加运费模板操作
     public function dispatch_add_check(Request $request)
@@ -55,19 +54,19 @@ class DispatchController extends Controller
             Dispatch::addDispatch($dispatch_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员添加零售店铺分类的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了栏目分类！');//保存操作记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了运费模板！');//保存操作记录
             }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了栏目分类！');//保存操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了运费模板！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '添加分类失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '添加运费模板失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加分类信息成功', 'status' => '1']);
+        return response()->json(['data' => '添加运费模板信息成功', 'status' => '1']);
     }
 
-    //添加与非模板页面
+    //运费模板列表
     public function dispatch_list(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -75,9 +74,21 @@ class DispatchController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //模板名称
-        $list = Dispatch::getPaginage(['store_id'=>$admin_data['organization_id']],$dispatch_name,'10','displayorder','DESC');
-        dump($list);
+        $list = Dispatch::getPaginage(['store_id'=>$admin_data['organization_id']],$dispatch_name,'0','displayorder','DESC');
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    //编辑运费模板
+    public function dispatch_edit(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $dispatch_id = $request->get('id');                //模板ID
+        $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);
+        dump($dispatch);
+        return view('Retail/Dispatch/dispatch_edit',['dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 }
