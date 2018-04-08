@@ -63,6 +63,7 @@
                                     <tr>
                                         <th>编号</th>
                                         <th>名称</th>
+                                        <th>是否启用</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
