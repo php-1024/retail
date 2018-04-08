@@ -88,7 +88,7 @@ class DispatchController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_id = $request->get('id');                //模板ID
-        $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);
+        $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);     //运费模板信息
         $province = Province::getList([],0,'id','ASC');
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }

@@ -48,26 +48,22 @@
                             <div class="line line-border b-b pull-in"></div>
                             <div style="clear:both"></div>
                             <div class="col-sm-12">
-                                <form method="post" class="form-horizontal" role="form" id="currentForm"
-                                      action="http://o2o.01nnt.com/retail/ajax/goods_list">
+                                <form method="post" class="form-horizontal" role="form" id="currentForm" action="http://o2o.01nnt.com/retail/ajax/goods_list">
                                     <input type="hidden" name="_token" value="gXrfjYLgVjSqVznCZOEWuDXxXCeIdWCEq4tuYcB6">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="全国包邮"
-                                               name="goods_name">
+                                        <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->name}}" name="dispatch_name">
                                     </div>
                                     <label class="col-sm-1 control-label">模板编号</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="152014521021"
-                                               name="goods_name" readonly="readonly">
+                                        <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
                                     </div>
                                 </form>
                             </div>
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-                            <form method="post" class="form-horizontal" role="form" id="purchase_goods"
-                                  action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
+                            <form method="post" class="form-horizontal" role="form" id="purchase_goods" action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
                                 <div class="tab-pane">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
