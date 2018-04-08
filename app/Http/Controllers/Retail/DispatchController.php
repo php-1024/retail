@@ -66,6 +66,7 @@ class DispatchController extends Controller
         return response()->json(['data' => '添加运费模板信息成功', 'status' => '1']);
     }
 
+
     //运费模板列表
     public function dispatch_list(Request $request)
     {
