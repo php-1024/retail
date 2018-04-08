@@ -74,6 +74,42 @@
                             <form method="post" class="form-horizontal" role="form" id="purchase_goods"
                                   action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
                                 <div class="tab-pane">
+                                    <div class="col-lg-5">
+                                        <section class="panel panel-default">
+                                            <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
+                                            <table class="table table-striped table-bordered ">
+                                                <thead>
+                                                <tr>
+                                                    <th>配送区域</th>
+                                                    <th>首重(克)</th>
+                                                    <th>运费(元/千克)</th>
+                                                    <th>续重(克)</th>
+                                                    <th>续费(元/千克)</th>
+                                                    <th>操作</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="goods_list">
+                                                <tr id="30">
+                                                    <td class="id">
+                                                        <label class="label label-success" style="display:inline-block">北京市</label>
+                                                        <label class="label label-success" style="display:inline-block">河南省</label>
+                                                        <label class="label label-success" style="display:inline-block">湖北省</label>
+                                                        <label class="label label-success" style="display:inline-block">湖南省</label>
+                                                    </td>
+                                                    <td class="name"><input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail(175)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <div style="clear: both;"></div>
+                                        </section>
+                                    </div>
                                     <div class="col-lg-7">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
