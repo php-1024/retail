@@ -567,7 +567,6 @@ class WechatmenuController extends CommonController
         $id = request()->get('id');
         // 获取该id 对应的自定义菜单
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
-        dump($conditionalmenu);
         // 获取标签名称
         $label_name = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'label_name')->first();
         //获取授权APPID
@@ -608,11 +607,11 @@ class WechatmenuController extends CommonController
         // 处理结构树
         $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
 
-        // 判断是否子菜单
-        $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
-        if ($re) {
-            return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
-        }
+//        // 判断是否子菜单
+//        $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
+//        if ($re) {
+//            return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
+//        }
 
         // 如果id有改变
         if ($data['$parent_id'] != $parent_id) {

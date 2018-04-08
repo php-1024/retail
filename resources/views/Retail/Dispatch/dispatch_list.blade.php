@@ -50,7 +50,7 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="ordersn" value="{{$ordersn}}" placeholder="订单编号">
+                                        <input type="text" class="form-control" name="ordersn" value="" placeholder="订单编号">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -73,45 +73,33 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>{{$val->ordersn}}</td>
+                                        <td>12121212</td>
                                         <td>
-                                            @if($val->type == 1)
                                             进货
-                                            @elseif($val->type == 2)
-                                            退货
-                                            @else
-                                            未知
-                                            @endif
                                         </td>
-                                        <td><label class="label label-success">{{$val->RetailSupplier->company_name}}</label></td>
+                                        <td><label class="label label-success">噶飒飒</label></td>
                                         <td>
-                                                {{$val->RetailSupplier->contactmobile}}
+                                                15784524635
                                         </td>
                                         <td>
                                             <label class="label label-info">
-                                                {{$val->account_info->realname}}
+                                                阿萨斯无群
                                             </label>
                                         </td>
                                         <td>
                                             <label class="label label-danger">
-                                                {{$val->order_price}}
+                                                10.25
                                             </label>
                                         </td>
                                         <td>
-                                            @if($val->status == 0)
-                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
-                                            @else
-                                                <button class="btn btn-success btn-xs"><i class="fa fa-lock"></i>&nbsp;&nbsp;已审核</button>
-                                            @endif
+                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
                                         </td>
-                                        <td>{{$val->created_at}}</td>
+                                        <td>212125151</td>
                                         <td>
-                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('{{$val->id}}','{{$val->type}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('1','0')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
-                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -119,7 +107,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {{$list->links()}}
+                                        {{--{{$list->links()}}--}}
                                     </div>
                                 </div>
                             </footer>
