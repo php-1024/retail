@@ -90,20 +90,20 @@ class AndroidApiController extends Controller
     {
         $organization_id = $request->organization_id;//店铺id
         $user_id = $request->user_id;//用户id 散客为0
-        if (!$user_id) {
+        if (empty($user_id)) {
             $user_id = 0;
         }
         $account_id = $request->account_id;//操作员id
         $remarks = $request->remarks;//备注
         $order_type = $request->order_type;//订单类型
-        if (!$order_type) {
+        if (empty($order_type)) {
             $order_type = 1;
         }
         $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
-                $order_price += $v['price'];
+                $order_price += $v['price']*$v['num'];
             }
         }
         $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id')->first();
