@@ -580,7 +580,7 @@ class WechatmenuController extends CommonController
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $conditionalmenu['tag_id']], ['id', '<>', $conditionalmenu['id']]], 0, 'id', 'DESC');
 
         // 渲染页面
-        return view('Fansmanage/Wechatmenu/conditional_menu_edit', ['list' => $list, 'wechatreply' => $wechatreply, 'conditionalmenu' => $conditionalmenu, 'label_name' => $label_name]);
+        return view('Fansmanage/Wechatmenu/conditional_menu_edit', ['list' => $list, 'wechatreply' => $wechatreply, 'conditionalmenu' => $conditionalmenu, 'label_name' => $label_name, 'edit_id' => $id]);
     }
 
 
