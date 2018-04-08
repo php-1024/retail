@@ -509,12 +509,17 @@ class WechatmenuController extends CommonController
 
         // 判断粉丝标签数量
         $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id]]);
+        var_dump($count);
         if ($parent_id == '0' && $count >= 3) {
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
         }
         if ($parent_id <> '0' && $count >= 5) {
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
+
+
+
+
 
         DB::beginTransaction();
         try {
@@ -596,10 +601,9 @@ class WechatmenuController extends CommonController
             return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
         }
 
-
-        if ($data['$parent_id'] != $parent_id) {//如果id有改变
+        // 如果id有改变
+        if ($data['$parent_id'] != $parent_id) {
             $res_menu = $this->judgeMenuStandard($parent_id, "conditional", $data["tag_id"]);
-            dd($res_menu);
             if ($res_menu !== true) {
                 return $res_menu;
             }
