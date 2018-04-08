@@ -420,6 +420,7 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
+        // 获取自定义菜单数据
         $label_list = Label::ListLabel(['fansmanage_id' => $this->admin_data['organization_id']]);
         // 获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
@@ -451,6 +452,7 @@ class WechatmenuController extends CommonController
             // 获取个性化菜单列表,粉丝标签id 获取到列表
             $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
         }
+        // 渲染页面
         return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list]);
     }
 
@@ -522,7 +524,8 @@ class WechatmenuController extends CommonController
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
@@ -532,12 +535,15 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $label_id = request()->label_id;//会员标签id
+        // 会员标签id
+        $label_id = request()->label_id;
+        // 获取 标签的微信公众号标签id
         $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-        //获取菜单列表
+        // 获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', '0']], 0, 'id', 'asc');
+        // 个性化菜单
         $son_menu = [];
+        // 处理菜单数据
         foreach ($list as $key => $val) {
             $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val->id]], 0, 'id', 'asc');
             if (!empty($sm)) {
@@ -545,10 +551,14 @@ class WechatmenuController extends CommonController
             }
             unset($sm);
         }
+        // 渲染页面
         return view('Fansmanage/Wechatmenu/conditional_menu_get', ['list' => $list, 'son_menu' => $son_menu]);
     }
 
-    //个性化菜单编辑页面
+    /**
+     * 个性化菜单编辑页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function conditional_menu_edit()
     {
         // 中间件参数 集合
@@ -557,13 +567,16 @@ class WechatmenuController extends CommonController
         $id = request()->get('id');
         // 获取该id 对应的自定义菜单
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
+        dump($conditionalmenu);
+        // 获取标签名称
         $label_name = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'label_name')->first();
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
         //获取触发关键字列表
         $wechatreply = WechatReply::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']]], 0, 'id', 'DESC');
-        //获取菜单列表
+        //获取主菜单列表
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $conditionalmenu['tag_id']], ['id', '<>', $conditionalmenu['id']]], 0, 'id', 'DESC');
+
         // 渲染页面
         return view('Fansmanage/Wechatmenu/conditional_menu_edit', ['list' => $list, 'wechatreply' => $wechatreply, 'conditionalmenu' => $conditionalmenu, 'label_name' => $label_name]);
     }
@@ -595,14 +608,11 @@ class WechatmenuController extends CommonController
         // 处理结构树
         $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
 
-
         // 判断是否子菜单
         $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
         if ($re) {
             return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
         }
-
-
 
         // 如果id有改变
         if ($data['$parent_id'] != $parent_id) {
