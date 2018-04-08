@@ -1,6 +1,6 @@
 <form class="form-horizontal" id="goods_thumb_delete_check" method="post" action="{{url('retail/ajax/goods_thumb_delete_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-     <input type="hidden" name="goods_thumb_id" id="goods_id" value="{{$goods_thumb_id}}">
+     <input type="hidden" name="goods_thumb_id" id="goods_thumb_id" value="{{$goods_thumb_id}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
