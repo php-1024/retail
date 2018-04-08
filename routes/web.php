@@ -597,6 +597,7 @@ Route::group(['prefix' => 'retail'], function () {
         Route::get('dispatch_list', 'Retail\DispatchController@dispatch_list')->middleware('RetailCheck'); //运费模板列表                              //订单管理-现场订单
     });
 
+
     //进销存开单处理
     Route::group(['prefix' => 'supplier'], function () {
         Route::get('supplier_add', 'Retail\SupplierController@supplier_add')->middleware('RetailCheck');        //添加供应商
