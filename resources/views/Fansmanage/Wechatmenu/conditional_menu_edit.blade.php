@@ -167,6 +167,7 @@
     </form>
 
     <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
+    <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
     <input type="hidden" id="tag_id" value="0">
     <input type="hidden" id="edit_id" value="{{$edit_id}}">
 </div>
@@ -194,7 +195,29 @@
                 $('#menu_box').html(response);
             }
         });
-        EditPostForm($("#edit_id").val());
+        getEditData($("#edit_id").val())
+    }
+
+    function getEditData(menu_id) {
+        var url = $("#conditional_menu_edit").val();
+        var token = $('._token').val();
+        var data = {'_token': token, 'id': menu_id};
+
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+                $('#ctrl_box').html(response);
+            }
+        });
     }
 
     $(function () {
