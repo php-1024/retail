@@ -99,8 +99,7 @@ class AndroidApiController extends Controller
         if (empty($order_type)) {
             $order_type = 1;
         }
-        echo $order_type;exit;
-        
+
         $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
@@ -124,6 +123,7 @@ class AndroidApiController extends Controller
             'operator_id' => $account_id,
             'status' => '0',
         ];
+        print_r($orderData);exit;
         DB::beginTransaction();
         try {
             $order_id = RetailOrder::addRetailOrder($orderData);//添加入订单表
