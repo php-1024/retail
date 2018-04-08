@@ -46,13 +46,13 @@ class ZeroneCheck{
             case "zerone/subordinate/subordinate_list":     //下级人员列表
             case "zerone/subordinate/subordinate_structure"://下级人员列表
 
-            //服务商管理
-            case "zerone/agent/agent_add":                  //添加服务商
-            case "zerone/agent/agent_examinelist":          //服务商审核列表
-            case "zerone/agent/agent_list":                 //服务商列表
-            case "zerone/agent/agent_structure":            //服务商人员架构
-            case "zerone/agent/agent_program":              //服务商程序管理
-            case "zerone/agent/agent_fansmanage":           //服务商商户划拨
+            //代理管理
+            case "zerone/agent/agent_add":                  //添加代理
+            case "zerone/agent/agent_examinelist":          //代理审核列表
+            case "zerone/agent/agent_list":                 //代理列表
+            case "zerone/agent/agent_structure":            //代理人员架构
+            case "zerone/agent/agent_program":              //代理程序管理
+            case "zerone/agent/agent_fansmanage":           //代理商户划拨
 
             //商户管理
             case "zerone/fansmanage/fansmanage_examinelist":  //商户审核列表
