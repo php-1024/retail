@@ -572,6 +572,9 @@ class WechatmenuController extends CommonController
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
         // 获取标签名称
         $label_name = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'label_name')->first();
+        // 获取标签id
+        $label_id = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'id')->first();
+
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
         //获取触发关键字列表
@@ -580,7 +583,7 @@ class WechatmenuController extends CommonController
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $conditionalmenu['tag_id']], ['id', '<>', $conditionalmenu['id']]], 0, 'id', 'DESC');
 
         // 渲染页面
-        return view('Fansmanage/Wechatmenu/conditional_menu_edit', ['list' => $list, 'wechatreply' => $wechatreply, 'conditionalmenu' => $conditionalmenu, 'label_name' => $label_name, 'edit_id' => $id]);
+        return view('Fansmanage/Wechatmenu/conditional_menu_edit', ['list' => $list, 'wechatreply' => $wechatreply, 'conditionalmenu' => $conditionalmenu, 'label_name' => $label_name, 'label_id' => $label_id, 'edit_id' => $id]);
     }
 
 
