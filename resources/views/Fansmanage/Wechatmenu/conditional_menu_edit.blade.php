@@ -174,7 +174,7 @@
 
 <script>
     // 获取列表主体
-    function changeConditionalMennuBody(label_id) {
+    function changeConditionalMennuEdit(label_id) {
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
         var $parent_id = $("#parent_id").val();
@@ -230,7 +230,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 }, function () {
-                    changeConditionalMennuBody($member_label);
+                    changeConditionalMennuEdit($member_label);
                 });
             } else {
                 swal({
