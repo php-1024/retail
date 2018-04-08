@@ -64,6 +64,16 @@ class Label extends Model
         }
     }
 
+    public static function getInfo($where = [], $field = [])
+    {
+        $res = self::select($field)->where($where)->first();
+        if (!empty($res)) {
+            return $res->toArray();
+        } else {
+            return false;
+        }
+    }
+
     /**
      * 获取单行数据的其中一列
      * @param $where

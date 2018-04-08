@@ -33,7 +33,7 @@
                 <input type="text" name="displayorder" size="3" value="{{$val->displayorder}}" />
             </td>
             <td>
-                <button type="button" id="deleteBtn" class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i></button>
+                <button type="button" id="deleteBtn" class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})">1<i class="fa fa-times"></i></button>
             </td>
         </tr>
         @endforeach
@@ -47,39 +47,3 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function() {
-        $('#deleteBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
-    });
-    //删除商品信息
-    function getDeleteForm(id){
-        var url = $('#goods_thumb_delete_comfirm_url').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'id':id};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-</script>
