@@ -374,6 +374,7 @@ class WechatmenuController extends CommonController
         }
         // 刷新并获取授权令牌
         $auth_info = \Wechat::refresh_authorization_info($organization_id);
+        dump($auth_info);
         // 创建微信菜单
         $re = \Wechat::create_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
