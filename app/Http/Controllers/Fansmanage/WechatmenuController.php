@@ -572,6 +572,7 @@ class WechatmenuController extends CommonController
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
         // 获取标签名称
         $label_name = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'label_name')->first();
+
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
         //获取触发关键字列表
