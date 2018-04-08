@@ -53,11 +53,13 @@
                                     <input type="hidden" name="_token" value="gXrfjYLgVjSqVznCZOEWuDXxXCeIdWCEq4tuYcB6">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="全国包邮" name="goods_name">
+                                        <input class="input-sm form-control" size="16" type="text" value="全国包邮"
+                                               name="goods_name">
                                     </div>
                                     <label class="col-sm-1 control-label">模板编号</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="152014521021" name="goods_name" readonly="readonly">
+                                        <input class="input-sm form-control" size="16" type="text" value="152014521021"
+                                               name="goods_name" readonly="readonly">
                                     </div>
                                 </form>
                             </div>
@@ -76,180 +78,21 @@
                                                     <th>可选省、市</th>
 
 
-
-
+                                                    <th></th>
                                                     <th>已选省、市</th>
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="goods_list">
                                                 <tr id="30">
-                                                    <td class="id"><select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            <option value="10" data-position="163">添加战区（零壹平台管理系统）</option>
-                                                            <option value="9" data-position="164">战区管理（零壹平台管理系统）</option>
+                                                    <td class="id"><select name="from" id="multiselect"
+                                                                           class="form-control"
+                                                                           style="display: inline-block;" size="15"
+                                                                           multiple="multiple">
+                                                            <option value="10" data-position="163">添加战区（零壹平台管理系统）
+                                                            </option>
+                                                            <option value="9" data-position="164">战区管理（零壹平台管理系统）
+                                                            </option>
                                                             <option value="4" data-position="165">测试节点4</option>
                                                             <option value="3" data-position="166">测试节点3</option>
                                                             <option value="2" data-position="167">测试节点2</option>
@@ -257,23 +100,35 @@
                                                         </select>
 
 
-
-
-
-
-
-
+                                                    </td>
+                                                    <td>
+                                                        <div class="col-sm-2">
+                                                            <button type="button" id="multiselect_rightAll"
+                                                                    class="btn btn-s-md btn-block"><i
+                                                                        class="icon-control-forward icons"></i></button>
+                                                            <button type="button" id="multiselect_rightSelected"
+                                                                    class="btn btn-s-md btn-block"><i
+                                                                        class="icon-arrow-right icons"></i></button>
+                                                            <button type="button" id="multiselect_leftSelected"
+                                                                    class="btn btn-s-md btn-block"><i
+                                                                        class="icon-arrow-left icons"></i></button>
+                                                            <button type="button" id="multiselect_leftAll"
+                                                                    class="btn btn-s-md btn-block"><i
+                                                                        class="icon-control-rewind icons"></i></button>
+                                                        </div>
                                                     </td>
                                                     <td class="name">
-                                                        <select name="nodes[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
+                                                        <select name="nodes[]" id="multiselect_to" class="form-control"
+                                                                size="15" multiple="multiple"></select>
 
                                                     </td>
-
 
 
                                                     <td>
-                                                        <button onclick="goodsSelect(30);" class="btn btn-info btn-xs" type="button">
-                                                            <i class="fa fa-plus"></i>添加选择</button>
+                                                        <button onclick="goodsSelect(30);" class="btn btn-info btn-xs"
+                                                                type="button">
+                                                            <i class="fa fa-plus"></i>添加选择
+                                                        </button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -304,12 +159,22 @@
                                                         <label class="label label-success" style="display:inline-block">湖北省</label>
                                                         <label class="label label-success" style="display:inline-block">湖南省</label>
                                                     </td>
-                                                    <td class="name"><input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
-                                                    <td class="price"><input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
-                                                    <td class="price"><input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
-                                                    <td class="price"><input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
+                                                    <td class="name"><input type="text" name="firstweight175"
+                                                                            id="firstweight175" value="0"
+                                                                            class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="firstprice175"
+                                                                             id="firstprice175" value="0.00"
+                                                                             class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="secondweight175"
+                                                                             id="secondweight175" value="0"
+                                                                             class="input-sm form-control"></td>
+                                                    <td class="price"><input type="text" name="secondprice175"
+                                                                             id="secondprice175" value="0.00"
+                                                                             class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail(175)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button class="btn btn-danger btn-xs"
+                                                                onclick="javascript:cancel_detail(175)"><i
+                                                                    class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
