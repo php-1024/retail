@@ -1,8 +1,12 @@
 <?php
+
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class WechatConditionalMenu extends Model{
+
+class WechatConditionalMenu extends Model
+{
     use SoftDeletes;
     protected $table = 'wechat_conditional_menu';
     protected $primaryKey = 'id';
@@ -10,7 +14,8 @@ class WechatConditionalMenu extends Model{
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
     //和wechat_authorizer_info表一对一的关系
-    public function wechatAuthorizerInfo(){
+    public function wechatAuthorizerInfo()
+    {
         return $this->hasOne('App\Models\WechatAuthorizerInfo', 'authorization_id');
     }
 
@@ -19,22 +24,32 @@ class WechatConditionalMenu extends Model{
     {
         return self::where($where)->first();
     }
+
     //简易型查询单条数据关联查询
     public static function ListConditionalMenu($where)
     {
         return self::where($where)->get();
     }
 
-    //获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    /**
+     * 获取某个标签下面的个性化菜单列表
+     * @param $where
+     * @param int $limit
+     * @param $orderby
+     * @param string $sort
+     * @return mixed
+     */
+    public static function getList($where, $limit = 0, $orderby, $sort = 'DESC')
+    {
         $model = new WechatConditionalMenu();
-        if(!empty($limit)){
+        if (!empty($limit)) {
             $model = $model->limit($limit);
         }
-        return $model->where($where)->orderBy($orderby,$sort)->get();
+        return $model->where($where)->orderBy($orderby, $sort)->get();
     }
 
-    public static function addConditionalMenu($param){
+    public static function addConditionalMenu($param)
+    {
         $model = new WechatConditionalMenu();
         $model->organization_id = $param['organization_id'];
         $model->authorizer_appid = $param['authorizer_appid'];
@@ -51,35 +66,40 @@ class WechatConditionalMenu extends Model{
     }
 
     //删除菜单
-    public static function removeConditionalMenu($where){
+    public static function removeConditionalMenu($where)
+    {
         return self::where($where)->forceDelete();
     }
 
-    public static function editConditionalMenu($where,$param){
-        if($model = self::where($where)->first()){
-            foreach($param as $key=>$val){
-                $model->$key=$val;
+    public static function editConditionalMenu($where, $param)
+    {
+        if ($model = self::where($where)->first()) {
+            foreach ($param as $key => $val) {
+                $model->$key = $val;
             }
             $model->save();
         }
     }
 
-    public static function getCount($where){
+    public static function getCount($where)
+    {
         return self::where($where)->count();
     }
 
     //获取单行数据的其中一列
-    public static function getPluck($where,$pluck){
+    public static function getPluck($where, $pluck)
+    {
         return self::where($where)->pluck($pluck);
     }
+
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
-    public static function checkRowExists($where){
-        $row = self::getPluck($where,'id')->toArray();
-        if(empty($row)){
+    public static function checkRowExists($where)
+    {
+        $row = self::getPluck($where, 'id')->toArray();
+        if (empty($row)) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
 }
-?>

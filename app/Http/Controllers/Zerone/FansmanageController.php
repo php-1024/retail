@@ -374,7 +374,6 @@ class FansmanageController extends Controller{
     }
 
 
-
     private function Com_structure($list,$id){
         $structure = '';
         foreach($list as $key=>$val){

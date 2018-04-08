@@ -64,10 +64,11 @@
                                         <label class="col-sm-1 control-label">订单状态</label>
                                         <div class="col-sm-1">
                                             <select name="status" class="form-control m-b">
-                                                <option value="0" @if($search_data['status']==0) selected @endif >未支付</option>
-                                                <option value="1" @if($search_data['status']==1) selected @endif >已支付</option>
-                                                <option value="3" @if($search_data['status']==3) selected @endif >已完成</option>
-                                                <option value="-1" @if($search_data['status']==-1) selected @endif >已取消</option>
+                                                <option @if($search_data['status'] == null ) selected @endif>请选择</option>
+                                                <option value="0" @if($search_data['status']=='0') selected @endif >未支付</option>
+                                                <option value="1" @if($search_data['status']=='1') selected @endif >已支付</option>
+                                                <option value="3" @if($search_data['status']=='3') selected @endif >已完成</option>
+                                                <option value="-1" @if($search_data['status']=='-1') selected @endif >已取消</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
