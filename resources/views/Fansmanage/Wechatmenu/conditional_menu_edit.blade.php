@@ -22,18 +22,14 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
-                @if($conditionalmenu->parent_id == 0)
-                    <select name="parent_id" class="form-control m-b" disabled="true">
-                        @else
-                            <select name="parent_id" class="form-control m-b">
-                                @endif
-
-                                <option value="0">无</option>
-                                @foreach($list as $key=>$val)
-                                    <option value="{{$val->id}}"
-                                            @if($conditionalmenu->parent_id == $val->id) selected @endif>{{$val->menu_name}}</option>
-                                @endforeach
-                            </select>
+                <select name="parent_id" class="form-control m-b"
+                        @if($conditionalmenu->parent_id == 0) disabled="true" @endif>
+                    <option value="0">无</option>
+                    @foreach($list as $key=>$val)
+                        <option value="{{$val->id}}"
+                                @if($conditionalmenu->parent_id == $val->id) selected @endif>{{$val->menu_name}}</option>
+                    @endforeach
+                </select>
 
             </div>
         </div>
