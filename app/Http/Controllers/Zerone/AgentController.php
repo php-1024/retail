@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Http\Controllers\Zerone;
+
 use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\AccountInfo;
@@ -17,9 +19,12 @@ use App\Models\Warzone;
 use App\Models\Module;
 use Illuminate\Support\Facades\DB;
 use Session;
-class AgentController extends Controller {
+
+class AgentController extends Controller
+{
     //服务商审核列表
-    public function agent_examinelist(Request $request) {
+    public function agent_examinelist(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
@@ -27,7 +32,7 @@ class AgentController extends Controller {
         $agent_name = $request->input('agent_name');
         $agent_owner_mobile = $request->input('agent_owner_mobile');
         $search_data = ['agent_name' => $agent_name, 'agent_owner_mobile' => $agent_owner_mobile];
-        $where = [['status','<>','1']];
+        $where = [['status', '<>', '1']];
         if (!empty($agent_name)) {
             $where[] = ['agent_name', 'like', '%' . $agent_name . '%'];
         }
@@ -37,22 +42,26 @@ class AgentController extends Controller {
         $list = OrganizationAgentapply::getPaginage($where, '15', 'id');
         return view('Zerone/Agent/agent_examinelist', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
+
     //服务商审核ajaxshow显示页面
-    public function agent_examine(Request $request) {
+    public function agent_examine(Request $request)
+    {
         $id = $request->input('id'); //服务商id
         $status = $request->input('status'); //是否通过值 1为通过 -1为不通过
         $info = OrganizationAgentapply::getOne([['id', $id]]); //获取该ID的信息
         return view('Zerone/Agent/agent_examine', ['info' => $info, 'status' => $status]);
     }
+
     //服务商审核数据提交
-    public function agent_examine_check(Request $request) {
+    public function agent_examine_check(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
         $id = $request->input('id'); //服务商id
         $status = $request->input('status'); //是否通过值 1为通过 -1为不通过
         $oneAgent = OrganizationAgentapply::getOne([['id', $id]]); //查询申请服务商信息
         $program_id = 2;
-        if ($status == - 1) {
+        if ($status == -1) {
             DB::beginTransaction();
             try {
                 OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]); //拒绝通过
@@ -60,8 +69,7 @@ class AgentController extends Controller {
                 OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '拒绝了服务商：' . $oneAgent['agent_name']); //保存操作记录
                 DB::commit(); //提交事务
 
-            }
-            catch(Exception $e) {
+            } catch (Exception $e) {
                 DB::rollBack(); //事件回滚
                 return response()->json(['data' => '拒绝失败', 'status' => '0']);
             }
@@ -74,46 +82,46 @@ class AgentController extends Controller {
                 //添加服务商
                 $orgData = [
                     'organization_name' => $oneAgent['agent_name'],
-                    'parent_id'         => '1',
-                    'parent_tree'       => $orgparent_tree,
-                    'program_id'        => '2',
-                    'type'              => '2',
-                    'status'            => '1',
-                    'asset_id'          => '0'
+                    'parent_id' => '1',
+                    'parent_tree' => $orgparent_tree,
+                    'program_id' => '2',
+                    'type' => '2',
+                    'status' => '1',
+                    'asset_id' => '0'
                 ];
                 $organization_id = Organization::addOrganization($orgData); //返回值为商户的id
 
                 $agentdata = [
                     'agent_id' => $organization_id,
-                    'zone_id'  => $oneAgent['zone_id']
+                    'zone_id' => $oneAgent['zone_id']
                 ];
                 WarzoneAgent::addWarzoneAgent($agentdata); //战区关联服务商
 
                 $user = Account::max('account');
                 $account = $user + 1; //用户账号
 
-                $parent_tree = '0'.','; //树是上级的树拼接上级的ID；
+                $parent_tree = '0' . ','; //树是上级的树拼接上级的ID；
                 $accdata = [
-                    'parent_id'       => '0',                            //上级id
-                    'parent_tree'     => $parent_tree,                   //组织树
-                    'deepth'          => '1',                            //账号深度
-                    'mobile'          => $oneAgent['agent_owner_mobile'],//手机号
-                    'password'        => $oneAgent['agent_password'],    //密码
+                    'parent_id' => '0',                            //上级id
+                    'parent_tree' => $parent_tree,                   //组织树
+                    'deepth' => '1',                            //账号深度
+                    'mobile' => $oneAgent['agent_owner_mobile'],//手机号
+                    'password' => $oneAgent['agent_password'],    //密码
                     'organization_id' => $organization_id,               //组织id
-                    'account'         => $account                        //登入账号
+                    'account' => $account                        //登入账号
                 ];
                 $account_id = Account::addAccount($accdata); //添加账号返回id
 
                 $acinfodata = [
                     'account_id' => $account_id,                    //用户id
-                    'realname'   => $oneAgent['agent_owner'],       //负责人姓名
-                    'idcard'     => $oneAgent['agent_owner_idcard'] //负责人身份证
+                    'realname' => $oneAgent['agent_owner'],       //负责人姓名
+                    'idcard' => $oneAgent['agent_owner_idcard'] //负责人身份证
                 ];
                 AccountInfo::addAccountInfo($acinfodata); //添加到管理员信息表
 
                 $orgagentinfo = [
-                    'agent_id'           => $organization_id,
-                    'agent_owner'        => $oneAgent['agent_owner'],
+                    'agent_id' => $organization_id,
+                    'agent_owner' => $oneAgent['agent_owner'],
                     'agent_owner_idcard' => $oneAgent['agent_owner_idcard'],
                     'agent_owner_mobile' => $oneAgent['agent_owner_mobile']
                 ];
@@ -129,16 +137,17 @@ class AgentController extends Controller {
                 OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '服务商审核通过：' . $oneAgent['agent_name']); //保存操作记录
                 DB::commit(); //提交事务
 
-            }
-            catch(Exception $e) {
+            } catch (Exception $e) {
                 DB::rollBack(); //事件回滚
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
             return response()->json(['data' => '申请通过', 'status' => '1']);
         }
     }
+
     //添加服务商
-    public function agent_add(Request $request) {
+    public function agent_add(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
@@ -146,8 +155,10 @@ class AgentController extends Controller {
         $warzone_list = Warzone::all();
         return view('Zerone/Agent/agent_add', ['warzone_list' => $warzone_list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
+
     //提交服务商数据
-    public function agent_add_check(Request $request) {
+    public function agent_add_check(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
         $organization_name = $request->input('organization_name'); //服务商名称
@@ -157,7 +168,7 @@ class AgentController extends Controller {
         }
         $zone_id = $request->input('zone_id'); //战区id
 
-        $parent_tree = '0'.','.'1'.','; //树是上级的树拼接上级的ID；
+        $parent_tree = '0' . ',' . '1' . ','; //树是上级的树拼接上级的ID；
 
         $mobile = $request->input('mobile'); //手机号码
         $password = $request->input('agent_password'); //用户密码
@@ -169,32 +180,32 @@ class AgentController extends Controller {
         try {
             $Orgdata = [
                 'organization_name' => $organization_name,
-                'parent_id'         => '1',
-                'parent_tree'       => $parent_tree,
-                'program_id'        => '2',
-                'type'              => '2',
-                'status'            => '1',
-                'asset_id'          => '0'
+                'parent_id' => '1',
+                'parent_tree' => $parent_tree,
+                'program_id' => '2',
+                'type' => '2',
+                'status' => '1',
+                'asset_id' => '0'
             ];
             $organization_id = Organization::addOrganization($Orgdata); //返回值为商户的id
 
             $agentdata = [
                 'agent_id' => $organization_id,
-                'zone_id'  => $zone_id
+                'zone_id' => $zone_id
             ];
             Warzoneagent::addWarzoneagent($agentdata); //战区关联服务商
 
             $user = Account::max('account');
             $account = $user + 1; //用户账号
-            $Accparent_tree = '0'.',';
+            $Accparent_tree = '0' . ',';
             $accdata = [
-                'parent_id'       => '0',
-                'parent_tree'     => $Accparent_tree,
-                'deepth'          => '1',
-                'mobile'          => $mobile,
-                'password'        => $encryptPwd,
+                'parent_id' => '0',
+                'parent_tree' => $Accparent_tree,
+                'deepth' => '1',
+                'mobile' => $mobile,
+                'password' => $encryptPwd,
                 'organization_id' => $organization_id,
-                'account'         => $account
+                'account' => $account
             ];
             $account_id = Account::addAccount($accdata); //添加账号返回id
 
@@ -202,8 +213,8 @@ class AgentController extends Controller {
             $idcard = $request->input('idcard'); //负责人身份证号
             $acinfodata = [
                 'account_id' => $account_id,
-                'realname'   => $realname,
-                'idcard'     => $idcard
+                'realname' => $realname,
+                'idcard' => $idcard
             ];
             AccountInfo::addAccountInfo($acinfodata); //添加到管理员信息表
             $module_node_list = Module::getListProgram('2', [], 0, 'id'); //获取当前系统的所有节点
@@ -213,8 +224,8 @@ class AgentController extends Controller {
                 }
             }
             $orgagentinfo = [
-                'agent_id'           => $organization_id,
-                'agent_owner'        => $realname,
+                'agent_id' => $organization_id,
+                'agent_owner' => $realname,
                 'agent_owner_idcard' => $idcard,
                 'agent_owner_mobile' => $mobile
             ];
@@ -222,15 +233,16 @@ class AgentController extends Controller {
             //添加操作日志
             OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '添加了服务商：' . $organization_name); //保存操作记录
             DB::commit(); //提交事务
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '提交失败', 'status' => '0']);
         }
         return response()->json(['data' => '提交成功', 'status' => '1']);
     }
+
     //服务商列表
-    public function agent_list(Request $request) {
+    public function agent_list(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
@@ -248,15 +260,19 @@ class AgentController extends Controller {
         }
         return view('Zerone/Agent/agent_list', ['search_data' => $search_data, 'listorg' => $listorg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
+
     //服务商编辑ajaxshow显示页面
-    public function agent_list_edit(Request $request) {
+    public function agent_list_edit(Request $request)
+    {
         $id = $request->input('id'); //服务商id
         $listorg = Organization::getOneagent([['id', $id]]);
         $warzone = Warzone::all();
         return view('Zerone/Agent/agent_list_edit', ['listorg' => $listorg, 'warzone' => $warzone]);
     }
+
     //服务商编辑功能提交
-    public function agent_list_edit_check(Request $request) {
+    public function agent_list_edit_check(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
         $id = $request->input('id'); //服务商id
@@ -302,22 +318,25 @@ class AgentController extends Controller {
             OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了服务商：' . $list['organization_name']); //保存操作记录
             DB::commit(); //提交事务
 
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
         return response()->json(['data' => '修改成功', 'status' => '1']);
     }
+
     //服务商冻结ajaxshow显示页面
-    public function agent_list_lock(Request $request) {
+    public function agent_list_lock(Request $request)
+    {
         $id = $request->input('id'); //服务商id
         $status = $request->input('status'); //冻结状态
         $list = Organization::getOneagent([['id', $id]]); //服务商信息
         return view('Zerone/Agent/agent_list_lock', ['id' => $id, 'list' => $list, 'status' => $status]);
     }
+
     //服务商冻结功能提交
-    public function agent_list_lock_check(Request $request) {
+    public function agent_list_lock_check(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
         $id = $request->input('id'); //服务商id
@@ -340,15 +359,16 @@ class AgentController extends Controller {
             }
             DB::commit(); //提交事务
 
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
+
     //服务商下级人员架构
-    public function agent_structure(Request $request) {
+    public function agent_structure(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
@@ -360,38 +380,42 @@ class AgentController extends Controller {
         $structure = $this->account_structure($list, $oneOrg['id']);
         return view('Zerone/Agent/agent_structure', ['listOrg' => $listOrg, 'oneOrg' => $oneOrg, 'structure' => $structure, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
+
     /*
      * 递归生成人员结构的方法
      * $list - 结构所有人员的无序列表
      * $id - 上级ID
     */
-    private function account_structure($list, $id) {
+    private function account_structure($list, $id)
+    {
         $structure = '';
         foreach ($list as $key => $val) {
             if ($val['parent_id'] == $id) {
                 unset($list[$key]);
                 $val['sonlist'] = $this->account_structure($list, $val['id']);
                 //$arr[] = $val;
-                $structure.= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">';
-                $structure.= '<div class="dd-handle">';
-                $structure.= '<span class="pull-right">创建时间：' . date('Y-m-d,H:i:s', $val['created_at']) . '</span>';
-                $structure.= '<span class="label label-info"><i class="fa fa-user"></i></span>';
-                $structure.= $val['account'] . '-' . $val['account_info']['realname'];
+                $structure .= '<ol class="dd-list"><li class="dd-item" data-id="' . $val['id'] . '">';
+                $structure .= '<div class="dd-handle">';
+                $structure .= '<span class="pull-right">创建时间：' . date('Y-m-d,H:i:s', $val['created_at']) . '</span>';
+                $structure .= '<span class="label label-info"><i class="fa fa-user"></i></span>';
+                $structure .= $val['account'] . '-' . $val['account_info']['realname'];
                 if (!empty($val['account_roles'])) {
-                    $structure.= '【' . $val['account_roles'][0]['role_name'] . '】';
+                    $structure .= '【' . $val['account_roles'][0]['role_name'] . '】';
                 }
-                $structure.= '</div>';
+                $structure .= '</div>';
                 $son_menu = $this->account_structure($list, $val['id']);
                 if (!empty($son_menu)) {
-                    $structure.= $son_menu;
+                    $structure .= $son_menu;
                 }
-                $structure.= '</li></ol>';
+                $structure .= '</li></ol>';
             }
         }
         return $structure;
     }
+
     //服务商程序管理
-    public function agent_program(Request $request) {
+    public function agent_program(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
@@ -406,8 +430,10 @@ class AgentController extends Controller {
         }
         return view('Zerone/Agent/agent_program', ['list' => $list, 'listOrg' => $listOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
+
     //服务商程序管理页面划入js显示
-    public function agent_assets(Request $request) {
+    public function agent_assets(Request $request)
+    {
         $organization_id = $request->input('organization_id'); //服务商id
         $program_id = $request->input('program_id'); //套餐id
         $listOrg = Organization::getOneagent([['id', $organization_id]]);
@@ -415,8 +441,10 @@ class AgentController extends Controller {
         $status = $request->input('status'); //状态
         return view('Zerone/Agent/agent_assets', ['listOrg' => $listOrg, 'oneProgram' => $oneProgram, 'status' => $status]);
     }
+
     //服务商程序管理页面划入划出检测
-    public function agent_assets_check(Request $request) {
+    public function agent_assets_check(Request $request)
+    {
         $route_name = $request->path(); //获取当前的页面路由
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         if ($admin_data['organization_id'] == 0) { //超级管理员没有组织id，操作默认为零壹公司操作
@@ -425,9 +453,9 @@ class AgentController extends Controller {
             $to_organization_id = $admin_data['organization_id'];
         }
         $organization_id = $request->input('organization_id'); //服务商id
-        $agent_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//服务商名字
+        $agent_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//服务商名字
         $program_id = $request->input('program_id'); //程序id
-        $program_name = Program::getPluck([['id',$program_id]],'program_name')->first();//程序名字
+        $program_name = Program::getPluck([['id', $program_id]], 'program_name')->first();//程序名字
         $number = $request->input('number'); //数量
         $status = $request->input('status'); //判断划入或者划出
         DB::beginTransaction();
@@ -461,18 +489,19 @@ class AgentController extends Controller {
             OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
 
             //添加操作日志
-            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state.'程序--'. $program_name .'*'.$number.' --服务商：' . $agent_name);
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state . '程序--' . $program_name . '*' . $number . ' --服务商：' . $agent_name);
             DB::commit(); //提交事务
 
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
+
     //商户划拨管理
-    public function agent_fansmanage(Request $request) {
+    public function agent_fansmanage(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
@@ -480,23 +509,27 @@ class AgentController extends Controller {
         $organization_id = $request->organization_id; //服务商id
         $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
         $list = Organization::getPaginageFansmanage([['parent_id', $organization_id]], '10', 'id');
-        foreach($list as $key=>$value){
+        foreach ($list as $key => $value) {
             $data = Organization::getList([['parent_id', $value['id']]]); //商户信息下级店铺信息
-            $list[$key]['store'] =  count($data); //计算店铺数量
-            $list[$key]['program_name'] = Program::getPluck([['id',$value['asset_id']]],'program_name')->first();//程序名字
-            $list[$key]['program_balance'] = OrganizationAssets::getPluck([['program_id',$value['asset_id']],['organization_id',$value['id']]],'program_balance')->first();//程序剩余数量
+            $list[$key]['store'] = count($data); //计算店铺数量
+            $list[$key]['program_name'] = Program::getPluck([['id', $value['asset_id']]], 'program_name')->first();//程序名字
+            $list[$key]['program_balance'] = OrganizationAssets::getPluck([['program_id', $value['asset_id']], ['organization_id', $value['id']]], 'program_balance')->first();//程序剩余数量
         }
         return view('Zerone/Agent/agent_fansmanage', ['organization_name' => $organization_name, 'organization_id' => $organization_id, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
+
     //商户划拨归属Ajax显示页面--划入
-    public function agent_fansmanage_add(Request $request) {
+    public function agent_fansmanage_add(Request $request)
+    {
         $organization_id = $request->organization_id; //服务商id
         $list = Organization::getList([['type', 3], ['parent_id', '<>', $organization_id], ['parent_id', '1']]);
-        $data = Organization::getOne([['id',$organization_id]]);
+        $data = Organization::getOne([['id', $organization_id]]);
         return view('Zerone/Agent/agent_fansmanage_add', ['list' => $list, 'data' => $data]);
     }
+
     //商户划拨归属功能提交
-    public function agent_fansmanage_add_check(Request $request) {
+    public function agent_fansmanage_add_check(Request $request)
+    {
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
         $organization_id = $request->organization_id; //服务商id
@@ -535,23 +568,26 @@ class AgentController extends Controller {
             OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '划拨了商户:' . $fansmanage_name . '-归属于服务商：' . $oneAgent['organization_name']); //保存操作记录
             DB::commit(); //提交事务
 
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
+
     //商户划拨归属Ajax显示页面--划出
-    public function agent_fansmanage_draw(Request $request) {
+    public function agent_fansmanage_draw(Request $request)
+    {
         $organization_id = $request->organization_id; //服务商id
         $oneAgent = Organization::getOne([['id', $organization_id]]);
         $fansmanage_id = $request->fansmanage_id; //划出商户id
         $onedata = Organization::getOne([['id', $fansmanage_id]]);
         return view('Zerone/Agent/agent_fansmanage_draw', ['onedata' => $onedata, 'oneAgent' => $oneAgent]);
     }
+
     //商户划拨归属划出功能提交
-    public function agent_fansmanage_draw_check(Request $request) {
+    public function agent_fansmanage_draw_check(Request $request)
+    {
         /*划出默认归属零壹*/
         $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
         $route_name = $request->path(); //获取当前的页面路由
@@ -593,12 +629,12 @@ class AgentController extends Controller {
             OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '从服务商:' . $organization_name . '-划出了商户：' . $fansmanage_name); //保存操作记录
             DB::commit(); //提交事务
 
-        }
-        catch(Exception $e) {
+        } catch (Exception $e) {
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 }
+
 ?>
