@@ -76,16 +76,14 @@
                                                 <thead>
                                                 <tr>
                                                     <th>可选省、市</th>
-
-
                                                     <th></th>
                                                     <th>已选省、市</th>
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody id="goods_list">
-                                                <tr id="30">
-                                                    <td class="id">
+                                                <tr>
+                                                    <td>
                                                         <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
                                                             @foreach($province as $key=>$val)
                                                             <option value="{{$val->id}}" data-position="{{$val->id}}">{{$val->province_name}}</option>
@@ -94,32 +92,17 @@
                                                     </td>
                                                     <td>
                                                         <div class="col-sm-2">
-                                                            <button type="button" id="multiselect_rightAll"
-                                                                    class="btn btn-s-md btn-block"><i
-                                                                        class="icon-control-forward icons"></i></button>
-                                                            <button type="button" id="multiselect_rightSelected"
-                                                                    class="btn btn-s-md btn-block"><i
-                                                                        class="icon-arrow-right icons"></i></button>
-                                                            <button type="button" id="multiselect_leftSelected"
-                                                                    class="btn btn-s-md btn-block"><i
-                                                                        class="icon-arrow-left icons"></i></button>
-                                                            <button type="button" id="multiselect_leftAll"
-                                                                    class="btn btn-s-md btn-block"><i
-                                                                        class="icon-control-rewind icons"></i></button>
+                                                            <button type="button" id="multiselect_rightAll" class="btn btn-s-md btn-block"><i class="icon-control-forward icons"></i></button>
+                                                            <button type="button" id="multiselect_rightSelected" class="btn btn-s-md btn-block"><i class="icon-arrow-right icons"></i></button>
+                                                            <button type="button" id="multiselect_leftSelected" class="btn btn-s-md btn-block"><i class="icon-arrow-left icons"></i></button>
+                                                            <button type="button" id="multiselect_leftAll" class="btn btn-s-md btn-block"><i class="icon-control-rewind icons"></i></button>
                                                         </div>
                                                     </td>
                                                     <td class="name">
-                                                        <select name="nodes[]" id="multiselect_to" class="form-control"
-                                                                size="15" multiple="multiple"></select>
-
+                                                        <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
-
-
                                                     <td>
-                                                        <button onclick="goodsSelect(30);" class="btn btn-info btn-xs"
-                                                                type="button">
-                                                            <i class="fa fa-plus"></i>添加选择
-                                                        </button>
+                                                        <button onclick="goodsSelect(30);" class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>添加选择</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -127,7 +110,6 @@
                                             <div style="clear: both;"></div>
                                         </section>
                                     </div>
-
                                     <div class="col-lg-6">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
