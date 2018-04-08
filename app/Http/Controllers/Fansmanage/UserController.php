@@ -16,7 +16,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 class UserController extends Controller{
-    //粉丝标签管理
+
+    /**
+     * 粉丝标签列表管理
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function user_tag(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -43,18 +48,21 @@ class UserController extends Controller{
         $label_name = $request->label_name; //会员标签名称
         $fansmanage_id = $admin_data['organization_id'];//组织id
 
+        // 判断标签是否已经存在
         $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
+
         if($re == 'true'){
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
 
         DB::beginTransaction();
-
         try {
-            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+            // 刷新并获取授权令牌
+            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
+            // 获取线上粉丝标签
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
             $re = json_decode($re,true);
-
+            // 判断微信公众号返回的消息
             if(!empty($re['errcode'])){
                 if($re['errcode'] == '45157'){
                     return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
@@ -64,17 +72,20 @@ class UserController extends Controller{
                     return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
                 }
             }
+            // 处理数据
             $dataLabel = [
                 'fansmanage_id'=>$fansmanage_id,
                 'store_id'=>0,
                 'label_name'=>$label_name,
                 'label_number'=>0,
+                // 微信公众号标签返回的id
                 'wechat_id'=>$re['tag']['id'],
-//                'wechat_id'=>111,
             ];
+            // 添加标签
             Label::addLabel($dataLabel);
+            // 添加操作记录
             if ($admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);//保存操作记录
+                OperationLog::addOperationLog('3', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -82,8 +93,6 @@ class UserController extends Controller{
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
         }
         return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
-
-
     }
     //编辑会员标签ajax显示页面
     public function label_edit(Request $request){

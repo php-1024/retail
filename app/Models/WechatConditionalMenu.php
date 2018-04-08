@@ -103,5 +103,3 @@ class WechatConditionalMenu extends Model
         }
     }
 }
-
-?>
