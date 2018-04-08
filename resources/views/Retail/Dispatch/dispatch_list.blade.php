@@ -61,36 +61,15 @@
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
-                                        <th>订单编号</th>
-                                        <th>类型</th>
-                                        <th>供应商</th>
-                                        <th>供应商联系方式</th>
-                                        <th>经手操作人员</th>
-                                        <th>订单总金额</th>
-                                        <th>审核</th>
-                                        <th>开单时间</th>
+                                        <th>编号</th>
+                                        <th>名称</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>12121212</td>
                                         <td>
                                             进货
-                                        </td>
-                                        <td><label class="label label-success">噶飒飒</label></td>
-                                        <td>
-                                                15784524635
-                                        </td>
-                                        <td>
-                                            <label class="label label-info">
-                                                阿萨斯无群
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <label class="label label-danger">
-                                                10.25
-                                            </label>
                                         </td>
                                         <td>
                                                 <button class="btn btn-warning btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
