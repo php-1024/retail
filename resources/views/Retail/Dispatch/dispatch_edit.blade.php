@@ -67,7 +67,7 @@
                             <form method="post" class="form-horizontal" role="form" id="purchase_goods"
                                   action="http://o2o.01nnt.com/retail/ajax/purchase_goods_check">
                                 <div class="tab-pane">
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-6">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
                                             <table class="table table-striped table-bordered ">
@@ -103,7 +103,7 @@
                                             <div style="clear: both;"></div>
                                         </section>
                                     </div>
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-6">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
                                             <table class="table table-striped table-bordered ">
