@@ -63,9 +63,9 @@
 
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
-                            <form method="post" class="form-horizontal" role="form" id="dispatch_province_add_check" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
-                                <input type="hidden" name="_token" value="{{csrf_token()}}">
                                 <div class="tab-pane">
+                                <form method="post" class="form-horizontal" role="form" id="dispatch_province_add_check" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
@@ -107,6 +107,7 @@
                                             <div style="clear: both;"></div>
                                         </section>
                                     </div>
+                                </form>
                                     <div class="col-lg-6">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
@@ -157,7 +158,6 @@
                                         </div>
                                     </div>
                                 </footer>
-                            </form>
                         </section>
                     </section>
                 </section>
