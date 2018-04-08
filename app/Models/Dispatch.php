@@ -59,7 +59,7 @@ class Dispatch extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$dispatch_name,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('Organization');
+        $model = new Dispatch();
         if(!empty($dispatch_name)){
             $model = $model->where('name','like','%'.$dispatch_name.'%');
         }
