@@ -14,7 +14,8 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
             <div class="col-sm-10">
-                <select class="form-control m-b" id="member_label" onchange="changeConditionalMenu(this)" name="label_id">
+                <select class="form-control m-b" id="member_label" onchange="changeConditionalMenu(this)"
+                        name="label_id">
                     <option value="0">无</option>
                     @foreach($label_list as $key=>$value)
                         <option value="{{$value->id}}">{{$value->label_name}}</option>
@@ -160,6 +161,10 @@
 
     function changeConditionalMenu(obj) {
         var label_id = $(obj).val();
+        changeConditionalMennuBody(label_id);
+    }
+
+    function changeConditionalMennuBody(label_id) {
         $('#tag_id').val(label_id);
         var url = $('#conditional_menu_get').val();
         var menu_url = $('#conditional_menu_list').val();
@@ -230,8 +235,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 }, function () {
-
-                    console.log($("#member_label").val())
+                    changeConditionalMennuBody($("#member_label").val())
                     // window.location.reload();
                 });
             } else {
