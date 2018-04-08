@@ -90,7 +90,7 @@ class AndroidApiController extends Controller
     {
         $organization_id = $request->organization_id;//店铺id
         $user_id = $request->user_id;//用户id 散客为0
-        if (!$user_id) {
+        if (empty($user_id)) {
             $user_id = 0;
         }
         $account_id = $request->account_id;//操作员id
