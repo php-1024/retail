@@ -447,16 +447,16 @@ class WechatmenuController extends CommonController
             // 如果存在会员标签，那么就将该标签对应的 菜单列出来
             // 获取授权APPID
             $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
-            // 获取某个条件下 的 wechat_id 信息
+            // 获取 微信公众号粉丝标签id
             $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-            // 获取个性化菜单列表
+            // 获取个性化菜单列表,粉丝标签id 获取到列表
             $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
         }
         return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list]);
     }
 
     /**
-     * 添加自定义菜单检测
+     * 添加个性化菜单检测
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -464,16 +464,23 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
+        // 获取事件类型
+        $event_type = request()->get('event_type');
+        // 获取响应类型
+        $response_type = request()->get('response_type');
+        // 组织ID
+        $organization_id = $this->admin_data['organization_id'];
+        // 会员标签id
+        $label_id = request()->label_id;
 
-        $event_type = request()->get('event_type');  //获取事件类型
-        $response_type = request()->get('response_type'); //获取响应类型
-        $organization_id = $this->admin_data['organization_id'];  //组织ID
-        $label_id = request()->label_id;  //会员标签id
+        // 获取 微信公众号粉丝标签id
         $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-        $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]); //获取授权APPID
-        $menu_name = request()->get('menu_name');                //获取菜单名称
-        $parent_id = request()->get('parent_id');                //获取上级菜单ID
-
+        // 获取授权APPID
+        $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
+        // 获取菜单名称
+        $menu_name = request()->get('menu_name');
+        // 获取上级菜单ID
+        $parent_id = request()->get('parent_id');
 
         // 菜单的级别数据结构 : 第一级为 0
         if ($parent_id == 0) {
@@ -482,9 +489,11 @@ class WechatmenuController extends CommonController
             $parent_tree = '0,' . $parent_id . ',';
         }
 
-
-        $response_url = request()->get('response_url');          //获取响应网址
-        $response_keyword = request()->get('response_keyword');  //获取响应关键字
+        // 获取响应网址
+        $response_url = request()->get('response_url');
+        // 获取响应关键字
+        $response_keyword = request()->get('response_keyword');
+        // 处理数据
         $defined_menu = [
             'organization_id' => $organization_id,
             'authorizer_appid' => $authorization['authorizer_appid'],
@@ -498,6 +507,7 @@ class WechatmenuController extends CommonController
             'response_keyword' => $response_keyword,
         ];
 
+        // 判断粉丝标签数量
         $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id]]);
         if ($parent_id == '0' && $count >= 3) {
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
@@ -586,24 +596,25 @@ class WechatmenuController extends CommonController
             return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
         }
         if ($data['$parent_id'] != $parent_id) {//如果id有改变
-            $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id], ['tag_id', $data['tag_id']]]);
-            // 如果为第一级菜单并且已有的第一级菜单 >= 3 就报错
-            if ($parent_id == '0' && $count >= 3) {
-                return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
-            }
-            if ($parent_id <> '0' && $count >= 5) {
-                return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
+            $res = $this->judgeMenuStandard($parent_id);
+            if ($res !== true) {
+                return $res;
             }
         }
+
         // 菜单的级别数据结构 : 第一级为 0
         if ($parent_id == 0) {
             $parent_tree = '0,';
         } else {
             $parent_tree = '0,' . $parent_id . ',';
         }
-        $response_url = request()->get('response_url');          //获取响应网址
-        $response_keyword = request()->get('response_keyword');  //获取响应关键字
-        $response_type = request()->get('response_type'); //获取响应类型
+        // 获取响应网址
+        $response_url = request()->get('response_url');
+        // 获取响应关键字
+        $response_keyword = request()->get('response_keyword');
+        // 获取响应类型
+        $response_type = request()->get('response_type');
+        // 处理数据
         $defined_menu = [
             'organization_id' => $organization_id,
             'authorizer_appid' => $authorization['authorizer_appid'],
@@ -618,14 +629,17 @@ class WechatmenuController extends CommonController
 
         DB::beginTransaction();
         try {
+            // 编辑个性化菜单资料
             WechatConditionalMenu::editConditionalMenu(['id' => $menu_id], $defined_menu);
-            //添加操作日志
-            if ($this->admin_data['is_super'] != 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('4', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改了公众号自定义菜单！');//保存操作记录
+            // 添加操作日志
+            if ($this->admin_data['is_super'] != 1) {
+                // 超级管理员操作商户的记录
+                $this->insertOperationLog("4", '修改了公众号自定义菜单！');
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
@@ -649,32 +663,37 @@ class WechatmenuController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $id = request()->get('id');//菜单id
-
-
+        // 菜单id
+        $id = request()->get('id');
+        // 事务处理
         DB::beginTransaction();
         try {
-            $data = WechatConditionalMenu::getOne([['id', $id]]);//菜单详情信息
-            if ($data['parent_id'] == 0) {//如果是最上级
-                $parent_tree = '0,' . $id . ',';//树形结构
-                WechatConditionalMenu::removeConditionalMenu([['parent_tree', $parent_tree]]);//删除子级菜单
+            // 菜单详情信息
+            $data = WechatConditionalMenu::getOne([['id', $id]]);
+            // 如果是最上级
+            if ($data['parent_id'] == 0) {
+                // 树形结构
+                $parent_tree = '0,' . $id . ',';
+                // 删除子级菜单
+                WechatConditionalMenu::removeConditionalMenu([['parent_tree', $parent_tree]]);
             }
-            WechatConditionalMenu::removeConditionalMenu([['id', $id]]);//删除顶级菜单
-            //添加操作日志
+            // 删除顶级菜单
+            WechatConditionalMenu::removeConditionalMenu([['id', $id]]);
+            // 添加操作日志
             if ($this->admin_data['is_super'] != 2) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '删除了公众号个性化菜单！');//保存操作记录
+                $this->insertOperationLog("3",'删除了公众号个性化菜单！');
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '删除个性化菜单失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '删除个性化菜单成功！', 'status' => '1']);
     }
 
     /**
-     * 自定义菜单添加页面
+     * 性化菜单一键同步到微信 页面
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function wechat_conditional_menu_add()
@@ -683,35 +702,51 @@ class WechatmenuController extends CommonController
     }
 
     /**
-     * 自定义菜单添加页面
+     * 个性化菜单一键同步到微信
      * @return \Illuminate\Http\JsonResponse
      */
     public function wechat_conditional_menu_add_check()
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
+        // 获取到标签
         $tag_id = request()->tag_id;
+        // 判断是否存在标签的值
         if ($tag_id == '0') {
             return response()->json(['data' => '请先选择粉丝标签', 'status' => '0']);
         }
+        // 获取到 标签的微信id
         $tag_id = Label::getPluck([['id', $tag_id], ['store_id', '0']], 'wechat_id')->first();
+        // 获取 组织id
         $organization_id = $this->admin_data['organization_id'];
+
+        // 获取某个标签下面的个性化主菜单列表
         $list = WechatConditionalMenu::ListConditionalMenu([['parent_id', '0'], ['tag_id', $tag_id], ['organization_id', $organization_id]]);
+
+        // 处理菜单数据
         foreach ($list as $key => $value) {
+            // 处理结构树
             $parent_tree = $value['parent_tree'] . $value['id'] . ',';
+            // 获取某个结构树下面的子菜单数据
             $re = WechatConditionalMenu::ListConditionalMenu([['parent_tree', $parent_tree], ['tag_id', $tag_id], ['organization_id', $organization_id]])->toArray();
+
+            // 判断是否存在子菜单结构
             if ($re) {
+                // 存在子菜单的情况
                 foreach ($re as $k => $v) {
+                    // 获取菜单的类型
                     $type = $this->getEventType($v["event_type"]);
                     $data['button'][$key]['name'] = $value['menu_name'];
+                    // 判断菜单类型
                     if ($v['event_type'] == 1) {
+                        // 链接类型
                         $data['button'][$key]['sub_button'][] = [
                             'name' => $v['menu_name'],
                             'type' => $type,
                             'url' => $v['response_url']
                         ];
                     } else {
+                        // 其他类型
                         $data['button'][$key]['sub_button'][] = [
                             'name' => $v['menu_name'],
                             'type' => $type,
@@ -720,9 +755,11 @@ class WechatmenuController extends CommonController
                     }
                 }
             } else {
+                // 没有子菜单的情况
                 $type = $this->getEventType($value['event_type']);
                 $data['button'][$key]['name'] = $value['menu_name'];
                 $data['button'][$key]['type'] = $type;
+                // 判断主菜单的类型
                 if ($value['event_type'] == 1) {
                     $data['button'][$key]['url'] = $value['response_url'];
                 } else {
@@ -731,13 +768,16 @@ class WechatmenuController extends CommonController
             }
 
         }
+        // 封装微信标签id
         $data['matchrule'] = [
             'tag_id' => $tag_id
         ];
-
-        $auth_info = \Wechat::refresh_authorization_info($organization_id);//刷新并获取授权令牌
+        // 刷新并获取授权令牌
+        $auth_info = \Wechat::refresh_authorization_info($organization_id);
+        // 创建个性化菜单
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
+        dd($re);
         if (!empty($re['menuid'])) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
@@ -789,6 +829,11 @@ class WechatmenuController extends CommonController
         return $type;
     }
 
+    /**
+     * 判断菜单是否符合微信公众号标准
+     * @param $parent_id
+     * @return bool|\Illuminate\Http\JsonResponse
+     */
     protected function judgeMenuStandard($parent_id)
     {
         // 获取父级菜单当前个数
@@ -798,10 +843,12 @@ class WechatmenuController extends CommonController
         if ($parent_id == '0' && $count >= 3) {
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
         }
+
         // 如果不为第一级菜单并且已有的第一级菜单 >= 5 就报错
         if ($parent_id <> '0' && $count >= 5) {
             return response()->json(['data' => '子菜单只能添加5条', 'status' => '0']);
         }
+
         // 默认返回true,表示菜单没有问题
         return true;
     }
