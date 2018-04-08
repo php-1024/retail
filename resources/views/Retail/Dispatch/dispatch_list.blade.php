@@ -75,7 +75,7 @@
                                             <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
                                         </td>
                                         <td>
-                                            <button class="btn btn-info btn-xs" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button class="btn btn-info btn-xs" onclick="window.location.href='dispath_edit?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         </td>
                                     </tr>
                                     @endforeach
