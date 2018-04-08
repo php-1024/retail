@@ -617,11 +617,8 @@ class WechatmenuController extends CommonController
 //            return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
 //        }
 
-        dump($data);
-        dump($parent_id);
         // 如果id有改变
         if ($data['parent_id'] != $parent_id) {
-            dump(1111);
             $res_menu = $this->judgeMenuStandard($parent_id, "conditional", $data["tag_id"]);
             if ($res_menu !== true) {
                 return $res_menu;
