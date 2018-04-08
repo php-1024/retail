@@ -23,7 +23,7 @@ use Session;
 class AgentController extends Controller
 {
     /**
-     * 服务商审核列表
+     * 代理审核列表
      */
     public function agent_examinelist(Request $request)
     {
@@ -35,7 +35,7 @@ class AgentController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-        // 服务商名字，页面搜索用
+        // 代理名字，页面搜索用
         $agent_name = $request->input('agent_name');
         // 手机号码，页面搜索用
         $agent_owner_mobile = $request->input('agent_owner_mobile');
@@ -44,7 +44,7 @@ class AgentController extends Controller
         // 数据库值查询条件
         $where = [['status', '<>', '1']];
         if (!empty($agent_name)) {
-            //服务商名字搜索条件
+            //代理名字搜索条件
             $where[] = ['agent_name', 'like', '%' . $agent_name . '%'];
         }
         if (!empty($agent_owner_mobile)) {
@@ -56,7 +56,9 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_examinelist', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //服务商审核ajaxshow显示页面
+    /**
+     * 代理审核ajaxshow显示页面
+     */
     public function agent_examine(Request $request)
     {
         $id = $request->input('id'); //服务商id
