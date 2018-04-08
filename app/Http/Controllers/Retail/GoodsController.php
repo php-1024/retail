@@ -133,8 +133,37 @@ class GoodsController extends Controller
         }
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
+    //删除商品图片弹窗
+    public function goods_thumb_delete(Request $request)
+    {
+        $goods_thumb_id = $request->get('id');              //分类栏目的id
+        return view('Retail/Goods/goods_thumb_delete',['goods_thumb_id'=>$goods_thumb_id]);
+    }
+    //删除商品图片操作
+    public function goods_thumb_delete_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $goods_thumb_id = $request->get('goods_thumb_id');              //获取分类栏目ID
+      //  $id = RetailStock::getPluck(['goods_thumb_id'=>$goods_thumb_id],'id')->first();
+        DB::beginTransaction();
+        try {
 
-
+            RetailGoodsThumb::select_delete($goods_thumb_id);
+         //   RetailStock::select_delete($id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品图片！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
+    }
     //图片异步加载部分
     public function goods_thumb(Request $request)
     {
