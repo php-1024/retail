@@ -36,6 +36,8 @@
                                 库存列表
                             </header>
                             <div class="row wrapper">
+                                <form class="form-horizontal" method="get" id="searchForm" action="">
+                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">商品名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" name="goods_name" value="{{$goods_name}}">
@@ -45,6 +47,7 @@
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
                                         </button>
                                     </div>
+                                </form>
                             </div>
 
                             <div class="table-responsive">
