@@ -440,6 +440,9 @@ class WechatmenuController extends CommonController
         $this->getRequestInfo();
         // 获取会员标签id
         $label_id = request()->label_id;
+        // 拿到上级菜单的值
+        $parent_id = request()->input("parent_id");
+
         // 声明菜单列表
         $list = [];
         // 判断是否存在会员标签
@@ -453,7 +456,7 @@ class WechatmenuController extends CommonController
             $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
         }
         // 渲染页面
-        return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list]);
+        return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list, "parent_id" => $parent_id]);
     }
 
     /**

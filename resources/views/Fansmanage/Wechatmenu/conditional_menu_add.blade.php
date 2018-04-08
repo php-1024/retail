@@ -133,6 +133,7 @@
     </form>
 </div>
 <script>
+
     $(function () {
         get_menu();
     })
@@ -169,7 +170,8 @@
         var url = $('#conditional_menu_get').val();
         var menu_url = $('#conditional_menu_list').val();
         var token = $('#_token').val();
-        var data = {'_token': token, 'label_id': label_id};
+        var $parent_id = $("#parent_id").val();
+        var data = {'_token': token, 'label_id': label_id, 'parent_id': $parent_id};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
@@ -222,12 +224,10 @@
     });
 
     function addPostForm() {
-        console.log(123);
         var target = $("#conditional_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
-            console.log(json);
             if (json.status == 1) {
                 swal({
                     title: "提示信息",
@@ -235,8 +235,8 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定"
                 }, function () {
+                    // 添加完成就将数据进行刷新
                     changeConditionalMennuBody($("#member_label").val())
-                    // window.location.reload();
                 });
             } else {
                 swal({
