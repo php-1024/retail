@@ -1,4 +1,8 @@
 <div class="table-responsive">
+    <form class="form-horizontal" method="get">
+        <input type="hidden" id="goods_thumb_delete_comfirm_url" value="{{ url('retail/ajax/goods_thumb_delete') }}">
+        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+    </form>
     <table class="table table-bordered table-stripped">
         <thead>
         <tr>
@@ -29,7 +33,7 @@
                 <input type="text" name="displayorder" size="3" value="{{$val->displayorder}}" />
             </td>
             <td>
-                <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i></button>
             </td>
         </tr>
         @endforeach
