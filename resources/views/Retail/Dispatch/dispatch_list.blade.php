@@ -62,8 +62,8 @@
                                     <thead>
                                     <tr>
                                         <th>名称</th>
-                                        <th>编号</th>
                                         <th>包邮区域</th>
+                                        <th>编号</th>
                                         <th>是否启用</th>
                                         <th>操作</th>
                                     </tr>
@@ -72,8 +72,8 @@
                                     @foreach($list as $key=>$val)
                                     <tr>
                                         <td>{{$val->name}}</td>
-                                        <td>{{$val->number}}</td>
                                         <td>包邮区域</td>
+                                        <td>{{$val->number}}</td>
                                         <td>
                                             <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
                                         </td>
