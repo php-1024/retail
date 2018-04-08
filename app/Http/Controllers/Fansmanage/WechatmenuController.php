@@ -101,7 +101,7 @@ class WechatmenuController extends CommonController
         ];
 
         // 判断菜单结构是否符合微信标准
-        $res_menu = $this->judgeMenuStandard($parent_id);
+        $res_menu = $this->judgeMenuStandard($parent_id, "defined");
         if ($res_menu !== true) {
             return $res_menu;
         }
@@ -202,7 +202,7 @@ class WechatmenuController extends CommonController
         // 如果父级id改变就进行 判断菜单是否符合以下条件
         if ($menu_parent_id != $parent_id) {
             // 判断菜单结构是否符合微信标准
-            $res_menu = $this->judgeMenuStandard($parent_id);
+            $res_menu = $this->judgeMenuStandard($parent_id, "defined");
             if ($res_menu !== true) {
                 return $res_menu;
             }
@@ -595,10 +595,12 @@ class WechatmenuController extends CommonController
         if ($re) {
             return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
         }
+
+
         if ($data['$parent_id'] != $parent_id) {//如果id有改变
-            $res = $this->judgeMenuStandard($parent_id);
-            if ($res !== true) {
-                return $res;
+            $res_menu = $this->judgeMenuStandard($parent_id, "conditional", $data["tag_id"]);
+            if ($res_menu !== true) {
+                return $res_menu;
             }
         }
 
@@ -681,7 +683,7 @@ class WechatmenuController extends CommonController
             WechatConditionalMenu::removeConditionalMenu([['id', $id]]);
             // 添加操作日志
             if ($this->admin_data['is_super'] != 2) {//超级管理员操作商户的记录
-                $this->insertOperationLog("3",'删除了公众号个性化菜单！');
+                $this->insertOperationLog("3", '删除了公众号个性化菜单！');
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -832,12 +834,20 @@ class WechatmenuController extends CommonController
     /**
      * 判断菜单是否符合微信公众号标准
      * @param $parent_id
+     * @param $type
+     * @param $tag_id
      * @return bool|\Illuminate\Http\JsonResponse
      */
-    protected function judgeMenuStandard($parent_id)
+    protected function judgeMenuStandard($parent_id, $type = 'defined', $tag_id = '')
     {
         // 获取父级菜单当前个数
-        $count = WechatDefinedMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id]]);
+        if ($type == 'defined') {
+            // 自定义菜单
+            $count = WechatDefinedMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id]]);
+        } else {
+            // 个性化菜单
+            $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id], ['tag_id', $tag_id]]);
+        }
 
         // 如果为第一级菜单并且已有的第一级菜单 >= 3 就报错
         if ($parent_id == '0' && $count >= 3) {
