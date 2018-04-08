@@ -331,6 +331,7 @@ class AndroidApiController extends Controller
             RetailOrder::editRetailOrder([['id', $order_id]], ['paytype' => $paytype, 'status' => '1', 'payment_company' => $payment_company]);//修改订单状态
             DB::commit();//提交事务
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '付款失败', 'status' => '0', 'data' => '']);
         }
