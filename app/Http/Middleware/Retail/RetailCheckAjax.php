@@ -43,6 +43,7 @@ class RetailCheckAjax
             case "retail/ajax/loss_list_confirm":       //报损订单审核弹窗
             case "retail/ajax/check_list_confirm":      //盘点订单审核弹窗
             case "retail/ajax/order_list_details":      //订单详细信息列表
+            case "retail/ajax/goods_thumb_delete":      //删除图片弹窗确认
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
