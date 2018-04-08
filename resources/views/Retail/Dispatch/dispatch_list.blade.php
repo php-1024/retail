@@ -61,8 +61,8 @@
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
-                                        <th>编号</th>
                                         <th>名称</th>
+                                        <th>编号</th>
                                         <th>是否启用</th>
                                         <th>操作</th>
                                     </tr>
@@ -70,8 +70,8 @@
                                     <tbody>
                                     @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>{{$val->number}}</td>
                                         <td>{{$val->name}}</td>
+                                        <td>{{$val->number}}</td>
                                         <td>
                                             <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
                                         </td>
