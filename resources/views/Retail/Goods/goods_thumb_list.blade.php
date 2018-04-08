@@ -33,7 +33,7 @@
                 <input type="text" name="displayorder" size="3" value="{{$val->displayorder}}" />
             </td>
             <td>
-                <button type="button" id="deleteBtn" class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i></button>
+                <button type="button" id="deleteBtn" class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})">1<i class="fa fa-times"></i></button>
             </td>
         </tr>
         @endforeach
