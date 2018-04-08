@@ -607,11 +607,11 @@ class WechatmenuController extends CommonController
         // 处理结构树
         $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
 
-        // 判断是否子菜单
-        $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
-        if ($re) {
-            return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
-        }
+//        // 判断是否子菜单
+//        $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
+//        if ($re) {
+//            return response()->json(['data' => '菜单下面还有别的子菜单，不能更改', 'status' => '0']);
+//        }
 
         // 如果id有改变
         if ($data['$parent_id'] != $parent_id) {
