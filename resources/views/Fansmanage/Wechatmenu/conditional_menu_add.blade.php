@@ -217,10 +217,12 @@
     });
 
     function addPostForm() {
+        console.log(123);
         var target = $("#conditional_menu_add_check");
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
+            console.log(json);
             if (json.status == 1) {
                 swal({
                     title: "提示信息",
