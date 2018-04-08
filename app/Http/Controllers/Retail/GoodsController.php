@@ -149,7 +149,7 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
 
-            RetailGoodsThumb::select_delete($goods_thumb_id);
+            RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
          //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
