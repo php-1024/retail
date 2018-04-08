@@ -170,7 +170,6 @@
 
     //审核
     function getEditForm(id, status) {
-
         var url = $('#agent_examine').val();
         var token = $('#_token').val();
         if (id == '') {
