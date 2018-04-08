@@ -17,7 +17,7 @@ use Session;
 
 class DispatchController extends Controller
 {
-    //添加与非模板页面
+    //添加运费模板页面
     public function dispatch_add(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -26,7 +26,6 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         return view('Retail/Dispatch/dispatch_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
-
 
     //添加运费模板操作
     public function dispatch_add_check(Request $request)
@@ -67,7 +66,7 @@ class DispatchController extends Controller
         return response()->json(['data' => '添加运费模板信息成功', 'status' => '1']);
     }
 
-    //添加与非模板页面
+    //运费模板列表
     public function dispatch_list(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -77,6 +76,18 @@ class DispatchController extends Controller
         $dispatch_name = $request->get('dispatch_name');    //模板名称
         $list = Dispatch::getPaginage(['store_id'=>$admin_data['organization_id']],$dispatch_name,'0','displayorder','DESC');
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    //编辑运费模板
+    public function dispatch_edit(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $dispatch_name = $request->get('dispatch_name');    //模板名称
+        $list = Dispatch::getPaginage(['store_id'=>$admin_data['organization_id']],$dispatch_name,'0','displayorder','DESC');
+        return view('Retail/Dispatch/dispatch_edit',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 }
