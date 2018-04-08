@@ -199,8 +199,7 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -216,109 +215,46 @@
 <script type="text/javascript"
         src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
-
-
-    //订单详情
-    function getwalletForm(id, type) {
-        var url = $('#order_list_details').val();
-        var token = $('#_token').val();
-        var data = {'_token': token, 'id': id, 'type': type};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
-                    window.location.reload();
-                });
-                return;
-            } else {
-                $('#myModal').html(response);
-                $('#myModal').modal();
+    $(function(){
+        //设置CSRF令牌
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    }
-
-
-    //审核订单
-    function getlockForm(id, status) {
-        var url = $('#purchase_list_confirm').val();
-        var token = $('#_token').val();
-        var data = {'_token': token, 'id': id, 'status': status};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                }, function () {
-                    window.location.reload();
-                });
-                return;
-            } else {
-                console.log(response);
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
+        $('#multiselect').multiselect({keepRenderingSort:true});
+    });
+    //提交表单
+    function postForm() {
+        var target = $("#currentForm");
+        var url = target.attr("action");
+        var module_name = $('#module_name').val();
+        var module_show_name = $('#module_show_name').val();
+        var _token = $('#_token').val();
+        var node = '';
+        $('#multiselect_to option').each(function(i,v){
+            node += 'nodes[]='+$(v).val()+'&';
         });
-    }
-
-    //添加会员标签
-    function getEditForm(id) {
-        var url = $('#user_list_edit').val();
-        var token = $('#_token').val();
-        var data = {'_token': token, 'id': id};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
-                    window.location.reload();
-                });
-                return;
-            } else {
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
-    function changeUserTag(obj, user_id, store_id, nickname) {
-        var label_id = $(obj).val();
-        var url = $('#store_label_add_check').val();
-        var token = $('#_token').val();
-        var data = {
-            '_token': token,
-            'label_id': label_id,
-            'user_id': user_id,
-            'store_id': store_id,
-            'nickname': nickname
-        };
+        node = node.substring(0, node.length-1);
+        var data = '_token='+_token+'&module_name='+module_name+'&module_show_name='+module_show_name+'&'+node;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
-            } else if (json.status == 1) {
+            } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
+                    confirmButtonText: "确定"
+                },function(){
                     window.location.reload();
                 });
-            } else {
+            }else{
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
+                    confirmButtonText: "确定"
                 });
             }
         });
