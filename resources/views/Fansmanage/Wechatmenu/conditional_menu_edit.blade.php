@@ -195,9 +195,10 @@
                 $('#menu_box').html(response);
             }
         });
-        getEditData($("#edit_id").val())
+        // getEditData($("#edit_id").val())
     }
 
+    
     function getEditData(menu_id) {
         var url = $("#conditional_menu_edit").val();
         var token = $('._token').val();
