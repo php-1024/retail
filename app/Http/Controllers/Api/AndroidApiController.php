@@ -103,7 +103,7 @@ class AndroidApiController extends Controller
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
-                $order_price += $v['price'];
+                $order_price += $v['price']*$v['num'];
             }
         }
         $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id')->first();

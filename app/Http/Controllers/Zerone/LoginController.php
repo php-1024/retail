@@ -44,7 +44,7 @@ class LoginController extends Controller
         $builder->output();
     }
 
-    /**
+    /** 
      * 检测登录
      */
     public function login_check()
