@@ -38,7 +38,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">菜单名称</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="限制四个字" name="menu_name"
+                <input type="text" class="form-control" placeholder="限制四个字" name="menu_name" maxlength="4"
                        value="{{$conditionalmenu->menu_name}}">
             </div>
         </div>
