@@ -86,6 +86,7 @@
                                     <th class="col-sm-2 text-right" >操作</th>
                                 </tr>
                                 </thead>
+                                
                                 <tbody>
                                 @foreach($list as $key=>$value)
                                     <tr>
