@@ -175,11 +175,12 @@
 
 <script>
     // 获取列表主体
-    function changeConditionalMennuEdit(label_id) {
+    function changeConditionalMennuEdit() {
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
         var $parent_id = $("#parent_id").val();
-        var data = {'_token': token, 'label_id': label_id, 'parent_id': $parent_id};
+        var $label_id = $("#member_label").val();
+        var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
@@ -198,7 +199,7 @@
         // getEditData($("#edit_id").val())
     }
 
-    
+
     function getEditData(menu_id) {
         var url = $("#conditional_menu_edit").val();
         var token = $('._token').val();
