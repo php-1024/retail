@@ -45,12 +45,11 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="order_list_details" value="{{ url('retail/ajax/order_list_details') }}">
                                     <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="ordersn" value="" placeholder="订单编号">
+                                        <input type="text" class="form-control" name="name" value="" placeholder="模板名称">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -113,34 +112,6 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
-
-
-
-    //订单详情
-    function getwalletForm(id,type){
-        var url = $('#order_list_details').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'id':id,'type':type};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
-
-
     //审核订单
     function getlockForm(id,status){
         var url = $('#purchase_list_confirm').val();
@@ -161,57 +132,6 @@
                 console.log(response);
                 $('#myModal').html(response);
                 $('#myModal').modal();
-            }
-        });
-    }
-    //添加会员标签
-    function getEditForm(id){
-        var url = $('#user_list_edit').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'id':id};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-
-    function changeUserTag(obj,user_id,store_id,nickname){
-        var label_id = $(obj).val();
-        var url = $('#store_label_add_check').val();
-        var token = $('#_token').val();
-        var data = {'_token':token,'label_id':label_id,'user_id':user_id,'store_id':store_id,'nickname':nickname};
-        $.post(url,data,function(json){
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
             }
         });
     }
