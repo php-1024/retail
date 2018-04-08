@@ -508,7 +508,7 @@ class WechatmenuController extends CommonController
         ];
 
         // 判断粉丝标签数量
-        $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id]]);
+        $count = WechatConditionalMenu::getCount([['organization_id', $this->admin_data['organization_id']], ['parent_id', $parent_id],['tag_id', $tag_id]]);
         var_dump($count);
         if ($parent_id == '0' && $count >= 3) {
             return response()->json(['data' => '主菜单最多只能添加三条', 'status' => '0']);
