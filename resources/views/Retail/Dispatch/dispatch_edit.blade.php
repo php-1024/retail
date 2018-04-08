@@ -52,8 +52,6 @@
                                       action="http://o2o.01nnt.com/retail/ajax/goods_list">
                                     <input type="hidden" name="_token" value="gXrfjYLgVjSqVznCZOEWuDXxXCeIdWCEq4tuYcB6">
                                     <label class="col-sm-1 control-label">模板名称</label>
-
-
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="全国包邮" name="goods_name">
                                     </div>
