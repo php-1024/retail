@@ -48,7 +48,7 @@
                             <div class="line line-border b-b pull-in"></div>
                             <div style="clear:both"></div>
                             <div class="col-sm-12">
-                                <form method="post" class="form-horizontal" role="form" id="currentForm" action="http://o2o.01nnt.com/retail/ajax/goods_list">
+                                <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
                                     <input type="hidden" name="_token" value="gXrfjYLgVjSqVznCZOEWuDXxXCeIdWCEq4tuYcB6">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
@@ -128,22 +128,16 @@
                                                         <label class="label label-success" style="display:inline-block">湖北省</label>
                                                         <label class="label label-success" style="display:inline-block">湖南省</label>
                                                     </td>
-                                                    <td class="name"><input type="text" name="firstweight175"
-                                                                            id="firstweight175" value="0"
-                                                                            class="input-sm form-control"></td>
-                                                    <td class="price"><input type="text" name="firstprice175"
-                                                                             id="firstprice175" value="0.00"
-                                                                             class="input-sm form-control"></td>
-                                                    <td class="price"><input type="text" name="secondweight175"
-                                                                             id="secondweight175" value="0"
-                                                                             class="input-sm form-control"></td>
-                                                    <td class="price"><input type="text" name="secondprice175"
-                                                                             id="secondprice175" value="0.00"
-                                                                             class="input-sm form-control"></td>
+                                                    <td class="name">
+                                                        <input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
+                                                    <td class="price">
+                                                        <input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
+                                                    <td class="price">
+                                                        <input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
+                                                    <td class="price">
+                                                        <input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs"
-                                                                onclick="javascript:cancel_detail(175)"><i
-                                                                    class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail(175)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -199,15 +193,13 @@
     function postForm() {
         var target = $("#currentForm");
         var url = target.attr("action");
-        var module_name = $('#module_name').val();
-        var module_show_name = $('#module_show_name').val();
         var _token = $('#_token').val();
-        var node = '';
+        var province = '';
         $('#multiselect_to option').each(function(i,v){
-            node += 'nodes[]='+$(v).val()+'&';
+            province += 'provinces[]='+$(v).val()+'&';
         });
-        node = node.substring(0, node.length-1);
-        var data = '_token='+_token+'&module_name='+module_name+'&module_show_name='+module_show_name+'&'+node;
+        province = province.substring(0, province.length-1);
+        var data = '_token='+_token+'&'+province;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();

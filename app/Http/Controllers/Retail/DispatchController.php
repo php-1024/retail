@@ -93,6 +93,12 @@ class DispatchController extends Controller
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //运费模板省份添加
+    public function dispatch_province_add_check(Request $request)
+    {
+        dd($request);
+    }
+
 }
 
 ?>
