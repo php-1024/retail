@@ -123,7 +123,6 @@ class AndroidApiController extends Controller
             'operator_id' => $account_id,
             'status' => '0',
         ];
-        print_r($orderData);exit;
         DB::beginTransaction();
         try {
             $order_id = RetailOrder::addRetailOrder($orderData);//添加入订单表
