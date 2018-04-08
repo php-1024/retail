@@ -61,9 +61,12 @@ class AgentController extends Controller
      */
     public function agent_examine(Request $request)
     {
-        $id = $request->input('id'); //服务商id
-        $status = $request->input('status'); //是否通过值 1为通过 -1为不通过
-        $info = OrganizationAgentapply::getOne([['id', $id]]); //获取该ID的信息
+        // 代理id
+        $id = $request->input('id');
+        // 是否通过值 1为通过 -1为不通过
+        $status = $request->input('status');
+        // 获取该代理的信息
+        $info = OrganizationAgentapply::getOne([['id', $id]]);
         return view('Zerone/Agent/agent_examine', ['info' => $info, 'status' => $status]);
     }
 

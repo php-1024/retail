@@ -59,11 +59,11 @@ class Dispatch extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$dispatch_name,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('Organization');
+        $model = new Dispatch();
         if(!empty($dispatch_name)){
             $model = $model->where('name','like','%'.$dispatch_name.'%');
         }
-        return $model->with('create_account')->with('Organization')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //查询出模型，再删除模型 一定要查询到才能删除

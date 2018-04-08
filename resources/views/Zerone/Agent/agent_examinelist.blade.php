@@ -30,7 +30,7 @@
                     <li class="active">
                         <a href="JavaScript:;">代理管理</a>
                     </li>
-                    <li >
+                    <li>
                         <strong>代理注册审核</strong>
                     </li>
                 </ol>
@@ -47,13 +47,17 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">代理名称</label>
-                                <input type="text" id="agent_name" name="agent_name" value="{{ $search_data['agent_name'] }}" placeholder="请输入代理名称" class="form-control">
+                                <input type="text" id="agent_name" name="agent_name"
+                                       value="{{ $search_data['agent_name'] }}" placeholder="请输入代理名称"
+                                       class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">手机号码</label>
-                                <input type="text" id="agent_owner_mobile" name="agent_owner_mobile" value="{{ $search_data['agent_owner_mobile'] }}" placeholder="手机号码" class="form-control">
+                                <input type="text" id="agent_owner_mobile" name="agent_owner_mobile"
+                                       value="{{ $search_data['agent_owner_mobile'] }}" placeholder="手机号码"
+                                       class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -83,7 +87,7 @@
                                     <th>手机号码</th>
                                     <th>申请状态</th>
                                     <th class="col-sm-1">注册时间</th>
-                                    <th class="col-sm-2 text-right" >操作</th>
+                                    <th class="col-sm-2 text-right">操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -93,7 +97,6 @@
                                         <td>{{$value->agent_name}}</td>
                                         <td>{{$value->warzone->zone_name}}</td>
                                         <td>{{$value->agent_owner}}</td>
-
                                         <td>{{$value->agent_owner_idcard}}</td>
                                         <td>{{$value->agent_owner_mobile}}</td>
                                         <td>@if($value->status == 0)<label class="label label-warning">待审核</label>
@@ -104,8 +107,14 @@
                                         <td>{{$value->created_at}}</td>
                                         <td class="text-right">
                                             @if($value->status == 0)
-                                                <button type="button" id="okBtn" class="btn  btn-xs btn-primary" onclick="getEditForm('{{ $value->id }}',this.value)" value="1"><i class="fa fa-check"></i>&nbsp;&nbsp;审核通过</button>
-                                                <button type="button" id="notokBtn" class="btn  btn-xs btn-danger" onclick="getEditForm('{{ $value->id }}',this.value)" value="-1"><i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过</button>
+                                                <button type="button" id="okBtn" class="btn  btn-xs btn-primary"
+                                                        onclick="getEditForm('{{ $value->id }}',this.value)" value="1">
+                                                    <i class="fa fa-check"></i>&nbsp;&nbsp;审核通过
+                                                </button>
+                                                <button type="button" id="notokBtn" class="btn  btn-xs btn-danger"
+                                                        onclick="getEditForm('{{ $value->id }}',this.value)" value="-1">
+                                                    <i class="fa fa-remove"></i>&nbsp;&nbsp;拒绝通过
+                                                </button>
                                             @else
                                                 <label class="label label-primary">已审核</label>
                                             @endif
@@ -127,11 +136,7 @@
                 </div>
             </div>
         </div>
-
-
-
         @include('Zerone/Public/Footer')
-
         <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
     </div>
 </div>
@@ -154,8 +159,7 @@
 
 
 <script>
-    $(function(){
-
+    $(function () {
         //设置CSRF令牌
         $.ajaxSetup({
             headers: {
@@ -165,36 +169,34 @@
     });
 
     //审核
-    function getEditForm(id,status){
-
+    function getEditForm(id, status) {
         var url = $('#agent_examine').val();
         var token = $('#_token').val();
-        if(id==''){
+        if (id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            },function(){
+            }, function () {
                 window.location.reload();
             });
             return;
         }
 
-        var data = {'id':id,'status':status,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id': id, 'status': status, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
-
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
