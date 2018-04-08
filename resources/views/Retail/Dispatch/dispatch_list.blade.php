@@ -68,19 +68,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$val)
                                     <tr>
+                                        <td>{{$val->number}}</td>
+                                        <td>{{$val->name}}</td>
                                         <td>
-                                            进货
+                                            <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
                                         </td>
-                                        <td>212125151</td>
                                         <td>
-                                                <button class="btn btn-danger btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
-                                        </td>
-
-                                        <td>
-                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('1','0')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
