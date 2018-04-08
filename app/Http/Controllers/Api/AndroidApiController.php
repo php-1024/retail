@@ -266,6 +266,7 @@ class AndroidApiController extends Controller
             'operator_id' => $order['operator_id'],//操作人id
             'retail_id' => $order['retail_id'],//店铺ID
             'operator_account' => $operator_account,//操作人账号
+            'created_at' => $order['created_at'],//添加时间
         ];
         $data = [
             'orderdata' => $orderdata,
