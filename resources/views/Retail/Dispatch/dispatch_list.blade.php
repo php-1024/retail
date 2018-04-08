@@ -74,7 +74,7 @@
                                         </td>
                                         <td>212125151</td>
                                         <td>
-                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
+                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
                                         </td>
 
                                         <td>
