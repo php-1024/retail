@@ -47,6 +47,7 @@ class RetailGoodsThumb extends Model{
     public static function deleteGoodsThumb($id){
         $model = Self::find($id);
         return $model->delete();
+       // forceDelete
     }
     
     //修改餐饮商品图片数据
