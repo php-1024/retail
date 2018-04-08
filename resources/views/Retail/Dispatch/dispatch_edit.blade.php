@@ -2,7 +2,7 @@
 <html lang="en" class="app">
 <head>
     <meta charset="utf-8" />
-    <title>运费模板列表 | 零壹云管理平台 | 零售版店铺管理系统</title>
+    <title>编辑运费模板 | 零壹云管理平台 | 零售版店铺管理系统</title>
     <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
@@ -41,56 +41,8 @@
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                运费模板列表
+                                编辑运费模板
                             </header>
-                            <div class="row wrapper">
-                                <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="order_list_details" value="{{ url('retail/ajax/order_list_details') }}">
-                                    <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
-                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <label class="col-sm-1 control-label">订单编号</label>
-                                    <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="ordersn" value="" placeholder="订单编号">
-                                    </div>
-                                    <div class="col-sm-1">
-                                        <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-striped b-t b-light">
-                                    <thead>
-                                    <tr>
-                                        <th>名称</th>
-                                        <th>编号</th>
-                                        <th>是否启用</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($list as $key=>$val)
-                                    <tr>
-                                        <td>{{$val->name}}</td>
-                                        <td>{{$val->number}}</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-info btn-xs" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <footer class="panel-footer">
-                                <div class="row">
-
-                                    <div class="col-sm-12 text-right text-center-xs">
-                                        {{$list->links()}}
-                                    </div>
-                                </div>
-                            </footer>
                         </section>
                     </section>
                 </section>
