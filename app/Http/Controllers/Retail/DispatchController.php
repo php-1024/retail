@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Dispatch;
 use App\Models\OperationLog;
+use App\Models\Province;
 use App\Models\RetailCategory;
 use App\Models\Organization;
 use Illuminate\Http\Request;
@@ -88,7 +89,8 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_id = $request->get('id');                //模板ID
         $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);
-        return view('Retail/Dispatch/dispatch_edit',['dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $province = Province::getList([],0,'id','DESC');
+        return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
 }

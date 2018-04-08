@@ -85,18 +85,11 @@
                                                 </thead>
                                                 <tbody id="goods_list">
                                                 <tr id="30">
-                                                    <td class="id"><select name="from" id="multiselect"
-                                                                           class="form-control"
-                                                                           style="display: inline-block;" size="15"
-                                                                           multiple="multiple">
-                                                            <option value="10" data-position="163">添加战区（零壹平台管理系统）
-                                                            </option>
-                                                            <option value="9" data-position="164">战区管理（零壹平台管理系统）
-                                                            </option>
-                                                            <option value="4" data-position="165">测试节点4</option>
-                                                            <option value="3" data-position="166">测试节点3</option>
-                                                            <option value="2" data-position="167">测试节点2</option>
-                                                            <option value="1" data-position="168">测试节点1</option>
+                                                    <td class="id">
+                                                        <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
+                                                            @foreach($province as $key=>$val)
+                                                            <option value="{{$val->id}}" data-position="{{$val->id}}">{{$val->province_name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </td>
                                                     <td>
