@@ -63,6 +63,7 @@
                                     </div>
                                 </form>
                             </div>
+
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                             <form method="post" class="form-horizontal" role="form" id="purchase_goods"
