@@ -98,8 +98,6 @@
                                                             <option value="2" data-position="167">测试节点2</option>
                                                             <option value="1" data-position="168">测试节点1</option>
                                                         </select>
-
-
                                                     </td>
                                                     <td>
                                                         <div class="col-sm-2">
