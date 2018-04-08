@@ -61,45 +61,27 @@
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
-                                        <th>订单编号</th>
-                                        <th>类型</th>
-                                        <th>供应商</th>
-                                        <th>供应商联系方式</th>
-                                        <th>经手操作人员</th>
-                                        <th>订单总金额</th>
-                                        <th>审核</th>
-                                        <th>开单时间</th>
+                                        <th>名称</th>
+                                        <th>包邮区域</th>
+                                        <th>编号</th>
+                                        <th>是否启用</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($list as $key=>$val)
                                     <tr>
-                                        <td>12121212</td>
+                                        <td>{{$val->name}}</td>
+                                        <td>包邮区域</td>
+                                        <td>{{$val->number}}</td>
                                         <td>
-                                            进货
-                                        </td>
-                                        <td><label class="label label-success">噶飒飒</label></td>
-                                        <td>
-                                                15784524635
+                                            <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
                                         </td>
                                         <td>
-                                            <label class="label label-info">
-                                                阿萨斯无群
-                                            </label>
-                                        </td>
-                                        <td>
-                                            <label class="label label-danger">
-                                                10.25
-                                            </label>
-                                        </td>
-                                        <td>
-                                                <button class="btn btn-warning btn-xs" onclick="getlockForm('1','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未审核</button>
-                                        </td>
-                                        <td>212125151</td>
-                                        <td>
-                                            <button class="btn btn-primary btn-xs" onclick="getwalletForm('1','0')"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;查看详情</button>
+                                            <button class="btn btn-info btn-xs" onclick="getwalletForm('{{$val->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         </td>
                                     </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
