@@ -197,11 +197,11 @@
         var _token = $('#_token').val();
         var province = '';
         $('#multiselect_to option').each(function(i,v){
-            province += '&province='+$(v).val()+'&';
+            province += 'provinces[]='+$(v).val()+'&';
         });
         console.log(province);
         province = province.substring(0, province.length-1);
-        var data = '_token='+_token+'&province='+province;
+        var data = '_token='+_token+province;
 //        console.log(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
