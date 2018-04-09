@@ -129,13 +129,13 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="first_weight{{$val->id}}[]" value="{{$val->first_weight}}" class="input-sm form-control"></td>
+                                                        <input type="text" name="dispatch_data{{$val->id}}['first_weight']" value="{{$val->first_weight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="additional_weight{{$val->id}}[]" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
+                                                        <input type="text" name="dispatch_data{{$val->id}}['additional_weight']" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="freight{{$val->id}}[]" value="{{$val->freight}}" class="input-sm form-control"></td>
+                                                        <input type="text" name="dispatch_data{{$val->id}}['freight']" value="{{$val->freight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="renewal{{$val->id}}[]" value="{{$val->renewal}}" class="input-sm form-control"></td>
+                                                        <input type="text" name="dispatch_data{{$val->id}}['renewal']" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
                                                         <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
