@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class WechatServiceProvider extends ServiceProvider {
+class WechatServiceProvider extends ServiceProvider
+{
 
     public function register()
     {
@@ -12,4 +14,3 @@ class WechatServiceProvider extends ServiceProvider {
         });
     }
 }
-?>

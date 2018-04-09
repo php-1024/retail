@@ -33,10 +33,15 @@ class UserController extends CommonController
      */
     public function user_tag()
     {
+
+        dump(\Wechat::getCodeToMsg(0));
+
+
         // 中间件参数 集合
         $this->getRequestInfo();
         // 组织id
         $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        // 获取标签列表
         $list = Label::getPaginage([['fansmanage_id', $fansmanage_id]], '10', 'id');
         // 渲染页面
         return view('Fansmanage/User/user_tag', ['list' => $list, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
@@ -63,24 +68,26 @@ class UserController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $label_name = request()->label_name; //会员标签名称
-        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        // 会员标签名称
+        $label_name = request()->label_name;
+        // 组织id
+        $fansmanage_id = $this->admin_data['organization_id'];
 
         // 判断标签是否已经存在
         $re = Label::checkRowExists([['fansmanage_id', $fansmanage_id], ['label_name', $label_name]]);
-
-        if ($re == 'true') {
-            return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
+        // 如果存在就返回报错
+        if ($re === true) {
+            return $this->getResponseMsg(0, "会员标签名称已存在！");
         }
-
+        // 事务处理
         DB::beginTransaction();
         try {
             // 刷新并获取授权令牌
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
-            // 获取线上粉丝标签
+            // 创建微信公众号粉丝标签
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'], $label_name);
             $re = json_decode($re, true);
+
             // 判断微信公众号返回的消息
             if (!empty($re['errcode'])) {
                 if ($re['errcode'] == '45157') {
@@ -104,11 +111,12 @@ class UserController extends CommonController
             Label::addLabel($dataLabel);
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $fansmanage_id, $this->admin_data['id'], $this->route_name, '创建会员标签成功：' . $label_name);
+                $this->insertOperationLog(3, '创建会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
         }
         return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
@@ -120,8 +128,11 @@ class UserController extends CommonController
      */
     public function label_edit()
     {
-        $id = request()->id; //会员标签id
+        // 获取会员标签id
+        $id = request()->id;
+        // 获取标签信息
         $oneLabel = Label::getOneLabel([['id', $id]]);
+        // 渲染页面
         return view('Fansmanage/User/label_edit', ['oneLabel' => $oneLabel]);
     }
 
@@ -134,20 +145,32 @@ class UserController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        // 组织id
+        $fansmanage_id = $this->admin_data['organization_id'];
+        // 会员标签id
+        $id = request()->id;
+        // 会员标签名称
+        $label_name = request()->label_name;
 
-        $id = request()->id; //会员标签id
-        $label_name = request()->label_name; //会员标签名称
+        // 检测标签是否已经存在
         $re = Label::checkRowExists([['fansmanage_id', $fansmanage_id], ['label_name', $label_name]]);
-        if ($re == 'true') {
-            return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
+        if ($re === true) {
+            return $this->getResponseMsg(0, '会员标签名称已存在！');
         }
+
+        // 获取标签的 由微信公众号返回的 微信 id
         $wechat_id = Label::getPluck([['id', $id]], 'wechat_id')->first();
+        // 事务处理
         DB::beginTransaction();
         try {
-            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+            // 刷新并获取授权令牌
+            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
+
+            // 编辑微信公众号粉丝标签
             $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'], $label_name, $wechat_id);
             $re = json_decode($re, true);
+
+            // 判断是否微信接口是否正确
             if (!empty($re['errcode'])) {
                 if ($re['errcode'] == '45157') {
                     return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
@@ -157,14 +180,17 @@ class UserController extends CommonController
                     return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
                 }
             }
-            Label::editLabel(['id' => $id], ['label_name' => $label_name]);
 
+            // 修改数据库里面的标签
+            Label::editLabel(['id' => $id], ['label_name' => $label_name]);
+            // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改会员标签成功：' . $label_name);//保存操作记录
+                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '修改会员标签失败！', 'status' => '0']);
         }
         return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
@@ -176,8 +202,11 @@ class UserController extends CommonController
      */
     public function label_delete()
     {
-        $id = request()->id; //会员标签id
+        // 会员标签id
+        $id = request()->id;
+        // 获取标签信息
         $oneLabel = Label::getOneLabel([['id', $id]]);
+        // 渲染页面
         return view('Fansmanage/User/label_delete', ['oneLabel' => $oneLabel]);
     }
 
@@ -190,11 +219,15 @@ class UserController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $id = request()->id; //会员标签id
-        $label_name = request()->label_name; //会员标签名称
-        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        // 会员标签id
+        $id = request()->id;
+        // 会员标签名称
+        $label_name = request()->label_name;
+        // 组织id
+        $fansmanage_id = $this->admin_data['organization_id'];
+        // 获取微信公众号返回的 标签的微信id
         $wechat_id = Label::getPluck([['id', $id]], 'wechat_id')->first();
+        // 事务处理
         DB::beginTransaction();
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
