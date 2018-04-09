@@ -143,6 +143,7 @@ class DispatchController extends Controller
         $dispatch_name = $request->get('dispatch_name');     //获取运费模板名称
         $dispatch_id = $request->get('dispatch_id');         //获取运费模板id
         $dispatch_data = $request->get('dispatch_data');      //获取运费模板详细信息
+        dd($dispatch_data);
         DB::beginTransaction();
         try {
             foreach ($dispatch_data as $key=>$val){
