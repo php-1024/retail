@@ -4,9 +4,7 @@
  *   自定义菜单，个性化菜单
  *   同时还具备一键上传到微信公众号的功能
  */
-
 namespace App\Http\Controllers\Fansmanage;
-
 
 use App\Http\Controllers\Controller;
 use App\Models\Label;
@@ -124,9 +122,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "添加自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "添加自定义菜单成功！");
     }
 
     /**
@@ -252,9 +250,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "修改自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "修改自定义菜单成功！");
     }
 
     /**
@@ -300,9 +298,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '删除自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "删除自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '删除自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(0, "删除自定义菜单成功！");
     }
 
 
@@ -530,11 +528,15 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "添加自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "添加自定义菜单成功！");
     }
 
+    /**
+     * 获取个性化菜单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function conditional_menu_get()
     {
         // 中间件参数 集合
@@ -655,8 +657,6 @@ class WechatmenuController extends CommonController
             'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
-        dump($defined_menu);
-
 
         // 事务处理
         DB::beginTransaction();
@@ -670,12 +670,11 @@ class WechatmenuController extends CommonController
             }
             DB::commit();
         } catch (\Exception $e) {
-            dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "修改自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "修改自定义菜单成功！");
     }
 
     /**
@@ -816,6 +815,7 @@ class WechatmenuController extends CommonController
             return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
     }
+
     // +----------------------------------------------------------------------
     // | End - 个性化菜单
     // +----------------------------------------------------------------------

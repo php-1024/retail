@@ -16,6 +16,7 @@ use App\Models\RetailStock;
 use App\Models\RetailStockLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class GoodsController extends Controller
@@ -146,17 +147,14 @@ class GoodsController extends Controller
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
-        $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
+        $goods_thumb = RetailGoodsThumb::getPluck(['id' => $goods_thumb_id], 'thumb')->first();
 
 
-        //  $id = RetailStock::getPluck(['goods_thumb_id'=>$goods_thumb_id],'id')->first();
         DB::beginTransaction();
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
 
-        //  Storage::delete($goods_thumb);
-         //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品图片！');//保存操作记录
@@ -169,8 +167,11 @@ class GoodsController extends Controller
             return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
         }
 
-
-        return response()->json(['data' => '删除商品图片成功'.$goods_thumb, 'status' => '1']);
+        if (file_exists($goods_thumb)) {                    //检查文件是否存在
+            if (!unlink($goods_thumb))                     //删除磁盘上的图片文件
+                return response()->json(['data' => '删除商品图片记录成功，但删除图片文件:' . $goods_thumb . ' 失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
     }
     //图片异步加载部分
     public function goods_thumb(Request $request)
@@ -192,9 +193,23 @@ class GoodsController extends Controller
         if ($request->hasFile('upload_thumb') && $file->isValid()){
             //检验文件是否有效
             $entension = $file->getClientOriginalExtension();                           //获取上传文件后缀名
-            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-            $file->move(base_path() . '/uploads/catering/', $new_name);         //$path上传后的文件路径
-            $file_path =  'uploads/catering/'.$new_name;
+
+            if($entension=='jpg'||$entension=='png'||$entension=='gif')
+            {
+                $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
+                $file->move(base_path() . '/uploads/catering/', $new_name);         //$path上传后的文件路径
+                $file_path =  'uploads/catering/'.$new_name;
+            } else
+
+            {
+                return response()->json(['data' => '上传商品图片格式无效，请检查', 'status' => '0']);
+            }
+
+
+        }
+        else{
+
+            return response()->json(['data' => '上传商品图片无效，请检查', 'status' => '0']);
         }
         $goods_thumb = ['goods_id' => $goods_id,'thumb' => $file_path];         //商品图片信息
         DB::beginTransaction();
