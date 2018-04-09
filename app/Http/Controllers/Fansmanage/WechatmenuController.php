@@ -552,7 +552,7 @@ class WechatmenuController extends CommonController
         if (!empty($list)) {
             // 处理菜单数据
             foreach ($list as $key => $val) {
-                $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val->id]], 0, 'id', 'asc');
+                $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val['id']]], 0, 'id', 'asc');
                 if (!empty($sm)) {
                     $son_menu[$val['id']] = $sm;
                 }
