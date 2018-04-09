@@ -25,6 +25,9 @@
     </div>
 </form>
 <script>
+    $("#currentForm").submit(function(){
+        postForm();
+    });
     //提交表单
     function postForm() {
         var target = $("#currentForm");
