@@ -18,7 +18,6 @@ use App\Models\UserInfo;
 use App\Models\UserLabel;
 use App\Models\UserOrigin;
 use App\Models\UserRecommender;
-use App\Services\Wechat\WechatError;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -35,7 +34,7 @@ class UserController extends CommonController
     public function user_tag()
     {
 
-        dump(WechatError::getCodeToMsg(0));
+        dump(\WechatError::getCodeToMsg(0));
 
 
         // 中间件参数 集合
