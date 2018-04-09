@@ -226,7 +226,7 @@ class GoodsController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '上传商品图片失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '上传商品图片信息成功'.$entension,'file_path' => $file_path, 'status' => '1']);
+        return response()->json(['data' => '上传商品图片信息成功','file_path' => $file_path, 'status' => '1']);
     }
 
     //商品列表
