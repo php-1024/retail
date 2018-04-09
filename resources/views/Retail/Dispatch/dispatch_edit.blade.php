@@ -198,9 +198,9 @@
         var province = [];
         $('#multiselect_to option').each(function(i,v){
 //            province += 'province='+$(v).val()+'&';
-            console.log($(v).val())
+            province = $(v).val();
         });
-
+        console.log(province);
         province = province.substring(0, province.length-1);
         var data = '_token='+_token+'&province='+province;
 //        console.log(data);
