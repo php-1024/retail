@@ -98,6 +98,7 @@ class DispatchController extends Controller
             }
             $val->province_name = $province_name;       //将查询出来的省份存进原有模型
         }
+        dump($province_name);
         $province = Province::getList([],0,'id','ASC')->toArray();  //  查询出所有省份
         //找出已选的省份并删除
         foreach($province as $k=>$v){
