@@ -126,10 +126,9 @@
                                                 @foreach($dispatch_province as $key=>$val)
                                                 <tr>
                                                     <td>
-                                                        <label class="label label-success" style="display:inline-block">北京市</label>
-                                                        <label class="label label-success" style="display:inline-block">河南省</label>
-                                                        <label class="label label-success" style="display:inline-block">湖北省</label>
-                                                        <label class="label label-success" style="display:inline-block">湖南省</label>
+                                                        @foreach($val->province_name as $kk=>$vv)
+                                                        <label class="label label-success" style="display:inline-block">{{$vv->province_name}}</label>
+                                                        @endforeach
                                                     </td>
                                                     <td>
                                                         <input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
