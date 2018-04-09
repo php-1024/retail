@@ -87,7 +87,7 @@ class ZeroneCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndAgentAdd($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/agent_list_edit_check"://服务商 检测 登录 和 权限 和 安全密码 和数据是否为空
+            case "zerone/ajax/agent_list_edit_check"://代理 检测 登录 和 权限 和 安全密码 和数据是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndAgentEdit($request);
                 return self::format_response($re,$next);
                 break;
