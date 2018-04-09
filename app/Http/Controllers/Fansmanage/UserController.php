@@ -85,8 +85,9 @@ class UserController extends CommonController
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'], $label_name);
             $re = json_decode($re, true);
 
+
             // 判断微信公众号返回的消息
-            if ($re['errcode'] != 0) {
+            if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
@@ -167,7 +168,7 @@ class UserController extends CommonController
             $re = json_decode($re, true);
 
             // 判断微信公众号返回的消息
-            if ($re['errcode'] != 0) {
+            if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
@@ -228,7 +229,7 @@ class UserController extends CommonController
             $re = json_decode($re, true);
 
             // 判断微信公众号返回的消息
-            if ($re['errcode'] != 0) {
+            if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
@@ -277,6 +278,12 @@ class UserController extends CommonController
         // 获取微信公众号标签列表
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         $re = json_decode($re, true);
+
+        // 判断微信公众号返回的消息
+        if (!empty($re['errcode']) && $re["errcode"] != 0) {
+            $msg = \WechatError::getCodeToMsg($re['errcode']);
+            return $this->getResponseMsg(0, $msg);
+        }
 
         // 获取本地标签列表
         $list = Label::getPluck(['fansmanage_id' => $fansmanage_id], "label_name");
