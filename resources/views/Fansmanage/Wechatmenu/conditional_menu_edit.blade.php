@@ -228,7 +228,6 @@
 
         console.log(data);
         return;
-
         $.post(url, data, function (json) {
             if (json.status == 1) {
                 swal({
