@@ -297,6 +297,7 @@ class UserController extends CommonController
             foreach ($data as $key => $val) {
                 $re_tags_val = $re['tags'][$key];
                 dump($re['tags'][$key]);
+
                 $dataLabel["label_name"] = $re_tags_val['name'];
                 $dataLabel["label_number"] = $re_tags_val['count'];
                 $dataLabel["wechat_id"] = $re_tags_val['id'];

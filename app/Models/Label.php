@@ -15,8 +15,9 @@ class Label extends Model
     protected $table = 'label';
     protected $primaryKey = 'id';
     public $timestamps = true;
-    public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-    protected $guarded = ["fansmanage_id","store_id","label_name","label_number","wechat_id"];
+    // 设置保存的created_at updated_at为时间戳格式
+    public $dateFormat = 'U';
+    protected $guarded = [];
 
     //获取单条信息
     public static function getOneLabel($where)
