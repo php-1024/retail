@@ -163,6 +163,8 @@ class AgentController extends Controller
                 'type' => '2',
                 // 状态1正常 0冻结
                 'status' => '1',
+                
+                'asset_id' => '0',
             ];
             // 添加代理并返回组织id
             $organization_id = Organization::addOrganization($orgData);
