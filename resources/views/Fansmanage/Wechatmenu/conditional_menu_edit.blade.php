@@ -184,9 +184,6 @@
         var token = $('#_token').val();
         var tag_id = $('#tag_id').val();
         var data = {'_token': token, 'tag_id': tag_id};
-        console.log(data);
-        return;
-
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
