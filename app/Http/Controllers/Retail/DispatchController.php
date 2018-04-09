@@ -95,10 +95,10 @@ class DispatchController extends Controller
         foreach ($dispatch_province as $key=>$val){
             $provinces = explode(',',$val->province_id);
             foreach ($provinces as $kk=>$vv){
-                Province::getList(['id'=>$vv],0,'id','ASC');
+                $province_name[] = Province::getList(['id'=>$vv],0,'id','ASC');
             }
         }
-        dump($admin_data);
+        dump($province_name);
         dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
