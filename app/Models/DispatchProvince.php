@@ -20,7 +20,6 @@ class DispatchProvince extends Model{
         $model->save();
         return $model->id;
     }
-
     //获取单条信息
     public static function getOne($where){
         return self::where($where)->first();
