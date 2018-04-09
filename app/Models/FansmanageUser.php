@@ -87,11 +87,14 @@ class FansmanageUser extends Model
     }
 
     //获取分页数据
-    public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC')
+    public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $field = [])
     {
         $model = self::with('userOrigin')->with('user')->with('userRecommender');
+        if (!empty($field)) {
+            $model->select($field);
+        }
         if (!empty($user_id)) {
-            $model = $model->where(['user_id' => $user_id]);
+            $model->where(['user_id' => $user_id]);
         }
         return $model->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
