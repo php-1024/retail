@@ -27,5 +27,11 @@ class Province extends Model{
         }
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
+
+    //获取战区
+    public static function getPluck($where,$pluck){
+        $model = self::with('warzone');
+        return $model->where($where)->pluck($pluck);
+    }
 }
 ?>

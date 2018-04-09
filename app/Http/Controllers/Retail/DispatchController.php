@@ -95,7 +95,7 @@ class DispatchController extends Controller
         foreach ($dispatch_province as $key=>$val){
             $provinces = explode(',',$val->province_id);
             foreach ($provinces as $kk=>$vv){
-                $province_name = Province::getList(['id'=>$vv],0,'id','ASC');
+                $province_name[] = Province::getPluck(['id'=>$vv],'province_name')->first();
             }
         }
         dump($province_name);
