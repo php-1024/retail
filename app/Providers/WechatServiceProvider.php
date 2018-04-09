@@ -13,7 +13,7 @@ class WechatServiceProvider extends ServiceProvider
             return new \App\Services\Wechat\WechatApi();
         });
 
-        $this->app->singleton('WechatService', function () {
+        $this->app->singleton('WechatErrorService', function () {
             return new \App\Services\Wechat\WechatError();
         });
     }
