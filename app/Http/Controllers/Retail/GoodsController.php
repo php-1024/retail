@@ -194,7 +194,10 @@ class GoodsController extends Controller
             //检验文件是否有效
             $entension = $file->getClientOriginalExtension();                           //获取上传文件后缀名
 
-
+            if($entension!='jpg'||$entension!='png'||$entension!='gif')
+            {
+                return response()->json(['data' => '上传商品图片格式无效，请检查', 'status' => '0']);
+            }
 
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
             $file->move(base_path() . '/uploads/catering/', $new_name);         //$path上传后的文件路径
