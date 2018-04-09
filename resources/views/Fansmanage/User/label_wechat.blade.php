@@ -19,15 +19,12 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                <button class="btn btn-success" type="button" id="save_btn" onclick="postForm()">确定</button>
             </div>
         </div>
     </div>
 </form>
 <script>
-    $("form").submit(function(){
-        postForm();
-    })
     //提交表单
     function postForm() {
         var target = $("#currentForm");
