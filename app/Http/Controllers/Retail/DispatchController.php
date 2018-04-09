@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dispatch;
+use App\Models\DispatchProvince;
 use App\Models\OperationLog;
 use App\Models\Province;
 use App\Models\RetailCategory;
@@ -100,8 +101,22 @@ class DispatchController extends Controller
         $route_name = $request->path();                          //获取当前的页面路由
         $dispatch_id = $request->get('dispatch_id');
         $provinces = $request->get('provinces');
-        dd($provinces);
-
+        $dispatch_province = ['dispatch_id'=>$dispatch_id,'province_id'=>$provinces];
+        DB::beginTransaction();
+        try {
+            DispatchProvince::addDispatchProvince($dispatch_province);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统设置了运费模板！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '设置了运费模板！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '添加运费区域失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加运费区域信息成功', 'status' => '1']);
     }
 
 }
