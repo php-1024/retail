@@ -24,13 +24,13 @@
             <div class="col-sm-10">
                 <select name="parent_id" class="form-control m-b" id="parent_id"
                         @if($conditionalmenu->parent_id == 0) disabled="true" @endif>
+                    {{--<select name="parent_id" class="form-control m-b" id="parent_id" disabled="true">--}}
                     <option value="0">无</option>
                     @foreach($list as $key=>$val)
                         <option value="{{$val->id}}"
                                 @if($conditionalmenu->parent_id == $val->id) selected @endif>{{$val->menu_name}}</option>
                     @endforeach
                 </select>
-
             </div>
         </div>
 
@@ -38,7 +38,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">菜单名称</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" placeholder="限制四个字" name="menu_name"
+                <input type="text" class="form-control" placeholder="限制四个字" name="menu_name" maxlength="4"
                        value="{{$conditionalmenu->menu_name}}">
             </div>
         </div>
@@ -164,12 +164,15 @@
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
+        <input type="hidden" id="parent_id_item" name="parent_id_item" value="{{ $conditionalmenu["parent_id"] }}">
+        <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
+        <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
+        <input type="hidden" id="tag_id" value="0">
+        <input type="hidden" id="edit_id" value="{{$edit_id}}">
+
     </form>
 
-    <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
-    <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
-    <input type="hidden" id="tag_id" value="0">
-    <input type="hidden" id="edit_id" value="{{$edit_id}}">
+
 </div>
 
 
@@ -178,7 +181,7 @@
     function changeConditionalMennuEdit() {
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
-        var $parent_id = $("#parent_id").val();
+        var $parent_id = $("#parent_id_item").val();
         var $label_id = $("#member_label").val();
         var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
         $.post(url, data, function (response) {
@@ -221,8 +224,8 @@
         var target = $("#conditional_menu_edit_check");
         var url = target.attr("action");
         var data = target.serialize();
-        var $parent_id = $("#parent_id").val();
         var $member_label = $("#member_label").val();
+
         $.post(url, data, function (json) {
             if (json.status == 1) {
                 swal({

@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Retail;
 use App\Http\Controllers\Controller;
 use App\Models\Dispatch;
 use App\Models\OperationLog;
+use App\Models\Province;
 use App\Models\RetailCategory;
 use App\Models\Organization;
 use Illuminate\Http\Request;
@@ -87,8 +88,15 @@ class DispatchController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_id = $request->get('id');                //模板ID
-        $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);
-        return view('Retail/Dispatch/dispatch_edit',['dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);     //运费模板信息
+        $province = Province::getList([],0,'id','ASC');
+        return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
+    //运费模板省份添加
+    public function dispatch_province_add_check(Request $request)
+    {
+        dd($request);
     }
 
 }

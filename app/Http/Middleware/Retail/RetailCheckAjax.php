@@ -44,6 +44,7 @@ class RetailCheckAjax
             case "retail/ajax/check_list_confirm":      //盘点订单审核弹窗
             case "retail/ajax/order_list_details":      //订单详细信息列表
             case "retail/ajax/goods_thumb_delete":      //删除图片弹窗确认
+            case "retail/ajax/dispatch_province_add_check"://运费模板省份添加
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

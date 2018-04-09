@@ -571,15 +571,7 @@ class WechatmenuController extends CommonController
         // 获取该id 对应的自定义菜单
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
 
-        // 获取标签名称
-        $label_name = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'label_name')->first();
-        // 获取标签id
-        $label_id = Label::getPluck([['wechat_id', $conditionalmenu['tag_id']]], 'id')->first();
-//        $label_info = Label::getInfo([['wechat_id', $conditionalmenu['tag_id']]], ["id", "label_name"]);
-
-        $label_info["label_name"] = $label_name;
-        $label_info["id"] = $label_id;
-
+        $label_info = Label::getInfo([['wechat_id', $conditionalmenu['tag_id']]], ["id", "label_name"]);
 
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
@@ -626,7 +618,7 @@ class WechatmenuController extends CommonController
 //        }
 
         // 如果id有改变
-        if ($data['$parent_id'] != $parent_id) {
+        if ($data['parent_id'] != $parent_id) {
             $res_menu = $this->judgeMenuStandard($parent_id, "conditional", $data["tag_id"]);
             if ($res_menu !== true) {
                 return $res_menu;
@@ -671,6 +663,7 @@ class WechatmenuController extends CommonController
             }
             DB::commit();
         } catch (\Exception $e) {
+            dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
