@@ -85,16 +85,15 @@ class AgentController extends Controller
         // 是否通过值 1为通过 -1为不通过
         $status = $request->input('status');
         // 查询申请代理信息
-        $oneAgent = OrganizationAgentapply::getOne([['id', $id]]);
+        $data = OrganizationAgentapply::getOne([['id', $id]]);
         // 程序id
-        $program_id = 2;
         if ($status == -1) {
             DB::beginTransaction();
             try {
                 // 拒绝通过
                 OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]);
                 // 添加操作日志
-                OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '拒绝了代理：' . $oneAgent['agent_name']); //保存操作记录
+                OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '拒绝了代理：' . $data['agent_name']); //保存操作记录
                 // 提交事务
                 DB::commit();
             } catch (Exception $e) {
@@ -108,98 +107,13 @@ class AgentController extends Controller
             try {
                 // 申请通过
                 OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]);
-                // 代理组织树
-                $orgparent_tree = '0' . ',' . '1' . ',';
-                //数据处理
-                $orgData = [
-                    // 代理名称
-                    'organization_name' => $oneAgent['agent_name'],
-                    // 上级id
-                    'parent_id' => '1',
-                    // 组织树
-                    'parent_tree' => $orgparent_tree,
-                    // 程序id
-                    'program_id' => $program_id,
-                    // 类型2为代理
-                    'type' => '2',
-                    // 状态1正常 0冻结
-                    'status' => '1',
-                ];
-                // 添加代理并返回组织id
-                $organization_id = Organization::addOrganization($orgData);
 
-                //数据处理
-                $agentdata = [
-                    // 代理id
-                    'agent_id' => $organization_id,
-                    // 战区id
-                    'zone_id' => $oneAgent['zone_id']
-                ];
-                // 战区关联代理
-                WarzoneAgent::addWarzoneAgent($agentdata);
-
-                // 查询零壹账号人数
-                $user = Account::max('account');
-                // 新的用户账号
-                $account = $user + 1;
-                // 树是上级的树拼接上级的ID；
-                $parent_tree = '0' . ',';
-                // 数据处理
-                $accdata = [
-                    // 上级id
-                    'parent_id' => '0',
-                    // 组织树
-                    'parent_tree' => $parent_tree,
-                    // 账号深度
-                    'deepth' => '1',
-                    // 手机号
-                    'mobile' => $oneAgent['agent_owner_mobile'],
-                    // 密码
-                    'password' => $oneAgent['agent_password'],
-                    // 组织id
-                    'organization_id' => $organization_id,
-                    // 登入账号
-                    'account' => $account
-                ];
-                // 添加账号返回id
-                $account_id = Account::addAccount($accdata);
-
-                // 数据处理
-                $acinfodata = [
-                    // 用户id
-                    'account_id' => $account_id,
-                    // 负责人姓名
-                    'realname' => $oneAgent['agent_owner'],
-                    // 负责人身份证
-                    'idcard' => $oneAgent['agent_owner_idcard']
-                ];
-                // 添加到用户信息详情
-                AccountInfo::addAccountInfo($acinfodata);
-
-                // 数据处理
-                $orgagentinfo = [
-                    // 代理id
-                    'agent_id' => $organization_id,
-                    // 代理负责人名字
-                    'agent_owner' => $oneAgent['agent_owner'],
-                    // 代理负责人身份证
-                    'agent_owner_idcard' => $oneAgent['agent_owner_idcard'],
-                    // 代理负责人手机号
-                    'agent_owner_mobile' => $oneAgent['agent_owner_mobile']
-                ];
-                // 添加到代理组织信息表
-                OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);
-
-                // 获取当前系统的所有节点
-                $module_node_list = Module::getListProgram($program_id, [], 0, 'id');
-                foreach ($module_node_list as $key => $val) {
-                    foreach ($val->program_nodes as $k => $v) {
-                        // 为当前用户加上节点权限
-                        AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
-                    }
+                $re = $this->add_agent($data);
+                if($re != 'ok'){
+                    return $re;
                 }
                 // 添加操作日志
-                OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '代理审核通过：' . $oneAgent['agent_name']);
+                OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '代理审核通过：' . $data['agent_name']);
                 // 提交事务
                 DB::commit();
 
@@ -230,6 +144,110 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_add', ['warzone_list' => $warzone_list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
+    private function add_agent($data){
+        DB::beginTransaction();
+        try {
+            // 代理组织树
+            $orgparent_tree = '0' . ',' . '1' . ',';
+            //数据处理
+            $orgData = [
+                // 代理名称
+                'organization_name' => $data['agent_name'],
+                // 上级id
+                'parent_id' => '1',
+                // 组织树
+                'parent_tree' => $orgparent_tree,
+                // 程序id
+                'program_id' => '2',
+                // 类型2为代理
+                'type' => '2',
+                // 状态1正常 0冻结
+                'status' => '1',
+
+                'asset_id' => '0',
+            ];
+            // 添加代理并返回组织id
+            $organization_id = Organization::addOrganization($orgData);
+
+            //数据处理
+            $agentdata = [
+                // 代理id
+                'agent_id' => $organization_id,
+                // 战区id
+                'zone_id' => $data['zone_id']
+            ];
+            // 战区关联代理
+            WarzoneAgent::addWarzoneAgent($agentdata);
+
+            // 查询零壹账号人数
+            $user = Account::max('account');
+            // 新的用户账号
+            $account = $user + 1;
+            // 树是上级的树拼接上级的ID；
+            $parent_tree = '0' . ',';
+            // 数据处理
+            $accdata = [
+                // 上级id
+                'parent_id' => '0',
+                // 组织树
+                'parent_tree' => $parent_tree,
+                // 账号深度
+                'deepth' => '1',
+                // 手机号
+                'mobile' => $data['agent_owner_mobile'],
+                // 密码
+                'password' => $data['agent_password'],
+                // 组织id
+                'organization_id' => $organization_id,
+                // 登入账号
+                'account' => $account
+            ];
+            // 添加账号返回id
+            $account_id = Account::addAccount($accdata);
+
+            // 数据处理
+            $acinfodata = [
+                // 用户id
+                'account_id' => $account_id,
+                // 负责人姓名
+                'realname' => $data['agent_owner'],
+                // 负责人身份证
+                'idcard' => $data['agent_owner_idcard']
+            ];
+            // 添加到用户信息详情
+            AccountInfo::addAccountInfo($acinfodata);
+
+            // 数据处理
+            $orgagentinfo = [
+                // 代理id
+                'agent_id' => $organization_id,
+                // 代理负责人名字
+                'agent_owner' => $data['agent_owner'],
+                // 代理负责人身份证
+                'agent_owner_idcard' => $data['agent_owner_idcard'],
+                // 代理负责人手机号
+                'agent_owner_mobile' => $data['agent_owner_mobile']
+            ];
+            // 添加到代理组织信息表
+            OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);
+
+            // 获取当前系统的所有节点
+            $module_node_list = Module::getListProgram(2, [], 0, 'id');
+            foreach ($module_node_list as $key => $val) {
+                foreach ($val->program_nodes as $k => $v) {
+                    // 为当前用户加上节点权限
+                    AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
+                }
+            }
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '审核失败', 'status' => '0']);
+        }
+        return 'ok';
+    }
     /**
      * 提交代理数据
      */
@@ -241,79 +259,48 @@ class AgentController extends Controller
         $route_name = $request->path();
         // 代理名称
         $organization_name = $request->input('organization_name');
-        $where = [['organization_name', $organization_name]];
-        if (Organization::checkRowExists($where)) {
+        // 根据名字查询，看是否重复
+        if (Organization::checkRowExists([['organization_name', $organization_name]])) {
             return response()->json(['data' => '代理名称已存在', 'status' => '0']);
         }
-        $zone_id = $request->input('zone_id'); //战区id
+        // 用户密码
+        $password = $request->input('agent_password');
+        // 获取加密盐
+        $key = config("app.agent_encrypt_key");
+        // 加密密码第一重
+        $encrypted = md5($password);
+        // 加密密码第二重
+        $encryptPwd = md5("lingyikeji" . $encrypted . $key);
 
-        $parent_tree = '0' . ',' . '1' . ','; //树是上级的树拼接上级的ID；
-
-        $mobile = $request->input('mobile'); //手机号码
-        $password = $request->input('agent_password'); //用户密码
-        $key = config("app.agent_encrypt_key"); //获取加密盐
-        $encrypted = md5($password); //加密密码第一重
-        $encryptPwd = md5("lingyikeji" . $encrypted . $key); //加密密码第二重
+        $data = [
+            // 代理名字
+            'agent_name'=>$organization_name,
+            // 手机号码
+            'agent_owner_mobile'=>$request->mobile,
+            // 用户密码
+            'agent_password'=>$encryptPwd,
+            // 战区id
+            'zone_id'=>$request->zone_id,
+            // 身份证号
+            'agent_owner_idcard'=>$request->idcard,
+            // 负责人姓名
+            'agent_owner'=>$request->realname,
+        ];
 
         DB::beginTransaction();
         try {
-            $Orgdata = [
-                'organization_name' => $organization_name,
-                'parent_id' => '1',
-                'parent_tree' => $parent_tree,
-                'program_id' => '2',
-                'type' => '2',
-                'status' => '1',
-                'asset_id' => '0'
-            ];
-            $organization_id = Organization::addOrganization($Orgdata); //返回值为商户的id
 
-            $agentdata = [
-                'agent_id' => $organization_id,
-                'zone_id' => $zone_id
-            ];
-            Warzoneagent::addWarzoneagent($agentdata); //战区关联代理
-
-            $user = Account::max('account');
-            $account = $user + 1; //用户账号
-            $Accparent_tree = '0' . ',';
-            $accdata = [
-                'parent_id' => '0',
-                'parent_tree' => $Accparent_tree,
-                'deepth' => '1',
-                'mobile' => $mobile,
-                'password' => $encryptPwd,
-                'organization_id' => $organization_id,
-                'account' => $account
-            ];
-            $account_id = Account::addAccount($accdata); //添加账号返回id
-
-            $realname = $request->input('realname'); //负责人姓名
-            $idcard = $request->input('idcard'); //负责人身份证号
-            $acinfodata = [
-                'account_id' => $account_id,
-                'realname' => $realname,
-                'idcard' => $idcard
-            ];
-            AccountInfo::addAccountInfo($acinfodata); //添加到管理员信息表
-            $module_node_list = Module::getListProgram('2', [], 0, 'id'); //获取当前系统的所有节点
-            foreach ($module_node_list as $key => $val) {
-                foreach ($val->program_nodes as $k => $v) {
-                    AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
-                }
+            $re = $this->add_agent($data);
+            if($re != 'ok'){
+                return $re;
             }
-            $orgagentinfo = [
-                'agent_id' => $organization_id,
-                'agent_owner' => $realname,
-                'agent_owner_idcard' => $idcard,
-                'agent_owner_mobile' => $mobile
-            ];
-            OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo); //添加到代理组织信息表
-            //添加操作日志
-            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '添加了代理：' . $organization_name); //保存操作记录
-            DB::commit(); //提交事务
+            // 添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '添加了代理：' . $organization_name);
+            // 提交事务
+            DB::commit();
         } catch (Exception $e) {
-            DB::rollBack(); //事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '提交失败', 'status' => '0']);
         }
         return response()->json(['data' => '提交成功', 'status' => '1']);

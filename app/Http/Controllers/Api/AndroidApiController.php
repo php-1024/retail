@@ -66,7 +66,7 @@ class AndroidApiController extends Controller
         $scan_code = $request->scan_code;//条码
         $where = [['retail_id', $organization_id]];
         if ($keyword) {
-            $where = [['keywords', 'LIKE', '%' . $keyword . '%']];
+            $where = [['name', 'LIKE', '%' . $keyword . '%']];
         }
         if ($scan_code) {
             $where = [['barcode', $scan_code]];

@@ -59,7 +59,6 @@
                                     </div>
                                 {{--</form>--}}
                             </div>
-
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
@@ -83,7 +82,7 @@
                                                     <td>
                                                         <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
                                                             @foreach($province as $key=>$val)
-                                                            <option value="{{$val->id}}" data-position="{{$val->id}}">{{$val->province_name}}</option>
+                                                            <option value="{{$val['id']}}" data-position="{{$val['id']}}">{{$val['province_name']}}</option>
                                                             @endforeach
                                                         </select>
                                                     </td>
@@ -108,7 +107,7 @@
                                         </section>
                                     </div>
                                 </form>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-7">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
                                             <table class="table table-striped table-bordered ">
@@ -122,27 +121,28 @@
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody id="goods_list">
-                                                <tr id="30">
-                                                    <td class="id">
-                                                        <label class="label label-success" style="display:inline-block">北京市</label>
-                                                        <label class="label label-success" style="display:inline-block">河南省</label>
-                                                        <label class="label label-success" style="display:inline-block">湖北省</label>
-                                                        <label class="label label-success" style="display:inline-block">湖南省</label>
+                                                <tbody>
+                                                @foreach($dispatch_province as $key=>$val)
+                                                <tr>
+                                                    <td class="col-lg-4">
+                                                        @foreach($val->province_name as $kk=>$vv)
+                                                        <label class="label label-success" style="display:inline-block">{{$vv['province_name']}}</label>
+                                                        @endforeach
                                                     </td>
-                                                    <td class="name">
-                                                        <input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
-                                                    <td class="price">
-                                                        <input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
-                                                    <td class="price">
-                                                        <input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
-                                                    <td class="price">
-                                                        <input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail(175)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <input type="text" name="first_weight" value="{{$val->first_weight}}" class="input-sm form-control"></td>
+                                                    <td>
+                                                        <input type="text" name="additional_weight" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
+                                                    <td>
+                                                        <input type="text" name="freight" value="{{$val->freight}}" class="input-sm form-control"></td>
+                                                    <td>
+                                                        <input type="text" name="renewal" value="{{$val->renewal}}" class="input-sm form-control"></td>
+                                                    <td>
+                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                             <div style="clear: both;"></div>
