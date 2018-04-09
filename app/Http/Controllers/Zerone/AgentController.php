@@ -28,8 +28,6 @@ class AgentController extends Controller
      */
     public function agent_examinelist(Request $request)
     {
-         Check::check();
-
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
         // 中间件产生的管理员数据参数
