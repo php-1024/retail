@@ -90,25 +90,24 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_id = $request->get('id');                //模板ID
         $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);     //运费模板信息
+        //运费模板已经设置的省份，列表信息
         $dispatch_province = DispatchProvince::getList(['dispatch_id'=>$dispatch_id],0,'id','ASC');
-        $province_name = [];
-        foreach ($dispatch_province as $key=>$val){
+        $province_name = [];        //初始化已选的省份
+        foreach ($dispatch_province as $key=>$val){//遍历处理已选的省份
             $provinces = explode(',',$val->province_id);
             foreach ($provinces as $kk=>$vv){
                 $province_name[] = Province::getOne(['id'=>$vv])->first()->toArray();
             }
         }
-        $province = Province::getList([],0,'id','ASC')->toArray();
-
+        $province = Province::getList([],0,'id','ASC')->toArray();  //  查询出所有省份
+        //找出已选的省份并删除
         foreach($province as $k=>$v){
             if(in_array($v, $province_name)){
                 unset($province[$k]);
             }
         }
-//                dump($province_name);
-//        dump($province->toArray());
         dump($province);
-        return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'dispatch_province'=>$dispatch_province,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //运费模板省份添加
