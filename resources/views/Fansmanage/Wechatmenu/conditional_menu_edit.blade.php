@@ -169,7 +169,7 @@
         <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
         <input type="hidden" id="wechat_conditional_menu_add"
                value="{{ url('fansmanage/ajax/wechat_conditional_menu_add') }}">
-        <input type="hidden" id="tag_id" value="{{$conditionalmenu["tag_id"]}}">
+        <input type="hidden" id="tag_id" value="{{$label_info["id"]}}">
         <input type="hidden" id="edit_id" value="{{$edit_id}}">
     </form>
 
@@ -207,7 +207,6 @@
         var token = $('#_token').val();
         var $parent_id = $("#parent_id_item").val();
         var $label_id = $("#member_label").val();
-        $('#tag_id').val($label_id);
         var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
         $.post(url, data, function (response) {
             if (response.status == '-1') {
