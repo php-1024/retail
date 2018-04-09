@@ -83,7 +83,7 @@
                                                     <td>
                                                         <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
                                                             @foreach($province as $key=>$val)
-                                                            <option value="{{$val->id}}" data-position="{{$val->id}}">{{$val->province_name}}</option>
+                                                            <option value="{{$val['id']}}" data-position="{{$val['id']}}">{{$val['province_name']}}</option>
                                                             @endforeach
                                                         </select>
                                                     </td>
