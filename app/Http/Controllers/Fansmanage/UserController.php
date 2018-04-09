@@ -102,12 +102,15 @@ class UserController extends CommonController
             ];
             // 添加标签
             Label::addLabel($dataLabel);
+
+
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
                 $this->insertOperationLog(3, '创建会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return $this->getResponseMsg(0, "创建会员标签失败！");
