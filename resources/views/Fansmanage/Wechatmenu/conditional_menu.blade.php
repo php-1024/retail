@@ -148,7 +148,6 @@
         });
     }
 
-
     function get_menu_add_box(){
         var url = $('#conditional_menu_add').val();
         var token = $('#_token').val();
