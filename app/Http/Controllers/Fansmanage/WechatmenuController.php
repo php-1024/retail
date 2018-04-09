@@ -552,6 +552,7 @@ class WechatmenuController extends CommonController
         if (!empty($list)) {
             // 处理菜单数据
             foreach ($list as $key => $val) {
+                // 组装子菜单
                 $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val['id']]], 0, 'id', 'asc');
                 if (!empty($sm)) {
                     $son_menu[$val['id']] = $sm;
@@ -575,9 +576,8 @@ class WechatmenuController extends CommonController
         $id = request()->get('id');
         // 获取该id 对应的自定义菜单
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
-
+        // 获取标签信息
         $label_info = Label::getInfo([['wechat_id', $conditionalmenu['tag_id']]], ["id", "label_name"]);
-
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
         //获取触发关键字列表
@@ -613,9 +613,8 @@ class WechatmenuController extends CommonController
         $parent_id = request()->get('parent_id');
         // 获取目前菜单的信息
         $data = WechatConditionalMenu::getOne([['id', $menu_id]]);
-        // 处理结构树
-        $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
-
+//        // 处理结构树
+//        $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
 //        // 判断是否子菜单
 //        $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
 //        if ($re) {
