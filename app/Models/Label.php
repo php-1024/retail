@@ -24,7 +24,7 @@ class Label extends Model
         return self::where($where)->first();
     }
 
-    //获取列表
+    // 获取列表
     public static function ListLabel($where)
     {
         return self::where($where)->get();

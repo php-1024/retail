@@ -10,11 +10,13 @@ namespace App\Http\Controllers\Fansmanage;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Label;
 
 class TestController extends Controller
 {
     public function test()
     {
-        dd(23423);
+        $list = Label::ListLabel(['fansmanage_id' => 5]);
+        dd($list);
     }
 }

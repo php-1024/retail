@@ -284,6 +284,10 @@ class UserController extends CommonController
 
         // 获取本地标签列表
         $list = Label::ListLabel(['fansmanage_id' => $fansmanage_id]);
+
+        dump($fansmanage_id);
+        dump($list);
+        dump($re);
         foreach ($list as $key => $value) {
             $local_label[] = $value['label_name'];
         }
@@ -291,6 +295,7 @@ class UserController extends CommonController
         foreach ($re['tags'] as $key => $val) {
             $wechat_label[] = $val['name'];
         }
+
 
         $data = array_diff($wechat_label, $local_label);
 
