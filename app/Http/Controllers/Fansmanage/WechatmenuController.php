@@ -544,12 +544,8 @@ class WechatmenuController extends CommonController
         $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
         // 获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', '0']], 0, 'id', 'asc');
-        dump($list->toArray());
-        if (!empty($list->toArray())) {
-            dump(1);
-        }else{
-            dump(2);
-        }
+        $list = $list->toArray();
+
         // 个性化菜单
         $son_menu = [];
         // 判断菜单列表
@@ -558,7 +554,7 @@ class WechatmenuController extends CommonController
             foreach ($list as $key => $val) {
                 $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val->id]], 0, 'id', 'asc');
                 if (!empty($sm)) {
-                    $son_menu[$val->id] = $sm;
+                    $son_menu[$val['id']] = $sm;
                 }
                 unset($sm);
             }
