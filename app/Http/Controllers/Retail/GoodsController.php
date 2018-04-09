@@ -146,7 +146,7 @@ class GoodsController extends Controller
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
-        $goods_thumb = RetailGoodsThumb::getPluck(['goods_thumb_id'=>$goods_thumb_id],'thumb')->first();
+        $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
        // $goods_thumb_filepath=$request->get('filepath');
         //  $id = RetailStock::getPluck(['goods_thumb_id'=>$goods_thumb_id],'id')->first();
         DB::beginTransaction();
