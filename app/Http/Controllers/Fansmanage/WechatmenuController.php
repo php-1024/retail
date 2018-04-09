@@ -655,6 +655,8 @@ class WechatmenuController extends CommonController
             'response_url' => $response_url,
             'response_keyword' => $response_keyword,
         ];
+        dump($defined_menu);
+
 
         // 事务处理
         DB::beginTransaction();
