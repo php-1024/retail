@@ -146,7 +146,7 @@ class DispatchController extends Controller
         DB::beginTransaction();
         try {
             foreach ($dispatch_data as $key=>$val){
-               $model = DispatchProvince::editDispatchProvince(['id'=>$key,'dispatch_id'=>$dispatch_id],['first_weight'=>$val['first_weight'],'additional_weight'=>$val['additional_weight'],'freight'=>$val['freight'],'renewal'=>$val['renewal']]);
+               $model = DispatchProvince::editDispatchProvince(['id'=>$key],['first_weight'=>$val['first_weight'],'additional_weight'=>$val['additional_weight'],'freight'=>$val['freight'],'renewal'=>$val['renewal']]);
                dd($model);
             }
             //添加操作日志
