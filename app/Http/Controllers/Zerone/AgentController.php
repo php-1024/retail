@@ -331,49 +331,72 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_list_lock', ['id' => $id, 'list' => $list, 'status' => $status]);
     }
 
-    //代理冻结功能提交
+    /**
+     * 代理冻结功能提交
+     */
     public function agent_list_lock_check(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $id = $request->input('id'); //代理id
-        $status = $request->input('status'); //代理id
-        $list = Organization::getOneagent([['id', $id]]);
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 代理id
+        $id = $request->input('id');
+        // 状态 1为冻结，0为解冻
+        $status = $request->input('status');
+        // 查询代理名称
+        $organization_name = Organization::getPluck([['id', $id]], 'organization_name')->first();
         DB::beginTransaction();
         try {
+            // 冻结
             if ($status == '1') {
+                // 修改代理状态
                 Organization::editOrganization([['id', $id]], ['status' => '0']);
+                // 冻结属于该代理的所有账号
                 Account::editOrganizationBatch([['organization_id', $id]], ['status' => '0']);
-                //添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了代理：' . $list['organization_name']); //保存操作记录
-
-            } elseif ($status == '0') {
+                // 添加操作日志
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了代理：' . $organization_name);
+                // 解冻
+            } else {
+                // 修改代理状态
                 Organization::editOrganization([['id', $id]], ['status' => '1']);
+                // 冻结属于该代理的所有账号
                 Account::editOrganizationBatch([['organization_id', $id]], ['status' => '1']);
                 //添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了代理：' . $list['organization_name']); //保存操作记录
-
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了代理：' . $organization_name);
             }
-            DB::commit(); //提交事务
-
+            // 提交事务
+            DB::commit();
         } catch (Exception $e) {
-            DB::rollBack(); //事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
-    //代理下级人员架构
+    /**
+     * 代理下级人员架构
+     */
     public function agent_structure(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $organization_id = $request->input('organization_id'); //代理id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 代理id
+        $organization_id = $request->input('organization_id');
+        // 代理信息
         $listOrg = Organization::getOneagent([['id', $organization_id]]);
+        // 代理负责人信息
         $oneOrg = Account::getOne([['organization_id', $organization_id], ['parent_id', '1']]);
+        // 代理下级所有信息
         $list = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $oneOrg['parent_tree'] . $oneOrg['id'] . ',%']], 0, 'id', 'asc')->toArray();
+        // 递归排序调用
         $structure = $this->account_structure($list, $oneOrg['id']);
         return view('Zerone/Agent/agent_structure', ['listOrg' => $listOrg, 'oneOrg' => $oneOrg, 'structure' => $structure, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
