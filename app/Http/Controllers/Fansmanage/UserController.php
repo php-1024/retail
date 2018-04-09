@@ -214,11 +214,13 @@ class UserController extends CommonController
         $fansmanage_id = $this->admin_data['organization_id'];
         // 获取微信公众号返回的 标签的微信id
         $wechat_id = Label::getPluck([['id', $id]], 'wechat_id')->first();
+
         // 事务处理
         DB::beginTransaction();
         try {
             // 刷新并获取授权令牌
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
+            // 删除微信公众号上面的标签
             $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'], $wechat_id);
             $re = json_decode($re, true);
 
@@ -230,7 +232,6 @@ class UserController extends CommonController
 
             // 标签软删除
             Label::where('id', $id)->forceDelete();
-
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
                 $this->insertOperationLog("4", '删除会员标签：' . $label_name);
