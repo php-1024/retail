@@ -121,7 +121,34 @@
 <script type="text/javascript">
     $(function(){
         get_menu_add_box();
+        changeConditionalMennuEdit();
     });
+
+
+    // 获取列表主体
+    function changeConditionalMennuEdit() {
+        var url = $('#conditional_menu_get').val();
+        var token = $('#_token').val();
+        var $parent_id = 0;
+        var $label_id = 0;
+        var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+                $('#menu_box').html(response);
+            }
+        });
+    }
+
 
     function get_menu_add_box(){
         var url = $('#conditional_menu_add').val();
