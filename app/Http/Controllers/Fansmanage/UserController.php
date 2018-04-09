@@ -191,6 +191,7 @@ class UserController extends CommonController
         // 中间件参数 集合
         $this->getRequestInfo();
 
+
         $id = request()->id; //会员标签id
         $label_name = request()->label_name; //会员标签名称
         $fansmanage_id = $this->admin_data['organization_id'];//组织id
