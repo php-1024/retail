@@ -90,7 +90,6 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_id = $request->get('id');                //模板ID
         $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);     //运费模板信息
-        $province = Province::getList([],0,'id','ASC');
         $dispatch_province = DispatchProvince::getList(['dispatch_id'=>$dispatch_id],0,'id','ASC');
         foreach ($dispatch_province as $key=>$val){
             $provinces = explode(',',$val->province_id);
@@ -98,6 +97,8 @@ class DispatchController extends Controller
                 $province_name[] = Province::getPluck(['id'=>$vv],'province_name')->first();
             }
         }
+        $province = Province::getList([],0,'id','ASC');
+        dump($province->toArray());
         dump($province_name);
         dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
