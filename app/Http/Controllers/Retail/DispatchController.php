@@ -94,7 +94,7 @@ class DispatchController extends Controller
         foreach ($dispatch_province as $key=>$val){//遍历处理已选的省份
             $provinces = explode(',',$val->province_id);
             foreach ($provinces as $kk=>$vv){
-                $province_name[$vv][] = Province::getOne(['id'=>$vv])->first()->toArray();
+                $province_name[$kk][] = Province::getOne(['id'=>$vv])->first()->toArray();
             }
             dump($province_name);
             $val->province_name = $province_name;       //将查询出来的省份存进原有模型
