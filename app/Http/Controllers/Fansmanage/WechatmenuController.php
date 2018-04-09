@@ -4,9 +4,7 @@
  *   自定义菜单，个性化菜单
  *   同时还具备一键上传到微信公众号的功能
  */
-
 namespace App\Http\Controllers\Fansmanage;
-
 
 use App\Http\Controllers\Controller;
 use App\Models\Label;
