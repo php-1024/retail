@@ -285,8 +285,6 @@ class UserController extends CommonController
         $wechat_label = array_column($re['tags'], "name");
         // 获取微信公众号标签和本地标签的差异
         $data = array_diff($wechat_label, $local_label);
-        dump($data);
-
 
         // 事务处理
         DB::beginTransaction();
@@ -296,18 +294,13 @@ class UserController extends CommonController
             // 将线上存在，但是本地不存在的数据保存到本地
             foreach ($data as $key => $val) {
                 $re_tags_val = $re['tags'][$key];
-                dump($re['tags'][$key]);
-
                 $dataLabel["label_name"] = $re_tags_val['name'];
                 $dataLabel["label_number"] = $re_tags_val['count'];
                 $dataLabel["wechat_id"] = $re_tags_val['id'];
-
                 Label::addLabel($dataLabel);
             }
-
             DB::commit();
         } catch (\Exception $e) {
-            dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '同步失败！', 'status' => '0']);
