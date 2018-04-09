@@ -90,7 +90,7 @@ class DispatchController extends Controller
         $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);     //运费模板信息
         //运费模板已经设置的省份，列表信息
         $dispatch_province = DispatchProvince::getList(['dispatch_id'=>$dispatch_id],0,'id','ASC');
-        $province_name = [];        //初始化已选的省份
+        $kk = [];        //初始化已选的省份
         foreach ($dispatch_province as $key=>$val){//遍历处理已选的省份
             $provinces = explode(',',$val->province_id);
             foreach ($provinces as $kk=>$vv){
@@ -101,7 +101,7 @@ class DispatchController extends Controller
         $province = Province::getList([],0,'id','ASC')->toArray();  //  查询出所有省份
         //找出已选的省份并删除
         foreach($province as $k=>$v){
-            if(in_array($v, $province_name)){
+            if(in_array($v, $kk)){
                 unset($province[$k]);
             }
         }
