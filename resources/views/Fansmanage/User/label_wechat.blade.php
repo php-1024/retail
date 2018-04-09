@@ -26,6 +26,8 @@
 </form>
 <script>
     $("#currentForm").submit(function(){
+        console.log(123)
+        return;
         postForm();
     });
     //提交表单
