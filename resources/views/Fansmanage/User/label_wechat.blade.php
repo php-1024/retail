@@ -1,6 +1,5 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/label_wechat_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="url_post" value="{{ url('fansmanage/ajax/label_wechat_check') }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -29,10 +28,8 @@
     //提交表单
     function postForm() {
         var target = $("#currentForm");
-        var url = $(input ["name=url_post"].val());
+        var url = target.attr("action");
         var data = target.serialize();
-
-        console.log(url);
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
