@@ -145,6 +145,7 @@ class GoodsController extends Controller
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取分类栏目ID
+
       //  $id = RetailStock::getPluck(['goods_thumb_id'=>$goods_thumb_id],'id')->first();
         DB::beginTransaction();
         try {
@@ -155,7 +156,7 @@ class GoodsController extends Controller
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品图片！');//保存操作记录
             } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！');//保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！'.'123');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
