@@ -2,6 +2,7 @@
 /**
  * 自定义菜单 模块，包括：
  *   自定义菜单，个性化菜单
+ *   同时还具备一键上传到微信公众号的功能
  */
 
 namespace App\Http\Controllers\Fansmanage;
@@ -807,7 +808,6 @@ class WechatmenuController extends CommonController
         // 创建个性化菜单
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
-        dd($re);
         if (!empty($re['menuid'])) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
