@@ -142,7 +142,6 @@ class DispatchController extends Controller
     {
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
-
         $dispatch_name = $request->get('dispatch_name');     //获取运费模板名称
         $dispatch_id = $request->get('dispatch_id');         //获取运费模板id
         $dispatch_data = $request->get('dispatch_data');      //获取运费模板详细信息
