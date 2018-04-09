@@ -155,7 +155,8 @@ class GoodsController extends Controller
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
-            if(Storage::delete($goods_thumb)){
+            $thumb = 'uploads/catering/20180409105716752.png';
+            if(Storage::delete($thumb)){
                 dd('删除成功！');
             }else{
                 dd('删除失败！');
