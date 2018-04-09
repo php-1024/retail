@@ -122,21 +122,21 @@
                                                     <th>操作</th>
                                                 </tr>
                                                 </thead>
-                                                <tbody id="goods_list">
+                                                <tbody>
                                                 @foreach($dispatch_province as $key=>$val)
                                                 <tr>
-                                                    <td>
+                                                    <td class="col-lg-4">
                                                         @foreach($val->province_name as $kk=>$vv)
                                                         <label class="label label-success" style="display:inline-block">{{$vv['province_name']}}</label>
                                                         @endforeach
                                                     </td>
                                                     <td>
                                                         <input type="text" name="first_weight" value="{{$val->first_weight}}" class="input-sm form-control"></td>
-                                                    <td class="price">
+                                                    <td>
                                                         <input type="text" name="additional_weight" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
-                                                    <td class="price">
+                                                    <td>
                                                         <input type="text" name="freight" value="{{$val->freight}}" class="input-sm form-control"></td>
-                                                    <td class="price">
+                                                    <td>
                                                         <input type="text" name="renewal" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
                                                         <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
