@@ -151,7 +151,7 @@ class DispatchController extends Controller
 //
 //        };
 //        DispatchProvince::editDispatchProvince(['id'=>$dispatch_id],$dispatch_data);
-        dd($request);
+        dd($request->dispatch_data*);
     }
 
 }
