@@ -103,6 +103,7 @@ class DispatchController extends Controller
         $provinces = $request->get('provinces');
         $province = implode('',$provinces);
         dd($province);
+
         $dispatch_province = ['dispatch_id'=>$dispatch_id,'province_id'=>$provinces];
         DB::beginTransaction();
         try {
