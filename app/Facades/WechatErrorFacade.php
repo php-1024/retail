@@ -4,10 +4,10 @@ namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class HttpCurlFacade extends Facade
+class WechatErrorFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'HttpCurlService';
+        return 'WechatErrorService';
     }
 }
