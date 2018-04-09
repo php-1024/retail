@@ -178,7 +178,6 @@
 
 
 <script>
-
     $("#addBtn").click(function () {
         var url = $('#wechat_conditional_menu_add').val();
         var token = $('#_token').val();
