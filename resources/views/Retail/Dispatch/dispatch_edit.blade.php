@@ -189,6 +189,8 @@
         });
         $('#multiselect').multiselect({keepRenderingSort:true});
     });
+
+
     //提交表单
     function province_add_check() {
         var url = $("#province_add_check").val();
