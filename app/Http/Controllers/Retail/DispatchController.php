@@ -96,7 +96,12 @@ class DispatchController extends Controller
     //运费模板省份添加
     public function dispatch_province_add_check(Request $request)
     {
-        dd($request);
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $dispatch_id = $request->get('dispatch_id');
+        $provinces = $request->get('provinces');
+        dd($provinces);
+
     }
 
 }
