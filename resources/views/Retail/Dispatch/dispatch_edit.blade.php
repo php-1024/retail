@@ -97,7 +97,7 @@
                                                         <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-info btn-xs" onclick="province_add_check()"><i class="fa fa-plus"></i>添加选择</button>
+                                                        <button type="button" class="btn btn-info btn-xs" onclick="aa()"><i class="fa fa-plus"></i>添加选择</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -192,7 +192,7 @@
 
 
     //提交表单
-    function province_add_check() {
+    function aa() {
         alert('1');
 //        var url = $("#province_add_check").val();
 //        var _token = $('#_token').val();
