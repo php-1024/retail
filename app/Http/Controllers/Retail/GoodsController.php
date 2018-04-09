@@ -155,7 +155,7 @@ class GoodsController extends Controller
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
-            $thumb = '/uploads/catering/20180409105716752.png';
+            $thumb = 'uploads/catering/20180409105716752.png';
             Storage::delete($thumb);
          //   RetailStock::select_delete($id);
             //添加操作日志
