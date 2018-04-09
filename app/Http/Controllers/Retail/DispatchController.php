@@ -115,6 +115,7 @@ class DispatchController extends Controller
         $route_name = $request->path();                          //获取当前的页面路由
         $dispatch_id = $request->get('dispatch_id');
         $provinces = $request->get('provinces');
+        dd($provinces);
         $province = implode(',',$provinces);
         $dispatch_province = ['dispatch_id'=>$dispatch_id,'province_id'=>$province];
         DB::beginTransaction();
