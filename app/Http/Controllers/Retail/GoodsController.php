@@ -149,7 +149,7 @@ class GoodsController extends Controller
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
         $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
 
-        $thumb = base_path(). 'uploads/catering/20180409105716752.png';
+        $thumb = 'uploads/catering/20180409105716752.png';
 
 
      //   base_path() . '/uploads/catering/'
