@@ -111,7 +111,6 @@ class DispatchController extends Controller
             }else{//零售店铺本人操作记录
                 OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '设置了运费模板！');//保存操作记录
             }
-
             DB::commit();
         } catch (\Exception $e) {
             dd($e);
