@@ -149,6 +149,10 @@ class GoodsController extends Controller
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
         $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
 
+
+        if(!unlink($goods_thumb))//删除磁盘上的图片文件
+            return response()->json(['data' => '删除商品图片文件失败，请检查', 'status' => '0']);
+
         DB::beginTransaction();
         try {
 
@@ -169,7 +173,7 @@ class GoodsController extends Controller
             return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
         }
 
-        unlink($goods_thumb);//删除磁盘上的图片文件
+
         return response()->json(['data' => '删除商品图片成功'.$goods_thumb, 'status' => '1']);
     }
     //图片异步加载部分
