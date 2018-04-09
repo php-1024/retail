@@ -98,10 +98,10 @@ class DispatchController extends Controller
             }
         }
         $province = Province::getList([],0,'id','ASC');
-//        dump($province_name);
-        $new_array = array_diff($province,$province_name);
+//        $new_array = array_diff($province,$province_name);
+                dump($province_name);
 //        dump($province->toArray());
-        dump($new_array);
+//        dump($new_array);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
