@@ -164,7 +164,7 @@
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
-        <input type="hidden" id="parent_id" name="parent_id" value="{{ $conditionalmenu["parent_id"] }}">
+        <input type="hidden" id="parent_id_item" name="parent_id_item" value="{{ $conditionalmenu["parent_id"] }}">
         <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
         <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
         <input type="hidden" id="tag_id" value="0">
@@ -181,7 +181,7 @@
     function changeConditionalMennuEdit() {
         var url = $('#conditional_menu_get').val();
         var token = $('#_token').val();
-        var $parent_id = $("#parent_id").val();
+        var $parent_id = $("#parent_id_item").val();
         var $label_id = $("#member_label").val();
         var data = {'_token': token, 'label_id': $label_id, 'parent_id': $parent_id};
         $.post(url, data, function (response) {
