@@ -225,6 +225,8 @@
         var url = target.attr("action");
         var data = target.serialize();
         var $member_label = $("#member_label").val();
+        console.log($("#parent_id").val());
+
         console.log(data);
         return;
         $.post(url, data, function (json) {
