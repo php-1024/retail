@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="#">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="url_post" value="{{ url('fansmanage/ajax/label_wechat_check') }}">
     <div class="modal-dialog">
