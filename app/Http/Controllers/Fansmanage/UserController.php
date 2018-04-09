@@ -162,17 +162,14 @@ class UserController extends CommonController
         try {
             // 刷新并获取授权令牌
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
-
             // 编辑微信公众号粉丝标签
             $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'], $label_name, $wechat_id);
             $re = json_decode($re, true);
-
             // 判断微信公众号返回的消息
             if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
-
             // 修改数据库里面的标签
             Label::editLabel(['id' => $id], ['label_name' => $label_name]);
             // 添加操作记录
@@ -183,9 +180,9 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '修改会员标签失败！', 'status' => '0']);
+            return $this->getResponseMsg(0,'修改会员标签失败！');
         }
-        return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
+        return $this->getResponseMsg(1,'修改会员标签成功！');
     }
 
     /**
@@ -227,16 +224,13 @@ class UserController extends CommonController
             // 删除微信公众号上面的标签
             $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'], $wechat_id);
             $re = json_decode($re, true);
-
             // 判断微信公众号返回的消息
             if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
-
             // 标签删除, 标签里面配置了软删除,所以用这个方法进行强制删除
             Label::where('id', $id)->forceDelete();
-
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
                 $this->insertOperationLog("4", '删除会员标签：' . $label_name);
@@ -245,10 +239,11 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
+            return $this->getResponseMsg(0,'删除会员标签失败！');
         }
-        return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
+        return $this->getResponseMsg(1,'删除会员标签成功！');
     }
+
 
     /**
      * 微信同步粉丝标签ajax显示页面
@@ -326,29 +321,41 @@ class UserController extends CommonController
     // +----------------------------------------------------------------------
     // | Start - 粉丝用户管理
     // +----------------------------------------------------------------------
-    //粉丝用户管理
+    /**
+     * 粉丝用户管理 页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function user_list()
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $organization_id = $this->admin_data['organization_id'];//组织id
-
-
-//        $auth_info = \Wechat::refresh_authorization_info($this->admin_data['organization_id']);//刷新并获取授权令牌
-//        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
-
-        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
+        // 组织id
+        $organization_id = $this->admin_data['organization_id'];
+        // 组织名称
+        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id');
+
+        dump($list);
+
+        // 处理数据
         foreach ($list as $key => $value) {
+            // 获取粉丝数据
             $re = UserInfo::getOneUserInfo([['user_id', $value->user_id]]);
-            $list[$key]['nickname'] = $re['nickname'];//微信昵称
-            $list[$key]['head_imgurl'] = $re['head_imgurl'];//微信头像
+            // 微信昵称
+            $list[$key]['nickname'] = $re['nickname'];
+            // 微信头像
+            $list[$key]['head_imgurl'] = $re['head_imgurl'];
+            // 获取推荐人id
             $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
-            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();//推荐人
-            $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();//粉丝对应的标签id
+            // 获取推荐人名称
+            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
+            // 粉丝对应的标签id
+            $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();
         }
-        $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);//会员标签
+        // 会员标签
+        $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
+        // 渲染页面
         return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
 
