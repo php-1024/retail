@@ -98,8 +98,8 @@ class DispatchController extends Controller
             }
         }
         $province = Province::getList([],0,'id','ASC');
-        dump($province_name);
-        dump($province);
+        dump($province_name->toArray());
+        dump($province->toArray());
         dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
