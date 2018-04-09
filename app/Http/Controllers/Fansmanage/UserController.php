@@ -276,39 +276,40 @@ class UserController extends CommonController
         $re = json_decode($re, true);
 
         // 获取本地标签列表
-        $list = Label::ListLabel(['fansmanage_id' => $fansmanage_id]);
-
-        dump($fansmanage_id);
-        dump($list);
-        dump($re);
-        foreach ($list as $key => $value) {
-            $local_label[] = $value['label_name'];
+        $list = Label::getPluck(['fansmanage_id' => $fansmanage_id], "label_name");
+        if (!empty($list)) {
+            $local_label = $list->toArray();
         }
 
-        foreach ($re['tags'] as $key => $val) {
-            $wechat_label[] = $val['name'];
-        }
-
-
+        // 获取微信公众号标签
+        $wechat_label = array_column($re['tags'], "name");
+        // 获取微信公众号标签和本地标签的差异
         $data = array_diff($wechat_label, $local_label);
+        dump($data);
 
+
+        // 事务处理
         DB::beginTransaction();
         try {
-            foreach ($re['tags'] as $key => $val) {
-                if (in_array($val['name'], $data)) {
-                    $dataLabel = [
-                        'fansmanage_id' => $fansmanage_id,
-                        'store_id' => 0,
-                        'label_name' => $val['name'],
-                        'label_number' => $val['count'],
-                        'wechat_id' => $val['id'],
-                    ];
-                    Label::addLabel($dataLabel);
-                }
+            $dataLabel["fansmanage_id"] = $fansmanage_id;
+            $dataLabel["store_id"] = 0;
+            // 将线上存在，但是本地不存在的数据保存到本地
+            foreach ($data as $key => $val) {
+                $re_tags_val = $re['tags'][$key];
+                dump($re['tags'][$key]);
+
+                $dataLabel["label_name"] = $re_tags_val['name'];
+                $dataLabel["label_number"] = $re_tags_val['count'];
+                $dataLabel["wechat_id"] = $re_tags_val['id'];
+
+                Label::addLabel($dataLabel);
             }
+
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            dump($e->getMessage());
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
         return response()->json(['data' => '同步成功！', 'status' => '1']);
