@@ -1,5 +1,11 @@
 <?php
+/**
+ * 用户管理 模块，包括：
+ *   粉丝标签，粉丝用户，用户足迹
+ */
+
 namespace App\Http\Controllers\Fansmanage;
+
 use App\Http\Controllers\Controller;
 use App\Models\FansmanageUserLog;
 use App\Models\Label;
@@ -15,43 +21,56 @@ use App\Models\UserRecommender;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
-class UserController extends Controller{
 
+class UserController extends CommonController
+{
+    // +----------------------------------------------------------------------
+    // | Start - 粉丝标签
+    // +----------------------------------------------------------------------
     /**
      * 粉丝标签列表管理
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function user_tag(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $fansmanage_id = $admin_data['organization_id'];//组织id
-        $list = Label::getPaginage([['fansmanage_id',$fansmanage_id]],'10','id');
-
-        return view('Fansmanage/User/user_tag',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
-    }
-    //添加会员标签ajax显示页面
-    public function label_add(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        return view('Fansmanage/User/label_add',['admin_data'=>$admin_data]);
+    public function user_tag()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // 组织id
+        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        $list = Label::getPaginage([['fansmanage_id', $fansmanage_id]], '10', 'id');
+        // 渲染页面
+        return view('Fansmanage/User/user_tag', ['list' => $list, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
 
+    /**
+     * 添加会员标签ajax显示页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function label_add()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // 渲染页面
+        return view('Fansmanage/User/label_add', ['admin_data' => $this->admin_data]);
+    }
 
-    //添加会员标签功能提交
-    public function label_add_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+    /**
+     * 添加会员标签功能提交
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function label_add_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
 
-        $label_name = $request->label_name; //会员标签名称
-        $fansmanage_id = $admin_data['organization_id'];//组织id
+        $label_name = request()->label_name; //会员标签名称
+        $fansmanage_id = $this->admin_data['organization_id'];//组织id
 
         // 判断标签是否已经存在
-        $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
+        $re = Label::checkRowExists([['fansmanage_id', $fansmanage_id], ['label_name', $label_name]]);
 
-        if($re == 'true'){
+        if ($re == 'true') {
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
 
@@ -60,32 +79,32 @@ class UserController extends Controller{
             // 刷新并获取授权令牌
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
             // 获取线上粉丝标签
-            $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'],$label_name);
-            $re = json_decode($re,true);
+            $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'], $label_name);
+            $re = json_decode($re, true);
             // 判断微信公众号返回的消息
-            if(!empty($re['errcode'])){
-                if($re['errcode'] == '45157'){
+            if (!empty($re['errcode'])) {
+                if ($re['errcode'] == '45157') {
                     return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
-                } elseif($re['errcode'] == '45158'){
+                } elseif ($re['errcode'] == '45158') {
                     return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
-                } elseif($re['errcode'] == '45056'){
+                } elseif ($re['errcode'] == '45056') {
                     return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
                 }
             }
             // 处理数据
             $dataLabel = [
-                'fansmanage_id'=>$fansmanage_id,
-                'store_id'=>0,
-                'label_name'=>$label_name,
-                'label_number'=>0,
+                'fansmanage_id' => $fansmanage_id,
+                'store_id' => 0,
+                'label_name' => $label_name,
+                'label_number' => 0,
                 // 微信公众号标签返回的id
-                'wechat_id'=>$re['tag']['id'],
+                'wechat_id' => $re['tag']['id'],
             ];
             // 添加标签
             Label::addLabel($dataLabel);
             // 添加操作记录
-            if ($admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $fansmanage_id, $admin_data['id'], $route_name, '创建会员标签成功：' . $label_name);
+            if ($this->admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('3', $fansmanage_id, $this->admin_data['id'], $this->route_name, '创建会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -94,45 +113,54 @@ class UserController extends Controller{
         }
         return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
     }
-    //编辑会员标签ajax显示页面
-    public function label_edit(Request $request){
-        $id = $request->id; //会员标签id
-        $oneLabel = Label::getOneLabel([['id',$id]]);
-        return view('Fansmanage/User/label_edit',['oneLabel'=>$oneLabel]);
+
+    /**
+     * 编辑会员标签ajax显示页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function label_edit()
+    {
+        $id = request()->id; //会员标签id
+        $oneLabel = Label::getOneLabel([['id', $id]]);
+        return view('Fansmanage/User/label_edit', ['oneLabel' => $oneLabel]);
     }
-    //编辑会员标签功能提交
-    public function label_edit_check(Request $request){
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+    /**
+     * 编辑会员标签功能提交
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function label_edit_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        $fansmanage_id = $this->admin_data['organization_id'];//组织id
 
-        $fansmanage_id = $admin_data['organization_id'];//组织id
-
-        $id = $request->id; //会员标签id
-        $label_name = $request->label_name; //会员标签名称
-        $re = Label::checkRowExists([['fansmanage_id',$fansmanage_id],['label_name',$label_name]]);
-        if($re == 'true'){
+        $id = request()->id; //会员标签id
+        $label_name = request()->label_name; //会员标签名称
+        $re = Label::checkRowExists([['fansmanage_id', $fansmanage_id], ['label_name', $label_name]]);
+        if ($re == 'true') {
             return response()->json(['data' => '会员标签名称已存在！', 'status' => '0']);
         }
-        $wechat_id = Label::getPluck([['id',$id]],'wechat_id')->first();
+        $wechat_id = Label::getPluck([['id', $id]], 'wechat_id')->first();
         DB::beginTransaction();
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
-            $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'],$label_name,$wechat_id);
-            $re = json_decode($re,true);
-            if(!empty($re['errcode'])){
-                if($re['errcode'] == '45157'){
+            $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'], $label_name, $wechat_id);
+            $re = json_decode($re, true);
+            if (!empty($re['errcode'])) {
+                if ($re['errcode'] == '45157') {
                     return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
-                } elseif($re['errcode'] == '45158'){
+                } elseif ($re['errcode'] == '45158') {
                     return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
-                } elseif($re['errcode'] == '45058'){
+                } elseif ($re['errcode'] == '45058') {
                     return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
                 }
             }
-            Label::editLabel(['id'=>$id],['label_name'=>$label_name]);
+            Label::editLabel(['id' => $id], ['label_name' => $label_name]);
 
-            if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改会员标签成功：'.$label_name);//保存操作记录
+            if ($this->admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改会员标签成功：' . $label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -143,39 +171,45 @@ class UserController extends Controller{
 
     }
 
-    /*
+    /**
      * 删除会员标签ajax显示页面
      */
-    public function label_delete(Request $request){
-        $id = $request->id; //会员标签id
-        $oneLabel = Label::getOneLabel([['id',$id]]);
-        return view('Fansmanage/User/label_delete',['oneLabel'=>$oneLabel]);
+    public function label_delete()
+    {
+        $id = request()->id; //会员标签id
+        $oneLabel = Label::getOneLabel([['id', $id]]);
+        return view('Fansmanage/User/label_delete', ['oneLabel' => $oneLabel]);
     }
-    //删除会员标签ajax显示页面
-    public function label_delete_check(Request $request){
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+    /**
+     * 删除会员标签ajax数据检测
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function label_delete_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
 
-        $id = $request->id; //会员标签id
-        $label_name = $request->label_name; //会员标签名称
-        $fansmanage_id = $admin_data['organization_id'];//组织id
-        $wechat_id = Label::getPluck([['id',$id]],'wechat_id')->first();
+        $id = request()->id; //会员标签id
+        $label_name = request()->label_name; //会员标签名称
+        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        $wechat_id = Label::getPluck([['id', $id]], 'wechat_id')->first();
         DB::beginTransaction();
         try {
             $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
-            $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'],$wechat_id);
-            $re = json_decode($re,true);
-            if(!empty($re['errcode'])){
-                if($re['errcode'] == '45057'){
+            $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'], $wechat_id);
+            $re = json_decode($re, true);
+            if (!empty($re['errcode'])) {
+                if ($re['errcode'] == '45057') {
                     return response()->json(['data' => '该标签下粉丝数超过10w，不允许直接删除', 'status' => '0']);
-                } elseif($re['errcode'] == '45058'){
+                } elseif ($re['errcode'] == '45058') {
                     return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
                 }
             }
-            Label::where('id',$id)->forceDelete();
-            if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('4',$admin_data['organization_id'],$admin_data['id'],$route_name,'删除会员标签：'.$label_name);//保存操作记录
+            Label::where('id', $id)->forceDelete();
+            if ($this->admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('4', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '删除会员标签：' . $label_name);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -185,36 +219,46 @@ class UserController extends Controller{
         return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
     }
 
-    //微信同步粉丝标签ajax显示页面
-    public function label_wechat(Request $request){
+    /**
+     * 微信同步粉丝标签ajax显示页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function label_wechat()
+    {
         return view('Fansmanage/User/label_wechat');
     }
-    //微信同步粉丝标签功能提交
-    public function label_wechat_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $fansmanage_id = $admin_data['organization_id'];//组织id
+
+    /**
+     * 微信同步粉丝标签功能提交
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function label_wechat_check()
+    {
+        $this->admin_data = request()->get('admin_data');//中间件产生的管理员数据参数
+        $fansmanage_id = $this->admin_data['organization_id'];//组织id
         $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
-        $re = json_decode($re,true);
-        $list = Label::ListLabel(['fansmanage_id'=>$fansmanage_id]);
-        foreach($list as $key=>$value){
+        $re = json_decode($re, true);
+        $list = Label::ListLabel(['fansmanage_id' => $fansmanage_id]);
+        foreach ($list as $key => $value) {
             $local_label[] = $value['label_name'];
         }
-        foreach($re['tags'] as $key=>$val){
-            $wechat_label[]=$val['name'];
+        foreach ($re['tags'] as $key => $val) {
+            $wechat_label[] = $val['name'];
         }
-        $data = array_diff($wechat_label,$local_label);
+        $data = array_diff($wechat_label, $local_label);
 
         DB::beginTransaction();
         try {
-            foreach($re['tags'] as $key=>$val){
-                if(in_array($val['name'],$data)){
+            foreach ($re['tags'] as $key => $val) {
+                if (in_array($val['name'], $data)) {
                     $dataLabel = [
-                        'fansmanage_id'=>$fansmanage_id,
-                        'store_id'=>0,
-                        'label_name'=>$val['name'],
-                        'label_number'=>$val['count'],
-                        'wechat_id'=>$val['id'],
+                        'fansmanage_id' => $fansmanage_id,
+                        'store_id' => 0,
+                        'label_name' => $val['name'],
+                        'label_number' => $val['count'],
+                        'wechat_id' => $val['id'],
                     ];
                     Label::addLabel($dataLabel);
                 }
@@ -227,82 +271,90 @@ class UserController extends Controller{
         return response()->json(['data' => '同步成功！', 'status' => '1']);
     }
 
+    // +----------------------------------------------------------------------
+    // | End - 粉丝标签
+    // +----------------------------------------------------------------------
 
 
+    // +----------------------------------------------------------------------
+    // | Start - 粉丝用户管理
+    // +----------------------------------------------------------------------
     //粉丝用户管理
-    public function user_list(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $admin_data['organization_id'];//组织id
+    public function user_list()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+
+        $organization_id = $this->admin_data['organization_id'];//组织id
 
 
-//        $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
+//        $auth_info = \Wechat::refresh_authorization_info($this->admin_data['organization_id']);//刷新并获取授权令牌
 //        \Wechat::get_fans_info($auth_info['authorizer_access_token'],'oyhbt1PNT38bzuM5rvwF71ePtUFI');
 
-        $store_name = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
-        $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],'','10','id');
-        foreach($list as $key=>$value){
-            $re =  UserInfo::getOneUserInfo([['user_id',$value->user_id]]);
+        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
+        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id');
+        foreach ($list as $key => $value) {
+            $re = UserInfo::getOneUserInfo([['user_id', $value->user_id]]);
             $list[$key]['nickname'] = $re['nickname'];//微信昵称
             $list[$key]['head_imgurl'] = $re['head_imgurl'];//微信头像
-            $recommender_id =  User::getPluck([['id',$value->userRecommender->recommender_id]],'id')->first();
-            $list[$key]['recommender_name']  =  UserInfo::getPluck([['user_id',$recommender_id]],'nickname')->first();//推荐人
-            $list[$key]['label_id']  = UserLabel::getPluck([['user_id',$value->user_id],['organization_id',$organization_id]],'label_id')->first();//粉丝对应的标签id
+            $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
+            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();//推荐人
+            $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();//粉丝对应的标签id
         }
-        $label = Label::ListLabel([['fansmanage_id',$organization_id],['store_id','0']]);//会员标签
-        return view('Fansmanage/User/user_list',['list'=>$list,'store_name'=>$store_name,'label'=>$label,'organization_id'=>$organization_id,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);//会员标签
+        return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
-    //粉丝用户管理
-    public function store_label_add_check(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
 
-        $label_id = $request->label_id;//会员标签id
-        $user_id = $request->user_id;//用户id
-        $organization_id = $admin_data['organization_id'];//组织id
-        $nickname = $request->nickname;//微信昵称
+    //粉丝用户管理
+    public function store_label_add_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+
+        $label_id = request()->label_id;//会员标签id
+        $user_id = request()->user_id;//用户id
+        $organization_id = $this->admin_data['organization_id'];//组织id
+        $nickname = request()->nickname;//微信昵称
         DB::beginTransaction();
         try {
-            $oneData = UserLabel::getOneUserLabel([['user_id',$user_id],['organization_id',$organization_id]]);//查询粉丝标签关联表有没有数据
-            if(!empty($oneData)){
-                if($oneData->label_id != 0){ //当粉丝标签关联表里标签id为0时 不执行
+            $oneData = UserLabel::getOneUserLabel([['user_id', $user_id], ['organization_id', $organization_id]]);//查询粉丝标签关联表有没有数据
+            if (!empty($oneData)) {
+                if ($oneData->label_id != 0) { //当粉丝标签关联表里标签id为0时 不执行
                     //减少原粉丝标签的人数
-                    $label_number = Label::getPluck([['id',$oneData->label_id]],'label_number')->first();//获取原粉丝标签的人数
-                    $number = $label_number-1;
-                    Label::editLabel([['id',$oneData->label_id]],['label_number'=>$number]);//修改粉丝标签的人数
+                    $label_number = Label::getPluck([['id', $oneData->label_id]], 'label_number')->first();//获取原粉丝标签的人数
+                    $number = $label_number - 1;
+                    Label::editLabel([['id', $oneData->label_id]], ['label_number' => $number]);//修改粉丝标签的人数
                 }
-                 if($label_id != 0){ //选择无标签的时候 不执行
-                     //增加现有的粉丝标签人数
-                     $add_label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
-                     $add_number = $add_label_number+1;
-                     Label::editLabel([['id',$label_id]],['label_number'=>$add_number]);//修改粉丝标签的人数
-                 }
-                UserLabel::editUserLabel([['id',$oneData->id]],['label_id'=>$label_id]);//修改粉丝标签关联表Label_id
+                if ($label_id != 0) { //选择无标签的时候 不执行
+                    //增加现有的粉丝标签人数
+                    $add_label_number = Label::getPluck([['id', $label_id]], 'label_number')->first();//获取粉丝标签的人数
+                    $add_number = $add_label_number + 1;
+                    Label::editLabel([['id', $label_id]], ['label_number' => $add_number]);//修改粉丝标签的人数
+                }
+                UserLabel::editUserLabel([['id', $oneData->id]], ['label_id' => $label_id]);//修改粉丝标签关联表Label_id
 
-            }else{
-                UserLabel::addUserLabel(['label_id'=>$label_id,'user_id'=>$user_id,'organization_id'=>$organization_id]);//粉丝与标签关系表
-                $label_number = Label::getPluck([['id',$label_id]],'label_number')->first();//获取粉丝标签的人数
-                $number = $label_number+1;
-                Label::editLabel([['id',$label_id]],['label_number'=>$number]);//修改粉丝标签的人数
+            } else {
+                UserLabel::addUserLabel(['label_id' => $label_id, 'user_id' => $user_id, 'organization_id' => $organization_id]);//粉丝与标签关系表
+                $label_number = Label::getPluck([['id', $label_id]], 'label_number')->first();//获取粉丝标签的人数
+                $number = $label_number + 1;
+                Label::editLabel([['id', $label_id]], ['label_number' => $number]);//修改粉丝标签的人数
             }
-            $dataUser = FansmanageUser::getOneFansmanageUser([['id',$user_id]]);
-            $tag_id = Label::getPluck([['id',$label_id]],'wechat_id')->first();
-            if($label_id != 0){ //选择无标签的时候 不执行
+            $dataUser = FansmanageUser::getOneFansmanageUser([['id', $user_id]]);
+            $tag_id = Label::getPluck([['id', $label_id]], 'wechat_id')->first();
+            if ($label_id != 0) { //选择无标签的时候 不执行
                 $data = [
-                    'openid_list'=>[$dataUser['open_id']],
-                    'tagid' =>$tag_id
+                    'openid_list' => [$dataUser['open_id']],
+                    'tagid' => $tag_id
                 ];
-                $auth_info = \Wechat::refresh_authorization_info($admin_data['organization_id']);//刷新并获取授权令牌
-                $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'],$data);
-                $re = json_decode($re,true);
-                if($re['errmsg']!='ok'){
+                $auth_info = \Wechat::refresh_authorization_info($this->admin_data['organization_id']);//刷新并获取授权令牌
+                $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'], $data);
+                $re = json_decode($re, true);
+                if ($re['errmsg'] != 'ok') {
                     return response()->json(['data' => '操作失败！', 'status' => '0']);
                 }
             }
-            if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改粉丝标签：'.$nickname);//保存操作记录
+            if ($this->admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改粉丝标签：' . $nickname);//保存操作记录
             }
             DB::commit();
 
@@ -314,49 +366,51 @@ class UserController extends Controller{
     }
 
     //粉丝用户管理编辑
-    public function user_list_edit(Request $request){
+    public function user_list_edit()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // 组织id
+        $organization_id = $this->admin_data["organization_id"];
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $organization_id = $admin_data['organization_id'];//组织id
-
-        $user_id = $request->id;//会员标签id
-        $userInfo =  UserInfo::getOneUserInfo([['user_id',$user_id]]);//微信昵称
-        $data['account'] =  User::getPluck([['id',$user_id]],'account')->first();//粉丝账号
-        $data['mobile'] =  FansmanageUser::getPluck([['user_id',$user_id]],'mobile')->first();//手机号
-        $yauntou = UserOrigin::getPluck([['user_id',$user_id]],'origin_id')->first();
-        if($yauntou == $organization_id){
-            $data['store_name'] = Organization::getPluck([['id',$organization_id]],'organization_name')->first();//组织名称
+        $user_id = request()->id;//会员标签id
+        $userInfo = UserInfo::getOneUserInfo([['user_id', $user_id]]);//微信昵称
+        $data['account'] = User::getPluck([['id', $user_id]], 'account')->first();//粉丝账号
+        $data['mobile'] = FansmanageUser::getPluck([['user_id', $user_id]], 'mobile')->first();//手机号
+        $yauntou = UserOrigin::getPluck([['user_id', $user_id]], 'origin_id')->first();
+        if ($yauntou == $organization_id) {
+            $data['store_name'] = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
         }
-        $recommender_id =  UserRecommender::getPluck([['user_id',$user_id]],'recommender_id')->first();//推荐人id
-        if(!empty($recommender_id)){
-            $list =  User::getOneUser([['id',$recommender_id]]);
+        $recommender_id = UserRecommender::getPluck([['user_id', $user_id]], 'recommender_id')->first();//推荐人id
+        if (!empty($recommender_id)) {
+            $list = User::getOneUser([['id', $recommender_id]]);
             $data['recommender_name'] = $list->UserInfo->nickname;
         }
-        return view('Fansmanage/User/user_list_edit',['data'=>$data,'userInfo'=>$userInfo]);
+        return view('Fansmanage/User/user_list_edit', ['data' => $data, 'userInfo' => $userInfo]);
 
     }
 
 
     //粉丝用户管理编辑功能提交
-    public function user_list_edit_check(Request $request){
+    public function user_list_edit_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $qq = $request->qq;//qq号
-        $mobile = $request->mobile;//手机号
-        $user_id = $request->user_id;//用户id
-        $nickname = $request->nickname;//微信昵称
-        $re = FansmanageUser::checkRowExists([['mobile',$mobile],['user_id','<>',$user_id]]);
-        if($re == 'true'){
+        $qq = request()->qq;//qq号
+        $mobile = request()->mobile;//手机号
+        $user_id = request()->user_id;//用户id
+        $nickname = request()->nickname;//微信昵称
+        $re = FansmanageUser::checkRowExists([['mobile', $mobile], ['user_id', '<>', $user_id]]);
+        if ($re == 'true') {
             return response()->json(['data' => '手机号已存在', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
-            FansmanageUser::editStoreUser(['user_id'=>$user_id],['mobile'=>$mobile]);
-            UserInfo::editUserInfo(['user_id'=>$user_id],['qq'=>$qq]);
-            if($admin_data['is_super'] != 2){
-                OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'修改资料：'.$nickname);//保存操作记录
+            FansmanageUser::editStoreUser(['user_id' => $user_id], ['mobile' => $mobile]);
+            UserInfo::editUserInfo(['user_id' => $user_id], ['qq' => $qq]);
+            if ($this->admin_data['is_super'] != 2) {
+                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改资料：' . $nickname);//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -368,40 +422,44 @@ class UserController extends Controller{
     }
 
     //粉丝用户管理粉丝钱包
-    public function user_list_wallet(Request $request){
-        $user_id = $request->id;//会员标签id
-        $status = $request->status;//冻结或者解锁
-        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-        return view('Fansmanage/User/user_list_wallet',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
+    public function user_list_wallet()
+    {
+        $user_id = request()->id;//会员标签id
+        $status = request()->status;//冻结或者解锁
+        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();//微信昵称
+        return view('Fansmanage/User/user_list_wallet', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
     }
+
     //粉丝用户管理冻结功能显示
-    public function user_list_lock(Request $request){
-        $user_id = $request->id;//会员标签id
-        $status = $request->status;//冻结或者解锁
-        $nickname =  UserInfo::getPluck([['user_id',$user_id]],'nickname')->first();//微信昵称
-        return view('Fansmanage/User/user_list_lock',['user_id'=>$user_id,'nickname'=>$nickname,'status'=>$status]);
+    public function user_list_lock()
+    {
+        $user_id = request()->id;//会员标签id
+        $status = request()->status;//冻结或者解锁
+        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();//微信昵称
+        return view('Fansmanage/User/user_list_lock', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
     }
+
     //粉丝用户管理冻结功能提交
-    public function user_list_lock_check(Request $request){
+    public function user_list_lock_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
 
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $user_id = $request->user_id;//会员标签id
-        $nickname = $request->nickname;//会员标签id
-        $status = $request->status;//冻结或者解冻判断
+        $user_id = request()->user_id;//会员标签id
+        $nickname = request()->nickname;//会员标签id
+        $status = request()->status;//冻结或者解冻判断
 
         DB::beginTransaction();
         try {
-            if($status == 1){
-                FansmanageUser::editStoreUser(['user_id'=>$user_id],['status'=>'0']);
-                if($admin_data['is_super'] != 2){
-                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'冻结了：'.$nickname);//保存操作记录
+            if ($status == 1) {
+                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '0']);
+                if ($this->admin_data['is_super'] != 2) {
+                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '冻结了：' . $nickname);//保存操作记录
                 }
-            }else{
-                FansmanageUser::editStoreUser(['user_id'=>$user_id],['status'=>'1']);
-                if($admin_data['is_super'] != 2){
-                    OperationLog::addOperationLog('3',$admin_data['organization_id'],$admin_data['id'],$route_name,'解冻了：'.$nickname);//保存操作记录
+            } else {
+                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '1']);
+                if ($this->admin_data['is_super'] != 2) {
+                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '解冻了：' . $nickname);//保存操作记录
                 }
             }
 
@@ -413,19 +471,31 @@ class UserController extends Controller{
         return response()->json(['data' => '操作成功！', 'status' => '1']);
 
     }
-    //粉丝用户足迹
-    public function user_timeline(Request $request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+    // +----------------------------------------------------------------------
+    // | End - 粉丝用户管理
+    // +----------------------------------------------------------------------
 
-        $fansmanage_id = $admin_data['organization_id'];//组织id
-        $list = FansmanageUserLog::getPaginage([['fansmanage_id',$fansmanage_id]],'5','id');
-        foreach($list as $key=>$value){
-            $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]],'nickname')->first();//微信昵称
+    // +----------------------------------------------------------------------
+    // | Start - 粉丝足迹
+    // +----------------------------------------------------------------------
+    //粉丝用户足迹
+    public function user_timeline()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+
+        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        $list = FansmanageUserLog::getPaginage([['fansmanage_id', $fansmanage_id]], '5', 'id');
+        foreach ($list as $key => $value) {
+            $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]], 'nickname')->first();//微信昵称
         }
-        return view('Fansmanage/User/user_timeline',['list'=>$list,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
+        return view('Fansmanage/User/user_timeline', ['list' => $list, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
+
+    // 欠缺搜索功能
+
+
+    // +----------------------------------------------------------------------
+    // | End - 粉丝用户管理
+    // +----------------------------------------------------------------------
 }
-?>
