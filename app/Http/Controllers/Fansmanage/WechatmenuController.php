@@ -657,6 +657,7 @@ class WechatmenuController extends CommonController
         ];
         dump($defined_menu);
 
+
         // 事务处理
         DB::beginTransaction();
         try {
