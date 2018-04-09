@@ -199,7 +199,7 @@
             province += 'provinces[]='+$(v).val()+'&';
         });
         province = province.substring(0, province.length-1);
-        var data = '_token='+_token+'&'+province;
+        var data = '_token='+_token+'&province='+province;
         console.log(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
