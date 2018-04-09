@@ -33,5 +33,11 @@ class Province extends Model{
         $model = self::with('warzone');
         return $model->where($where)->pluck($pluck);
     }
+
+    //获取战区
+    public static function getOne($where){
+        $model = self::with('warzone');
+        return $model->where($where)->get();
+    }
 }
 ?>
