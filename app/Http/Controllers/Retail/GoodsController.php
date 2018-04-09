@@ -195,9 +195,14 @@ class GoodsController extends Controller
             $entension = $file->getClientOriginalExtension();                           //获取上传文件后缀名
 
 
+
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
             $file->move(base_path() . '/uploads/catering/', $new_name);         //$path上传后的文件路径
             $file_path =  'uploads/catering/'.$new_name;
+        }
+        else{
+
+            return response()->json(['data' => '上传商品图片无效，请检查', 'status' => '0']);
         }
         $goods_thumb = ['goods_id' => $goods_id,'thumb' => $file_path];         //商品图片信息
         DB::beginTransaction();
