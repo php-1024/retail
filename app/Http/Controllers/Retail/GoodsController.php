@@ -154,7 +154,8 @@ class GoodsController extends Controller
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
-         //   Storage::delete($goods_thumb);
+
+        //  Storage::delete($goods_thumb);
          //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
@@ -167,6 +168,8 @@ class GoodsController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
         }
+
+
         return response()->json(['data' => '删除商品图片成功'.$goods_thumb, 'status' => '1']);
     }
     //图片异步加载部分
