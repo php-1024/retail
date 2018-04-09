@@ -60,7 +60,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    window.location.reload();
+                    $("#myModal").modal("hide");
                 });
             }
         });
