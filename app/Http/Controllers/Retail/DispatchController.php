@@ -102,9 +102,7 @@ class DispatchController extends Controller
         $dispatch_id = $request->get('dispatch_id');
         $provinces = $request->get('provinces');
         $province = implode(',',$provinces);
-        dd($province);
-
-        $dispatch_province = ['dispatch_id'=>$dispatch_id,'province_id'=>$provinces];
+        $dispatch_province = ['dispatch_id'=>$dispatch_id,'province_id'=>$province];
         DB::beginTransaction();
         try {
             DispatchProvince::addDispatchProvince($dispatch_province);
