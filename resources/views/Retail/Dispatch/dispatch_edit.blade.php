@@ -97,7 +97,7 @@
                                                         <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-info btn-xs" onclick="javascript:alert('1');"><i class="fa fa-plus"></i>添加选择</button>
+                                                        <button type="button" class="btn btn-info btn-xs" onclick="javascript:province_add_check();"><i class="fa fa-plus"></i>添加选择</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
