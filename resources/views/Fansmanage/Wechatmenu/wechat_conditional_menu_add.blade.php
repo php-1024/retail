@@ -39,7 +39,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 }, function () {
-                    // window.location.reload();
+                    window.location.reload();
                 });
                 return;
             } else {
@@ -49,7 +49,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 }, function () {
-                    // window.location.reload();
+                    window.location.reload();
                 });
             }
         });

@@ -124,9 +124,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "添加自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "添加自定义菜单成功！");
     }
 
     /**
@@ -252,9 +252,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "修改自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "修改自定义菜单成功！");
     }
 
     /**
@@ -300,9 +300,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '删除自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "删除自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '删除自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(0, "删除自定义菜单成功！");
     }
 
 
@@ -530,9 +530,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '添加自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "添加自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "添加自定义菜单成功！");
     }
 
     /**
@@ -674,9 +674,9 @@ class WechatmenuController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '修改自定义菜单失败，请检查', 'status' => '0']);
+            return $this->getResponseMsg(0, "修改自定义菜单失败，请检查");
         }
-        return response()->json(['data' => '修改自定义菜单成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "修改自定义菜单成功！");
     }
 
     /**
@@ -817,6 +817,7 @@ class WechatmenuController extends CommonController
             return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
     }
+
     // +----------------------------------------------------------------------
     // | End - 个性化菜单
     // +----------------------------------------------------------------------
