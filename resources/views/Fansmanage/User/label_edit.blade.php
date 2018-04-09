@@ -44,6 +44,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
+            console.log(json);
             if (json.status == -1) {
                 window.location.reload();
             } else if (json.status == 1) {
