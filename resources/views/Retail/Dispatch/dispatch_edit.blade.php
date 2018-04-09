@@ -65,6 +65,7 @@
                                 <div class="tab-pane">
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
                                     <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
+
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
