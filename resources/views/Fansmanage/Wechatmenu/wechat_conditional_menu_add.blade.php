@@ -12,7 +12,7 @@
                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
 
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="safe_password" value="">
+                            <input type="password" class="form-control" name="safe_password" value="">
                         </div>
                     </div>
 
