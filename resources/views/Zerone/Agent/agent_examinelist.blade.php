@@ -2,25 +2,20 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>零壹新科技程序管理平台</title>
     <link href="{{asset('public/Zerone/library/bootstrap')}}/css/bootstrap.min.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/font')}}/css/font-awesome.css" rel="stylesheet">
     <link href="{{asset('public/Zerone/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
-
     <link href="{{asset('public/Zerone')}}/css/animate.css" rel="stylesheet">
     <link href="{{asset('public/Zerone')}}/css/style.css" rel="stylesheet">
 </head>
 
 <body class="">
 
-
 <div id="wrapper">
     @include('Zerone/Public/Nav')
-
     <div id="page-wrapper" class="gray-bg">
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -37,10 +32,7 @@
             </div>
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
-
-
             <div class="ibox-content m-b-sm border-bottom">
-
                 <div class="row">
                     <form method="get" role="form" id="searchForm" action="">
                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
@@ -69,7 +61,6 @@
                     </form>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
@@ -130,7 +121,6 @@
                                 </tr>
                                 </tfoot>
                             </table>
-
                         </div>
                     </div>
                 </div>

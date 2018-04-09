@@ -71,72 +71,110 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_examine', ['info' => $info, 'status' => $status]);
     }
 
-    //服务商审核数据提交
+    /**
+     * 代理审核数据提交
+     */
     public function agent_examine_check(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $id = $request->input('id'); //服务商id
-        $status = $request->input('status'); //是否通过值 1为通过 -1为不通过
-        $oneAgent = OrganizationAgentapply::getOne([['id', $id]]); //查询申请服务商信息
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 代理id
+        $id = $request->input('id');
+        // 是否通过值 1为通过 -1为不通过
+        $status = $request->input('status');
+        // 查询申请代理信息
+        $oneAgent = OrganizationAgentapply::getOne([['id', $id]]);
+        // 程序id
         $program_id = 2;
         if ($status == -1) {
             DB::beginTransaction();
             try {
-                OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]); //拒绝通过
-                //添加操作日志
+                // 拒绝通过
+                OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]);
+                // 添加操作日志
                 OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '拒绝了服务商：' . $oneAgent['agent_name']); //保存操作记录
-                DB::commit(); //提交事务
-
+                // 提交事务
+                DB::commit();
             } catch (Exception $e) {
-                DB::rollBack(); //事件回滚
+                // 事件回滚
+                DB::rollBack();
                 return response()->json(['data' => '拒绝失败', 'status' => '0']);
             }
             return response()->json(['data' => '拒绝成功', 'status' => '1']);
-        } elseif ($status == 1) {
+        } else{
             DB::beginTransaction();
             try {
-                OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]); //申请通过
-                $orgparent_tree = '0' . ',' . '1' . ','; //服务商组织树
-                //添加服务商
+                // 申请通过
+                OrganizationAgentapply::editOrganizationAgentapply([['id', $id]], ['status' => $status]);
+                // 代理组织树
+                $orgparent_tree = '0' . ',' . '1' . ',';
+                //数据处理
                 $orgData = [
+                    // 代理名称
                     'organization_name' => $oneAgent['agent_name'],
+                    // 上级id
                     'parent_id' => '1',
+                    // 组织树
                     'parent_tree' => $orgparent_tree,
-                    'program_id' => '2',
+                    // 程序id
+                    'program_id' => $program_id,
+                    // 类型2为代理
                     'type' => '2',
+                    // 状态1正常 0冻结
                     'status' => '1',
-                    'asset_id' => '0'
                 ];
-                $organization_id = Organization::addOrganization($orgData); //返回值为商户的id
+                // 添加代理并返回组织id
+                $organization_id = Organization::addOrganization($orgData);
 
+                //数据处理
                 $agentdata = [
+                    // 代理id
                     'agent_id' => $organization_id,
+                    // 战区id
                     'zone_id' => $oneAgent['zone_id']
                 ];
-                WarzoneAgent::addWarzoneAgent($agentdata); //战区关联服务商
+                // 战区关联代理
+                WarzoneAgent::addWarzoneAgent($agentdata);
 
+                // 查询零壹账号人数
                 $user = Account::max('account');
-                $account = $user + 1; //用户账号
-
-                $parent_tree = '0' . ','; //树是上级的树拼接上级的ID；
+                // 新的用户账号
+                $account = $user + 1;
+                // 树是上级的树拼接上级的ID；
+                $parent_tree = '0' . ',';
+                // 数据处理
                 $accdata = [
-                    'parent_id' => '0',                            //上级id
-                    'parent_tree' => $parent_tree,                   //组织树
-                    'deepth' => '1',                            //账号深度
-                    'mobile' => $oneAgent['agent_owner_mobile'],//手机号
-                    'password' => $oneAgent['agent_password'],    //密码
-                    'organization_id' => $organization_id,               //组织id
-                    'account' => $account                        //登入账号
+                    // 上级id
+                    'parent_id' => '0',
+                    // 组织树
+                    'parent_tree' => $parent_tree,
+                    // 账号深度
+                    'deepth' => '1',
+                    // 手机号
+                    'mobile' => $oneAgent['agent_owner_mobile'],
+                    // 密码
+                    'password' => $oneAgent['agent_password'],
+                    // 组织id
+                    'organization_id' => $organization_id,
+                    // 登入账号
+                    'account' => $account
                 ];
-                $account_id = Account::addAccount($accdata); //添加账号返回id
+                // 添加账号返回id
+                $account_id = Account::addAccount($accdata);
 
+                //数据处理
                 $acinfodata = [
-                    'account_id' => $account_id,                    //用户id
-                    'realname' => $oneAgent['agent_owner'],       //负责人姓名
-                    'idcard' => $oneAgent['agent_owner_idcard'] //负责人身份证
+                    // 用户id
+                    'account_id' => $account_id,
+                    // 负责人姓名
+                    'realname' => $oneAgent['agent_owner'],
+                    // 负责人身份证
+                    'idcard' => $oneAgent['agent_owner_idcard']
                 ];
-                AccountInfo::addAccountInfo($acinfodata); //添加到管理员信息表
+                // 添加到用户信息详情
+                AccountInfo::addAccountInfo($acinfodata);
 
                 $orgagentinfo = [
                     'agent_id' => $organization_id,
@@ -144,7 +182,8 @@ class AgentController extends Controller
                     'agent_owner_idcard' => $oneAgent['agent_owner_idcard'],
                     'agent_owner_mobile' => $oneAgent['agent_owner_mobile']
                 ];
-                OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo); //添加到服务商组织信息表
+                // 添加到服务商组织信息表
+                OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);
 
                 $module_node_list = Module::getListProgram($program_id, [], 0, 'id'); //获取当前系统的所有节点
                 foreach ($module_node_list as $key => $val) {
@@ -152,9 +191,10 @@ class AgentController extends Controller
                         AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
                     }
                 }
-                //添加操作日志
-                OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '服务商审核通过：' . $oneAgent['agent_name']); //保存操作记录
-                DB::commit(); //提交事务
+                // 添加操作日志
+                OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '代理审核通过：' . $oneAgent['agent_name']);
+                // 提交事务
+                DB::commit();
 
             } catch (Exception $e) {
                 DB::rollBack(); //事件回滚
@@ -400,11 +440,11 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_structure', ['listOrg' => $listOrg, 'oneOrg' => $oneOrg, 'structure' => $structure, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    /*
+    /**
      * 递归生成人员结构的方法
      * $list - 结构所有人员的无序列表
      * $id - 上级ID
-    */
+     */
     private function account_structure($list, $id)
     {
         $structure = '';
