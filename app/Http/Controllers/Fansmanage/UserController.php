@@ -85,8 +85,9 @@ class UserController extends CommonController
             $re = \Wechat::create_fans_tag($auth_info['authorizer_access_token'], $label_name);
             $re = json_decode($re, true);
 
+
             // 判断微信公众号返回的消息
-            if ($re['errcode'] != 0) {
+            if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
@@ -102,12 +103,15 @@ class UserController extends CommonController
             ];
             // 添加标签
             Label::addLabel($dataLabel);
+
+
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
                 $this->insertOperationLog(3, '创建会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return $this->getResponseMsg(0, "创建会员标签失败！");
@@ -164,7 +168,7 @@ class UserController extends CommonController
             $re = json_decode($re, true);
 
             // 判断微信公众号返回的消息
-            if ($re['errcode'] != 0) {
+            if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
@@ -225,7 +229,7 @@ class UserController extends CommonController
             $re = json_decode($re, true);
 
             // 判断微信公众号返回的消息
-            if ($re['errcode'] != 0) {
+            if (!empty($re['errcode']) && $re["errcode"] != 0) {
                 $msg = \WechatError::getCodeToMsg($re['errcode']);
                 return $this->getResponseMsg(0, $msg);
             }
@@ -275,40 +279,40 @@ class UserController extends CommonController
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         $re = json_decode($re, true);
 
+        // 判断微信公众号返回的消息
+        if (!empty($re['errcode']) && $re["errcode"] != 0) {
+            $msg = \WechatError::getCodeToMsg($re['errcode']);
+            return $this->getResponseMsg(0, $msg);
+        }
+
         // 获取本地标签列表
-        $list = Label::ListLabel(['fansmanage_id' => $fansmanage_id]);
-
-        dump($fansmanage_id);
-        dump($list);
-        dump($re);
-        foreach ($list as $key => $value) {
-            $local_label[] = $value['label_name'];
+        $list = Label::getPluck(['fansmanage_id' => $fansmanage_id], "label_name");
+        if (!empty($list)) {
+            $local_label = $list->toArray();
         }
 
-        foreach ($re['tags'] as $key => $val) {
-            $wechat_label[] = $val['name'];
-        }
-
-
+        // 获取微信公众号标签
+        $wechat_label = array_column($re['tags'], "name");
+        // 获取微信公众号标签和本地标签的差异
         $data = array_diff($wechat_label, $local_label);
 
+        // 事务处理
         DB::beginTransaction();
         try {
-            foreach ($re['tags'] as $key => $val) {
-                if (in_array($val['name'], $data)) {
-                    $dataLabel = [
-                        'fansmanage_id' => $fansmanage_id,
-                        'store_id' => 0,
-                        'label_name' => $val['name'],
-                        'label_number' => $val['count'],
-                        'wechat_id' => $val['id'],
-                    ];
-                    Label::addLabel($dataLabel);
-                }
+            $dataLabel["fansmanage_id"] = $fansmanage_id;
+            $dataLabel["store_id"] = 0;
+            // 将线上存在，但是本地不存在的数据保存到本地
+            foreach ($data as $key => $val) {
+                $re_tags_val = $re['tags'][$key];
+                $dataLabel["label_name"] = $re_tags_val['name'];
+                $dataLabel["label_number"] = $re_tags_val['count'];
+                $dataLabel["wechat_id"] = $re_tags_val['id'];
+                Label::addLabel($dataLabel);
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '同步失败！', 'status' => '0']);
         }
         return response()->json(['data' => '同步成功！', 'status' => '1']);
