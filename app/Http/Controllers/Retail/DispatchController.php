@@ -140,6 +140,15 @@ class DispatchController extends Controller
     //运费模板省份编辑
     public function dispatch_province_edit_check(Request $request)
     {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $dispatch_id = $request->get('dispatch_id');
+        $first_weight = $request->get('first_weight');
+        $additional_weight = $request->get('additional_weight');
+        $freight = $request->get('freight');
+        $renewal = $request->get('renewal');
+        foreach ()
+        DispatchProvince::editDispatchProvince(['id'=>$dispatch_id],$dispatch_data);
         dd($request);
     }
 
