@@ -149,9 +149,8 @@ class GoodsController extends Controller
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
         $goods_thumb = RetailGoodsThumb::getPluck(['id' => $goods_thumb_id], 'thumb')->first();
 
-        if (file_exists($goods_thumb)) {
-
-             if (!unlink($goods_thumb))//删除磁盘上的图片文件
+        if (file_exists($goods_thumb)) {                    //检查文件是否存在
+             if (!unlink($goods_thumb))                     //删除磁盘上的图片文件
                  return response()->json(['data' => '删除商品图片文件:' . $goods_thumb . ' 失败，请检查', 'status' => '0']);
         }
         DB::beginTransaction();
@@ -159,9 +158,6 @@ class GoodsController extends Controller
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
 
-          //  http://o2o.01nnt.com/uploads/catering/20180409105716752.png
-
-         //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品图片！');//保存操作记录
