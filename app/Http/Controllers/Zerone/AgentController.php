@@ -297,7 +297,7 @@ class AgentController extends Controller
 
             // 修改用户管理员信息表 身份证号
             AccountInfo::editAccountInfo([['account_id', $account_id]], ['idcard' => $idcard]);
-            
+
             // 修改代理信息表 身份证号
             OrganizationAgentinfo::editOrganizationAgentinfo([['agent_id', $id]], ['agent_owner_idcard' => $idcard]);
 
@@ -317,12 +317,17 @@ class AgentController extends Controller
         return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
-    //代理冻结ajaxshow显示页面
+    /**
+     * 代理冻结ajaxshow显示页面
+     */
     public function agent_list_lock(Request $request)
     {
-        $id = $request->input('id'); //代理id
-        $status = $request->input('status'); //冻结状态
-        $list = Organization::getOneagent([['id', $id]]); //代理信息
+        // 代理id
+        $id = $request->input('id');
+        // 冻结状态
+        $status = $request->input('status');
+        // 代理信息
+        $list = Organization::getOneagent([['id', $id]]);
         return view('Zerone/Agent/agent_list_lock', ['id' => $id, 'list' => $list, 'status' => $status]);
     }
 
