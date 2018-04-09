@@ -31,8 +31,6 @@
                                 @if($conditionalmenu->parent_id == $val->id) selected @endif>{{$val->menu_name}}</option>
                     @endforeach
                 </select>
-
-
             </div>
         </div>
 
