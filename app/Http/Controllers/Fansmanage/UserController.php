@@ -185,7 +185,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 软删除会员标签ajax显示页面,并且同步到微信公众号
+     * 删除会员标签ajax显示页面,并且同步到微信公众号
      */
     public function label_delete()
     {
@@ -198,7 +198,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 软删除会员标签ajax数据检测
+     * 删除会员标签ajax数据检测
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -230,8 +230,9 @@ class UserController extends CommonController
                 return $this->getResponseMsg(0, $msg);
             }
 
-            // 标签软删除
+            // 标签删除, 标签里面配置了软删除,所以用这个方法进行强制删除
             Label::where('id', $id)->forceDelete();
+
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
                 $this->insertOperationLog("4", '删除会员标签：' . $label_name);
@@ -247,10 +248,12 @@ class UserController extends CommonController
 
     /**
      * 微信同步粉丝标签ajax显示页面
+     * 主要是可以同步部分直接在公众号后台直接进行添加标签的步骤
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function label_wechat()
     {
+        // 渲染页面
         return view('Fansmanage/User/label_wechat');
     }
 
@@ -261,18 +264,34 @@ class UserController extends CommonController
      */
     public function label_wechat_check()
     {
-        $this->admin_data = request()->get('admin_data');//中间件产生的管理员数据参数
-        $fansmanage_id = $this->admin_data['organization_id'];//组织id
-        $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+        // 中间件参数 集合
+        $this->getRequestInfo();
+
+        // 组织id
+        $fansmanage_id = $this->admin_data['organization_id'];
+        // 刷新并获取授权令牌
+        $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
+        // 获取微信公众号标签列表
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         $re = json_decode($re, true);
+
+        // 判断微信公众号返回的消息
+        if ($re['errcode'] != 0) {
+            $msg = \WechatError::getCodeToMsg($re['errcode']);
+            return $this->getResponseMsg(0, $msg);
+        }
+
+
+        // 获取本地标签列表
         $list = Label::ListLabel(['fansmanage_id' => $fansmanage_id]);
         foreach ($list as $key => $value) {
             $local_label[] = $value['label_name'];
         }
+
         foreach ($re['tags'] as $key => $val) {
             $wechat_label[] = $val['name'];
         }
+
         $data = array_diff($wechat_label, $local_label);
 
         DB::beginTransaction();
