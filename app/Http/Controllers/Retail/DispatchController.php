@@ -93,11 +93,11 @@ class DispatchController extends Controller
         $province_name = [];        //初始化已选的省份
         foreach ($dispatch_province as $key=>$val){//遍历处理已选的省份
             $provinces = explode(',',$val->province_id);
+            dump($provinces);
             foreach ($provinces as $kk=>$vv){
                 $province_name[] = Province::getOne(['id'=>$vv])->first()->toArray();
-                $val->$kk = Province::getOne(['id'=>$vv])->first()->toArray();
             }
-//            $val->province_name = $province_names;       //将查询出来的省份存进原有模型
+            $val[$key]->province_name = $province_name;       //将查询出来的省份存进原有模型
         }
         $province = Province::getList([],0,'id','ASC')->toArray();  //  查询出所有省份
         //找出已选的省份并删除
@@ -106,7 +106,6 @@ class DispatchController extends Controller
                 unset($province[$k]);
             }
         }
-        dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'dispatch_province'=>$dispatch_province,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
