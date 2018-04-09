@@ -2,6 +2,7 @@
 
 namespace App\Services\Wechat;
 
+use App\Facades\WechatFacade;
 use App\Models\WechatOpenSetting;
 use App\Models\WechatAuthorization;
 use App\Services\Curl\HttpCurl;
