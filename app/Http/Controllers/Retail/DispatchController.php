@@ -106,6 +106,7 @@ class DispatchController extends Controller
                 unset($province[$k]);
             }
         }
+        $dispatch_province->province_name = $province_name;
         dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'dispatch_province'=>$dispatch_province,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
