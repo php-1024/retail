@@ -149,8 +149,10 @@ class GoodsController extends Controller
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
         $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
 
-        $thumb = 'uploads/catering/20180409105716752.png';
+        $thumb = base_path(). 'uploads/catering/20180409105716752.png';
 
+
+     //   base_path() . '/uploads/catering/'
 
         /*
         if(Storage::exists($thumb))
@@ -159,8 +161,8 @@ class GoodsController extends Controller
 
             return response()->json(['data' => '商品图片不存在，请检查', 'status' => '0']);
 */
-
-        if( Storage::disk('uploads')->delete($thumb))
+      //  Storage::disk('uploads')->delete($thumb)
+        if(unlink($thumb))
              return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
         else
             return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
