@@ -83,7 +83,7 @@
                                                     <td>
                                                         <select name="from" id="multiselect" class="form-control" style="display: inline-block;" size="15" multiple="multiple">
                                                             @foreach($province as $key=>$val)
-                                                            <option value="{{$val->id}}" data-position="{{$val->id}}">{{$val->province_name}}</option>
+                                                            <option value="{{$val['id']}}" data-position="{{$val['id']}}">{{$val['province_name']}}</option>
                                                             @endforeach
                                                         </select>
                                                     </td>
@@ -123,14 +123,15 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="goods_list">
-                                                <tr id="30">
-                                                    <td class="id">
+                                                {{--@foreach($dispatch_province as $key=>$val)--}}
+                                                <tr>
+                                                    <td>
                                                         <label class="label label-success" style="display:inline-block">北京市</label>
                                                         <label class="label label-success" style="display:inline-block">河南省</label>
                                                         <label class="label label-success" style="display:inline-block">湖北省</label>
                                                         <label class="label label-success" style="display:inline-block">湖南省</label>
                                                     </td>
-                                                    <td class="name">
+                                                    <td>
                                                         <input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
                                                     <td class="price">
                                                         <input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
@@ -143,6 +144,7 @@
                                                         </button>
                                                     </td>
                                                 </tr>
+                                                {{--@endforeach--}}
                                                 </tbody>
                                             </table>
                                             <div style="clear: both;"></div>
