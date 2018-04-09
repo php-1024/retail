@@ -93,8 +93,8 @@ class DispatchController extends Controller
         $province = Province::getList([],0,'id','ASC');
         $dispatch_province = DispatchProvince::getList(['dispatch_id'=>$dispatch_id],0,'id','ASC');
         foreach ($dispatch_province as $key=>$val){
-            dd($val->province_id);
-            Province::getList(['id'=>$val->id],0,'id','ASC');
+//            dd($val->province_id);
+//            Province::getList(['id'=>$val->id],0,'id','ASC');
         }
         dump($admin_data);
         dump($dispatch_province);
