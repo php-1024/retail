@@ -275,11 +275,11 @@ class UserController extends CommonController
         $re = \Wechat::create_fans_tag_list($auth_info['authorizer_access_token']);
         $re = json_decode($re, true);
 
-        // 判断微信公众号返回的消息
-        if ($re['errcode'] != 0) {
-            $msg = \WechatError::getCodeToMsg($re['errcode']);
-            return $this->getResponseMsg(0, $msg);
-        }
+//        // 判断微信公众号返回的消息
+//        if ($re['errcode'] != 0) {
+//            $msg = \WechatError::getCodeToMsg($re['errcode']);
+//            return $this->getResponseMsg(0, $msg);
+//        }
 
 
         // 获取本地标签列表
