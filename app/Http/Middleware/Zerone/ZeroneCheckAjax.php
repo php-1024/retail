@@ -78,12 +78,12 @@ class ZeroneCheckAjax
 
 
 
-            //服务商管理
-            case "zerone/ajax/agent_examine_check"://服务商审核检测 登录 和 权限 和 安全密码 --审核通过
+            //代理管理
+            case "zerone/ajax/agent_examine_check"://代理审核检测 登录 和 权限 和 安全密码 --审核通过
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
-            case "zerone/ajax/agent_add_check"://检测服务商名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
+            case "zerone/ajax/agent_add_check"://检测代理名称 负责人姓名 负责人身份证号 手机号码 服务商登录密码 安全密码是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndAgentAdd($request);
                 return self::format_response($re,$next);
                 break;

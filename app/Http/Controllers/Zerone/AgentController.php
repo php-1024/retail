@@ -212,13 +212,19 @@ class AgentController extends Controller
         }
     }
 
-    //添加服务商
+    /**
+     * 添加服务商
+     */
     public function agent_add(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
         $warzone_list = Warzone::all();
         return view('Zerone/Agent/agent_add', ['warzone_list' => $warzone_list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
