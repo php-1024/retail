@@ -61,7 +61,7 @@
                                 <div style="clear:both"></div>
                                 <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
-                                    <input type="hidden" id="dispatch_province_add_check" value=" {{ url('retail/ajax/dispatch_province_add_check') }} ">
+                                    <input type="hidden" id="province_add_check" value=" {{ url('retail/ajax/dispatch_province_add_check') }} ">
                                     <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
                                     <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
                                     <div class="col-lg-5">
@@ -97,7 +97,7 @@
                                                         <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
                                                     <td>
-                                                        <button onclick="dispatch_province_add_check();" class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>添加选择</button>
+                                                        <button onclick="province_add_check();" class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>添加选择</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -190,8 +190,8 @@
         $('#multiselect').multiselect({keepRenderingSort:true});
     });
     //提交表单
-    function dispatch_province_add_check() {
-        var url = $("#dispatch_province_add_check").val();
+    function province_add_check() {
+        var url = $("#province_add_check").val();
         var _token = $('#_token').val();
         var dispatch_id = $('#dispatch_id').val();
         var province = '';
