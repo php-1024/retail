@@ -66,7 +66,7 @@
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
                                     <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
                                     <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
                                             <table class="table table-striped table-bordered ">
@@ -108,7 +108,7 @@
                                         </section>
                                     </div>
                                 </form>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-8">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
                                             <table class="table table-striped table-bordered ">
@@ -123,28 +123,27 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="goods_list">
-                                                {{--@foreach($dispatch_province as $key=>$val)--}}
+                                                @foreach($dispatch_province as $key=>$val)
                                                 <tr>
                                                     <td>
-                                                        <label class="label label-success" style="display:inline-block">北京市</label>
-                                                        <label class="label label-success" style="display:inline-block">河南省</label>
-                                                        <label class="label label-success" style="display:inline-block">湖北省</label>
-                                                        <label class="label label-success" style="display:inline-block">湖南省</label>
+                                                        @foreach($val->province_name as $kk=>$vv)
+                                                        <label class="label label-success" style="display:inline-block">{{$vv['province_name']}}</label>
+                                                        @endforeach
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
+                                                        <input type="text" name="first_weight" value="{{$val->first_weight}}" class="input-sm form-control"></td>
                                                     <td class="price">
-                                                        <input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
+                                                        <input type="text" name="additional_weight" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
                                                     <td class="price">
-                                                        <input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
+                                                        <input type="text" name="freight" value="{{$val->freight}}" class="input-sm form-control"></td>
                                                     <td class="price">
-                                                        <input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
+                                                        <input type="text" name="renewal" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail(175)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
-                                                {{--@endforeach--}}
+                                                @endforeach
                                                 </tbody>
                                             </table>
                                             <div style="clear: both;"></div>
