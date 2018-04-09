@@ -160,15 +160,16 @@
             <div class="col-sm-12 col-sm-offset-3">
                 <button type="button" class="btn btn-success" onclick="EditPostForm()">修改菜单</button>
                 {{--<button type="button" class="btn btn-primary" id="addBtn">一键创建默认自定义菜单</button>--}}
-                <button type="button" class="btn btn-dark" id="addBtn">一键同步到微信公众号</button>
+                <button type="button" class="btn btn-dark" id="wechat_conditional_menu_btn">一键同步到微信公众号</button>
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
         <input type="hidden" id="parent_id_item" name="parent_id_item" value="{{ $conditionalmenu["parent_id"] }}">
         <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
         <input type="hidden" id="conditional_menu_edit" value="{{ url('fansmanage/ajax/conditional_menu_edit') }}">
-        <input type="hidden" id="wechat_conditional_menu_add" value="{{ url('fansmanage/ajax/wechat_conditional_menu_add') }}">
-        <input type="hidden" id="tag_id" value="0">
+        <input type="hidden" id="wechat_conditional_menu_add"
+               value="{{ url('fansmanage/ajax/wechat_conditional_menu_add') }}">
+        <input type="hidden" id="tag_id" value="{{$conditionalmenu["tag_id"]}}">
         <input type="hidden" id="edit_id" value="{{$edit_id}}">
     </form>
 
@@ -177,14 +178,11 @@
 
 
 <script>
-
-    $("#addBtn").click(function(){
+    $("#wechat_conditional_menu_btn").click(function () {
         var url = $('#wechat_conditional_menu_add').val();
         var token = $('#_token').val();
         var tag_id = $('#tag_id').val();
         var data = {'_token': token, 'tag_id': tag_id};
-        console.log(data);
-        return ;
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
@@ -252,7 +250,7 @@
         var url = target.attr("action");
         var data = target.serialize();
         var $member_label = $("#member_label").val();
-        if($("#parent_id").val() == 0){
+        if ($("#parent_id").val() == 0) {
             data += '&parent_id=0'
         }
 

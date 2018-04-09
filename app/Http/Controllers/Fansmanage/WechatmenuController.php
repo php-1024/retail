@@ -535,6 +535,10 @@ class WechatmenuController extends CommonController
         return response()->json(['data' => '添加自定义菜单成功！', 'status' => '1']);
     }
 
+    /**
+     * 获取个性化菜单列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function conditional_menu_get()
     {
         // 中间件参数 集合
