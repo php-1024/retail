@@ -545,6 +545,9 @@ class WechatmenuController extends CommonController
         // 获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', '0']], 0, 'id', 'asc');
         dump($list);
+        if (!empty($list)) {
+            dump(1);
+        }
         // 个性化菜单
         $son_menu = [];
         // 判断菜单列表
