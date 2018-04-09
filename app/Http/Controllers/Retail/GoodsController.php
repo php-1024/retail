@@ -16,6 +16,7 @@ use App\Models\RetailStock;
 use App\Models\RetailStockLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class GoodsController extends Controller
@@ -154,6 +155,11 @@ class GoodsController extends Controller
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
+            if(Storage::delete($goods_thumb)){
+                dd('删除成功！');
+            }else{
+                dd('删除失败！');
+            }
 
         //  Storage::delete($goods_thumb);
          //   RetailStock::select_delete($id);
