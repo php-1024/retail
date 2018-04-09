@@ -338,27 +338,22 @@ class UserController extends CommonController
 
         dump($list);
 
-        if(!empty($list)) {
-            dump(1);
-            $list = $list -> toArray();
-            // 处理数据
-            foreach ($list as $key => $value) {
-                // 获取粉丝数据
-                $re = UserInfo::getOneUserInfo([['user_id', $value->user_id]]);
-                // 微信昵称
-                $list[$key]['nickname'] = $re['nickname'];
-                // 微信头像
-                $list[$key]['head_imgurl'] = $re['head_imgurl'];
-                // 获取推荐人id
-                $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
-                // 获取推荐人名称
-                $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
-                // 粉丝对应的标签id
-                $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();
-            }
+
+        // 处理数据
+        foreach ($list as $key => $value) {
+            // 获取粉丝数据
+            $re = UserInfo::getOneUserInfo([['user_id', $value->user_id]]);
+            // 微信昵称
+            $list[$key]['nickname'] = $re['nickname'];
+            // 微信头像
+            $list[$key]['head_imgurl'] = $re['head_imgurl'];
+            // 获取推荐人id
+            $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
+            // 获取推荐人名称
+            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
+            // 粉丝对应的标签id
+            $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();
         }
-
-
         // 会员标签
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
         // 渲染页面
