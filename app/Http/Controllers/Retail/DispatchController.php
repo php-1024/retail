@@ -98,7 +98,7 @@ class DispatchController extends Controller
             }
         }
         $province = Province::getList([],0,'id','ASC')->toArray();
-        $new_array = array_diff($province,$province_name);
+        $new_array = array_diff($province_name,$province);
 //                dump($province_name);
 //        dump($province->toArray());
         dump($new_array);
