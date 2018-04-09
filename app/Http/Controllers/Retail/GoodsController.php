@@ -156,14 +156,14 @@ class GoodsController extends Controller
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品图片！');//保存操作记录
             } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！'.'123');//保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
             return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
+        return response()->json(['data' => '删除商品图片成功'.'123', 'status' => '1']);
     }
     //图片异步加载部分
     public function goods_thumb(Request $request)
