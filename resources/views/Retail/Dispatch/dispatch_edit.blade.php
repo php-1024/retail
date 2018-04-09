@@ -47,8 +47,8 @@
                             </header>
                             <div class="line line-border b-b pull-in"></div>
                             <div style="clear:both"></div>
+                            <form method="post" class="form-horizontal" role="form" id="dispatch_province_edit_check" action="{{ url('retail/ajax/dispatch_province_edit_check') }}">
                             <div class="col-sm-12">
-                                {{--<form method="post" class="form-horizontal" role="form" id="search" action="{{ url('retail/ajax/dispatch_province_add_check') }}">--}}
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->name}}" name="dispatch_name">
@@ -57,7 +57,6 @@
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
                                     </div>
-                                {{--</form>--}}
                             </div>
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
@@ -153,11 +152,12 @@
                                 <footer class="panel-footer">
                                     <div class="row">
                                         <div class="col-sm-12 col-sm-offset-6">
-                                            <button type="button" class="btn btn-success" onclick="">确认提交
+                                            <button type="button" class="btn btn-success" onclick="dispatch_province_edit_check()">确认提交
                                             </button>
                                         </div>
                                     </div>
                                 </footer>
+                            </form>
                         </section>
                     </section>
                 </section>
@@ -202,6 +202,34 @@
         });
         province = province.substring(0, province.length-1);
         var data = '_token='+_token+'&'+'dispatch_id='+dispatch_id+'&'+province;
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+
+    //运费模板编辑
+    function dispatch_province_edit_check() {
+        var target = $("#dispatch_province_edit_check");
+        var url = target.attr("action");
+        var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
