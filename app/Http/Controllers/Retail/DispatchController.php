@@ -142,16 +142,28 @@ class DispatchController extends Controller
     {
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
-        $dispatch_id = $request->get('dispatch_id');
-        $first_weight = $request->get('first_weight');
-        $additional_weight = $request->get('additional_weight');
-        $freight = $request->get('freight');
-        $renewal = $request->get('renewal');
-//        foreach ($first_weight as $key=>$val){
-//
-//        };
-//        DispatchProvince::editDispatchProvince(['id'=>$dispatch_id],$dispatch_data);
-        dd($request);
+
+        $dispatch_name = $request->get('dispatch_name');     //获取运费模板名称
+        $dispatch_id = $request->get('dispatch_id');         //获取运费模板id
+        $dispatch_data = $request->get('dispatch_data');      //获取运费模板详细信息
+        DB::beginTransaction();
+        try {
+            foreach ($dispatch_data as $key=>$val){
+                DispatchProvince::editDispatchProvince(['id'=>$key,'dispatch_id'=>$dispatch_id],['first_weight'=>$val['first_weight'],'additional_weight'=>$val['additional_weight'],'freight'=>$val['freight'],'renewal'=>$val['renewal']]);
+            }
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统修改了运费模板！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了运费模板！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改运费区域信息失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改运费区域信息成功', 'status' => '1']);
     }
 
 }
