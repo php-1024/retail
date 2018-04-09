@@ -225,12 +225,10 @@
         var url = target.attr("action");
         var data = target.serialize();
         var $member_label = $("#member_label").val();
-        console.log($("#parent_id").val());
         if($("#parent_id").val() == 0){
             data += '&parent_id=0'
         }
-        console.log(data);
-        return;
+
         $.post(url, data, function (json) {
             if (json.status == 1) {
                 swal({
