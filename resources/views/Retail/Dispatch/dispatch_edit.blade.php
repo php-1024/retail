@@ -61,7 +61,7 @@
                                 <div style="clear:both"></div>
                                 <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
-                                <form method="post" class="form-horizontal" role="form" id="dispatch_province_add_check" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
+                                    <input type="hidden" id="dispatch_province_add_check" value=" {{ url('retail/ajax/dispatch_province_add_check') }} ">
                                     <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
                                     <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
                                     <div class="col-lg-5">
@@ -105,7 +105,6 @@
                                             <div style="clear: both;"></div>
                                         </section>
                                     </div>
-                                </form>
                                     <div class="col-lg-7">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
@@ -192,8 +191,7 @@
     });
     //提交表单
     function dispatch_province_add_check() {
-        var target = $("#dispatch_province_add_check");
-        var url = target.attr("action");
+        var url = $("#dispatch_province_add_check").val();
         var _token = $('#_token').val();
         var dispatch_id = $('#dispatch_id').val();
         var province = '';
