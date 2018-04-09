@@ -107,7 +107,6 @@ class DispatchController extends Controller
                 unset($province[$k]);
             }
         }
-        dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'dispatch_province'=>$dispatch_province,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
@@ -136,6 +135,12 @@ class DispatchController extends Controller
             return response()->json(['data' => '添加运费区域失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '添加运费区域信息成功', 'status' => '1']);
+    }
+
+    //运费模板省份编辑
+    public function dispatch_province_edit_check(Request $request)
+    {
+        dd($request);
     }
 
 }
