@@ -195,10 +195,11 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var _token = $('#_token').val();
-        var province = '';
+        var province = [];
         $('#multiselect_to option').each(function(i,v){
-            province += 'provinces[]='+$(v).val()+'&';
+            province += 'province='+$(v).val()+'&';
         });
+
         province = province.substring(0, province.length-1);
         var data = '_token='+_token+'&province='+province;
         console.log(data);

@@ -2,6 +2,7 @@
 /**
  * 自定义菜单 模块，包括：
  *   自定义菜单，个性化菜单
+ *   同时还具备一键上传到微信公众号的功能
  */
 
 namespace App\Http\Controllers\Fansmanage;
@@ -544,21 +545,18 @@ class WechatmenuController extends CommonController
         $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
         // 获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', '0']], 0, 'id', 'asc');
-        dump($list->toArray());
-        if (!empty($list->toArray())) {
-            dump(1);
-        }else{
-            dump(2);
-        }
+        $list = $list->toArray();
+
         // 个性化菜单
         $son_menu = [];
         // 判断菜单列表
         if (!empty($list)) {
             // 处理菜单数据
             foreach ($list as $key => $val) {
-                $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val->id]], 0, 'id', 'asc');
+                // 组装子菜单
+                $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val['id']]], 0, 'id', 'asc');
                 if (!empty($sm)) {
-                    $son_menu[$val->id] = $sm;
+                    $son_menu[$val['id']] = $sm;
                 }
                 unset($sm);
             }
@@ -579,9 +577,8 @@ class WechatmenuController extends CommonController
         $id = request()->get('id');
         // 获取该id 对应的自定义菜单
         $conditionalmenu = WechatConditionalMenu::getOne([['id', $id]]);
-
+        // 获取标签信息
         $label_info = Label::getInfo([['wechat_id', $conditionalmenu['tag_id']]], ["id", "label_name"]);
-
         //获取授权APPID
         $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
         //获取触发关键字列表
@@ -617,9 +614,8 @@ class WechatmenuController extends CommonController
         $parent_id = request()->get('parent_id');
         // 获取目前菜单的信息
         $data = WechatConditionalMenu::getOne([['id', $menu_id]]);
-        // 处理结构树
-        $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
-
+//        // 处理结构树
+//        $ziparent_tree = $data['parent_tree'] . $data['id'] . ',';
 //        // 判断是否子菜单
 //        $re = WechatConditionalMenu::checkRowExists([['organization_id', $this->admin_data['organization_id']], ['tag_id', $data['tag_id']], ['parent_tree', $ziparent_tree]]);
 //        if ($re) {
@@ -812,7 +808,6 @@ class WechatmenuController extends CommonController
         // 创建个性化菜单
         $re = \Wechat::create_conditional_menu($auth_info['authorizer_access_token'], $data);
         $re = json_decode($re, true);
-        dd($re);
         if (!empty($re['menuid'])) {
             return response()->json(['data' => '同步成功！', 'status' => '1']);
         } else {
