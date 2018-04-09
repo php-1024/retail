@@ -164,7 +164,7 @@ class AgentController extends Controller
                 // 添加账号返回id
                 $account_id = Account::addAccount($accdata);
 
-                //数据处理
+                // 数据处理
                 $acinfodata = [
                     // 用户id
                     'account_id' => $account_id,
@@ -176,18 +176,25 @@ class AgentController extends Controller
                 // 添加到用户信息详情
                 AccountInfo::addAccountInfo($acinfodata);
 
+                // 数据处理
                 $orgagentinfo = [
+                    // 代理id
                     'agent_id' => $organization_id,
+                    // 代理负责人名字
                     'agent_owner' => $oneAgent['agent_owner'],
+                    // 代理负责人身份证
                     'agent_owner_idcard' => $oneAgent['agent_owner_idcard'],
+                    // 代理负责人手机号
                     'agent_owner_mobile' => $oneAgent['agent_owner_mobile']
                 ];
                 // 添加到服务商组织信息表
                 OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);
 
-                $module_node_list = Module::getListProgram($program_id, [], 0, 'id'); //获取当前系统的所有节点
+                // 获取当前系统的所有节点
+                $module_node_list = Module::getListProgram($program_id, [], 0, 'id');
                 foreach ($module_node_list as $key => $val) {
                     foreach ($val->program_nodes as $k => $v) {
+                        // 为当前用户加上节点权限
                         AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
                     }
                 }
@@ -197,7 +204,8 @@ class AgentController extends Controller
                 DB::commit();
 
             } catch (Exception $e) {
-                DB::rollBack(); //事件回滚
+                // 事件回滚
+                DB::rollBack();
                 return response()->json(['data' => '审核失败', 'status' => '0']);
             }
             return response()->json(['data' => '申请通过', 'status' => '1']);
