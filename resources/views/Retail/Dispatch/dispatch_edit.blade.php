@@ -66,7 +66,7 @@
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
                                     <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
                                     <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
                                             <table class="table table-striped table-bordered ">
@@ -108,7 +108,7 @@
                                         </section>
                                     </div>
                                 </form>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-8">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
                                             <table class="table table-striped table-bordered ">
