@@ -91,6 +91,8 @@ class DispatchController extends Controller
         $dispatch_id = $request->get('id');                //模板ID
         $dispatch = Dispatch::getOne(['id'=>$dispatch_id]);     //运费模板信息
         $province = Province::getList([],0,'id','ASC');
+        $dispatch_province = DispatchProvince::getList(['dispatch_id'=>$dispatch_id],0,'id','ASC');
+        dump($dispatch_province);
         return view('Retail/Dispatch/dispatch_edit',['province'=>$province,'dispatch'=>$dispatch,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
