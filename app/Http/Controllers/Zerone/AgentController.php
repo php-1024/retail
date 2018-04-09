@@ -112,20 +112,27 @@ class AgentController extends Controller
                 $orgparent_tree = '0' . ',' . '1' . ',';
                 //数据处理
                 $orgData = [
+                    // 代理名称
                     'organization_name' => $oneAgent['agent_name'],
+                    // 上级id
                     'parent_id' => '1',
+                    // 组织树
                     'parent_tree' => $orgparent_tree,
-                    'program_id' => '2',
+                    // 程序id
+                    'program_id' => $program_id,
+                    // 类型2为代理
                     'type' => '2',
+                    // 状态1正常 0冻结
                     'status' => '1',
-                    'asset_id' => '0'
                 ];
                 // 添加代理并返回组织id
                 $organization_id = Organization::addOrganization($orgData);
 
                 //数据处理
                 $agentdata = [
+                    // 代理id
                     'agent_id' => $organization_id,
+                    // 战区id
                     'zone_id' => $oneAgent['zone_id']
                 ];
                 // 战区关联代理
@@ -433,11 +440,11 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_structure', ['listOrg' => $listOrg, 'oneOrg' => $oneOrg, 'structure' => $structure, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    /*
+    /**
      * 递归生成人员结构的方法
      * $list - 结构所有人员的无序列表
      * $id - 上级ID
-    */
+     */
     private function account_structure($list, $id)
     {
         $structure = '';
