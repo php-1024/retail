@@ -156,13 +156,7 @@ class GoodsController extends Controller
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
             $thumb = 'uploads/catering/20180409105716752.png';
-            if(Storage::delete($thumb)){
-                dd('删除成功！');
-            }else{
-                dd('删除失败！');
-            }
-
-        //  Storage::delete($goods_thumb);
+          Storage::delete($thumb);
          //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
