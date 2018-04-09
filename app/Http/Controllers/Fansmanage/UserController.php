@@ -338,6 +338,7 @@ class UserController extends CommonController
 
         dump($list);
 
+
         // 处理数据
         foreach ($list as $key => $value) {
             // 获取粉丝数据

@@ -20,6 +20,9 @@ class TestController extends Controller
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', 5]], '', '10', 'id');
 
-        dd($list);
+        dump($list);
+        dump($list[0]["userOrigin"]);
+
+        dd($list["data"][0]["user_origin"]);
     }
 }
