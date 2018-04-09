@@ -160,7 +160,7 @@
             <div class="col-sm-12 col-sm-offset-3">
                 <button type="button" class="btn btn-success" onclick="EditPostForm()">修改菜单</button>
                 {{--<button type="button" class="btn btn-primary" id="addBtn">一键创建默认自定义菜单</button>--}}
-                <button type="button" class="btn btn-dark" id="addBtn">一键同步到微信公众号</button>
+                <button type="button" class="btn btn-dark" id="wechat_conditional_menu_btn">一键同步到微信公众号</button>
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -178,7 +178,7 @@
 
 
 <script>
-    $("#addBtn").click(function () {
+    $("#wechat_conditional_menu_btn").click(function () {
         var url = $('#wechat_conditional_menu_add').val();
         var token = $('#_token').val();
         var tag_id = $('#tag_id').val();
