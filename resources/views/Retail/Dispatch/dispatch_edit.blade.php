@@ -123,7 +123,7 @@
                                                 </tr>
                                                 </thead>
                                                 <tbody id="goods_list">
-                                                @foreach($dispatch_province as $key=>$val)
+                                                {{--@foreach($dispatch_province as $key=>$val)--}}
                                                 <tr>
                                                     <td>
                                                         <label class="label label-success" style="display:inline-block">北京市</label>
@@ -144,7 +144,7 @@
                                                         </button>
                                                     </td>
                                                 </tr>
-                                                @endforeach
+                                                {{--@endforeach--}}
                                                 </tbody>
                                             </table>
                                             <div style="clear: both;"></div>
