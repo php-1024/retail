@@ -40,6 +40,7 @@ class DispatchProvince extends Model{
     //修改数据
     public static function editDispatchProvince($where,$param){
         if($model = self::where($where)->first()){
+            dd($model);
             foreach($param as $key=>$val){
                 $model->$key=$val;
             }
