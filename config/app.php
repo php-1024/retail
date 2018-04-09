@@ -327,7 +327,7 @@ return [
         'HttpCurl' => App\Facades\HttpCurlFacade::class,
         'IP2Attr' => App\Facades\IP2AttrFacade::class,
         'ZeroneRedis' => App\Facades\ZeroneRedisFacade::class,
-        'Wechat' => App\Facades\WechatFacade::class
+        'Wechat' => App\Facades\WechatFacade::class,
     ],
 
 ];
