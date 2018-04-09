@@ -16,6 +16,7 @@ use App\Models\RetailStock;
 use App\Models\RetailStockLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class GoodsController extends Controller
@@ -154,8 +155,8 @@ class GoodsController extends Controller
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
-
-        //  Storage::delete($goods_thumb);
+            $thumb = '/uploads/catering/20180409105716752.png';
+            Storage::delete($thumb);
          //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
