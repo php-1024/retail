@@ -22,9 +22,9 @@
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
             <div class="col-sm-10">
-                {{--<select name="parent_id" class="form-control m-b" id="parent_id"--}}
-                        {{--@if($conditionalmenu->parent_id == 0) disabled="true" @endif>--}}
-                    <select name="parent_id" class="form-control m-b" id="parent_id" disabled="true">
+                <select name="parent_id" class="form-control m-b" id="parent_id"
+                        @if($conditionalmenu->parent_id == 0) disabled="true" @endif>
+                    {{--<select name="parent_id" class="form-control m-b" id="parent_id" disabled="true">--}}
                     <option value="0">无</option>
                     @foreach($list as $key=>$val)
                         <option value="{{$val->id}}"
