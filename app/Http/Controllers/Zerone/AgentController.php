@@ -13,6 +13,7 @@ use App\Models\OrganizationAssets;
 use App\Models\OrganizationAssetsallocation;
 use App\Models\Program;
 use App\Models\WarzoneAgent;
+use App\Services\ZeroneRedis\Check;
 use Illuminate\Http\Request;
 use App\Models\OrganizationAgentapply;
 use App\Models\Warzone;
@@ -27,6 +28,8 @@ class AgentController extends Controller
      */
     public function agent_examinelist(Request $request)
     {
+        echo Check::check();
+
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
         // 中间件产生的管理员数据参数
