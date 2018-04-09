@@ -151,7 +151,7 @@ class GoodsController extends Controller
 
 
         if(!unlink($goods_thumb))//删除磁盘上的图片文件
-            return response()->json(['data' => '删除商品图片文件失败，请检查', 'status' => '0']);
+            return response()->json(['data' => '删除商品图片文件:'.$goods_thumb.' 失败，请检查', 'status' => '0']);
 
         DB::beginTransaction();
         try {
@@ -174,7 +174,7 @@ class GoodsController extends Controller
         }
 
 
-        return response()->json(['data' => '删除商品图片成功'.$goods_thumb, 'status' => '1']);
+        return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
     }
     //图片异步加载部分
     public function goods_thumb(Request $request)
