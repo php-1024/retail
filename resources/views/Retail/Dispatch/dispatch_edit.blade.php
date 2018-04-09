@@ -64,7 +64,8 @@
                             <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
-                                    <input type="hidden" name="_token" value=" {{ csrf_token() }} ">
+                                    <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
+
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
@@ -199,7 +200,7 @@
             province += 'provinces[]='+$(v).val()+'&';
         });
         province = province.substring(0, province.length-1);
-        var data = '_token='+_token+'&'+province;
+        var data = '_token='+_token+'&province='+province;
         console.log(data);
         $.post(url, data, function (json) {
             if (json.status == -1) {
