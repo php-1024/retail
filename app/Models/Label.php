@@ -16,7 +16,7 @@ class Label extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
-
+    protected $guarded = ["fansmanage_id","store_id","label_name","label_number","wechat_id"];
 
     //获取单条信息
     public static function getOneLabel($where)
@@ -24,23 +24,25 @@ class Label extends Model
         return self::where($where)->first();
     }
 
-    //获取列表
+    // 获取列表
     public static function ListLabel($where)
     {
         return self::where($where)->get();
     }
 
-    //添加会员标签
+    /**
+     * 添加标签
+     * @param $param
+     * @return bool
+     */
     public static function addLabel($param)
     {
-        $model = new Label();
-        $model->fansmanage_id = $param['fansmanage_id'];//粉丝管理系统ID
-        $model->store_id = $param['store_id'];//店铺id
-        $model->label_name = $param['label_name'];//标签名称
-        $model->label_number = $param['label_number'];//标签粉丝数量
-        $model->wechat_id = $param['wechat_id'];//微信公众号粉丝标签id
-        $model->save();
-        return $model->id;
+        $res = self::create($param);
+        if(!empty($res)){
+            return $res->toArray();
+        }else{
+            return false;
+        }
     }
 
     //修改数据
@@ -64,6 +66,12 @@ class Label extends Model
         }
     }
 
+    /**
+     * 获取某个标签的信息
+     * @param array $where
+     * @param array $field
+     * @return bool
+     */
     public static function getInfo($where = [], $field = [])
     {
         $res = self::select($field)->where($where)->first();

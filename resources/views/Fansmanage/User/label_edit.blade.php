@@ -1,4 +1,5 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('fansmanage/ajax/label_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm"
+      action="{{ url('fansmanage/ajax/label_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{$oneLabel->id}}">
     <div class="modal-dialog">
@@ -12,17 +13,17 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$oneLabel->label_name}}" placeholder="标签名称" class="form-control" name="label_name">
+                            <input type="text" value="{{$oneLabel->label_name}}" placeholder="标签名称" class="form-control"
+                                   name="label_name">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
-
-
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
+                            <input type="password" value="" placeholder="安全密码" class="form-control"
+                                   name="safe_password">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -43,24 +44,26 @@
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url, data, function (json) {
+            console.log(json);
             if (json.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if (json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
+            } else {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                    //type: "warning"
+                }, function () {
+                    $("#myModal").modal("hide");
                 });
             }
         });

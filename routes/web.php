@@ -385,6 +385,10 @@ Route::group(['prefix' => 'agent'], function () {
 
 /**********************粉丝管理系统*********************/
 Route::group(['prefix' => 'fansmanage'], function () {
+
+    Route::get('/test', 'Fansmanage\TestController@test');
+
+
     //登录页面组
     Route::group(['prefix' => 'login'], function () {
         Route::get('/', 'Fansmanage\LoginController@display')->middleware('FansmanageCheck');                           //登录页面路由

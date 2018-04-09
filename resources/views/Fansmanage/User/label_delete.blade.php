@@ -13,7 +13,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-                            <input type="password" value="{{$oneLabel->label_name}}" class="form-control" name="label_name">
+                            <input type="text" value="{{$oneLabel->label_name}}" class="form-control" name="label_name">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
+                            <input type="password" value="" placeholder="安全密码" class="form-control" name="safe_password">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -60,7 +60,7 @@
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    window.location.reload();
+                    $("#myModal").modal("hide");
                 });
             }
         });
