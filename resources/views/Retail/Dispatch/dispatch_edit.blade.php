@@ -127,7 +127,7 @@
                                                 <tr>
                                                     <td>
                                                         @foreach($val->province_name as $kk=>$vv)
-                                                        <label class="label label-success" style="display:inline-block">{{$vv->province_name}}</label>
+                                                        <label class="label label-success" style="display:inline-block">{{$vv['province_name']}}</label>
                                                         @endforeach
                                                     </td>
                                                     <td>
