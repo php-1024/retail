@@ -59,7 +59,6 @@
                                     </div>
                                 {{--</form>--}}
                             </div>
-
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
