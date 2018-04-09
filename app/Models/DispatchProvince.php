@@ -16,7 +16,7 @@ class DispatchProvince extends Model{
     public static function addDispatchProvince($param){
         $model = new DispatchProvince();
         $model->dispatch_id = $param['dispatch_id'];
-        $model->provice_id = $param['provice_id'];
+        $model->province_id = $param['province_id'];
         $model->save();
         return $model->id;
     }
