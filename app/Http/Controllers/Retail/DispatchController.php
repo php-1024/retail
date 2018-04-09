@@ -97,7 +97,7 @@ class DispatchController extends Controller
                 $province_name[$kk] = Province::getOne(['id'=>$vv])->first()->toArray();
             }
             $province_data[$key] = $province_name;
-            $val->province_name = $province_data;       //将查询出来的省份存进原有模型
+            $val->province_name = $province_data[$key];       //将查询出来的省份存进原有模型
         }
         $province = Province::getList([],0,'id','ASC')->toArray();  //  查询出所有省份
         //找出已选的省份并删除
