@@ -147,7 +147,9 @@ class DispatchController extends Controller
         $additional_weight = $request->get('additional_weight');
         $freight = $request->get('freight');
         $renewal = $request->get('renewal');
-        foreach ()
+        foreach ($first_weight as $key=>$val){
+
+        };
         DispatchProvince::editDispatchProvince(['id'=>$dispatch_id],$dispatch_data);
         dd($request);
     }
