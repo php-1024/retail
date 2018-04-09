@@ -147,13 +147,14 @@ class GoodsController extends Controller
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
         $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
-       // $goods_thumb_filepath=$request->get('filepath');
+
+
         //  $id = RetailStock::getPluck(['goods_thumb_id'=>$goods_thumb_id],'id')->first();
         DB::beginTransaction();
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
-
+            Storage::delete($goods_thumb);
          //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
