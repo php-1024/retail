@@ -2,43 +2,43 @@
 
 return [
 
-    'encrypt_key'=>'1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',//加密盐
-    'tooling_encrypt_key'=>'1asdfnonlkj324jtsdfmio2o3immro43imio34om5om4om5',//程序管理系统加密盐
+    'encrypt_key' => '1asdfnonlkj324jtio5nto45j89y6jonh5968h5oo23nr',//加密盐
+    'tooling_encrypt_key' => '1asdfnonlkj324jtsdfmio2o3immro43imio34om5om4om5',//程序管理系统加密盐
 
     /*******************零壹平台**************************/
-    'zerone_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdejwio',//零壹管理平台登录密码加密盐
-    'zerone_safe_encrypt_key'=>'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdfd21a1',//零壹管理平台安全密码加密盐
+    'zerone_encrypt_key' => 'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdejwio',//零壹管理平台登录密码加密盐
+    'zerone_safe_encrypt_key' => 'hasuidfhsdafnkdfg1oi2j382rj89243503945hjfdfd21a1',//零壹管理平台安全密码加密盐
     /*******************零壹平台**************************/
 
     /*******************服务商**************************/
-    'agent_encrypt_key'=>'sdfdsf121s2dfdsfds121s2df45dsf12dsf45dsf12sd45sdf12ds',//零壹管理平台登录密码加密盐
-    'agent_safe_encrypt_key'=>'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
+    'agent_encrypt_key' => 'sdfdsf121s2dfdsfds121s2df45dsf12dsf45dsf12sd45sdf12ds',//零壹管理平台登录密码加密盐
+    'agent_safe_encrypt_key' => 'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
     /*******************服务商**************************/
 
     /*******************商户***************************/
-    'company_encrypt_key'=>'asdfghjklqwerasxczdfgrtijnjhbjhgysjughaysasaisdsyssd',//零壹管理平台登录密码加密盐
-    'company_safe_encrypt_key'=>'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
+    'company_encrypt_key' => 'asdfghjklqwerasxczdfgrtijnjhbjhgysjughaysasaisdsyssd',//零壹管理平台登录密码加密盐
+    'company_safe_encrypt_key' => 'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
     /*******************商户***************************/
 
     /*******************总店**************************/
-    'catering_encrypt_key'=>'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
-    'catering_safe_encrypt_key'=>'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
+    'catering_encrypt_key' => 'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
+    'catering_safe_encrypt_key' => 'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
     /*******************总店**************************/
 
 
     /*******************粉丝管理系统**************************/
-    'fansmanage_encrypt_key'=>'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
-    'fansmanage_safe_encrypt_key'=>'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
+    'fansmanage_encrypt_key' => 'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
+    'fansmanage_safe_encrypt_key' => 'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
     /*******************粉丝管理系统**************************/
 
     /*******************餐饮分店**************************/
-    'branch_encrypt_key'=>'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店业务系统登录密码加密盐
-    'branch_safe_encrypt_key'=>'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店业务系统全密码加密盐
+    'branch_encrypt_key' => 'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店业务系统登录密码加密盐
+    'branch_safe_encrypt_key' => 'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店业务系统全密码加密盐
     /*******************餐饮分店**************************/
 
     /*******************餐饮分店简版**************************/
-    'catering_branch_encrypt_key'=>'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店简版业务系统登录密码加密盐
-    'catering_branch_safe_encrypt_key'=>'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店简版业务系统全密码加密盐
+    'catering_branch_encrypt_key' => 'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店简版业务系统登录密码加密盐
+    'catering_branch_safe_encrypt_key' => 'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店简版业务系统全密码加密盐
     /*******************餐饮分店简版**************************/
 
     /*************
@@ -46,18 +46,17 @@ return [
      * 最新整理
      **********/
     /*******************零售版店铺**************************/
-    'retail_encrypt_key'=>'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 零售版店铺登录密码加密盐
-    'retail_safe_encrypt_key'=>'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 零售版店铺全密码加密盐
+    'retail_encrypt_key' => 'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 零售版店铺登录密码加密盐
+    'retail_safe_encrypt_key' => 'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 零售版店铺全密码加密盐
     /*******************零售版店铺**************************/
 
 
-
     /******************微信开放平台相关参数********************/
-    'wechat_open_setting'=>[
-        'open_appid'=>'wxd22806e3df9e9d35', //开放平台APPID
-        'open_token'=>'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
-        'open_key'=>'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
-        'open_appsecret'=>'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
+    'wechat_open_setting' => [
+        'open_appid' => 'wxd22806e3df9e9d35', //开放平台APPID
+        'open_token' => 'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
+        'open_key' => 'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
+        'open_appsecret' => 'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
     ],
     /******************微信开放平台相关参数********************/
 
@@ -66,27 +65,26 @@ return [
      * 用于建设零壹的账号体系
      * 零壹服务号
      */
-    'wechat_web_setting'=>[
-        'appid'=>'wx3fb8f4754008e524',
-        'appsecret'=>'e889b1da27356de8858ac9b7934fe228',
+    'wechat_web_setting' => [
+        'appid' => 'wx3fb8f4754008e524',
+        'appsecret' => 'e889b1da27356de8858ac9b7934fe228',
     ],
 
 
-
-    'allowed_error_times'=>5,//允许登录错误次数
+    'allowed_error_times' => 5,//允许登录错误次数
 
 
     /*
      * 零壹管理系统无需检验权限的路由
      */
-    'zerone_route_except'=>[
+    'zerone_route_except' => [
         'zerone',//零壹管理平台首页
     ],
 
     /*
     * 服务商管理系统无需检验权限的路由
     */
-    'agent_route_except'=>[
+    'agent_route_except' => [
         'agent',//零壹管理平台首页
     ],
 
@@ -94,7 +92,7 @@ return [
     /*
     * 零售管理系统无需检验权限的路由
     */
-    'retail_route_except'=>[
+    'retail_route_except' => [
         'retail',//零售管理系统首页
     ],
 
@@ -328,6 +326,7 @@ return [
         'IP2Attr' => App\Facades\IP2AttrFacade::class,
         'ZeroneRedis' => App\Facades\ZeroneRedisFacade::class,
         'Wechat' => App\Facades\WechatFacade::class,
+        'WechatError' => App\Facades\WechatErrorFacade::class,
     ],
 
 ];
