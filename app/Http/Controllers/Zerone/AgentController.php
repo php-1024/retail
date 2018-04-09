@@ -230,6 +230,98 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_add', ['warzone_list' => $warzone_list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
+    private function add_agent($oneAgent){
+        // 代理组织树
+        $orgparent_tree = '0' . ',' . '1' . ',';
+        //数据处理
+        $orgData = [
+            // 代理名称
+            'organization_name' => $oneAgent['agent_name'],
+            // 上级id
+            'parent_id' => '1',
+            // 组织树
+            'parent_tree' => $orgparent_tree,
+            // 程序id
+            'program_id' => '2',
+            // 类型2为代理
+            'type' => '2',
+            // 状态1正常 0冻结
+            'status' => '1',
+        ];
+        // 添加代理并返回组织id
+        $organization_id = Organization::addOrganization($orgData);
+
+        //数据处理
+        $agentdata = [
+            // 代理id
+            'agent_id' => $organization_id,
+            // 战区id
+            'zone_id' => $oneAgent['zone_id']
+        ];
+        // 战区关联代理
+        WarzoneAgent::addWarzoneAgent($agentdata);
+
+        // 查询零壹账号人数
+        $user = Account::max('account');
+        // 新的用户账号
+        $account = $user + 1;
+        // 树是上级的树拼接上级的ID；
+        $parent_tree = '0' . ',';
+        // 数据处理
+        $accdata = [
+            // 上级id
+            'parent_id' => '0',
+            // 组织树
+            'parent_tree' => $parent_tree,
+            // 账号深度
+            'deepth' => '1',
+            // 手机号
+            'mobile' => $oneAgent['agent_owner_mobile'],
+            // 密码
+            'password' => $oneAgent['agent_password'],
+            // 组织id
+            'organization_id' => $organization_id,
+            // 登入账号
+            'account' => $account
+        ];
+        // 添加账号返回id
+        $account_id = Account::addAccount($accdata);
+
+        // 数据处理
+        $acinfodata = [
+            // 用户id
+            'account_id' => $account_id,
+            // 负责人姓名
+            'realname' => $oneAgent['agent_owner'],
+            // 负责人身份证
+            'idcard' => $oneAgent['agent_owner_idcard']
+        ];
+        // 添加到用户信息详情
+        AccountInfo::addAccountInfo($acinfodata);
+
+        // 数据处理
+        $orgagentinfo = [
+            // 代理id
+            'agent_id' => $organization_id,
+            // 代理负责人名字
+            'agent_owner' => $oneAgent['agent_owner'],
+            // 代理负责人身份证
+            'agent_owner_idcard' => $oneAgent['agent_owner_idcard'],
+            // 代理负责人手机号
+            'agent_owner_mobile' => $oneAgent['agent_owner_mobile']
+        ];
+        // 添加到代理组织信息表
+        OrganizationAgentinfo::addOrganizationAgentinfo($orgagentinfo);
+
+        // 获取当前系统的所有节点
+        $module_node_list = Module::getListProgram($program_id, [], 0, 'id');
+        foreach ($module_node_list as $key => $val) {
+            foreach ($val->program_nodes as $k => $v) {
+                // 为当前用户加上节点权限
+                AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
+            }
+        }
+    }
     /**
      * 提交代理数据
      */
@@ -241,19 +333,24 @@ class AgentController extends Controller
         $route_name = $request->path();
         // 代理名称
         $organization_name = $request->input('organization_name');
-        $where = [['organization_name', $organization_name]];
-        if (Organization::checkRowExists($where)) {
+        // 根据名字查询，看是否重复
+        if (Organization::checkRowExists([['organization_name', $organization_name]])) {
             return response()->json(['data' => '代理名称已存在', 'status' => '0']);
         }
-        $zone_id = $request->input('zone_id'); //战区id
-
-        $parent_tree = '0' . ',' . '1' . ','; //树是上级的树拼接上级的ID；
-
-        $mobile = $request->input('mobile'); //手机号码
-        $password = $request->input('agent_password'); //用户密码
-        $key = config("app.agent_encrypt_key"); //获取加密盐
-        $encrypted = md5($password); //加密密码第一重
-        $encryptPwd = md5("lingyikeji" . $encrypted . $key); //加密密码第二重
+        // 战区id
+        $zone_id = $request->input('zone_id');
+        // 树是上级的树拼接上级的ID；
+        $parent_tree = '0' . ',' . '1' . ',';
+        // 手机号码
+        $mobile = $request->input('mobile');
+        // 用户密码
+        $password = $request->input('agent_password');
+        // 获取加密盐
+        $key = config("app.agent_encrypt_key");
+        // 加密密码第一重
+        $encrypted = md5($password);
+        // 加密密码第二重
+        $encryptPwd = md5("lingyikeji" . $encrypted . $key);
 
         DB::beginTransaction();
         try {
