@@ -131,15 +131,15 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="firstweight175" id="firstweight175" value="0" class="input-sm form-control"></td>
+                                                        <input type="text" name="first_weight" value="{{$val->first_weight}}" class="input-sm form-control"></td>
                                                     <td class="price">
-                                                        <input type="text" name="firstprice175" id="firstprice175" value="0.00" class="input-sm form-control"></td>
+                                                        <input type="text" name="additional_weight" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
                                                     <td class="price">
-                                                        <input type="text" name="secondweight175" id="secondweight175" value="0" class="input-sm form-control"></td>
+                                                        <input type="text" name="freight" value="{{$val->freight}}" class="input-sm form-control"></td>
                                                     <td class="price">
-                                                        <input type="text" name="secondprice175" id="secondprice175" value="0.00" class="input-sm form-control"></td>
+                                                        <input type="text" name="renewal" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail(175)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
