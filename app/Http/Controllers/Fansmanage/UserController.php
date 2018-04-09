@@ -34,7 +34,7 @@ class UserController extends CommonController
     public function user_tag()
     {
 
-        dump(\WechatError::getCodeToMsg(0));
+        dump(\WechatError::getCodeToMsg(-1));
 
 
         // 中间件参数 集合
