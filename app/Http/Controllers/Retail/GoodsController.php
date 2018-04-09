@@ -159,7 +159,7 @@ class GoodsController extends Controller
             return response()->json(['data' => '商品图片不存在，请检查', 'status' => '0']);
 */
 
-        if( Storage::disk('app')->delete($thumb))
+        if( Storage::disk('')->delete($thumb))
              return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
         else
             return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
