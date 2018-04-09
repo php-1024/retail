@@ -65,7 +65,7 @@
                                 <div class="tab-pane">
                                 <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
                                     <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
-
+                                    <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
@@ -195,14 +195,13 @@
         var target = $("#currentForm");
         var url = target.attr("action");
         var _token = $('#_token').val();
+        var dispatch_id = $('#dispatch_id').val();
         var province = '';
         $('#multiselect_to option').each(function(i,v){
-            province += '&province='+$(v).val()+'&';
+            province += 'provinces[]='+$(v).val()+'&';
         });
-        console.log(province);
         province = province.substring(0, province.length-1);
-        var data = '_token='+_token+'&province='+province;
-//        console.log(data);
+        var data = '_token='+_token+'&'+'dispatch_id='+dispatch_id+'&'+province;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
