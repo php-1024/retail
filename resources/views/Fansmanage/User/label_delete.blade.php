@@ -13,9 +13,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">标签名称</label>
                         <div class="col-sm-10">
-
-                            <input type="text" value="{{$oneLabel->label_name}}" class="form-control" name="label_name">
-
+                            <input type="password" value="{{$oneLabel->label_name}}" class="form-control" name="label_name">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -56,14 +54,14 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    $("#myModal").modal("hide");
+                });
             }
         });
     }

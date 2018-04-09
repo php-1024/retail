@@ -33,10 +33,6 @@ class UserController extends CommonController
      */
     public function user_tag()
     {
-
-        dump(\WechatError::getCodeToMsg(-1));
-
-
         // 中间件参数 集合
         $this->getRequestInfo();
         // 组织id
@@ -60,7 +56,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 添加会员标签功能提交
+     * 添加会员标签功能提交,并且同步到微信公众号
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -79,6 +75,7 @@ class UserController extends CommonController
         if ($re === true) {
             return $this->getResponseMsg(0, "会员标签名称已存在！");
         }
+
         // 事务处理
         DB::beginTransaction();
         try {
@@ -89,15 +86,11 @@ class UserController extends CommonController
             $re = json_decode($re, true);
 
             // 判断微信公众号返回的消息
-            if (!empty($re['errcode'])) {
-                if ($re['errcode'] == '45157') {
-                    return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
-                } elseif ($re['errcode'] == '45158') {
-                    return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
-                } elseif ($re['errcode'] == '45056') {
-                    return response()->json(['data' => '创建的标签数过多，请注意不能超过100个', 'status' => '0']);
-                }
+            if ($re['errcode'] != 0) {
+                $msg = \WechatError::getCodeToMsg($re['errcode']);
+                return $this->getResponseMsg(0, $msg);
             }
+
             // 处理数据
             $dataLabel = [
                 'fansmanage_id' => $fansmanage_id,
@@ -117,9 +110,9 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '创建会员标签失败！', 'status' => '0']);
+            return $this->getResponseMsg(0, "创建会员标签失败！");
         }
-        return response()->json(['data' => '创建会员标签成功！', 'status' => '1']);
+        return $this->getResponseMsg(1, "创建会员标签成功！");
     }
 
     /**
@@ -137,7 +130,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 编辑会员标签功能提交
+     * 编辑会员标签功能提交,并且同步到微信公众号
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -170,22 +163,17 @@ class UserController extends CommonController
             $re = \Wechat::create_fans_tag_edit($auth_info['authorizer_access_token'], $label_name, $wechat_id);
             $re = json_decode($re, true);
 
-            // 判断是否微信接口是否正确
-            if (!empty($re['errcode'])) {
-                if ($re['errcode'] == '45157') {
-                    return response()->json(['data' => '微信公众平台已有该标签', 'status' => '0']);
-                } elseif ($re['errcode'] == '45158') {
-                    return response()->json(['data' => '标签名长度超过30个字节', 'status' => '0']);
-                } elseif ($re['errcode'] == '45058') {
-                    return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
-                }
+            // 判断微信公众号返回的消息
+            if ($re['errcode'] != 0) {
+                $msg = \WechatError::getCodeToMsg($re['errcode']);
+                return $this->getResponseMsg(0, $msg);
             }
 
             // 修改数据库里面的标签
             Label::editLabel(['id' => $id], ['label_name' => $label_name]);
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改会员标签成功：' . $label_name);
+                $this->insertOperationLog(3, '修改会员标签成功：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -194,11 +182,10 @@ class UserController extends CommonController
             return response()->json(['data' => '修改会员标签失败！', 'status' => '0']);
         }
         return response()->json(['data' => '修改会员标签成功！', 'status' => '1']);
-
     }
 
     /**
-     * 删除会员标签ajax显示页面
+     * 软删除会员标签ajax显示页面,并且同步到微信公众号
      */
     public function label_delete()
     {
@@ -211,7 +198,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 删除会员标签ajax数据检测
+     * 软删除会员标签ajax数据检测
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -227,26 +214,32 @@ class UserController extends CommonController
         $fansmanage_id = $this->admin_data['organization_id'];
         // 获取微信公众号返回的 标签的微信id
         $wechat_id = Label::getPluck([['id', $id]], 'wechat_id')->first();
+
         // 事务处理
         DB::beginTransaction();
         try {
-            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);//刷新并获取授权令牌
+            // 刷新并获取授权令牌
+            $auth_info = \Wechat::refresh_authorization_info($fansmanage_id);
+            // 删除微信公众号上面的标签
             $re = \Wechat::create_fans_tag_delete($auth_info['authorizer_access_token'], $wechat_id);
             $re = json_decode($re, true);
-            if (!empty($re['errcode'])) {
-                if ($re['errcode'] == '45057') {
-                    return response()->json(['data' => '该标签下粉丝数超过10w，不允许直接删除', 'status' => '0']);
-                } elseif ($re['errcode'] == '45058') {
-                    return response()->json(['data' => '不能修改0/1/2这三个系统默认保留的标签', 'status' => '0']);
-                }
+
+            // 判断微信公众号返回的消息
+            if ($re['errcode'] != 0) {
+                $msg = \WechatError::getCodeToMsg($re['errcode']);
+                return $this->getResponseMsg(0, $msg);
             }
+
+            // 标签软删除
             Label::where('id', $id)->forceDelete();
+            // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('4', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '删除会员标签：' . $label_name);//保存操作记录
+                $this->insertOperationLog("4", '删除会员标签：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '删除会员标签失败！', 'status' => '0']);
         }
         return response()->json(['data' => '删除会员标签成功！', 'status' => '1']);
