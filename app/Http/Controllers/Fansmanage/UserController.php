@@ -300,11 +300,13 @@ class UserController extends CommonController
                 $dataLabel["label_name"] = $re_tags_val['name'];
                 $dataLabel["label_number"] = $re_tags_val['count'];
                 $dataLabel["wechat_id"] = $re_tags_val['id'];
+
                 Label::addLabel($dataLabel);
             }
 
             DB::commit();
         } catch (\Exception $e) {
+            dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '同步失败！', 'status' => '0']);
