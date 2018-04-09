@@ -544,15 +544,24 @@ class WechatmenuController extends CommonController
         $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
         // 获取菜单列表
         $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', '0']], 0, 'id', 'asc');
+        dump($list->items);
+        if (!empty($list->items)) {
+            dump(1);
+        }else{
+            dump(2);
+        }
         // 个性化菜单
         $son_menu = [];
-        // 处理菜单数据
-        foreach ($list as $key => $val) {
-            $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val->id]], 0, 'id', 'asc');
-            if (!empty($sm)) {
-                $son_menu[$val->id] = $sm;
+        // 判断菜单列表
+        if (!empty($list)) {
+            // 处理菜单数据
+            foreach ($list as $key => $val) {
+                $sm = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['tag_id', $tag_id], ['parent_id', $val->id]], 0, 'id', 'asc');
+                if (!empty($sm)) {
+                    $son_menu[$val->id] = $sm;
+                }
+                unset($sm);
             }
-            unset($sm);
         }
         // 渲染页面
         return view('Fansmanage/Wechatmenu/conditional_menu_get', ['list' => $list, 'son_menu' => $son_menu]);
