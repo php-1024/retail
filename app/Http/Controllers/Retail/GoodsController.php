@@ -148,15 +148,25 @@ class GoodsController extends Controller
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_thumb_id = $request->get('goods_thumb_id');              //获取图片ID
         $goods_thumb = RetailGoodsThumb::getPluck(['id'=>$goods_thumb_id],'thumb')->first();
+        $thumb = 'uploads/catering/20180409105716752.png';
+        if(Storage::exists($thumb))
+            return response()->json(['data' => '商品图片存在', 'status' => '1']);
+        else
+            return response()->json(['data' => '商品图片不存在，请检查', 'status' => '0']);
 
+        if(Storage::delete($thumb))
 
+        return response()->json(['data' => '删除商品图片成功', 'status' => '1']);
+        else
+            return response()->json(['data' => '删除商品图片失败，请检查', 'status' => '0']);
         //  $id = RetailStock::getPluck(['goods_thumb_id'=>$goods_thumb_id],'id')->first();
         DB::beginTransaction();
         try {
 
             RetailGoodsThumb::deleteGoodsThumb($goods_thumb_id);
-            $thumb = 'uploads/catering/20180409105716752.png';
-            Storage::delete($thumb);
+
+          //  http://o2o.01nnt.com/uploads/catering/20180409105716752.png
+
          //   RetailStock::select_delete($id);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
