@@ -124,7 +124,6 @@
         changeConditionalMennuEdit();
     });
 
-
     // 获取列表主体
     function changeConditionalMennuEdit() {
         var url = $('#conditional_menu_get').val();
