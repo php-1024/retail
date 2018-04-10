@@ -433,14 +433,21 @@ class AgentController extends Controller
         return $structure;
     }
 
-    //代理程序管理
+    /**
+     * 代理程序管理
+     */
     public function agent_program(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $organization_id = $request->input('organization_id'); //代理id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 代理id
+        $organization_id = $request->input('organization_id');
         $listOrg = Organization::getOneagent([['id', $organization_id]]);
         $list = Program::getPaginage([['is_asset', '1']], 15, 'id');
         foreach ($list as $key => $value) {
@@ -578,7 +585,6 @@ class AgentController extends Controller
                         $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $organization_id, 'to_organization_id' => $fansmanage_id, 'program_id' => $asset_id, 'status' => '0', 'number' => $number];
                         //添加操作日志
                         OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
-
                     } else {
                         return response()->json(['data' => '该代理的程序数量不够', 'status' => '0']);
                     }

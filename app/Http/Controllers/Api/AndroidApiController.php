@@ -88,14 +88,19 @@ class AndroidApiController extends Controller
      */
     public function order_check(Request $request)
     {
-        $organization_id = $request->organization_id;//店铺id
-        $user_id = $request->user_id;//用户id 散客为0
+        // 店铺id
+        $organization_id = $request->organization_id;
+        // 用户id 散客为0
+        $user_id = $request->user_id;
         if (empty($user_id)) {
             $user_id = 0;
         }
-        $account_id = $request->account_id;//操作员id
-        $remarks = $request->remarks;//备注
-        $order_type = $request->order_type;//订单类型
+        // 操作员id
+        $account_id = $request->account_id;
+        // 备注
+        $remarks = $request->remarks;
+        // 订单类型
+        $order_type = $request->order_type;
         if (empty($order_type)) {
             $order_type = '1';
         }
