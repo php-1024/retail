@@ -162,8 +162,11 @@ class RetailCheckAjax
 
 
             /****支付设置****/
-            // 添加终端机器号信息功能提交
-            case "retail/ajax/shengpay_add_check":
+            case "retail/ajax/payconfig_check":    // 收款信息设置数据监测
+            $re = $this->checkLoginAndRuleAndPayconfig($request);
+                return self::format_response($re, $next);
+                break;
+            case "retail/ajax/shengpay_add_check":            // 添加终端机器号信息功能提交
             case "retail/ajax/shengpay_edit_check":
                 $re = $this->checkLoginAndRuleAndShengpayAdd($request);
                 return self::format_response($re, $next);
@@ -403,6 +406,21 @@ class RetailCheckAjax
         }
     }
 
+    // 收款信息设置数据监测
+    public function checkLoginAndRuleAndPayconfig($request)
+    {
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录是否有权限以及安全密码
+        if ($re['status'] == '0') {
+            return $re;
+        } else {
+            $re2 = $this->checkPayconfig($re['response']);//检测修改的数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
 
 
     /******************************复合检测结束*********************************/
@@ -768,10 +786,17 @@ class RetailCheckAjax
         return self::res(1, $request);
     }
 
-
-
-
-
+    // 收款信息设置数据监测
+    public function checkPayconfig($request)
+    {
+        if (empty($request->input('sft_pos_num'))) {
+            return self::res(0, response()->json(['data' => '请输入pos商户号!', 'status' => '0']));
+        }
+        if (empty($request->input('sft_num'))) {
+            return self::res(0, response()->json(['data' => '请输入盛付通商户号!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
 
     /*****************************数据检测结束****************************/
 
