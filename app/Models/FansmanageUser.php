@@ -30,11 +30,25 @@ class FansmanageUser extends Model
         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
-
+    /**
+     * 跟user_info 表关联,获取用户数据
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function userInfo()
     {
-        return $this->belongsTo("App\Models\UserInfo","user_id","user_id");
+        return $this->belongsTo("App\Models\UserInfo", "user_id", "user_id");
     }
+
+    /**
+     * 跟 粉丝标签关联, 获取标签数据
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function userLabel()
+    {
+        return $this->belongsTo("App\Models\UserLabel", "user_id", "user_id");
+    }
+
+
 
     //用户消费推荐表（导流）一对一的关系
     public function userRecommender()
@@ -95,7 +109,7 @@ class FansmanageUser extends Model
     //获取分页数据
     public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $field = [])
     {
-        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo');
+        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with('userLabel');
         if (!empty($field)) {
             $model->select($field);
         }

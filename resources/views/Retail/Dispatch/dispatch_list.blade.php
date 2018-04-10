@@ -45,11 +45,11 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
+                                    <input type="hidden" id="dispatch_list_lock" value="{{url('retail/ajax/dispatch_list_lock')}}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <label class="col-sm-1 control-label">订单编号</label>
+                                    <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="name" value="" placeholder="模板名称">
+                                        <input type="text" class="form-control" name="name" value="{{$dispatch_name}}" placeholder="模板名称">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -61,7 +61,7 @@
                                     <thead>
                                     <tr>
                                         <th>名称</th>
-                                        <th>编号</th>
+                                        <th>模板编号</th>
                                         <th>是否启用</th>
                                         <th>操作</th>
                                     </tr>
@@ -72,10 +72,15 @@
                                         <td>{{$val->name}}</td>
                                         <td>{{$val->number}}</td>
                                         <td>
-                                            <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
+                                            @if($val->status == 1)
+                                            <button class="btn btn-success btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;已启用</button>
+                                                @elseif($val->status == 0)
+                                                <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;未启用</button>
+                                            @endif
                                         </td>
                                         <td>
                                             <button class="btn btn-info btn-xs" onclick="window.location.href='dispatch_edit?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -114,7 +119,7 @@
 <script type="text/javascript">
     //审核订单
     function getlockForm(id,status){
-        var url = $('#purchase_list_confirm').val();
+        var url = $('#dispatch_list_lock').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
@@ -129,7 +134,6 @@
                 });
                 return;
             }else{
-                console.log(response);
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
