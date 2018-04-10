@@ -49,7 +49,6 @@ class FansmanageUser extends Model
     }
 
 
-
     //用户消费推荐表（导流）一对一的关系
     public function userRecommender()
     {
@@ -106,10 +105,17 @@ class FansmanageUser extends Model
         return self::where($where)->get()->count();
     }
 
-    //获取分页数据
+    // 获取分页数据
     public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $field = [])
     {
-        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with('userLabel');
+//        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with('userLabel');
+
+        $model = self::with(["userOrigin", "user", "userRecommender", "userInfo" => function($query){
+            $query->select("nickname","headimgurl");
+        }, "userLabel" => function ($query) {
+            $query->select("label_id");
+        }]);
+
         if (!empty($field)) {
             $model->select($field);
         }
@@ -118,5 +124,4 @@ class FansmanageUser extends Model
         }
         return $model->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
-
 }
