@@ -25,17 +25,20 @@ class RetailShengpay extends Model
     }
 
     //添加数据
-    public static function addShengpayTerminal($param)
+    public static function addShengpay($param)
     {
         $model = new RetailShengpay();
         $model->retail_id = $param['retail_id'];
-        $model->terminal_num = $param['terminal_num'];
+        $model->sft_pos_num = $param['sft_pos_num'];//pos商户号
+        $model->sft_num = $param['sft_num'];//盛付通商户号
+        $model->type = $param['type'];//0：未设置，1：T0,2：T1
+        $model->status = $param['status'];//-1：未通过，0：待审核，1：已通过
         $model->save();
         return $model->id;
     }
 
     //修改数据
-    public static function editShengpayTerminal($where, $param)
+    public static function editShengpay($where, $param)
     {
         if ($model = self::where($where)->first()) {
             foreach ($param as $key => $val) {

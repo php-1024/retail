@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
+use App\Models\RetailShengpay;
 use App\Models\RetailShengpayTerminal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -43,27 +44,31 @@ class PaysettingController extends Controller
         $retail_id = $admin_data['organization_id'];
         // 获取当前的页面路由
         $route_name = $request->path();
-        // 终端号
-        $terminal_num = $request->terminal_num;
-        // 查询终端号是否存在
-        if (RetailShengpayTerminal::checkRowExists([['terminal_num', $terminal_num]])) {
-            return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
-        }
+        // pos商户号
+        $sft_pos_num = $request->sft_pos_num;
+        // 盛付通商户号
+        $sft_num = $request->sft_num;
+
         DB::beginTransaction();
         try {
             // 数据处理
             $data = [
                 // 店铺id
                 'retail_id' => $retail_id,
-                // 终端号
-                'terminal_num' => $terminal_num,
+                // pos商户号
+                'sft_pos_num' => $sft_pos_num,
+                // 盛付通商户号
+                'sft_num' => $sft_num,
+                'type' => '0',
+                'status' => '0',
             ];
-            // 添加终端号
-            RetailShengpayTerminal::addShengpayTerminal($data);
+
+            // 添加付款信息
+            RetailShengpay::addShengpay($data);
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了终端号：' . $terminal_num);
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了付款信息设置');
             }
             // 事件提交
             DB::commit();
