@@ -46,9 +46,9 @@
                                     <input type="hidden" id="shengpay_delete" value="{{ url('retail/ajax/shengpay_delete') }}">
                                     <label class="col-sm-1 control-label">终端机器号</label>
 
-                                    <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" name="terminal_num" type="text" value="{{$search_data['terminal_num']}}">
-                                    </div>
+                                    {{--<div class="col-sm-2">--}}
+                                        {{--<input class="input-sm form-control" size="16" name="terminal_num" type="text" value="{{$search_data['terminal_num']}}">--}}
+                                    {{--</div>--}}
 
                                     <div class="col-sm-3">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
