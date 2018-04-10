@@ -79,6 +79,19 @@ class DispatchController extends Controller
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'dispatch_name'=>$dispatch_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //运费模板删除弹窗
+    public function dispatch_list_delete(Request $request)
+    {
+        $id = $request->get('id');
+        return view('Retail/Dispatch/dispatch_list_delete',['id'=>$id]);
+    }
+
+    //运费模板删除弹窗
+    public function dispatch_list_delete_check(Request $request)
+    {
+        dd($request);
+    }
+
     //运费模板启用弹窗
     public function dispatch_list_lock(Request $request)
     {
@@ -171,7 +184,6 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加运费区域失败，请检查', 'status' => '0']);
         }
@@ -201,7 +213,6 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改运费区域信息失败，请检查', 'status' => '0']);
         }
