@@ -109,7 +109,7 @@ class FansmanageUser extends Model
     public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $field = [])
     {
         $model = self::select("id", "store_id", "fansmanage_id", "user_id", "open_id", "mobile")->with(["userOrigin", "user"=>function($query){
-            $query->select("id","account","created_time");
+            $query->select("id","account","created_at");
         }, "userRecommender" => function ($query) {
             $query->select("recommender_id", "user_id");
         }, "userInfo" => function ($query) {
