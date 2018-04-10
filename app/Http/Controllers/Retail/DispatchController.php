@@ -97,9 +97,11 @@ class DispatchController extends Controller
         if ($status == '0'){
             $status = 1;
             $tips = '启用';
+            dd($status);
         }else{
             $status = 0;
             $tips = '弃用';
+            dd($status);
         }
         DB::beginTransaction();
         try {
