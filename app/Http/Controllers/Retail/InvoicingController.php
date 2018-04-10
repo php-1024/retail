@@ -142,6 +142,8 @@ class InvoicingController extends Controller
             $where = ['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id];
         }elseif (!empty($goods_name)){
             $where = [['retail_id',$admin_data['organization_id']],['name', 'LIKE', '%' . $goods_name . '%']];
+        }elseif (!empty($category_id) && !empty($goods_name)){
+            $where = [['retail_id',$admin_data['organization_id']],['category_id',$category_id],['name', 'LIKE', '%' . $goods_name . '%']];
         }else{
             $where = ['retail_id'=>$admin_data['organization_id']];
         }
