@@ -222,7 +222,7 @@ class PaysettingController extends Controller
         DB::beginTransaction();
         try {
             // 删除终端号
-            RetailShengpayTerminal::where('id',$id)->forceDelete();//删除节点
+            RetailShengpayTerminal::where('id',$id)->forceDelete();
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
