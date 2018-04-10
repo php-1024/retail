@@ -4,9 +4,12 @@
  *
  */
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-class RetailPurchaseOrderGoods extends Model{
+
+class RetailPurchaseOrderGoods extends Model
+{
     use SoftDeletes;
     protected $table = 'retail_purchase_order_goods';
     protected $primaryKey = 'id';
@@ -15,8 +18,9 @@ class RetailPurchaseOrderGoods extends Model{
 
 
     //和RetailPurchaseOrder表多对一的关系
-    public function RetailPurchaseOrder(){
-        return $this->belongsTo('App\Models\RetailPurchaseOrder', 'order_id','id');
+    public function RetailPurchaseOrder()
+    {
+        return $this->belongsTo('App\Models\RetailPurchaseOrder', 'order_id', 'id');
     }
 
     public static function getOne($where)
@@ -26,16 +30,18 @@ class RetailPurchaseOrderGoods extends Model{
     }
 
     //获取列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC'){
+    public static function getList($where, $limit = 0, $orderby, $sort = 'DESC')
+    {
         $model = new RetailPurchaseOrderGoods();
-        if(!empty($limit)){
+        if (!empty($limit)) {
             $model = $model->limit($limit);
         }
-        return $model->with('RetailPurchaseOrder')->where($where)->orderBy($orderby,$sort)->get();
+        return $model->with('RetailPurchaseOrder')->where($where)->orderBy($orderby, $sort)->get();
     }
 
     //保存创建订单的商品快照数据
-    public static function addOrderGoods($param){
+    public static function addOrderGoods($param)
+    {
         $model = new RetailPurchaseOrderGoods();
         $model->order_id = $param['order_id'];
         $model->goods_id = $param['goods_id'];
@@ -49,18 +55,21 @@ class RetailPurchaseOrderGoods extends Model{
     }
 
     //修改数据
-    public static function editOrder($where,$param){
-        if($model = self::where($where)->first()){
-            foreach($param as $key=>$val){
-                $model->$key=$val;
+    public static function editOrder($where, $param)
+    {
+        if ($model = self::where($where)->first()) {
+            foreach ($param as $key => $val) {
+                $model->$key = $val;
             }
             $model->save();
         }
     }
 
     //获取分页列表
-    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
-        return self::with('RetailPurchaseOrder')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+    public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
+    {
+        return self::with('RetailPurchaseOrder')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 }
+
 ?>
