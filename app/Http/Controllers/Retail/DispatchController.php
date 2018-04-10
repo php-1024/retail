@@ -79,6 +79,13 @@ class DispatchController extends Controller
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'dispatch_name'=>$dispatch_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //运费模板启用弹窗
+    public function dispatch_list_lock(Request $request)
+    {
+        dd($request);
+        return view('Retail/Dispatch/dispatch_list_lock',['list'=>$list,'dispatch_name'=>$dispatch_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+    }
+
     //编辑运费模板
     public function dispatch_edit(Request $request)
     {
