@@ -142,7 +142,7 @@ class InvoicingController extends Controller
             $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id],'0','id','DESC');
         }elseif (!empty($goods_name)){
             $where = [['name', 'LIKE', '%' . $goods_name . '%']];
-            $goods = RetailGoods::getList($where,'0','id','DESC',$goods_name);
+            $goods = RetailGoods::getList($where,'0','id','DESC');
         }else{
             $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id']],'0','id','DESC');
         }
