@@ -329,6 +329,8 @@ class UserController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
+        // 搜索内容
+        $search_content = request()->get("search_content");
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
