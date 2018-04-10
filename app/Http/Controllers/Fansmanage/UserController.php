@@ -339,26 +339,18 @@ class UserController extends CommonController
         // 处理数据
         foreach ($list as $key => $value) {
             if (!empty($value["user"])) {
-                $list_merge = $value->toArray();
-//                // 微信昵称
-//                $list[$key]['nickname'] = $value["userInfo"]['nickname'];
-//                // 微信头像
-//                $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
-//                // 获取推荐人信息
-//                // 推荐人id
-//                $recommender_info = User::select("id")->where(['id' => 2])->first();
-//                // 推荐人名称
-//                $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
-//                $list[$key]['recommender_name'] = $userInfo["nickname"];
-//                // 粉丝对应的标签id
-//                $list[$key]['label_id'] = $value["userLabel"]['label_id'];
-
-                $list_merge[$key]['nickname'] = $value["userInfo"]['nickname'];
-                $list_merge[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
-                $recommender_info = User::select("id")->where(['id' => $value["userRecommender"]["recommender_id"]])->first();
+                // 微信昵称
+                $list[$key]['nickname'] = $value["userInfo"]['nickname'];
+                // 微信头像
+                $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
+                // 获取推荐人信息
+                // 推荐人id
+                $recommender_info = User::select("id")->where(['id' => 2])->first();
+                // 推荐人名称
                 $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
-                $list_merge[$key]['recommender_name'] = $userInfo["nickname"];
-                $list_merge[$key]['label_id'] = $value["userLabel"]['label_id'];
+                $list[$key]['recommender_name'] = $userInfo["nickname"];
+                // 粉丝对应的标签id
+                $list[$key]['label_id'] = $value["userLabel"]['label_id'];
             }
         }
 
@@ -367,7 +359,7 @@ class UserController extends CommonController
 
 
         // 渲染页面
-        return view('Fansmanage/User/user_list', ['list' => $list_merge, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
+        return view('Fansmanage/User/user_list', ['list' => $listd, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
 
     //粉丝用户管理

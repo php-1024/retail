@@ -120,19 +120,19 @@ class FansmanageUser extends Model
      */
     public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $search = '')
     {
-        $model = self::select("id", "store_id", "fansmanage_id", "user_id", "open_id", "mobile", "created_at")->with(["userOrigin", "user" => function ($query) use ($search) {
+        $model = self::select("fansmanage_user.id", "fansmanage_user.store_id", "fansmanage_user.fansmanage_id", "fansmanage_user.user_id", "fansmanage_user.open_id", "fansmanage_user.mobile", "fansmanage_user.created_at","user.account")->with(["userOrigin", "user" => function ($query) {
             $query->select("id", "account");
-            // 关键字搜索
-            if (!empty($search)) {
-                $query->where("account", 'like', "%$search%");
-            }
         }, "userRecommender" => function ($query) {
             $query->select("recommender_id", "user_id");
         }, "userInfo" => function ($query) {
             $query->select("id", "nickname", "head_imgurl", "user_id");
         }, "userLabel" => function ($query) {
             $query->select("label_id", "user_id");
-        }]);
+        }])->leftJoin('user', 'fansmanage_user.user_id', '=', 'user.id');;
+
+        if (!empty($search)) {
+            $model->where("user.account", "like", "%$search%");
+        }
 
         if (!empty($user_id)) {
             $model->where(['user_id' => $user_id]);
