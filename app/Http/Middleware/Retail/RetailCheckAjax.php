@@ -88,6 +88,7 @@ class RetailCheckAjax
             case "retail/ajax/goods_thumb_delete_check":     //商品图片删除--检测登录安全密码和权限
             case "retail/ajax/dispatch_list_lock_check":     //启用、弃用运费模板确认
             case "retail/ajax/dispatch_list_delete_check":   //运费模板删除确认操作
+            case "retail/ajax/shengpay_apply_check":         //终端机器号重新申请功能提交
             $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
@@ -169,6 +170,7 @@ class RetailCheckAjax
                 $re = $this->checkLoginAndRuleAndShengpayAdd($request);
                 return self::format_response($re, $next);
                 break;
+
             /****粉丝信息编辑****/
 
 
