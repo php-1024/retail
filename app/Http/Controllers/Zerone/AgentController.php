@@ -605,21 +605,31 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_fansmanage', ['organization_name' => $organization_name, 'organization_id' => $organization_id, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //商户划拨归属Ajax显示页面--划入
+    /**
+     * 商户划拨归属Ajax显示页面--划入
+     */
     public function agent_fansmanage_add(Request $request)
     {
-        $organization_id = $request->organization_id; //代理id
+        // 代理id
+        $organization_id = $request->organization_id;
+        // 显示组织表里商户类型的，并且上级组织为零壹的，并且属于该代理的
         $list = Organization::getList([['type', 3], ['parent_id', '<>', $organization_id], ['parent_id', '1']]);
+        // 该代理信息
         $data = Organization::getOne([['id', $organization_id]]);
         return view('Zerone/Agent/agent_fansmanage_add', ['list' => $list, 'data' => $data]);
     }
 
-    //商户划拨归属功能提交
+    /**
+     * 商户划拨归属功能提交
+     */
     public function agent_fansmanage_add_check(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $organization_id = $request->organization_id; //代理id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 代理id
+        $organization_id = $request->organization_id;
         $oneAgent = Organization::getOne([['id', $organization_id]]); //代理信息
         $status = $request->status; //是否消耗程序数量
         $fansmanage_id = $request->fansmanage_id; //商户id
