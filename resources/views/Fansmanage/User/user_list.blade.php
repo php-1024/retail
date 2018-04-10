@@ -69,7 +69,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive" id="table_content">
                                 <table class="table table-striped b-t b-light">
                                     <thead>
                                     <tr>
@@ -177,12 +177,13 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
+
     $("#searchBtn").click(function () {
         var $url = $("#user_list").val();
         var $search_content = $("#user_account").val();
         var $data = {"search_content": $search_content,"_token":$("#_token").val()}
         $.post($url, $data, function ($response) {
-            $("#content").html($response)
+            $("#table_content").html($response)
         })
     });
 
