@@ -760,7 +760,7 @@ class RetailCheckAjax
     // 添加终端机器号信息功能提交
     public function checkShengpayAdd($request)
     {
-        if (empty($request->orders['terminal_num'])) {
+        if (empty($request->input('terminal_num'))) {
             return self::res(0, response()->json(['data' => '请输入终端号!', 'status' => '0']));
         }
         return self::res(1, $request);
