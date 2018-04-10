@@ -17,6 +17,21 @@ class PaysettingController extends Controller
 {
 
     /**
+     * 收款信息设置
+     */
+    public function payconfig(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        return view('Retail/Paysetting/payconfig', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
+    /**
      * 添加终端机器号信息
      */
     public function shengpay_add(Request $request)
@@ -249,14 +264,7 @@ class PaysettingController extends Controller
     }
 
 
-    public function shengf_setting(Request $request)
-    {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
-        return view('Retail/Paysetting/zerone_setting', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
-    }
+
 
     public function kuaifu_setting(Request $request)
     {
