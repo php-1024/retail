@@ -287,8 +287,8 @@ class AndroidApiController extends Controller
     public function cash_payment(Request $request)
     {
         $order_id = $request->order_id;//订单id
-        $order_status = RetailOrder::getPluck([['id', $order_id]], 'status')->first();
-        if ($order_status != '0') {
+        $order = RetailOrder::getOne([['id', $order_id]])();
+        if ($order['status'] != '0') {
             return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
         }
         $organization_id = $request->organization_id;//店铺
@@ -308,7 +308,7 @@ class AndroidApiController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
         }
-        return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
+        return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id,'price'=>$order['order_price']]]);
     }
 
     /**
