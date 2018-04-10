@@ -48,6 +48,10 @@
                             <div class="line line-border b-b pull-in"></div>
                             <div style="clear:both"></div>
                             <form method="post" class="form-horizontal" role="form" id="dispatch_province_edit_check" action="{{ url('retail/ajax/dispatch_province_edit_check') }}">
+                                <input type="hidden" id="province_add_check" value=" {{ url('retail/ajax/dispatch_province_add_check') }} ">
+                                <input type="hidden" id="province_delete_check" value=" {{ url('retail/ajax/dispatch_province_delete_check') }} ">
+                                <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
+                                <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
                                 <div class="col-sm-12">
                                         <label class="col-sm-1 control-label">模板名称</label>
                                         <div class="col-sm-2">
@@ -61,9 +65,6 @@
                                 <div style="clear:both"></div>
                                 <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
-                                    <input type="hidden" id="province_add_check" value=" {{ url('retail/ajax/dispatch_province_add_check') }} ">
-                                    <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
-                                    <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
@@ -227,7 +228,7 @@
 
     //提交表单
     function provinces_delete_check() {
-        var url = $("#province_add_check").val();
+        var url = $("#province_delete_check").val();
         var _token = $('#_token').val();
         var dispatch_id = $('#dispatch_id').val();
         var province = '';
