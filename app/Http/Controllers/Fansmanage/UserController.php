@@ -180,9 +180,9 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return $this->getResponseMsg(0,'修改会员标签失败！');
+            return $this->getResponseMsg(0, '修改会员标签失败！');
         }
-        return $this->getResponseMsg(1,'修改会员标签成功！');
+        return $this->getResponseMsg(1, '修改会员标签成功！');
     }
 
     /**
@@ -239,9 +239,9 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return $this->getResponseMsg(0,'删除会员标签失败！');
+            return $this->getResponseMsg(0, '删除会员标签失败！');
         }
-        return $this->getResponseMsg(1,'删除会员标签成功！');
+        return $this->getResponseMsg(1, '删除会员标签成功！');
     }
 
 
@@ -342,10 +342,14 @@ class UserController extends CommonController
             $list[$key]['nickname'] = $value["userInfo"]['nickname'];
             // 微信头像
             $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
-            // 获取推荐人id
-            $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
-            // 获取推荐人名称
-            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
+
+            // 获取推荐人信息
+            // 推荐人id
+            $recommender_info = User::select("id")->where(['id' => 2])->first();
+            // 推荐人名称
+            $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
+            $list[$key]['recommender_name'] = $userInfo["nickname"];
+
             // 粉丝对应的标签id
             $list[$key]['label_id'] = $value["userLabel"]['label_id'];
         }
@@ -353,6 +357,7 @@ class UserController extends CommonController
         // 粉丝标签列表
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
 
+        
         // 渲染页面
         return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
