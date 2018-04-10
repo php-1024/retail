@@ -32,11 +32,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">下属列表</h3>
+                            <h3 class="m-b-none">终端机器列表</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                下属列表
+                                终端机器列表
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
@@ -45,10 +45,10 @@
                                     <input type="hidden" id="subordinate_lock" value="{{ url('retail/ajax/subordinate_lock') }}">
                                     <input type="hidden" id="subordinate_delete" value="{{ url('retail/ajax/subordinate_delete') }}">
                                     <input type="hidden" id="subordinate_authorize_url" value="{{ url('retail/ajax/subordinate_authorize') }}">
-                                    <label class="col-sm-1 control-label">下属账号</label>
+                                    <label class="col-sm-1 control-label">终端机器号</label>
 
                                     <div class="col-sm-2">
-                                        {{--<input class="input-sm form-control" size="16" name="account" type="text" value="{{$search_data['account']}}">--}}
+                                        <input class="input-sm form-control" size="16" name="account" type="text" value="">
                                     </div>
 
                                     <div class="col-sm-3">
