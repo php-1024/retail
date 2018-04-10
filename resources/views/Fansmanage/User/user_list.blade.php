@@ -58,7 +58,7 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" id="input-id-1" value=""
+                                        <input type="text" class="form-control" id="user_account" value=""
                                                placeholder="用户账号">
                                     </div>
                                     <div class="col-sm-1">
@@ -177,7 +177,12 @@
 <script type="text/javascript">
 
     $("#searchBtn").click(function () {
-        var $url = $("#user_list").val()
+        var $url = $("#user_list").val();
+        var $user_account = $("#user_account").val();
+        var $data = {"user_account":$user_account}
+        $.post($url, $data, function ($response) {
+
+        })
     });
 
 
