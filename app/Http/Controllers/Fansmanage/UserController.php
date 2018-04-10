@@ -332,7 +332,8 @@ class UserController extends CommonController
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
-        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        $store_name = Organization::where(['id'=> $organization_id])->value("organization_name");
+
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
 
@@ -345,10 +346,9 @@ class UserController extends CommonController
                 $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
                 // 获取推荐人信息
                 // 推荐人id
-                $recommender_info = User::select("id")->where(['id' => $value["userRecommender"]["recommender_id"]])->first();
+                $recommender_id = User::where(['id' => $value["userRecommender"]["recommender_id"]])->value("id");
                 // 推荐人名称
-                $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
-                $list[$key]['recommender_name'] = $userInfo["nickname"];
+                $list[$key]['recommender_name'] = UserInfo::where(['user_id'=> $recommender_id])->value("nickname");
                 // 粉丝对应的标签id
                 $list[$key]['label_id'] = $value["userLabel"]['label_id'];
             }
