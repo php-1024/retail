@@ -375,18 +375,22 @@ class UserController extends CommonController
         $this->getRequestInfo();
         // 搜索内容
         $search_content = request()->input("search_content");
+
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
-//        if (empty($search_content)) {
-//            $search_content = '';
-//        }
+        if (empty($search_content)) {
+            $search_content = '';
+        }
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
 
+        dump($search_content);
         dump($organization_id);
         dump($list);
+
+
         // 处理数据
         foreach ($list as $key => $value) {
             if (!empty($value["user"])) {

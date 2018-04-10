@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">用户账号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  value="{{$data->terminal_num}}">
+                            <input type="text" class="form-control"  value="{{$data->terminal_num}}" name="terminal_num">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
