@@ -23,7 +23,7 @@ class LoginController extends Controller{
         return view('Agent/Login/display');
     }
     /*
-     * 生成验证码
+     * 生成验证码,直接生产引用
      */
     public function captcha()
     {
