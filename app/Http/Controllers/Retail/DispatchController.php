@@ -94,7 +94,7 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');                          //获取运费模板id
         $status = $request->get('status');
-        if ($status == '0'){
+        if ($status == 0){
             $status = 1;
             $tips = '启用';
         }else{
