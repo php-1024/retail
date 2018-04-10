@@ -168,6 +168,12 @@ class DispatchController extends Controller
         return response()->json(['data' => '修改运费区域信息成功', 'status' => '1']);
     }
 
+    //运费模板省份删除
+    public function dispatch_province_delete_check(Request $request)
+    {
+        dd($request);
+    }
+
 }
 
 ?>

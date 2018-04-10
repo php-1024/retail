@@ -136,7 +136,7 @@
                                                     <td>
                                                         <input type="text" name="dispatch_data[{{$val->id}}][renewal]" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button class="btn btn-danger btn-xs" onclick="provinces_delete_check('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -193,6 +193,40 @@
 
     //提交表单
     function provinces_add_check() {
+        var url = $("#province_add_check").val();
+        var _token = $('#_token').val();
+        var dispatch_id = $('#dispatch_id').val();
+        var province = '';
+        $('#multiselect_to option').each(function(i,v){
+            province += 'provinces[]='+$(v).val()+'&';
+        });
+        province = province.substring(0, province.length-1);
+        var data = '_token='+_token+'&'+'dispatch_id='+dispatch_id+'&'+province;
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+
+    //提交表单
+    function provinces_delete_check() {
         var url = $("#province_add_check").val();
         var _token = $('#_token').val();
         var dispatch_id = $('#dispatch_id').val();
