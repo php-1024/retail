@@ -442,7 +442,9 @@ Route::group(['prefix' => 'fansmanage'], function () {
     //用户管理
     Route::group(['prefix' => 'user'], function () {
         Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('FansmanageCheck');                    //粉丝标签管理
-        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                  //粉丝用户管理
+//        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');
+        //粉丝用户管理
+        Route::match(['get', 'post'], 'user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                  //粉丝用户管理
         Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 

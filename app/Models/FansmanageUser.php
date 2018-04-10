@@ -128,8 +128,9 @@ class FansmanageUser extends Model
             $query->select("id", "nickname", "head_imgurl", "user_id");
         }, "userLabel" => function ($query) {
             $query->select("label_id", "user_id");
-        }])->leftJoin('user', 'fansmanage_user.user_id', '=', 'user.id');;
+        }])->leftJoin('user', 'fansmanage_user.user_id', '=', 'user.id');
 
+        // 判断是否有搜索关键字
         if (!empty($search)) {
             $model->where("user.account", "like", "%$search%");
         }
