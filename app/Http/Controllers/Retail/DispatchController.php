@@ -101,7 +101,6 @@ class DispatchController extends Controller
             $status = '0';
             $tips = '弃用';
         }
-//        dd($status,$tips);
         DB::beginTransaction();
         try {
             Dispatch::editDispatch(['id'=>$id],['status'=>$status]);
@@ -113,11 +112,10 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '启用运费模板失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips.'运费模板失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '启用运费模板成功', 'status' => '1']);
+        return response()->json(['data' => $tips.'运费模板成功', 'status' => '1']);
     }
 
     //编辑运费模板
