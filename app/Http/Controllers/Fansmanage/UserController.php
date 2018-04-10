@@ -349,7 +349,7 @@ class UserController extends CommonController
             // 获取推荐人名称
             $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
             // 粉丝对应的标签id
-            $list[$key]['label_id'] = $re["userInfo"]['label_id'];
+            $list[$key]['label_id'] = $re["userLabel"]['label_id'];
         }
 
         // 粉丝标签列表
