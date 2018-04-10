@@ -45,6 +45,7 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <input type="hidden" id="dispatch_list_lock" value="{{url('retail/ajax/dispatch_list_lock')}}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
@@ -118,7 +119,7 @@
 <script type="text/javascript">
     //审核订单
     function getlockForm(id,status){
-        var url = $('#purchase_list_confirm').val();
+        var url = $('#dispatch_list_lock').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
         $.post(url,data,function(response){
@@ -133,7 +134,6 @@
                 });
                 return;
             }else{
-                console.log(response);
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }

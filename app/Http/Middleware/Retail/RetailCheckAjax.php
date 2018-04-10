@@ -47,6 +47,7 @@ class RetailCheckAjax
             case "retail/ajax/dispatch_province_add_check"://运费模板省份添加
             case "retail/ajax/dispatch_province_edit_check"://运费模板信息编辑
             case "retail/ajax/dispatch_province_delete_check"://运费模板信息删除
+            case "retail/ajax/dispatch_list_lock":            //运费模板启用弹窗
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
