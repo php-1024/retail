@@ -145,7 +145,7 @@
                                 </table>
                             </div>
 
-                            <input type="hidden" id="user_list" value="{{ url("fansmanage/user/user_list") }}">
+                            <input type="hidden" id="user_list" value="{{ url("fansmanage/user/user_search") }}">
                             <input type="hidden" id="_token" name="_token" value="{{csrf_token()}}">
                             <footer class="panel-footer">
                                 <div class="row">
@@ -177,13 +177,12 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript">
-
     $("#searchBtn").click(function () {
         var $url = $("#user_list").val();
         var $search_content = $("#user_account").val();
         var $data = {"search_content": $search_content,"_token":$("#_token").val()}
         $.post($url, $data, function ($response) {
-            $("html").html($response)
+            $("#content").html($response)
         })
     });
 

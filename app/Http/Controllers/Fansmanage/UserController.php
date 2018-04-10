@@ -329,6 +329,50 @@ class UserController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
+        // 组织id
+        $organization_id = $this->admin_data['organization_id'];
+        // 组织名称
+        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        if (empty($search_content)) {
+            $search_content = '';
+        }
+        // 获取粉丝列表
+        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
+
+        // 处理数据
+        foreach ($list as $key => $value) {
+            if (!empty($value["user"])) {
+                // 微信昵称
+                $list[$key]['nickname'] = $value["userInfo"]['nickname'];
+                // 微信头像
+                $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
+                // 获取推荐人信息
+                // 推荐人id
+                $recommender_info = User::select("id")->where(['id' => 2])->first();
+                // 推荐人名称
+                $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
+                $list[$key]['recommender_name'] = $userInfo["nickname"];
+                // 粉丝对应的标签id
+                $list[$key]['label_id'] = $value["userLabel"]['label_id'];
+            }
+        }
+
+        // 粉丝标签列表
+        $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
+
+        // 渲染页面
+        return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
+    }
+
+
+    /**
+     * 列表搜索
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function user_list_search()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
         // 搜索内容
         $search_content = request()->input("search_content");
         // 组织id
@@ -363,8 +407,9 @@ class UserController extends CommonController
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
 
         // 渲染页面
-        return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
+        return view('Fansmanage/User/user_search', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
+
 
     //粉丝用户管理
     public function store_label_add_check()
