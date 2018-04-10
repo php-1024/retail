@@ -18,9 +18,8 @@ use Session;
 class WechatController extends Controller{
     /**************************************************************************页面授权开始*********************************************************************************/
     public function auth(){
-        $appinfo = config('app.wechat_web_setting');
         $redirect_url = 'http://o2o.01nnt.com/api/wechat/web_redirect';
-        $url =\Wechat::get_open_web_auth_url($appinfo['appid'],$redirect_url);
+        $url =\Wechat::get_web_auth_url($redirect_url);
         echo $url;
     }
     /*
