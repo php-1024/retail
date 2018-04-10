@@ -423,7 +423,7 @@ class UserController extends CommonController
         // 手机号
         $data['mobile'] = FansmanageUser::where(['user_id'=> $user_id])->value("mobile");
         // 获取推荐人的id
-        $yauntou = UserOrigin::where(['user_id'=> $user_id])->value("origin_id");
+        $yauntou = UserOrigin::where(['user_id'=> $user_id])->value("store_id");
 
         // 如果推荐人id 同 组织id 相同, 则返回 组织名称,否则 默认为联盟商户
         if ($yauntou == $organization_id) {
