@@ -442,7 +442,9 @@ Route::group(['prefix' => 'fansmanage'], function () {
     //用户管理
     Route::group(['prefix' => 'user'], function () {
         Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('FansmanageCheck');                    //粉丝标签管理
-        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                  //粉丝用户管理
+//        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');
+        //粉丝用户管理
+        Route::match(['get', 'post'], 'user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                  //粉丝用户管理
         Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 
@@ -717,7 +719,8 @@ Route::group(['prefix' => 'retail'], function () {
 
 
         //支付设置
-        Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号信息功能提交
+        Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号功能提交
+        Route::post('shengpay_edit', 'Retail\PaysettingController@shengpay_edit')->middleware('RetailCheckAjax');             //编辑终端机器号Ajax显示
 
     });
 });

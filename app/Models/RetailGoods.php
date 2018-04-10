@@ -56,10 +56,13 @@ class RetailGoods extends Model{
     }
 
     //获取餐饮商品列表
-    public static function getList($where,$limit=0,$orderby,$sort='DESC',$select=[]){
+    public static function getList($where,$limit=0,$orderby,$sort='DESC',$goods_name='',$select=[]){
         $model = new RetailGoods();
         if(!empty($limit)){
             $model = $model->limit($limit);
+        }
+        if(!empty($goods_name)){
+            $model = $model->where('name','like','%'.$goods_name.'%');
         }
         if(!empty($select)){
             $model = $model->select($select);

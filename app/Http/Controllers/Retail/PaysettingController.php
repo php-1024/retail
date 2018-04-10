@@ -46,7 +46,7 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 终端号
         $terminal_num = $request->terminal_num;
-        if(RetailShengpayTerminal::checkRowExists([['terminal_num',$terminal_num]])){
+        if (RetailShengpayTerminal::checkRowExists([['terminal_num', $terminal_num]])) {
             return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
         }
         DB::beginTransaction();
@@ -54,9 +54,9 @@ class PaysettingController extends Controller
             // 数据处理
             $data = [
                 // 店铺id
-                'retail_id'=>$retail_id,
+                'retail_id' => $retail_id,
                 // 终端号
-                'terminal_num'=>$terminal_num,
+                'terminal_num' => $terminal_num,
             ];
             // 添加终端号
             RetailShengpayTerminal::addShengpayTerminal($data);
@@ -68,7 +68,6 @@ class PaysettingController extends Controller
             // 事件提交
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '添加失败！', 'status' => '0']);
@@ -81,11 +80,29 @@ class PaysettingController extends Controller
      */
     public function shengpay_list(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
-        return view('Retail/Paysetting/shengpay_list', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 店铺id
+        $retail_id = $admin_data['organization_id'];
+        // 查询店铺终端号列表
+        $list = RetailShengpayTerminal::getPaginage([['retail_id',$retail_id]],10,'id');
+
+        return view('Retail/Paysetting/shengpay_list', ['list' => $list,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function shengpay_edit(Request $request)
+    {
+
+        return view('Retail/Paysetting/shengpay_edit');
     }
 
     public function shengf_setting(Request $request)
