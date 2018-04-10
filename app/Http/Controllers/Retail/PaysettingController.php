@@ -36,7 +36,7 @@ class PaysettingController extends Controller
     public function shengpay_add_check(Request $request)
     {
         $admin_data = $request->get('admin_data');
-
+        dd(1);
 
     }
 
