@@ -108,13 +108,18 @@ class FansmanageUser extends Model
     // 获取分页数据
     public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $field = [])
     {
-//        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with('userLabel');
+        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with('userLabel');
 
-        $model = self::with(["userOrigin", "user", "userRecommender", "userInfo" => function ($query) {
-            $query->select("nickname", "head_imgurl");
-        }, "userLabel" => function ($query) {
-            $query->select("label_id");
-        }]);
+//        $model = self::with(["userOrigin", "user", "userRecommender", "userInfo" => function ($query) {
+//            $query->select("nickname", "head_imgurl");
+//        }, "userLabel" => function ($query) {
+//            $query->select("label_id");
+//        }]);
+
+
+
+
+
 
         if (!empty($field)) {
             $model->select($field);
