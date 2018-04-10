@@ -88,11 +88,65 @@
                                 </form>
                             </div>
                         </section>
+                        <div class="table-responsive">
+                            <table class="table table-striped b-t b-light">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>pos商户号</th>
+                                    <th>盛付通商户号</th>
+                                    <th>状态</th>
+                                    <th>添加时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{--@foreach($list as $key=>$val)--}}
+                                    {{--<tr>--}}
+                                        {{--<td>{{ $val->id }}</td>--}}
+                                        {{--<td>{{ $val->terminal_num }}</td>--}}
+                                        {{--<td>--}}
+                                            {{--@if($val->status == '0')--}}
+                                                {{--<label class="label label-warning">待审核</label>--}}
+                                            {{--@elseif($val->status == '1')--}}
+                                                {{--<label class="label label-success">已通过</label>--}}
+                                            {{--@elseif($val->status == '-1')--}}
+                                                {{--<label class="label label-danger">未通过</label>--}}
+                                            {{--@endif--}}
+                                        {{--</td>--}}
+                                        {{--<td>{{ $val->created_at }}</td>--}}
+                                        {{--<td>--}}
+                                            {{--@if($val->status != '1')--}}
+                                                {{--<button class="btn btn-info btn-xs" id="editBtn"--}}
+                                                        {{--onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑--}}
+                                                {{--</button>--}}
+                                            {{--@endif--}}
+
+                                            {{--@if($val->status == '-1')--}}
+                                                {{--<button type="button" id="lockBtn" class="btn  btn-xs btn-warning"--}}
+                                                        {{--onclick="getApplyForm('{{ $val->id }}')"><i--}}
+                                                            {{--class="icon icon-lock"></i>&nbsp;&nbsp;重新申请--}}
+                                                {{--</button>--}}
+                                            {{--@endif--}}
+                                            {{--<button class="btn btn-danger btn-xs" id="deleteBtn"--}}
+                                                    {{--onclick="getDeleteComfirmForm('{{ $val->id }}')"><i--}}
+                                                        {{--class="fa fa-times"></i>&nbsp;&nbsp;解除绑定--}}
+                                            {{--</button>--}}
+                                        {{--</td>--}}
+                                    {{--</tr>--}}
+                                {{--@endforeach--}}
+                                </tbody>
+                            </table>
+                        </div>
+
                     </section>
+
+
                 </section>
             </section>
         </section>
     </section>
+</section>
 </section>
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>

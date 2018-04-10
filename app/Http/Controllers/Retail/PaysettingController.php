@@ -30,7 +30,12 @@ class PaysettingController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-        return view('Retail/Paysetting/payconfig', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        // 店铺id
+        $retail_id = $admin_data['organization_id'];
+        // 查询店铺付款信息设置
+        $data = RetailShengpay::getOne([['retail_id', $retail_id]]);
+
+        return view('Retail/Paysetting/payconfig', ['data' => $data, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     /**
@@ -311,8 +316,6 @@ class PaysettingController extends Controller
         }
         return response()->json(['data' => '操作成功！', 'status' => '1']);
     }
-
-
 
 
     public function kuaifu_setting(Request $request)
