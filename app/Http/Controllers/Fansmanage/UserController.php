@@ -329,8 +329,6 @@ class UserController extends CommonController
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-        // 搜索内容
-        $search_content = request()->input("search_content");
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
@@ -339,7 +337,7 @@ class UserController extends CommonController
             $search_content = '';
         }
         // 获取粉丝列表
-        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC", $search_content);
+        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
 
         // 处理数据
         foreach ($list as $key => $value) {
@@ -368,7 +366,7 @@ class UserController extends CommonController
 
 
     /**
-     *
+     * 列表搜索
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function user_list_search()
