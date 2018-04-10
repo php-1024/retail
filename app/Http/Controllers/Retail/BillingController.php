@@ -273,7 +273,7 @@ class BillingController extends Controller
         }
         $goods = RetailGoods::getList($where,0,'created_at','DESC');
         foreach ($goods as $key=>$val){
-            $goods_data[] = RetailStock::getOne(['goods_id'=>$val->id]);
+            $goods_data[] = RetailStock::getOne(['goods_id'=>$val->id])->first();
         }
 //        dump($stock_list);
         dump($goods_data);
