@@ -636,6 +636,7 @@ Route::group(['prefix' => 'retail'], function () {
 
     //支付设置
     Route::group(['prefix' => 'paysetting'], function () {
+        Route::get('payconfig', 'Retail\PaysettingController@payconfig')->middleware('RetailCheck');           //收款信息设置
         Route::get('shengpay_add', 'Retail\PaysettingController@shengpay_add')->middleware('RetailCheck');     //添加终端机器号信息
         Route::get('shengpay_list', 'Retail\PaysettingController@shengpay_list')->middleware('RetailCheck');   //终端机器号列表
     });
