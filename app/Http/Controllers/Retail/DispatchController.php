@@ -171,7 +171,6 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加运费区域失败，请检查', 'status' => '0']);
         }
@@ -201,7 +200,6 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改运费区域信息失败，请检查', 'status' => '0']);
         }
