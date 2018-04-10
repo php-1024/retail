@@ -581,7 +581,6 @@ class FansmanageController extends Controller{
 
         }
         catch(Exception $e) {
-            dd($e);
             DB::rollBack(); //事件回滚
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }

@@ -79,6 +79,37 @@ class DispatchController extends Controller
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'dispatch_name'=>$dispatch_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
+    //运费模板删除弹窗
+    public function dispatch_list_delete(Request $request)
+    {
+        $id = $request->get('id');
+        return view('Retail/Dispatch/dispatch_list_delete',['id'=>$id]);
+    }
+
+    //运费模板删除确认操作
+    public function dispatch_list_delete_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $id = $request->get('id');
+        DB::beginTransaction();
+        try {
+            Dispatch::select_delete($id);
+            DispatchProvince::select_deletes(['dispatch_id'=>$id]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统删除了运费模板！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了运费模板！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除运费模板失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除运费模板成功', 'status' => '1']);
+    }
+
     //运费模板启用弹窗
     public function dispatch_list_lock(Request $request)
     {
@@ -171,7 +202,6 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '添加运费区域失败，请检查', 'status' => '0']);
         }
@@ -201,7 +231,6 @@ class DispatchController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改运费区域信息失败，请检查', 'status' => '0']);
         }

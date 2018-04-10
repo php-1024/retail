@@ -67,5 +67,11 @@ class DispatchProvince extends Model{
         $model = Self::find($id);
         return $model->forceDelete();
     }
+
+    //查询出模型，再删除模型 一定要查询到才能删除
+    public static function select_deletes($where){
+        $model = Self::where($where);
+        return $model->forceDelete();
+    }
 }
 ?>
