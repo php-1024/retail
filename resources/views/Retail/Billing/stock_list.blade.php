@@ -94,7 +94,6 @@
                                 </div>
                             </footer>
                         </section>
-
                     </section>
                 </section>
             </section>
