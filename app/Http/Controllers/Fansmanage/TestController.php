@@ -22,7 +22,7 @@ class TestController extends Controller
         $list = FansmanageUser::getPaginage([['fansmanage_id', 5]], '', '10', 'id');
         dump($list);
         dump($list[0]["userOrigin"]["id"]);
-        dd($list[0]["userInfo"]["nickname"]);
+        dd($list[0]["userLabel"]['label_id']);
 
         $label = Label::ListLabel([['fansmanage_id', 5], ['store_id', '0']]);
 
