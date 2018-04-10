@@ -71,7 +71,11 @@
                                         <td>{{$val->name}}</td>
                                         <td>{{$val->number}}</td>
                                         <td>
+                                            @if($val->status == 0)
                                             <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;未启用</button>
+                                                @elseif($val->status == 1)
+                                                <button class="btn btn-success btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;未启用</button>
+                                            @endif
                                         </td>
                                         <td>
                                             <button class="btn btn-info btn-xs" onclick="window.location.href='dispatch_edit?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
