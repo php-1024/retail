@@ -101,6 +101,7 @@ class DispatchController extends Controller
             $status = 0;
             $tips = '弃用';
         }
+
         DB::beginTransaction();
         try {
             Dispatch::editDispatch(['id'=>$id],['status'=>$status]);
