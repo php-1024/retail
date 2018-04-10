@@ -86,7 +86,7 @@ class SystemController extends Controller{
         return redirect('agent');
     }
 
-    //公司信息设置
+    //公司信息设置页面
     public function agent_info(Request $request){
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
@@ -97,8 +97,9 @@ class SystemController extends Controller{
         $warzone = Warzone::getOne([['id', $data['warzoneAgent']['zone_id']]]);
         return view('Agent/System/agent_info',['warzone'=>$warzone,'data'=>$data,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
     }
-    //公司信息设置
+    //公司信息设置修改保存
     public function agent_info_check(Request $request){
+        var_dump($request);exit;
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $request->input('organization_id');//服务商id
