@@ -138,13 +138,16 @@ class InvoicingController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('category_id');    //栏目分类id
         $goods_name = $request->get('goods_name');      //商品名称
-        if (!empty($category_id)){
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id],'0','id','DESC');
+        if (!empty($category_id) && !empty($goods_name)){
+            $where = [['retail_id',$admin_data['organization_id']],['category_id',$category_id],['name', 'LIKE', '%' . $goods_name . '%']];
+        }elseif (!empty($category_id)){
+            $where = ['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id];
         }elseif (!empty($goods_name)){
-            $goods = RetailGoods::getList([['name', 'LIKE', '%' . $goods_name . '%'],['retail_id',$admin_data['organization_id']]],'0','id','DESC',$goods_name);
+            $where = [['retail_id',$admin_data['organization_id']],['name', 'LIKE', '%' . $goods_name . '%']];
         }else{
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id']],'0','id','DESC');
+            $where = ['retail_id'=>$admin_data['organization_id']];
         }
+        $goods = RetailGoods::getList($where,'0','id','DESC');
         return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
     }
 

@@ -91,10 +91,20 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 店铺id
         $retail_id = $admin_data['organization_id'];
-        // 查询店铺终端号列表
-        $list = RetailShengpayTerminal::getPaginage([['retail_id',$retail_id]],10,'id');
 
-        return view('Retail/Paysetting/shengpay_list', ['list' => $list,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        // 查询条件
+        $where = [['retail_id', $retail_id]];
+        // 终端号
+        $terminal_num = $request->terminal_num;
+        if (!empty($terminal_num)) {
+            $where = [['terminal_num', $terminal_num]];
+        }
+
+        $search_data = ['terminal_num' => $terminal_num];//分页搜索使用
+        // 查询店铺终端号列表
+        $list = RetailShengpayTerminal::getPaginage($where, 10, 'id');
+
+        return view('Retail/Paysetting/shengpay_list', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     /**
@@ -105,9 +115,9 @@ class PaysettingController extends Controller
         // 获取终端号id
         $id = $request->id;
         // 查询信息
-        $data = RetailShengpayTerminal::getOne([['id',$id]]);
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
 
-        return view('Retail/Paysetting/shengpay_edit',['data'=>$data]);
+        return view('Retail/Paysetting/shengpay_edit', ['data' => $data]);
     }
 
     /**
@@ -125,14 +135,14 @@ class PaysettingController extends Controller
         // 终端号id
         $id = $request->id;
         // 查询终端号是否存在
-        if (RetailShengpayTerminal::checkRowExists([['terminal_num', $terminal_num],['id','<>',$id]])) {
+        if (RetailShengpayTerminal::checkRowExists([['terminal_num', $terminal_num], ['id', '<>', $id]])) {
             return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
 
             // 修改终端号
-            RetailShengpayTerminal::editShengpayTerminal([['id',$id]],['terminal_num'=>$terminal_num]);
+            RetailShengpayTerminal::editShengpayTerminal([['id', $id]], ['terminal_num' => $terminal_num]);
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
@@ -147,6 +157,97 @@ class PaysettingController extends Controller
         }
         return response()->json(['data' => '修改成功！', 'status' => '1']);
     }
+
+    /**
+     * 终端机器号重新申请ajax显示
+     */
+    public function shengpay_apply(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/shengpay_apply', ['data' => $data]);
+    }
+
+    /**
+     * 终端机器号重新申请功能提交
+     */
+    public function shengpay_apply_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 终端号
+        $terminal_num = $request->terminal_num;
+        // 终端号id
+        $id = $request->id;
+        DB::beginTransaction();
+        try {
+            // 修改终端号
+            RetailShengpayTerminal::editShengpayTerminal([['id', $id]], ['status' => '0']);
+            // 如果不是超级管理员
+            if ($admin_data['is_super'] != 1) {
+                // 保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '重新提交申请终端号：' . $terminal_num);
+            }
+            // 事件提交
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功！', 'status' => '1']);
+    }
+
+    /**
+     * 终端机器号解除绑定ajax显示
+     */
+    public function shengpay_delete(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/shengpay_delete', ['data' => $data]);
+    }
+
+    /**
+     * 终端机器号解除绑定功能提交
+     */
+    public function shengpay_delete_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 终端号
+        $terminal_num = $request->terminal_num;
+        // 终端号id
+        $id = $request->id;
+        DB::beginTransaction();
+        try {
+            // 删除终端号
+            RetailShengpayTerminal::where('id', $id)->forceDelete();
+            // 如果不是超级管理员
+            if ($admin_data['is_super'] != 1) {
+                // 保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了终端号：' . $terminal_num);
+            }
+            // 事件提交
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功！', 'status' => '1']);
+    }
+
 
     public function shengf_setting(Request $request)
     {
