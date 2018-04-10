@@ -33,7 +33,7 @@ class TestController extends Controller
 //        }]);
 
 
-        $model = FansmanageUser::with(['user', 'userOrigin', "userRecommender" => function($query){
+        $model = FansmanageUser::select("store_id","fansmanage_id","user_id","open_id","mobile")->with(['user', 'userOrigin', "userRecommender" => function($query){
             $query->select("recommender_id","user_id");
         }, 'userInfo' => function ($query) {
             $query->select("id","nickname","head_imgurl","user_id");
@@ -47,7 +47,7 @@ class TestController extends Controller
 
         $recommender_id = User::select("id")->where(['id'=> 2])->first();
 
-        dump($test[0]["userInfo"]);
+        dump($test);
 //        dump($test_info["data"][0]["user_info"]);
 //        dump($test_info["data"][0]["user_recommender"]["recommender_id"]);
 //        dump($test_info["data"][0]["userLabel"]);
