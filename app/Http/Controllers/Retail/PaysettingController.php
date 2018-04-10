@@ -141,12 +141,11 @@ class PaysettingController extends Controller
             // 事件提交
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '添加失败！', 'status' => '0']);
+            return response()->json(['data' => '修改失败！', 'status' => '0']);
         }
-        return response()->json(['data' => '添加成功！', 'status' => '1']);
+        return response()->json(['data' => '修改成功！', 'status' => '1']);
     }
 
     public function shengf_setting(Request $request)
