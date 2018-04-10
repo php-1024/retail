@@ -347,7 +347,9 @@ class UserController extends CommonController
             $recommender_info = User::select("id")->where(['id' => 2])->first();
             // 获取推荐人名称
 //            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_info['id']]], 'nickname')->first();
-            $list[$key]['recommender_name'] = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();;
+            $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
+            $list[$key]['recommender_name'] = $userInfo["nickname"];
+
             // 粉丝对应的标签id
             $list[$key]['label_id'] = $value["userLabel"]['label_id'];
         }
