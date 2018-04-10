@@ -46,6 +46,7 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 终端号
         $terminal_num = $request->terminal_num;
+        // 查询终端号是否存在
         if (RetailShengpayTerminal::checkRowExists([['terminal_num', $terminal_num]])) {
             return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
         }
@@ -101,8 +102,12 @@ class PaysettingController extends Controller
      */
     public function shengpay_edit(Request $request)
     {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id',$id]]);
 
-        return view('Retail/Paysetting/shengpay_edit');
+        return view('Retail/Paysetting/shengpay_edit',['data'=>$data]);
     }
 
     public function shengf_setting(Request $request)
