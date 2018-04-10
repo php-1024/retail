@@ -375,7 +375,6 @@ class UserController extends CommonController
         $this->getRequestInfo();
         // 搜索内容
         $search_content = request()->input("search_content");
-
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
@@ -384,13 +383,7 @@ class UserController extends CommonController
             $search_content = '';
         }
         // 获取粉丝列表
-        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
-
-        dump($search_content);
-        dump($organization_id);
-        dump($list);
-
-
+        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC", $search_content);
         // 处理数据
         foreach ($list as $key => $value) {
             if (!empty($value["user"])) {
@@ -413,7 +406,7 @@ class UserController extends CommonController
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
 
         // 渲染页面
-        return view('Fansmanage/User/user_search', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
+        return view('Fansmanage/User/user_search', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id]);
     }
 
 
