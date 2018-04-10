@@ -60,7 +60,7 @@
                                     <label class="col-sm-1 control-label">用户账号</label>
                                     <div class="col-sm-2">
                                         <input type="text" class="form-control" id="user_account" value=""
-                                               placeholder="用户账号">
+                                               placeholder="请输入用户账号">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="button" id="searchBtn" class="btn btn-s-md btn-info"><i
