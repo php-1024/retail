@@ -92,13 +92,13 @@ class DispatchController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $id = $request->get('id');
+        $id = $request->get('id');                          //获取运费模板id
         $status = $request->get('status');
-        if ($status == '0'){
-            $status = 1;
+        if ($status == 0){
+            $status = '1';
             $tips = '启用';
         }else{
-            $status = 0;
+            $status = '0';
             $tips = '弃用';
         }
         DB::beginTransaction();
@@ -113,9 +113,9 @@ class DispatchController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '启用运费模板失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips.'运费模板失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '启用运费模板成功', 'status' => '1']);
+        return response()->json(['data' => $tips.'运费模板成功', 'status' => '1']);
     }
 
     //编辑运费模板
