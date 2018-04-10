@@ -149,7 +149,7 @@ class PaysettingController extends Controller
     }
 
     /**
-     * 编辑终端机器号ajax显示
+     * 终端机器号重新申请ajax显示
      */
     public function shengpay_apply(Request $request)
     {

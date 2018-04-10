@@ -286,7 +286,7 @@ class AndroidApiController extends Controller
     public function cash_payment(Request $request)
     {
         $order_id = $request->order_id;//订单id
-        $order = RetailOrder::getOne([['id', $order_id]])();
+        $order = RetailOrder::getOne([['id', $order_id]]);
         if ($order['status'] != '0') {
             return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
         }
