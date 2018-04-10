@@ -105,11 +105,27 @@ class FansmanageUser extends Model
         return self::where($where)->get()->count();
     }
 
+
     // 获取分页数据
-    public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $field = [])
+
+    /**
+     * 用户列表 数据
+     * @param $where
+     * @param $user_id
+     * @param $paginate
+     * @param $orderby
+     * @param string $sort
+     * @param string $search
+     * @return mixed
+     */
+    public static function getPaginage($where, $user_id, $paginate, $orderby, $sort = 'DESC', $search = '')
     {
-        $model = self::select("id", "store_id", "fansmanage_id", "user_id", "open_id", "mobile","created_at")->with(["userOrigin", "user"=>function($query){
-            $query->select("id","account");
+        $model = self::select("id", "store_id", "fansmanage_id", "user_id", "open_id", "mobile", "created_at")->with(["userOrigin", "user" => function ($query) use ($search) {
+            $query->select("id", "account");
+            // 关键字搜索
+            if (!empty($search)) {
+                $query->where("account", 'like', "%$search%");
+            }
         }, "userRecommender" => function ($query) {
             $query->select("recommender_id", "user_id");
         }, "userInfo" => function ($query) {
@@ -118,10 +134,6 @@ class FansmanageUser extends Model
             $query->select("label_id", "user_id");
         }]);
 
-
-        if (!empty($field)) {
-            $model->select($field);
-        }
         if (!empty($user_id)) {
             $model->where(['user_id' => $user_id]);
         }
