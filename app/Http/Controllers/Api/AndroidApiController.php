@@ -165,6 +165,7 @@ class AndroidApiController extends Controller
 
 //account_id=76&organization_id=5&timestamp=1522485361983&token=e71eaa006f6854ca6c86380a7e94e853&goodsdata={"data":[{"id":1,"num":"1","price":"10.00"},{"id":2,"num":"1","price":"12.00"}]}
 
+//{"data":[{"id":"1","num":"5","price":"0.01"},{"id":"2","num":"3","price":"0.01"},{"id":"6","num":"3","price":"5.00"},{"id":"5","num":"4","price":"16.00"},{"id":"4","num":"3","price":"12.00"}]}
 
     /**
      * 取消订单接口
@@ -287,8 +288,8 @@ class AndroidApiController extends Controller
     public function cash_payment(Request $request)
     {
         $order_id = $request->order_id;//订单id
-        $order_status = RetailOrder::getPluck([['id', $order_id]], 'status')->first();
-        if ($order_status != '0') {
+        $order = RetailOrder::getOne([['id', $order_id]])();
+        if ($order['status'] != '0') {
             return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
         }
         $organization_id = $request->organization_id;//店铺
@@ -308,7 +309,7 @@ class AndroidApiController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '现金付款失败', 'status' => '0', 'data' => '']);
         }
-        return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
+        return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id, 'price' => $order['order_price']]]);
     }
 
     /**

@@ -42,6 +42,7 @@
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="shengpay_edit" value="{{ url('retail/ajax/shengpay_edit') }}">
+                                    <input type="hidden" id="shengpay_apply" value="{{ url('retail/ajax/shengpay_apply') }}">
                                     <label class="col-sm-1 control-label">终端机器号</label>
 
                                     <div class="col-sm-2">
@@ -85,7 +86,7 @@
                                                 @endif
 
                                             @if($val->status == '-1')
-                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;重新申请</button>
+                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getApplyForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;重新申请</button>
                                                 @endif
                                                 <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;解除绑定</button>
                                             </td>
@@ -126,7 +127,7 @@
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    //获取用户信息，编辑密码框
+    //编辑终端号
     function getEditForm(id){
         var url = $('#shengpay_edit').val();
         var token = $('#_token').val();
@@ -159,6 +160,43 @@
             }
         });
     }
+
+    //重新申请
+    function getApplyForm(id){
+        var url = $('#shengpay_apply').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+
+
 </script>
 </body>
 </html>

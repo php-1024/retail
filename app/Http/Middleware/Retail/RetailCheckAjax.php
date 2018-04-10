@@ -51,6 +51,7 @@ class RetailCheckAjax
             case "retail/ajax/dispatch_list_delete":          //运费模板删除确认弹窗
 
             case "retail/ajax/shengpay_edit":          //编辑终端机器号
+            case "retail/ajax/shengpay_apply":         //终端机器号重新申请
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

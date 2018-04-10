@@ -141,12 +141,24 @@ class PaysettingController extends Controller
             // 事件提交
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '添加失败！', 'status' => '0']);
+            return response()->json(['data' => '修改失败！', 'status' => '0']);
         }
-        return response()->json(['data' => '添加成功！', 'status' => '1']);
+        return response()->json(['data' => '修改成功！', 'status' => '1']);
+    }
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function shengpay_apply(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id',$id]]);
+
+        return view('Retail/Paysetting/shengpay_apply',['data'=>$data]);
     }
 
     public function shengf_setting(Request $request)
