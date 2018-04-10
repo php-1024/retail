@@ -817,7 +817,7 @@ class AgentController extends Controller
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-    
+
     /**
      * 添加代理数据提交
      */
