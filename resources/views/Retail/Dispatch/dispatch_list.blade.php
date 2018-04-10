@@ -46,6 +46,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="dispatch_list_lock" value="{{url('retail/ajax/dispatch_list_lock')}}">
+                                    <input type="hidden" id="dispatch_list_delete" value="{{url('retail/ajax/dispatch_list_delete')}}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
@@ -80,7 +81,7 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-info btn-xs" onclick="window.location.href='dispatch_edit?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-danger btn-xs" onclick="getDeleteForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -117,11 +118,34 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
-    //审核订单
+    //启用、弃用运费模板
     function getlockForm(id,status){
         var url = $('#dispatch_list_lock').val();
         var token = $('#_token').val();
         var data = {'_token':token,'id':id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //删除运费模板
+    function getDeleteForm(id){
+        var url = $('#dispatch_list_delete').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
