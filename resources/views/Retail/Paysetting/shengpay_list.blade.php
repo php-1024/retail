@@ -47,7 +47,7 @@
                                     <label class="col-sm-1 control-label">终端机器号</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="{{$search_data['terminal_num']}}">
+                                        <input class="input-sm form-control" size="16" name="terminal_num" type="text" value="{{$search_data['terminal_num']}}">
                                     </div>
 
                                     <div class="col-sm-3">
