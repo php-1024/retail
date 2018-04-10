@@ -96,6 +96,15 @@ class PaysettingController extends Controller
         return view('Retail/Paysetting/shengpay_list', ['list' => $list,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function shengpay_edit(Request $request)
+    {
+
+        return view('Retail/Paysetting/shengpay_edit');
+    }
+
     public function shengf_setting(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
