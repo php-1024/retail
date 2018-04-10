@@ -107,7 +107,7 @@ class SystemController extends Controller{
         $organization_name = $request->input('organization_name');//服务商名称
         $idcard = $request->input('idcard');//负责人身份证
         $mobile = $request->input('mobile');//负责人手机号
-        var_dump($request);exit;
+
         DB::beginTransaction();
         try{
             $agent= Organization::getOneAgent([['id',$organization_id]]);
@@ -134,7 +134,7 @@ class SystemController extends Controller{
             }
 
             if($admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商：' . $agent['organization_name']);//保存操作记录
+                OperationLog::addOperationLog('2', $organization_id, $account_id, $route_name, '修改了服务商信息：' . $agent['organization_name']);//保存操作记录
             }
             DB::commit();//提交事务
         }catch (\Exception $e) {
