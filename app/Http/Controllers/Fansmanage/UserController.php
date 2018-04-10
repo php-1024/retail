@@ -343,13 +343,13 @@ class UserController extends CommonController
             // 微信昵称
             $list[$key]['nickname'] = $value["userInfo"]['nickname'];
             // 微信头像
-            $list[$key]['head_imgurl'] = $re["userInfo"]['head_imgurl'];
+            $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
             // 获取推荐人id
             $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
             // 获取推荐人名称
             $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
             // 粉丝对应的标签id
-            $list[$key]['label_id'] = $re["userLabel"]['label_id'];
+            $list[$key]['label_id'] = $value["userLabel"]['label_id'];
         }
 
         // 粉丝标签列表
