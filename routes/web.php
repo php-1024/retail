@@ -633,7 +633,8 @@ Route::group(['prefix' => 'retail'], function () {
 
     //支付设置
     Route::group(['prefix' => 'paysetting'], function () {
-        Route::get('wechat_setting', 'Retail\PaysettingController@wechat_setting')->middleware('RetailCheck');   //支付设置-微信支付
+        Route::get('shengpay_add', 'Retail\PaysettingController@shengpay_add')->middleware('RetailCheck');     //添加终端机器号信息
+        Route::get('shengpay_list', 'Retail\PaysettingController@shengpay_list')->middleware('RetailCheck');   //终端机器号列表
     });
 
 
@@ -713,6 +714,11 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('user_list_lock', 'Retail\UserController@user_list_lock')->middleware('RetailCheckAjax');                 //列表冻结ajax显示
         Route::post('user_list_lock_check', 'Retail\UserController@user_list_lock_check')->middleware('RetailCheckAjax');     //列表冻结功能提交
         Route::post('user_list_wallet', 'Retail\UserController@user_list_wallet')->middleware('RetailCheckAjax');             //列表粉丝钱包ajax显示
+
+
+        //支付设置
+        Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号信息功能提交
+
     });
 });
 /**********************零售版店铺管理系统*********************/

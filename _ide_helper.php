@@ -2175,7 +2175,8 @@ namespace Illuminate\Support\Facades {
          * @param string $path
          * @return string 
          * @static 
-         */ 
+         */
+
         public static function getCompiledPath($path)
         {
             //Method inherited from \Illuminate\View\Compilers\Compiler            
