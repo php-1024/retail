@@ -46,6 +46,9 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 终端号
         $terminal_num = $request->terminal_num;
+        if(RetailShengpayTerminal::checkRowExists([['terminal_num',$terminal_num]])){
+            return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
             // 数据处理
