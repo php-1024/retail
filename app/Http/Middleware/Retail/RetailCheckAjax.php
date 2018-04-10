@@ -164,6 +164,7 @@ class RetailCheckAjax
             /****支付设置****/
             // 添加终端机器号信息功能提交
             case "retail/ajax/shengpay_add_check":
+            case "retail/ajax/shengpay_edit_check":
                 $re = $this->checkLoginAndRuleAndShengpayAdd($request);
                 return self::format_response($re, $next);
                 break;
