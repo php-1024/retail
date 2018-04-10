@@ -83,11 +83,11 @@
                                             </td>
                                             <td>{{ $val->created_at }}</td>
                                             <td>
-                                                @if($val->status=='1')
+                                                @if($val->status == '1')
                                                 <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                 @endif
 
-                                            @if($val->status=='-1')
+                                            @if($val->status == '-1')
                                                     <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;重新申请</button>
                                                 @endif
                                                 <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;解除绑定</button>
