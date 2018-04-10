@@ -7,7 +7,10 @@
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
+use App\Models\OperationLog;
+use App\Models\RetailShengpayTerminal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class PaysettingController extends Controller
@@ -35,9 +38,37 @@ class PaysettingController extends Controller
      */
     public function shengpay_add_check(Request $request)
     {
+        // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
-        dd(1);
-
+        // 店铺id
+        $retail_id = $admin_data['organization_id'];
+        // 终端号
+        $terminal_num = $request->terminal_num;
+        DB::beginTransaction();
+        try {
+            // 数据处理
+            $data = [
+                // 店铺id
+                'retail_id'=>$retail_id,
+                // 终端号
+                'terminal_num'=>$terminal_num,
+            ];
+            // 添加终端号
+            RetailShengpayTerminal::addShengpayTerminal($data);
+            // 如果不是超级管理员
+            if ($admin_data['is_super'] != 1) {
+                // 保存操作记录
+                OperationLog::addOperationLog('3', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改粉丝标签：' . $nickname);
+            }
+            // 事件提交
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '添加失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加成功！', 'status' => '1']);
     }
 
     /**
