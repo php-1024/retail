@@ -10,11 +10,14 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">用户账号</label>
+                        <label class="col-sm-2 text-right control-label">用户账号</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$data['account']}}" placeholder="标签名称" class="form-control" disabled="" name="account">
                         </div>
                     </div>
+
+
+
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
