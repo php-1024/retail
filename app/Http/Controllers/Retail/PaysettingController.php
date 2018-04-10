@@ -221,16 +221,17 @@ class PaysettingController extends Controller
         $id = $request->id;
         DB::beginTransaction();
         try {
-            // 修改终端号
-            RetailShengpayTerminal::editShengpayTerminal([['id',$id]],['status'=>'0']);
+            // 删除终端号
+            RetailShengpayTerminal::where('id',$id)->forceDelete();//删除节点
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '重新提交申请终端号：' . $terminal_num);
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了终端号：' . $terminal_num);
             }
             // 事件提交
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '操作失败！', 'status' => '0']);
