@@ -75,21 +75,22 @@
                                             <td>
                                                 @if($val->status == '0')
                                                     <label class="label label-warning">待审核</label>
-                                                @elseif(($val->status == '1'))
+                                                @elseif($val->status == '1')
                                                     <label class="label label-success">已通过</label>
-                                                @elseif(($val->status == '-1'))
+                                                @elseif($val->status == '-1')
                                                     <label class="label label-danger">未通过</label>
                                                 @endif
                                             </td>
                                             <td>{{ $val->created_at }}</td>
                                             <td>
+                                                @if($val->status != '1')
                                                 <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                                @if($val->status=='1')
-                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
-                                                @else
-                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
                                                 @endif
-                                                <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+
+                                            @if($val->status == '-1')
+                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;重新申请</button>
+                                                @endif
+                                                <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;解除绑定</button>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -128,41 +129,6 @@
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    //冻结用户-解冻
-    function getLockComfirmForm(id,account,status){
-        var url = $('#subordinate_lock').val();
-        var token = $('#_token').val();
-
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'account':account,'status':status,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
     //获取用户信息，编辑密码框
     function getEditForm(id){
         var url = $('#subordinate_edit_url').val();
