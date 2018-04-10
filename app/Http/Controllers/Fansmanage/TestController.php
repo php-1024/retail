@@ -20,15 +20,32 @@ class TestController extends Controller
     {
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', 5]], '', '10', 'id');
-        dump($list);
-        dump($list[0]["userOrigin"]["id"]);
-        dd($list[0]["userLabel"]['label_id']);
 
-        $label = Label::ListLabel([['fansmanage_id', 5], ['store_id', '0']]);
+        dd($list);
 
-        dump($label);
+//        $model = FansmanageUser::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with(['userLabel' => function ($query) {
+//            return $query->select("label_id");
+//        }]);
 
-        $res = UserLabel::getPluck([['user_id', 1], ['organization_id', 5]], 'label_id')->first();
-        var_dump($res);
+
+        $model = FansmanageUser::with('userOrigin')->with(['userLabel' => function ($query) {
+            $query->select("label_id", "user_id");
+        }, 'userOrigin' => function ($query) {
+            $query->select("origin_id", "user_id");
+        }]);
+
+
+//        Post::with(array('user'=>function($query){
+//            $query->select('id','username');
+//        }))->get();
+
+        if (!empty($field)) {
+            $model->select($field);
+        }
+        if (!empty($user_id)) {
+            $model->where(['user_id' => $user_id]);
+        }
+        $test = $model->where(['fansmanage_id' => 5])->orderBy("id", "DESC")->paginate(10);
+        dump($test);
     }
 }

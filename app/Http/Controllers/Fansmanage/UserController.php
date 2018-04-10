@@ -338,8 +338,6 @@ class UserController extends CommonController
 
         // 处理数据
         foreach ($list as $key => $value) {
-            // 获取粉丝数据
-            $re = UserInfo::getOneUserInfo([['user_id', $value->user_id]]);
             // 微信昵称
             $list[$key]['nickname'] = $value["userInfo"]['nickname'];
             // 微信头像
@@ -350,7 +348,6 @@ class UserController extends CommonController
             $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
             // 粉丝对应的标签id
             $list[$key]['label_id'] = $value["userLabel"]['label_id'];
-
         }
 
         // 粉丝标签列表
