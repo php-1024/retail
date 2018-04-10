@@ -61,6 +61,10 @@
                                         <div class="col-sm-2">
                                             <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
                                         </div>
+                                    <label class="col-sm-1 control-label">排序</label>
+                                    <div class="col-sm-2">
+                                        <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->displayorder}}" name="displayorder">
+                                    </div>
                                 </div>
                                 <div style="clear:both"></div>
                                 <div class="line line-border b-b pull-in"></div>
