@@ -110,8 +110,8 @@ class FansmanageUser extends Model
     {
 //        $model = self::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with('userLabel');
 
-        $model = self::with(["userOrigin", "user", "userRecommender", "userInfo" => function($query){
-            $query->select("nickname","head_imgurl");
+        $model = self::with(["userOrigin", "user", "userRecommender", "userInfo" => function ($query) {
+            $query->select("nickname", "head_imgurl");
         }, "userLabel" => function ($query) {
             $query->select("label_id");
         }]);
