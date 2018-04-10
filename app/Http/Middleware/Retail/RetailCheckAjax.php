@@ -66,6 +66,10 @@ class RetailCheckAjax
                 break;
 
 
+
+
+
+
             /****检测是否登录 权限 安全密码****/
             case "retail/ajax/store_edit_check":        //店铺信息编辑弹窗页面
             case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
@@ -153,6 +157,19 @@ class RetailCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re, $next);
             /****粉丝信息编辑****/
+
+
+            /****支付设置****/
+            // 添加终端机器号信息功能提交
+            case "retail/ajax/shengpay_add_check":
+                $re = $this->checkLoginAndRuleAndShengpayAdd($request);
+                return self::format_response($re, $next);
+                break;
+            /****粉丝信息编辑****/
+
+
+
+
         }
     }
 
@@ -367,6 +384,25 @@ class RetailCheckAjax
             }
         }
     }
+
+    // 添加终端机器号信息功能检测
+    public function checkLoginAndRuleAndShengpayAdd($request)
+    {
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录是否有权限以及安全密码
+        if ($re['status'] == '0') {
+            return $re;
+        } else {
+            $re2 = $this->checkShengpayAdd($re['response']);//检测修改的数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
+
+
+
     /******************************复合检测结束*********************************/
 
 
@@ -719,6 +755,21 @@ class RetailCheckAjax
             return self::res(1, $request);
         }
     }
+
+
+    // 添加终端机器号信息功能提交
+    public function checkShengpayAdd($request)
+    {
+        if (empty($request->input('terminal_num'))) {
+            return self::res(0, response()->json(['data' => '请输入终端号!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
+
+
+
+
 
     /*****************************数据检测结束****************************/
 
