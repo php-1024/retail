@@ -63,13 +63,10 @@ class RetailShengpayTerminal extends Model
     }
 
     //获取分页列表
-    public static function getPaginage($where, $category_name, $paginate, $orderby, $sort = 'DESC')
+    public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
     {
-        $model = self::with('Organization');
-        if (!empty($category_name)) {
-            $model = $model->where('name', 'like', '%' . $category_name . '%');
-        }
-        return $model->with('create_account')->with('Organization')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
+        return self::where($where)->orderBy($orderby, $sort)->paginate($paginate);
+
     }
 }
 
