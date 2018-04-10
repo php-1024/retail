@@ -46,7 +46,7 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 终端号
         $terminal_num = $request->terminal_num;
-        if(RetailShengpayTerminal::checkRowExists([['terminal_num',$terminal_num]])){
+        if (RetailShengpayTerminal::checkRowExists([['terminal_num', $terminal_num]])) {
             return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
         }
         DB::beginTransaction();
@@ -54,9 +54,9 @@ class PaysettingController extends Controller
             // 数据处理
             $data = [
                 // 店铺id
-                'retail_id'=>$retail_id,
+                'retail_id' => $retail_id,
                 // 终端号
-                'terminal_num'=>$terminal_num,
+                'terminal_num' => $terminal_num,
             ];
             // 添加终端号
             RetailShengpayTerminal::addShengpayTerminal($data);
@@ -68,7 +68,6 @@ class PaysettingController extends Controller
             // 事件提交
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '添加失败！', 'status' => '0']);
