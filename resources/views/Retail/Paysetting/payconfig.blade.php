@@ -46,13 +46,22 @@
                             </div>
                             <div class="table-responsive">
                                 <form class="form-horizontal" method="post" role="form" id="currentForm"
-                                      action="{{ url('retail/ajax/shengpay_add_check') }}">
+                                      action="{{ url('retail/ajax/payconfig_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">终端号</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">pos商户号</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" value="" name="terminal_num">
+                                            <input type="text" class="form-control" value="" name="sft_pos_num">
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">盛付通商户号</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" value="" name="sft_num">
                                         </div>
                                     </div>
 
@@ -131,13 +140,14 @@
                     window.location.reload();
                 });
             } else {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
