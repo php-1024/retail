@@ -74,11 +74,11 @@
                                             <td>{{ $val->terminal_num }}</td>
                                             <td>
                                                 @if($val->status == '0')
-                                                    <label class="label label-times">待审核</label>
+                                                    <label class="label label-warning">待审核</label>
                                                 @elseif(($val->status == '1'))
                                                     <label class="label label-success">已通过</label>
                                                 @elseif(($val->status == '-1'))
-                                                    <label class="label label-times">未通过</label>
+                                                    <label class="label label-danger">未通过</label>
                                                 @endif
                                             </td>
                                             <td>{{ $val->created_at }}</td>
