@@ -335,8 +335,11 @@ class UserController extends CommonController
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        if (empty($search_content)) {
+            $search_content = '';
+        }
         // 获取粉丝列表
-        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id',"DESC");
+        $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC", $search_content);
 
         // 处理数据
         foreach ($list as $key => $value) {
@@ -358,7 +361,6 @@ class UserController extends CommonController
 
         // 粉丝标签列表
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
-
 
         // 渲染页面
         return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
