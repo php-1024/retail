@@ -156,7 +156,6 @@ class AndroidApiController extends Controller
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
@@ -165,7 +164,6 @@ class AndroidApiController extends Controller
 
 //account_id=76&organization_id=5&timestamp=1522485361983&token=e71eaa006f6854ca6c86380a7e94e853&goodsdata={"data":[{"id":1,"num":"1","price":"10.00"},{"id":2,"num":"1","price":"12.00"}]}
 
-//{"data":[{"id":"1","num":"5","price":"0.01"},{"id":"2","num":"3","price":"0.01"},{"id":"6","num":"3","price":"5.00"},{"id":"5","num":"4","price":"16.00"},{"id":"4","num":"3","price":"12.00"}]}
 
     /**
      * 取消订单接口
