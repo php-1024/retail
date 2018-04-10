@@ -83,7 +83,7 @@
                                             </td>
                                             <td>{{ $val->created_at }}</td>
                                             <td>
-                                                @if($val->status == '1')
+                                                @if($val->status != '1')
                                                 <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                                 @endif
 
