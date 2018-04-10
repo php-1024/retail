@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                @if(empty$data->id)
+                                @if(empty($data->id))
                                 <form class="form-horizontal" method="post" role="form" id="currentForm"
                                       action="{{ url('retail/ajax/payconfig_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
