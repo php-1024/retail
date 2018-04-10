@@ -85,6 +85,48 @@ class PaysettingController extends Controller
         return response()->json(['data' => '添加成功！', 'status' => '1']);
     }
 
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function payconfig_edit(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/payconfig_edit', ['data' => $data]);
+    }
+
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function payconfig_apply(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/payconfig_apply', ['data' => $data]);
+    }
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function payconfig_delete(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/payconfig_delete', ['data' => $data]);
+    }
+
+
     /**
      * 添加终端机器号信息
      */

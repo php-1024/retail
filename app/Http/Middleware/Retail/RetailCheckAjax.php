@@ -50,9 +50,12 @@ class RetailCheckAjax
             case "retail/ajax/dispatch_list_lock":            //运费模板启用弹窗
             case "retail/ajax/dispatch_list_delete":          //运费模板删除确认弹窗
 
-            case "retail/ajax/shengpay_edit":          //编辑终端机器号
-            case "retail/ajax/shengpay_apply":         //终端机器号重新申请
-            case "retail/ajax/shengpay_delete":        //终端机器号解除绑定
+            case "retail/ajax/shengpay_edit":           //编辑终端机器号
+            case "retail/ajax/shengpay_apply":          //终端机器号重新申请
+            case "retail/ajax/shengpay_delete":         //终端机器号解除绑定
+            case "retail/ajax/payconfig_edit":          //付款信息编辑
+            case "retail/ajax/payconfig_apply":         //付款信息重新申请
+            case "retail/ajax/payconfig_delete":        //付款信息删除
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
