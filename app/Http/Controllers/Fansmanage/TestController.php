@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Fansmanage;
 use App\Http\Controllers\Controller;
 use App\Models\FansmanageUser;
 use App\Models\Label;
+use App\Models\User;
 use App\Models\UserLabel;
 
 class TestController extends Controller
@@ -32,24 +33,23 @@ class TestController extends Controller
 //        }]);
 
 
-        $model = FansmanageUser::with(['userLabel' => function ($query) {
-            $query->select("label_id", "user_id");
-        }, 'userOrigin' => function ($query) {
-            $query->select("origin_id", "user_id");
+        $model = FansmanageUser::with(['user', 'userOrigin', "userRecommender" => function($query){
+            $query->select("recommender_id","user_id");
+        }, 'userInfo' => function ($query) {
+            $query->select("id","nickname","head_imgurl","user_id");
+        }, 'userLabel' => function ($query) {
+            $query->select("label_id","user_id");
         }]);
-
-
-//        Post::with(array('user'=>function($query){
-//            $query->select('id','username');
-//        }))->get();
-
-        if (!empty($field)) {
-            $model->select($field);
-        }
-        if (!empty($user_id)) {
-            $model->where(['user_id' => $user_id]);
-        }
         $test = $model->where(['fansmanage_id' => 5])->orderBy("id", "DESC")->paginate(10);
-        dump($test);
+
+        $test_info = $test->toArray();
+
+
+        $recommender_id = User::select("id")->where(['id'=> 2])->first();
+
+        dump($test_info["data"][0]);
+        dump($test_info["data"][0]["user_info"]);
+        dump($test_info["data"][0]["user_recommender"]["recommender_id"]);
+//        dump($test_info["data"][0]["userLabel"]);
     }
 }

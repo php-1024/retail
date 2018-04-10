@@ -180,9 +180,9 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return $this->getResponseMsg(0,'修改会员标签失败！');
+            return $this->getResponseMsg(0, '修改会员标签失败！');
         }
-        return $this->getResponseMsg(1,'修改会员标签成功！');
+        return $this->getResponseMsg(1, '修改会员标签成功！');
     }
 
     /**
@@ -239,9 +239,9 @@ class UserController extends CommonController
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return $this->getResponseMsg(0,'删除会员标签失败！');
+            return $this->getResponseMsg(0, '删除会员标签失败！');
         }
-        return $this->getResponseMsg(1,'删除会员标签成功！');
+        return $this->getResponseMsg(1, '删除会员标签成功！');
     }
 
 
@@ -342,10 +342,12 @@ class UserController extends CommonController
             $list[$key]['nickname'] = $value["userInfo"]['nickname'];
             // 微信头像
             $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
+
             // 获取推荐人id
-            $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
+            $recommender_info = User::select("id")->where(['id' => 2])->first();
             // 获取推荐人名称
-            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
+//            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_info['id']]], 'nickname')->first();
+            $list[$key]['recommender_name'] = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();;
             // 粉丝对应的标签id
             $list[$key]['label_id'] = $value["userLabel"]['label_id'];
         }
