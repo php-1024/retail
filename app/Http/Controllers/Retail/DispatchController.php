@@ -82,6 +82,14 @@ class DispatchController extends Controller
     //运费模板启用弹窗
     public function dispatch_list_lock(Request $request)
     {
+        $id = $request->get('id');
+        $status = $request->get('status');
+        return view('Retail/Dispatch/dispatch_list_lock',['id'=>$id,'status'=>$status]);
+    }
+
+    //运费模板启用弹窗
+    public function dispatch_list_lock_check(Request $request)
+    {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $id = $request->get('id');
