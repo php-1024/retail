@@ -129,13 +129,13 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="dispatch_data[{{$val->id}}][first_weight]" value="{{$val->first_weight}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][first_weight]" value="{{$val->first_weight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="dispatch_data[{{$val->id}}][additional_weight]" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][additional_weight]" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="dispatch_data[{{$val->id}}][freight]" value="{{$val->freight}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][freight]" value="{{$val->freight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="dispatch_data[{{$val->id}}][renewal]" value="{{$val->renewal}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][renewal]" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
                                                         <button type="button" class="btn btn-danger btn-xs" onclick="provinces_delete_check('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
