@@ -630,8 +630,10 @@ class AgentController extends Controller
         $route_name = $request->path();
         // 代理id
         $organization_id = $request->organization_id;
-        $oneAgent = Organization::getOne([['id', $organization_id]]); //代理信息
-        $status = $request->status; //是否消耗程序数量
+        // 代理信息
+        $oneAgent = Organization::getOne([['id', $organization_id]]);
+        // 是否消耗程序数量
+        $status = $request->status;
         $fansmanage_id = $request->fansmanage_id; //商户id
         $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name')->first();
         DB::beginTransaction();
