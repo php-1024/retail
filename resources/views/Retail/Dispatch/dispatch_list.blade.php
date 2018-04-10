@@ -45,11 +45,10 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <label class="col-sm-1 control-label">订单编号</label>
+                                    <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="name" value="" placeholder="模板名称">
+                                        <input type="text" class="form-control" name="name" value="{{$dispatch_name}}" placeholder="模板名称">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
