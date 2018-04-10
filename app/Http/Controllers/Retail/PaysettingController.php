@@ -42,8 +42,13 @@ class PaysettingController extends Controller
         $admin_data = $request->get('admin_data');
         // 店铺id
         $retail_id = $admin_data['organization_id'];
+        // 获取当前的页面路由
+        $route_name = $request->path();
         // 终端号
         $terminal_num = $request->terminal_num;
+        if(RetailShengpayTerminal::checkRowExists([['terminal_num',$terminal_num]])){
+            return response()->json(['data' => '该终端号已绑定！', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
             // 数据处理
@@ -58,7 +63,7 @@ class PaysettingController extends Controller
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
-                OperationLog::addOperationLog('3', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改粉丝标签：' . $nickname);
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了终端号：' . $terminal_num);
             }
             // 事件提交
             DB::commit();
