@@ -137,7 +137,7 @@
                                                     <td>
                                                         <input type="text" name="dispatch_data[{{$val->id}}][renewal]" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="provinces_delete_check('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button type="button" class="btn btn-danger btn-xs" onclick="provinces_delete_check('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
