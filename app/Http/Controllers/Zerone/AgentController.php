@@ -634,7 +634,9 @@ class AgentController extends Controller
         $oneAgent = Organization::getOne([['id', $organization_id]]);
         // 是否消耗程序数量
         $status = $request->status;
-        $fansmanage_id = $request->fansmanage_id; //商户id
+        // 商户id
+        $fansmanage_id = $request->fansmanage_id;
+        // 查询商户名称
         $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name')->first();
         DB::beginTransaction();
         try {
