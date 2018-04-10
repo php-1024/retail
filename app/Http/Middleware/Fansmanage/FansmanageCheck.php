@@ -74,6 +74,7 @@ class FansmanageCheck{
             case "fansmanage/user/user_tag":                  //粉丝标签管理
             case "fansmanage/user/user_list":                 //粉丝用户管理
             case "fansmanage/user/user_timeline":             //粉丝用户足迹
+            case "fansmanage/user/user_search":             //粉丝用户搜索
             /****用户管理****/
 
                 $re = $this->checkLoginAndRule($request);   //判断是否登录

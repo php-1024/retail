@@ -444,8 +444,8 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('FansmanageCheck');                    //粉丝标签管理
 //        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');
         //粉丝用户管理
-        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                              //粉丝用户管理
-        Route::post('user_search', 'Fansmanage\UserController@user_list_search')->middleware('FansmanageCheckAjax');                    //粉丝用户管理
+        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                              //粉丝搜索
+        Route::post('user_search', 'Fansmanage\UserController@user_list_search')->middleware('FansmanageCheck');                    //粉丝用户管理
         Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 
