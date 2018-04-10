@@ -275,7 +275,7 @@ class BillingController extends Controller
         foreach ($goods as $key=>$val){
             $goods_data[] = RetailStock::getOne(['goods_id'=>$val->id]);
         }
-        dump($stock_list);
+//        dump($stock_list);
         dump($goods_data);
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'goods_name'=>$goods_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
