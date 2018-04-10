@@ -74,16 +74,7 @@
                                     </div>
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">微信网页授权</label>
-                                        <div class="col-sm-8">
-                                            <label>
-                                                <input type="checkbox" checked=""><i></i> 授权回调页面已经设置成o2o.01nnt.com
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    
                                     <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
 
