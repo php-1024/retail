@@ -92,17 +92,14 @@ class DispatchController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $id = $request->get('id');
-        dd($id);
+        $id = $request->get('id');                          //获取运费模板id
         $status = $request->get('status');
         if ($status == '0'){
             $status = 1;
             $tips = '启用';
-            dd($status);
         }else{
             $status = 0;
             $tips = '弃用';
-            dd($status);
         }
         DB::beginTransaction();
         try {
