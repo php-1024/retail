@@ -153,6 +153,7 @@ class DispatchController extends Controller
             foreach ($dispatch_data as $key=>$val){
                 DispatchProvince::editDispatchProvince(['id'=>$key,'dispatch_id'=>$dispatch_id],['first_weight'=>$val['first_weight'],'additional_weight'=>$val['additional_weight'],'freight'=>$val['freight'],'renewal'=>$val['renewal']]);
             }
+            Dispatch::editDispatch(['id'=>$dispatch_id],['name'=>$dispatch_name]);
             //添加操作日志
             if ($admin_data['is_super'] == 1){//超级管理员的记录
                 OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统修改了运费模板！');//保存操作记录
