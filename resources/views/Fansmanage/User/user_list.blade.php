@@ -180,10 +180,8 @@
     $("#searchBtn").click(function () {
         var $url = $("#user_list").val();
         var $search_content = $("#user_account").val();
-
         var $data = {"search_content": $search_content,"_token":$("#_token").val()}
         $.post($url, $data, function ($response) {
-
             console.log($response);
         })
     });
