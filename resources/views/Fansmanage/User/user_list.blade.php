@@ -90,32 +90,32 @@
                                         <tr>
                                             <td>{{$value["id"]}}</td>
                                             <td>
-                                                @if(!$value->head_imgurl)
+                                                @if(!$value["head_imgurl"])
                                                     <img src="{{asset('public/Fansmanage')}}/img/m1.jpg" alt=""
                                                          class="r r-2x img-full" style="width: 50px; height: 50px;">
                                                 @else
-                                                    <img src="{{$value->head_imgurl}}" alt="" class="r r-2x img-full"
+                                                    <img src="{{$value["head_imgurl"]}}" alt="" class="r r-2x img-full"
                                                          style="width: 50px; height: 50px;">
                                                 @endif
                                             </td>
-                                            <td>{{$value->user->account}}</td>
-                                            <td>{{$value->nickname}}</td>
+                                            <td>{{$value["user"]["account"]}}</td>
+                                            <td>{{$value["nickname"]}}</td>
                                             <td><label class="label label-success">是</label></td>
                                             <td><label class="label label-info">
-                                                    @if($value->userOrigin->origin_id==$organization_id)
+                                                    @if($value["userOrigin"]["origin_id"]==$organization_id)
                                                         {{$store_name}}
                                                     @else
                                                         零壹联盟
                                                     @endif</label></td>
-                                            <td><label class="label label-primary">{{$value->recommender_name}}</label>
+                                            <td><label class="label label-primary">{{$value["recommender_name"]}}</label>
                                             </td>
                                             <td>
                                                 <select style="width:100px" class="chosen-select2"
-                                                        onchange="changeUserTag(this,'{{$value->user_id}}','{{$value->nickname}}')">
+                                                        onchange="changeUserTag(this,'{{$value["user_id"]}}','{{$value["nickname"]}}')">
                                                     <option value="0">无标签</option>
                                                     @foreach($label as $k=>$v)
-                                                        <option value="{{$v->id}}"
-                                                                @if($v->id == $value->label_id) selected @endif>{{$v->label_name}}</option>
+                                                        <option value="{{$v["id"]}}"
+                                                                @if($v["id"] == $value["label_id"]) selected @endif>{{$v["label_name"]}}</option>
                                                     @endforeach
                                                 </select>
                                             </td>
