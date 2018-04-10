@@ -43,6 +43,7 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="shengpay_edit" value="{{ url('retail/ajax/shengpay_edit') }}">
                                     <input type="hidden" id="shengpay_apply" value="{{ url('retail/ajax/shengpay_apply') }}">
+                                    <input type="hidden" id="shengpay_delete" value="{{ url('retail/ajax/shengpay_delete') }}">
                                     <label class="col-sm-1 control-label">终端机器号</label>
 
                                     <div class="col-sm-2">
@@ -195,7 +196,39 @@
         });
     }
 
-
+    //重新申请
+    function getDeleteComfirmForm(id){
+        var url = $('#shengpay_delete').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 
 </script>
 </body>
