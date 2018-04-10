@@ -168,7 +168,6 @@ class PaysettingController extends Controller
     {
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
-
         // 获取当前的页面路由
         $route_name = $request->path();
         // 终端号
@@ -177,13 +176,57 @@ class PaysettingController extends Controller
         $id = $request->id;
         DB::beginTransaction();
         try {
-
             // 修改终端号
             RetailShengpayTerminal::editShengpayTerminal([['id',$id]],['status'=>'0']);
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
                 OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '重新提交申请终端号：' . $terminal_num);
+            }
+            // 事件提交
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功！', 'status' => '1']);
+    }
+
+    /**
+     * 终端机器号解除绑定ajax显示
+     */
+    public function shengpay_delete(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id',$id]]);
+
+        return view('Retail/Paysetting/shengpay_delete',['data'=>$data]);
+    }
+
+    /**
+     * 终端机器号解除绑定功能提交
+     */
+    public function shengpay_delete_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 终端号
+        $terminal_num = $request->terminal_num;
+        // 终端号id
+        $id = $request->id;
+        DB::beginTransaction();
+        try {
+            // 删除终端号
+            RetailShengpayTerminal::where('id',$id)->forceDelete();//删除节点
+            // 如果不是超级管理员
+            if ($admin_data['is_super'] != 1) {
+                // 保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了终端号：' . $terminal_num);
             }
             // 事件提交
             DB::commit();

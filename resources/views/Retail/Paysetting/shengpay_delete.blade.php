@@ -1,11 +1,11 @@
-<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_apply_check') }}">
+<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id"  value="{{ $data->id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">编辑终端机器号</h4>
+                <h4 class="modal-title">解除绑定终端机器号</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
@@ -51,13 +51,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
