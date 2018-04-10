@@ -371,7 +371,6 @@ class UserController extends CommonController
      */
     public function user_list_search()
     {
-        dd(request()->all());
         // 中间件参数 集合
         $this->getRequestInfo();
         // 搜索内容
