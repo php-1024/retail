@@ -45,11 +45,10 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="purchase_list_confirm" value="{{ url('retail/ajax/purchase_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <label class="col-sm-1 control-label">订单编号</label>
+                                    <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="name" value="" placeholder="模板名称">
+                                        <input type="text" class="form-control" name="name" value="{{$dispatch_name}}" placeholder="模板名称">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -61,7 +60,7 @@
                                     <thead>
                                     <tr>
                                         <th>名称</th>
-                                        <th>编号</th>
+                                        <th>模板编号</th>
                                         <th>是否启用</th>
                                         <th>操作</th>
                                     </tr>
@@ -76,6 +75,7 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-info btn-xs" onclick="window.location.href='dispatch_edit?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                     @endforeach

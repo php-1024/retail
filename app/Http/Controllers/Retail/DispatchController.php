@@ -11,11 +11,9 @@ use App\Models\Dispatch;
 use App\Models\DispatchProvince;
 use App\Models\OperationLog;
 use App\Models\Province;
-use App\Models\RetailCategory;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
 
 class DispatchController extends Controller
 {
@@ -76,9 +74,9 @@ class DispatchController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $dispatch_name = $request->get('dispatch_name');    //模板名称
+        $dispatch_name = $request->get('name');             //模板名称
         $list = Dispatch::getPaginage(['store_id'=>$admin_data['organization_id']],$dispatch_name,'0','displayorder','DESC');
-        return view('Retail/Dispatch/dispatch_list',['list'=>$list,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Dispatch/dispatch_list',['list'=>$list,'dispatch_name'=>$dispatch_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //编辑运费模板
@@ -97,8 +95,9 @@ class DispatchController extends Controller
             $provinces = explode(',',$val->province_id);
             foreach ($provinces as $kk=>$vv){
                 $province_name[] = Province::getOne(['id'=>$vv])->first()->toArray();
+                $province_data[$val->id][$vv] = Province::getOne(['id'=>$vv])->first()->toArray();
             }
-            $val->province_name = $province_name;       //将查询出来的省份存进原有模型
+            $val->province_name = $province_data[$val->id];       //将查询出来的省份存进原有模型
         }
         $province = Province::getList([],0,'id','ASC')->toArray();  //  查询出所有省份
         //找出已选的省份并删除
@@ -117,6 +116,9 @@ class DispatchController extends Controller
         $route_name = $request->path();                          //获取当前的页面路由
         $dispatch_id = $request->get('dispatch_id');
         $provinces = $request->get('provinces');
+        if (empty($provinces)){
+            return response()->json(['data' => '请选择配送区域', 'status' => '0']);
+        }
         $province = implode(',',$provinces);
         $dispatch_province = ['dispatch_id'=>$dispatch_id,'province_id'=>$province];
         DB::beginTransaction();
@@ -140,7 +142,53 @@ class DispatchController extends Controller
     //运费模板省份编辑
     public function dispatch_province_edit_check(Request $request)
     {
-        dd($request);
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $dispatch_name = $request->get('dispatch_name');     //获取运费模板名称
+        $dispatch_id = $request->get('dispatch_id');         //获取运费模板id
+        $dispatch_data = $request->get('dispatch_data');      //获取运费模板详细信息
+        DB::beginTransaction();
+        try {
+            foreach ($dispatch_data as $key=>$val){
+                DispatchProvince::editDispatchProvince(['id'=>$key,'dispatch_id'=>$dispatch_id],['first_weight'=>$val['first_weight'],'additional_weight'=>$val['additional_weight'],'freight'=>$val['freight'],'renewal'=>$val['renewal']]);
+            }
+            Dispatch::editDispatch(['id'=>$dispatch_id],['name'=>$dispatch_name]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统修改了运费模板！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了运费模板！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改运费区域信息失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改运费区域信息成功', 'status' => '1']);
+    }
+
+    //运费模板省份删除
+    public function dispatch_province_delete_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $province_id = $request->get('province_id');        //获取运费模板身份关系id
+        DB::beginTransaction();
+        try {
+            DispatchProvince::select_delete($province_id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1){//超级管理员的记录
+                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统删除了运费模板所包含的部分省份！');//保存操作记录
+            }else{//零售店铺本人操作记录
+                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '删除了运费模板所包含的部分省份！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除相关省份信息失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除相关省份信息成功', 'status' => '1']);
     }
 
 }

@@ -43,7 +43,7 @@ class Dispatch extends Model{
     }
 
     //修改数据
-    public static function editCategory($where,$param){
+    public static function editDispatch($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;

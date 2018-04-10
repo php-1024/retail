@@ -48,22 +48,23 @@
                             <div class="line line-border b-b pull-in"></div>
                             <div style="clear:both"></div>
                             <form method="post" class="form-horizontal" role="form" id="dispatch_province_edit_check" action="{{ url('retail/ajax/dispatch_province_edit_check') }}">
-                            <div class="col-sm-12">
-                                    <label class="col-sm-1 control-label">模板名称</label>
-                                    <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->name}}" name="dispatch_name">
-                                    </div>
-                                    <label class="col-sm-1 control-label">模板编号</label>
-                                    <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
-                                    </div>
-                            </div>
-                            <div style="clear:both"></div>
-                            <div class="line line-border b-b pull-in"></div>
+                                <input type="hidden" id="province_add_check" value=" {{ url('retail/ajax/dispatch_province_add_check') }} ">
+                                <input type="hidden" id="province_delete_check" value=" {{ url('retail/ajax/dispatch_province_delete_check') }} ">
+                                <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
+                                <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
+                                <div class="col-sm-12">
+                                        <label class="col-sm-1 control-label">模板名称</label>
+                                        <div class="col-sm-2">
+                                            <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->name}}" name="dispatch_name">
+                                        </div>
+                                        <label class="col-sm-1 control-label">模板编号</label>
+                                        <div class="col-sm-2">
+                                            <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
+                                        </div>
+                                </div>
+                                <div style="clear:both"></div>
+                                <div class="line line-border b-b pull-in"></div>
                                 <div class="tab-pane">
-                                <form method="post" class="form-horizontal" role="form" id="currentForm" action="{{ url('retail/ajax/dispatch_province_add_check') }}">
-                                    <input type="hidden" id="_token" name="_token" value=" {{ csrf_token() }} ">
-                                    <input type="hidden" id="dispatch_id" name="dispatch_id" value=" {{ $dispatch->id }} ">
                                     <div class="col-lg-5">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">选择可配送区域</header>
@@ -97,7 +98,7 @@
                                                         <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
                                                     <td>
-                                                        <button onclick="postForm();" class="btn btn-info btn-xs" type="button"><i class="fa fa-plus"></i>添加选择</button>
+                                                        <button type="button" class="btn btn-info btn-xs" onclick="provinces_add_check()"><i class="fa fa-plus"></i>添加选择</button>
                                                     </td>
                                                 </tr>
                                                 </tbody>
@@ -105,7 +106,6 @@
                                             <div style="clear: both;"></div>
                                         </section>
                                     </div>
-                                </form>
                                     <div class="col-lg-7">
                                         <section class="panel panel-default">
                                             <header class="panel-heading font-bold">配送区域：(选择可配送区域之前，请保存重量和价格参数)</header>
@@ -129,15 +129,15 @@
                                                         @endforeach
                                                     </td>
                                                     <td>
-                                                        <input type="text" name="first_weight" value="{{$val->first_weight}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][first_weight]" value="{{$val->first_weight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="additional_weight" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][additional_weight]" value="{{$val->additional_weight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="freight" value="{{$val->freight}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][freight]" value="{{$val->freight}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <input type="text" name="renewal" value="{{$val->renewal}}" class="input-sm form-control"></td>
+                                                        <input type="number" name="dispatch_data[{{$val->id}}][renewal]" value="{{$val->renewal}}" class="input-sm form-control"></td>
                                                     <td>
-                                                        <button class="btn btn-danger btn-xs" onclick="javascript:cancel_detail('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
+                                                        <button type="button" class="btn btn-danger btn-xs" onclick="provinces_delete_check('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除
                                                         </button>
                                                     </td>
                                                 </tr>
@@ -190,10 +190,11 @@
         });
         $('#multiselect').multiselect({keepRenderingSort:true});
     });
+
+
     //提交表单
-    function postForm() {
-        var target = $("#currentForm");
-        var url = target.attr("action");
+    function provinces_add_check() {
+        var url = $("#province_add_check").val();
         var _token = $('#_token').val();
         var dispatch_id = $('#dispatch_id').val();
         var province = '';
@@ -202,6 +203,34 @@
         });
         province = province.substring(0, province.length-1);
         var data = '_token='+_token+'&'+'dispatch_id='+dispatch_id+'&'+province;
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
+
+    //提交表单
+    function provinces_delete_check(province_id) {
+        var url = $("#province_delete_check").val();
+        var _token = $('#_token').val();
+        var data = '_token='+_token+'&'+'province_id='+province_id;
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
