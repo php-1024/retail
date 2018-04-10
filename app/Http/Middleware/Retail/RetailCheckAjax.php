@@ -46,6 +46,7 @@ class RetailCheckAjax
             case "retail/ajax/goods_thumb_delete":      //删除图片弹窗确认
             case "retail/ajax/dispatch_province_add_check"://运费模板省份添加
             case "retail/ajax/dispatch_province_edit_check"://运费模板信息编辑
+            case "retail/ajax/dispatch_province_delete_check"://运费模板信息删除
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
