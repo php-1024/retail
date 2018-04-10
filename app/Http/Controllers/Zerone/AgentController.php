@@ -448,11 +448,15 @@ class AgentController extends Controller
         $route_name = $request->path();
         // 代理id
         $organization_id = $request->input('organization_id');
+        // 代理信息
         $listOrg = Organization::getOneagent([['id', $organization_id]]);
+        // 程序列表
         $list = Program::getPaginage([['is_asset', '1']], 15, 'id');
         foreach ($list as $key => $value) {
             $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $value['id']]]);
+           // 剩余数量
             $list[$key]['program_balance'] = $re['program_balance'];
+            // 使用数量
             $list[$key]['program_used_num'] = $re['program_used_num'];
         }
         return view('Zerone/Agent/agent_program', ['list' => $list, 'listOrg' => $listOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
