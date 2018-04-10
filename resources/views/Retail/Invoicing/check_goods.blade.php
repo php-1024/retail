@@ -68,7 +68,7 @@
 
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="" name="goods_name" placeholder="关键字或条码">
+                                        <input class="input-sm form-control" size="16" type="text" value="" name="goods_name" placeholder="关键字">
                                     </div>
                                     <div class="col-sm-1">
 
