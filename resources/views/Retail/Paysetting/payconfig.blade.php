@@ -46,9 +46,11 @@
                             </div>
                             <div class="table-responsive">
                                 @if(empty($data->id))
-                                    <form class="form-horizontal" method="post" role="form" id="currentForm"
-                                          action="{{ url('retail/ajax/payconfig_check') }}">
-                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <form class="form-horizontal" method="post" role="form" id="currentForm" action="{{ url('retail/ajax/payconfig_check') }}">
+                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                        <input type="hidden" id="payconfig_edit" value="{{ url('retail/ajax/payconfig_edit') }}">
+                                        <input type="hidden" id="payconfig_apply" value="{{ url('retail/ajax/payconfig_apply') }}">
+                                        <input type="hidden" id="payconfig_delete" value="{{ url('retail/ajax/payconfig_delete') }}">
 
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="input-id-1">pos商户号</label>
@@ -188,18 +190,118 @@
                     window.location.reload();
                 });
             } else {
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
 
+    //编辑终端号
+    function getEditForm(id){
+        var url = $('#payconfig_edit').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //重新申请
+    function getApplyForm(id){
+        var url = $('#payconfig_apply').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+    //重新申请
+    function getDeleteComfirmForm(id){
+        var url = $('#payconfig_delete').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+        var data = {'id':id,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 
 </script>
 </body>
