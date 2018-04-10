@@ -13,6 +13,9 @@ use Session;
 class PaysettingController extends Controller
 {
 
+    /**
+     * 添加终端机器号信息
+     */
     public function shengpay_add(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -22,6 +25,9 @@ class PaysettingController extends Controller
         return view('Retail/Paysetting/shengpay_add', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
+    /**
+     * 终端机器号信息列表
+     */
     public function shengpay_list(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
