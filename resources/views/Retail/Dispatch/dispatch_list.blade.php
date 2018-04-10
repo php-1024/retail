@@ -71,9 +71,9 @@
                                         <td>{{$val->name}}</td>
                                         <td>{{$val->number}}</td>
                                         <td>
-                                            @if($val->status == 0)
+                                            @if($val->status == 1)
                                             <button class="btn btn-success btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;已启用</button>
-                                                @elseif($val->status == 1)
+                                                @elseif($val->status == 0)
                                                 <button class="btn btn-danger btn-xs" onclick="getlockForm('{{$val->id}}','{{$val->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;未启用</button>
                                             @endif
                                         </td>
