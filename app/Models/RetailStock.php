@@ -45,6 +45,11 @@ class RetailStock extends Model{
     }
 
     //获取分页列表
+    public static function getOne($where){
+        return self::with('RetailGoods')->with('RetailCategory')->where($where)->get();
+    }
+
+    //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         $model = new RetailStock();
         return $model->with('RetailGoods')->with('RetailCategory')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
