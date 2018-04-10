@@ -75,7 +75,7 @@
                                         </td>
                                         <td>
                                             <button class="btn btn-info btn-xs" onclick="window.location.href='dispatch_edit?id={{$val->id}}'"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm(62)"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteForm('{{$val->id}}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>
                                         </td>
                                     </tr>
                                     @endforeach
