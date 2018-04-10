@@ -385,6 +385,7 @@ class UserController extends CommonController
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC", $search_content);
 
+        dump($list);
         // 处理数据
         foreach ($list as $key => $value) {
             if (!empty($value["user"])) {
