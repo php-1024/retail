@@ -139,13 +139,13 @@ class InvoicingController extends Controller
         $category_id = $request->get('category_id');    //栏目分类id
         $goods_name = $request->get('goods_name');      //商品名称
         if (!empty($category_id)){
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id],'0','id','DESC');
+            $where = ['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id];
         }elseif (!empty($goods_name)){
             $where = [['retail_id',$admin_data['organization_id']],['name', 'LIKE', '%' . $goods_name . '%']];
-            $goods = RetailGoods::getList($where,'0','id','DESC');
         }else{
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id']],'0','id','DESC');
+            $where = ['retail_id'=>$admin_data['organization_id']];
         }
+        $goods = RetailGoods::getList($where,'0','id','DESC');
         return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
     }
 
