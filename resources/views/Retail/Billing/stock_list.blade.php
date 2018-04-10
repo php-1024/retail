@@ -86,7 +86,6 @@
                             </div>
                             <footer class="panel-footer">
                                 <div class="row">
-
                                     <div class="col-sm-12 text-right text-center-xs">
                                         @if(!is_array($stock_list))
                                         {!! $stock_list->links() !!}
