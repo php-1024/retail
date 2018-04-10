@@ -359,7 +359,7 @@ class UserController extends CommonController
 
 
         // 渲染页面
-        return view('Fansmanage/User/user_list', ['list' => $listd, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
+        return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
 
     //粉丝用户管理
