@@ -228,36 +228,37 @@
 
     //提交表单
     function provinces_delete_check() {
-        var url = $("#province_delete_check").val();
-        var _token = $('#_token').val();
-        var dispatch_id = $('#dispatch_id').val();
-        var province = '';
-        $('#multiselect_to option').each(function(i,v){
-            province += 'provinces[]='+$(v).val()+'&';
-        });
-        province = province.substring(0, province.length-1);
-        var data = '_token='+_token+'&'+'dispatch_id='+dispatch_id+'&'+province;
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                },function(){
-                    window.location.reload();
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }
-        });
+        alert(1)
+//        var url = $("#province_delete_check").val();
+//        var _token = $('#_token').val();
+//        var dispatch_id = $('#dispatch_id').val();
+//        var province = '';
+//        $('#multiselect_to option').each(function(i,v){
+//            province += 'provinces[]='+$(v).val()+'&';
+//        });
+//        province = province.substring(0, province.length-1);
+//        var data = '_token='+_token+'&'+'dispatch_id='+dispatch_id+'&'+province;
+//        $.post(url, data, function (json) {
+//            if (json.status == -1) {
+//                window.location.reload();
+//            } else if(json.status == 1) {
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                },function(){
+//                    window.location.reload();
+//                });
+//            }else{
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定"
+//                });
+//            }
+//        });
     }
 
     //运费模板编辑
