@@ -336,26 +336,25 @@ class UserController extends CommonController
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id');
 
-        dump($list);
-
-
         // 处理数据
         foreach ($list as $key => $value) {
             // 获取粉丝数据
             $re = UserInfo::getOneUserInfo([['user_id', $value->user_id]]);
             // 微信昵称
-            $list[$key]['nickname'] = $re['nickname'];
+            $list[$key]['nickname'] = $value["userInfo"]['nickname'];
             // 微信头像
-            $list[$key]['head_imgurl'] = $re['head_imgurl'];
+            $list[$key]['head_imgurl'] = $re["userInfo"]['head_imgurl'];
             // 获取推荐人id
             $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
             // 获取推荐人名称
             $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
             // 粉丝对应的标签id
-            $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();
+            $list[$key]['label_id'] = $re["userInfo"]['label_id'];
         }
-        // 会员标签
+
+        // 粉丝标签列表
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
+
         // 渲染页面
         return view('Fansmanage/User/user_list', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
