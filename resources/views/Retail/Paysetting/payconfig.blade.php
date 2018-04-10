@@ -159,6 +159,8 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
