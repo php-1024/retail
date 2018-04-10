@@ -1,6 +1,6 @@
 <form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" id="id" value="{{ $info->id }}">
+    {{--<input type="hidden" name="id" id="id" value="{{ $info->id }}">--}}
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
