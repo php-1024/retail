@@ -61,10 +61,8 @@
                                     <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>用户账号</th>
-                                        <th>真实姓名</th>
-                                        <th>手机号码</th>
-                                        <th>用户状态</th>
+                                        <th>盛付通终端号</th>
+                                        <th>状态</th>
                                         <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
