@@ -46,97 +46,93 @@
                             </div>
                             <div class="table-responsive">
                                 @if(empty($data->id))
-                                <form class="form-horizontal" method="post" role="form" id="currentForm"
-                                      action="{{ url('retail/ajax/payconfig_check') }}">
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <form class="form-horizontal" method="post" role="form" id="currentForm"
+                                          action="{{ url('retail/ajax/payconfig_check') }}">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">pos商户号</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" value="" name="sft_pos_num">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">pos商户号</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" value="" name="sft_pos_num">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">盛付通商户号</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" value="" name="sft_num">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">盛付通商户号</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" value="" name="sft_num">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                                        <div class="col-sm-8">
-                                            <input type="password" class="form-control" value="" name="safe_password">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                                            <div class="col-sm-8">
+                                                <input type="password" class="form-control" value=""
+                                                       name="safe_password">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                    <div class="form-group">
-                                        <div class="col-sm-12 col-sm-offset-6">
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-sm-offset-6">
 
-                                            <button type="button" class="btn btn-success" onclick="postForm()">确定添加
-                                            </button>
+                                                <button type="button" class="btn btn-success" onclick="postForm()">确定添加
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                </form>
+                                    </form>
                             </div>
                             @else
-                            <table class="table table-striped b-t b-light">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>pos商户号</th>
-                                    <th>盛付通商户号</th>
-                                    <th>状态</th>
-                                    <th>添加时间</th>
-                                    <th>操作</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                {{--@foreach($list as $key=>$val)--}}
-                                {{--<tr>--}}
-                                {{--<td>{{ $val->id }}</td>--}}
-                                {{--<td>{{ $val->terminal_num }}</td>--}}
-                                {{--<td>--}}
-                                {{--@if($val->status == '0')--}}
-                                {{--<label class="label label-warning">待审核</label>--}}
-                                {{--@elseif($val->status == '1')--}}
-                                {{--<label class="label label-success">已通过</label>--}}
-                                {{--@elseif($val->status == '-1')--}}
-                                {{--<label class="label label-danger">未通过</label>--}}
-                                {{--@endif--}}
-                                {{--</td>--}}
-                                {{--<td>{{ $val->created_at }}</td>--}}
-                                {{--<td>--}}
-                                {{--@if($val->status != '1')--}}
-                                {{--<button class="btn btn-info btn-xs" id="editBtn"--}}
-                                {{--onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑--}}
-                                {{--</button>--}}
-                                {{--@endif--}}
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>pos商户号</th>
+                                        <th>盛付通商户号</th>
+                                        <th>状态</th>
+                                        <th>添加时间</th>
+                                        <th>操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>{{ $val->id }}</td>
+                                        <td>{{ $val->sft_pos_num }}</td>
+                                        <td>{{ $val->sft_num }}</td>
 
-                                {{--@if($val->status == '-1')--}}
-                                {{--<button type="button" id="lockBtn" class="btn  btn-xs btn-warning"--}}
-                                {{--onclick="getApplyForm('{{ $val->id }}')"><i--}}
-                                {{--class="icon icon-lock"></i>&nbsp;&nbsp;重新申请--}}
-                                {{--</button>--}}
-                                {{--@endif--}}
-                                {{--<button class="btn btn-danger btn-xs" id="deleteBtn"--}}
-                                {{--onclick="getDeleteComfirmForm('{{ $val->id }}')"><i--}}
-                                {{--class="fa fa-times"></i>&nbsp;&nbsp;解除绑定--}}
-                                {{--</button>--}}
-                                {{--</td>--}}
-                                {{--</tr>--}}
-                                {{--@endforeach--}}
-                                </tbody>
-                            </table>
+                                        <td>
+                                            @if($val->status == '0')
+                                                <label class="label label-warning">待审核</label>
+                                            @elseif($val->status == '1')
+                                                <label class="label label-success">已通过</label>
+                                            @elseif($val->status == '-1')
+                                                <label class="label label-danger">未通过</label>
+                                            @endif
+                                        </td>
+                                        <td>{{ $val->created_at }}</td>
+                                        <td>
+                                            @if($val->status != '1')
+                                                <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
+                                                </button>
+                                            @endif
+
+                                            @if($val->status == '-1')
+                                                <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getApplyForm('{{ $val->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;重新申请
+                                                </button>
+                                            @endif
+                                            <button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;解除绑定
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             @endif
                         </section>
                     </section>
