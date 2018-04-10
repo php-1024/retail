@@ -99,7 +99,7 @@ class AndroidApiController extends Controller
         $account_id = $request->account_id;
         // 备注
         $remarks = $request->remarks;
-        // 订单类型
+
         $order_type = $request->order_type;
         if (empty($order_type)) {
             $order_type = '1';

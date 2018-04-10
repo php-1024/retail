@@ -41,10 +41,7 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('retail/ajax/subordinate_edit') }}">
-                                    <input type="hidden" id="subordinate_lock" value="{{ url('retail/ajax/subordinate_lock') }}">
-                                    <input type="hidden" id="subordinate_delete" value="{{ url('retail/ajax/subordinate_delete') }}">
-                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('retail/ajax/subordinate_authorize') }}">
+                                    <input type="hidden" id="shengpay_edit" value="{{ url('retail/ajax/shengpay_edit') }}">
                                     <label class="col-sm-1 control-label">终端机器号</label>
 
                                     <div class="col-sm-2">
@@ -131,9 +128,8 @@
 <script type="text/javascript">
     //获取用户信息，编辑密码框
     function getEditForm(id){
-        var url = $('#subordinate_edit_url').val();
+        var url = $('#shengpay_edit').val();
         var token = $('#_token').val();
-
         if(id==''){
             swal({
                 title: "提示信息",
@@ -145,7 +141,6 @@
             });
             return;
         }
-
         var data = {'id':id,'_token':token};
         $.post(url,data,function(response){
             if(response.status=='-1'){

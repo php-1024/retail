@@ -719,7 +719,8 @@ Route::group(['prefix' => 'retail'], function () {
 
 
         //支付设置
-        Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号信息功能提交
+        Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号功能提交
+        Route::post('shengpay_edit', 'Retail\PaysettingController@shengpay_edit')->middleware('RetailCheckAjax');             //编辑终端机器号Ajax显示
 
     });
 });
