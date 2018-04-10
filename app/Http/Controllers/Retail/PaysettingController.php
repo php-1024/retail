@@ -148,6 +148,19 @@ class PaysettingController extends Controller
         return response()->json(['data' => '修改成功！', 'status' => '1']);
     }
 
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function shengpay_apply(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id',$id]]);
+
+        return view('Retail/Paysetting/shengpay_apply',['data'=>$data]);
+    }
+
     public function shengf_setting(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数

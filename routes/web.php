@@ -723,6 +723,7 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号功能提交
         Route::post('shengpay_edit', 'Retail\PaysettingController@shengpay_edit')->middleware('RetailCheckAjax');             //编辑终端机器号Ajax显示
         Route::post('shengpay_edit_check', 'Retail\PaysettingController@shengpay_edit_check')->middleware('RetailCheckAjax'); //编辑终端机器号功能提交
+        Route::post('shengpay_apply', 'Retail\PaysettingController@shengpay_apply')->middleware('RetailCheckAjax');           //终端机器号重新申请Ajax
 
     });
 });
