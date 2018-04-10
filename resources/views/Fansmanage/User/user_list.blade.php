@@ -181,6 +181,7 @@
         var $search_content = $("#user_account").val();
         var $data = {"search_content": $search_content}
         $.post($url, $data, function ($response) {
+
             console.log($response);
         })
     });
