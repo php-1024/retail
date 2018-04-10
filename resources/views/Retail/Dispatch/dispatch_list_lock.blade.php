@@ -22,9 +22,9 @@
                             <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
                             <span class="help-block m-b-none">
                                @if($status == '1')
-                                    <p class="text-danger">启用后该模板即可使用</p>
-                                @else
                                     <p class="text-danger">弃用后该模板不在生效</p>
+                                @else
+                                    <p class="text-danger">启用后该模板即可使用</p>
                                 @endif
                           </span>
                         </div>
