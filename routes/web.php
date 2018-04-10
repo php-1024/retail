@@ -633,7 +633,8 @@ Route::group(['prefix' => 'retail'], function () {
 
     //支付设置
     Route::group(['prefix' => 'paysetting'], function () {
-        Route::get('wechat_setting', 'Retail\PaysettingController@wechat_setting')->middleware('RetailCheck');   //支付设置-微信支付
+        Route::get('shengpay_add', 'Retail\PaysettingController@shengpay_add')->middleware('RetailCheck');     //添加终端机器号信息
+        Route::get('shengpay_list', 'Retail\PaysettingController@shengpay_list')->middleware('RetailCheck');   //终端机器号列表
     });
 
 
