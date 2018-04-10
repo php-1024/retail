@@ -350,6 +350,7 @@ class UserController extends CommonController
             $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();
             // 粉丝对应的标签id
             $list[$key]['label_id'] = $value["userLabel"]['label_id'];
+
         }
 
         // 粉丝标签列表
