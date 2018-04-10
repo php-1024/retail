@@ -99,7 +99,6 @@ class SystemController extends Controller{
     }
     //公司信息设置修改保存
     public function agent_info_check(Request $request){
-        var_dump($request);exit;
 
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
@@ -108,6 +107,7 @@ class SystemController extends Controller{
         $organization_name = $request->input('organization_name');//服务商名称
         $idcard = $request->input('idcard');//负责人身份证
         $mobile = $request->input('mobile');//负责人手机号
+        var_dump($request);exit;
         DB::beginTransaction();
         try{
             $agent= Organization::getOneAgent([['id',$organization_id]]);
