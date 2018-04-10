@@ -19,8 +19,9 @@ class TestController extends Controller
     public function test()
     {
         // 获取粉丝列表
-//        $list = FansmanageUser::getPaginage([['fansmanage_id', 5]], '', '10', 'id');
+        $list = FansmanageUser::getPaginage([['fansmanage_id', 5]], '', '10', 'id');
 
+        dd($list);
 
 //        $model = FansmanageUser::with('userOrigin')->with('user')->with('userRecommender')->with('userInfo')->with(['userLabel' => function ($query) {
 //            return $query->select("label_id");
