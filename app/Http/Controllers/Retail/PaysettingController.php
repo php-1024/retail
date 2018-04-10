@@ -80,11 +80,20 @@ class PaysettingController extends Controller
      */
     public function shengpay_list(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
-        return view('Retail/Paysetting/shengpay_list', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 店铺id
+        $retail_id = $admin_data['organization_id'];
+        // 查询店铺终端号列表
+        $list = RetailShengpayTerminal::getPaginage([['retail_id',$retail_id]],10,'id');
+        
+        return view('Retail/Paysetting/shengpay_list', ['list' => $list,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     public function shengf_setting(Request $request)
