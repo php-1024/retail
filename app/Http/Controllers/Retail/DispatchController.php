@@ -95,10 +95,10 @@ class DispatchController extends Controller
         $id = $request->get('id');                          //获取运费模板id
         $status = $request->get('status');
         if ($status == 0){
-            $status = 1;
+            $status = '1';
             $tips = '启用';
         }else{
-            $status = 0;
+            $status = '0';
             $tips = '弃用';
         }
 //        dd($status,$tips);
