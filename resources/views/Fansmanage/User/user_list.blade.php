@@ -85,6 +85,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     @foreach($list as $key=>$value)
                                         <tr>
                                             <td>{{$value["id"]}}</td>
