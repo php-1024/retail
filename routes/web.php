@@ -726,7 +726,7 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('shengpay_apply', 'Retail\PaysettingController@shengpay_apply')->middleware('RetailCheckAjax');           //终端机器号重新申请Ajax
         Route::post('shengpay_apply_check', 'Retail\PaysettingController@shengpay_apply_check')->middleware('RetailCheckAjax');//终端机器号重新申请功能提交
         Route::post('shengpay_delete', 'Retail\PaysettingController@shengpay_delete')->middleware('RetailCheckAjax');         //终端机器号解除绑定ajax
-        Route::post('shengpay_delete_check', 'Retail\PaysettingController@shengpay_delete_checj')->middleware('RetailCheckAjax');//终端机器号解除绑定功能提交
+        Route::post('shengpay_delete_check', 'Retail\PaysettingController@shengpay_delete_check')->middleware('RetailCheckAjax');//终端机器号解除绑定功能提交
 
     });
 });
