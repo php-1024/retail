@@ -241,7 +241,6 @@ class PaysettingController extends Controller
             // 事件提交
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '操作失败！', 'status' => '0']);
