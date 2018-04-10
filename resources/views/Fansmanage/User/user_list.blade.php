@@ -85,9 +85,10 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+
                                     @foreach($list as $key=>$value)
                                         <tr>
-                                            <td>{{$value->id}}</td>
+                                            <td>{{$value["id"]}}</td>
                                             <td>
                                                 @if(!$value->head_imgurl)
                                                     <img src="{{asset('public/Fansmanage')}}/img/m1.jpg" alt=""
