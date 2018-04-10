@@ -128,41 +128,6 @@
 <script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
 <script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
-    //冻结用户-解冻
-    function getLockComfirmForm(id,account,status){
-        var url = $('#subordinate_lock').val();
-        var token = $('#_token').val();
-
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'account':account,'status':status,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
     //获取用户信息，编辑密码框
     function getEditForm(id){
         var url = $('#subordinate_edit_url').val();
