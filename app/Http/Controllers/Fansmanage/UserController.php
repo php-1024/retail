@@ -343,10 +343,10 @@ class UserController extends CommonController
             // 微信头像
             $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
 
-            // 获取推荐人id
+            // 获取推荐人信息
+            // 推荐人id
             $recommender_info = User::select("id")->where(['id' => 2])->first();
-            // 获取推荐人名称
-//            $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_info['id']]], 'nickname')->first();
+            // 推荐人名称
             $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
             $list[$key]['recommender_name'] = $userInfo["nickname"];
 

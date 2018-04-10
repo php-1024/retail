@@ -42,14 +42,14 @@ class TestController extends Controller
         }]);
         $test = $model->where(['fansmanage_id' => 5])->orderBy("id", "DESC")->paginate(10);
 
-        $test_info = $test->toArray();
+//        $test_info = $test->toArray();
 
 
         $recommender_id = User::select("id")->where(['id'=> 2])->first();
 
-        dump($test_info["data"][0]);
-        dump($test_info["data"][0]["user_info"]);
-        dump($test_info["data"][0]["user_recommender"]["recommender_id"]);
+        dump($test[0]["userInfo"]);
+//        dump($test_info["data"][0]["user_info"]);
+//        dump($test_info["data"][0]["user_recommender"]["recommender_id"]);
 //        dump($test_info["data"][0]["userLabel"]);
     }
 }
