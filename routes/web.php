@@ -704,6 +704,7 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('dispatch_province_edit_check', 'Retail\DispatchController@dispatch_province_edit_check')->middleware('RetailCheckAjax');  //运费模信息编辑
         Route::post('dispatch_province_delete_check', 'Retail\DispatchController@dispatch_province_delete_check')->middleware('RetailCheckAjax');  //运费模信息删除
         Route::post('dispatch_list_lock', 'Retail\DispatchController@dispatch_list_lock')->middleware('RetailCheckAjax');                 //列表启用运费模板ajax显示
+        Route::post('dispatch_list_lock_check', 'Retail\DispatchController@dispatch_list_lock_check')->middleware('RetailCheckAjax');                 //列表启用运费模板ajax显示
 
         Route::post('user_list_edit', 'Retail\UserController@user_list_edit')->middleware('RetailCheckAjax');                 //列表编辑ajax显示
         Route::post('user_list_edit_check', 'Retail\UserController@user_list_edit_check')->middleware('RetailCheckAjax');     //列表编辑功能提交
