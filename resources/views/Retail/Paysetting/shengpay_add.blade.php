@@ -45,8 +45,10 @@
                                 </div>
                             </div>
                             <div class="table-responsive">
-                                <form class="form-horizontal" method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_add_check') }}">
+                                <form class="form-horizontal" method="post" role="form" id="currentForm"
+                                      action="{{ url('retail/ajax/shengpay_add_check') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
+
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">终端号</label>
                                         <div class="col-sm-8">
@@ -57,9 +59,19 @@
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                     <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                                        <div class="col-sm-8">
+                                            <input type="password" class="form-control" value="" name="safe_password">
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                    <div class="form-group">
                                         <div class="col-sm-12 col-sm-offset-6">
 
-                                            <button type="button" class="btn btn-success"  onclick="postForm()">确定添加</button>
+                                            <button type="button" class="btn btn-success" onclick="postForm()">确定添加
+                                            </button>
                                         </div>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -109,31 +121,27 @@
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if (json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+            } else {
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
-
-
-
-
-
 
 
 </script>

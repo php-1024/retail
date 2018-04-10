@@ -18,11 +18,26 @@ class PaysettingController extends Controller
      */
     public function shengpay_add(Request $request)
     {
-        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
-        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
-        $route_name = $request->path();                         //获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+
         return view('Retail/Paysetting/shengpay_add', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
+
+    /**
+     * 添加终端机器号信息
+     */
+    public function shengpay_add_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');
+
+
     }
 
     /**
