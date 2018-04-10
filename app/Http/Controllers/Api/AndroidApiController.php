@@ -71,7 +71,7 @@ class AndroidApiController extends Controller
         if ($scan_code) {
             $where = [['barcode', $scan_code]];
         }
-        $goodslist = RetailGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
+        $goodslist = RetailGoods::getList($where, '0', 'displayorder', 'asc', '', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
         if (empty($goodslist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
@@ -109,7 +109,7 @@ class AndroidApiController extends Controller
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
-                $order_price += $v['price']*$v['num'];
+                $order_price += $v['price'] * $v['num'];
             }
         }
         $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id')->first();
