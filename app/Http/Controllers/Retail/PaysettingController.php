@@ -91,10 +91,20 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 店铺id
         $retail_id = $admin_data['organization_id'];
-        // 查询店铺终端号列表
-        $list = RetailShengpayTerminal::getPaginage([['retail_id',$retail_id]],10,'id');
 
-        return view('Retail/Paysetting/shengpay_list', ['list' => $list,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        // 查询条件
+        $where = [['retail_id',$retail_id]];
+        // 终端号
+        $terminal_num = $request->terminal_num;
+        if(!empty($terminal_num)){
+            $where = [['terminal_num',$terminal_num]];
+        }
+
+        $search_data = ['terminal_num' => $terminal_num];//分页搜索使用
+        // 查询店铺终端号列表
+        $list = RetailShengpayTerminal::getPaginage($where,10,'id');
+
+        return view('Retail/Paysetting/shengpay_list', ['search_data'=>$search_data,'list' => $list,'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     /**

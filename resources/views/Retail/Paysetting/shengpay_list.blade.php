@@ -47,7 +47,7 @@
                                     <label class="col-sm-1 control-label">终端机器号</label>
 
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" name="account" type="text" value="">
+                                        <input class="input-sm form-control" size="16" name="terminal_num" type="text" value="{{$search_data['terminal_num']}}">
                                     </div>
 
                                     <div class="col-sm-3">
@@ -101,7 +101,7 @@
 
                                     <div class="col-sm-12 text-right text-center-xs">
                                         <ul class="pagination pull-right">
-                                            {{--{{ $list->appends($search_data)->links() }}--}}
+                                            {{ $list->appends($search_data)->links() }}
                                         </ul>
                                     </div>
                                 </div>
