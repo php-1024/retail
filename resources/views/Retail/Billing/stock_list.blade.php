@@ -88,7 +88,9 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
+                                        @if(!empty($stock_list->links()))
                                         {!! $stock_list->links() !!}
+                                        @endif
                                     </div>
                                 </div>
                             </footer>
