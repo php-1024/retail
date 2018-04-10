@@ -454,7 +454,7 @@ class AgentController extends Controller
         $list = Program::getPaginage([['is_asset', '1']], 15, 'id');
         foreach ($list as $key => $value) {
             $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $value['id']]]);
-           // 剩余数量
+            // 剩余数量
             $list[$key]['program_balance'] = $re['program_balance'];
             // 使用数量
             $list[$key]['program_used_num'] = $re['program_used_num'];
@@ -462,82 +462,132 @@ class AgentController extends Controller
         return view('Zerone/Agent/agent_program', ['list' => $list, 'listOrg' => $listOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //代理程序管理页面划入js显示
+    /**
+     * 代理程序管理页面划入js显示
+     */
     public function agent_assets(Request $request)
     {
-        $organization_id = $request->input('organization_id'); //代理id
-        $program_id = $request->input('program_id'); //套餐id
+        // 代理id
+        $organization_id = $request->input('organization_id');
+        // 程序id
+        $program_id = $request->input('program_id');
+        // 代理信息
         $listOrg = Organization::getOneagent([['id', $organization_id]]);
+        // 程序信息
         $oneProgram = Program::getOne([['id', $program_id]]);
-        $status = $request->input('status'); //状态
+        // 状态
+        $status = $request->input('status');
         return view('Zerone/Agent/agent_assets', ['listOrg' => $listOrg, 'oneProgram' => $oneProgram, 'status' => $status]);
     }
 
-    //代理程序管理页面划入划出检测
+    /**
+     * 代理程序管理页面划入划出检测
+     */
     public function agent_assets_check(Request $request)
     {
-        $route_name = $request->path(); //获取当前的页面路由
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        if ($admin_data['organization_id'] == 0) { //超级管理员没有组织id，操作默认为零壹公司操作
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 超级管理员没有组织id，操作默认为零壹公司操作
+        if ($admin_data['organization_id'] == 0) {
             $to_organization_id = 1;
         } else {
             $to_organization_id = $admin_data['organization_id'];
         }
-        $organization_id = $request->input('organization_id'); //代理id
-        $agent_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//代理名字
-        $program_id = $request->input('program_id'); //程序id
-        $program_name = Program::getPluck([['id', $program_id]], 'program_name')->first();//程序名字
-        $number = $request->input('number'); //数量
-        $status = $request->input('status'); //判断划入或者划出
+        // 代理id
+        $organization_id = $request->input('organization_id');
+        // 代理名字
+        $agent_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        // 程序id
+        $program_id = $request->input('program_id');
+        // 程序名字
+        $program_name = Program::getPluck([['id', $program_id]], 'program_name')->first();
+        // 数量
+        $number = $request->input('number');
+        // 判断划入或者划出
+        $status = $request->input('status');
         DB::beginTransaction();
         try {
+            // 查询当前代理是否有这套程序
             $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
-            $id = $re['id'];
-            if ($status == '1') { //划入
-                $state = '划入';
+            // 划入
+            if ($status == '1') {
+                $remarks = '划入';
+                // 如果为空，说明该代理还没有这套程序
                 if (empty($re)) {
+                    // 新添加一条数据
                     OrganizationAssets::addAssets(['organization_id' => $organization_id, 'program_id' => $program_id, 'program_balance' => $number, 'program_used_num' => '0']);
                 } else {
+                    // 原来的程序数量加上划入的数量
                     $num = $re['program_balance'] + $number;
-                    OrganizationAssets::editAssets([['id', $id]], ['program_balance' => $num]);
+                    // 修改数据
+                    OrganizationAssets::editAssets([['id', $re['id']]], ['program_balance' => $num]);
                 }
-
-            } else { //划出
-                $state = '划出';
+                // 划出
+            } else {
+                $remarks = '划出';
+                // 如果为空，说明该代理还没有这套程序
                 if (empty($re)) {
                     return response()->json(['data' => '数量不足', 'status' => '0']);
                 } else {
-                    if ($re['program_balance'] >= $number) { //划出数量小于或等于剩余数量
+                    // 划出数量小于或等于剩余数量
+                    if ($re['program_balance'] >= $number) {
+                        // 原来的程序数量减掉划出的数量
                         $num = $re['program_balance'] - $number;
-                        OrganizationAssets::editAssets([['id', $id]], ['program_balance' => $num]);
+                        // 修改数据
+                        OrganizationAssets::editAssets([['id', $re['id']]], ['program_balance' => $num]);
                     } else {
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
             }
-            $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $organization_id, 'to_organization_id' => $to_organization_id, 'program_id' => $program_id, 'status' => $status, 'number' => $number];
-            //添加程序操作记录
-            OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
+            // 数据处理
+            $data = [
+                // 操作人id
+                'operator_id' => $admin_data['id'],
+                // 划出的组织id
+                'fr_organization_id ' => $organization_id,
+                // 划给的组织id
+                'to_organization_id' => $to_organization_id,
+                // 程序id
+                'program_id' => $program_id,
+                // 1表示划入 0划出
+                'status' => $status,
+                // 程序数量
+                'number' => $number
+            ];
+            // 添加程序操作记录
+            OrganizationAssetsallocation::addOrganizationAssetsallocation($data);
 
-            //添加操作日志
-            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state . '程序--' . $program_name . '*' . $number . ' --代理：' . $agent_name);
-            DB::commit(); //提交事务
+            // 添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $remarks . '程序--' . $program_name . '*' . $number . ' --代理：' . $agent_name);
+            // 提交事务
+            DB::commit();
 
         } catch (Exception $e) {
-            DB::rollBack(); //事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
-    //商户划拨管理
+    /**
+     * 商户划拨管理
+     */
     public function agent_fansmanage(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data'); //中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $organization_id = $request->organization_id; //代理id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 代理id
+        $organization_id = $request->organization_id;
         $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
         $list = Organization::getPaginageFansmanage([['parent_id', $organization_id]], '10', 'id');
         foreach ($list as $key => $value) {
