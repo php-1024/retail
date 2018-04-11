@@ -329,6 +329,7 @@ Route::group(['prefix' => 'zerone'], function () {
 
         //支付审核
         Route::post('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheckAjax');     //商户审核页面显示
+        Route::post('shengpay_apply_check', 'Zerone\PaysettingController@shengpay_apply_check')->middleware('ZeroneCheckAjax');//商户审核页面显示
 
     });
 });
