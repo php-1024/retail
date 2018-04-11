@@ -30,7 +30,7 @@
             <input type="password" class="form-control" placeholder="登录密码" name="password">
             <input type="text" name="captcha" class="form-control" name="captcha" placeholder="验证码" >
             <input type="hidden" id="captcha_url"  value="{{ URL('agent/login/captcha') }}">
-            <img src="{{ URL('agent/login/captcha/1') }}" id="login_captcha"  onclick="re_captcha()" alt="验证码" title="刷新图片" width="200" height="60"
+            <img src="{{ URL('agent/login/captcha/1') }}" id="login_captcha"  onclick="re_captcha()" alt="验证码" title="刷新图片" width="160" height="45"
                  id="verify" border="0">
 
             <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登录</button>
@@ -54,7 +54,7 @@
     });
     //刷新验证码
     function re_captcha() {
-        $url = "{{url('test/captcha')}}";
+        $url = "{{url('agent/login/captcha')}}";
         $url = $url + "/" + Math.random();
         document.getElementById('verify').src = $url;
     }
