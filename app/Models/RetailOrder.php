@@ -30,7 +30,7 @@ class RetailOrder extends Model
 
     //和个人信息表一对一的关系
     public function account_info(){
-        return $this->hasOne('App\Models\AccountInfo', 'operator_id','account_id');
+        return $this->hasOne('App\Models\AccountInfo', 'account_id','operator_id');
     }
 
     public static function getOne($where)
