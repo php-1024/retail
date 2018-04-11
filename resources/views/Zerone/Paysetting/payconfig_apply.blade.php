@@ -107,7 +107,7 @@
                                             @if($value->status == 1)
                                                 <label class="label label-primary">已审核</label>
                                             @elseif($value->status == 0)
-                                                <label class="label label-danger">未审核</label>
+                                                <label class="label label-warning">未审核</label>
                                             @elseif($value->status == -1)
                                                 <label class="label label-danger">未通过</label>
                                             @endif
