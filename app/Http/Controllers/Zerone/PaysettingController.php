@@ -10,7 +10,7 @@ use Session;
 class PaysettingController extends Controller
 {
     /**
-     * 代理审核列表
+     * 收款信息审核
      */
     public function payconfig_apply(Request $request)
     {
