@@ -450,61 +450,6 @@ class WechatmenuController extends CommonController
         return view('Fansmanage/Wechatmenu/conditional_menu_add', ['label_list' => $label_list, 'list' => $list, "parent_id" => $parent_id, "label_id" => $label_id, 'wechatreply' => $wechatreply]);
     }
 
-//    public function conditional_menu_list()
-//    {
-//        // 中间件参数 集合
-//        $this->getRequestInfo();
-//        // 获取会员标签id
-//        $label_id = request()->label_id;
-//        // 拿到上级菜单的值
-//        $parent_id = request()->input("parent_id");
-//
-//        // 声明菜单列表
-//        $list = [];
-//        // 判断是否存在会员标签
-//        if (!empty($label_id)) {
-//            // 如果存在会员标签，那么就将该标签对应的 菜单列出来
-//            // 获取授权APPID
-//            $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
-//            // 获取 微信公众号粉丝标签id
-//            $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-//            // 获取个性化菜单列表,粉丝标签id 获取到列表
-//            $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
-//        }
-//        // 渲染页面
-//        return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list, "parent_id" => $parent_id]);
-//    }
-//
-//
-//    /**
-//     * 显示上级菜单
-//     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-//     */
-//    public function conditional_menu_listA()
-//    {
-//        // 中间件参数 集合
-//        $this->getRequestInfo();
-//        // 获取会员标签id
-//        $label_id = request()->label_id;
-//        // 拿到上级菜单的值
-//        $parent_id = request()->input("parent_id");
-//
-//        // 声明菜单列表
-//        $list = [];
-//        // 判断是否存在会员标签
-//        if (!empty($label_id)) {
-//            // 如果存在会员标签，那么就将该标签对应的 菜单列出来
-//            // 获取授权APPID
-//            $authorization = WechatAuthorization::getOne([['organization_id', $this->admin_data['organization_id']]]);
-//            // 获取 微信公众号粉丝标签id
-//            $tag_id = Label::getPluck([['id', $label_id], ['store_id', '0']], 'wechat_id')->first();
-//            // 获取个性化菜单列表,粉丝标签id 获取到列表
-//            $list = WechatConditionalMenu::getList([['organization_id', $this->admin_data['organization_id']], ['authorizer_appid', $authorization['authorizer_appid']], ['parent_id', '0'], ['tag_id', $tag_id]], 0, 'id', 'DESC');
-//        }
-//        // 渲染页面
-//        return view('Fansmanage/Wechatmenu/conditional_menu_list', ['list' => $list, "parent_id" => $parent_id]);
-//    }
-
     /**
      * 添加个性化菜单检测
      * @return \Illuminate\Http\JsonResponse

@@ -542,7 +542,7 @@ class UserController extends CommonController
 
 
     /**
-     * 粉丝用户管理粉丝钱包
+     * 粉丝用户管理 粉丝钱包
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function user_list_wallet()
