@@ -18,7 +18,7 @@
                         name="label_id">
                     <option value="0">无</option>
                     @foreach($label_list as $key=>$value)
-                        <option value="{{$value->id}}" @if($label_id == $value["id"]) @endif>{{$value->label_name}}</option>
+                        <option value="{{$value->id}}" @if($label_id == $value["id"]) selected @endif>{{$value->label_name}}</option>
                     @endforeach
                 </select>
             </div>
