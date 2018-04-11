@@ -265,6 +265,7 @@ class BillingController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_name = $request->get('goods_name');         //获取供应商名称
+        $stock_list = [];
         if (!empty($goods_name)){
             $where = [['retail_id',$admin_data['organization_id']],['name','like','%'.$goods_name.'%']];
         }else{
