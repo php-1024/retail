@@ -57,7 +57,7 @@
         console.log(1);
         $url = "{{url('agent/login/captcha')}}";
         $url = $url + "/" + Math.random();
-        console.log(2)
+        console.log($url)
         document.getElementById('verify').src = $url;
     }
 
