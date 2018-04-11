@@ -67,7 +67,7 @@
 
 
 
-            console.log(json);return false;
+            console.log(json);;
             if(json.status==1){
                 window.location.reload();
             }else{
