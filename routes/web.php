@@ -251,6 +251,13 @@ Route::group(['prefix' => 'zerone'], function () {
         Route::get('fansmanage_store', 'Zerone\FansmanageController@fansmanage_store')->middleware('ZeroneCheck');            //商户划拨管理
     });
 
+    //支付审核
+    Route::group(['prefix' => 'paysetting'], function () {
+        Route::get('payconfig_apply', 'Zerone\PaysettingController@payconfig_apply')->middleware('ZeroneCheck');        //收款信息审核
+        Route::get('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheck');          //pos终端号审核
+    });
+
+
     //异步提交数据组
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('login_check', 'Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登录数据
