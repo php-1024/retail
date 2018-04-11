@@ -38,7 +38,7 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-            <input type="hidden" id="shengpay" value="{{ url('zerone/ajax/shengpay') }}">
+            <input type="hidden" id="shengpay_apply" value="{{ url('zerone/ajax/shengpay_apply') }}">
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="searchForm" action="">
                     <div class="row">
@@ -141,7 +141,7 @@
     // 审核
     function getApplyForm(id,status){
 
-        var url = $('#shengpay').val();
+        var url = $('#shengpay_apply').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
