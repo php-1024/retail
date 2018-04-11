@@ -253,8 +253,8 @@ Route::group(['prefix' => 'zerone'], function () {
 
     //支付审核
     Route::group(['prefix' => 'paysetting'], function () {
-        Route::get('payconfig_apply', 'Zerone\PaysettingController@payconfig_apply')->middleware('ZeroneCheck');        //收款信息审核
-        Route::get('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheck');          //pos终端号审核
+        Route::get('payconfig', 'Zerone\PaysettingController@payconfig')->middleware('ZeroneCheck');                    //收款信息审核
+        Route::get('shengpay', 'Zerone\PaysettingController@shengpay')->middleware('ZeroneCheck');                      //pos终端号审核
     });
 
 
@@ -326,6 +326,9 @@ Route::group(['prefix' => 'zerone'], function () {
         Route::post('fansmanage_store_add_check', 'Zerone\FansmanageController@fansmanage_store_add_check')->middleware('ZeroneCheckAjax');//商户店铺管理划入数据提交
         Route::post('fansmanage_store_draw', 'Zerone\FansmanageController@fansmanage_store_draw')->middleware('ZeroneCheckAjax');//商户店铺管理划出页面显示
         Route::post('fansmanage_store_draw_check', 'Zerone\FansmanageController@fansmanage_store_draw_check')->middleware('ZeroneCheckAjax');//商户店铺管理划出数据提交
+
+        //支付审核
+        Route::post('fansmanage_examine', 'Zerone\FansmanageController@fansmanage_examine')->middleware('ZeroneCheckAjax');//商户审核页面显示
 
     });
 });
