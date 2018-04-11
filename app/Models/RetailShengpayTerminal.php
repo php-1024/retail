@@ -18,6 +18,11 @@ class RetailShengpayTerminal extends Model
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
 
+    //和组织表一对一的关系
+    public function organization(){
+        return $this->belongsTo('App\Models\Organization', 'retail_id', 'id');
+    }
+
     //获取单条信息
     public static function getOne($where)
     {
@@ -65,7 +70,7 @@ class RetailShengpayTerminal extends Model
     //获取分页列表
     public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
     {
-        return self::where($where)->orderBy($orderby, $sort)->paginate($paginate);
+        return self::with('organization')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
 
     }
 }
