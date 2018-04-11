@@ -65,6 +65,8 @@
         var data = target.serialize();
         $.post(url,data,function(json){
 
+
+
             console.log(json);return
             if(json.status==1){
                 window.location.reload();
