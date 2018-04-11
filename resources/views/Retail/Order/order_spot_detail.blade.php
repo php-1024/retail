@@ -178,7 +178,7 @@
                         <div class="col-lg-8">
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
-                                    购物车 {{$order->user->UserInfo->nickname}}
+                                    购物车 {{$order->account_info->realname}}
                                 </header>
                                 <div class="panel-body">
                                     <table class="table table-striped">
