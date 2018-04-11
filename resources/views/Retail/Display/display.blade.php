@@ -312,9 +312,9 @@
                             <button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
                         </div>
                     </div>
-
                     <div id="baidumap" style="width:550px; height:300px;"></div>
                     <div style="clear:both"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <div class="col-sm-9">
                             <div class="col-sm-4">
