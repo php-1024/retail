@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_edit_check') }}">
+<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/payconfig_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id"  value="{{ $data->id }}">
     <div class="modal-dialog">
@@ -58,13 +58,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
