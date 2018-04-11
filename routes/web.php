@@ -328,7 +328,7 @@ Route::group(['prefix' => 'zerone'], function () {
         Route::post('fansmanage_store_draw_check', 'Zerone\FansmanageController@fansmanage_store_draw_check')->middleware('ZeroneCheckAjax');//商户店铺管理划出数据提交
 
         //支付审核
-        Route::post('fansmanage_examine', 'Zerone\FansmanageController@fansmanage_examine')->middleware('ZeroneCheckAjax');//商户审核页面显示
+        Route::post('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheckAjax');     //商户审核页面显示
 
     });
 });
