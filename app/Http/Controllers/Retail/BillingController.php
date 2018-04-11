@@ -273,7 +273,7 @@ class BillingController extends Controller
             $stock_list = RetailStock::getPaginage($where,'10','created_at','ASC'); //查询商品信息
         }
 //        $goods = RetailGoods::getList($where,0,'created_at','DESC');
-        $goods = RetailGoods::getPaginage($where,'','10','created_at','DESC');
+        $goods = RetailGoods::getPaginage($where,'','1','created_at','DESC');
         foreach ($goods as $key=>$val){
             $stock_list[] = RetailStock::getOne(['goods_id'=>$val->id])->first();
         }
