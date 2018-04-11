@@ -251,6 +251,13 @@ Route::group(['prefix' => 'zerone'], function () {
         Route::get('fansmanage_store', 'Zerone\FansmanageController@fansmanage_store')->middleware('ZeroneCheck');            //商户划拨管理
     });
 
+    //支付审核
+    Route::group(['prefix' => 'paysetting'], function () {
+        Route::get('payconfig_apply', 'Zerone\PaysettingController@payconfig_apply')->middleware('ZeroneCheck');        //收款信息审核
+        Route::get('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheck');          //pos终端号审核
+    });
+
+
     //异步提交数据组
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('login_check', 'Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登录数据
@@ -444,7 +451,7 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::get('user_tag', 'Fansmanage\UserController@user_tag')->middleware('FansmanageCheck');                    //粉丝标签管理
 //        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');
         //粉丝用户管理
-        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                              //粉丝用户管理
+        Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                              //粉丝搜索
         Route::post('user_search', 'Fansmanage\UserController@user_list_search')->middleware('FansmanageCheck');                    //粉丝用户管理
         Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
@@ -636,6 +643,7 @@ Route::group(['prefix' => 'retail'], function () {
 
     //支付设置
     Route::group(['prefix' => 'paysetting'], function () {
+        Route::get('payconfig', 'Retail\PaysettingController@payconfig')->middleware('RetailCheck');           //收款信息设置
         Route::get('shengpay_add', 'Retail\PaysettingController@shengpay_add')->middleware('RetailCheck');     //添加终端机器号信息
         Route::get('shengpay_list', 'Retail\PaysettingController@shengpay_list')->middleware('RetailCheck');   //终端机器号列表
     });
@@ -720,8 +728,20 @@ Route::group(['prefix' => 'retail'], function () {
 
 
         //支付设置
+        Route::post('payconfig_check', 'Retail\PaysettingController@payconfig_check')->middleware('RetailCheckAjax');         //收款信息功能提交
+        Route::post('payconfig_edit', 'Retail\PaysettingController@payconfig_edit')->middleware('RetailCheckAjax');           //收款信息编辑ajax
+        Route::post('payconfig_edit_check', 'Retail\PaysettingController@payconfig_edit_check')->middleware('RetailCheckAjax');//收款信息功能提交
+        Route::post('payconfig_apply', 'Retail\PaysettingController@payconfig_apply')->middleware('RetailCheckAjax');         //收款信息功能重新申请
+        Route::post('payconfig_apply_check', 'Retail\PaysettingController@payconfig_apply_check')->middleware('RetailCheckAjax');//收款信息功能重新申请功能提交
+        Route::post('payconfig_delete', 'Retail\PaysettingController@payconfig_delete')->middleware('RetailCheckAjax');       //收款信息功能解除绑定ajax显示
+        Route::post('payconfig_delete_check', 'Retail\PaysettingController@payconfig_delete_check')->middleware('RetailCheckAjax');//收款信息功能解除绑定功能提交
         Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号功能提交
         Route::post('shengpay_edit', 'Retail\PaysettingController@shengpay_edit')->middleware('RetailCheckAjax');             //编辑终端机器号Ajax显示
+        Route::post('shengpay_edit_check', 'Retail\PaysettingController@shengpay_edit_check')->middleware('RetailCheckAjax'); //编辑终端机器号功能提交
+        Route::post('shengpay_apply', 'Retail\PaysettingController@shengpay_apply')->middleware('RetailCheckAjax');           //终端机器号重新申请Ajax
+        Route::post('shengpay_apply_check', 'Retail\PaysettingController@shengpay_apply_check')->middleware('RetailCheckAjax');//终端机器号重新申请功能提交
+        Route::post('shengpay_delete', 'Retail\PaysettingController@shengpay_delete')->middleware('RetailCheckAjax');         //终端机器号解除绑定ajax
+        Route::post('shengpay_delete_check', 'Retail\PaysettingController@shengpay_delete_check')->middleware('RetailCheckAjax');//终端机器号解除绑定功能提交
 
     });
 });

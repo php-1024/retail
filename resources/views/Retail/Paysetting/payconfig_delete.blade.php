@@ -1,21 +1,14 @@
-<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_edit_check') }}">
+<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/payconfig_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id"  value="{{ $data->id }}">
+    <input type="hidden" name="id"  value="{{ $id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">编辑终端机器号</h4>
+                <h4 class="modal-title">解除绑定付款信息</h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-id-1">用户账号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control"  value="{{$data->terminal_num}}" name="terminal_num">
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                         <div class="col-sm-10">
@@ -27,7 +20,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-success" type="button" id="addBtn" onclick="return postForm();">确定</button>
+                <button class="btn btn-success" type="button" onclick="return postForm();">确定</button>
             </div>
         </div>
     </div>

@@ -32,9 +32,8 @@ class UserController extends Controller
         $organization_id = $admin_data['organization_id'];  //组织id
         $account = $request->get('account');            //接收用户账号
         $user_id = User::getPluck(['account'=>$account],'id')->first();                                 //获取用户id
-        $fansmanage_id = Organization::getPluck(['id'=>$organization_id],'parent_id')->first();         //获取粉丝管理平台的组织id
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first(); //组织名称
-        $list = FansmanageUser::getPaginage([['fansmanage_id',$fansmanage_id],['store_id',$organization_id]],$user_id,'10','id','DESC');
+        $list = FansmanageUser::getPaginage([['fansmanage_id',$organization_id]],$user_id,'10','id','DESC');
         foreach ($list as $key => $value) {
             $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]], 'nickname')->first();//微信昵称
             $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
@@ -98,7 +97,7 @@ class UserController extends Controller
         $userInfo = UserInfo::getOneUserInfo([['user_id', $user_id]]);//微信昵称
         $data['account'] = User::getPluck([['id', $user_id]], 'account')->first();//粉丝账号
         $data['mobile'] = FansmanageUser::getPluck([['user_id', $user_id]], 'mobile')->first();//手机号
-        $yauntou = UserOrigin::getPluck([['user_id', $user_id]], 'origin_id')->first();
+        $yauntou = UserOrigin::getPluck([['user_id', $user_id]], 'store_id')->first();
         if ($yauntou == $organization_id) {
             $data['store_name'] = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
         }

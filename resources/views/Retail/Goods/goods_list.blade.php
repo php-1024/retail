@@ -110,7 +110,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {!! $goods->links() !!}
+                                        {!! $goods->appends($search_data)->links() !!}
                                     </div>
                                 </div>
                             </footer>

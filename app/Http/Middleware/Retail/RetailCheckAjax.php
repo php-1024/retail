@@ -50,8 +50,13 @@ class RetailCheckAjax
             case "retail/ajax/dispatch_list_lock":            //运费模板启用弹窗
             case "retail/ajax/dispatch_list_delete":          //运费模板删除确认弹窗
 
-            case "retail/ajax/shengpay_edit":          //编辑终端机器号
-            $re = $this->checkLoginAndRule($request);
+            case "retail/ajax/shengpay_edit":           //编辑终端机器号
+            case "retail/ajax/shengpay_apply":          //终端机器号重新申请
+            case "retail/ajax/shengpay_delete":         //终端机器号解除绑定
+            case "retail/ajax/payconfig_edit":          //付款信息编辑
+            case "retail/ajax/payconfig_apply":         //付款信息重新申请
+            case "retail/ajax/payconfig_delete":        //付款信息删除
+                $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
             case "retail/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
@@ -66,10 +71,6 @@ class RetailCheckAjax
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-
-
-
-
 
 
             /****检测是否登录 权限 安全密码****/
@@ -87,7 +88,11 @@ class RetailCheckAjax
             case "retail/ajax/goods_thumb_delete_check":     //商品图片删除--检测登录安全密码和权限
             case "retail/ajax/dispatch_list_lock_check":     //启用、弃用运费模板确认
             case "retail/ajax/dispatch_list_delete_check":   //运费模板删除确认操作
-            $re = $this->checkLoginAndRuleAndSafe($request);
+            case "retail/ajax/shengpay_apply_check":            // 终端机器号重新申请功能提交
+            case "retail/ajax/shengpay_delete_check":            // 终端机器号解除绑定功能提交
+            case "retail/ajax/payconfig_delete_check":           // 付款信息解除绑定功能提交
+            case "retail/ajax/payconfig_apply_check":            // 付款信息重新申请功能提交
+                $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
             /****检测是否登录 权限 安全密码****/
@@ -134,7 +139,7 @@ class RetailCheckAjax
 
             /*********进销存商品选择列表*********/
             case "retail/ajax/search_company":          //检测登录，权限，及供应商搜索的数据处理
-            $re = $this->checkLoginAndRuleAndSearchCompany($request);
+                $re = $this->checkLoginAndRuleAndSearchCompany($request);
                 return self::format_response($re, $next);
                 break;
             /*********进销存商品选择列表*********/
@@ -162,14 +167,18 @@ class RetailCheckAjax
 
 
             /****支付设置****/
-            // 添加终端机器号信息功能提交
-            case "retail/ajax/shengpay_add_check":
+            case "retail/ajax/payconfig_check":    // 收款信息设置数据监测
+            case "retail/ajax/payconfig_edit_check":    // 收款信息设置数据监测
+            $re = $this->checkLoginAndRuleAndPayconfig($request);
+                return self::format_response($re, $next);
+                break;
+            case "retail/ajax/shengpay_add_check":            // 添加终端机器号信息功能提交
+            case "retail/ajax/shengpay_edit_check":
                 $re = $this->checkLoginAndRuleAndShengpayAdd($request);
                 return self::format_response($re, $next);
                 break;
+
             /****粉丝信息编辑****/
-
-
 
 
         }
@@ -403,6 +412,21 @@ class RetailCheckAjax
         }
     }
 
+    // 收款信息设置数据监测
+    public function checkLoginAndRuleAndPayconfig($request)
+    {
+        $re = $this->checkLoginAndRuleAndSafe($request);//判断是否登录是否有权限以及安全密码
+        if ($re['status'] == '0') {
+            return $re;
+        } else {
+            $re2 = $this->checkPayconfig($re['response']);//检测修改的数据
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
 
 
     /******************************复合检测结束*********************************/
@@ -413,38 +437,38 @@ class RetailCheckAjax
     public function checkHasRule($request)
     {
         $admin_data = $request->get('admin_data');
-        if($admin_data['id']<>1 && $admin_data['is_super']<>1){
+        if ($admin_data['id'] <> 1 && $admin_data['is_super'] <> 1) {
             //暂定所有用户都有权限
             //return self::res(1,redirect('zerone'));
             $route_name = $request->path();//获取当前的页面路由
 
             //查询用户所具备的所有节点的路由
-            $account_info = Account::getOne([['id',$admin_data['id']]]);
+            $account_info = Account::getOne([['id', $admin_data['id']]]);
             $account_routes = [];
-            foreach($account_info->nodes as $key=>$val){
+            foreach ($account_info->nodes as $key => $val) {
                 $account_routes[] = $val->route_name;
             }
 
             //查询该程序下所有节点的路由
-            $program_info = Program::getOne([['id',10]]);
+            $program_info = Program::getOne([['id', 10]]);
             $program_routes = [];
-            foreach($program_info->nodes as $key=>$val){
+            foreach ($program_info->nodes as $key => $val) {
                 $program_routes[] = $val->route_name;
             }
 
             //计算数组差集，获取用户所没有的权限
-            $unset_routes = array_diff($program_routes,$account_routes);
+            $unset_routes = array_diff($program_routes, $account_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
-            if(!in_array($route_name,$program_routes) && !in_array($route_name,config('app.retail_route_except'))){
+            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.retail_route_except'))) {
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
             }
             //如果没有权限，则报错
-            if(in_array($route_name,$unset_routes)){
+            if (in_array($route_name, $unset_routes)) {
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
             }
-            return self::res(1,$request);
-        }else{
-            return self::res(1,$request);
+            return self::res(1, $request);
+        } else {
+            return self::res(1, $request);
         }
     }
 
@@ -528,8 +552,8 @@ class RetailCheckAjax
         if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -550,8 +574,8 @@ class RetailCheckAjax
         if (empty($request->input('realname'))) {
             return self::res(0, response()->json(['data' => '请输入用户真实姓名', 'status' => '0']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -662,8 +686,8 @@ class RetailCheckAjax
         if (empty($request->input('contactmobile'))) {
             return self::res(0, response()->json(['data' => '请输入联系人电话！', 'status' => '0']));
         }
-        $mobile= $request->input('contactmobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('contactmobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -688,13 +712,13 @@ class RetailCheckAjax
         if (empty($request->input('details'))) {
             return self::res(0, response()->json(['data' => '请填写商品详情!', 'status' => '0']));
         }
-        if (!empty($request->input('price')) && !is_numeric($request->input('price'))){
+        if (!empty($request->input('price')) && !is_numeric($request->input('price'))) {
             return self::res(0, response()->json(['data' => '请正确输入价格!', 'status' => '0']));
         }
-        if (!empty($request->input('barcode')) && !is_numeric($request->input('barcode'))){
+        if (!empty($request->input('barcode')) && !is_numeric($request->input('barcode'))) {
             return self::res(0, response()->json(['data' => '请正确输入商品条码!', 'status' => '0']));
         }
-        if (!empty($request->input('stock')) && !is_numeric($request->input('stock'))){
+        if (!empty($request->input('stock')) && !is_numeric($request->input('stock'))) {
             return self::res(0, response()->json(['data' => '请正确输入库存!', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -768,10 +792,17 @@ class RetailCheckAjax
         return self::res(1, $request);
     }
 
-
-
-
-
+    // 收款信息设置数据监测
+    public function checkPayconfig($request)
+    {
+        if (empty($request->input('sft_pos_num'))) {
+            return self::res(0, response()->json(['data' => '请输入pos商户号!', 'status' => '0']));
+        }
+        if (empty($request->input('sft_num'))) {
+            return self::res(0, response()->json(['data' => '请输入盛付通商户号!', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
 
     /*****************************数据检测结束****************************/
 

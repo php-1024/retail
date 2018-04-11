@@ -59,6 +59,7 @@ class RetailCheck{
 
             case "retail/user/user_list":               //用户管理-粉丝用户管理
 
+            case "retail/paysetting/payconfig":        //支付设置-收款信息设置
             case "retail/paysetting/shengpay_add":     //支付设置-添加终端机器号信息
             case "retail/paysetting/shengpay_list":    //支付设置-终端机器号信息列表
                 $re = $this->checkLoginAndRule($request);//判断是否登录

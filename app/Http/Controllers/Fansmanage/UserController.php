@@ -36,7 +36,7 @@ class UserController extends CommonController
         // 中间件参数 集合
         $this->getRequestInfo();
         // 组织id
-        $fansmanage_id = $this->admin_data['organization_id'];//组织id
+        $fansmanage_id = $this->admin_data['organization_id'];
         // 获取标签列表
         $list = Label::getPaginage([['fansmanage_id', $fansmanage_id]], '10', 'id');
         // 渲染页面
@@ -332,10 +332,8 @@ class UserController extends CommonController
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
-        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
-        if (empty($search_content)) {
-            $search_content = '';
-        }
+        $store_name = Organization::where(['id' => $organization_id])->value("organization_name");
+
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
 
@@ -348,10 +346,9 @@ class UserController extends CommonController
                 $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
                 // 获取推荐人信息
                 // 推荐人id
-                $recommender_info = User::select("id")->where(['id' => 2])->first();
+                $recommender_id = User::where(['id' => $value["userRecommender"]["recommender_id"]])->value("id");
                 // 推荐人名称
-                $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
-                $list[$key]['recommender_name'] = $userInfo["nickname"];
+                $list[$key]['recommender_name'] = UserInfo::where(['user_id' => $recommender_id])->value("nickname");
                 // 粉丝对应的标签id
                 $list[$key]['label_id'] = $value["userLabel"]['label_id'];
             }
@@ -366,7 +363,7 @@ class UserController extends CommonController
 
 
     /**
-     * 列表搜索
+     * 列表搜索 页面
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function user_list_search()
@@ -384,7 +381,6 @@ class UserController extends CommonController
         }
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC", $search_content);
-
         // 处理数据
         foreach ($list as $key => $value) {
             if (!empty($value["user"])) {
@@ -394,7 +390,7 @@ class UserController extends CommonController
                 $list[$key]['head_imgurl'] = $value["userInfo"]['head_imgurl'];
                 // 获取推荐人信息
                 // 推荐人id
-                $recommender_info = User::select("id")->where(['id' => 2])->first();
+                $recommender_info = User::select("id")->where(['id' => $value["userRecommender"]["recommender_id"]])->first();
                 // 推荐人名称
                 $userInfo = UserInfo::select("nickname")->where(['user_id' => $recommender_info['id']])->first();
                 $list[$key]['recommender_name'] = $userInfo["nickname"];
@@ -402,57 +398,225 @@ class UserController extends CommonController
                 $list[$key]['label_id'] = $value["userLabel"]['label_id'];
             }
         }
-
         // 粉丝标签列表
         $label = Label::ListLabel([['fansmanage_id', $organization_id], ['store_id', '0']]);
-
         // 渲染页面
-        return view('Fansmanage/User/user_search', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
+        return view('Fansmanage/User/user_list_search', ['list' => $list, 'store_name' => $store_name, 'label' => $label, 'organization_id' => $organization_id]);
+    }
+
+    /**
+     * 粉丝用户管理编辑
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function user_list_edit()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // 组织id
+        $organization_id = $this->admin_data["organization_id"];
+        // 会员标签id
+        $user_id = request()->id;
+        // 微信昵称
+        $userInfo = UserInfo::getOneUserInfo([['user_id', $user_id]]);
+        // 粉丝账号
+        $data['account'] = User::where(['id' => $user_id])->value("account");
+        // 手机号
+        $data['mobile'] = FansmanageUser::where(['user_id' => $user_id])->value("mobile");
+        // 获取推荐人的id
+        $yauntou = UserOrigin::where(['user_id' => $user_id])->value("store_id");
+
+        // 如果推荐人id 同 组织id 相同, 则返回 组织名称,否则 默认为联盟商户
+        if ($yauntou == $organization_id) {
+            // 组织名称
+            $data['store_name'] = Organization::where(['id' => $organization_id])->value("organization_name");
+        }
+        // 推荐人id
+        $recommender_id = UserRecommender::where(['user_id' => $user_id])->value("recommender_id");
+        if (!empty($recommender_id)) {
+            // 获取推荐人信息
+            $list = User::getOneUser([['id', $recommender_id]]);
+            $data['recommender_name'] = $list->UserInfo->nickname;
+        }
+        // 渲染页面
+        return view('Fansmanage/User/user_list_edit', ['data' => $data, 'userInfo' => $userInfo]);
+    }
+
+    /**
+     * 粉丝用户管理编辑功能提交,修改手机号码和QQ 号码
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function user_list_edit_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // qq号
+        $qq = request()->qq;
+        // 手机号
+        $mobile = request()->mobile;
+        // 用户id
+        $user_id = request()->user_id;
+        // 微信昵称
+        $nickname = request()->nickname;
+        // 判断手机号码是否存在
+        $re = FansmanageUser::checkRowExists([['mobile', $mobile], ['user_id', '<>', $user_id]]);
+        if ($re == 'true') {
+            return response()->json(['data' => '手机号已存在', 'status' => '0']);
+        }
+        // 事务处理
+        DB::beginTransaction();
+        try {
+            // 修改粉丝的 手机号码
+            FansmanageUser::editStoreUser(['user_id' => $user_id], ['mobile' => $mobile]);
+            // 修改粉丝的 QQ号码
+            UserInfo::editUserInfo(['user_id' => $user_id], ['qq' => $qq]);
+            // 保存操作记录
+            if ($this->admin_data['is_super'] != 2) {
+                $this->insertOperationLog(3, '修改资料：' . $nickname);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return $this->getResponseMsg(0, '修改资料失败！');
+        }
+        return $this->getResponseMsg(1, '修改资料成功！');
     }
 
 
-    //粉丝用户管理
+    /**
+     * 粉丝用户管理冻结功能显示
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function user_list_lock()
+    {
+        // 会员标签id
+        $user_id = request()->id;
+        // 冻结或者解锁, 1 为 冻结, 0 为解冻
+        $status = request()->status;
+        // 微信昵称
+        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();
+        // 渲染页面
+        return view('Fansmanage/User/user_list_lock', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
+    }
+
+    /**
+     * 粉丝用户管理 冻结/解冻 功能提交
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
+    public function user_list_lock_check()
+    {
+        // 中间件参数 集合
+        $this->getRequestInfo();
+        // 会员标签id
+        $user_id = request()->user_id;
+        // 会员标签id
+        $nickname = request()->nickname;
+        // 冻结或者解冻判断
+        $status = request()->status;
+        // 事务处理
+        DB::beginTransaction();
+        try {
+            if ($status == 1) {
+                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '0']);
+                // 保存操作记录
+                if ($this->admin_data['is_super'] != 2) {
+                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '冻结了：' . $nickname);
+                }
+            } else {
+                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '1']);
+                // 保存操作记录
+                if ($this->admin_data['is_super'] != 2) {
+                    $this->insertOperationLog(3, '解冻了：' . $nickname);
+                }
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功！', 'status' => '1']);
+    }
+
+
+    /**
+     * 粉丝用户管理 粉丝钱包
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function user_list_wallet()
+    {
+        // 会员标签id
+        $user_id = request()->id;
+        // 冻结或者解锁
+        $status = request()->status;
+        // 微信昵称
+        $nickname = UserInfo::where(["user_id"=>$user_id])->value("nickname");
+        // 渲染页面
+        return view('Fansmanage/User/user_list_wallet', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
+    }
+
+    /**
+     * 粉丝用户管理
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
+     */
     public function store_label_add_check()
     {
         // 中间件参数 集合
         $this->getRequestInfo();
-
-        $label_id = request()->label_id;//会员标签id
-        $user_id = request()->user_id;//用户id
-        $organization_id = $this->admin_data['organization_id'];//组织id
-        $nickname = request()->nickname;//微信昵称
+        // 会员标签id
+        $label_id = request()->label_id;
+        // 用户id
+        $user_id = request()->user_id;
+        // 组织id
+        $organization_id = $this->admin_data['organization_id'];
+        // 微信昵称
+        $nickname = request()->nickname;
+        // 事务处理
         DB::beginTransaction();
         try {
             $oneData = UserLabel::getOneUserLabel([['user_id', $user_id], ['organization_id', $organization_id]]);//查询粉丝标签关联表有没有数据
             if (!empty($oneData)) {
-                if ($oneData->label_id != 0) { //当粉丝标签关联表里标签id为0时 不执行
-                    //减少原粉丝标签的人数
+                // 当粉丝标签关联表里标签id为0时 不执行
+                if ($oneData->label_id != 0) {
+                    // 减少原粉丝标签的人数
                     $label_number = Label::getPluck([['id', $oneData->label_id]], 'label_number')->first();//获取原粉丝标签的人数
                     $number = $label_number - 1;
                     Label::editLabel([['id', $oneData->label_id]], ['label_number' => $number]);//修改粉丝标签的人数
                 }
-                if ($label_id != 0) { //选择无标签的时候 不执行
-                    //增加现有的粉丝标签人数
-                    $add_label_number = Label::getPluck([['id', $label_id]], 'label_number')->first();//获取粉丝标签的人数
+                // 选择无标签的时候 不执行
+                if ($label_id != 0) {
+                    // 增加现有的粉丝标签人数
+                    // 获取粉丝标签的人数
+                    $add_label_number = Label::getPluck([['id', $label_id]], 'label_number')->first();
                     $add_number = $add_label_number + 1;
-                    Label::editLabel([['id', $label_id]], ['label_number' => $add_number]);//修改粉丝标签的人数
+                    // 修改粉丝标签的人数
+                    Label::editLabel([['id', $label_id]], ['label_number' => $add_number]);
                 }
-                UserLabel::editUserLabel([['id', $oneData->id]], ['label_id' => $label_id]);//修改粉丝标签关联表Label_id
+                // 修改粉丝标签关联表Label_id
+                UserLabel::editUserLabel([['id', $oneData->id]], ['label_id' => $label_id]);
 
             } else {
-                UserLabel::addUserLabel(['label_id' => $label_id, 'user_id' => $user_id, 'organization_id' => $organization_id]);//粉丝与标签关系表
-                $label_number = Label::getPluck([['id', $label_id]], 'label_number')->first();//获取粉丝标签的人数
+                // 粉丝与标签关系表
+                UserLabel::addUserLabel(['label_id' => $label_id, 'user_id' => $user_id, 'organization_id' => $organization_id]);
+                // 获取粉丝标签的人数
+                $label_number = Label::getPluck([['id', $label_id]], 'label_number')->first();
                 $number = $label_number + 1;
-                Label::editLabel([['id', $label_id]], ['label_number' => $number]);//修改粉丝标签的人数
+                // 修改粉丝标签的人数
+                Label::editLabel([['id', $label_id]], ['label_number' => $number]);
             }
             $dataUser = FansmanageUser::getOneFansmanageUser([['id', $user_id]]);
             $tag_id = Label::getPluck([['id', $label_id]], 'wechat_id')->first();
-            if ($label_id != 0) { //选择无标签的时候 不执行
+            // 选择无标签的时候 不执行
+            if ($label_id != 0) {
                 $data = [
                     'openid_list' => [$dataUser['open_id']],
                     'tagid' => $tag_id
                 ];
-                $auth_info = \Wechat::refresh_authorization_info($this->admin_data['organization_id']);//刷新并获取授权令牌
+                // 刷新并获取授权令牌
+                $auth_info = \Wechat::refresh_authorization_info($this->admin_data['organization_id']);
                 $re = \Wechat::add_fans_tag_label($auth_info['authorizer_access_token'], $data);
                 $re = json_decode($re, true);
                 if ($re['errmsg'] != 'ok') {
@@ -460,123 +624,19 @@ class UserController extends CommonController
                 }
             }
             if ($this->admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改粉丝标签：' . $nickname);//保存操作记录
+                // 保存操作记录
+                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改粉丝标签：' . $nickname);
             }
             DB::commit();
-
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败！', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功！', 'status' => '1']);
     }
 
-    //粉丝用户管理编辑
-    public function user_list_edit()
-    {
-        // 中间件参数 集合
-        $this->getRequestInfo();
-        // 组织id
-        $organization_id = $this->admin_data["organization_id"];
 
-        $user_id = request()->id;//会员标签id
-        $userInfo = UserInfo::getOneUserInfo([['user_id', $user_id]]);//微信昵称
-        $data['account'] = User::getPluck([['id', $user_id]], 'account')->first();//粉丝账号
-        $data['mobile'] = FansmanageUser::getPluck([['user_id', $user_id]], 'mobile')->first();//手机号
-        $yauntou = UserOrigin::getPluck([['user_id', $user_id]], 'origin_id')->first();
-        if ($yauntou == $organization_id) {
-            $data['store_name'] = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();//组织名称
-        }
-        $recommender_id = UserRecommender::getPluck([['user_id', $user_id]], 'recommender_id')->first();//推荐人id
-        if (!empty($recommender_id)) {
-            $list = User::getOneUser([['id', $recommender_id]]);
-            $data['recommender_name'] = $list->UserInfo->nickname;
-        }
-        return view('Fansmanage/User/user_list_edit', ['data' => $data, 'userInfo' => $userInfo]);
-
-    }
-
-
-    //粉丝用户管理编辑功能提交
-    public function user_list_edit_check()
-    {
-        // 中间件参数 集合
-        $this->getRequestInfo();
-
-        $qq = request()->qq;//qq号
-        $mobile = request()->mobile;//手机号
-        $user_id = request()->user_id;//用户id
-        $nickname = request()->nickname;//微信昵称
-        $re = FansmanageUser::checkRowExists([['mobile', $mobile], ['user_id', '<>', $user_id]]);
-        if ($re == 'true') {
-            return response()->json(['data' => '手机号已存在', 'status' => '0']);
-        }
-        DB::beginTransaction();
-        try {
-            FansmanageUser::editStoreUser(['user_id' => $user_id], ['mobile' => $mobile]);
-            UserInfo::editUserInfo(['user_id' => $user_id], ['qq' => $qq]);
-            if ($this->admin_data['is_super'] != 2) {
-                OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '修改资料：' . $nickname);//保存操作记录
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '修改资料失败！', 'status' => '0']);
-        }
-        return response()->json(['data' => '修改资料成功！', 'status' => '1']);
-
-    }
-
-    //粉丝用户管理粉丝钱包
-    public function user_list_wallet()
-    {
-        $user_id = request()->id;//会员标签id
-        $status = request()->status;//冻结或者解锁
-        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();//微信昵称
-        return view('Fansmanage/User/user_list_wallet', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
-    }
-
-    //粉丝用户管理冻结功能显示
-    public function user_list_lock()
-    {
-        $user_id = request()->id;//会员标签id
-        $status = request()->status;//冻结或者解锁
-        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();//微信昵称
-        return view('Fansmanage/User/user_list_lock', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
-    }
-
-    //粉丝用户管理冻结功能提交
-    public function user_list_lock_check()
-    {
-        // 中间件参数 集合
-        $this->getRequestInfo();
-
-        $user_id = request()->user_id;//会员标签id
-        $nickname = request()->nickname;//会员标签id
-        $status = request()->status;//冻结或者解冻判断
-
-        DB::beginTransaction();
-        try {
-            if ($status == 1) {
-                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '0']);
-                if ($this->admin_data['is_super'] != 2) {
-                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '冻结了：' . $nickname);//保存操作记录
-                }
-            } else {
-                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '1']);
-                if ($this->admin_data['is_super'] != 2) {
-                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '解冻了：' . $nickname);//保存操作记录
-                }
-            }
-
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '操作失败！', 'status' => '0']);
-        }
-        return response()->json(['data' => '操作成功！', 'status' => '1']);
-
-    }
     // +----------------------------------------------------------------------
     // | End - 粉丝用户管理
     // +----------------------------------------------------------------------
@@ -597,10 +657,6 @@ class UserController extends CommonController
         }
         return view('Fansmanage/User/user_timeline', ['list' => $list, 'admin_data' => $this->admin_data, 'route_name' => $this->route_name, 'menu_data' => $this->menu_data, 'son_menu_data' => $this->son_menu_data]);
     }
-
-    // 欠缺搜索功能
-
-
     // +----------------------------------------------------------------------
     // | End - 粉丝用户管理
     // +----------------------------------------------------------------------

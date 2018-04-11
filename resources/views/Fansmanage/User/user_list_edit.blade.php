@@ -10,17 +10,20 @@
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">用户账号</label>
+                        <label class="col-sm-2 control-label text-right">用户账号</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$data['account']}}" placeholder="标签名称" class="form-control" disabled="" name="account">
                         </div>
                     </div>
+
+
+
                     <div style="clear:both;"></div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">微信昵称</label>
+                        <label class="col-sm-2 control-label text-right ">微信昵称</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$userInfo['nickname']}}" placeholder="安全密码" class="form-control" disabled="">
                         </div>
@@ -29,7 +32,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">源头</label>
+                        <label class="col-sm-2 control-label text-right">源头</label>
                         <div class="col-sm-10">
                             @if(!empty($data['store_name']))
                                 <label class="label label-success">自有店铺-{{$data['store_name']}}</label>
@@ -42,7 +45,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">推荐人</label>
+                        <label class="col-sm-2 control-label text-right">推荐人</label>
                         <div class="col-sm-10">
                             @if(empty($data['recommender_name']))
                                 <label class="label label-success">自行关注</label>
@@ -56,7 +59,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">手机号码</label>
+                        <label class="col-sm-2 control-label text-right">手机号码</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$data['mobile']}}" placeholder="手机号码" class="form-control" name="mobile">
                         </div>
@@ -65,7 +68,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">QQ号码</label>
+                        <label class="col-sm-2 control-label text-right">QQ号码</label>
                         <div class="col-sm-10">
                             <input type="text" value="{{$userInfo['qq']}}" placeholder="QQ号码" class="form-control" name="qq">
                         </div>
@@ -76,7 +79,7 @@
 
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">安全密码</label>
+                        <label class="col-sm-2 control-label text-right">安全密码</label>
                         <div class="col-sm-10">
                             <input type="text" value="" placeholder="安全密码" class="form-control" name="safe_password">
                         </div>

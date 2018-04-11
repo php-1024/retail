@@ -265,13 +265,16 @@ class BillingController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_name = $request->get('goods_name');         //获取供应商名称
-        $goods_id = RetailGoods::getPluck(['name'=>$goods_name],'id')->first();
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();    //获取粉丝管理平台的组织id
-        $where = [
-            'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
-        ];
-        $stock_list = RetailStock::getPaginage($where,$goods_id,'10','created_at','ASC'); //查询商品信息
+        if (!empty($goods_name)){
+            $where = [['retail_id',$admin_data['organization_id']],['name','like','%'.$goods_name.'%']];
+        }else{
+            $where = [['retail_id',$admin_data['organization_id']]];
+            $stock_list = RetailStock::getPaginage($where,'10','created_at','ASC'); //查询商品信息
+        }
+        $goods = RetailGoods::getList($where,0,'created_at','DESC');
+        foreach ($goods as $key=>$val){
+            $stock_list[] = RetailStock::getOne(['goods_id'=>$val->id])->first();
+        }
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'goods_name'=>$goods_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
