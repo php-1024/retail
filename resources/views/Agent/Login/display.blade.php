@@ -54,8 +54,10 @@
     });
     //刷新验证码
     function re_captcha() {
+        console.log(1);
         $url = "{{url('agent/login/captcha')}}";
         $url = $url + "/" + Math.random();
+        console.log(2)
         document.getElementById('verify').src = $url;
     }
 
