@@ -45,58 +45,55 @@ class SftController extends Controller
     public function test()
     {
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-//        $param_body["merchantNo"] = '11548088';
-//        $param_body["charset"] = 'UTF-8';
-//        $param_body["requestTime"] = date('YmdHis');
-//
-//
-//        // 业务参数
-//        // 订单号
-//        $param_body["merchantOrderNo"] = md5(time());
-//        // 交易金额
-//        $param_body["amount"] = "0.01";
-//        $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
-//        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
-//        $param_body["productName"] = md5(microtime(true));
-//        $param_body["currency"] = "CNY";
-//        $param_body["userIp"] = "120.78.140.10";
-//        $param_body["payChannel"] = "wp";
-////        $param_body["openid"] = '11548088';
-////        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
-////        $param_body["exts"] = '11548088';
-//
-//
-//        if ($param_body["payChannel"] == 'hw') {
-//            $param_body_attach_wxh5["requestFrom"] = "ANDROID_APP";
-//            $param_body_attach_wxh5["app_name"] = "ANDROID_APP";
-//            $param_body_attach_wxh5["bundle_id"] = "";
-//            $param_body_attach_wxh5["package_name"] = "";
-//            $param_body_attach_wxh5["wap_url"] = "";
-//            $param_body_attach_wxh5["note"] = "";
-//            $param_body_attach_wxh5["attach"] = "";
-//        }
-//
-//        $param_head["signType"] = "MD5";
-//        $param_head["signMsg"] = md5(microtime());
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
 
 
-//        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+        // 业务参数
+        // 订单号
+        $param_body["merchantOrderNo"] = md5(time());
+        // 交易金额
+        $param_body["amount"] = "0.01";
+        $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
+        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
+        $param_body["productName"] = md5(microtime(true));
+        $param_body["currency"] = "CNY";
+        $param_body["userIp"] = "120.78.140.10";
+        $param_body["payChannel"] = "wp";
+//        $param_body["openid"] = '11548088';
+//        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
+//        $param_body["exts"] = '11548088';
 
-        $param_body_json = '{
-    "requestTime": "20171222111120", 
-    "charset": "UTF-8", 
-    "amount": "0.01", 
-    "expireTime": "20171222131120", 
-    "notifyUrl": "http://o2o.01nnt.com/pay/sft/test2", 
-    "userIp": "123.123.123.123", 
-    "currency": "CNY", 
-    "payChannel": "wp", 
-    "merchantOrderNo": "f2e03275ee25488f99e58630dfb02552", 
-    "productName": "测试商品", 
-    "merchantNo": "540511"
-}';
-        $res = $this->httpRequest($api_url, "post", $param_body_json);
-        dump($res);
+
+        if ($param_body["payChannel"] == 'hw') {
+            $param_body_attach_wxh5["requestFrom"] = "ANDROID_APP";
+            $param_body_attach_wxh5["app_name"] = "ANDROID_APP";
+            $param_body_attach_wxh5["bundle_id"] = "";
+            $param_body_attach_wxh5["package_name"] = "";
+            $param_body_attach_wxh5["wap_url"] = "";
+            $param_body_attach_wxh5["note"] = "";
+            $param_body_attach_wxh5["attach"] = "";
+        }
+
+
+        $param_body["signType"] = "MD5";
+       $param_body["signMsg"] = md5(microtime());
+
+
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+
+        $origin = "1111111111";
+        foreach ($param_body as $key => $value) {
+            if (!empty($value)) {
+                $origin .= "&$key=$value";
+            }
+        }
+        $param_head["signType"] = "MD5";
+        $param_head["signMsg"] = strtoupper(md5($origin . $this->key));
+
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $param_head, true);
+
     }
 
     public function generateSignature($param)
@@ -120,7 +117,7 @@ class SftController extends Controller
         $prepare_data['i'] = 'iii';
         $prepare_data['k'] = '';
 
-        foreach ($prepare_data as $key=>$value) {
+        foreach ($prepare_data as $key => $value) {
             if (!empty($value))
                 $origin .= "&$key=$value";
         }
@@ -274,13 +271,13 @@ class SftController extends Controller
         // 开启调试模式就返回 curl 的结果
         if ($debug) {
             echo "=====post data======\r\n";
-            var_dump($postData);
+            dump($postData);
             echo "=====info===== \r\n";
-            print_r($requestinfo);
+            dump($requestinfo);
             echo "=====response=====\r\n";
-            print_r($response);
+            dump($response);
             echo "=====http_code=====\r\n";
-            print_r($http_code);
+            dump($http_code);
         }
         curl_close($curl);
         return $response;
