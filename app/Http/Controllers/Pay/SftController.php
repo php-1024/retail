@@ -13,6 +13,7 @@ class SftController extends Controller
 {
     public function test()
     {
+        dd($ip = request()->getClientIp());
         echo "测试盛付通相关接口";
         $url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
         http://10.241.80.55:8080/web-acquire-channel/pay/order.htm
@@ -30,7 +31,7 @@ class SftController extends Controller
         $param["amount"] = "0.01";
         $param["expireTime"] = date('YmdHis', strtotime("+2 hours"));
         $param["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
-        $param["productName"] = '商品test-';
+        $param["productName"] = "商品test-".time();
         $param["currency"] = '11548088';
         $param["userIp"] = '11548088';
         $param["payChannel"] = '11548088';
