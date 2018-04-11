@@ -14,7 +14,7 @@ class PaysettingController extends Controller
     /**
      * 收款信息审核
      */
-    public function payconfig_apply(Request $request)
+    public function payconfig(Request $request)
     {
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
@@ -27,13 +27,13 @@ class PaysettingController extends Controller
         // 查询收款信息列表
         $list = RetailShengpay::getPaginage([], 15, 'id');
 
-        return view('Zerone/Paysetting/payconfig_apply', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Zerone/Paysetting/payconfig', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
     /**
      * 收款信息审核
      */
-    public function shengpay_apply(Request $request)
+    public function shengpay(Request $request)
     {
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
@@ -51,7 +51,7 @@ class PaysettingController extends Controller
         // 查询收款信息列表
         $list = RetailShengpayTerminal::getPaginage([], 15, 'id');
 
-        return view('Zerone/Paysetting/shengpay_apply', ['search_data' => $search_data,'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data,'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
 }

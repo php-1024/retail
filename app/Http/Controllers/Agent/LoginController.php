@@ -70,8 +70,7 @@ class LoginController extends Controller
         $captcha = Request::input('captcha');//接收验证码
         $check_captcha = $this->getCode($captcha);
         if($check_captcha ==0){
-            ErrorLog::addErrorTimes($ip, 2);
-            return response()->json(['data' => '验证码输入错误', 'status' => '-1']);
+            return response()->json(['data' => '验证码输入错误', 'status' => '0']);
         }
         $account_info = Account::getOneForLogin($username);//根据账号查询
         if (empty($account_info)) {   //若果没有查询到数据，账号名称错误
@@ -88,8 +87,9 @@ class LoginController extends Controller
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
         //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip', $ip]]);//查询该IP下的错误记录
+
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
-        if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
+        if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 300)) {
             if (!empty($account_info)) {
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip, 2);
@@ -98,7 +98,6 @@ class LoginController extends Controller
                     ErrorLog::addErrorTimes($ip, 2);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 } else {
-
                     //登录成功要生成缓存的登录信息
                     $admin_data = [
                         'id' => $account_info->id,    //用户ID

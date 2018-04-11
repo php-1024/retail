@@ -70,8 +70,8 @@ class ZeroneCheck
 
 
                 //支付审核
-            case "zerone/paysetting/payconfig_apply":         //收款信息审核
-            case "zerone/paysetting/shengpay_apply":          //pos终端号审核
+            case "zerone/paysetting/payconfig":         //收款信息审核
+            case "zerone/paysetting/shengpay":          //pos终端号审核
 
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re, $next);
