@@ -67,6 +67,12 @@ class ZeroneCheck
             case "zerone/fansmanage/fansmanage_program":      //商户程序管理
             case "zerone/fansmanage/fansmanage_store":        //商户划拨管理
 
+
+
+                //支付审核
+            case "zerone/paysetting/payconfig_apply":         //收款信息审核
+            case "zerone/paysetting/shengpay_apply":          //pos终端号审核
+
                 $re = $this->checkLoginAndRule($request);//判断是否登录
                 return self::format_response($re, $next);
                 break;
