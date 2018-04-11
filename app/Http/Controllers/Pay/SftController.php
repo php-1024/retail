@@ -95,7 +95,7 @@ class SftController extends Controller
     "productName": "测试商品", 
     "merchantNo": "540511"
 }';
-        $res = $this->httpRequest($api_url, "post", $param_body_json, $param_head);
+        $res = $this->httpRequest($api_url, "post", $param_body_json);
         dump($res);
     }
 
