@@ -66,34 +66,31 @@ class SftController extends Controller
 //        $param_body["exts"] = '11548088';
 
 
-        if ($param_body["payChannel"] == 'hw') {
-            $param_body_attach_wxh5["requestFrom"] = "ANDROID_APP";
-            $param_body_attach_wxh5["app_name"] = "ANDROID_APP";
-            $param_body_attach_wxh5["bundle_id"] = "";
-            $param_body_attach_wxh5["package_name"] = "";
-            $param_body_attach_wxh5["wap_url"] = "";
-            $param_body_attach_wxh5["note"] = "";
-            $param_body_attach_wxh5["attach"] = "";
-        }
+//        if ($param_body["payChannel"] == 'hw') {
+//            $param_body_attach_wxh5["requestFrom"] = "ANDROID_APP";
+//            $param_body_attach_wxh5["app_name"] = "ANDROID_APP";
+//            $param_body_attach_wxh5["bundle_id"] = "";
+//            $param_body_attach_wxh5["package_name"] = "";
+//            $param_body_attach_wxh5["wap_url"] = "";
+//            $param_body_attach_wxh5["note"] = "";
+//            $param_body_attach_wxh5["attach"] = "";
+//        }
 
 
         $param_body["signType"] = "MD5";
-       $param_body["signMsg"] = md5(microtime());
-
+        $param_body["signMsg"] = md5(microtime());
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
 
-        $origin = "1111111111";
+        $origin = "5555";
         foreach ($param_body as $key => $value) {
             if (!empty($value)) {
                 $origin .= "&$key=$value";
             }
         }
-        $param_head["signType"] = "MD5";
-        $param_head["signMsg"] = strtoupper(md5($origin . $this->key));
 
-        $res = $this->httpRequest($api_url, "post", $param_body_json, $param_head, true);
-
+        $header = ["signType: MD5","signMsg:" . strtoupper(md5($origin . $this->key))];
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
     public function generateSignature($param)
@@ -102,6 +99,35 @@ class SftController extends Controller
     }
 
     public function test2()
+    {
+        $url = 'http://www.baidu.com';
+//        $param_body["signType"] = "MD5";
+//        $param_body["signMsg"] = md5(microtime());
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, TRUE);    //表示需要response header
+        curl_setopt($ch, CURLOPT_NOBODY, FALSE); //表示需要response body
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+
+        $header[] = "Content-type: application/x-www-form-urlencoded";
+        $header[] = "signType: MD5";
+        $header[] = "signMsg: MD5" . md5(microtime());
+        curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        $result = curl_exec($ch);
+        $a = curl_getinfo($ch);
+
+        dump($result);
+        dd($a);
+
+    }
+
+    public function test3()
     {
         dd(request()->all());
 
@@ -260,24 +286,30 @@ class SftController extends Controller
 //        curl_setopt($curl, CURLOPT_HEADER, true);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         // 指定最多的HTTP重定向的数量，这个选项是和CURLOPT_FOLLOWLOCATION一起使用的
-        curl_setopt($curl, CURLOPT_MAXREDIRS, 2);/**/
+        curl_setopt($curl, CURLOPT_MAXREDIRS, 2);
+
+
+        dump($headers);
+        // 添加请求头部
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLINFO_HEADER_OUT, true);
         // COOKIE带过去
 //        curl_setopt($curl, CURLOPT_COOKIE, $Cookiestr);
         $response = curl_exec($curl);
-        $requestinfo = curl_getinfo($curl);
+        $requestInfo = curl_getinfo($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         // 开启调试模式就返回 curl 的结果
         if ($debug) {
             echo "=====post data======\r\n";
             dump($postData);
             echo "=====info===== \r\n";
-            dump($requestinfo);
+            dump($requestInfo);
             echo "=====response=====\r\n";
             dump($response);
             echo "=====http_code=====\r\n";
             dump($http_code);
+
+            dump(curl_getinfo($curl, CURLINFO_HEADER_OUT));
         }
         curl_close($curl);
         return $response;
