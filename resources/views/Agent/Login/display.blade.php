@@ -54,7 +54,7 @@
     });
     //刷新验证码
     function re_captcha() {
-        $url = "{{url('test/captcha')}}";
+        $url = "{{url('agent/login/captcha')}}";
         $url = $url + "/" + Math.random();
         document.getElementById('verify').src = $url;
     }
