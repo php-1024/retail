@@ -35,8 +35,11 @@ class DispatchController extends Controller
         $dispatch_name = $request->get('dispatch_name');    //栏目名称
         $displayorder = $request->get('displayorder');      //栏目排序
         $number = date('Ymdhis').rand(1000,9999);        //时间加上4为随机数，一共18位数
+        $row = Dispatch::checkRowExists(['name'=>$dispatch_name]);
         if (empty($dispatch_name)){
             return response()->json(['data' => '请输入运费模板名称！', 'status' => '0']);
+        }elseif ($row){
+            return response()->json(['data' => '运费模板名称重复，请重新输入！', 'status' => '0']);
         }
         if (empty($displayorder)){
             $displayorder = '0';
