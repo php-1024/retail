@@ -22,7 +22,7 @@ class AccountInfo extends Model
 
     //和RetailOrder表是一对一的关系
     public function RetailOrder(){
-        return $this->belongsTo('App\Models\RetailOrder', 'id','operator_id');
+        return $this->belongsTo('App\Models\RetailOrder','operator_id');
     }
 
     //和RetailPurchaseOrder表是一对一的关系
