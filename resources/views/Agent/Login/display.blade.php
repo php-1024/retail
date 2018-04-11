@@ -29,8 +29,8 @@
             <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
             <input type="password" class="form-control" placeholder="登录密码" name="password">
             <input type="text" name="captcha" class="form-control" placeholder="验证码" >
-            <input type="hidden" id="captcha_url" value="{{ URL('agent/login/captcha') }}">
-            <img src="{{ URL('agent/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
+            <input type="hidden" id="captcha_url" name="captcha" value="{{ URL('agent/login/captcha') }}">
+            <img src="{{ URL('agent/login/captcha') }}/{{ time() }}" id="login_captcha"  onClick="return changeCaptcha();">
 
             <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登录</button>
         </div>
@@ -64,10 +64,6 @@
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){
-
-
-
-
             if(json.status==1){
                 window.location.reload();
             }else{

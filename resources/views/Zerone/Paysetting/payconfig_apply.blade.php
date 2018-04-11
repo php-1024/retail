@@ -101,7 +101,7 @@
                                 @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td>{{$value->organization_name}}</td>
+                                        <td>{{$value->organization->organization_name}}</td>
                                         <td>{{$value->sft_pos_num}}</td>
                                         <td>{{$value->sft_num }}</td>
                                         <td>
@@ -114,7 +114,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->id}}')">
+                                            <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
                                                 <option value="0">无标签</option>
                                             </select>
                                         </td>
