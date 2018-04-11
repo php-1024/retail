@@ -43,7 +43,7 @@ class PaysettingController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-
+        // 店铺名称
         $organization_name = $request->organization_name;
 
         $search_data = ['organization_name' => $organization_name];
