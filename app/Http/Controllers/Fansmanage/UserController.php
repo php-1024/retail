@@ -493,6 +493,7 @@ class UserController extends CommonController
         // 会员标签id
         $user_id = request()->id;
         // 冻结或者解锁, 1 为 冻结, 0 为解冻
+        // 这里的用途只是渲染 语句而已
         $status = request()->status;
         // 微信昵称
         $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();
@@ -518,19 +519,17 @@ class UserController extends CommonController
         // 事务处理
         DB::beginTransaction();
         try {
-            if ($status == 1) {
-                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '0']);
-                // 保存操作记录
-                if ($this->admin_data['is_super'] != 2) {
-                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '冻结了：' . $nickname);
-                }
-            } else {
-                FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '1']);
-                // 保存操作记录
-                if ($this->admin_data['is_super'] != 2) {
-                    $this->insertOperationLog(3, '解冻了：' . $nickname);
-                }
+            // 修改账号状态
+            $status = $status == 1 ? 1 : 0;
+            $log_string = $status == 1 ? "解冻了：{$nickname}" : "冻结了：{$nickname}";
+
+            // 修改账户信息
+            FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => $status]);
+            // 保存操作记录
+            if ($this->admin_data['is_super'] != 2) {
+                $this->insertOperationLog(3, $log_string);
             }
+
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
