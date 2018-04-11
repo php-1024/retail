@@ -91,6 +91,7 @@
                                     <th>店铺名称</th>
                                     <th>pos商户号</th>
                                     <th>盛付通商户号</th>
+                                    <th>状态</th>
                                     <th>到账状态</th>
                                     <th class="col-sm-1">注册时间</th>
                                     <th class="col-sm-4 text-right" >操作</th>
@@ -111,6 +112,11 @@
                                             @elseif($value->status == -1)
                                                 <label class="label label-danger">未通过</label>
                                             @endif
+                                        </td>
+                                        <td>
+                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->id}}')">
+                                                <option value="0">无标签</option>
+                                            </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
