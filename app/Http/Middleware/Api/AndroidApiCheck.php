@@ -426,12 +426,12 @@ class AndroidApiCheck
         if (empty($request->input('token'))) {
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
-        if (empty($request->input('sft_pos_num'))) {
-            return self::res(0, response()->json(['msg' => '商户号的值不能为空', 'status' => '0', 'data' => '']));
-        }
-        if (empty($request->input('terminal_num'))) {
-            return self::res(0, response()->json(['msg' => 'pos机终端值不能为空', 'status' => '0', 'data' => '']));
-        }
+//        if (empty($request->input('sft_pos_num'))) {
+//            return self::res(0, response()->json(['msg' => '商户号的值不能为空', 'status' => '0', 'data' => '']));
+//        }
+//        if (empty($request->input('terminal_num'))) {
+//            return self::res(0, response()->json(['msg' => 'pos机终端值不能为空', 'status' => '0', 'data' => '']));
+//        }
         list($t1, $t2) = explode(' ', microtime());
         $time = (float)sprintf('%.0f', (floatval($t1) + floatval($t2)) * 1000);//获取当前的时间戳--13位
         if($time - $request->input('timestamp')>120000){//如果超过两分钟
