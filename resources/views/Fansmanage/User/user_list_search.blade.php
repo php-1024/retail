@@ -52,9 +52,9 @@
                 <button class="btn btn-info btn-xs" id="editBtn"
                         onclick="getEditForm({{$value->id}})"><i class="fa fa-edit"></i>&nbsp;&nbsp;粉丝详情
                 </button>
-                <button class="btn btn-primary btn-xs" id="balanceBtn"
-                        onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包
-                </button>
+                {{--<button class="btn btn-primary btn-xs" id="balanceBtn"--}}
+                        {{--onclick="getwalletForm()"><i class="fa fa-credit-card"></i>&nbsp;&nbsp;粉丝钱包--}}
+                {{--</button>--}}
                 @if($value->status == 1 || $value->status == -1)
                     <button class="btn btn-warning btn-xs" id="lockBtn"
                             onclick="getlockForm('{{$value->id}}','{{$value->status}}')">
