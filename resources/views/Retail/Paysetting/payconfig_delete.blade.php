@@ -1,6 +1,6 @@
 <form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id"  value="{{ $data->id }}">
+    <input type="hidden" name="id"  value="{{ $id }}">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,13 +9,6 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="get">
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="input-id-1">用户账号</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" disabled value="{{$data->terminal_num}}" name="terminal_num">
-                        </div>
-                    </div>
-                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                         <div class="col-sm-10">
