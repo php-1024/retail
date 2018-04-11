@@ -12,14 +12,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">pos商户号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  value="{{$data->sft_pos_num}}" name="terminal_num">
+                            <input type="text" class="form-control"  value="{{$data->sft_pos_num}}" name="sft_pos_num">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">盛付通商户号</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  value="{{$data->sft_num}}" name="terminal_num">
+                            <input type="text" class="form-control"  value="{{$data->sft_num}}" name="sft_num">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>

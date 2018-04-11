@@ -166,6 +166,7 @@ class RetailCheckAjax
 
             /****支付设置****/
             case "retail/ajax/payconfig_check":    // 收款信息设置数据监测
+            case "retail/ajax/payconfig_edit_check":    // 收款信息设置数据监测
             $re = $this->checkLoginAndRuleAndPayconfig($request);
                 return self::format_response($re, $next);
                 break;
