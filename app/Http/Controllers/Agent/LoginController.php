@@ -51,8 +51,9 @@ class LoginController extends Controller{
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-
+        var_dump($username);
         $account_info = Account::getOneForLogin($username);//根据账号查询
+        var_dump($account_info);exit;
         if($account_info->id == 1){//如果是超级管理员获取零壹加密盐
             $key = config("app.zerone_encrypt_key");//获取加密盐--零壹加密盐
         }else{
