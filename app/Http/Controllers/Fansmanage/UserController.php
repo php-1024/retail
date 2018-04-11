@@ -332,7 +332,7 @@ class UserController extends CommonController
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
-        $store_name = Organization::where(['id'=> $organization_id])->value("organization_name");
+        $store_name = Organization::where(['id' => $organization_id])->value("organization_name");
 
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
@@ -348,7 +348,7 @@ class UserController extends CommonController
                 // 推荐人id
                 $recommender_id = User::where(['id' => $value["userRecommender"]["recommender_id"]])->value("id");
                 // 推荐人名称
-                $list[$key]['recommender_name'] = UserInfo::where(['user_id'=> $recommender_id])->value("nickname");
+                $list[$key]['recommender_name'] = UserInfo::where(['user_id' => $recommender_id])->value("nickname");
                 // 粉丝对应的标签id
                 $list[$key]['label_id'] = $value["userLabel"]['label_id'];
             }
@@ -419,19 +419,19 @@ class UserController extends CommonController
         // 微信昵称
         $userInfo = UserInfo::getOneUserInfo([['user_id', $user_id]]);
         // 粉丝账号
-        $data['account'] = User::where(['id'=> $user_id])->value("account");
+        $data['account'] = User::where(['id' => $user_id])->value("account");
         // 手机号
-        $data['mobile'] = FansmanageUser::where(['user_id'=> $user_id])->value("mobile");
+        $data['mobile'] = FansmanageUser::where(['user_id' => $user_id])->value("mobile");
         // 获取推荐人的id
-        $yauntou = UserOrigin::where(['user_id'=> $user_id])->value("store_id");
+        $yauntou = UserOrigin::where(['user_id' => $user_id])->value("store_id");
 
         // 如果推荐人id 同 组织id 相同, 则返回 组织名称,否则 默认为联盟商户
         if ($yauntou == $organization_id) {
             // 组织名称
-            $data['store_name'] = Organization::where(['id'=> $organization_id])->value("organization_name");
+            $data['store_name'] = Organization::where(['id' => $organization_id])->value("organization_name");
         }
         // 推荐人id
-        $recommender_id = UserRecommender::where(['user_id'=> $user_id])->value("recommender_id");
+        $recommender_id = UserRecommender::where(['user_id' => $user_id])->value("recommender_id");
         if (!empty($recommender_id)) {
             // 获取推荐人信息
             $list = User::getOneUser([['id', $recommender_id]]);
@@ -472,32 +472,17 @@ class UserController extends CommonController
             UserInfo::editUserInfo(['user_id' => $user_id], ['qq' => $qq]);
             // 保存操作记录
             if ($this->admin_data['is_super'] != 2) {
-                $this->insertOperationLog(3,'修改资料：' . $nickname);
+                $this->insertOperationLog(3, '修改资料：' . $nickname);
             }
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
             DB::rollBack();
-            return $this->getResponseMsg(0,'修改资料失败！');
+            return $this->getResponseMsg(0, '修改资料失败！');
         }
-        return $this->getResponseMsg(1,'修改资料成功！');
+        return $this->getResponseMsg(1, '修改资料成功！');
     }
 
-    /**
-     * 粉丝用户管理粉丝钱包
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function user_list_wallet()
-    {
-        // 会员标签id
-        $user_id = request()->id;
-        // 冻结或者解锁
-        $status = request()->status;
-        // 微信昵称
-        $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();
-        // 渲染页面
-        return view('Fansmanage/User/user_list_wallet', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
-    }
 
     /**
      * 粉丝用户管理冻结功能显示
@@ -507,7 +492,7 @@ class UserController extends CommonController
     {
         // 会员标签id
         $user_id = request()->id;
-        // 冻结或者解锁
+        // 冻结或者解锁, 1 为 冻结, 0 为解冻
         $status = request()->status;
         // 微信昵称
         $nickname = UserInfo::getPluck([['user_id', $user_id]], 'nickname')->first();
@@ -516,7 +501,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 粉丝用户管理冻结功能提交
+     * 粉丝用户管理 冻结/解冻 功能提交
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -543,16 +528,33 @@ class UserController extends CommonController
                 FansmanageUser::editStoreUser(['user_id' => $user_id], ['status' => '1']);
                 // 保存操作记录
                 if ($this->admin_data['is_super'] != 2) {
-                    OperationLog::addOperationLog('3', $this->admin_data['organization_id'], $this->admin_data['id'], $this->route_name, '解冻了：' . $nickname);
+                    $this->insertOperationLog(3, '解冻了：' . $nickname);
                 }
             }
-
             DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败！', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功！', 'status' => '1']);
+    }
+
+
+    /**
+     * 粉丝用户管理粉丝钱包
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function user_list_wallet()
+    {
+        // 会员标签id
+        $user_id = request()->id;
+        // 冻结或者解锁
+        $status = request()->status;
+        // 微信昵称
+        $nickname = UserInfo::where(["user_id"=>$user_id])->value("nickname");
+        // 渲染页面
+        return view('Fansmanage/User/user_list_wallet', ['user_id' => $user_id, 'nickname' => $nickname, 'status' => $status]);
     }
 
     /**

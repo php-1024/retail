@@ -9,7 +9,7 @@
                value="{{ url('fansmanage/ajax/wechat_conditional_menu_add') }}">
         <input type="hidden" name="response_type" id="response_type" value="1">
         <input type="hidden" id="conditional_menu_get" value="{{ url('fansmanage/ajax/conditional_menu_get') }}">
-        <input type="hidden" id="conditional_menu_list" value="{{ url('fansmanage/ajax/conditional_menu_list') }}">
+        <input type="hidden" id="conditional_menu_add" value="{{ url('fansmanage/ajax/conditional_menu_add') }}">
         <input type="hidden" id="tag_id" value="0">
         <div class="form-group">
             <label class="col-sm-2 control-label" for="input-id-1">会员标签组</label>
@@ -18,13 +18,23 @@
                         name="label_id">
                     <option value="0">无</option>
                     @foreach($label_list as $key=>$value)
-                        <option value="{{$value->id}}">{{$value->label_name}}</option>
+                        <option value="{{$value->id}}" @if($label_id == $value["id"]) selected @endif>{{$value->label_name}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
         <div class="line line-dashed b-b line-lg pull-in"></div>
-        <div class="form-group" id="menu"></div>
+        <div class="form-group" id="menu">
+            <label class="col-sm-2 control-label" for="input-id-1">上级菜单</label>
+            <div class="col-sm-10">
+                <select name="parent_id" class="form-control m-b" id="parent_id">
+                    <option value="0">无</option>
+                    @foreach($list as $key=>$val)
+                        <option value="{{$val->id}}" @if($val->id == $parent_id) selected @endif>{{$val->menu_name}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
         <div class="line line-dashed b-b line-lg pull-in"></div>
         <div class="form-group">
@@ -134,31 +144,29 @@
 </div>
 <script>
 
-    $(function () {
-        get_menu();
-    })
-
-
-    function get_menu() {
-        var url = $('#conditional_menu_list').val();
-        var token = $('#_token').val();
-        var data = {'_token': token};
-        $.post(url, data, function (response) {
-            if (response.status == '-1') {
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                }, function () {
-                    window.location.reload();
-                });
-                return;
-            } else {
-                $('#menu').html(response);
-            }
-        });
-    }
+    // $(function () {
+    //     get_menu();
+    // })
+    // function get_menu() {
+    //     var url = $('#conditional_menu_list').val();
+    //     var token = $('#_token').val();
+    //     var data = {'_token': token};
+    //     $.post(url, data, function (response) {
+    //         if (response.status == '-1') {
+    //             swal({
+    //                 title: "提示信息",
+    //                 text: response.data,
+    //                 confirmButtonColor: "#DD6B55",
+    //                 confirmButtonText: "确定",
+    //             }, function () {
+    //                 window.location.reload();
+    //             });
+    //             return;
+    //         } else {
+    //             $('#menu').html(response);
+    //         }
+    //     });
+    // }
 
     function changeConditionalMenu(obj) {
         var label_id = $(obj).val();
@@ -168,7 +176,7 @@
     function changeConditionalMennuBody(label_id) {
         $('#tag_id').val(label_id);
         var url = $('#conditional_menu_get').val();
-        var menu_url = $('#conditional_menu_list').val();
+        var menu_add = $('#conditional_menu_add').val();
         var token = $('#_token').val();
         var $parent_id = $("#parent_id").val();
         var data = {'_token': token, 'label_id': label_id, 'parent_id': $parent_id};
@@ -187,7 +195,7 @@
                 $('#menu_box').html(response);
             }
         });
-        $.post(menu_url, data, function (response) {
+        $.post(menu_add, data, function (response) {
             if (response.status == '-1') {
                 swal({
                     title: "提示信息",
@@ -199,7 +207,7 @@
                 });
                 return;
             } else {
-                $('#menu').html(response);
+                $('#ctrl_box').html(response);
             }
         });
     }
