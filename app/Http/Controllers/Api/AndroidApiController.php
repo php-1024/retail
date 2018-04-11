@@ -48,7 +48,7 @@ class AndroidApiController extends Controller
             return response()->json(['msg' => '密码不正确', 'status' => '0', 'data' => '']);
         }
         // 查询pos商户号
-        $shengpay = RetailShengpay::getOne([['retail_id',$data['organization_id']]]);
+        $shengpay = RetailShengpay::getOne([['retail_id',$data['organization_id']],['sft_pos_num',$sft_pos_num]]);
         if(!empty($shengpay)){
             return response()->json(['msg' => 'pos商户号不存在', 'status' => '0', 'data' => '']);
         }
