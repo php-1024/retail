@@ -267,7 +267,7 @@ class BillingController extends Controller
         $goods_name = $request->get('goods_name');         //获取供应商名称
         $stock_list = [];
         if ($goods_name != null){
-            $where = [['retail_id',$admin_data['organization_id']],['name','like','%'.$goods_name.'%']];.
+            $where = [['retail_id',$admin_data['organization_id']],['name','like','%'.$goods_name.'%']];
             $goods = RetailGoods::getPaginage($where,'','10','created_at','DESC');
             foreach ($goods as $key=>$val){
                 $stock_list[] = RetailStock::getOne(['goods_id'=>$val->id])->first();
