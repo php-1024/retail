@@ -30,6 +30,7 @@ class SubordinateController extends Controller
         $key = config("app.retail_encrypt_key");//获取加密盐
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+        dump($encryptPwd);
         if ($encryptPwd != $data['password']) {
             return response()->json(['msg' => '密码不正确', 'status' => '0', 'data' => '']);
         }
