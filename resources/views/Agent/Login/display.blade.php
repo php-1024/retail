@@ -74,7 +74,7 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-
+                re_captcha();
             }
         });
     }
