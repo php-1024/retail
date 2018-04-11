@@ -153,7 +153,7 @@ class DisplayController extends Controller
 
         $bd_gcj = $this->bd_decrypt($lng,$lat);
         $file_path =  '';       //初始化文件路径为空
-        $retail_info = [];
+        $retail_info = [];      //初始化店铺信息
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
             if ($file->isValid()) {
                 //检验文件是否有效
@@ -181,7 +181,6 @@ class DisplayController extends Controller
                 'lat' => $bd_gcj['gg_lat'],
             ];
         }
-        dd($retail_info);
         DB::beginTransaction();
         try {
             Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
