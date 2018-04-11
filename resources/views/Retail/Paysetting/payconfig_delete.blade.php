@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/shengpay_delete_check') }}">
+<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/payconfig_delete_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id"  value="{{ $id }}">
     <div class="modal-dialog">
@@ -20,7 +20,7 @@
             </div>
             <div class="modal-footer">
                 <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                <button class="btn btn-success" type="button" id="addBtn" onclick="return postForm();">确定</button>
+                <button class="btn btn-success" type="button" onclick="return postForm();">确定</button>
             </div>
         </div>
     </div>
