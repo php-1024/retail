@@ -48,6 +48,8 @@ class LoginController extends Controller
     public function getCode($captcha)
     {
         $code = Session::get('agent_system_captcha');
+        print_r($captcha);
+        print_r($code);exit;
         if ($code == $captcha) {
             //用户输入验证码正确
             return '1';
@@ -69,7 +71,7 @@ class LoginController extends Controller
         $password = Request::input('password');//接收用户密码
         $captcha = Request::input('captcha');//接收验证码
         $check_captcha = $this->getCode($captcha);
-        if($check_captcha !=1){
+        if($check_captcha ==0){
             ErrorLog::addErrorTimes($ip, 2);
             return response()->json(['data' => '验证码输入错误', 'status' => '-1']);
         }
