@@ -98,9 +98,11 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->ordersn}}</td>
+                                        @if($val->user != null)
                                         <td>{{$val->user->account}}</td>
                                         <td>{{$val->user->UserInfo->nickname}}</td>
                                         <td>{{$val->user->mobile}}</td>
+                                        @endif
 
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td>
