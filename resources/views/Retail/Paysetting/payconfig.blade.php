@@ -32,11 +32,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">盛付通终端机器号添加</h3>
+                            <h3 class="m-b-none">盛付通付款信息添加</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                盛付通终端机器号添加
+                                盛付通付款信息添加
                             </header>
                             <div class="row wrapper">
                                 <div class="well">
