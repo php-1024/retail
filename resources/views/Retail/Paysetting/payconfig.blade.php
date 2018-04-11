@@ -46,7 +46,8 @@
                             </div>
                             <div class="table-responsive">
                                 @if(empty($data->id))
-                                    <form class="form-horizontal" method="post" role="form" id="currentForm" action="{{ url('retail/ajax/payconfig_check') }}">
+                                    <form class="form-horizontal" method="post" role="form" id="currentForm"
+                                          action="{{ url('retail/ajax/payconfig_check') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
 
 
@@ -145,7 +146,8 @@
         </section>
     </section>
 </section>
-</section>
+<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+
 <!-- App -->
 <script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -158,9 +160,8 @@
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/iCheck/js/icheck.min.js"></script>
+<script type="text/javascript"
+        src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});
@@ -205,33 +206,33 @@
     }
 
     //编辑终端号
-    function getEditForm(id){
+    function getEditForm(id) {
         var url = $('#payconfig_edit').val();
         var token = $('#_token').val();
-        if(id==''){
+        if (id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            },function(){
+            }, function () {
                 window.location.reload();
             });
             return;
         }
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id': id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
@@ -239,33 +240,33 @@
     }
 
     //重新申请
-    function getApplyForm(id){
+    function getApplyForm(id) {
         var url = $('#payconfig_apply').val();
         var token = $('#_token').val();
-        if(id==''){
+        if (id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            },function(){
+            }, function () {
                 window.location.reload();
             });
             return;
         }
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id': id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
@@ -273,33 +274,33 @@
     }
 
     //重新申请
-    function getDeleteComfirmForm(id){
+    function getDeleteComfirmForm(id) {
         var url = $('#payconfig_delete').val();
         var token = $('#_token').val();
-        if(id==''){
+        if (id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            },function(){
+            }, function () {
                 window.location.reload();
             });
             return;
         }
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id': id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
