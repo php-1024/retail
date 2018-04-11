@@ -164,12 +164,10 @@ class PaysettingController extends Controller
      */
     public function payconfig_delete(Request $request)
     {
-        // 获取终端号id
+        // id
         $id = $request->id;
-        // 查询信息
-        $data = RetailShengpayTerminal::getOne([['id', $id]]);
 
-        return view('Retail/Paysetting/payconfig_delete', ['data' => $data]);
+        return view('Retail/Paysetting/payconfig_delete', ['id' => $id]);
     }
 
 
