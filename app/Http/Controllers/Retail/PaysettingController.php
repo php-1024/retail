@@ -94,8 +94,8 @@ class PaysettingController extends Controller
         // 获取终端号id
         $id = $request->id;
         // 查询信息
-        $data = RetailShengpay::getPluck([['id', $id]],'id');
-        dd($data);
+        $data = RetailShengpay::getOne([['id', $id]]);
+
         return view('Retail/Paysetting/payconfig_edit', ['data' => $data]);
     }
 
