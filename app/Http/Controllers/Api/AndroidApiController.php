@@ -53,7 +53,7 @@ class AndroidApiController extends Controller
         }
         // 查询pos商户号
         $shengpay = RetailShengpay::getOne([['retail_id', $data['organization_id']], ['sft_pos_num', $sft_pos_num]]);
-        if (!empty($shengpay)) {
+        if (empty($shengpay)) {
             return response()->json(['msg' => 'pos商户号不存在', 'status' => '0', 'data' => '']);
         }
         if ($shengpay->status != '1') {
@@ -61,7 +61,7 @@ class AndroidApiController extends Controller
         }
         // 查询pos机终端号
         $terminal = RetailShengpayTerminal::getOne([['retail_id', $data['organization_id']], 'terminal_num', $terminal_num]);
-        if (!empty($terminal)) {
+        if (empty($terminal)) {
             return response()->json(['msg' => 'pos机终端号不存在', 'status' => '0', 'data' => '']);
         }
         if ($terminal->status != '1') {
