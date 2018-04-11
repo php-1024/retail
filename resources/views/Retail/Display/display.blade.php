@@ -314,12 +314,18 @@
                     </div>
 
                     <div id="baidumap" style="width:550px; height:300px;"></div>
-
+                    <div style="clear:both"></div>
                     <div class="form-group">
-                        <div class="col-sm-10">
-                            <input type="text" name="lng" id="lng" value="{{$organization->OrganizationRetailinfo->lng}}"  class="form-control col-sm-2" />
-                            -
-                            <input type="text" id="lat" name="lat" value="{{$organization->OrganizationRetailinfo->lat}}"  class="form-control col-sm-2" />
+                        <div class="col-sm-9">
+                            <div class="col-sm-4">
+                                <input type="text" name="lng" id="lng" value="{{$organization->OrganizationRetailinfo->lng}}"  class="form-control" />
+                            </div>
+                            <div class="col-sm-1">
+                                -
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="lat" name="lat" value="{{$organization->OrganizationRetailinfo->lat}}"  class="form-control" />
+                            </div>
                         </div>
                     </div>
 
