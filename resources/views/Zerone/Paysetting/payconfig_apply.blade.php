@@ -97,37 +97,33 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{--@foreach($list as $key=>$value)--}}
-                                    {{--<tr>--}}
-                                        {{--<td>{{$value->id}}</td>--}}
-                                        {{--<td>{{$value->organization_name}}</td>--}}
-                                        {{--<td>{{$value->agent_name}}</td>--}}
-                                        {{--<td>{{$value['fansmanageinfo']['fansmanage_owner']}}</td>--}}
-                                        {{--<td>{{$value->account->account}}</td>--}}
-                                        {{--<td>{{$value->account->mobile}}</td>--}}
-                                        {{--<td>--}}
-                                            {{--@if($value->status == 1)--}}
-                                                {{--<label class="label label-primary">正常</label>--}}
-                                            {{--@elseif($value->status == 0)--}}
-                                                {{--<label class="label label-danger">已冻结</label>--}}
-                                            {{--@endif--}}
-                                        {{--</td>--}}
-                                        {{--<td>{{ $value->created_at }}</td>--}}
-                                        {{--<td class="text-right">--}}
-                                            {{--<button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>--}}
-                                            {{--@if($value->status == 1)--}}
-                                                {{--<button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>--}}
-                                            {{--@elseif($value->status == 0)--}}
-                                                {{--<button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>--}}
-                                            {{--@endif--}}
+                                @foreach($list as $key=>$value)
+                                    <tr>
+                                        <td>{{$value->id}}</td>
+                                        <td>{{$value->organization_name}}</td>
+                                        <td>{{$value->sft_pos_num}}</td>
+                                        <td>{{$value->sft_num }}</td>
+                                        <td>
+                                            @if($value->status == 1)
+                                                <label class="label label-primary">已审核</label>
+                                            @elseif($value->status == 0)
+                                                <label class="label label-danger">未审核</label>
+                                            @elseif($value->status == -1)
+                                                <label class="label label-danger">未通过</label>
+                                            @endif
+                                        </td>
+                                        <td>{{ $value->created_at }}</td>
+                                        <td class="text-right">
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            @if($value->status == 1)
+                                                <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            @elseif($value->status == 0)
+                                                <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            @endif
+                                        </td>
 
-                                            {{--<button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>--}}
-                                            {{--<button type="button" id="programBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_program')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-warning"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;程序管理</button>--}}
-                                            {{--<button type="button" id="fansmanageBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_store')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-danger"><i class="fa fa-arrow-circle-o-left"></i>&nbsp;&nbsp;店铺管理</button>--}}
-                                        {{--</td>--}}
-
-                                    {{--</tr>--}}
-                                {{--@endforeach--}}
+                                    </tr>
+                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
