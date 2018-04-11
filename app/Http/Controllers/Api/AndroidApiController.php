@@ -96,12 +96,12 @@ class AndroidApiController extends Controller
         $organization_id = $request->organization_id;//店铺id
         $keyword = $request->keyword;//关键字
         $scan_code = $request->scan_code;//条码
-        $where = [['retail_id', $organization_id]];
+        $where[] = ['retail_id', $organization_id];
         if ($keyword) {
-            $where = [['name', 'LIKE', '%' . $keyword . '%']];
+            $where[] = ['name', 'LIKE', '%' . $keyword . '%'];
         }
         if ($scan_code) {
-            $where = [['barcode', $scan_code]];
+            $where[] = ['barcode', $scan_code];
         }
         $goodslist = RetailGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
         if (empty($goodslist->toArray())) {

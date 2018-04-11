@@ -25,19 +25,19 @@ class LoginController extends Controller
         return view('Agent/Login/display');
     }
 
-    /*
+    /**
      * 生成验证码,直接生产引用
      */
-    public function captcha()
+    public function captcha($tmp)
     {
         //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder;
         //可以设置图片宽高及字体
-        $builder->build($width = 150, $height = 35, $font = null);
+        $builder->build($width = 250, $height = 70, $font = null);
         //获取验证码的内容
         $phrase = $builder->getPhrase();
         //把内容存入session
-        Session::flash('agent_system_captcha', $phrase);
+        Session::flash('milkcaptcha', $phrase);
         //生成图片
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
@@ -45,12 +45,10 @@ class LoginController extends Controller
     }
 
     //验证注册码的正确与否
-    public function getCode($captcha)
+    public function getCode($capt)
     {
-        $code = Session::get('agent_system_captcha');
-        print_r($captcha);
-        print_r($code);exit;
-        if ($code == $captcha) {
+        $code = Session::get('milkcaptcha');
+        if ($code == $capt) {
             //用户输入验证码正确
             return '1';
         } else {

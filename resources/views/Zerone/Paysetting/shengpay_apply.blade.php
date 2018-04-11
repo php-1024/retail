@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">店铺名称</label>
-                                {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
+                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入店铺名称" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -95,11 +95,7 @@
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            @if($value->status == 1)
-                                                <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            @elseif($value->status == 0)
-                                                <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
-                                            @endif
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         </td>
 
                                     </tr>
@@ -109,7 +105,7 @@
                                 <tr>
                                     <td colspan="9" class="footable-visible">
                                         <ul class="pagination pull-right">
-                                            {{--{{$list->appends($search_data)->links()}}--}}
+                                            {{$list->appends($search_data)->links()}}
                                         </ul>
                                     </td>
                                 </tr>

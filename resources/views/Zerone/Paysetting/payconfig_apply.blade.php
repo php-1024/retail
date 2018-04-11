@@ -51,24 +51,6 @@
                                 {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
                             </div>
                         </div>
-                        {{--<div class="col-sm-3">--}}
-                        {{--<div class="form-group">--}}
-                        {{--<label class="control-label" for="amount">手机号码</label>--}}
-                        {{--<input type="text" id="amount" name="amount" value="" placeholder="手机号码" class="form-control">--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-sm-3">--}}
-                        {{--<div class="form-group">--}}
-                        {{--<label class="control-label" for="amount">所在战区</label>--}}
-                        {{--<select class="form-control m-b" name="account">--}}
-                        {{--<option>东部战区</option>--}}
-                        {{--<option>西部战区</option>--}}
-                        {{--<option>南部战区</option>--}}
-                        {{--<option>北部战区</option>--}}
-                        {{--<option>中部战区</option>--}}
-                        {{--</select>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
@@ -121,11 +103,7 @@
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            @if($value->status == 1)
-                                                <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
-                                            @elseif($value->status == 0)
-                                                <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
-                                            @endif
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                         </td>
 
                                     </tr>
