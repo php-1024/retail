@@ -28,9 +28,9 @@
         <div class="login-wrap">
             <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
             <input type="password" class="form-control" placeholder="登录密码" name="password">
-            <input type="text" name="captcha" class="form-control" placeholder="验证码" >
-            <input type="hidden" id="captcha_url" value="{{ URL('agent/login/captcha') }}">
-            <img src="{{ URL('agent/login/captcha') }}/{{ time() }}" id="login_captcha" onClick="return changeCaptcha();">
+            <input type="text" name="captcha" class="form-control" name="captcha" placeholder="验证码" >
+            <input type="hidden" id="captcha_url"  value="{{ URL('agent/login/captcha') }}">
+            <img src="{{ URL('agent/login/captcha/1') }}" id="login_captcha"  onclick="re_captcha()" alt="验证码" title="刷新图片" width="160" height="45" border="0">
 
             <button class="btn btn-lg btn-login btn-block" type="button" onClick="postForm();">登录</button>
         </div>
@@ -51,11 +51,11 @@
             }
         });
     });
-    //更换验证码
-    function changeCaptcha(){
-        var url = $("#captcha_url").val();
-        url = url + "/" + Math.random();
-        $("#login_captcha").attr("src",url);
+    //刷新验证码
+    function re_captcha() {
+        $url = "{{url('agent/login/captcha')}}";
+        $url = $url + "/" + Math.random();
+        document.getElementById('login_captcha').src = $url;
     }
 
     //提交表单
@@ -64,10 +64,6 @@
         var url = target.attr("action");
         var data = target.serialize();
         $.post(url,data,function(json){
-
-
-
-            console.log(json);return false;
             if(json.status==1){
                 window.location.reload();
             }else{
@@ -78,7 +74,7 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-                changeCaptcha();
+                re_captcha();
             }
         });
     }

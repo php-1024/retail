@@ -153,6 +153,7 @@ class DisplayController extends Controller
 
         $bd_gcj = $this->bd_decrypt($lng,$lat);
         $file_path =  '';       //初始化文件路径为空
+        $retail_info = [];      //初始化店铺信息
         if ($request->hasFile('retail_logo')){                          //检测是否有文件上传，有就处理文件
             if ($file->isValid()) {
                 //检验文件是否有效
@@ -160,20 +161,26 @@ class DisplayController extends Controller
                 $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
                 $file->move(base_path() . '/uploads/retail/', $new_name);          //上传文件操作
                 $file_path =  'uploads/retail/'.$new_name;
-            } else {
-                $file_path =  '';
+                //要存储的数据
+                $retail_info = [
+                    'retail_logo' => $file_path,
+                    'retail_owner' => $retail_owner,
+                    'retail_owner_mobile' => $retail_owner_mobile,
+                    'retail_address' => $retail_address,
+                    'lng' => $bd_gcj['gg_lon'],
+                    'lat' => $bd_gcj['gg_lat'],
+                ];
             }
+        }else {
+            //要存储的数据
+            $retail_info = [
+                'retail_owner' => $retail_owner,
+                'retail_owner_mobile' => $retail_owner_mobile,
+                'retail_address' => $retail_address,
+                'lng' => $bd_gcj['gg_lon'],
+                'lat' => $bd_gcj['gg_lat'],
+            ];
         }
-
-        $retail_info = [
-            'retail_logo' => $file_path,
-            'retail_owner' => $retail_owner,
-            'retail_owner_mobile' => $retail_owner_mobile,
-            'retail_address' => $retail_address,
-            'lng' => $bd_gcj['gg_lon'],
-            'lat' => $bd_gcj['gg_lat'],
-        ];
-
         DB::beginTransaction();
         try {
             Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
