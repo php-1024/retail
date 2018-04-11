@@ -28,6 +28,11 @@ class RetailOrder extends Model
         return $this->hasMany('App\Models\RetailOrderGoods', 'order_id', 'id');
     }
 
+    //和account表一对一的关系
+    public function account(){
+        return $this->hasOne('App\Models\Account', 'id','operator_id');
+    }
+
     //和个人信息表一对一的关系
     public function account_info(){
         return $this->hasOne('App\Models\AccountInfo', 'account_id','operator_id');
