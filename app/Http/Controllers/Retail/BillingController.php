@@ -269,13 +269,12 @@ class BillingController extends Controller
             $where = [['retail_id',$admin_data['organization_id']],['name','like','%'.$goods_name.'%']];
         }else{
             $where = [['retail_id',$admin_data['organization_id']]];
-            $stock_list = RetailStock::getPaginage($where,'10','created_at','ASC'); //查询商品信息
+            $stock_list = RetailStock::getPaginage($where,'1','created_at','ASC'); //查询商品信息
         }
         $goods = RetailGoods::getList($where,0,'created_at','DESC');
         foreach ($goods as $key=>$val){
             $stock_list[] = RetailStock::getOne(['goods_id'=>$val->id])->first();
         }
-        dump($stock_list);
         return  view('Retail/Billing/stock_list',['stock_list'=>$stock_list,'goods_name'=>$goods_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
