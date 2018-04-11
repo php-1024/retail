@@ -305,14 +305,28 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" id='address' value="{{$organization->OrganizationRetailinfo->retail_address}}" name="retail_address" placeholder="店铺地址" class="form-control"><button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
+                        <div class="col-sm-8">
+                            <input type="text" id='address' value="{{$organization->OrganizationRetailinfo->retail_address}}" name="retail_address" placeholder="店铺地址" class="form-control">
                         </div>
-                        <div id="baidumap" style="width:550px; height:300px;"></div>
+                        <div class="col-sm-2">
+                            <button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
+                        </div>
                     </div>
-
+                    <div id="baidumap" style="width:550px; height:300px;"></div>
+                    <div style="clear:both"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
-                        <input type="text" name="lng" id="lng" value="{{$organization->OrganizationRetailinfo->lng}}"  class="span3" /> - <input type="text" id="lat" name="lat" value="{{$organization->OrganizationRetailinfo->lat}}"  class="span3" />
+                        <div class="col-sm-9">
+                            <div class="col-sm-4">
+                                <input type="text" name="lng" id="lng" value="{{$organization->OrganizationRetailinfo->lng}}"  class="form-control" />
+                            </div>
+                            <div class="col-sm-1">
+                                -
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" id="lat" name="lat" value="{{$organization->OrganizationRetailinfo->lat}}"  class="form-control" />
+                            </div>
+                        </div>
                     </div>
 
 
