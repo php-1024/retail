@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
+use App\Models\RetailShengpay;
 use App\Models\RetailShengpayTerminal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,8 +30,103 @@ class PaysettingController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-        return view('Retail/Paysetting/payconfig', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        // 店铺id
+        $retail_id = $admin_data['organization_id'];
+        // 查询店铺付款信息设置
+        $data = RetailShengpay::getOne([['retail_id', $retail_id]]);
+
+        return view('Retail/Paysetting/payconfig', ['data' => $data, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
+
+    /**
+     * 收款信息设置功能提交
+     */
+    public function payconfig_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 店铺id
+        $retail_id = $admin_data['organization_id'];
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // pos商户号
+        $sft_pos_num = $request->sft_pos_num;
+        // 盛付通商户号
+        $sft_num = $request->sft_num;
+
+        DB::beginTransaction();
+        try {
+            // 数据处理
+            $data = [
+                // 店铺id
+                'retail_id' => $retail_id,
+                // pos商户号
+                'sft_pos_num' => $sft_pos_num,
+                // 盛付通商户号
+                'sft_num' => $sft_num,
+                'type' => '0',
+                'status' => '0',
+            ];
+
+            // 添加付款信息
+            RetailShengpay::addShengpay($data);
+            // 如果不是超级管理员
+            if ($admin_data['is_super'] != 1) {
+                // 保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了付款信息设置');
+            }
+            // 事件提交
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '添加失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加成功！', 'status' => '1']);
+    }
+
+
+    /**
+     * 编辑收款信息ajax显示
+     */
+    public function payconfig_edit(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpay::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/payconfig_edit', ['data' => $data]);
+    }
+
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function payconfig_apply(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/payconfig_apply', ['data' => $data]);
+    }
+
+    /**
+     * 编辑终端机器号ajax显示
+     */
+    public function payconfig_delete(Request $request)
+    {
+        // 获取终端号id
+        $id = $request->id;
+        // 查询信息
+        $data = RetailShengpayTerminal::getOne([['id', $id]]);
+
+        return view('Retail/Paysetting/payconfig_delete', ['data' => $data]);
+    }
+
+
     /**
      * 添加终端机器号信息
      */
@@ -262,8 +358,6 @@ class PaysettingController extends Controller
         }
         return response()->json(['data' => '操作成功！', 'status' => '1']);
     }
-
-
 
 
     public function kuaifu_setting(Request $request)
