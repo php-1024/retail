@@ -28,6 +28,11 @@ class RetailOrder extends Model
         return $this->hasMany('App\Models\RetailOrderGoods', 'order_id', 'id');
     }
 
+    //和个人信息表一对一的关系
+    public function account_info(){
+        return $this->hasOne('App\Models\AccountInfo', 'id','operator_id');
+    }
+
     public static function getOne($where)
     {
         $model = self::with('User')->with('RetailOrderGoods');
@@ -84,7 +89,7 @@ class RetailOrder extends Model
     //获取分页列表
     public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
     {
-        $model = self::with('User');
+        $model = self::with('User')->with('account_info');
         return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
 
     }
