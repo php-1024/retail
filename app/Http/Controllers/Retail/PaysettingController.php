@@ -156,6 +156,36 @@ class PaysettingController extends Controller
 
         return view('Retail/Paysetting/payconfig_apply', ['id' => $id]);
     }
+    /**
+     * 终端机器号重新申请功能提交
+     */
+    public function payconfig_apply_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 付款信息id
+        $id = $request->id;
+        DB::beginTransaction();
+        try {
+            // 修改付款信息
+            RetailShengpay::editShengpay([['id', $id]], ['status' => '0']);
+            // 如果不是超级管理员
+            if ($admin_data['is_super'] != 1) {
+                // 保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '重新提交付款信息');
+            }
+            // 事件提交
+            DB::commit();
+        } catch (\Exception $e) {
+            dd($e);
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败！', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功！', 'status' => '1']);
+    }
 
     /**
      * 解除绑定付款信息ajax显示
