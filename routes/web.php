@@ -251,6 +251,13 @@ Route::group(['prefix' => 'zerone'], function () {
         Route::get('fansmanage_store', 'Zerone\FansmanageController@fansmanage_store')->middleware('ZeroneCheck');            //商户划拨管理
     });
 
+    //支付审核
+    Route::group(['prefix' => 'paysetting'], function () {
+        Route::get('payconfig_apply', 'Zerone\PaysettingController@payconfig_apply')->middleware('ZeroneCheck');        //收款信息审核
+        Route::get('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheck');          //pos终端号审核
+    });
+
+
     //异步提交数据组
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('login_check', 'Zerone\LoginController@login_check')->middleware('ZeroneCheckAjax');//提交登录数据
@@ -725,6 +732,7 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('payconfig_edit', 'Retail\PaysettingController@payconfig_edit')->middleware('RetailCheckAjax');           //收款信息编辑ajax
         Route::post('payconfig_edit_check', 'Retail\PaysettingController@payconfig_edit_check')->middleware('RetailCheckAjax');//收款信息功能提交
         Route::post('payconfig_apply', 'Retail\PaysettingController@payconfig_apply')->middleware('RetailCheckAjax');         //收款信息功能重新申请
+        Route::post('payconfig_apply_check', 'Retail\PaysettingController@payconfig_apply_check')->middleware('RetailCheckAjax');//收款信息功能重新申请功能提交
         Route::post('payconfig_delete', 'Retail\PaysettingController@payconfig_delete')->middleware('RetailCheckAjax');       //收款信息功能解除绑定ajax显示
         Route::post('payconfig_delete_check', 'Retail\PaysettingController@payconfig_delete_check')->middleware('RetailCheckAjax');//收款信息功能解除绑定功能提交
         Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号功能提交

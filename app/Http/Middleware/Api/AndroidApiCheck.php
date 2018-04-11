@@ -434,7 +434,6 @@ class AndroidApiCheck
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//app传过来的时间戳
-
         $data = Account::where([['id', $account_id]])->first();//查询用户信息
         if (empty($data)) {
             return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
@@ -447,6 +446,7 @@ class AndroidApiCheck
         }
 
         $store_token = base64_encode($store_token . $data['uuid']) . 'lingyi2018';//第一次加密
+        echo $store_token;exit;
         $store_token = md5($store_token);//第二次加密
         if ($store_token != $token) {
             return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));

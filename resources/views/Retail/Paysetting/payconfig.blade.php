@@ -32,11 +32,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">盛付通终端机器号添加</h3>
+                            <h3 class="m-b-none">盛付通付款信息添加</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                盛付通终端机器号添加
+                                盛付通付款信息添加
                             </header>
                             <div class="row wrapper">
                                 <div class="well">
@@ -46,10 +46,8 @@
                             </div>
                             <div class="table-responsive">
                                 @if(empty($data->id))
-                                    <form class="form-horizontal" method="post" role="form" id="currentForm"
-                                          action="{{ url('retail/ajax/payconfig_check') }}">
-                                        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-
+                                    <form class="form-horizontal" method="post" role="form" id="currentForm" action="{{ url('retail/ajax/payconfig_check') }}">
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}">
 
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="input-id-1">pos商户号</label>
@@ -92,7 +90,7 @@
                             </div>
                             @else
                                 <table class="table table-striped b-t b-light">
-                                    <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+                                    <input type="hidden" id="_token" value="{{csrf_token()}}">
                                     <input type="hidden" id="payconfig_edit" value="{{ url('retail/ajax/payconfig_edit') }}">
                                     <input type="hidden" id="payconfig_apply" value="{{ url('retail/ajax/payconfig_apply') }}">
                                     <input type="hidden" id="payconfig_delete" value="{{ url('retail/ajax/payconfig_delete') }}">

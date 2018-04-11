@@ -91,6 +91,7 @@ class RetailCheckAjax
             case "retail/ajax/shengpay_apply_check":            // 终端机器号重新申请功能提交
             case "retail/ajax/shengpay_delete_check":            // 终端机器号解除绑定功能提交
             case "retail/ajax/payconfig_delete_check":           // 付款信息解除绑定功能提交
+            case "retail/ajax/payconfig_apply_check":            // 付款信息重新申请功能提交
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
