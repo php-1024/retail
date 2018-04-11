@@ -18,6 +18,7 @@ class AndroidApiCheck
         switch ($route_name) {
             /*****登录*****/
             case "api/androidapi/login"://检测登入提交数据
+            case "retail/subordinate/login_test"://检测登入提交数据
                 $re = $this->checkLogin($request);
                 return self::format_response($re, $next);
                 break;
