@@ -94,7 +94,7 @@ class RetailOrder extends Model
     //获取分页列表
     public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
     {
-        $model = self::with('User')->with('account_info');
+        $model = self::with('User')->with('account')->with('account_info');
         return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
 
     }
