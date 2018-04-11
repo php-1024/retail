@@ -81,7 +81,7 @@ class AndroidApiController extends Controller
     public function goodscategory(Request $request)
     {
         $organization_id = $request->organization_id;//店铺id
-        $categorylist = RetailCategory::getList([['fansmanage_id', $organization_id]], '0', 'displayorder', 'asc', ['id', 'name', 'displayorder']);
+        $categorylist = RetailCategory::getList([['retail_id', $organization_id]], '0', 'displayorder', 'asc', ['id', 'name', 'displayorder']);
         if (empty($categorylist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
@@ -111,7 +111,7 @@ class AndroidApiController extends Controller
             $goodslist[$key]['category_name'] = RetailCategory::getPluck([['id', $value['category_id']]], 'name')->first();
             $goodslist[$key]['thumb'] = RetailGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
         }
-        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
+        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
         return response()->json($data);
     }
 
