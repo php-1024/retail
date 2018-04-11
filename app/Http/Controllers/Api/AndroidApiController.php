@@ -111,7 +111,7 @@ class AndroidApiController extends Controller
             $goodslist[$key]['category_name'] = RetailCategory::getPluck([['id', $value['category_id']]], 'name')->first();
             $goodslist[$key]['thumb'] = RetailGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
         }
-        $data = ['status' => '1', 'msg' => '获取分类成功', 'data' => ['goodslist' => $goodslist]];
+        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
         return response()->json($data);
     }
 
