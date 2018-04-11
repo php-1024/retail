@@ -101,7 +101,7 @@
                                 @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td>{{$value->organization_name}}</td>
+                                        <td>{{$value->organization->organization_name}}</td>
                                         <td>{{$value->sft_pos_num}}</td>
                                         <td>{{$value->sft_num }}</td>
                                         <td>
