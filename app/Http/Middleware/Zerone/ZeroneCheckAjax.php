@@ -174,7 +174,10 @@ class ZeroneCheckAjax
             case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
             case "zerone/ajax/fansmanage_store_add"://商户店铺划入检测弹出登入和权限
             case "zerone/ajax/fansmanage_store_draw"://商户店铺划出检测弹出登入和权限
-                $re = $this->checkLoginAndRule($request);
+
+            //支付审核
+            case "zerone/ajax/shengpay_apply"://商户店铺划出检测弹出登入和权限
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 
