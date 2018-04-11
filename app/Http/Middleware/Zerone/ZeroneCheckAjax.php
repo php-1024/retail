@@ -140,6 +140,18 @@ class ZeroneCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+
+
+
+
+            case "zerone/ajax/shengpay_apply_check"://检测 登录 和 权限 和 安全密码 店铺划出归属
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re,$next);
+                break;
+
+
+
+
             //系统管理
             case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
             case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
@@ -174,7 +186,10 @@ class ZeroneCheckAjax
             case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
             case "zerone/ajax/fansmanage_store_add"://商户店铺划入检测弹出登入和权限
             case "zerone/ajax/fansmanage_store_draw"://商户店铺划出检测弹出登入和权限
-                $re = $this->checkLoginAndRule($request);
+
+            //支付审核
+            case "zerone/ajax/shengpay_apply"://商户店铺划出检测弹出登入和权限
+            $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
 

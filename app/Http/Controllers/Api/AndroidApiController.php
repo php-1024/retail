@@ -227,18 +227,22 @@ class AndroidApiController extends Controller
      */
     public function order_list(Request $request)
     {
-        $organization_id = $request->organization_id;//店铺
-        $status = $request->status;//订单状态
+        // 店铺
+        $organization_id = $request->organization_id;
+        // 订单状态
+        $status = $request->status;
         $where = [['retail_id', $organization_id]];
         if ($status) {
             $where = [['status', $status]];
         }
         $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at'])->toArray();
         if ($orderlist) {
-            $total_num = count($orderlist);//订单数量
+            // 订单数量
+            $total_num = count($orderlist);
             $total_amount = 0;
             foreach ($orderlist as $key => $value) {
-                $total_amount += $value['order_price'];//订单总价格
+                // 订单总价格
+                $total_amount += $value['order_price'];
             }
         } else {
             return response()->json(['status' => '0', 'msg' => '没有订单', 'data' => '']);
