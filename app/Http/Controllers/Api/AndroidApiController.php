@@ -60,7 +60,7 @@ class AndroidApiController extends Controller
             return response()->json(['msg' => 'pos商户号没通过审核', 'status' => '0', 'data' => '']);
         }
         // 查询pos机终端号
-        $terminal = RetailShengpayTerminal::getOne([['retail_id', $data['organization_id']], 'terminal_num', $terminal_num]);
+        $terminal = RetailShengpayTerminal::getOne([['retail_id', $data['organization_id']], ['terminal_num', $terminal_num]]);
         if (empty($terminal)) {
             return response()->json(['msg' => 'pos机终端号不存在', 'status' => '0', 'data' => '']);
         }
