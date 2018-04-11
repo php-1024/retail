@@ -181,6 +181,7 @@ class DisplayController extends Controller
                 ];
             }
         }
+        dd($retail_info);
         DB::beginTransaction();
         try {
             Organization::editOrganization([['id',$organization_id]],['organization_name'=>$organization_name]);
