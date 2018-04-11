@@ -114,7 +114,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <select style="width:100px" class="chosen-select2" onchange="changeUserTag(this,'{{$value->id}}')">
+                                            <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
                                                 <option value="0">无标签</option>
                                             </select>
                                         </td>
