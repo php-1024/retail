@@ -434,7 +434,6 @@ class AndroidApiCheck
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//app传过来的时间戳
-        echo $token;exit;
         $data = Account::where([['id', $account_id]])->first();//查询用户信息
         if (empty($data)) {
             return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
