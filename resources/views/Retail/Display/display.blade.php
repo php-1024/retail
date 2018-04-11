@@ -316,7 +316,9 @@
                     <div id="baidumap" style="width:550px; height:300px;"></div>
 
                     <div class="form-group">
-                        <input type="text" name="lng" id="lng" value="{{$organization->OrganizationRetailinfo->lng}}"  class="span3" /> - <input type="text" id="lat" name="lat" value="{{$organization->OrganizationRetailinfo->lat}}"  class="span3" />
+                        <input type="text" name="lng" id="lng" value="{{$organization->OrganizationRetailinfo->lng}}"  class="col-sm-2" />
+                        -
+                        <input type="text" id="lat" name="lat" value="{{$organization->OrganizationRetailinfo->lat}}"  class="col-sm-2" />
                     </div>
 
 
