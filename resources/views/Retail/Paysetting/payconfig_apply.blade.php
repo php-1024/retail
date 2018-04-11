@@ -15,7 +15,6 @@
                             <input type="password" class="form-control" value=""  name="safe_password">
                         </div>
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
