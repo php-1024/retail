@@ -314,7 +314,7 @@
                     </div>
 
                     <div id="baidumap" style="width:550px; height:300px;"></div>
-
+                    <div style="clear:both"></div>
                     <div class="form-group">
                         <div class="col-sm-9">
                             <div class="col-sm-4">
