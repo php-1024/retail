@@ -644,7 +644,6 @@ Route::group(['prefix' => 'retail'], function () {
 
     //下属管理--添加组
     Route::group(['prefix' => 'subordinate'], function () {
-        Route::any('login_test', 'Retail\SubordinateController@login_test')->middleware('AndroidApiCheck');    //下级人员登录测试
         Route::get('subordinate_add', 'Retail\SubordinateController@subordinate_add')->middleware('RetailCheck');    //添加下级人员
         Route::get('subordinate_list', 'Retail\SubordinateController@subordinate_list')->middleware('RetailCheck');  //下级人员列表
     });
