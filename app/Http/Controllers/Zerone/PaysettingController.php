@@ -43,10 +43,15 @@ class PaysettingController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
+
+        $organization_name = $request->organization_name;
+
+        $search_data = ['organization_name' => $organization_name];
+
         // 查询收款信息列表
         $list = RetailShengpayTerminal::getPaginage([], 15, 'id');
 
-        return view('Zerone/Paysetting/shengpay_apply', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Zerone/Paysetting/shengpay_apply', ['search_data' => $search_data,'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
 }

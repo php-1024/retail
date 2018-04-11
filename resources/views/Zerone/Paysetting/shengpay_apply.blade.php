@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">店铺名称</label>
-                                {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
+                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -105,7 +105,7 @@
                                 <tr>
                                     <td colspan="9" class="footable-visible">
                                         <ul class="pagination pull-right">
-                                            {{--{{$list->appends($search_data)->links()}}--}}
+                                            {{$list->appends($search_data)->links()}}
                                         </ul>
                                     </td>
                                 </tr>
