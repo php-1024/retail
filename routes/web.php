@@ -722,7 +722,8 @@ Route::group(['prefix' => 'retail'], function () {
 
         //支付设置
         Route::post('payconfig_check', 'Retail\PaysettingController@payconfig_check')->middleware('RetailCheckAjax');         //收款信息功能提交
-        Route::post('payconfig_edit', 'Retail\PaysettingController@payconfig_edit')->middleware('RetailCheckAjax');           //收款信息功能编辑ajax
+        Route::post('payconfig_edit', 'Retail\PaysettingController@payconfig_edit')->middleware('RetailCheckAjax');           //收款信息编辑ajax
+        Route::post('payconfig_edit_check', 'Retail\PaysettingController@payconfig_edit_check')->middleware('RetailCheckAjax');//收款信息功能提交
         Route::post('payconfig_apply', 'Retail\PaysettingController@payconfig_apply')->middleware('RetailCheckAjax');         //收款信息功能重新申请
         Route::post('payconfig_delete', 'Retail\PaysettingController@payconfig_delete')->middleware('RetailCheckAjax');       //收款信息功能解除绑定
         Route::post('shengpay_add_check', 'Retail\PaysettingController@shengpay_add_check')->middleware('RetailCheckAjax');   //添加终端机器号功能提交
