@@ -25,13 +25,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>商户列表</h2>
+                <h2>收款信息列表</h2>
                 <ol class="breadcrumb">
                     <li class="active">
-                        <a href="JavaScript:;">商户管理</a>
+                        <a href="JavaScript:;">收款信息列表</a>
                     </li>
                     <li >
-                        <strong>商户列表</strong>
+                        <strong>收款信息列表</strong>
                     </li>
                 </ol>
             </div>
@@ -47,7 +47,7 @@
 
                         <div class="col-sm-3">
                             <div class="form-group">
-                                <label class="control-label" for="amount">商户名称</label>
+                                <label class="control-label" for="amount">店铺名称</label>
                                 {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
                             </div>
                         </div>
