@@ -59,8 +59,11 @@ class PaysettingController extends Controller
      */
     public function shengpay_apply(Request $request)
     {
+        $id = $request->id;
 
-        return view('Zerone/Paysetting/shengpay_apply');
+        $status = $request->status;
+
+        return view('Zerone/Paysetting/shengpay_apply',['id'=>$id,'status'=>$status]);
     }
 
 }
