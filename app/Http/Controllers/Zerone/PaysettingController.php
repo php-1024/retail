@@ -23,7 +23,7 @@ class PaysettingController extends Controller
         // 获取当前的页面路由
         $route_name = $request->path();
 
-        return view('Zerone/Agent/payconfig_apply', [ 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Zerone/Paysetting/payconfig_apply', [ 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
 
