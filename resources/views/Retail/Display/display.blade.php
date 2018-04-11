@@ -305,8 +305,11 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺地址</label>
-                        <div class="col-sm-10">
-                            <input type="text" id='address' value="{{$organization->OrganizationRetailinfo->retail_address}}" name="retail_address" placeholder="店铺地址" class="form-control"><button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
+                        <div class="col-sm-8">
+                            <input type="text" id='address' value="{{$organization->OrganizationRetailinfo->retail_address}}" name="retail_address" placeholder="店铺地址" class="form-control">
+                        </div>
+                        <div class="col-sm-8">
+                            <button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
                         </div>
                         <div id="baidumap" style="width:550px; height:300px;"></div>
                     </div>
