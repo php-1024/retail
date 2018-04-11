@@ -111,7 +111,6 @@
                                         <td>{{ $data->id }}</td>
                                         <td>{{ $data->sft_pos_num }}</td>
                                         <td>{{ $data->sft_num }}</td>
-
                                         <td>
                                             @if($data->status == '0')
                                                 <label class="label label-warning">待审核</label>
@@ -127,7 +126,6 @@
                                                 <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $data->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
                                                 </button>
                                             @endif
-
                                             @if($data->status == '-1')
                                                 <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getApplyForm('{{ $data->id }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;重新申请
                                                 </button>
