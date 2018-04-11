@@ -51,24 +51,6 @@
                                 {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
                             </div>
                         </div>
-                        {{--<div class="col-sm-3">--}}
-                        {{--<div class="form-group">--}}
-                        {{--<label class="control-label" for="amount">手机号码</label>--}}
-                        {{--<input type="text" id="amount" name="amount" value="" placeholder="手机号码" class="form-control">--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-sm-3">--}}
-                        {{--<div class="form-group">--}}
-                        {{--<label class="control-label" for="amount">所在战区</label>--}}
-                        {{--<select class="form-control m-b" name="account">--}}
-                        {{--<option>东部战区</option>--}}
-                        {{--<option>西部战区</option>--}}
-                        {{--<option>南部战区</option>--}}
-                        {{--<option>北部战区</option>--}}
-                        {{--<option>中部战区</option>--}}
-                        {{--</select>--}}
-                        {{--</div>--}}
-                        {{--</div>--}}
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount"> &nbsp;</label>
@@ -89,10 +71,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>店铺名称</th>
-                                    <th>pos商户号</th>
-                                    <th>盛付通商户号</th>
+                                    <th>终端号</th>
                                     <th>状态</th>
-                                    <th>到账状态</th>
                                     <th class="col-sm-1">注册时间</th>
                                     <th class="col-sm-4 text-right" >操作</th>
                                 </tr>
@@ -102,8 +82,7 @@
                                     <tr>
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization->organization_name}}</td>
-                                        <td>{{$value->sft_pos_num}}</td>
-                                        <td>{{$value->sft_num }}</td>
+                                        <td>{{$value->terminal_num}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">已审核</label>
@@ -112,11 +91,6 @@
                                             @elseif($value->status == -1)
                                                 <label class="label label-danger">未通过</label>
                                             @endif
-                                        </td>
-                                        <td>
-                                            <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
-                                                <option value="0">无标签</option>
-                                            </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
