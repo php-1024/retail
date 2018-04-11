@@ -777,6 +777,7 @@ Route::group(['prefix' => 'pay'], function () {
     //微信通用路由组
     Route::group(['prefix' => 'sft'], function () {
         Route::any('test', 'Pay\SftController@test');//测试函数
+        Route::any('test2', 'Pay\SftController@test2');//测试函数
     });
 });
 /***************************对接支付接口路由*********************************/
