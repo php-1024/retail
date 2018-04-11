@@ -58,7 +58,7 @@ class RetailPurchaseOrder extends Model{
 
     public static function getOne($where)
     {
-        $model = self::with('RetailSupplier')->with('RetailPurchaseOrderGoods');
+        $model = self::with('account_info')->with('RetailSupplier')->with('RetailPurchaseOrderGoods');
         return $model->where($where)->get();
     }
 
