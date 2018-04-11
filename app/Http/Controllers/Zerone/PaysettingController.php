@@ -54,6 +54,15 @@ class PaysettingController extends Controller
         return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data,'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
+    /**
+     * 收款信息审核
+     */
+    public function shengpay_apply(Request $request)
+    {
+
+        return view('Zerone/Paysetting/shengpay_apply');
+    }
+
 }
 
 ?>
