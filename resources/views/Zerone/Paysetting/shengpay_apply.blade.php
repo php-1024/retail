@@ -5,7 +5,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
-                <h3>编辑服务商</h3>
+                <h3>@if($status == 1)通过审核@else拒绝通过@endif</h3>
             </div>
             <div class="modal-body">
                 <div class="form-group">
