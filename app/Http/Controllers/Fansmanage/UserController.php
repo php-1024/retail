@@ -442,7 +442,7 @@ class UserController extends CommonController
     }
 
     /**
-     * 粉丝用户管理编辑功能提交
+     * 粉丝用户管理编辑功能提交,修改手机号码和QQ 号码
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
@@ -466,9 +466,9 @@ class UserController extends CommonController
         // 事务处理
         DB::beginTransaction();
         try {
-            // 修改粉丝的手机号码
+            // 修改粉丝的 手机号码
             FansmanageUser::editStoreUser(['user_id' => $user_id], ['mobile' => $mobile]);
-            // 修改粉丝的 qq 号码
+            // 修改粉丝的 QQ号码
             UserInfo::editUserInfo(['user_id' => $user_id], ['qq' => $qq]);
             // 保存操作记录
             if ($this->admin_data['is_super'] != 2) {
