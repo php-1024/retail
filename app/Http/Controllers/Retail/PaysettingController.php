@@ -87,15 +87,15 @@ class PaysettingController extends Controller
 
 
     /**
-     * 编辑终端机器号ajax显示
+     * 编辑收款信息ajax显示
      */
     public function payconfig_edit(Request $request)
     {
         // 获取终端号id
         $id = $request->id;
         // 查询信息
-        $data = RetailShengpayTerminal::getOne([['id', $id]]);
-
+        $data = RetailShengpay::getPluck([['id', $id]],'id');
+        dd($data);
         return view('Retail/Paysetting/payconfig_edit', ['data' => $data]);
     }
 
