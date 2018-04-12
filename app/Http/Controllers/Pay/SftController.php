@@ -179,7 +179,7 @@ class SftController extends Controller
     public function test5()
     {
         // 退款查询
-        $api_url = "http://mgw.shengpay.com/ web-acquire-channel/pay/refundQuery.htm";
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refundQuery.htm";
         $param_body["merchantNo"] = '11548088';
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
@@ -188,7 +188,7 @@ class SftController extends Controller
         $param_body["refundOrderNo"] = "TK20180408_5_1000419";
         $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
         $param_body["refundTransNo"] = "20180412161624998";
-        $param_body["sftOrderNo"] = null;
+        $param_body["sftOrderNo"] = "";
         $param_body["exts"] = null;
 
 
