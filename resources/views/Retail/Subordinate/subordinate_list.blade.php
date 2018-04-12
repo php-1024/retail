@@ -32,11 +32,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">下属列表</h3>
+                            <h3 class="m-b-none">操作员列表</h3>
                         </div>
                         <section class="panel panel-default">
                             <header class="panel-heading">
-                                下属列表
+                                操作员列表
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
