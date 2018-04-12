@@ -97,7 +97,7 @@
                                             @if($val->status == 1)
                                                 <label class="label label-success" onclick="getlockForm('{{$val->id}}','{{$val->status}}')">销售中</label>
                                             @elseif($val->status == 0)
-                                                <label class="label label-success" onclick="getlockForm('{{$val->id}}','{{$val->status}}')">已下架</label>
+                                                <label class="label" onclick="getlockForm('{{$val->id}}','{{$val->status}}')">已下架</label>
                                             @endif
                                         </td>
                                         <td>{{$val->created_at}}</td>
