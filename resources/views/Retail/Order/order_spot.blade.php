@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 零售版店铺管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Branch')}}/library/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Branch')}}/library/wizard/css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Retail')}}/library/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Retail')}}/library/wizard/css/custom.css" rel="stylesheet" />
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Branch')}}/library/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Branch')}}/library/ie/respond.min.js"></script>
-    <script src="{{asset('public/Branch')}}/library/ie/excanvas.js"></script>
+    <script src="{{asset('public/Retail')}}/library/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Retail')}}/library/ie/respond.min.js"></script>
+    <script src="{{asset('public/Retail')}}/library/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
@@ -82,8 +82,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>订单编号</th>
-                                        <th>用户账号</th>
-                                        <th>微信昵称</th>
+                                        <th>操作员账号</th>
+                                        <th>操作员昵称</th>
                                         <th>联系方式</th>
                                         <th>支付方式</th>
                                         <th>订单金额</th>
@@ -98,12 +98,9 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->ordersn}}</td>
-                                        @if($val->user != null)
-                                        <td>{{$val->user->account}}</td>
-                                        <td>{{$val->user->UserInfo->nickname}}</td>
-                                        <td>{{$val->user->mobile}}</td>
-                                        @endif
-
+                                        <td>{{$val->account->account}}</td>
+                                        <td>{{$val->account_info->realname}}</td>
+                                        <td>{{$val->account->mobile}}</td>
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td>
                                             <label class="label label-info">
@@ -169,17 +166,17 @@
 </section>
 
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch')}}/library/file-input/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Retail')}}/library/file-input/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 </body>
 </html>

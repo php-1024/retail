@@ -3,19 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <title>零壹云管理平台 | 零售版店铺管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
-    <link href="{{asset('public/Branch')}}/library/sweetalert/sweetalert.css" rel="stylesheet" />
-    <link href="{{asset('public/Branch')}}/library/wizard/css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/library/jPlayer/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link href="{{asset('public/Retail')}}/library/sweetalert/sweetalert.css" rel="stylesheet" />
+    <link href="{{asset('public/Retail')}}/library/wizard/css/custom.css" rel="stylesheet" />
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Branch')}}/library/ie/html5shiv.js"></script>
-    <script src="{{asset('public/Branch')}}/library/ie/respond.min.js"></script>
-    <script src="{{asset('public/Branch')}}/library/ie/excanvas.js"></script>
+    <script src="{{asset('public/Retail')}}/library/ie/html5shiv.js"></script>
+    <script src="{{asset('public/Retail')}}/library/ie/respond.min.js"></script>
+    <script src="{{asset('public/Retail')}}/library/ie/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
@@ -62,16 +62,16 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">用户账号</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->user->account}}
+                                                    {{$order->account->account}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 text-right" for="input-id-1">微信昵称</label>
+                                            <label class="col-sm-3 text-right" for="input-id-1">操作员昵称</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->user->UserInfo->nickname}}
+                                                    {{$order->account_info->realname}}
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">联系方式</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->user->mobile}}
+                                                    {{$order->account->mobile}}
                                                 </div>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@
                         <div class="col-lg-8">
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
-                                    购物车 {{$order->user->UserInfo->nickname}}
+                                    购物车 {{$order->account_info->realname}}
                                 </header>
                                 <div class="panel-body">
                                     <table class="table table-striped">
@@ -244,18 +244,18 @@
 </section>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch')}}/library/file-input/bootstrap-filestyle.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/jquery.jplayer.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/sweetalert/sweetalert.min.js"></script>
-<script type="text/javascript" src="{{asset('public/Branch')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/library/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Retail')}}/library/file-input/bootstrap-filestyle.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/jPlayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/sweetalert/sweetalert.min.js"></script>
+<script type="text/javascript" src="{{asset('public/Retail')}}/library/wizard/js/jquery.bootstrap.wizard.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $('#rootwizard').bootstrapWizard({'tabClass': 'bwizard-steps'});

@@ -26,7 +26,7 @@
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <h2 class="form-signin-heading">零壹新科技服务商管理平台</h2>
         <div class="login-wrap">
-            <input type="text" class="form-control" placeholder="用户名" autofocus name="username">
+            <input type="text" class="form-control" placeholder="用户" a名utofocus name="username">
             <input type="password" class="form-control" placeholder="登录密码" name="password">
             <input type="text" name="captcha" class="form-control" name="captcha" placeholder="验证码" >
             <input type="hidden" id="captcha_url"  value="{{ URL('agent/login/captcha') }}">
@@ -74,10 +74,18 @@
                     confirmButtonText: "确定",
                     //type: "warning"
                 });
-
+                re_captcha();
             }
         });
     }
+
+    //检测回车登录事件
+    document.onkeydown=function(event){
+        var e = event || window.event || arguments.callee.caller.arguments[0];
+        if(e && e.keyCode==13){ // enter 键
+            postForm();
+        }
+    };
 </script>
 
 </body>

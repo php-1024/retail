@@ -22,9 +22,11 @@ class SystemController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
             $list = Organization::getPaginage([['program_id','2']],20,'id');
+
             foreach($list as $key=>$value){
                 $list[$key]['warzone'] = Warzone::getPluck([['id', $value['warzoneAgent']['zone_id']]],'zone_name')->first();
             }
+
             return view('Agent/System/select_agent',['list'=>$list]);
         }else{
             $where = [['organization_id',$organization_id]];
@@ -81,10 +83,10 @@ class SystemController extends Controller{
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
     }
-    //超级管理员选择服务商
-    public function switch_status(Request $request){
-        return redirect('agent');
-    }
+//    //超级管理员选择服务商
+//    public function switch_status(Request $request){
+//        return redirect('agent');
+//    }
 
     //公司信息设置页面
     public function agent_info(Request $request){

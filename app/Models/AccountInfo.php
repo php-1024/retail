@@ -20,6 +20,11 @@ class AccountInfo extends Model
         return $this->belongsTo('App\Models\Account', 'account_id');
     }
 
+    //和RetailOrder表是一对一的关系
+    public function RetailOrder(){
+        return $this->belongsTo('App\Models\RetailOrder','account_id','operator_id');
+    }
+
     //和RetailPurchaseOrder表是一对一的关系
     public function RetailPurchaseOrder(){
         return $this->belongsTo('App\Models\RetailPurchaseOrder', 'id','operator_id');
