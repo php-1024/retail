@@ -80,8 +80,23 @@ class SftController extends Controller
             }
         }
 
-        $origin .= '&signType=MD5&merchantKey=liuxingwen05118888';
-        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($origin))];
+
+        $param_body_json = '{
+            "requestTime": "20171222111120", 
+    "charset": "UTF-8", 
+    "amount": "0.01", 
+    "expireTime": "20171222131120", 
+    "notifyUrl": "http://o2o.01nnt.com/pay/sft/test2", 
+    "userIp": "120.78.140.10", 
+    "currency": "CNY", 
+    "payChannel": "wp", 
+    "merchantOrderNo": "f2e03275ee25488f99e58630dfb02552", 
+    "productName": "测试商品", 
+    "merchantNo": "11548088"
+}';
+
+//        $origin .= '&signType=MD5&merchantKey=liuxingwen05118888';
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json))];
 
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
