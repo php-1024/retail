@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Pay;
 
 use App\Http\Controllers\Controller;
+use App\Models\XhoLog;
 use Illuminate\Support\Facades\Request;
 use Session;
 
@@ -62,7 +63,8 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(100,999);
+//        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(100,999);
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000" . rand(100, 999);
 //        $param_body["merchantOrderNo"] = "LS20180408_5_1000003";
         // 交易金额
         $param_body["amount"] = "0.01";
@@ -74,20 +76,18 @@ class SftController extends Controller
         $param_body["payChannel"] = "hw";
 
 
-
-
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 
         $exts = array(
-            "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
-            "app_name"=>"",// APP应用名称
-            "bundle_id"=>"",//IOS 应用唯一标识
-            "package_name"=>"",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
-            "wap_url"=>'http://www.17kx.com',//授权域名(报备时填写的域名地址)
-            "wap_name"=>"测试WAP",//WAP应用名称,网页标题
-            "note"=>"http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
-            "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
+            "requestFrom" => "WAP",//ANDROID_APP, IOS_APP, WAP
+            "app_name" => "",// APP应用名称
+            "bundle_id" => "",//IOS 应用唯一标识
+            "package_name" => "",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
+            "wap_url" => 'http://www.17kx.com',//授权域名(报备时填写的域名地址)
+            "wap_name" => "测试WAP",//WAP应用名称,网页标题
+            "note" => "http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
+            "attach" => "" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
         );
         $param_body["exts"] = $exts;
 
@@ -96,26 +96,31 @@ class SftController extends Controller
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
 
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
-        $res = json_decode($res, true);
+        $res_arr = json_decode($res, true);
 
-
-        if(!empty($res["payUrl"])) {
+        if (!empty($res_arr["payUrl"])) {
 //            dump($res);
-            header('Location:' . $res["payUrl"]);
-        }else{
-            dd($res);
+            XhoLog::create(["name"=>"跳转前","content" => $res]);
+            header('Location:' . $res_arr["payUrl"]);
+        } else {
+            dd($res_arr);
         }
     }
 
     public function test2()
     {
-        dump(\request()->all());
+        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name"=>"test2","content" => $res]);
+
 //        $test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
 //        echo $test;
-//        echo "test2";
+        echo "test2";
     }
 
-    public function notify(){
+    public function notify()
+    {
+        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name"=>"notify","content" => $res]);
         echo "OK";
     }
 

@@ -25,7 +25,6 @@ class FansmanageController extends Controller
         $fansmanage_name = $request->input('fansmanage_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
         $search_data = ['fansmanage_name' => $fansmanage_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
-
         $where = [['agent_id', $admin_data['organization_id']]];
         if (!empty($fansmanage_name)) {
             $where[] = ['fansmanage_name', 'like', '%' . $fansmanage_name . '%'];
@@ -44,21 +43,14 @@ class FansmanageController extends Controller
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $fansmanage_name = $request->input('fansmanage_name');
-        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
-        $where = [['parent_id', $admin_data['organization_id']]];
-        if (!empty($fansmanage_name)) {
-            $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
-        }
-        if (!empty($fansmanage_owner_mobile)) {
-
-            $where[] = ['fansmanage_owner_mobile', $fansmanage_owner_mobile];
-        }
-        $list = Organization::getPaginagefansmanage([$where, ['program_id', 3]], 10, 'id');
+        $organization = $admin_data['organization_id'];
+        $list = Organization::getPaginagefansmanage([['parent_id', $organization], ['program_id', 3]], 10, 'id');
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-
+    public function fansmanage_listdemo(){
+        return view('Agent/Fansmanage/fansmanage_listdemo');
+    }
 
     //店铺结构
     public function fansmanage_structure(Request $request)
@@ -67,7 +59,6 @@ class FansmanageController extends Controller
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-
         $organization_id = $request->input('organization_id');//当前组织ID，零壹管理平台组织只能为1
         $list = Organization::getList([['parent_id', $organization_id]]);
         foreach ($list as $key => $value) {
