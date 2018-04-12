@@ -94,8 +94,8 @@
                                         <td class="text-right">
                                             @if($value->status == 0)
                                                 <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm({{ $value->id }},'1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm({{ $value->id }},'-1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
                                             @endif
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm({{ $value->id }},'-1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
 
                                         </td>
 

@@ -32,6 +32,20 @@ class PaysettingController extends Controller
     }
 
     /**
+     * pos终端机审核ajax显示
+     */
+    public function payconfig_apply(Request $request)
+    {
+        // pos终端机id
+        $id = $request->id;
+        // 状态值1表示审核通过，-1表示拒绝通过
+        $status = $request->status;
+
+        return view('Zerone/Paysetting/payconfig_apply',['id'=>$id,'status'=>$status]);
+    }
+
+
+    /**
      * 收款信息审核
      */
     public function shengpay(Request $request)
