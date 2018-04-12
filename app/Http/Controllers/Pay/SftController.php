@@ -74,6 +74,11 @@ class SftController extends Controller
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
+        $param_body["exts"] = [
+            'requestFrom'=>'requestFrom',
+            'wap_name'=>'测试盛付通支付',
+            'wap_url'=>'http://o2o.01nnt.com',
+        ];
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
         $origin_key = "support4test";
 //        $origin_key = "liuxingwen05118888";
