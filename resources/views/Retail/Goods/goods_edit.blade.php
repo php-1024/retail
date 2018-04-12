@@ -216,7 +216,7 @@
     function bigthumb(imgurl) {
         var bigthumb = imgurl;
         $('#myModal').modal();
-        $('#myModal').innerHTML(bigthumb);
+        $('#myModal').innerHTML = bigthumb;
     }
 
     //弹出上传图片窗口
