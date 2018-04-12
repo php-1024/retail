@@ -75,7 +75,7 @@ class SftController extends Controller
 //        $param_body["exts"] = '11548088';
 
         $param_body["exts"] = json_encode([
-            'requestFrom'=>'requestFrom',
+            'requestFrom'=>'WAP',
             'wap_name'=>'测试盛付通支付',
             'wap_url'=>'http://o2o.01nnt.com',
         ]);
