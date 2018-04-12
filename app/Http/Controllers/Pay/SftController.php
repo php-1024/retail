@@ -61,6 +61,7 @@ class SftController extends Controller
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
         $param_body["payChannel"] = "wp";
+
 //        $param_body["openid"] = '11548088';
 //        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
@@ -77,19 +78,19 @@ class SftController extends Controller
 //        }
 
 
-        $param_body["signType"] = "MD5";
-        $param_body["signMsg"] = md5(microtime());
+//        $param_body["signType"] = "MD5";
+//        $param_body["signMsg"] = md5(microtime());
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
 
-        $origin = "5555";
+        $origin = "liuxingwen05118888";
         foreach ($param_body as $key => $value) {
             if (!empty($value)) {
                 $origin .= "&$key=$value";
             }
         }
 
-        $header = ["signType: MD5","signMsg:" . strtoupper(md5($origin . $this->key))];
+        $header = ["signType: MD5","signMsg: " . strtoupper(md5($origin))];
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
