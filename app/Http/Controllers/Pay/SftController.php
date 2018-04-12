@@ -45,22 +45,26 @@ class SftController extends Controller
 //    protected $origin_key = "liuxingwen05118888";
 //    protected $merchantNo = "11548088";
 
-    protected $origin_key = "liuxingwen05118888";
-    protected $merchantNo = "support4test";
+    protected $origin_key = "support4test";
+    protected $merchantNo = "540511";
 
     public function test()
     {
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
+
+
 //        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
 //        $param_body["merchantNo"] = '11548088';
-        $param_body["merchantNo"] = '540511';
+
+
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000001";
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000".mt_rand(100,999);
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -68,14 +72,15 @@ class SftController extends Controller
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "ow";
+        $param_body["payChannel"] = "up";
+
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
 
-        /*
+
         $param_body["exts"] = array(
             "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
             "app_name"=>"",// APP应用名称
@@ -86,14 +91,12 @@ class SftController extends Controller
             "note"=>"http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
             "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
         );
-        */
+
 
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
 
-        $origin_key = "support4test";
-//        $origin_key = "liuxingwen05118888";
-        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
 
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res = json_decode($res, true);
