@@ -379,7 +379,6 @@ Route::group(['prefix' => 'agent'], function () {
     Route::group(['prefix' => 'fansmanage'], function () {
         Route::get('fansmanage_register', 'Agent\FansmanageController@fansmanage_register')->middleware('AgentCheck');//商户注册列表
         Route::get('fansmanage_list', 'Agent\FansmanageController@fansmanage_list')->middleware('AgentCheck');//商户列表
-        Route::get('fansmanage_listdemo', 'Agent\FansmanageController@fansmanage_listdemo')->middleware('AgentCheck');//商户列表
         Route::get('fansmanage_structure', 'Agent\FansmanageController@fansmanage_structure')->middleware('AgentCheck');//店铺结构
         Route::get('fansmanage_program', 'Agent\FansmanageController@fansmanage_program')->middleware('AgentCheck');//程序划拨
     });
@@ -803,6 +802,11 @@ Route::group(['prefix' => 'pay'], function () {
         Route::any('test5', 'Pay\SftController@test5');//测试函数
         Route::any('test6', 'Pay\SftController@test6');//测试函数
         Route::any('test7', 'Pay\SftController@test7');//测试函数
+        Route::any('test8', 'Pay\SftController@test8');//测试函数
+        Route::any('test9', 'Pay\SftController@test9');//测试函数
+        Route::any('test10', 'Pay\SftController@test10');//测试函数
+        Route::any('test11', 'Pay\SftController@test11');//测试函数
+        Route::any('test12', 'Pay\SftController@test12');//测试函数
     });
 });
 /***************************对接支付接口路由*********************************/
