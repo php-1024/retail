@@ -93,9 +93,9 @@
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
                                             @if($value->status == 0)
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm({{ $value->id }},'1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
                                             @endif
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm({{ $value->id }},'-1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
 
                                         </td>
 
@@ -142,7 +142,7 @@
 
 <script>
     // 审核
-    function getApplyForm(id,status){
+    function getApplyForm(id,status,organization_id){
 
         var url = $('#shengpay_apply').val();
         var token = $('#_token').val();
@@ -158,7 +158,7 @@
             return;
         }
 
-        var data = {'id':id,'_token':token,'status':status};
+        var data = {'id':id,'_token':token,'status':status,'organization_id':organization_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
