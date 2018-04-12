@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <title>登录密码修改 | 零壹云管理平台 | 零售版店铺管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
+    <link rel="stylesheet" href="{{asset('public/Retail/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail/library/sweetalert')}}/sweetalert.css">
     <!--[if lt IE 9]>
-    <script src="{{asset('public/Branch/library/ie')}}/html5shiv.js"></script>
-    <script src="{{asset('public/Branch/library/ie')}}/respond.min.js"></script>
-    <script src="{{asset('public/Branch/library/ie')}}/excanvas.js"></script>
+    <script src="{{asset('public/Retail/library/ie')}}/html5shiv.js"></script>
+    <script src="{{asset('public/Retail/library/ie')}}/respond.min.js"></script>
+    <script src="{{asset('public/Retail/library/ie')}}/excanvas.js"></script>
     <![endif]-->
 </head>
 <body class="">
@@ -91,17 +91,17 @@
 </section>
 
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch/library/file-input')}}/bootstrap-filestyle.min.js"></script>
-<script src="{{asset('public/Branch/library/jPlayer')}}/jquery.jplayer.min.js"></script>
-<script src="{{asset('public/Branch/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Branch/library/sweetalert')}}/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail/library/slimscroll')}}/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Retail/library/file-input')}}/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Retail/library/jPlayer')}}/jquery.jplayer.min.js"></script>
+<script src="{{asset('public/Retail/library/jPlayer')}}/add-on/jplayer.playlist.min.js"></script>
+<script src="{{asset('public/Retail/library/sweetalert')}}/sweetalert.min.js"></script>
 <script>
     //提交表单
     function postForm() {
