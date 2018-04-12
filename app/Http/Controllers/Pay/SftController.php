@@ -60,7 +60,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000" . rand(10, 99);
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000".mt_rand(100,999);
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -68,13 +68,26 @@ class SftController extends Controller
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "wp";
+        $param_body["payChannel"] = "ow";
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
-        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+
+        $param_body["exts"] = array(
+            "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
+            "app_name"=>"",// APP应用名称
+            "bundle_id"=>"",//IOS 应用唯一标识
+            "package_name"=>"",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
+            "wap_url"=>'45.77.198.100',//授权域名(报备时填写的域名地址)
+            "wap_name"=>"测试WAP",//WAP应用名称,网页标题
+            "note"=>"45.77.198.100",//为商户自定义的跟本次交易有关的参数
+            "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
+        );
+
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+
         $origin_key = "support4test";
 //        $origin_key = "liuxingwen05118888";
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
@@ -83,8 +96,8 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
         if(!empty($res["payUrl"])) {
-            dump($res);
-//            header('Location:' . $res["payUrl"]);
+            //dump($res);
+            header('Location:' . $res["payUrl"]);
         }else{
             dd($res);
         }
