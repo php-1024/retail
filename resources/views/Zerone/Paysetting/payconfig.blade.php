@@ -39,7 +39,7 @@
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
             <input type="hidden" id="payconfig_apply" value="{{ url('zerone/ajax/payconfig_apply') }}">
-            <input type="hidden" id="fansmanage_list_lock" value="{{ url('zerone/ajax/fansmanage_list_lock') }}">
+            <input type="hidden" id="payconfig_type" value="{{ url('zerone/ajax/payconfig_type') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="searchForm" action="">
@@ -97,7 +97,9 @@
                                         </td>
                                         <td>
                                             <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
-                                                <option value="0">无标签</option>
+                                                <option value="0">未设置</option>
+                                                <option value="1">T0</option>
+                                                <option value="2">T1</option>
                                             </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>
@@ -184,6 +186,43 @@
             }
         });
     }
+
+
+    // 审核
+    function changeUserTag(obj,id){
+
+        var type = $(obj).val();
+        var url = $('#payconfig_type').val();
+        var token = $('#_token').val();
+
+        var data = {'id':id,'_token':token,'type':type};
+
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+            }else{
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>
