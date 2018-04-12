@@ -80,7 +80,7 @@ class SftController extends Controller
 //        $param_body["exts"] = '11548088';
 
 
-        /*
+
         $param_body["exts"] = array(
             "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
             "app_name"=>"",// APP应用名称
@@ -91,7 +91,7 @@ class SftController extends Controller
             "note"=>"http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
             "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
         );
-        */
+
 
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
