@@ -160,7 +160,6 @@ class PaysettingController extends Controller
 
         // 查询收款信息列表
         $list = RetailShengpayTerminal::getPaginage([], 15, 'id');
-
         return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
@@ -173,8 +172,12 @@ class PaysettingController extends Controller
         $id = $request->id;
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
+        // 店铺id
+        $retail_id = $request->retail_id;
+        // 店铺名称
+        $retail_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
 
-        return view('Zerone/Paysetting/shengpay_apply', ['id' => $id, 'status' => $status]);
+        return view('Zerone/Paysetting/shengpay_apply', ['retail_name' => $retail_name, 'id' => $id, 'status' => $status]);
     }
 
 
@@ -191,6 +194,8 @@ class PaysettingController extends Controller
         $id = $request->id;
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
+        // 店铺名称
+        $retail_name = $request->retail_name;
         // 查询终端号
         $terminal_num = RetailShengpayTerminal::getPluck([['id', $id]], 'terminal_num');
         // 如果查不到 打回
@@ -204,10 +209,10 @@ class PaysettingController extends Controller
 
             if ($status == '1') {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了终端号：' . $terminal_num);
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了' . $retail_name . '终端号：' . $terminal_num);
             } else {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了终端号：' . $terminal_num);
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了' . $retail_name . '终端号：' . $terminal_num);
             }
 
             DB::commit();

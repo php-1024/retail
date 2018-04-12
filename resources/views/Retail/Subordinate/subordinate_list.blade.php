@@ -26,8 +26,8 @@
     <section>
         <section class="hbox stretch">
             <!-- .aside -->
-            @include('Retail/Public/Nav')
-            <!-- /.aside -->
+        @include('Retail/Public/Nav')
+        <!-- /.aside -->
             <section id="content">
                 <section class="vbox">
                     <section class="scrollable padder">
@@ -41,18 +41,22 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    <input type="hidden" id="subordinate_edit_url" value="{{ url('retail/ajax/subordinate_edit') }}">
-                                    <input type="hidden" id="subordinate_lock" value="{{ url('retail/ajax/subordinate_lock') }}">
-                                    <input type="hidden" id="subordinate_delete" value="{{ url('retail/ajax/subordinate_delete') }}">
-                                    <input type="hidden" id="subordinate_authorize_url" value="{{ url('retail/ajax/subordinate_authorize') }}">
+                                    <input type="hidden" id="subordinate_edit_url"
+                                           value="{{ url('retail/ajax/subordinate_edit') }}">
+                                    <input type="hidden" id="subordinate_lock"
+                                           value="{{ url('retail/ajax/subordinate_lock') }}">
+                                    <input type="hidden" id="subordinate_delete"
+                                           value="{{ url('retail/ajax/subordinate_delete') }}">
+                                    <input type="hidden" id="subordinate_authorize_url"
+                                           value="{{ url('retail/ajax/subordinate_authorize') }}">
                                     <label class="col-sm-1 control-label">操作员账号</label>
-
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" name="account" type="text" value="{{$search_data['account']}}">
+                                        <input class="input-sm form-control" size="16" name="account" type="text"
+                                               value="{{$search_data['account']}}">
                                     </div>
-
                                     <div class="col-sm-3">
-                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -74,7 +78,8 @@
                                         <tr>
                                             <td>{{ $val->id }}</td>
                                             <td>{{ $val->account }}</td>
-                                            <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@else <label class="label label-danger">未绑定</label> @endif</td>
+                                            <td>@if(!empty($val->account_info)){{$val->account_info->realname }}@else
+                                                    <label class="label label-danger">未绑定</label> @endif</td>
                                             <td>{{ $val->mobile }}</td>
                                             <td>
                                                 @if($val->status == '1')
@@ -85,11 +90,19 @@
                                             </td>
                                             <td>{{ $val->created_at }}</td>
                                             <td>
-                                                <button class="btn btn-info btn-xs" id="editBtn" onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                                <button class="btn btn-info btn-xs" id="editBtn"
+                                                        onclick="getEditForm({{ $val->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑
+                                                </button>
                                                 @if($val->status=='1')
-                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-warning" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;冻结</button>
+                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-warning"
+                                                            onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')">
+                                                        <i class="icon icon-lock"></i>&nbsp;&nbsp;冻结
+                                                    </button>
                                                 @else
-                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-success" onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')"><i class="icon icon-lock"></i>&nbsp;&nbsp;解冻</button>
+                                                    <button type="button" id="lockBtn" class="btn  btn-xs btn-success"
+                                                            onclick="getLockComfirmForm('{{ $val->id }}','{{ $val->account }}','{{ $val->status }}')">
+                                                        <i class="icon icon-lock"></i>&nbsp;&nbsp;解冻
+                                                    </button>
                                                 @endif
                                                 {{--<button class="btn btn-danger btn-xs" id="deleteBtn" onclick="getDeleteComfirmForm('{{ $val->id }}','{{ $val->account }}')"><i class="fa fa-times"></i>&nbsp;&nbsp;删除</button>--}}
                                             </td>
@@ -131,70 +144,67 @@
 <script src="{{asset('public/Retail/library')}}/iCheck/js/icheck.min.js"></script>
 <script type="text/javascript">
     //冻结用户-解冻
-    function getLockComfirmForm(id,account,status){
+    function getLockComfirmForm(id, account, status) {
         var url = $('#subordinate_lock').val();
         var token = $('#_token').val();
-
-        if(id==''){
+        if (id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            },function(){
+            }, function () {
                 window.location.reload();
             });
             return;
         }
-
-        var data = {'id':id,'account':account,'status':status,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id': id, 'account': account, 'status': status, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
         });
     }
     //获取用户信息，编辑密码框
-    function getEditForm(id){
+    function getEditForm(id) {
         var url = $('#subordinate_edit_url').val();
         var token = $('#_token').val();
 
-        if(id==''){
+        if (id == '') {
             swal({
                 title: "提示信息",
                 text: '数据传输错误',
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "确定",
-            },function(){
+            }, function () {
                 window.location.reload();
             });
             return;
         }
-
-        var data = {'id':id,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id': id, '_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
                 swal({
                     title: "提示信息",
                     text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
                 return;
-            }else{
+            } else {
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }

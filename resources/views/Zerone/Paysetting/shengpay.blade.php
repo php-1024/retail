@@ -158,7 +158,7 @@
             return;
         }
 
-        var data = {'id':id,'_token':token,'status':status};
+        var data = {'id':id,'_token':token,'status':status,'retail_id':retail_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
