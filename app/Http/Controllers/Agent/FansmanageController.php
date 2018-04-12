@@ -47,7 +47,6 @@ class FansmanageController extends Controller
         $fansmanage_name = $request->input('fansmanage_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
         $organization = $admin_data['organization_id'];
-
         if (!empty($fansmanage_name)) {
             $where[] = ['fansmanage_name', 'like', '%' . $fansmanage_name . '%'];
         }
