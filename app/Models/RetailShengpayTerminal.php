@@ -70,7 +70,7 @@ class RetailShengpayTerminal extends Model
     //获取分页列表
     public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
     {
-        return self::where($where)->leftJoin('organization','retail_shengpay_terminal.retail_id','=','id')->orderBy($orderby, $sort)->paginate($paginate);
+        return self::where($where)->leftJoin('organization','retail_shengpay_terminal.retail_id','=','organization.id')->orderBy($orderby, $sort)->paginate($paginate);
 
     }
 }
