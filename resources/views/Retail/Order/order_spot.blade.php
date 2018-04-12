@@ -117,6 +117,8 @@
                                             微信二维码
                                         @elseif($val->paytype == '-1' )
                                             现金支付，其他支付
+                                        @elseif($val->paytype == null)
+                                            暂未支付
                                         @endif
                                         </label>
                                         </td>
