@@ -38,8 +38,8 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-            <input type="hidden" id="fansmanage_list_edit" value="{{ url('zerone/ajax/fansmanage_list_edit') }}">
-            <input type="hidden" id="fansmanage_list_lock" value="{{ url('zerone/ajax/fansmanage_list_lock') }}">
+            <input type="hidden" id="payconfig_apply" value="{{ url('zerone/ajax/payconfig_apply') }}">
+            <input type="hidden" id="payconfig_type" value="{{ url('zerone/ajax/payconfig_type') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
                 <form method="get" role="form" id="searchForm" action="">
@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">店铺名称</label>
-                                {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
+                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入店铺名称" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -97,13 +97,17 @@
                                         </td>
                                         <td>
                                             <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
-                                                <option value="0">无标签</option>
+                                                <option value="0">未设置</option>
+                                                <option value="1">T0</option>
+                                                <option value="2">T1</option>
                                             </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            @if($value->status == 0)
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
+                                            @endif
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
                                         </td>
 
                                     </tr>
@@ -113,7 +117,7 @@
                                 <tr>
                                     <td colspan="9" class="footable-visible">
                                         <ul class="pagination pull-right">
-                                            {{--{{$list->appends($search_data)->links()}}--}}
+                                            {{$list->appends($search_data)->links()}}
                                         </ul>
                                     </td>
                                 </tr>
@@ -148,20 +152,9 @@
 <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
 <script>
-    $(function(){
-
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-
-    //编辑
-    function getEditForm(id){
-
-        var url = $('#fansmanage_list_edit').val();
+    // 审核
+    function getApplyForm(id,status,retail_id){
+        var url = $('#payconfig_apply').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
@@ -175,7 +168,7 @@
             return;
         }
 
-        var data = {'id':id,'_token':token};
+        var data = {'id':id,'_token':token,'status':status,'retail_id':retail_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
@@ -188,48 +181,48 @@
                 });
                 return;
             }else{
-
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
         });
     }
-    //冻结
-    function getLockForm(id,status){
 
-        var url = $('#fansmanage_list_lock').val();
+
+    // 审核
+    function changeUserTag(obj,id){
+
+        var type = $(obj).val();
+        var url = $('#payconfig_type').val();
         var token = $('#_token').val();
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
 
-        var data = {'id':id,'status':status,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
+        var data = {'id':id,'_token':token,'type':type};
+
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                window.location.reload();
+            } else if(json.status == 1) {
                 swal({
                     title: "提示信息",
-                    text: response.data,
+                    text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
                     window.location.reload();
                 });
-                return;
             }else{
-
-                $('#myModal').html(response);
-                $('#myModal').modal();
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
+
+
 </script>
 </body>
 </html>

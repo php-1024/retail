@@ -3,14 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <title>商品列表 | 零壹云管理平台 | 零售版店铺管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Branch/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch')}}/css/app.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Branch/library/sweetalert')}}/sweetalert.css">
+    <link rel="stylesheet" href="{{asset('public/Retail/library/jPlayer')}}/jplayer.flat.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail')}}/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Retail/library/sweetalert')}}/sweetalert.css">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Company/library/ie')}}/html5shiv.js"></script>
     <script src="{{asset('public/Company/library/ie')}}/respond.min.js"></script>
@@ -38,10 +38,8 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
+                                    <input type="hidden" id="goods_status_comfirm_url" value="{{ url('retail/ajax/goods_status') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    {{--<div class="col-sm-2">--}}
-                                        {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
-                                    {{--</div>--}}
                                     <div class="col-sm-2">
                                         <select name="category_id" class="form-control m-b">
                                             <option value="0">所有分类</option>
@@ -71,7 +69,7 @@
                                         <th>商品分类</th>
                                         <th>库存</th>
                                         <th>排序</th>
-                                        <th>商品状态</th>
+                                        <th>商品状态（点击可切换状态）</th>
                                         <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -94,7 +92,11 @@
                                             {{$val->displayorder}}
                                         </td>
                                         <td>
-                                            <label class="label label-success">在售</label>
+                                            @if($val->status == 1)
+                                                <label class="label label-success" onclick="getlockForm('{{$val->id}}','{{$val->status}}')">销售中</label>
+                                            @elseif($val->status == 0)
+                                                <label class="label label-danger" onclick="getlockForm('{{$val->id}}','{{$val->status}}')">已下架</label>
+                                            @endif
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
@@ -125,17 +127,17 @@
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
 
-<script src="{{asset('public/Branch')}}/js/jquery.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
-<script src="{{asset('public/Branch')}}/js/bootstrap.js"></script>
+<script src="{{asset('public/Retail')}}/js/bootstrap.js"></script>
 <!-- App -->
-<script src="{{asset('public/Branch')}}/js/app.js"></script>
-<script src="{{asset('public/Branch')}}/js/app.plugin.js"></script>
-<script src="{{asset('public/Branch/library')}}/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/file-input/bootstrap-filestyle.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/jPlayer/jquery.jplayer.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
-<script src="{{asset('public/Branch/library')}}/sweetalert/sweetalert.min.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.js"></script>
+<script src="{{asset('public/Retail')}}/js/app.plugin.js"></script>
+<script src="{{asset('public/Retail/library')}}/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('public/Retail/library')}}/file-input/bootstrap-filestyle.min.js"></script>
+<script src="{{asset('public/Retail/library')}}/jPlayer/jquery.jplayer.min.js"></script>
+<script src="{{asset('public/Retail/library')}}/jPlayer/add-on/jplayer.playlist.min.js"></script>
+<script src="{{asset('public/Retail/library')}}/sweetalert/sweetalert.min.js"></script>
 <script>
     $(document).ready(function() {
         $('#deleteBtn').click(function(){
@@ -149,6 +151,30 @@
             });
         });
     });
+
+    //上下架商品
+    function getlockForm(id,status){
+        var url = $('#goods_status_comfirm_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
     //删除商品信息
     function getDeleteForm(id){
         var url = $('#goods_delete_comfirm_url').val();

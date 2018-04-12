@@ -45,11 +45,10 @@ class DisplayController extends Controller
             $organization = Organization::getOne([['id', $admin_data['organization_id']]]);
             $program = Program::getOne([['id',$organization->program_id]]);
             $organization->program_name = $program;
-            $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
             $fans = FansmanageUser::getCount(['fansmanage_id'=>$admin_data['organization_id']]);//查询当前店铺粉丝数量
-            $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'status'=>'3'],'0','id','DESC');
-            $order_spot = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'order_type'=>'1'],'0','id','DESC')->count();
-            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id],'0','id','DESC')->count();
+            $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'status'=>'3'],'0','id','DESC');
+            $order_spot = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'order_type'=>'1'],'0','id','DESC')->count();
+            $goods = RetailGoods::getList(['retail_id'=>$admin_data['organization_id']],'0','id','DESC')->count();
             $operating_receipt = 0.00;//营业收入
             foreach ($order as $key=>$val){
                 $operating_receipt += $val->order_price;

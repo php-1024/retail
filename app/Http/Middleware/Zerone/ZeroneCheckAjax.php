@@ -144,7 +144,8 @@ class ZeroneCheckAjax
 
 
 
-            case "zerone/ajax/shengpay_apply_check"://检测 登录 和 权限 和 安全密码 店铺划出归属
+            case "zerone/ajax/shengpay_apply_check"://检测 登录 和 权限 和 安全密码 终端号审核功能提交
+            case "zerone/ajax/payconfig_apply_check"://检测 登录 和 权限 和 安全密码收款信息审核功能提交
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
@@ -153,42 +154,44 @@ class ZeroneCheckAjax
 
 
             //系统管理
-            case "zerone/ajax/warzone_add"://添加战区弹出框检测登录和权限
-            case "zerone/ajax/warzone_delete_confirm"://确认删除战区弹出框检测登录和权限
-            case "zerone/ajax/warzone_edit"://修改战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_add":                 //添加战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_delete_confirm":      //确认删除战区弹出框检测登录和权限
+            case "zerone/ajax/warzone_edit":                //修改战区弹出框检测登录和权限
 
 
             //下级管理
-            case "zerone/ajax/role_delete_comfirm"://删除权限角色安全密码弹出框检测登录和权限
-            case "zerone/ajax/role_edit"://修改权限角色弹出框检测登录和权限
+            case "zerone/ajax/role_delete_comfirm":         //删除权限角色安全密码弹出框检测登录和权限
+            case "zerone/ajax/role_edit":                   //修改权限角色弹出框检测登录和权限
 
-            case "zerone/ajax/subordinate_delete_confirm"://删除下级人员管理页面弹出框
-            case "zerone/ajax/subordinate_authorize"://授权下级人员管理页面弹出框
-            case "zerone/ajax/subordinate_lock_confirm"://冻结下级人员安全密码弹出框检测登录和权限
-            case "zerone/ajax/subordinate_edit"://修改权限角色弹出框检测登录和权限
-            case "zerone/ajax/quick_rule"://添加下架人员快速授权检测登录和权限
-            case "zerone/ajax/selected_rule"://添加下架人员快速授权检测登录和权限
+            case "zerone/ajax/subordinate_delete_confirm":  //删除下级人员管理页面弹出框
+            case "zerone/ajax/subordinate_authorize":       //授权下级人员管理页面弹出框
+            case "zerone/ajax/subordinate_lock_confirm":    //冻结下级人员安全密码弹出框检测登录和权限
+            case "zerone/ajax/subordinate_edit":            //修改权限角色弹出框检测登录和权限
+            case "zerone/ajax/quick_rule":                  //添加下架人员快速授权检测登录和权限
+            case "zerone/ajax/selected_rule":               //添加下架人员快速授权检测登录和权限
 
 
             //代理管理
-            case "zerone/ajax/agent_examine"://代理审核检测弹出登入和权限
-            case "zerone/ajax/agent_list_edit"://代理列表修改弹出检测登入和权限
-            case "zerone/ajax/agent_list_lock"://代理列表冻结弹出检测登入和权限
-            case "zerone/ajax/agent_assets"://代理列表划入检测弹出登入和权限
-            case "zerone/ajax/agent_fansmanage_add"://代理列表商户划拨管理-商户划入归属
-            case "zerone/ajax/agent_fansmanage_draw"://代理列表商户划拨管理-商户划出归属
+            case "zerone/ajax/agent_examine":               //代理审核检测弹出登入和权限
+            case "zerone/ajax/agent_list_edit":             //代理列表修改弹出检测登入和权限
+            case "zerone/ajax/agent_list_lock":             //代理列表冻结弹出检测登入和权限
+            case "zerone/ajax/agent_assets":                //代理列表划入检测弹出登入和权限
+            case "zerone/ajax/agent_fansmanage_add":        //代理列表商户划拨管理-商户划入归属
+            case "zerone/ajax/agent_fansmanage_draw":       //代理列表商户划拨管理-商户划出归属
 
             //商户管理
-            case "zerone/ajax/fansmanage_examine"://商户审核检测弹出登录和权限
-            case "zerone/ajax/fansmanage_list_edit"://商户编辑检测弹出登入和权限
-            case "zerone/ajax/fansmanage_list_lock"://商户冻结检测弹出登入和权限
-            case "zerone/ajax/fansmanage_list_delete"://商户删除检测弹出登入和权限
-            case "zerone/ajax/fansmanage_assets"://商户资产划入检测弹出登入和权限
-            case "zerone/ajax/fansmanage_store_add"://商户店铺划入检测弹出登入和权限
-            case "zerone/ajax/fansmanage_store_draw"://商户店铺划出检测弹出登入和权限
+            case "zerone/ajax/fansmanage_examine":          //商户审核检测弹出登录和权限
+            case "zerone/ajax/fansmanage_list_edit":        //商户编辑检测弹出登入和权限
+            case "zerone/ajax/fansmanage_list_lock":        //商户冻结检测弹出登入和权限
+            case "zerone/ajax/fansmanage_list_delete":      //商户删除检测弹出登入和权限
+            case "zerone/ajax/fansmanage_assets":           //商户资产划入检测弹出登入和权限
+            case "zerone/ajax/fansmanage_store_add":        //商户店铺划入检测弹出登入和权限
+            case "zerone/ajax/fansmanage_store_draw":       //商户店铺划出检测弹出登入和权限
 
             //支付审核
-            case "zerone/ajax/shengpay_apply"://商户店铺划出检测弹出登入和权限
+            case "zerone/ajax/payconfig_apply":             //付款信息审核检测弹出登入和权限
+            case "zerone/ajax/shengpay_apply":              //pos终端机审核检测弹出登入和权限
+            case "zerone/ajax/payconfig_type":              //pos终端机审核检测弹出登入和权限
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;

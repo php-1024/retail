@@ -42,6 +42,8 @@ class SftController extends Controller
         ],
     ];
 
+    protected $origin_key = "liuxingwen05118888";
+
     public function test()
     {
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
@@ -49,10 +51,9 @@ class SftController extends Controller
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = md5(time());
+        $param_body["merchantOrderNo"] = "LS20180408_5_100001";
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -61,11 +62,63 @@ class SftController extends Controller
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
         $param_body["payChannel"] = "wp";
+
 //        $param_body["openid"] = '11548088';
 //        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+        $origin_key = "liuxingwen05118888";
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
 
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+
+    public function test3()
+    {
+        /
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+
+        $param_body["refundOrderNo"] = "";
+        $param_body["merchantOrderNo"] = "";
+        $param_body["refundTransNo"] = "";
+        $param_body["sftOrderNo"] = "";
+        $param_body["exts"] = "";
+
+
+        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+
+    public function test4()
+    {
+        // 查询
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
+
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+
+        $param_body["merchantOrderNo"] = date('YmdHis');
+        $param_body["sftOrderNo"] = date('YmdHis');
+        $param_body["exts"] = date('YmdHis');
+
+        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+
+    public function generateSignature($param)
+    {
 //        if ($param_body["payChannel"] == 'hw') {
 //            $param_body_attach_wxh5["requestFrom"] = "ANDROID_APP";
 //            $param_body_attach_wxh5["app_name"] = "ANDROID_APP";
@@ -75,169 +128,77 @@ class SftController extends Controller
 //            $param_body_attach_wxh5["note"] = "";
 //            $param_body_attach_wxh5["attach"] = "";
 //        }
-
-
-        $param_body["signType"] = "MD5";
-        $param_body["signMsg"] = md5(microtime());
-
-        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
-
-        $origin = "5555";
-        foreach ($param_body as $key => $value) {
-            if (!empty($value)) {
-                $origin .= "&$key=$value";
-            }
-        }
-
-        $header = ["signType: MD5","signMsg:" . strtoupper(md5($origin . $this->key))];
-        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, true);
-    }
-
-    public function generateSignature($param)
-    {
-
     }
 
     public function test2()
     {
-        $url = 'http://www.baidu.com';
-//        $param_body["signType"] = "MD5";
-//        $param_body["signMsg"] = md5(microtime());
-
-
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_HEADER, TRUE);    //表示需要response header
-        curl_setopt($ch, CURLOPT_NOBODY, FALSE); //表示需要response body
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
-        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
-
-        $header[] = "Content-type: application/x-www-form-urlencoded";
-        $header[] = "signType: MD5";
-        $header[] = "signMsg: MD5" . md5(microtime());
-        curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        $result = curl_exec($ch);
-        $a = curl_getinfo($ch);
-
-        dump($result);
-        dd($a);
-
+        dump(\request()->all());
     }
 
-    public function test3()
+
+    /**
+     * 利用约定数据和私钥生成数字签名
+     * @param $data 待签数据
+     * @return String 返回签名
+     */
+    public function sign($data = '')
     {
-        dd(request()->all());
-
-        $origin = "111";
-        $prepare_data['a'] = 'aaa';
-        $prepare_data['b'] = 'bbb';
-        $prepare_data['c'] = 'ccc';
-        $prepare_data['d'] = 'ddd';
-        $prepare_data['e'] = 'eee';
-        $prepare_data['f'] = 'fff';
-        $prepare_data['g'] = 'ggg';
-        $prepare_data['h'] = 'hhh';
-        $prepare_data['i'] = 'iii';
-        $prepare_data['k'] = '';
-
-        foreach ($prepare_data as $key => $value) {
-            if (!empty($value))
-                $origin .= "&$key=$value";
+        if (empty($data)) {
+            return False;
         }
 
-        dd($origin);
+        $private_key = file_get_contents(dirname(__FILE__) . '/rsa_private_key.pem');
+        if (empty($private_key)) {
+            echo "Private Key error!";
+            return False;
+        }
 
-        $prepare_data['SignMsg'] = strtoupper(md5($origin . $this->key));
-        return $prepare_data;
+        $pkeyid = openssl_get_privatekey($private_key);
+        if (empty($pkeyid)) {
+            echo "private key resource identifier False!";
+            return False;
+        }
+
+        $verify = openssl_sign($data, $signature, $pkeyid, OPENSSL_ALGO_MD5);
+        openssl_free_key($pkeyid);
+        return $signature;
     }
 
-    private $key = '111';
-
-    public function verify()
+    /**
+     * 利用公钥和数字签名以及约定数据验证合法性
+     * @param $data 待验证数据
+     * @param $signature 数字签名
+     * @return -1:error验证错误 1:correct验证成功 0:incorrect验证失败
+     */
+    public function isValid($data = '', $signature = '')
     {
-        $origin = "111";
-        $prepare_data['a'] = 'aaa';
-        $prepare_data['b'] = 'bbb';
-        $prepare_data['c'] = 'ccc';
-        $prepare_data['d'] = 'ddd';
-        $prepare_data['e'] = 'eee';
-        $prepare_data['f'] = 'fff';
-        $prepare_data['g'] = 'ggg';
-        $prepare_data['h'] = 'hhh';
-        $prepare_data['i'] = 'iii';
-        $prepare_data['k'] = '';
-
-        foreach ($prepare_data as $value) {
-            if (!empty($value))
-                $origin .= $value;
+        if (empty($data) || empty($signature)) {
+            return False;
         }
 
+        $public_key = file_get_contents(dirname(__FILE__) . '/rsa_public_key.pem');
+        if (empty($public_key)) {
+            echo "Public Key error!";
+            return False;
+        }
 
-        $prepare_data['SignMsg'] = strtoupper(md5($origin . $this->key));
-        return $prepare_data;
+        $pkeyid = openssl_get_publickey($public_key);
+        if (empty($pkeyid)) {
+            echo "public key resource identifier False!";
+            return False;
+        }
 
+        $ret = openssl_verify($data, $signature, $pkeyid, OPENSSL_ALGO_MD5);
+        switch ($ret) {
+            case -1:
+                echo "error";
+                break;
+            default:
+                echo $ret == 1 ? "correct" : "incorrect";//0:incorrect
+                break;
+        }
+        return $ret;
     }
-
-    /*相应*/
-    public function receive()
-    {
-
-        if ($this->returnSign()) {
-            /*支付成功*/
-            $return_data['order_id'] = $_POST['OrderNo'];
-            $return_data['payment_id'] = $_POST['TransNo'];
-            $return_data['price'] = $_POST['TransAmount'];
-            $return_data['order_status'] = 0;
-            return $return_data;
-
-            echo 'OK';
-        } else {
-            echo 'Error';
-            error_log(date('m-d H:i:s', SYS_TIME) . '| GET: illegality notice : flase |' . "\r\n", 3, CACHE_PATH . 'pay_error_sanda.php');
-            showmessage(L('illegal_sign'));
-            return false;
-        }
-
-    }
-
-
-    /*响应数据验证*/
-    private function returnSign()
-    {
-        $params = array(
-            'aaa' => '',
-            'bbb' => '',
-            'ccc' => '',
-            'ddd' => '',
-            'eee' => '',
-            'fff' => '',
-            'ggg' => '',
-            'hhh' => '',
-            'iii' => '',
-            'SignType' => 'MD5',
-        );
-        foreach ($_POST as $key => $value) {
-            if (isset($params[$key])) {
-                $params[$key] = $value;
-            }
-        }
-        $TransStatus = (int)$_POST['TransStatus'];
-        $origin = '';
-        foreach ($params as $key => $value) {
-            if (!empty($value))
-                $origin .= $value;
-        }
-        $SignMsg = strtoupper(md5($origin . $this->key));
-        if ($SignMsg == $_POST['SignMsg'] and $TransStatus == 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     /**
      * CURL请求
