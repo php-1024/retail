@@ -44,10 +44,10 @@ class PaysettingController extends Controller
         // 店铺id
         $retail_id = $request->retail_id;
 
-        $organization_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
+        $retail_name = Organization::getOne([['id', $retail_id]]);
 
 
-        return view('Zerone/Paysetting/payconfig_apply', ['organization_name' => $organization_name, 'id' => $id, 'status' => $status]);
+        return view('Zerone/Paysetting/payconfig_apply', ['retail_name' => $retail_name, 'id' => $id, 'status' => $status]);
     }
 
     /**
@@ -59,16 +59,13 @@ class PaysettingController extends Controller
         $admin_data = $request->get('admin_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-        // pos终端机id
+        // 付款信息id
         $id = $request->id;
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
-        // 查询终端号
-//        $terminal_num = RetailShengpay::getPluck([['id', $id]], 'terminal_num');
-//        // 如果查不到 打回
-//        if (empty($terminal_num)) {
-//            return response()->json(['data' => '查不到数据', 'status' => '0']);
-//        }
+        // 店铺名称
+        $retail_name = $request->retail_name;
+
         DB::beginTransaction();
         try {
             // 修改付款信息状态
@@ -76,12 +73,11 @@ class PaysettingController extends Controller
 
             if ($status == '1') {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了终端号：' );
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了付款信息店铺：'.$retail_name );
             } else {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了终端号：' );
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝了付款信息店铺：'.$retail_name );
             }
-
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
