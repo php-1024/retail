@@ -96,7 +96,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <select style="width:100px" class="dropdown-menu" aria-labelledby="dropdownMenu1"  onchange="changeUserTag(this,'{{$value->id}}','{{$value->organization->id}}')">
+                                            <select style="width:100px" onchange="changeUserTag(this,'{{$value->id}}','{{$value->organization->id}}')">
                                                 <option @if($value->type == 0) selected @endif value="0">未设置</option>
                                                 <option @if($value->type == 1) selected @endif value="1">T0</option>
                                                 <option @if($value->type == 2) selected @endif value="2">T1</option>
