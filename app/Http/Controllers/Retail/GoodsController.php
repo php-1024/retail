@@ -270,9 +270,9 @@ class GoodsController extends Controller
         $status = $request->get('status');                  //获取商品状态
         if ($status == 0){
             $status = 1;
-            $stock = RetailGoods::getPluck(['id'=>$goods_id],'stock');
+            $stock = RetailGoods::getPluck(['id'=>$goods_id],'stock')->first();
             $tips = '上架';
-//            dd($stock);
+            dd($stock);
         }elseif($status == 1){
             $status = '0';
             $stock = '0';
