@@ -33,6 +33,12 @@ class Account extends Model{
     public function organization(){
         return $this->belongsTo('App\Models\Organization', 'organization_id');
     }
+
+    //和RetailOrder表是一对一的关系
+    public function RetailOrder(){
+        return $this->belongsTo('App\Models\RetailOrder','id','operator_id');
+    }
+
     //和权限角色表创建者一对多的关系
     public function roles(){
         return $this->hasMany('App\Models\OrganizationRole', 'created_by');
