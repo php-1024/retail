@@ -102,8 +102,10 @@
                                         </td>
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
+                                            @if($value->status == 0)
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm({{ $value->id }},'1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm({{ $value->id }},'-1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
+                                            @endif
                                         </td>
 
                                     </tr>
@@ -148,20 +150,9 @@
 <script src="{{asset('public/Zerone')}}/js/bootstrap-datepicker.js"></script>
 
 <script>
-    $(function(){
-
-        //设置CSRF令牌
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-    });
-
-    //编辑
-    function getEditForm(id){
-
-        var url = $('#fansmanage_list_edit').val();
+    // 审核
+    function getApplyForm(id,status){
+        var url = $('#shengpay_apply').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
@@ -175,7 +166,7 @@
             return;
         }
 
-        var data = {'id':id,'_token':token};
+        var data = {'id':id,'_token':token,'status':status};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
@@ -188,43 +179,6 @@
                 });
                 return;
             }else{
-
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
-    //冻结
-    function getLockForm(id,status){
-
-        var url = $('#fansmanage_list_lock').val();
-        var token = $('#_token').val();
-        if(id==''){
-            swal({
-                title: "提示信息",
-                text: '数据传输错误',
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "确定",
-            },function(){
-                window.location.reload();
-            });
-            return;
-        }
-
-        var data = {'id':id,'status':status,'_token':token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-
                 $('#myModal').html(response);
                 $('#myModal').modal();
             }
