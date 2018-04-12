@@ -246,11 +246,44 @@ class GoodsController extends Controller
     }
 
 
+    //上架、下架商品弹窗确认
+    public function goods_status(Request $request)
+    {
+        $goods_id = $request->get('id');              //商品的ID
+        return view('Retail/Goods/goods_status',['goods_id'=>$goods_id]);
+    }
+
     //删除商品弹窗
     public function goods_delete(Request $request)
     {
-        $goods_id = $request->get('id');              //分类栏目的id
+        $goods_id = $request->get('id');              //商品的ID
         return view('Retail/Goods/goods_delete',['goods_id'=>$goods_id]);
+    }
+
+    //上架、下架商品确认操作
+    public function goods_status_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
+        $route_name = $request->path();                          //获取当前的页面路由
+        $goods_id = $request->get('goods_id');              //获取分类栏目ID
+        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id')->first();
+        dd($id,$goods_id,$request);
+        DB::beginTransaction();
+        try {
+            RetailGoods::editRetailGoods(['id'=>$goods_id],['status'=>$status]);
+            RetailStock::select_delete($id);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '删除商品失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '删除商品成功', 'status' => '1']);
     }
 
     //删除商品操作

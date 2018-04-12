@@ -38,10 +38,8 @@
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                     <input type="hidden" id="goods_delete_comfirm_url" value="{{ url('retail/ajax/goods_delete') }}">
+                                    <input type="hidden" id="goods_status_comfirm_url" value="{{ url('retail/ajax/goods_status') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                                    {{--<div class="col-sm-2">--}}
-                                        {{--<button type="button" class="btn btn-s-md btn-info" onclick="location.href='goods_copy'"><i class="fa fa-copy"></i>&nbsp;&nbsp;拷贝其他分店商品</button>--}}
-                                    {{--</div>--}}
                                     <div class="col-sm-2">
                                         <select name="category_id" class="form-control m-b">
                                             <option value="0">所有分类</option>
@@ -153,6 +151,30 @@
             });
         });
     });
+
+    //上下架商品
+    function getlockForm(id,status){
+        var url = $('#goods_status_comfirm_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token,'id':id,'status':status};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
     //删除商品信息
     function getDeleteForm(id){
         var url = $('#goods_delete_comfirm_url').val();
