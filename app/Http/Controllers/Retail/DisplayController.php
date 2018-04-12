@@ -47,6 +47,7 @@ class DisplayController extends Controller
             $organization->program_name = $program;
             $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
             dump($fansmanage_id);
+            dump($admin_data);
             $fans = FansmanageUser::getCount(['fansmanage_id'=>$admin_data['organization_id']]);//查询当前店铺粉丝数量
             $order = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'status'=>'3'],'0','id','DESC');
             $order_spot = RetailOrder::getList(['retail_id'=>$admin_data['organization_id'],'fansmanage_id'=>$fansmanage_id,'order_type'=>'1'],'0','id','DESC')->count();
