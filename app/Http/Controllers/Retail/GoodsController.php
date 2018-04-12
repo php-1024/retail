@@ -274,7 +274,7 @@ class GoodsController extends Controller
             $tips = '上架';
 //            dd($stock);
         }elseif($status == 1){
-            $status = 0;
+            $status = '0';
             $stock = '0';
             $tips = '下架';
         }
