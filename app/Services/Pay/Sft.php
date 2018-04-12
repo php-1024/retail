@@ -11,43 +11,80 @@ class Sft
 {
 
 
-
     /**
-     * 查询订单
+     * 查询订单 接口
      * @param array $param
      * @return mixed
      */
     public static function queryOrder($param)
     {
         try {
-            $origin_key = $param["origin_key"];
-            $merchantNo = $param["merchantNo"];
-            $merchantOrderNo = $param["merchantOrderNo"];
             // 接口地址
             $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
             // 商家的身份码
-            $param_body["merchantNo"] = $merchantNo;
+            $param_body["merchantNo"] = $param["merchantNo"];
             // 字符集
             $param_body["charset"] = 'UTF-8';
             // 请求时间-当前时间
             $param_body["requestTime"] = date('YmdHis');
             // 商品订单id
-            $param_body["merchantOrderNo"] = $merchantOrderNo;
+            $param_body["merchantOrderNo"] = $param["merchantOrderNo"];
             // 盛付通返回的订单id
             $param_body["sftOrderNo"] = null;
             // 其他参数
             $param_body["exts"] = null;
             // json 化 参数数据
             $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
-
             // 获取签名
-            $header = self::getSign($param_body_json, $origin_key);
+            $header = self::getSign($param_body_json, $param["origin_key"]);
             // 发起请求
             return self::httpRequest($api_url, "post", $param_body_json, $header);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
+
+
+    /**
+     * 退款 接口
+     * @param $param
+     * @return mixed|string
+     */
+    public static function refund($param)
+    {
+        try {
+            // 接口地址
+            $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refund.htm";
+            // 商家的身份码
+            $param_body["merchantNo"] = $param["merchantNo"];
+            // 字符集
+            $param_body["charset"] = 'UTF-8';
+            // 请求时间-当前时间
+            $param_body["requestTime"] = date('YmdHis');
+            // 退款流水账号
+            $param_body["refundOrderNo"] = $param["refundOrderNo"];
+            // 退款订单号
+            $param_body["merchantOrderNo"] = $param["merchantOrderNo"];
+            // 退款金额
+            $param_body["refundAmount"] = $param["refundAmount"];
+            // 通知地址
+            $param_body["notifyURL"] = $param["notifyURL"];
+            // 其他
+            $param_body["exts"] = "";
+
+            // json 化 参数数据
+            $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+            // 获取签名
+            $header = self::getSign($param_body_json, $param["origin_key"]);
+            // 发起请求
+            return self::httpRequest($api_url, "post", $param_body_json, $header);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
+
+
+
 
     /**
      * 返回签名

@@ -141,7 +141,7 @@ class SftController extends Controller
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
-        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, true);
         dd($res);
     }
 
@@ -154,10 +154,15 @@ class SftController extends Controller
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
+        // 退款流水账号
         $param_body["refundOrderNo"] = "TK20180408_5_1000" . rand(100, 999);
+        // 退款订单号
         $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
+        // 退款金额
         $param_body["refundAmount"] = "0.01";
-        $param_body["notifyURL"] = "http://o2o.01nnt.com/pay/sft/test2";
+        // 通知地址
+        $param_body["notifyURL"] = "http://o2o.01nnt.com/pay/sft/test8";
+        // 其他
         $param_body["exts"] = "";
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
@@ -174,18 +179,16 @@ class SftController extends Controller
     public function test5()
     {
         // 退款查询
-        $api_url = "http://mgw.shengpay.com/ web-acquire-channel/pay/refundQuery.htm";
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refundQuery.htm";
         $param_body["merchantNo"] = '11548088';
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-
-        $param_body["refundOrderNo"] = "";
-        $param_body["merchantOrderNo"] = "";
-        $param_body["refundTransNo"] = "";
-        $param_body["sftOrderNo"] = "";
-        $param_body["exts"] = "";
-
+        $param_body["refundOrderNo"] = "TK20180408_5_1000419";
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
+//        $param_body["refundTransNo"] = "20180412161624998";
+        $param_body["sftOrderNo"] = null;
+        $param_body["exts"] = null;
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
