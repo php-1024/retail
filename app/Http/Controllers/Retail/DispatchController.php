@@ -44,7 +44,7 @@ class DispatchController extends Controller
         if (empty($displayorder)){
             $displayorder = '0';
         }
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $dispatch_data = [
             'name' => $dispatch_name,
             'number' => $number,

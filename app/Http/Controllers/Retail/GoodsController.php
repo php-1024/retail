@@ -47,7 +47,7 @@ class GoodsController extends Controller
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $goods_name = RetailGoods::checkRowExists(['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'name' => $name]);
         if($goods_name) {//判断商品名称是已经存在
             return response()->json(['data' => '商品名称重名，请重新输入！', 'status' => '0']);
@@ -109,7 +109,7 @@ class GoodsController extends Controller
         $stock = $request->get('stock');                    //商品库存
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
