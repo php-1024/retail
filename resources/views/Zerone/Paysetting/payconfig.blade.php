@@ -97,7 +97,9 @@
                                         </td>
                                         <td>
                                             <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
-                                                <option value="0">无标签</option>
+                                                <option value="0">未设置</option>
+                                                <option value="1">T0</option>
+                                                <option value="2">T1</option>
                                             </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>
@@ -184,6 +186,44 @@
             }
         });
     }
+
+
+    // 审核
+    function changeUserTag(status,id){
+        var url = $('#payconfig_apply').val();
+        var token = $('#_token').val();
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'_token':token,'status':status,'retail_id':retail_id};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
+
+
 </script>
 </body>
 </html>
