@@ -184,13 +184,11 @@ class SftController extends Controller
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-
         $param_body["refundOrderNo"] = "TK20180408_5_1000419";
         $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
-        $param_body["refundTransNo"] = "20180412161624998";
+//        $param_body["refundTransNo"] = "20180412161624998";
         $param_body["sftOrderNo"] = null;
         $param_body["exts"] = null;
-
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
