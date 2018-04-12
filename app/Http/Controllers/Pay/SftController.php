@@ -79,7 +79,9 @@ class SftController extends Controller
             'wap_name'=>'测试盛付通支付',
             'wap_url'=>'http://o2o.01nnt.com',
         ]);
-        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+        dump($param_body_json);
+        exit();
         $origin_key = "support4test";
 //        $origin_key = "liuxingwen05118888";
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
