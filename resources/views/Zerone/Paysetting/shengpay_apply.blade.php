@@ -1,4 +1,4 @@
-<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/shengpay_appal_check') }}">
+<form method="post" role="form" id="currentForm" action="{{ url('zerone/ajax/shengpay_apply_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{$id}}">
     <input type="hidden" name="status" value="{{$status}}">
@@ -44,13 +44,14 @@
                     window.location.reload();
                 });
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                    //type: "warning"
-                });
+                console.log(json);
+//                swal({
+//                    title: "提示信息",
+//                    text: json.data,
+//                    confirmButtonColor: "#DD6B55",
+//                    confirmButtonText: "确定",
+//                    //type: "warning"
+//                });
             }
         });
     }
