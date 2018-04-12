@@ -46,6 +46,7 @@ class SftController extends Controller
 
     public function test()
     {
+        // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
         $param_body["merchantNo"] = '11548088';
         $param_body["charset"] = 'UTF-8';
@@ -75,10 +76,32 @@ class SftController extends Controller
     }
 
 
+
+
     public function test3()
     {
-        /
+        // 订单查询
         $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
+
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+
+        $param_body["merchantOrderNo"] = date('YmdHis');
+        $param_body["sftOrderNo"] = date('YmdHis');
+        $param_body["exts"] = date('YmdHis');
+
+        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+
+    public function test4()
+    {
+        // 退款
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refund.htm";
         $param_body["merchantNo"] = '11548088';
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
@@ -97,24 +120,29 @@ class SftController extends Controller
     }
 
 
-    public function test4()
+    public function test5()
     {
-        // 查询
-        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
-
+        // 退款查询
+        $api_url = "http://mgw.shengpay.com/ web-acquire-channel/pay/refundQuery.htm";
         $param_body["merchantNo"] = '11548088';
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
 
-        $param_body["merchantOrderNo"] = date('YmdHis');
-        $param_body["sftOrderNo"] = date('YmdHis');
-        $param_body["exts"] = date('YmdHis');
+        $param_body["refundOrderNo"] = "";
+        $param_body["merchantOrderNo"] = "";
+        $param_body["refundTransNo"] = "";
+        $param_body["sftOrderNo"] = "";
+        $param_body["exts"] = "";
+
 
         $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
+
+
+
 
 
     public function generateSignature($param)
