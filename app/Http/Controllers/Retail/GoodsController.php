@@ -249,9 +249,9 @@ class GoodsController extends Controller
     //上架、下架商品弹窗确认
     public function goods_status(Request $request)
     {
-        dd($request);
         $goods_id = $request->get('id');              //商品的ID
-        return view('Retail/Goods/goods_status',['goods_id'=>$goods_id]);
+        $status = $request->get('status');              //商品的ID
+        return view('Retail/Goods/goods_status',['goods_id'=>$goods_id,'status'=>$status]);
     }
 
     //删除商品弹窗
