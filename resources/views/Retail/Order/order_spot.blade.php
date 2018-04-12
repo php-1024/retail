@@ -103,24 +103,23 @@
                                         <td>{{$val->account->mobile}}</td>
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td>
-                                            <label class="label label-info">
+
 
                                         @if($val->paytype == '0' )
-                                            银行卡支付
+                                                <label class="label label-info">银行卡支付</label>
                                         @elseif($val->paytype == '1' )
-                                            支付宝扫码
+                                                <label class="label label-info">支付宝扫码
                                         @elseif($val->paytype == '2' )
-                                            支付宝二维码
+                                                <label class="label label-info">支付宝二维码
                                         @elseif($val->paytype == '3' )
-                                            微信扫码
+                                                <label class="label label-info">微信扫码
                                         @elseif($val->paytype == '4' )
-                                            微信二维码
+                                                <label class="label label-info">微信二维码
                                         @elseif($val->paytype == '-1' )
-                                            现金支付，其他支付
+                                                <label class="label label-info">现金支付，其他支付
                                         @elseif($val->paytype == null)
-                                            暂未支付
+                                                <label class="label label-danger">暂未支付
                                         @endif
-                                        </label>
                                         </td>
 
                                         <td>{{$val->order_price}}</td>
