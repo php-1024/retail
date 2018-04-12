@@ -144,7 +144,9 @@
 
 
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+</div>
 
 {{--上传图片--}}
 <div class="modal fade" id="myModal_thumb" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -193,7 +195,6 @@
 <script src="{{asset('public/Retail/library')}}/trumbowyg/plugins/upload/trumbowyg.upload.js"></script>
 <script src="{{asset('public/Retail/library')}}/trumbowyg/plugins/base64/trumbowyg.base64.js"></script>
 <script>
-
     $(document).ready(function() {
         $('#form-content').trumbowyg({
             lang: 'fr',
@@ -211,6 +212,11 @@
             $('#myModal').modal();
         });
     });
+    //弹出大图
+    function bigthumb() {
+        $('#myModal_thumb').modal();
+    }
+
     //弹出上传图片窗口
     function addthumb() {
         $('#myModal_thumb').modal();
