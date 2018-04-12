@@ -44,7 +44,7 @@ class PaysettingController extends Controller
         // 店铺id
         $retail_id = $request->retail_id;
 
-        $retail_name = Organization::getOne([['id', $retail_id]]);
+        $retail_name = Organization::getPluck([['id', $retail_id]],'organization_name');
 
 
         return view('Zerone/Paysetting/payconfig_apply', ['retail_name' => $retail_name, 'id' => $id, 'status' => $status]);
