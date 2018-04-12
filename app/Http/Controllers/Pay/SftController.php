@@ -80,7 +80,6 @@ class SftController extends Controller
             }
         }
 
-
         $param_body_json = '{
             "requestTime": "20171222111120", 
     "charset": "UTF-8", 
