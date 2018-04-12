@@ -54,6 +54,7 @@
                         <div class="panel-body">
                             <form class="form-horizontal tasi-form" method="get">
                                 <div class="form-group">
+
                                     <label class="control-label col-lg-1" for="inputSuccess">商户名称</label>
                                     <div class="col-lg-2">
                                         <input type="text" name="fansmanage_name" class="form-control" placeholder="商户名称">
