@@ -173,9 +173,9 @@ class PaysettingController extends Controller
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
         // 店铺id
-        $retail = $request->retail;
+        $retail_id = $request->retail_id;
         // 店铺名称
-        $retail_name = Organization::getPluck([['id', $retail]], 'organization_name');
+        $retail_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
 
         return view('Zerone/Paysetting/shengpay_apply', ['retail_name' => $retail_name, 'id' => $id, 'status' => $status]);
     }
@@ -209,10 +209,10 @@ class PaysettingController extends Controller
 
             if ($status == '1') {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了'.$retail_name.'终端号：' . $terminal_num);
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了' . $retail_name . '终端号：' . $terminal_num);
             } else {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了'.$retail_name.'终端号：' . $terminal_num);
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了' . $retail_name . '终端号：' . $terminal_num);
             }
 
             DB::commit();
