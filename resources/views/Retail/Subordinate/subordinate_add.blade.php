@@ -33,11 +33,11 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">下属添加</h3>
+                            <h3 class="m-b-none">操作员添加</h3>
                         </div>
                         <section class="panel">
                             <header class="panel-heading">
-                                添加下级人员
+                                添加操作员
                             </header>
                             <div class="panel-body">
                                 <form  method="post" class="form-horizontal" id="currentForm" action="{{ url('retail/ajax/subordinate_add_check') }}">
