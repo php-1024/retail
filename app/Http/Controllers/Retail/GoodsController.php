@@ -271,7 +271,7 @@ class GoodsController extends Controller
         if ($status == 0){
             $status = 1;
             $stock = RetailGoods::getPluck(['id'=>$goods_id],'stock');
-            dd($stock);
+//            dd($stock);
         }elseif($status == 1){
             $status = 0;
             $stock = '0';
@@ -283,7 +283,7 @@ class GoodsController extends Controller
             RetailStock::editStock(['id'=>$id],['stock'=>$stock]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统上架了商品！');//保存操作记录
             } else {//零售店铺本人操作记录
                 OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
             }
