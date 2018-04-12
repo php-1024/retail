@@ -160,7 +160,6 @@ class PaysettingController extends Controller
 
         // 查询收款信息列表
         $list = RetailShengpayTerminal::getPaginage([], 15, 'id');
-
         return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
@@ -176,7 +175,7 @@ class PaysettingController extends Controller
         // 店铺id
         $retail = $request->retail;
         // 店铺名称
-        $retail_name = Organization::getPluck([['id', $id]], 'organization_name');
+        $retail_name = Organization::getPluck([['id', $retail]], 'organization_name');
 
         return view('Zerone/Paysetting/shengpay_apply', ['retail_name' => $retail_name, 'id' => $id, 'status' => $status]);
     }
