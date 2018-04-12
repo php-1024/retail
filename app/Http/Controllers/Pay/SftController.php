@@ -52,7 +52,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = md5(time());
+        $param_body["merchantOrderNo"] = "LS20180408_5_100001";
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -66,37 +66,9 @@ class SftController extends Controller
 //        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
-
-//        $param_body["signType"] = "MD5";
-//        $param_body["signMsg"] = md5(microtime());
-
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
-
-//        $origin_key = "liuxingwen05118888";
-        $origin = "";
-        foreach ($param_body as $key => $value) {
-            if (!empty($value)) {
-                $origin .= "&$key=$value";
-            }
-        }
-
-        $param_body_json = '{
-            "requestTime": "20171222111120", 
-    "charset": "UTF-8", 
-    "amount": "0.01", 
-    "expireTime": "20171222131120", 
-    "notifyUrl": "http://o2o.01nnt.com/pay/sft/test2", 
-    "userIp": "120.78.140.10", 
-    "currency": "CNY", 
-    "payChannel": "wp", 
-    "merchantOrderNo": "f2e03275ee25488f99e58630dfb02552", 
-    "productName": "测试商品", 
-    "merchantNo": "11548088"
-}';
-
-
-//        $origin .= '&signType=MD5&merchantKey=liuxingwen05118888';
-        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json))];
+        $origin_key = "liuxingwen05118888";
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json.$origin_key))];
 
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
