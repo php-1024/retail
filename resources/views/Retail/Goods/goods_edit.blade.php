@@ -214,7 +214,7 @@
     });
     //弹出大图
     function bigthumb() {
-        $('#myModal_thumb').modal();
+        $('#myModal').modal();
     }
 
     //弹出上传图片窗口
