@@ -42,19 +42,23 @@ class SftController extends Controller
         ],
     ];
 
-    protected $origin_key = "liuxingwen05118888";
-    protected $merchantNo = "11548088";
-
 //    protected $origin_key = "liuxingwen05118888";
-//    protected $merchantNo = "540511";
+//    protected $merchantNo = "11548088";
+
+    protected $origin_key = "support4test";
+    protected $merchantNo = "540511";
 
     public function test()
     {
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
+
+
 //        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
 //        $param_body["merchantNo"] = '11548088';
-        $param_body["merchantNo"] = '540511';
+
+
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
@@ -68,7 +72,8 @@ class SftController extends Controller
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "ow";
+        $param_body["payChannel"] = "up";
+
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
@@ -91,9 +96,7 @@ class SftController extends Controller
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
 
-        $origin_key = "support4test";
-//        $origin_key = "liuxingwen05118888";
-        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
 
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res = json_decode($res, true);
@@ -123,7 +126,7 @@ class SftController extends Controller
         // 订单查询
         $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
 
-        $param_body["merchantNo"] = '11548088';
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
