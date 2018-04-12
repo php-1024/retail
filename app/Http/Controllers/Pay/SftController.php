@@ -89,7 +89,7 @@ class SftController extends Controller
             "note"=>"http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
             "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
         );
-        $param_body["exts"] = json_encode($exts,JSON_UNESCAPED_UNICODE);
+        $param_body["exts"] = $exts;
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
 
