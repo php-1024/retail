@@ -82,6 +82,7 @@ class SftController extends Controller
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res = json_decode($res,true);
 
+        dump($res);
         header('Location:'. $res["payUrl"]);
     }
 
