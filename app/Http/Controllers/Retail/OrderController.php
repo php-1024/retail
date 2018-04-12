@@ -40,6 +40,7 @@ class OrderController extends Controller
         }
 
         if (!empty($ordersn) && !empty($paytype) && $ordersn != null) {
+            dd($request);
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
 
