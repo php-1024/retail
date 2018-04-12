@@ -42,10 +42,11 @@ class SftController extends Controller
         ],
     ];
 
+    protected $origin_key = "liuxingwen05118888";
+
     public function test()
     {
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-//        $api_url = 'http://10.241.80.55:8080/web-acquire-channel/pay/order.htm';
         $param_body["merchantNo"] = '11548088';
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
@@ -73,6 +74,49 @@ class SftController extends Controller
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
+
+    public function test3()
+    {
+        /
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+
+        $param_body["refundOrderNo"] = "";
+        $param_body["merchantOrderNo"] = "";
+        $param_body["refundTransNo"] = "";
+        $param_body["sftOrderNo"] = "";
+        $param_body["exts"] = "";
+
+
+        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+
+    public function test4()
+    {
+        // 查询
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
+
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+
+        $param_body["merchantOrderNo"] = date('YmdHis');
+        $param_body["sftOrderNo"] = date('YmdHis');
+        $param_body["exts"] = date('YmdHis');
+
+        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+
     public function generateSignature($param)
     {
 //        if ($param_body["payChannel"] == 'hw') {
@@ -89,10 +133,6 @@ class SftController extends Controller
     public function test2()
     {
         dump(\request()->all());
-    }
-
-    public function test3()
-    {
     }
 
 
