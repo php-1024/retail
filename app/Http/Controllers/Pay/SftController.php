@@ -68,7 +68,7 @@ class SftController extends Controller
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
         $origin_key = "liuxingwen05118888";
-        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json.$origin_key))];
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
 
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -88,6 +88,7 @@ class SftController extends Controller
 
     public function test2()
     {
+        dump(\request()->all());
     }
 
     public function test3()
