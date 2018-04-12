@@ -213,8 +213,8 @@
         });
     });
     //弹出大图
-    function bigthumb() {
-        var imgurl = $0.src;
+    function bigthumb(this) {
+        var imgurl = this.src;
         console.log(imgurl);
         $('#myModal').modal();
     }
