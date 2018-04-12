@@ -191,7 +191,7 @@ class Organization extends Model
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where)
     {
-        $row = self::getPluck($where, 'id')->toArray();
+        $row = self::getPluck($where, 'id');
         if (empty($row)) {
             return false;
         } else {

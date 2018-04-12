@@ -345,7 +345,7 @@ class AgentController extends Controller
         // 状态 1为冻结，0为解冻
         $status = $request->input('status');
         // 查询代理名称
-        $organization_name = Organization::getPluck([['id', $id]], 'organization_name')->first();
+        $organization_name = Organization::getPluck([['id', $id]], 'organization_name');
         DB::beginTransaction();
         try {
             // 冻结
@@ -498,7 +498,7 @@ class AgentController extends Controller
         // 代理id
         $organization_id = $request->input('organization_id');
         // 代理名字
-        $agent_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        $agent_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
         // 程序id
         $program_id = $request->input('program_id');
         // 程序名字
@@ -589,7 +589,7 @@ class AgentController extends Controller
         // 代理id
         $organization_id = $request->organization_id;
         // 代理名称
-        $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
         // 隶属于该代理的所有商户
         $list = Organization::getPaginageFansmanage([['parent_id', $organization_id]], '10', 'id');
         foreach ($list as $key => $value) {
@@ -637,7 +637,7 @@ class AgentController extends Controller
         // 商户id
         $fansmanage_id = $request->fansmanage_id;
         // 查询商户名称
-        $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name')->first();
+        $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name');
         DB::beginTransaction();
         try {
             // 组织树
@@ -733,13 +733,13 @@ class AgentController extends Controller
         // 代理id
         $organization_id = $request->organization_id;
         // 代理名称
-        $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
         // 划出商户id
         $fansmanage_id = $request->fansmanage_id;
         // 是否消耗程序数量
         $status = $request->status;
         // 店铺名称
-        $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name')->first();
+        $fansmanage_name = Organization::getPluck([['id', $fansmanage_id]], 'organization_name');
         DB::beginTransaction();
         try {
             // 组织树

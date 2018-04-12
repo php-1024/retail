@@ -68,7 +68,7 @@ class AndroidApiController extends Controller
             return response()->json(['msg' => 'pos机终端号没通过审核', 'status' => '0', 'data' => '']);
         }
         // 店铺名称
-        $organization_name = Organization::getPluck([['id', $data['organization_id']]], 'organization_name')->first();
+        $organization_name = Organization::getPluck([['id', $data['organization_id']]], 'organization_name');
         // 数据返回
         $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id'], 'account' => $data['account'], 'organization_id' => $data['organization_id'], 'uuid' => $data['uuid'], 'sft_num' => $shengpay['sft_num'], 'organization_name' => $organization_name]];
 
@@ -144,7 +144,7 @@ class AndroidApiController extends Controller
                 $order_price += $v['price'] * $v['num'];
             }
         }
-        $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id')->first();
+        $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id');
         $num = RetailOrder::where([['retail_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
         $num += 1;
         $sort = 100000 + $num;

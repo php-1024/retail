@@ -375,7 +375,7 @@ class UserController extends CommonController
         // 组织id
         $organization_id = $this->admin_data['organization_id'];
         // 组织名称
-        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name')->first();
+        $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
         if (empty($search_content)) {
             $search_content = '';
         }

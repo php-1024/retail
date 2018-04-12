@@ -71,17 +71,17 @@ class SubordinateController extends Controller
                 AccountInfo::addAccountInfo(['account_id' => $account_id, 'realname' => $realname]);
                 if ($admin_data['is_super'] == 1) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺系统添加了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺系统添加了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了操作员：' . $account);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '添加下级人员失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '添加操作员失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '添加下级人员成功，账号是：' . $account, 'status' => '1']);
+            return response()->json(['data' => '添加操作员成功，账号是：' . $account, 'status' => '1']);
         }
     }
 
@@ -142,18 +142,18 @@ class SubordinateController extends Controller
                 }
                 if ($admin_data['is_super'] == 2) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统编辑了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统编辑了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了操作员：' . $account);//保存操作记录
                 }
                 //添加操作日志
                 DB::commit();
             } catch (\Exception $e) {
                 DB::rollBack();//事件回滚
-                return response()->json(['data' => '编辑下级人员失败，请检查', 'status' => '0']);
+                return response()->json(['data' => '编辑操作员失败，请检查', 'status' => '0']);
             }
-            return response()->json(['data' => '编辑下级人员成功', 'status' => '1']);
+            return response()->json(['data' => '编辑操作员成功', 'status' => '1']);
         }
     }
 
@@ -180,19 +180,19 @@ class SubordinateController extends Controller
                 Account::editAccount([['id', $id]], ['status' => '0']);
                 if ($admin_data['is_super'] == 1) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统冻结了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统冻结了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了操作员：' . $account);//保存操作记录
                 }
             } else {
                 Account::editAccount([['id', $id]], ['status' => '1']);
                 if ($admin_data['is_super'] == 1) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统解冻了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统解冻了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了下级人员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了操作员：' . $account);//保存操作记录
                 }
             }
             DB::commit();
@@ -214,7 +214,7 @@ class SubordinateController extends Controller
     //删除下级人员
     public function subordinate_delete_check(Request $request)
     {
-        echo "这里是删除下级人员";
+        echo "这里是删除操作员";
     }
 }
 

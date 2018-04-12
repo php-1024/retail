@@ -107,17 +107,30 @@ class PaysettingController extends Controller
         // 到款方式
         $type = $request->type;
 
-//        // 店铺名称
-//        $retail_name = $request->retail_name;
+        switch ($type) {
+            case "0":
+                $name = '未设置';
+                break;
+            case "1":
+                $name = 'T0';
+                break;
+            case "2":
+                $name = 'T1';
+                break;
+        }
+
+        // 店铺id
+        $retail_id = $request->retail_id;
+
+        // 店铺名称
+        $retail_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
 
         DB::beginTransaction();
         try {
             // 修改付款信息状态
             RetailShengpay::editShengpay([['id', $id]], ['type' => $type]);
-
             // 添加操作日志
-//            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝了付款信息店铺：' . $retail_name);
-
+            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了' . $retail_name . '付款状态：' . $name);
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
