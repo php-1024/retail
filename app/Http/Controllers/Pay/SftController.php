@@ -68,7 +68,7 @@ class SftController extends Controller
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "wp";
+        $param_body["payChannel"] = "hw";
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
