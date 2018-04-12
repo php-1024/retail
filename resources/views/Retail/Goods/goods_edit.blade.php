@@ -213,10 +213,10 @@
         });
     });
     //弹出大图
-    function bigthumb() {
-        var imgurl = $(this).attr('src');
-        console.log(imgurl);
+    function bigthumb(imgurl) {
+        var bigthumb = imgurl;
         $('#myModal').modal();
+        $('#myModal').innerHTML = bigthumb;
     }
 
     //弹出上传图片窗口
