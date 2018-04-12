@@ -64,7 +64,7 @@ class SftController extends Controller
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
-        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
+        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/notify";
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
@@ -95,10 +95,12 @@ class SftController extends Controller
 //        dump(\request()->all());
         //$test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
         //echo $test;
-
-        header('Location:');
+        echo "test2";
     }
 
+    public function notify(){
+        echo "OK";
+    }
 
     public function test3()
     {

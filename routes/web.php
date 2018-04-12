@@ -795,6 +795,7 @@ Route::group(['prefix' => 'pay'], function () {
     //微信通用路由组
     Route::group(['prefix' => 'sft'], function () {
         Route::any('test', 'Pay\SftController@test');//测试函数
+        Route::any('notity', 'Pay\SftController@notity');//测试函数
         Route::any('test2', 'Pay\SftController@test2');//测试函数
         Route::any('test3', 'Pay\SftController@test3');//测试函数
         Route::any('test4', 'Pay\SftController@test4');//测试函数
