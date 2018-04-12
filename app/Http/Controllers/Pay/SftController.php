@@ -60,7 +60,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(10,99);
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000" . rand(10, 99);
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -80,10 +80,10 @@ class SftController extends Controller
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
 
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
-        $res = json_decode($res,true);
+        $res = json_decode($res, true);
 
-        dump($res);
-        header('Location:'. $res["payUrl"]);
+//        dump($res);
+        header('Content-Type:text/html;charset= UTF-8;Location:' . $res["payUrl"]);
     }
 
     public function test2()
@@ -94,7 +94,6 @@ class SftController extends Controller
 
         header('Location:');
     }
-
 
 
     public function test3()
@@ -111,7 +110,7 @@ class SftController extends Controller
         $param_body["sftOrderNo"] = date('YmdHis');
         $param_body["exts"] = date('YmdHis');
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -133,7 +132,7 @@ class SftController extends Controller
         $param_body["exts"] = "";
 
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -155,7 +154,7 @@ class SftController extends Controller
         $param_body["exts"] = "";
 
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -183,7 +182,7 @@ class SftController extends Controller
         $param_body["exts"] = "";
 
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -200,7 +199,7 @@ class SftController extends Controller
         $param_body["paymentOrderNo"] = "";
         $param_body["sharingType"] = "";
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -218,7 +217,6 @@ class SftController extends Controller
 //            $param_body_attach_wxh5["attach"] = "";
 //        }
     }
-
 
 
     /**
