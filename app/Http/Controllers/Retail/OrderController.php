@@ -42,6 +42,7 @@ class OrderController extends Controller
         if (!empty($ordersn) && !empty($paytype) && $ordersn != null) {
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
+
         if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
             $where = [['retail_id' , $admin_data['organization_id']],['paytype' , $paytype]];
         }
