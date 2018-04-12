@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Zerone;
 
 use App\Http\Controllers\Controller;
 use App\Models\OperationLog;
+use App\Models\Organization;
 use App\Models\RetailShengpay;
 use App\Models\RetailShengpayTerminal;
 use Illuminate\Http\Request;
@@ -40,8 +41,13 @@ class PaysettingController extends Controller
         $id = $request->id;
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
+        // 店铺id
+        $retail_id = $request->retail_id;
 
-        return view('Zerone/Paysetting/payconfig_apply',['id'=>$id,'status'=>$status]);
+        $organization_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
+
+
+        return view('Zerone/Paysetting/payconfig_apply', ['organization_name' => $organization_name, 'id' => $id, 'status' => $status]);
     }
 
 
@@ -66,7 +72,7 @@ class PaysettingController extends Controller
         // 查询收款信息列表
         $list = RetailShengpayTerminal::getPaginage([], 15, 'id');
 
-        return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data,'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
     /**
@@ -79,7 +85,7 @@ class PaysettingController extends Controller
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
 
-        return view('Zerone/Paysetting/shengpay_apply',['id'=>$id,'status'=>$status]);
+        return view('Zerone/Paysetting/shengpay_apply', ['id' => $id, 'status' => $status]);
     }
 
 
@@ -97,20 +103,20 @@ class PaysettingController extends Controller
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
         // 查询终端号
-        $terminal_num = RetailShengpayTerminal::getPluck([['id',$id]],'terminal_num');
+        $terminal_num = RetailShengpayTerminal::getPluck([['id', $id]], 'terminal_num');
         // 如果查不到 打回
-        if(empty($terminal_num)){
+        if (empty($terminal_num)) {
             return response()->json(['data' => '查不到数据', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
             // 修改终端号状态
-            RetailShengpayTerminal::editShengpayTerminal([['id',$id]],['status'=>$status]);
+            RetailShengpayTerminal::editShengpayTerminal([['id', $id]], ['status' => $status]);
 
-            if($status == '1'){
+            if ($status == '1') {
                 // 添加操作日志
                 OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了终端号：' . $terminal_num);
-            }else{
+            } else {
                 // 添加操作日志
                 OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了终端号：' . $terminal_num);
             }
