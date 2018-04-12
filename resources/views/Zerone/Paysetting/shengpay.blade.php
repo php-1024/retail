@@ -142,7 +142,7 @@
 
 <script>
     // 审核
-    function getApplyForm(id,status,organization_id){
+    function getApplyForm(id,status,retail_id){
 
         var url = $('#shengpay_apply').val();
         var token = $('#_token').val();
@@ -158,7 +158,7 @@
             return;
         }
 
-        var data = {'id':id,'_token':token,'status':status,'organization_id':organization_id};
+        var data = {'id':id,'_token':token,'status':status,'retail_id':retail_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
