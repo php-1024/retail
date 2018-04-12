@@ -60,7 +60,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_100001";
+        $param_body["merchantOrderNo"] = "LS20180408_5_100002";
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -82,6 +82,12 @@ class SftController extends Controller
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
+    public function test2()
+    {
+//        dump(\request()->all());
+        $test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
+        echo $test;
+    }
 
 
 
@@ -207,10 +213,6 @@ class SftController extends Controller
 //        }
     }
 
-    public function test2()
-    {
-        dump(\request()->all());
-    }
 
 
     /**
