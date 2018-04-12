@@ -72,8 +72,8 @@
                                         <div class="col-sm-1">
                                             <select name="status" class="form-control m-b">
                                                 <option @if($search_data['status'] == null ) selected @endif>请选择</option>
-                                                <option value="0" @if($search_data['status']=='0') selected @endif >未支付</option>
-                                                <option value="1" @if($search_data['status']=='1') selected @endif >已支付</option>
+                                                <option value="0" @if($search_data['status']=='0') selected @endif >待付款</option>
+                                                <option value="1" @if($search_data['status']=='1') selected @endif >已付款</option>
                                                 <option value="3" @if($search_data['status']=='3') selected @endif >已完成</option>
                                                 <option value="-1" @if($search_data['status']=='-1') selected @endif >已取消</option>
                                             </select>
