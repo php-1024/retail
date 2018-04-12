@@ -81,9 +81,7 @@ class PaysettingController extends Controller
         $id = $request->id;
 
         $status = $request->status;
-
-        echo RetailShengpayTerminal::checkRowExists([['id',1]]);exit;
-
+        
         $terminal_num = RetailShengpayTerminal::getPluck([['id',$id]],'terminal_num');
         if(empty($terminal_num)){
             return response()->json(['data' => '查不到数据', 'status' => '0']);
