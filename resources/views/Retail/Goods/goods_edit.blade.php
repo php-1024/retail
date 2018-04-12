@@ -214,7 +214,11 @@
     });
     //弹出大图
     function bigthumb(imgurl) {
-        var bigthumb = '<div style="position:relative;width:100%;height:100%;"><img src="'+imgurl+'" style="position:absolute;width:80%;height:80%;left:0;right:0;margin:5% auto;"></div>';
+        var bigthumb = '<div style="position:relative;width:100%;height:100%;">' +
+                '<div style="position:absolute;width:80%;height:80%;left:0;right:0;margin:5% auto;">'+
+                '<img src="'+imgurl+'" style="width:100%;height:100%;">'+
+                '</div>'+
+            '</div>';
         $('#myModal').modal();
         console.log(bigthumb);
         $('#myModal').html(bigthumb);
