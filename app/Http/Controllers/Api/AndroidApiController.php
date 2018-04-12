@@ -68,7 +68,7 @@ class AndroidApiController extends Controller
             return response()->json(['msg' => 'pos机终端号没通过审核', 'status' => '0', 'data' => '']);
         }
         // 店铺名称
-        $organization_name = Organization::getPluck([['id', $data['organization_id']]], 'organization_name')->first();
+        $organization_name = Organization::getPluck([['id', $data['organization_id']]], 'organization_name');
         // 数据返回
         $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id'], 'account' => $data['account'], 'organization_id' => $data['organization_id'], 'uuid' => $data['uuid'], 'sft_num' => $shengpay['sft_num'], 'organization_name' => $organization_name]];
 
