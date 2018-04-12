@@ -82,8 +82,8 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>订单编号</th>
-                                        <th>用户账号</th>
-                                        <th>微信昵称</th>
+                                        <th>操作员账号</th>
+                                        <th>操作员昵称</th>
                                         <th>联系方式</th>
                                         <th>支付方式</th>
                                         <th>订单金额</th>
@@ -98,12 +98,9 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->ordersn}}</td>
-                                        @if($val->user != null)
-                                        <td>{{$val->user->account}}</td>
-                                        <td>{{$val->user->UserInfo->nickname}}</td>
-                                        <td>{{$val->user->mobile}}</td>
-                                        @endif
-
+                                        <td>{{$val->account->account}}</td>
+                                        <td>{{$val->account_info->realname}}</td>
+                                        <td>{{$val->account->mobile}}</td>
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td>
                                             <label class="label label-info">

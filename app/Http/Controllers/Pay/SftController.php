@@ -45,27 +45,27 @@ class SftController extends Controller
     public function test()
     {
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-//        $param_body["merchantNo"] = '11548088';
-//        $param_body["charset"] = 'UTF-8';
-//        $param_body["requestTime"] = date('YmdHis');
-//
-//
-//        // 业务参数
-//        // 订单号
-//        $param_body["merchantOrderNo"] = md5(time());
-//        // 交易金额
-//        $param_body["amount"] = "0.01";
-//        $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
-//        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
-//        $param_body["productName"] = md5(microtime(true));
-//        $param_body["currency"] = "CNY";
-//        $param_body["userIp"] = "120.78.140.10";
-//        $param_body["payChannel"] = "wp";
-////        $param_body["openid"] = '11548088';
-////        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
-////        $param_body["exts"] = '11548088';
-//
-//
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+
+        // 业务参数
+        // 订单号
+        $param_body["merchantOrderNo"] = md5(time());
+        // 交易金额
+        $param_body["amount"] = "0.01";
+        $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
+        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
+        $param_body["productName"] = md5(microtime(true));
+        $param_body["currency"] = "CNY";
+        $param_body["userIp"] = "120.78.140.10";
+        $param_body["payChannel"] = "wp";
+//        $param_body["openid"] = '11548088';
+//        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
+//        $param_body["exts"] = '11548088';
+
+
 //        if ($param_body["payChannel"] == 'hw') {
 //            $param_body_attach_wxh5["requestFrom"] = "ANDROID_APP";
 //            $param_body_attach_wxh5["app_name"] = "ANDROID_APP";
@@ -75,28 +75,22 @@ class SftController extends Controller
 //            $param_body_attach_wxh5["note"] = "";
 //            $param_body_attach_wxh5["attach"] = "";
 //        }
-//
-//        $param_head["signType"] = "MD5";
-//        $param_head["signMsg"] = md5(microtime());
 
 
-//        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+        $param_body["signType"] = "MD5";
+        $param_body["signMsg"] = md5(microtime());
 
-        $param_body_json = '{
-    "requestTime": "20171222111120", 
-    "charset": "UTF-8", 
-    "amount": "0.01", 
-    "expireTime": "20171222131120", 
-    "notifyUrl": "http://o2o.01nnt.com/pay/sft/test2", 
-    "userIp": "123.123.123.123", 
-    "currency": "CNY", 
-    "payChannel": "wp", 
-    "merchantOrderNo": "f2e03275ee25488f99e58630dfb02552", 
-    "productName": "测试商品", 
-    "merchantNo": "540511"
-}';
-        $res = $this->httpRequest($api_url, "post", $param_body_json);
-        dump($res);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
+
+        $origin = "5555";
+        foreach ($param_body as $key => $value) {
+            if (!empty($value)) {
+                $origin .= "&$key=$value";
+            }
+        }
+
+        $header = ["signType: MD5","signMsg:" . strtoupper(md5($origin . $this->key))];
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
     public function generateSignature($param)
@@ -105,6 +99,35 @@ class SftController extends Controller
     }
 
     public function test2()
+    {
+        $url = 'http://www.baidu.com';
+//        $param_body["signType"] = "MD5";
+//        $param_body["signMsg"] = md5(microtime());
+
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_HEADER, TRUE);    //表示需要response header
+        curl_setopt($ch, CURLOPT_NOBODY, FALSE); //表示需要response body
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, FALSE);
+        curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 120);
+
+        $header[] = "Content-type: application/x-www-form-urlencoded";
+        $header[] = "signType: MD5";
+        $header[] = "signMsg: MD5" . md5(microtime());
+        curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+        $result = curl_exec($ch);
+        $a = curl_getinfo($ch);
+
+        dump($result);
+        dd($a);
+
+    }
+
+    public function test3()
     {
         dd(request()->all());
 
@@ -120,7 +143,7 @@ class SftController extends Controller
         $prepare_data['i'] = 'iii';
         $prepare_data['k'] = '';
 
-        foreach ($prepare_data as $key=>$value) {
+        foreach ($prepare_data as $key => $value) {
             if (!empty($value))
                 $origin .= "&$key=$value";
         }
@@ -263,24 +286,30 @@ class SftController extends Controller
 //        curl_setopt($curl, CURLOPT_HEADER, true);
         curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1);
         // 指定最多的HTTP重定向的数量，这个选项是和CURLOPT_FOLLOWLOCATION一起使用的
-        curl_setopt($curl, CURLOPT_MAXREDIRS, 2);/**/
+        curl_setopt($curl, CURLOPT_MAXREDIRS, 2);
+
+
+        dump($headers);
+        // 添加请求头部
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLINFO_HEADER_OUT, true);
         // COOKIE带过去
 //        curl_setopt($curl, CURLOPT_COOKIE, $Cookiestr);
         $response = curl_exec($curl);
-        $requestinfo = curl_getinfo($curl);
+        $requestInfo = curl_getinfo($curl);
         $http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         // 开启调试模式就返回 curl 的结果
         if ($debug) {
             echo "=====post data======\r\n";
-            var_dump($postData);
+            dump($postData);
             echo "=====info===== \r\n";
-            print_r($requestinfo);
+            dump($requestInfo);
             echo "=====response=====\r\n";
-            print_r($response);
+            dump($response);
             echo "=====http_code=====\r\n";
-            print_r($http_code);
+            dump($http_code);
+
+            dump(curl_getinfo($curl, CURLINFO_HEADER_OUT));
         }
         curl_close($curl);
         return $response;

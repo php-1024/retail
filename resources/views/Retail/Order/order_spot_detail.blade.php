@@ -62,16 +62,16 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">用户账号</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->user->account}}
+                                                    {{$order->account->account}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 text-right" for="input-id-1">微信昵称</label>
+                                            <label class="col-sm-3 text-right" for="input-id-1">操作员昵称</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->user->UserInfo->nickname}}
+                                                    {{$order->account_info->realname}}
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +80,7 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">联系方式</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    {{$order->user->mobile}}
+                                                    {{$order->account->mobile}}
                                                 </div>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@
                         <div class="col-lg-8">
                             <section class="panel panel-default">
                                 <header class="panel-heading font-bold">
-                                    购物车 {{$order->user->UserInfo->nickname}}
+                                    购物车 {{$order->account_info->realname}}
                                 </header>
                                 <div class="panel-body">
                                     <table class="table table-striped">
