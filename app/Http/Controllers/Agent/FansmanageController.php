@@ -48,7 +48,6 @@ class FansmanageController extends Controller
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-
     //店铺结构
     public function fansmanage_structure(Request $request)
     {
