@@ -56,12 +56,13 @@ class PaysettingController extends Controller
     }
 
     /**
-     * 收款信息审核
+     * pos终端机审核ajax显示
      */
     public function shengpay_apply(Request $request)
     {
+        // pos终端机id
         $id = $request->id;
-
+        // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
 
         return view('Zerone/Paysetting/shengpay_apply',['id'=>$id,'status'=>$status]);
@@ -69,7 +70,7 @@ class PaysettingController extends Controller
 
 
     /**
-     * 收款信息审核
+     * pos终端机审核提交
      */
     public function shengpay_apply_check(Request $request)
     {
@@ -77,18 +78,19 @@ class PaysettingController extends Controller
         $admin_data = $request->get('admin_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-
+        // pos终端机id
         $id = $request->id;
-
+        // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
-        
+        // 查询终端号
         $terminal_num = RetailShengpayTerminal::getPluck([['id',$id]],'terminal_num');
+        // 如果查不到 打回
         if(empty($terminal_num)){
             return response()->json(['data' => '查不到数据', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
-
+            // 修改终端号状态
             RetailShengpayTerminal::editShengpayTerminal([['id',$id]],['status'=>$status]);
 
             if($status == '1'){
