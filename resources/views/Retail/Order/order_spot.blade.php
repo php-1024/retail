@@ -79,7 +79,7 @@
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                            <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;高级搜索</button>
                                         </div>
                                 </form>
                             </div>
