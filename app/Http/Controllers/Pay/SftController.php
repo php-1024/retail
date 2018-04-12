@@ -52,8 +52,6 @@ class SftController extends Controller
     {
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-
-
 //        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
 //        $param_body["merchantNo"] = '11548088';
 
@@ -64,7 +62,8 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000".mt_rand(100,999);
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(100,999);
+//        $param_body["merchantOrderNo"] = "LS20180408_5_1000003";
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -72,27 +71,23 @@ class SftController extends Controller
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "up";
+        $param_body["payChannel"] = "hw";
 
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
-
-
-        $param_body["exts"] = array(
-            "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
-            "app_name"=>"",// APP应用名称
-            "bundle_id"=>"",//IOS 应用唯一标识
-            "package_name"=>"",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
-            "wap_url"=>'http://www.17kx.com',//授权域名(报备时填写的域名地址)
-            "wap_name"=>"测试WAP",//WAP应用名称,网页标题
-            "note"=>"http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
-            "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
-        );
-
-
+//        $param_body["exts"] = array(
+//            "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
+//            "app_name"=>"",// APP应用名称
+//            "bundle_id"=>"",//IOS 应用唯一标识
+//            "package_name"=>"",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
+//            "wap_url"=>'http://www.17kx.com',//授权域名(报备时填写的域名地址)
+//            "wap_name"=>"测试WAP",//WAP应用名称,网页标题
+//            "note"=>"http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
+//            "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
+//        );
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
 
@@ -102,7 +97,7 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
         if(!empty($res["payUrl"])) {
-            //dump($res);
+//            dump($res);
             header('Location:' . $res["payUrl"]);
         }else{
             dd($res);
@@ -121,6 +116,9 @@ class SftController extends Controller
         echo "OK";
     }
 
+
+
+
     public function test3()
     {
         // 订单查询
@@ -131,7 +129,7 @@ class SftController extends Controller
         $param_body["requestTime"] = date('YmdHis');
 
 
-        $param_body["merchantOrderNo"] = date('YmdHis');
+        $param_body["merchantOrderNo"] = LS20180408_5_1000003;
         $param_body["sftOrderNo"] = date('YmdHis');
         $param_body["exts"] = date('YmdHis');
 
