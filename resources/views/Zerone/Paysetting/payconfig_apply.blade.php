@@ -2,6 +2,7 @@
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" value="{{$id}}">
     <input type="hidden" name="status" value="{{$status}}">
+    <input type="hidden" name="retail_name" value="{{$retail_name}}">
     <div class="modal-dialog modal-lg">
         <div class="modal-content animated fadeIn">
             <div class="modal-header">
@@ -10,7 +11,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-sm-2 control-label">店铺名称</label>
-                    <div class="col-sm-10">{{$organization_name}}</div>
+                    <div class="col-sm-10">{{$retail_name}}</div>
                 </div>
                 <div style="clear:both"></div>
                 <div class="hr-line-dashed"></div>
@@ -53,14 +54,13 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }

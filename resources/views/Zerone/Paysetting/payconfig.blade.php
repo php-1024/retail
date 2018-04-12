@@ -48,7 +48,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">店铺名称</label>
-                                {{--<input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">--}}
+                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入店铺名称" class="form-control">
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -103,9 +103,9 @@
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
                                             @if($value->status == 0)
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm({{ $value->id }},'1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
                                             @endif
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm({{ $value->id }},'-1')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
                                         </td>
 
                                     </tr>
@@ -115,7 +115,7 @@
                                 <tr>
                                     <td colspan="9" class="footable-visible">
                                         <ul class="pagination pull-right">
-                                            {{--{{$list->appends($search_data)->links()}}--}}
+                                            {{$list->appends($search_data)->links()}}
                                         </ul>
                                     </td>
                                 </tr>
@@ -151,7 +151,7 @@
 
 <script>
     // 审核
-    function getApplyForm(id,status){
+    function getApplyForm(id,status,retail_id){
         var url = $('#payconfig_apply').val();
         var token = $('#_token').val();
         if(id==''){
@@ -166,7 +166,7 @@
             return;
         }
 
-        var data = {'id':id,'_token':token,'status':status};
+        var data = {'id':id,'_token':token,'status':status,'retail_id':retail_id};
         $.post(url,data,function(response){
             if(response.status=='-1'){
                 swal({
