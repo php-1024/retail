@@ -97,9 +97,9 @@
                                         </td>
                                         <td>
                                             <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
-                                                <option value="0">未设置</option>
-                                                <option value="1">T0</option>
-                                                <option value="2">T1</option>
+                                                <option @if($value->type == 0) selected @endif value="0">未设置</option>
+                                                <option @if($value->type == 1) selected @endif value="1">T0</option>
+                                                <option @if($value->type == 2) selected @endif value="2">T1</option>
                                             </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>

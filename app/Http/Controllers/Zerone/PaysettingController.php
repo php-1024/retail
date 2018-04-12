@@ -117,7 +117,7 @@ class PaysettingController extends Controller
 
             // 添加操作日志
 //            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝了付款信息店铺：' . $retail_name);
-            
+
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
