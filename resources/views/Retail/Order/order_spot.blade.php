@@ -152,7 +152,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {{$list->links()}}
+                                        {{$list->appends($search_data)->links()}}
                                     </div>
                                 </div>
                             </footer>
