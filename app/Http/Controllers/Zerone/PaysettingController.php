@@ -41,8 +41,13 @@ class PaysettingController extends Controller
         $id = $request->id;
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
+        // 店铺id
+        $retail_id = $request->retail_id;
 
-        return view('Zerone/Paysetting/payconfig_apply', ['id' => $id, 'status' => $status]);
+        $organization_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
+
+
+        return view('Zerone/Paysetting/payconfig_apply', ['organization_name' => $organization_name, 'id' => $id, 'status' => $status]);
     }
 
 
@@ -79,12 +84,8 @@ class PaysettingController extends Controller
         $id = $request->id;
         // 状态值1表示审核通过，-1表示拒绝通过
         $status = $request->status;
-        // 店铺id
-        $retail_id = $request->retail_id;
-        dd($retail_id)    ;
-        $organization_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
 
-        return view('Zerone/Paysetting/shengpay_apply', ['organization_name' => $organization_name, 'id' => $id, 'status' => $status]);
+        return view('Zerone/Paysetting/shengpay_apply', ['id' => $id, 'status' => $status]);
     }
 
 
