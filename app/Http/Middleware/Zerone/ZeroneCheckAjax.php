@@ -145,6 +145,7 @@ class ZeroneCheckAjax
 
 
             case "zerone/ajax/shengpay_apply_check"://检测 登录 和 权限 和 安全密码 终端号审核功能提交
+            case "zerone/ajax/payconfig_apply_check"://检测 登录 和 权限 和 安全密码收款信息审核功能提交
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
                 break;
