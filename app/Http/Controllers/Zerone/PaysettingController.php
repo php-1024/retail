@@ -81,7 +81,7 @@ class PaysettingController extends Controller
         $status = $request->status;
         // 店铺id
         $retail_id = $request->retail_id;
-
+        dd($retail_id)    ;
         $organization_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
 
         return view('Zerone/Paysetting/shengpay_apply', ['organization_name' => $organization_name, 'id' => $id, 'status' => $status]);
