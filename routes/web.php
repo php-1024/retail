@@ -379,6 +379,7 @@ Route::group(['prefix' => 'agent'], function () {
     Route::group(['prefix' => 'fansmanage'], function () {
         Route::get('fansmanage_register', 'Agent\FansmanageController@fansmanage_register')->middleware('AgentCheck');//商户注册列表
         Route::get('fansmanage_list', 'Agent\FansmanageController@fansmanage_list')->middleware('AgentCheck');//商户列表
+        Route::get('fansmanage_listdemo', 'Agent\FansmanageController@fansmanage_listdemo')->middleware('AgentCheck');//商户列表
         Route::get('fansmanage_structure', 'Agent\FansmanageController@fansmanage_structure')->middleware('AgentCheck');//店铺结构
         Route::get('fansmanage_program', 'Agent\FansmanageController@fansmanage_program')->middleware('AgentCheck');//程序划拨
     });
