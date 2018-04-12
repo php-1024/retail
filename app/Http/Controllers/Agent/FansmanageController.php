@@ -175,7 +175,6 @@ class FansmanageController extends Controller
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
-
 }
 
 ?>
