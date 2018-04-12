@@ -115,7 +115,7 @@ class PaysettingController extends Controller
                 $name = 'T0';
                 break;
             case "2":
-                $name = 'T';
+                $name = 'T1';
                 break;
         }
 
