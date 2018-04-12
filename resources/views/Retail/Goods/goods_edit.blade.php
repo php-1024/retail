@@ -220,7 +220,7 @@
                            '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
                            '<h4 class="modal-title">浏览大图</h4></div>' +
                            '<div class="modal-body">' +
-                           '<img src="'+imgurl+'" style="position:absolute;width:auto;height:auto;" /></div></div></div>';
+                           '<img src="'+imgurl+'" style="position:absolute;left:0;top:0;max-width: 100%;height:auto;" /></div></div></div>';
         $('#myModal').modal();
         console.log(bigthumb);
         $('#myModal').html(bigthumb);
