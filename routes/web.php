@@ -330,6 +330,7 @@ Route::group(['prefix' => 'zerone'], function () {
         //支付审核
         Route::post('payconfig_apply', 'Zerone\PaysettingController@payconfig_apply')->middleware('ZeroneCheckAjax');            //付款信息ajax显示
         Route::post('payconfig_apply_check', 'Zerone\PaysettingController@payconfig_apply_check')->middleware('ZeroneCheckAjax');//付款信息功能提交
+        Route::post('payconfig_type', 'Zerone\PaysettingController@payconfig_type')->middleware('ZeroneCheckAjax');              //店铺到款状态
 
         Route::post('shengpay_apply', 'Zerone\PaysettingController@shengpay_apply')->middleware('ZeroneCheckAjax');            //终端号审核ajax显示
         Route::post('shengpay_apply_check', 'Zerone\PaysettingController@shengpay_apply_check')->middleware('ZeroneCheckAjax');//终端号审核功能提交

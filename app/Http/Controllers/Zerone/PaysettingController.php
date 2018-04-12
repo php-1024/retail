@@ -94,6 +94,40 @@ class PaysettingController extends Controller
     }
 
     /**
+     * 收款信息审核功能提交
+     */
+    public function payconfig_type(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 付款信息id
+        $id = $request->id;
+        // 到款方式
+        $type = $request->type;
+
+//        // 店铺名称
+//        $retail_name = $request->retail_name;
+
+        DB::beginTransaction();
+        try {
+            // 修改付款信息状态
+            RetailShengpay::editShengpay([['id', $id]], ['type' => $type]);
+
+            // 添加操作日志
+//            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝了付款信息店铺：' . $retail_name);
+            
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作成功', 'status' => '1']);
+    }
+
+    /**
      * 收款信息审核
      */
     public function shengpay(Request $request)

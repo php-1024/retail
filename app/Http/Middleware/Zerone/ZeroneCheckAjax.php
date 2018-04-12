@@ -191,6 +191,7 @@ class ZeroneCheckAjax
             //支付审核
             case "zerone/ajax/payconfig_apply":             //付款信息审核检测弹出登入和权限
             case "zerone/ajax/shengpay_apply":              //pos终端机审核检测弹出登入和权限
+            case "zerone/ajax/payconfig_type":              //pos终端机审核检测弹出登入和权限
             $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
