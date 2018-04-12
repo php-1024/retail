@@ -711,7 +711,9 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('goods_add_check', 'Retail\GoodsController@goods_add_check')->middleware('RetailCheckAjax');                   //商品添加检测
 
         Route::post('goods_delete', 'Retail\GoodsController@goods_delete')->middleware('RetailCheckAjax');                         //商品删除弹窗
+        Route::post('goods_status', 'Retail\GoodsController@goods_status')->middleware('RetailCheckAjax');                         //商品状态修改弹窗
         Route::post('goods_delete_check', 'Retail\GoodsController@goods_delete_check')->middleware('RetailCheckAjax');             //商品删除检测
+        Route::post('goods_status_check', 'Retail\GoodsController@goods_status_check')->middleware('RetailCheckAjax');             //商品状态修改检测
         Route::post('goods_thumb_delete', 'Retail\GoodsController@goods_thumb_delete')->middleware('RetailCheckAjax');              //商品图片删除弹窗
         Route::post('goods_thumb_delete_check', 'Retail\GoodsController@goods_thumb_delete_check')->middleware('RetailCheckAjax');  //商品图片删除检测
         Route::post('goods_edit_check', 'Retail\GoodsController@goods_edit_check')->middleware('RetailCheckAjax');                 //商品编辑检测
@@ -794,6 +796,11 @@ Route::group(['prefix' => 'pay'], function () {
     Route::group(['prefix' => 'sft'], function () {
         Route::any('test', 'Pay\SftController@test');//测试函数
         Route::any('test2', 'Pay\SftController@test2');//测试函数
+        Route::any('test3', 'Pay\SftController@test3');//测试函数
+        Route::any('test4', 'Pay\SftController@test4');//测试函数
+        Route::any('test5', 'Pay\SftController@test5');//测试函数
+        Route::any('test6', 'Pay\SftController@test6');//测试函数
+        Route::any('test7', 'Pay\SftController@test7');//测试函数
     });
 });
 /***************************对接支付接口路由*********************************/
