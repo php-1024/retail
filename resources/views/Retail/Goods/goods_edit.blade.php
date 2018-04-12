@@ -214,7 +214,7 @@
     });
     //弹出大图
     function bigthumb() {
-        var imgurl = this;
+        var imgurl = $(this).find('img').src;
         console.log(imgurl);
         $('#myModal').modal();
     }
