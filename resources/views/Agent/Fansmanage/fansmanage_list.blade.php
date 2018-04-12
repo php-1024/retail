@@ -53,22 +53,19 @@
                     <section class="panel">
                         <div class="panel-body">
                             <form class="form-horizontal tasi-form" method="get">
-
                                 <div class="form-group">
                                     <label class="control-label col-lg-1" for="inputSuccess">商户名称</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="商户名称">
+                                        <input type="text" name="fansmanage_name" class="form-control" placeholder="商户名称">
                                     </div>
                                     <label class="control-label col-lg-1" for="inputSuccess">手机号码</label>
                                     <div class="col-lg-2">
-                                        <input type="text" class="form-control" placeholder="手机号码">
+                                        <input type="text" name="fansmanage_owner_mobile" class="form-control" placeholder="手机号码">
                                     </div>
                                     <div class="col-lg-2">
                                         <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                                     </div>
-
                                 </div>
-
                             </form>
                         </div>
                     </section>
