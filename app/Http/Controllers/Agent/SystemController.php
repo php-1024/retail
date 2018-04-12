@@ -22,11 +22,10 @@ class SystemController extends Controller{
         $organization_id = $admin_data['organization_id'];//服务商id
         if($admin_data['is_super'] == 1 ){
             $list = Organization::getPaginage([['program_id','2']],20,'id');
-
             foreach($list as $key=>$value){
                 $list[$key]['warzone'] = Warzone::getPluck([['id', $value['warzoneAgent']['zone_id']]],'zone_name')->first();
             }
-
+            //选择代理服务商页面数据渲染
             return view('Agent/System/select_agent',['list'=>$list]);
         }else{
             $where = [['organization_id',$organization_id]];
@@ -41,7 +40,7 @@ class SystemController extends Controller{
             return view('Agent/System/index',['login_log_list'=>$login_log_list,'operation_log_list'=>$operation_log_list,'acc_num'=>$acc_num,'org_num'=>$org_num,'admin_data'=>$admin_data,'route_name'=>$route_name,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]);
         }
     }
-    //超级管理员选择服务商
+    //超级管理员选择服务商操作
     public function select_agent(Request $request){
         $admin_this = $request->get('admin_data');//中间件产生的管理员数据参数
         $organization_id = $request->input('organization_id');//中间件产生的管理员数据参数
@@ -83,10 +82,10 @@ class SystemController extends Controller{
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
     }
-//    //超级管理员选择服务商
-//    public function switch_status(Request $request){
-//        return redirect('agent');
-//    }
+    //超级管理员选择服务商
+    public function switch_status(Request $request){
+        return redirect('agent');
+    }
 
     //公司信息设置页面
     public function agent_info(Request $request){
