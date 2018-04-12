@@ -107,7 +107,7 @@ class PaysettingController extends Controller
         // 到款方式
         $type = $request->type;
 
-        switch ($type){
+        switch ($type) {
             case "0":
                 $name = '未设置';
                 break;
@@ -123,7 +123,7 @@ class PaysettingController extends Controller
         $retail_id = $request->retail_id;
 
         // 店铺名称
-        $retail_name = Organization::getPluck([['id',$retail_id]],'organization_name');
+        $retail_name = Organization::getPluck([['id', $retail_id]], 'organization_name');
 
         DB::beginTransaction();
         try {
@@ -131,7 +131,7 @@ class PaysettingController extends Controller
             RetailShengpay::editShengpay([['id', $id]], ['type' => $type]);
 
             // 添加操作日志
-            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了'.$retail_name.'付款状态：' .$name );
+            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了' . $retail_name . '付款状态：' . $name);
 
             DB::commit();
         } catch (\Exception $e) {
