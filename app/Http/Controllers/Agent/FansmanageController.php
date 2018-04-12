@@ -47,13 +47,15 @@ class FansmanageController extends Controller
         $fansmanage_name = $request->input('fansmanage_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
         $organization = $admin_data['organization_id'];
+        $where[] = '';
         if (!empty($fansmanage_name)) {
-            $where[] = ['fansmanage_name', 'like', '%' . $fansmanage_name . '%'];
+            $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
+
         if (!empty($fansmanage_owner_mobile)) {
             $where[] = ['fansmanage_owner_mobile', $fansmanage_owner_mobile];
         }
-        $list = Organization::getPaginagefansmanage([['parent_id', $organization], ['program_id', 3]], 10, 'id');
+        $list = Organization::getPaginagefansmanage([['parent_id', $organization],$where, ['program_id', 3]], 10, 'id');
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 

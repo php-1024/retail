@@ -42,11 +42,11 @@ class SftController extends Controller
         ],
     ];
 
-    protected $origin_key = "liuxingwen05118888";
-    protected $merchantNo = "11548088";
-
 //    protected $origin_key = "liuxingwen05118888";
-//    protected $merchantNo = "540511";
+//    protected $merchantNo = "11548088";
+
+    protected $origin_key = "liuxingwen05118888";
+    protected $merchantNo = "support4test";
 
     public function test()
     {
@@ -60,7 +60,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000".mt_rand(100,999);
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000001";
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
@@ -123,7 +123,7 @@ class SftController extends Controller
         // 订单查询
         $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/query.htm";
 
-        $param_body["merchantNo"] = '11548088';
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
