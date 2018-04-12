@@ -42,11 +42,11 @@ class SftController extends Controller
         ],
     ];
 
-//    protected $origin_key = "liuxingwen05118888";
-//    protected $merchantNo = "11548088";
-
     protected $origin_key = "liuxingwen05118888";
-    protected $merchantNo = "540511";
+    protected $merchantNo = "11548088";
+
+//    protected $origin_key = "liuxingwen05118888";
+//    protected $merchantNo = "540511";
 
     public function test()
     {
@@ -83,7 +83,7 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
         if(!empty($res["payUrl"])) {
-            return "<iframe src='{$res["payUrl"]}'></iframe>";
+            dump($res);
 //            header('Location:' . $res["payUrl"]);
         }else{
             dd($res);
