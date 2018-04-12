@@ -31,30 +31,22 @@ class OrderController extends Controller
         $status = $request->get('status');                  //接收订单状态
         $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = [['retail_id' , $admin_data['organization_id']]];
-
+        //按订单编号搜索
+        if (!empty($ordersn) && $ordersn != null) {
+            $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
+        }
+        //按用户账号搜索
         if (!empty($user_id) && $user_id != null) {
-            dump(1);
             $where = [['retail_id' , $admin_data['organization_id']],['user_id' , $user_id]];
         }
-        if (!empty($ordersn) && $ordersn != null) {
-            dump(2);
-            $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
-        }
-
-        if (!empty($ordersn) && $ordersn != null && !empty($paytype) && !empty($status)) {
-            dump(3);
-            $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
-        }
-
+        //按照支付方式搜索
         if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
-            dump(4);
             $where = [['retail_id' , $admin_data['organization_id']],['paytype' , $paytype]];
         }
+        //按照订单状态搜索
         if (!empty($status) && $status != '请选择' || $status == '0') {
-            dump(5);
             $where = [['retail_id' , $admin_data['organization_id']],['status' , $status]];
         }
-
 
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
