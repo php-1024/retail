@@ -129,10 +129,8 @@ class PaysettingController extends Controller
         try {
             // 修改付款信息状态
             RetailShengpay::editShengpay([['id', $id]], ['type' => $type]);
-
             // 添加操作日志
             OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了' . $retail_name . '付款状态：' . $name);
-
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
