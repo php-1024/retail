@@ -209,10 +209,10 @@ class PaysettingController extends Controller
 
             if ($status == '1') {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了' . $retail_name . '终端号：' . $terminal_num);
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了--' . $retail_name . '--终端号：' . $terminal_num);
             } else {
                 // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了' . $retail_name . '终端号：' . $terminal_num);
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了--' . $retail_name . '--终端号：' . $terminal_num);
             }
 
             DB::commit();
