@@ -272,7 +272,6 @@ class GoodsController extends Controller
             $status = 1;
             $stock = RetailGoods::getPluck(['id'=>$goods_id],'stock')->first();
             $tips = '上架';
-            dd($stock);
         }elseif($status == 1){
             $status = '0';
             $stock = '0';
