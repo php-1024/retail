@@ -711,9 +711,9 @@ Route::group(['prefix' => 'retail'], function () {
         Route::post('goods_add_check', 'Retail\GoodsController@goods_add_check')->middleware('RetailCheckAjax');                   //商品添加检测
 
         Route::post('goods_delete', 'Retail\GoodsController@goods_delete')->middleware('RetailCheckAjax');                         //商品删除弹窗
-        Route::post('goods_status', 'Retail\GoodsController@goods_status')->middleware('RetailCheckAjax');                         //商品删除弹窗
+        Route::post('goods_status', 'Retail\GoodsController@goods_status')->middleware('RetailCheckAjax');                         //商品状态修改弹窗
         Route::post('goods_delete_check', 'Retail\GoodsController@goods_delete_check')->middleware('RetailCheckAjax');             //商品删除检测
-        Route::post('goods_status_check', 'Retail\GoodsController@goods_status_check')->middleware('RetailCheckAjax');             //商品删除检测
+        Route::post('goods_status_check', 'Retail\GoodsController@goods_status_check')->middleware('RetailCheckAjax');             //商品状态修改检测
         Route::post('goods_thumb_delete', 'Retail\GoodsController@goods_thumb_delete')->middleware('RetailCheckAjax');              //商品图片删除弹窗
         Route::post('goods_thumb_delete_check', 'Retail\GoodsController@goods_thumb_delete_check')->middleware('RetailCheckAjax');  //商品图片删除检测
         Route::post('goods_edit_check', 'Retail\GoodsController@goods_edit_check')->middleware('RetailCheckAjax');                 //商品编辑检测
