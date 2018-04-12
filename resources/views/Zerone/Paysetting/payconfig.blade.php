@@ -152,7 +152,7 @@
 <script>
     // 审核
     function getApplyForm(id,status){
-        var url = $('#shengpay_apply').val();
+        var url = $('#payconfig_apply').val();
         var token = $('#_token').val();
         if(id==''){
             swal({
