@@ -208,7 +208,7 @@ class Organization extends Model
     //获取分页数据-服务商
     public static function getPaginage($where, $paginate, $orderby, $sort = 'DESC')
     {
-        return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
+        return self::with('warzoneAgent')->with('organizationAgentinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate)->toarray();
     }
 
     //获取分页数据-商户
