@@ -271,10 +271,12 @@ class GoodsController extends Controller
         if ($status == 0){
             $status = 1;
             $stock = RetailGoods::getPluck(['id'=>$goods_id],'stock');
+            $tips = '上架';
 //            dd($stock);
         }elseif($status == 1){
             $status = 0;
             $stock = '0';
+            $tips = '下架';
         }
         $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id')->first();
         DB::beginTransaction();
@@ -283,16 +285,16 @@ class GoodsController extends Controller
             RetailStock::editStock(['id'=>$id],['stock'=>$stock]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统上架了商品！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统'.$tips.'了商品！');//保存操作记录
             } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, $tips.'了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => '删除商品失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips.'商品失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '删除商品成功', 'status' => '1']);
+        return response()->json(['data' => $tips.'商品成功', 'status' => '1']);
     }
 
     //删除商品操作
