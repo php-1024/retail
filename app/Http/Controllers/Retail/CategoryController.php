@@ -36,7 +36,7 @@ class CategoryController extends Controller
         if (empty($category_sort)){
             $category_sort = '0';
         }
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $names = RetailCategory::checkRowExists(['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'name' => $category_name]);
         if($names) {//判断分类是已经存在
             return response()->json(['data' => '分类名称重名，请重新输入！', 'status' => '0']);

@@ -144,7 +144,7 @@ class AndroidApiController extends Controller
                 $order_price += $v['price'] * $v['num'];
             }
         }
-        $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id')->first();
+        $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id');
         $num = RetailOrder::where([['retail_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
         $num += 1;
         $sort = 100000 + $num;
