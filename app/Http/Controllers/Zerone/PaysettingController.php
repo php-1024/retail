@@ -82,7 +82,7 @@ class PaysettingController extends Controller
 
         $status = $request->status;
 
-        echo RetailShengpayTerminal::checkRowExists([['id',5]]);exit;
+        echo RetailShengpayTerminal::checkRowExists([['id',1]]);exit;
 
         $terminal_num = RetailShengpayTerminal::getPluck([['id',$id]],'terminal_num');
         if(empty($terminal_num)){
