@@ -39,7 +39,7 @@ class OrderController extends Controller
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
 
-        if (!empty($ordersn) && $ordersn != null && !empty($paytype)) {
+        if (!empty($ordersn) && $ordersn != null && !empty($paytype) && !empty($status)) {
             dd($request);
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
