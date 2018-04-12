@@ -50,8 +50,8 @@ class FansmanageController extends Controller
         if (!empty($fansmanage_name)) {
             $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
-
         if (!empty($fansmanage_owner_mobile)) {
+
             $where[] = ['fansmanage_owner_mobile', $fansmanage_owner_mobile];
         }
         $list = Organization::getPaginagefansmanage([$where, ['program_id', 3]], 10, 'id');
