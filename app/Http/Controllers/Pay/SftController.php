@@ -79,13 +79,14 @@ class SftController extends Controller
 //        $origin_key = "liuxingwen05118888";
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
 
-//        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
-//        $res = json_decode($res, true);
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
+        $res = json_decode($res, true);
 
-//        dump($res);
-//        header('Content-Type:text/html;charset= UTF-8;Location:' . $res["payUrl"]);
-//        header('Content-Type:text/html;charset= UTF-8;Location:http://www.baidu.com');
-        header('Location:http://www.baidu.com');
+        if(!empty($res["payUrl"])) {
+            header('Location:' . $res["payUrl"]);
+        }else{
+            dd($res);
+        }
     }
 
     public function test2()
