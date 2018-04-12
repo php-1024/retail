@@ -83,7 +83,8 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
 //        dump($res);
-        header('Content-Type:text/html;charset= UTF-8;Location:' . $res["payUrl"]);
+//        header('Content-Type:text/html;charset= UTF-8;Location:' . $res["payUrl"]);
+        header('Content-Type:text/html;charset= UTF-8;Location:http://www.baidu.com');
     }
 
     public function test2()
