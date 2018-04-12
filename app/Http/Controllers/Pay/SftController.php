@@ -83,7 +83,8 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
         if(!empty($res["payUrl"])) {
-            header('Location:' . $res["payUrl"]);
+            return "<iframe src='{$res["payUrl"]}'></iframe>";
+//            header('Location:' . $res["payUrl"]);
         }else{
             dd($res);
         }
