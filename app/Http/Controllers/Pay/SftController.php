@@ -60,7 +60,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_100006";
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(10,99);
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
