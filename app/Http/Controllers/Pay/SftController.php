@@ -83,8 +83,8 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
         if(!empty($res["payUrl"])) {
-            dump($res);
-//            header('Location:' . $res["payUrl"]);
+            //dump($res);
+            header('Location:' . $res["payUrl"]);
         }else{
             dd($res);
         }
