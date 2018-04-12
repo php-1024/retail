@@ -43,40 +43,77 @@ class SftController extends Controller
     ];
 
     protected $origin_key = "liuxingwen05118888";
+    protected $merchantNo = "11548088";
+
+//    protected $origin_key = "liuxingwen05118888";
+//    protected $merchantNo = "540511";
 
     public function test()
     {
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-        $param_body["merchantNo"] = '11548088';
+//        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
+//        $param_body["merchantNo"] = '11548088';
+        $param_body["merchantNo"] = '540511';
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_100001";
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000".mt_rand(100,999);
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
-        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/test2";
+        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/notify";
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "wp";
+        $param_body["payChannel"] = "ow";
 
 //        $param_body["openid"] = '11548088';
-//        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
+        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
 //        $param_body["exts"] = '11548088';
 
-        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);;
-        $origin_key = "liuxingwen05118888";
+
+        $param_body["exts"] = array(
+            "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
+            "app_name"=>"",// APP应用名称
+            "bundle_id"=>"",//IOS 应用唯一标识
+            "package_name"=>"",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
+            "wap_url"=>'45.77.198.100',//授权域名(报备时填写的域名地址)
+            "wap_name"=>"测试WAP",//WAP应用名称,网页标题
+            "note"=>"45.77.198.100",//为商户自定义的跟本次交易有关的参数
+            "attach"=>"" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
+        );
+
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+
+        $origin_key = "support4test";
+//        $origin_key = "liuxingwen05118888";
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
 
-        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
+        $res = json_decode($res, true);
+
+        if(!empty($res["payUrl"])) {
+            //dump($res);
+            header('Location:' . $res["payUrl"]);
+        }else{
+            dd($res);
+        }
     }
 
+    public function test2()
+    {
+//        dump(\request()->all());
+        //$test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
+        //echo $test;
+        echo "test2";
+    }
 
-
+    public function notify(){
+        echo "OK";
+    }
 
     public function test3()
     {
@@ -92,7 +129,7 @@ class SftController extends Controller
         $param_body["sftOrderNo"] = date('YmdHis');
         $param_body["exts"] = date('YmdHis');
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -114,7 +151,7 @@ class SftController extends Controller
         $param_body["exts"] = "";
 
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
@@ -136,13 +173,55 @@ class SftController extends Controller
         $param_body["exts"] = "";
 
 
-        $param_body_json = json_encode($param_body,JSON_UNESCAPED_UNICODE);
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
+    public function test6()
+    {
+        // 分账
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/sharing.htm";
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
 
 
+        $param_body["sharingOrderNo"] = "";
+        $param_body["merchantOrderNo"] = "";
+        $param_body["notifyURL"] = "";
+
+        $param_body["sharingReqItem"][0]["sharingNo"] = "";
+        $param_body["sharingReqItem"][0]["sharingAmount"] = "";
+        $param_body["sharingReqItem"][0]["sharingRate"] = "";
+        $param_body["sharingReqItem"][0]["payeeId"] = "";
+        $param_body["sharingReqItem"][0]["payeeIdType"] = "";
+
+
+        $param_body["exts"] = "";
+
+
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
+
+    public function test7()
+    {
+        // 分账查询
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/sharingQuery.htm";
+        $param_body["merchantNo"] = '11548088';
+        $param_body["charset"] = 'UTF-8';
+        $param_body["requestTime"] = date('YmdHis');
+
+        $param_body["sharingQueryOrderNo"] = "";
+        $param_body["paymentOrderNo"] = "";
+        $param_body["sharingType"] = "";
+
+        $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+        $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+    }
 
 
     public function generateSignature($param)
@@ -156,11 +235,6 @@ class SftController extends Controller
 //            $param_body_attach_wxh5["note"] = "";
 //            $param_body_attach_wxh5["attach"] = "";
 //        }
-    }
-
-    public function test2()
-    {
-        dump(\request()->all());
     }
 
 
@@ -277,8 +351,6 @@ class SftController extends Controller
         // 指定最多的HTTP重定向的数量，这个选项是和CURLOPT_FOLLOWLOCATION一起使用的
         curl_setopt($curl, CURLOPT_MAXREDIRS, 2);
 
-
-        dump($headers);
         // 添加请求头部
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLINFO_HEADER_OUT, true);
