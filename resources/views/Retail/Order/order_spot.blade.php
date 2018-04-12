@@ -48,6 +48,8 @@
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
                                         <label class="col-sm-1 control-label">用户账号</label>
                                         <div class="col-sm-1">
