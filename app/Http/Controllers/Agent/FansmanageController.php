@@ -46,7 +46,6 @@ class FansmanageController extends Controller
         $route_name = $request->path();//获取当前的页面路由
         $fansmanage_name = $request->input('fansmanage_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
-        $search_data = ['fansmanage_name' => $fansmanage_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
         $organization = $admin_data['organization_id'];
 
         if (!empty($fansmanage_name)) {
