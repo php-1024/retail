@@ -95,6 +95,7 @@ class SftController extends Controller
     "merchantNo": "11548088"
 }';
 
+
 //        $origin .= '&signType=MD5&merchantKey=liuxingwen05118888';
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json))];
 
