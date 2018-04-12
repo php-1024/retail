@@ -35,7 +35,11 @@ class OrderController extends Controller
         if (!empty($user_id) && $user_id != null) {
             $where = [['retail_id' , $admin_data['organization_id']],['user_id' , $user_id]];
         }
-        if (!empty($ordersn) && $ordersn != null || !empty($ordersn) && $ordersn != null && !empty($paytype) && $paytype != '请选择' || $paytype == '0') {
+        if (!empty($ordersn) && $ordersn != null) {
+            $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
+        }
+
+        if (!empty($ordersn) && !empty($paytype) && $ordersn != null) {
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
         if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
