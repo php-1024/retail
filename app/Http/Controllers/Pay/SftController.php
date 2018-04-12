@@ -100,7 +100,7 @@ class SftController extends Controller
 
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
-            XhoLog::create(["name"=>"跳转前","content" => $res]);
+            XhoLog::create(["name" => "跳转前", "content" => $res]);
             header('Location:' . $res_arr["payUrl"]);
         } else {
             dd($res_arr);
@@ -109,8 +109,8 @@ class SftController extends Controller
 
     public function test2()
     {
-        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
-        XhoLog::create(["name"=>"test2","content" => $res]);
+        $res = json_encode(\request()->all(), JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name" => "test2", "content" => $res]);
 
 //        $test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
 //        echo $test;
@@ -119,8 +119,8 @@ class SftController extends Controller
 
     public function notify()
     {
-        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
-        XhoLog::create(["name"=>"notify","content" => $res]);
+        $res = json_encode(\request()->all(), JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name" => "notify", "content" => $res]);
         echo "OK";
     }
 
@@ -173,22 +173,22 @@ class SftController extends Controller
 
     public function test8()
     {
-        XhoLog::create(["name"=>"退款通知","content" => \request()->all()]);
+        XhoLog::create(["name" => "退款通知", "content" => \request()->all()]);
     }
 
     public function test5()
     {
         // 退款查询
         $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refundQuery.htm";
-        $param_body["merchantNo"] = '11548088';
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
         $param_body["refundOrderNo"] = "TK20180408_5_1000419";
         $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
 //        $param_body["refundTransNo"] = "20180412161624998";
-        $param_body["sftOrderNo"] = null;
-        $param_body["exts"] = null;
+//        $param_body["sftOrderNo"] = null;
+//        $param_body["exts"] = null;
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
