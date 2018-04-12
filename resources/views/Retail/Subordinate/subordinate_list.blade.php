@@ -45,7 +45,7 @@
                                     <input type="hidden" id="subordinate_lock" value="{{ url('retail/ajax/subordinate_lock') }}">
                                     <input type="hidden" id="subordinate_delete" value="{{ url('retail/ajax/subordinate_delete') }}">
                                     <input type="hidden" id="subordinate_authorize_url" value="{{ url('retail/ajax/subordinate_authorize') }}">
-                                    <label class="col-sm-1 control-label">下属账号</label>
+                                    <label class="col-sm-1 control-label">操作员账号</label>
 
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" name="account" type="text" value="{{$search_data['account']}}">
