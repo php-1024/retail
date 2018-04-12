@@ -40,7 +40,7 @@ class SupplierController extends Controller
         if (empty($displayorder)){
             $displayorder = '0';
         }
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $supplier_data = [
             'company_name' => $company_name,
             'contactname' => $contactname,

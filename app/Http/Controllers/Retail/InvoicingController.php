@@ -157,7 +157,7 @@ class InvoicingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
 
 
         $organization_id = $admin_data['organization_id'];
@@ -238,7 +238,7 @@ class InvoicingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
 
         $organization_id = $admin_data['organization_id'];
         $num = RetailLossOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
@@ -318,7 +318,7 @@ class InvoicingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id')->first();
+        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
 
         $organization_id = $admin_data['organization_id'];
         $num = RetailCheckOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
