@@ -78,7 +78,7 @@ class SftController extends Controller
 //        $param_body["exts"] = '11548088';
 
         $param_body["exts"] = array(
-            "requestFrom"=>"ANDROID_APP",//ANDROID_APP, IOS_APP, WAP
+            "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
             "app_name"=>"",// APP应用名称
             "bundle_id"=>"",//IOS 应用唯一标识
             "package_name"=>"",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
