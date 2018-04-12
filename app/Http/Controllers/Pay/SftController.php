@@ -83,7 +83,7 @@ class SftController extends Controller
         $origin .= '&signType=MD5&merchantKey=liuxingwen05118888';
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($origin))];
 
-        $res = $this->httpRequest($api_url, "post", $param_body, $header, true);
+        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
     public function generateSignature($param)
