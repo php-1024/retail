@@ -38,7 +38,7 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight ecommerce">
             <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-            <input type="hidden" id="fansmanage_list_edit" value="{{ url('zerone/ajax/fansmanage_list_edit') }}">
+            <input type="hidden" id="payconfig_apply" value="{{ url('zerone/ajax/payconfig_apply') }}">
             <input type="hidden" id="fansmanage_list_lock" value="{{ url('zerone/ajax/fansmanage_list_lock') }}">
 
             <div class="ibox-content m-b-sm border-bottom">
