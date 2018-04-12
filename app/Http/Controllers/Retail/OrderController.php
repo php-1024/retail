@@ -33,22 +33,29 @@ class OrderController extends Controller
         $where = [['retail_id' , $admin_data['organization_id']]];
 
         if (!empty($user_id) && $user_id != null) {
+            dump(1);
             $where = [['retail_id' , $admin_data['organization_id']],['user_id' , $user_id]];
         }
         if (!empty($ordersn) && $ordersn != null) {
+            dump(2);
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
 
         if (!empty($ordersn) && $ordersn != null && !empty($paytype) && !empty($status)) {
+            dump(3);
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
 
         if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
+            dump(4);
             $where = [['retail_id' , $admin_data['organization_id']],['paytype' , $paytype]];
         }
         if (!empty($status) && $status != '请选择' || $status == '0') {
+            dump(5);
             $where = [['retail_id' , $admin_data['organization_id']],['status' , $status]];
         }
+
+
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
