@@ -100,7 +100,7 @@ class SftController extends Controller
 
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
-            XhoLog::create(["content" => $res]);
+            XhoLog::create(["name"=>"跳转前","content" => $res]);
             header('Location:' . $res_arr["payUrl"]);
         } else {
             dd($res_arr);
@@ -109,14 +109,18 @@ class SftController extends Controller
 
     public function test2()
     {
-        dump(\request()->all());
+        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name"=>"test2","content" => $res]);
+
 //        $test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
 //        echo $test;
-//        echo "test2";
+        echo "test2";
     }
 
     public function notify()
     {
+        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name"=>"notify","content" => $res]);
         echo "OK";
     }
 
