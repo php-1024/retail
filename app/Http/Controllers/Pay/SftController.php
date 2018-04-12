@@ -80,8 +80,7 @@ class SftController extends Controller
             'wap_url'=>'http://o2o.01nnt.com',
         ];
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
-        dump($param_body_json);
-        exit();
+
         $origin_key = "support4test";
 //        $origin_key = "liuxingwen05118888";
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $origin_key))];
@@ -90,8 +89,8 @@ class SftController extends Controller
         $res = json_decode($res, true);
 
         if(!empty($res["payUrl"])) {
-            //dump($res);
-            header('Location:' . $res["payUrl"]);
+            dump($res);
+            //header('Location:' . $res["payUrl"]);
         }else{
             dd($res);
         }
