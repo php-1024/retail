@@ -105,7 +105,7 @@ class PaysettingController extends Controller
             DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
-        return response()->json(['data' => '操作失败', 'status' => '1']);
+        return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
 }
