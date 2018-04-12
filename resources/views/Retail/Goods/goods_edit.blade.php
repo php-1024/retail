@@ -214,15 +214,23 @@
     });
     //弹出大图
     function bigthumb(imgurl) {
-        var bigthumb = "<div style='position:relative;width:100%;height:100%;'><img src='"+imgurl+"' style='position:absolute;width:80%;height:80%;left:0;right:0;margin:5% auto;'></div>";;
+            var bigthumb = '<div class="modal-dialog">'+
+                           '<div class="modal-content">'+
+                           '<div class="modal-header">' +
+                           '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>' +
+                           '<h4 class="modal-title">浏览大图</h4></div>' +
+                           '<div class="modal-body">' +
+                           '<img src="'+imgurl+'" style="max-width: 100%;height:auto;" /></div></div></div>';
         $('#myModal').modal();
-        $('#myModal').innerHTML = bigthumb;
+        console.log(bigthumb);
+        $('#myModal').html(bigthumb);
     }
 
     //弹出上传图片窗口
     function addthumb() {
         $('#myModal_thumb').modal();
     }
+
 
     //编辑提交表单
     function postEditForm() {
