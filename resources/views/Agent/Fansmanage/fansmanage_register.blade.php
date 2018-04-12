@@ -70,6 +70,7 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <div class="panel-body">
+
                             <form class="form-horizontal tasi-form" method="get" action="">
                                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                 <div class="form-group">
@@ -86,6 +87,7 @@
                                     </div>
                                 </div>
                             </form>
+
                         </div>
                     </section>
                 </div>
