@@ -96,10 +96,10 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}')">
-                                                <option value="0">未设置</option>
-                                                <option value="1">T0</option>
-                                                <option value="2">T1</option>
+                                            <select style="width:100px"  onchange="changeUserTag(this,'{{$value->id}}','{{$value->organization->id}}')">
+                                                <option @if($value->type == 0) selected @endif value="0">未设置</option>
+                                                <option @if($value->type == 1) selected @endif value="1">T0</option>
+                                                <option @if($value->type == 2) selected @endif value="2">T1</option>
                                             </select>
                                         </td>
                                         <td>{{ $value->created_at }}</td>
@@ -189,13 +189,13 @@
 
 
     // 审核
-    function changeUserTag(obj,id){
+    function changeUserTag(obj,id,retail_id){
 
         var type = $(obj).val();
         var url = $('#payconfig_type').val();
         var token = $('#_token').val();
 
-        var data = {'id':id,'_token':token,'type':type};
+        var data = {'id':id,'_token':token,'type':type,'retail_id':retail_id};
 
         $.post(url, data, function (json) {
             if (json.status == -1) {
@@ -210,14 +210,13 @@
                     window.location.reload();
                 });
             }else{
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }

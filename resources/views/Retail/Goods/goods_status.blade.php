@@ -1,6 +1,6 @@
 <form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/goods_status_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <input type="hidden" name="id" value="{{$id}}">
+    <input type="hidden" name="goods_id" value="{{$goods_id}}">
     <input type="hidden" name="status" value="{{$status}}">
     <div class="modal-dialog">
         <div class="modal-content">
