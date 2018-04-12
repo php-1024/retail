@@ -188,7 +188,7 @@ class SftController extends Controller
         $param_body["refundOrderNo"] = "TK20180408_5_1000419";
         $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
         $param_body["refundTransNo"] = "20180412161624998";
-        $param_body["sftOrderNo"] = "";
+        $param_body["sftOrderNo"] = null;
         $param_body["exts"] = null;
 
 
