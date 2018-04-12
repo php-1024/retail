@@ -71,7 +71,7 @@
                                         <th>商品分类</th>
                                         <th>库存</th>
                                         <th>排序</th>
-                                        <th>商品状态</th>
+                                        <th>商品状态（点击可切换状态）</th>
                                         <th>添加时间</th>
                                         <th>操作</th>
                                     </tr>
@@ -94,7 +94,7 @@
                                             {{$val->displayorder}}
                                         </td>
                                         <td>
-                                            <label class="label label-success">在售</label>
+                                            <label class="label label-success">销售中</label>
                                         </td>
                                         <td>{{$val->created_at}}</td>
                                         <td>
