@@ -334,8 +334,6 @@ class SftController extends Controller
         // 指定最多的HTTP重定向的数量，这个选项是和CURLOPT_FOLLOWLOCATION一起使用的
         curl_setopt($curl, CURLOPT_MAXREDIRS, 2);
 
-
-        dump($headers);
         // 添加请求头部
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($curl, CURLINFO_HEADER_OUT, true);
