@@ -73,9 +73,11 @@ class SftController extends Controller
         $param_body["userIp"] = "120.78.140.10";
         $param_body["payChannel"] = "hw";
 
+
+
+
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
-//        $param_body["exts"] = '11548088';
 
         $param_body["exts"] = array(
             "requestFrom"=>"WAP",//ANDROID_APP, IOS_APP, WAP
