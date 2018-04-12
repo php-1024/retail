@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Zerone;
 
 use App\Http\Controllers\Controller;
+use App\Models\OperationLog;
 use App\Models\RetailShengpay;
 use App\Models\RetailShengpayTerminal;
 use Illuminate\Http\Request;
@@ -64,6 +65,47 @@ class PaysettingController extends Controller
         $status = $request->status;
 
         return view('Zerone/Paysetting/shengpay_apply',['id'=>$id,'status'=>$status]);
+    }
+
+
+    /**
+     * 收款信息审核
+     */
+    public function shengpay_apply_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+
+        $id = $request->id;
+
+        $status = $request->status;
+
+        $terminal_num = RetailShengpayTerminal::getPluck([['id',$id]],'terminal_num');
+        if(empty($terminal_num)){
+            return response()->json(['data' => '查不到数据', 'status' => '0']);
+        }
+        DB::beginTransaction();
+        try {
+
+            RetailShengpayTerminal::editShengpayTerminal([['id',$id]],['status'=>$status]);
+
+            if($status == '1'){
+                // 添加操作日志
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了终端号：' . $terminal_num);
+            }else{
+                // 添加操作日志
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了终端号：' . $terminal_num);
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '操作失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '操作失败', 'status' => '1']);
     }
 
 }
