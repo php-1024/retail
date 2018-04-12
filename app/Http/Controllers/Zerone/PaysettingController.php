@@ -106,9 +106,11 @@ class PaysettingController extends Controller
         $id = $request->id;
         // 到款方式
         $type = $request->type;
+        // 店铺id
+        $retail_id = $request->retail_id;
 
-//        // 店铺名称
-//        $retail_name = $request->retail_name;
+        // 店铺名称
+        $retail_name = Organization::getPluck([['id',$retail_id]],'organization_name');
 
         DB::beginTransaction();
         try {
@@ -116,7 +118,7 @@ class PaysettingController extends Controller
             RetailShengpay::editShengpay([['id', $id]], ['type' => $type]);
 
             // 添加操作日志
-//            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝了付款信息店铺：' . $retail_name);
+            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺付款状态：' . $retail_name);
 
             DB::commit();
         } catch (\Exception $e) {
