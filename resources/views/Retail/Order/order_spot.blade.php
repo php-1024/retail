@@ -40,15 +40,20 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <label class="col-sm-1 control-label">订单编号</label>
+                                    <div class="col-sm-2">
+                                        <input class="input-sm form-control" name="ordersn" size="16" type="text" value="{{$search_data['ordersn']}}">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                    </div>
+                                </form>
+                                <form class="form-horizontal" method="get">
                                         <label class="col-sm-1 control-label">用户账号</label>
                                         <div class="col-sm-1">
                                             <input class="input-sm form-control" name="account" size="16" type="text" value="{{$search_data['account']}}">
                                         </div>
-                                        <label class="col-sm-1 control-label">订单编号</label>
 
-                                        <div class="col-sm-2">
-                                            <input class="input-sm form-control" name="ordersn" size="16" type="text" value="{{$search_data['ordersn']}}">
-                                        </div>
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
