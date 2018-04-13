@@ -20,7 +20,7 @@
                             <label class="col-sm-2 control-label" for="input-id-1">选择付款方式</label>
                             <div class="col-sm-2">
                                 <select name="paytype" class="form-control m-b">
-                                        <option>请选择付款方式</option>
+                                        <option>请选择</option>
                                         <option value="-1">现金支付，其他支付</option>
                                         <option value="1">支付宝扫码</option>
                                         <option value="2">支付宝二维码</option>
