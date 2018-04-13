@@ -104,7 +104,7 @@ class OrderController extends Controller
             $orders = RetailOrder::getList(['id'=>$order_id],0,'created_at','DESC');
             $return_goods = [];
             foreach ($orders as $key=>$val){
-                dd($val->RetailOrderGoods->goods_id);
+                dd($val->RetailOrderGoods['goods_id']);
 //                $return_goods[] = [
 //                    'goods_id' => $val->RetailOrderGoods->goods_id,
 //                    'total' => $val->RetailOrderGoods->total
