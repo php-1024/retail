@@ -119,6 +119,7 @@ class OrderController extends Controller
         try {
             if ($status == '-1'){
                 $order = RetailOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+                dd($order);
                 foreach ($order as $key=>$val){
                     $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
                     $new_stock = $old_stock+$val->total;         //退货后处理的新库存
@@ -141,7 +142,7 @@ class OrderController extends Controller
                 }
             }
 
-            
+
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
