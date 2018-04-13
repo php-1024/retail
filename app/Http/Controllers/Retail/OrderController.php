@@ -150,7 +150,6 @@ class OrderController extends Controller
                 $this->return_stock($order,'7');
             }
         }
-
         DB::beginTransaction();
         try {
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status,'paytype'=>$paytype]);
@@ -176,6 +175,7 @@ class OrderController extends Controller
                 $new_stock = $old_stock-$val->total;         //确认付款后处理的新库存
             }elseif($type == '7'){//销退入库
                 $new_stock = $old_stock+$val->total;         //退货后处理的新库存
+                dd($new_stock);
             }
             //1、更新商品信息中的库存
             RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
