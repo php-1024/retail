@@ -49,7 +49,7 @@ class OrderController extends Controller
             $where[] = ['status' , $status];
         }
         if ($operator_id == null){
-            $where = [];
+            $where[] = ['operator_id' , $operator_id];
         }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
