@@ -241,8 +241,8 @@ class AndroidApiController extends Controller
         if ($status) {
 
             preg_match('/(^[0-9]*$)/',$status,$status);
-            
-            $where[] = ['status', $status];
+
+            $where[] = ['status', $status[1]];
 
         }
         print_r($where);exit;
