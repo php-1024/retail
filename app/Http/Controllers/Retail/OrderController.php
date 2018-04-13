@@ -105,7 +105,7 @@ class OrderController extends Controller
             $return_goods = [];
             foreach ($orders as $key=>$val){
                 foreach ($val->RetailOrderGoods as $kk=>$vv){
-                    $return_goods[] = [
+                    $return_goods = [
                         'goods_id' => $vv->goods_id,
                         'total' => $vv->total
                     ];
