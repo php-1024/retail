@@ -65,6 +65,18 @@ class RetailSupplier extends Model{
         $model->save();
         return $model->id;
     }
+
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where)
+    {
+        $row = self::getPluck($where, 'id');
+        if (empty($row)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     //修改数据
     public static function editSupplier($where,$param){
         if($model = self::where($where)->first()){
@@ -83,7 +95,7 @@ class RetailSupplier extends Model{
 
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
-        $model = Self::find($id);
+        $model = self::find($id);
         return $model->forceDelete();
     }
 }

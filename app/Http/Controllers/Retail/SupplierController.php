@@ -40,6 +40,9 @@ class SupplierController extends Controller
         if (empty($displayorder)){
             $displayorder = '0';
         }
+        if (RetailSupplier::checkRowExists(['company_name'=>$company_name])){
+            return response()->json(['data' => '供应商名称已存在，请检查', 'status' => '0']);
+        }
         $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
         $supplier_data = [
             'company_name' => $company_name,
