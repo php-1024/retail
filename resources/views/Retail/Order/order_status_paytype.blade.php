@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="order_status_check" method="post" action="{{url('retail/ajax/order_status_check')}}">
+<form class="form-horizontal" id="order_status_check" method="post" action="{{url('retail/ajax/order_status_paytype_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
      <input type="hidden" name="order_id" id="order_id" value="{{$order_id}}">
      <input type="hidden" name="status" id="status" value="{{$status}}">

@@ -116,6 +116,34 @@ class OrderController extends Controller
         return response()->json(['data' => '修改订单状态成功！', 'status' => '1']);
     }
 
+    //修改订单状态以及确认付款方式确认操作
+    public function order_status_paytype_check(Request $request)
+    {
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                     //获取当前的页面路由
+        $order_id = $request->get('order_id');          //订单ID
+        $status = $request->get('status');              //订单状态
+        $paytype = $request->get('paytype');            //订单付款方式
+        if ($paytype == '请选择'){
+            return response()->json(['data' => '请选择付款方式！', 'status' => '0']);
+        }
+        DB::beginTransaction();
+        try {
+            RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status,'paytype'=>$paytype]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了订单状态！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改订单状态成功！', 'status' => '1']);
+    }
+
 }
 
 ?>
