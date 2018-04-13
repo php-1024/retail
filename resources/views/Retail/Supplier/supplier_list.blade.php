@@ -45,7 +45,7 @@
                                     <input type="hidden" id="supplier_delete_comfirm_url" value="{{ url('retail/ajax/supplier_delete') }}">
                                     <label class="col-sm-1 control-label">供应商名称</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$company_name}}">
+                                        <input class="input-sm form-control" size="16" type="text" name="company_name" value="{{$search_data['company_name']}}">
                                     </div>
 
                                     <div class="col-sm-3">
@@ -85,9 +85,8 @@
                             </div>
                             <footer class="panel-footer">
                                 <div class="row">
-
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {!! $supplier->links() !!}
+                                        {!! $supplier->appends($search_data)->links() !!}
                                     </div>
                                 </div>
                             </footer>
