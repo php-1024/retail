@@ -235,7 +235,7 @@ class AndroidApiController extends Controller
         if ($status) {
             $where[] = ['status', $status];
         }
-        $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at'])->toArray();
+        $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
         print_r($orderlist);exit;
         if ($orderlist) {
             // 订单数量
