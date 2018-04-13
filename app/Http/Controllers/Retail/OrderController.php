@@ -101,7 +101,8 @@ class OrderController extends Controller
         $status = $request->get('status');              //订单状态
 
         if ($status == '-1'){
-            dd('取消订单，还原商品库存！');
+            $orders = RetailOrder::getList(['id'=>$order_id],0,'created_at','DESC');
+            dd($orders);
         }
 
 
