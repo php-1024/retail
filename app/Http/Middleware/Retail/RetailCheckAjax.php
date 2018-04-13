@@ -32,6 +32,7 @@ class RetailCheckAjax
             case "retail/ajax/goods_delete":            //商品删除弹窗
             case "retail/ajax/goods_status":            //商品状态修改弹窗
             case "retail/ajax/order_status":            //订单状态修改确认弹窗
+            case "retail/ajax/order_status_paytype":    //订单状态修改以及邓丹支付方式确认弹窗
             case "retail/ajax/upload_thumb_check":      //上传图片
             case "retail/ajax/user_list_edit":          //会员列表编辑显示页面
             case "retail/ajax/user_list_lock":          //会员列表冻结显示页面
@@ -80,6 +81,7 @@ class RetailCheckAjax
             case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/goods_status_check":      //检测是否登录 权限 安全密码
             case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
+            case "retail/ajax/order_status_paytype_check"://检测是否登录 权限 安全密码
             case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
             case "retail/ajax/user_list_lock_check":    //检测是否登录 权限 安全密码--冻结粉丝标签
             case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
