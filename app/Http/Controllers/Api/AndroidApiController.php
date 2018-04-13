@@ -242,7 +242,7 @@ class AndroidApiController extends Controller
 
             $status = preg_match('/(^[0-9]*$)/',$status,$a)?$a[1]:0;
             $status = (int)$status;
-            $where[] = ['status', "'".$status."'"];
+            $where[] = ['status', '0'];
 
         }
         $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
