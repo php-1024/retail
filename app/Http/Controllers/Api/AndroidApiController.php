@@ -504,7 +504,6 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
-                    echo 1;exit;
                     $stock_data = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
                     print_r($stock_data);exit;
                     $retail_stock = $stock_data['stock'] + $value['total'];
@@ -513,7 +512,6 @@ class AndroidApiController extends Controller
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交失败', 'status' => '0', 'data' => '']);
         }
