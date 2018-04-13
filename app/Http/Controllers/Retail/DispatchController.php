@@ -83,6 +83,7 @@ class DispatchController extends Controller
         if (empty($dispatch_name)){
             $where[] = ['name','like','%'.$dispatch_name.'%'];
         }
+        dump($dispatch_name);
         dump($where);
         $list = Dispatch::getPaginage($where,'0','displayorder','DESC');
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
