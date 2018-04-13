@@ -96,7 +96,6 @@ class OrderController extends Controller
     //修改订单状态确认操作
     public function order_status_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                     //获取当前的页面路由
         $order_id = $request->get('order_id');          //订单ID
@@ -116,8 +115,27 @@ class OrderController extends Controller
 //        }
 
         if ($status == '-1'){
-            $orders = RetailOrder::getList(['id'=>$order_id],0,'created_at','DESC');
-            foreach ($orders as $key=>$val){
+            $order = RetailOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+            foreach ($order as $key=>$val){
+                $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
+                $new_stock = $old_stock+$val->total;         //退货后处理的新库存
+                //1、更新商品信息中的库存
+                RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
+                //2、更新库存表的库存
+                RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
+                $stock_data = [
+                    'fansmanage_id' => $order->fansmanage_id,
+                    'retail_id' => $order->retail_id,
+                    'goods_id' => $val->goods_id,
+                    'amount' => $val->total,
+                    'ordersn' => $order->ordersn,
+                    'operator_id' => $order->operator_id,
+                    'remark' => $order->remarks,
+                    'type' => '7',  //退货入库
+                    'status' => '1',
+                ];
+                RetailStockLog::addStockLog($stock_data);
+
                 foreach ($val->RetailOrderGoods as $kk=>$vv){
                     $old_stock = RetailGoods::getPluck(['id'=>$vv->goods_id],'stock')->first(); //查询原来商品的库存
                     $new_stock = $old_stock+$vv->total;         //退货后处理的新库存
@@ -127,9 +145,9 @@ class OrderController extends Controller
                     RetailStock::editStock(['goods_id'=>$vv->goods_id],['stock'=>$new_stock]);
                     $stock_data = [
                         'fansmanage_id' => $order->fansmanage_id,
-                        'retail_id' => $order->retail_id,
-                        'goods_id' => $val->goods_id,
-                        'amount' => $val->total,
+                        'retail_id' => $admin_data['organization_id'],
+                        'goods_id' => $vv->goods_id,
+                        'amount' => $vv->total,
                         'ordersn' => $order->ordersn,
                         'operator_id' => $order->operator_id,
                         'remark' => $order->remarks,
