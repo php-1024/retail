@@ -40,17 +40,23 @@ class FansmanageController extends Controller
     public function fansmanage_list(Request $request)
     {
         $organization_name = $request->input('organization_name');
-        $organization_mobile = $request->input('organization_mobile');
-        if(!empty($organization_name)){
-            var_dump($organization_name);exit;
-        }
+        $fansmanage_owner_mobile = $request->input('organization_mobile');
+        $search_data = ['organization_name' => $organization_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        $organization = $admin_data['organization_id'];
-        $list = Organization::getPaginagefansmanage([['parent_id', $organization], ['program_id', 3]], 10, 'id');
-        return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+//        $organization = $admin_data['organization_id'];
+        $where = [['parent_id', $admin_data['organization_id']]];
+
+        if(!empty($organization_name)){
+            $where[] = ['organization_name', 'like', '%' . $organization_name . '%'];
+        }
+        if(!empty($fansmanage_owner_mobile)){
+            $where[] = ['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%'];
+        }
+        $list = Organization::getPaginagefansmanage([$where, ['program_id', 3]], 10, 'id');
+        return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
     //店铺结构
