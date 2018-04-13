@@ -216,7 +216,7 @@ class Organization extends Model
     {
         return self::with(['account' => function ($query) {
             $query->where('deepth', '1');
-        }])->with('fansmanageinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
+        }])->with('organizationFansmanageinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
     //获取分页数据-商户
