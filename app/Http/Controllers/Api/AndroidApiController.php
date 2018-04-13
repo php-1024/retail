@@ -137,10 +137,6 @@ class AndroidApiController extends Controller
         // 备注
         $remarks = $request->remarks;
 
-        $order_type = $request->order_type;
-        if (empty($order_type)) {
-            $order_type = '1';
-        }
 
         $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
         $order_price = 0;
@@ -158,7 +154,6 @@ class AndroidApiController extends Controller
             'ordersn' => $ordersn,
             'order_price' => $order_price,
             'remarks' => $remarks,
-            'order_type' => $order_type,
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $organization_id,
             'user_id' => $user_id,
@@ -239,11 +234,11 @@ class AndroidApiController extends Controller
 
         $where[] = ['retail_id', $organization_id];
         if ($status) {
-
-            $status = preg_match('/(^[0-9]*$)/',$status,$a)?$a[1]:0;
-            $status = (string)$status;
+            if($status != '-1'){
+                $status = preg_match('/(^[0-9]*$)/',$status,$a)?$a[1]:0;
+                $status = (string)$status;
+            }
             $where[] = ['status', $status];
-
         }
         $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
         if ($orderlist->toArray()) {
@@ -312,7 +307,6 @@ class AndroidApiController extends Controller
             'user_id' => $order['user_id'],//粉丝id
             'user_account' => $user_account,//粉丝账号
             'payment_company' => $order['payment_company'],//支付公司
-            'order_type' => $order['order_type'],//0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'status' => $order['status'],//订单状态
             'paytype' => $order['paytype'],//支付方式
             'operator_id' => $order['operator_id'],//操作人id
