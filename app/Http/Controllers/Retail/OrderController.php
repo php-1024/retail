@@ -11,6 +11,7 @@ use App\Models\RetailGoods;
 use App\Models\RetailOrder;
 use App\Models\OperationLog;
 use App\Models\RetailStock;
+use App\Models\RetailStockLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -135,30 +136,10 @@ class OrderController extends Controller
                     'status' => '1',
                 ];
                 RetailStockLog::addStockLog($stock_data);
-
-                foreach ($val->RetailOrderGoods as $kk=>$vv){
-                    $old_stock = RetailGoods::getPluck(['id'=>$vv->goods_id],'stock')->first(); //查询原来商品的库存
-                    $new_stock = $old_stock+$vv->total;         //退货后处理的新库存
-                    //1、更新商品信息中的库存
-                    RetailGoods::editRetailGoods(['id'=>$vv->goods_id],['stock'=>$new_stock]);
-                    //2、更新库存表的库存
-                    RetailStock::editStock(['goods_id'=>$vv->goods_id],['stock'=>$new_stock]);
-                    $stock_data = [
-                        'fansmanage_id' => $order->fansmanage_id,
-                        'retail_id' => $admin_data['organization_id'],
-                        'goods_id' => $vv->goods_id,
-                        'amount' => $vv->total,
-                        'ordersn' => $order->ordersn,
-                        'operator_id' => $order->operator_id,
-                        'remark' => $order->remarks,
-                        'type' => $type,
-                        'status' => '1',
-                    ];
-                    RetailStockLog::addStockLog($stock_data);
-                }
             }
         }
 
+        dd("退货改库存!");
 
         DB::beginTransaction();
         try {
