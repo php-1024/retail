@@ -63,7 +63,7 @@
                                         <input type="text" name="organization_mobile" class="form-control" placeholder="手机号码">
                                     </div>
                                     <div class="col-lg-2">
-                                        <button type="button" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
+                                        <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
                                     </div>
                                 </div>
                             </form>
