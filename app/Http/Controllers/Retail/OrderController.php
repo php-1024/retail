@@ -172,7 +172,7 @@ class OrderController extends Controller
     {
         foreach ($order->RetailOrderGoods as $key=>$val){
             $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
-            if ($type == '6'){//退货类型
+            if ($type == '6'){//销售出库
                 $new_stock = $old_stock-$val->total;         //确认付款后处理的新库存
             }elseif($type == '7'){//销退入库
                 $new_stock = $old_stock+$val->total;         //退货后处理的新库存
@@ -189,7 +189,7 @@ class OrderController extends Controller
                 'ordersn' => $order->ordersn,
                 'operator_id' => $order->operator_id,
                 'remark' => $order->remarks,
-                'type' => '7',  //退货入库
+                'type' => $type,  //销售出库、销退入库
                 'status' => '1',
             ];
             RetailStockLog::addStockLog($stock_data);
