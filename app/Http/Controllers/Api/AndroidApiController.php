@@ -233,10 +233,11 @@ class AndroidApiController extends Controller
         $status = $request->status;
         $where[] = ['retail_id', $organization_id];
         if ($status) {
-            $where[] = ['status', $status];
+            $where[] = ['status', '0'];
         }
-        $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at'])->toArray();
-        if ($orderlist) {
+        print_r($where);exit;
+        $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
+        if ($orderlist->toArray()) {
             // 订单数量
             $total_num = count($orderlist);
             $total_amount = 0;
@@ -260,10 +261,12 @@ class AndroidApiController extends Controller
      */
     public function order_detail(Request $request)
     {
-        $organization_id = $request->organization_id;//店铺
-        $order_id = $request->order_id;//订单id
-
-        $order = RetailOrder::getOne([['id', $order_id], ['retail_id', $organization_id]]);//订单详情
+        // 店铺
+        $organization_id = $request->organization_id;
+        // 订单id
+        $order_id = $request->order_id;
+        // 订单详情
+        $order = RetailOrder::getOne([['id', $order_id], ['retail_id', $organization_id]]);
         if (empty($order)) {
             return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
         }
