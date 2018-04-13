@@ -139,9 +139,18 @@ class OrderController extends Controller
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
         $paytype = $request->get('paytype');            //订单付款方式
+
+        $power = RetailConfig::getPluck([['retail_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
         if ($paytype == '请选择'){
             return response()->json(['data' => '请选择付款方式！', 'status' => '0']);
         }
+        if ($status == '1' && $order->status == '0'){//手动确认付款    1、判断是否付款减库存
+            if ($power == '1') {//说明付款减库存，此时库存已经减去，需要还原
+                $this->return_stock($order);
+            }
+        }
+
         DB::beginTransaction();
         try {
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status,'paytype'=>$paytype]);
