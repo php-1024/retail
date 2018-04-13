@@ -481,10 +481,10 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
-                    $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
-                    print_r($re);exit;
-                    $retail_stock = $re['stock'] - $value['total'];
-                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+//                    $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
+//                    print_r($re);exit;
+//                    $retail_stock = $re['stock'] - $value['total'];
+//                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
 
                 }
             } else {
@@ -505,16 +505,15 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
-                    $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
-
-                    $retail_stock = $re['stock'] + $value['total'];
-                    print_r($retail_stock);exit;
-                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+//                    $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
+//
+//                    $retail_stock = $re['stock'] + $value['total'];
+//                    print_r($retail_stock);exit;
+//                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
                 }
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交失败', 'status' => '0', 'data' => '']);
         }
