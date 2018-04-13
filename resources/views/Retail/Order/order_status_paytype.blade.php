@@ -20,8 +20,7 @@
                             <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                             <div class="col-sm-2">
                                 <select name="company_name" class="form-control m-b">
-                                    <option value="0">请选择公司名称</option>
-                                    <option value="{{$val->company_name}}">{{$val->company_name}}</option>
+                                        <option>请选择付款方式</option>
                                         @if($order->paytype == '-1' )
                                         <option value="-1">现金支付，其他支付</option>
                                         @elseif($order->paytype == '1' )
