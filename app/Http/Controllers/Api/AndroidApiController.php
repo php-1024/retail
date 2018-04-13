@@ -482,7 +482,7 @@ class AndroidApiController extends Controller
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
                     $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
-                    $retail_stock = $re['stock'] - $value['total'];
+                    $retail_stock = $re->stock - $value['total'];
                     echo $retail_stock;exit;
                     RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
 
