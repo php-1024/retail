@@ -18,8 +18,11 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" name="safe_password" value="">
+                            <div class="col-sm-2">
+                                <select name="company_name" class="form-control m-b">
+                                    <option value="0">请选择公司名称</option>
+                                    <option value="0">请选择公司名称</option>
+                                </select>
                             </div>
                         </div>
 
