@@ -48,9 +48,6 @@ class OrderController extends Controller
         if (!empty($status) && $status != '请选择' || $status == '0') {
             $where[] = ['status' , $status];
         }
-        dump($account);
-        dump($operator_id);
-        dump($where);
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
