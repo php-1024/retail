@@ -184,7 +184,6 @@
                                             <th>商品标题</th>
                                             <th>数量</th>
                                             <th>商品价格</th>
-                                            <th>状态</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -201,23 +200,6 @@
                                             <td>
                                                 <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->price}}">
                                             </td>
-                                            <th>
-                                                @if($val->status==-1)
-                                                    <label class="label label-default">已取消</label>
-                                                @elseif($val->status==0)
-                                                    <label class="label label-primary">待付款</label>
-                                                @elseif($val->status==1)
-                                                    <label class="label label-warning">已付款</label>
-                                                @elseif($val->status==2)
-                                                    <label class="label label-success">已发货</label>
-                                                @elseif($val->status==3)
-                                                    <label class="label label-info">已完成</label>
-                                                @endif
-                                                {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
-                                                    {{--<option>待上菜</option>--}}
-                                                    {{--<option>已上菜</option>--}}
-                                                {{--</select>--}}
-                                            </th>
                                         </tr>
                                         @endforeach
                                         <tr>
