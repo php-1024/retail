@@ -481,7 +481,7 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
-                    $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
+                    $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
                     print_r($re);exit;
                     $retail_stock = $re->stock - $value['total'];
                     echo $retail_stock;exit;
@@ -506,7 +506,7 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
-                    $re = RetailStock::getOne([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
+                    $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
                     $retail_stock = $re['stock'] + $value['total'];
                     RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
                 }
