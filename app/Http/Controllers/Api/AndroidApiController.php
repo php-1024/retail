@@ -234,7 +234,7 @@ class AndroidApiController extends Controller
         echo $status; exit;
         $where[] = ['retail_id', $organization_id];
         if ($status) {
-            if ($status == '0'){
+            if ($status === 0){
                 echo 1;exit;
             }
             $where[] = ['status', $status];
