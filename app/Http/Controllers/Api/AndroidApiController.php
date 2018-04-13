@@ -85,6 +85,10 @@ class AndroidApiController extends Controller
         if (empty($categorylist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
+        foreach($categorylist as $key=>$value){
+            echo $value;
+        }
+        exit;
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
     }
 
@@ -235,11 +239,9 @@ class AndroidApiController extends Controller
 
         $where[] = ['retail_id', $organization_id];
         if ($status) {
-            if (isset($status)){
-                echo 1;exit;
-            }else{
-                $where[] = ['status', $status];
-            }
+
+            $where[] = ['status', $status];
+
         }
         print_r($where);exit;
         $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
