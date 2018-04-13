@@ -102,7 +102,7 @@
                                                         <select name="province[]" id="multiselect_to" class="form-control" size="15" multiple="multiple"></select>
                                                     </td>
                                                     <td>
-                                                        <button type="button" class="btn btn-warning btn-xs" onclick="provinces_add_check()">确认已选</button>
+                                                        <label class="label label-warning" onclick="provinces_add_check()">确认已选</label>
                                                     </td>
                                                 </tr>
                                                 </tbody>
