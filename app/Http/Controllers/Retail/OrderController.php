@@ -31,22 +31,22 @@ class OrderController extends Controller
         $paytype = $request->get('paytype');                //接收支付方式
         $status = $request->get('status');                  //接收订单状态
         $search_data = ['operator_id' => $operator_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
-        $where = [['retail_id' , $admin_data['organization_id']]];
+        $where[] = ['retail_id' , $admin_data['organization_id']];
         //按订单编号搜索
         if (!empty($ordersn) && $ordersn != null) {
-            $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
+            $where[] = ['ordersn' , $ordersn];
         }
         //按用户账号搜索
         if (!empty($operator_id) && $operator_id != null) {
-            $where = [['retail_id' , $admin_data['organization_id']],['operator_id' , $operator_id]];
+            $where[] = ['operator_id' , $operator_id];
         }
         //按照支付方式搜索
         if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
-            $where = [['retail_id' , $admin_data['organization_id']],['paytype' , $paytype]];
+            $where[] = ['paytype' , $paytype];
         }
         //按照订单状态搜索
         if (!empty($status) && $status != '请选择' || $status == '0') {
-            $where = [['retail_id' , $admin_data['organization_id']],['status' , $status]];
+            $where[] = ['status' , $status];
         }
         dump($account);
         dump($operator_id);
