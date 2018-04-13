@@ -17,23 +17,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
+                            <label class="col-sm-2 control-label" for="input-id-1">选择付款方式</label>
                             <div class="col-sm-2">
-                                <select name="company_name" class="form-control m-b">
+                                <select name="paytype" class="form-control m-b">
                                         <option>请选择付款方式</option>
-                                        @if($order->paytype == '-1' )
                                         <option value="-1">现金支付，其他支付</option>
-                                        @elseif($order->paytype == '1' )
                                         <option value="1">支付宝扫码</option>
-                                        @elseif($order->paytype == '2' )
                                         <option value="2">支付宝二维码</option>
-                                        @elseif($order->paytype == '3' )
                                         <option value="3">微信扫码</option>
-                                        @elseif($order->paytype == '4' )
                                         <option value="4">微信二维码</option>
-                                        @elseif($order->paytype == '0' )
                                         <option value="0">银行卡支付</option>
-                                        @endif
                                 </select>
                             </div>
                         </div>
