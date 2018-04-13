@@ -76,7 +76,6 @@ class RetailOrder extends Model
         $retailorder->ordersn = $param['ordersn'];//订单编号
         $retailorder->order_price = $param['order_price'];//订单价格
         $retailorder->user_id = $param['user_id'];//订单人id
-        $retailorder->order_type = $param['order_type'];//订单类型
         $retailorder->status = $param['status'];//订单状态
         $retailorder->operator_id = $param['operator_id'];//操作人员id
         $retailorder->fansmanage_id = $param['fansmanage_id'];//管理平台id

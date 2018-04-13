@@ -100,7 +100,7 @@ class SftController extends Controller
 
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
-            XhoLog::create(["name"=>"跳转前","content" => $res]);
+            XhoLog::create(["name" => "跳转前", "content" => $res]);
             header('Location:' . $res_arr["payUrl"]);
         } else {
             dd($res_arr);
@@ -109,8 +109,8 @@ class SftController extends Controller
 
     public function test2()
     {
-        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
-        XhoLog::create(["name"=>"test2","content" => $res]);
+        $res = json_encode(\request()->all(), JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name" => "test2", "content" => $res]);
 
 //        $test = "<script>location.href = 'weixin://wxpay/bizpayurl?pr=m8aUz9Q'</script>";
 //        echo $test;
@@ -119,8 +119,8 @@ class SftController extends Controller
 
     public function notify()
     {
-        $res = json_encode(\request()->all(),JSON_UNESCAPED_UNICODE);
-        XhoLog::create(["name"=>"notify","content" => $res]);
+        $res = json_encode(\request()->all(), JSON_UNESCAPED_UNICODE);
+        XhoLog::create(["name" => "notify", "content" => $res]);
         echo "OK";
     }
 
@@ -135,13 +135,14 @@ class SftController extends Controller
         $param_body["requestTime"] = date('YmdHis');
 
 
-        $param_body["merchantOrderNo"] = LS20180408_5_1000003;
-        $param_body["sftOrderNo"] = date('YmdHis');
-        $param_body["exts"] = date('YmdHis');
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
+        $param_body["sftOrderNo"] = null;
+        $param_body["exts"] = null;
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
-        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+        $res = $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+        dd($res);
     }
 
 
@@ -149,17 +150,20 @@ class SftController extends Controller
     {
         // 退款
         $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refund.htm";
-        $param_body["merchantNo"] = '11548088';
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-
-        $param_body["refundOrderNo"] = "";
-        $param_body["merchantOrderNo"] = "";
-        $param_body["refundTransNo"] = "";
-        $param_body["sftOrderNo"] = "";
+        // 退款流水账号
+        $param_body["refundOrderNo"] = "TK20180408_5_1000" . rand(100, 999);
+        // 退款订单号
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
+        // 退款金额
+        $param_body["refundAmount"] = "0.01";
+        // 通知地址
+        $param_body["notifyURL"] = "http://o2o.01nnt.com/pay/sft/test8";
+        // 其他
         $param_body["exts"] = "";
-
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
@@ -167,21 +171,24 @@ class SftController extends Controller
     }
 
 
+    public function test8()
+    {
+        XhoLog::create(["name" => "退款通知", "content" => \request()->all()]);
+    }
+
     public function test5()
     {
         // 退款查询
-        $api_url = "http://mgw.shengpay.com/ web-acquire-channel/pay/refundQuery.htm";
-        $param_body["merchantNo"] = '11548088';
+        $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refundQuery.htm";
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-
-        $param_body["refundOrderNo"] = "";
-        $param_body["merchantOrderNo"] = "";
-        $param_body["refundTransNo"] = "";
-        $param_body["sftOrderNo"] = "";
-        $param_body["exts"] = "";
-
+        $param_body["refundOrderNo"] = "TK20180408_5_1000419";
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000829";
+//        $param_body["refundTransNo"] = "20180412161624998";
+//        $param_body["sftOrderNo"] = null;
+//        $param_body["exts"] = null;
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
@@ -245,71 +252,6 @@ class SftController extends Controller
 //            $param_body_attach_wxh5["note"] = "";
 //            $param_body_attach_wxh5["attach"] = "";
 //        }
-    }
-
-
-    /**
-     * 利用约定数据和私钥生成数字签名
-     * @param $data 待签数据
-     * @return String 返回签名
-     */
-    public function sign($data = '')
-    {
-        if (empty($data)) {
-            return False;
-        }
-
-        $private_key = file_get_contents(dirname(__FILE__) . '/rsa_private_key.pem');
-        if (empty($private_key)) {
-            echo "Private Key error!";
-            return False;
-        }
-
-        $pkeyid = openssl_get_privatekey($private_key);
-        if (empty($pkeyid)) {
-            echo "private key resource identifier False!";
-            return False;
-        }
-
-        $verify = openssl_sign($data, $signature, $pkeyid, OPENSSL_ALGO_MD5);
-        openssl_free_key($pkeyid);
-        return $signature;
-    }
-
-    /**
-     * 利用公钥和数字签名以及约定数据验证合法性
-     * @param $data 待验证数据
-     * @param $signature 数字签名
-     * @return -1:error验证错误 1:correct验证成功 0:incorrect验证失败
-     */
-    public function isValid($data = '', $signature = '')
-    {
-        if (empty($data) || empty($signature)) {
-            return False;
-        }
-
-        $public_key = file_get_contents(dirname(__FILE__) . '/rsa_public_key.pem');
-        if (empty($public_key)) {
-            echo "Public Key error!";
-            return False;
-        }
-
-        $pkeyid = openssl_get_publickey($public_key);
-        if (empty($pkeyid)) {
-            echo "public key resource identifier False!";
-            return False;
-        }
-
-        $ret = openssl_verify($data, $signature, $pkeyid, OPENSSL_ALGO_MD5);
-        switch ($ret) {
-            case -1:
-                echo "error";
-                break;
-            default:
-                echo $ret == 1 ? "correct" : "incorrect";//0:incorrect
-                break;
-        }
-        return $ret;
     }
 
     /**

@@ -85,6 +85,11 @@ class AndroidApiController extends Controller
         if (empty($categorylist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
+        foreach($categorylist as $key=>$value){
+            if(!RetailGoods::checkRowExists([['category_id',$value['id']]])){
+              unset($categorylist[$key]);
+            };
+        }
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
     }
 
@@ -108,7 +113,7 @@ class AndroidApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
         foreach ($goodslist as $key => $value) {
-            $goodslist[$key]['category_name'] = RetailCategory::getPluck([['id', $value['category_id']]], 'name')->first();
+            $goodslist[$key]['category_name'] = RetailCategory::getPluck([['id', $value['category_id']]], 'name');
             $goodslist[$key]['thumb'] = RetailGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
         }
         $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
@@ -132,10 +137,6 @@ class AndroidApiController extends Controller
         // 备注
         $remarks = $request->remarks;
 
-        $order_type = $request->order_type;
-        if (empty($order_type)) {
-            $order_type = '1';
-        }
 
         $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
         $order_price = 0;
@@ -153,7 +154,6 @@ class AndroidApiController extends Controller
             'ordersn' => $ordersn,
             'order_price' => $order_price,
             'remarks' => $remarks,
-            'order_type' => $order_type,
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $organization_id,
             'user_id' => $user_id,
@@ -231,12 +231,17 @@ class AndroidApiController extends Controller
         $organization_id = $request->organization_id;
         // 订单状态
         $status = $request->status;
-        $where = [['retail_id', $organization_id]];
+
+        $where[] = ['retail_id', $organization_id];
         if ($status) {
-            $where = [['status', $status]];
+            if($status != '-1'){
+                $status = preg_match('/(^[0-9]*$)/',$status,$a)?$a[1]:0;
+                $status = (string)$status;
+            }
+            $where[] = ['status', $status];
         }
-        $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at'])->toArray();
-        if ($orderlist) {
+        $orderlist = RetailOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
+        if ($orderlist->toArray()) {
             // 订单数量
             $total_num = count($orderlist);
             $total_amount = 0;
@@ -260,10 +265,12 @@ class AndroidApiController extends Controller
      */
     public function order_detail(Request $request)
     {
-        $organization_id = $request->organization_id;//店铺
-        $order_id = $request->order_id;//订单id
-
-        $order = RetailOrder::getOne([['id', $order_id], ['retail_id', $organization_id]]);//订单详情
+        // 店铺
+        $organization_id = $request->organization_id;
+        // 订单id
+        $order_id = $request->order_id;
+        // 订单详情
+        $order = RetailOrder::getOne([['id', $order_id], ['retail_id', $organization_id]]);
         if (empty($order)) {
             return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
         }
@@ -300,7 +307,6 @@ class AndroidApiController extends Controller
             'user_id' => $order['user_id'],//粉丝id
             'user_account' => $user_account,//粉丝账号
             'payment_company' => $order['payment_company'],//支付公司
-            'order_type' => $order['order_type'],//0为未知订单，1为现场订单，2为外卖订单，3为预约订单
             'status' => $order['status'],//订单状态
             'paytype' => $order['paytype'],//支付方式
             'operator_id' => $order['operator_id'],//操作人id
