@@ -25,20 +25,20 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
 
         $account = $request->get('account');                //接收搜索账号
-        $user_id = Account::getPluck([['account',$account]],'id')->first();//操作员账号ID
+        $operator_id = Account::getPluck([['account',$account]],'id')->first();//操作员账号ID
 
         $ordersn = $request->get('ordersn');                //接收订单编号
         $paytype = $request->get('paytype');                //接收支付方式
         $status = $request->get('status');                  //接收订单状态
-        $search_data = ['user_id' => $user_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
+        $search_data = ['operator_id' => $operator_id, 'account'=>$account,'ordersn' => $ordersn,'paytype' => $paytype,'status' => $status]; //搜索数据
         $where = [['retail_id' , $admin_data['organization_id']]];
         //按订单编号搜索
         if (!empty($ordersn) && $ordersn != null) {
             $where = [['retail_id' , $admin_data['organization_id']],['ordersn' , $ordersn]];
         }
         //按用户账号搜索
-        if (!empty($user_id) && $user_id != null) {
-            $where = [['retail_id' , $admin_data['organization_id']],['user_id' , $user_id]];
+        if (!empty($operator_id) && $operator_id != null) {
+            $where = [['retail_id' , $admin_data['organization_id']],['operator_id' , $operator_id]];
         }
         //按照支付方式搜索
         if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
@@ -49,7 +49,7 @@ class OrderController extends Controller
             $where = [['retail_id' , $admin_data['organization_id']],['status' , $status]];
         }
         dump($account);
-        dump($user_id);
+        dump($operator_id);
         dump($where);
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
