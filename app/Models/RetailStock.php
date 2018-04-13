@@ -50,6 +50,12 @@ class RetailStock extends Model{
     }
 
     //获取分页列表
+    public static function getOneRetailStock($where)
+    {
+        return self::where($where)->first();
+
+    }
+        //获取分页列表
     public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         $model = new RetailStock();
         return $model->with('RetailGoods')->with('RetailCategory')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
@@ -57,7 +63,7 @@ class RetailStock extends Model{
 
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->pluck($pluck);
+        return self::where($where)->value($pluck);
     }
 
     //查询出模型，再删除模型 一定要查询到才能删除

@@ -16,6 +16,7 @@ use App\Models\RetailOrder;
 use App\Models\RetailOrderGoods;
 use App\Models\RetailShengpay;
 use App\Models\RetailShengpayTerminal;
+use App\Models\RetailStock;
 use App\Models\RetailStockLog;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -85,9 +86,9 @@ class AndroidApiController extends Controller
         if (empty($categorylist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
-        foreach($categorylist as $key=>$value){
-            if(!RetailGoods::checkRowExists([['category_id',$value['id']]])){
-              unset($categorylist[$key]);
+        foreach ($categorylist as $key => $value) {
+            if (!RetailGoods::checkRowExists([['category_id', $value['id']]])) {
+                unset($categorylist[$key]);
             };
         }
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
@@ -188,6 +189,7 @@ class AndroidApiController extends Controller
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
@@ -234,8 +236,8 @@ class AndroidApiController extends Controller
 
         $where[] = ['retail_id', $organization_id];
         if ($status) {
-            if($status != '-1'){
-                $status = preg_match('/(^[0-9]*$)/',$status,$a)?$a[1]:0;
+            if ($status != '-1') {
+                $status = preg_match('/(^[0-9]*$)/', $status, $a) ? $a[1] : 0;
                 $status = (string)$status;
             }
             $where[] = ['status', $status];
@@ -479,6 +481,11 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
+                    $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
+                    $retail_stock = $re->stock - $value['total'];
+                    echo $retail_stock;exit;
+                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+
                 }
             } else {
                 $goodsdata = RetailOrderGoods::where([['order_id', $order_id]])->get();//订单快照中的商品
@@ -498,6 +505,9 @@ class AndroidApiController extends Controller
                         'status' => '1',
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
+                    $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
+                    $retail_stock = $re['stock'] + $value['total'];
+                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
                 }
             }
             DB::commit();//提交事务

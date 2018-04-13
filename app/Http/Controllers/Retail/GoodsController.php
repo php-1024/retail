@@ -277,7 +277,7 @@ class GoodsController extends Controller
             $stock = '0';
             $tips = '下架';
         }
-        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id')->first();
+        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id');
         DB::beginTransaction();
         try {
             RetailGoods::editRetailGoods(['id'=>$goods_id],['status'=>$status]);
@@ -303,7 +303,7 @@ class GoodsController extends Controller
         $admin_data = $request->get('admin_data');           //中间件产生的管理员数据参数
         $route_name = $request->path();                          //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //获取分类栏目ID
-        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id')->first();
+        $id = RetailStock::getPluck(['goods_id'=>$goods_id],'id');
         DB::beginTransaction();
         try {
             RetailGoods::select_delete($goods_id);
