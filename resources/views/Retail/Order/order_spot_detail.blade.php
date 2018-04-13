@@ -206,12 +206,16 @@
                                                 <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->price}}">
                                             </td>
                                             <th>
-                                                @if($val->status == 0)
-                                                    待上菜
-                                                @elseif($val->status == 1)
-                                                    已上菜
-                                                @else
-                                                    未知状态
+                                                @if($val->status==-1)
+                                                    <label class="label label-default">已取消</label>
+                                                @elseif($val->status==0)
+                                                    <label class="label label-primary">待付款</label>
+                                                @elseif($val->status==1)
+                                                    <label class="label label-warning">已付款</label>
+                                                @elseif($val->status==2)
+                                                    <label class="label label-success">已发货</label>
+                                                @elseif($val->status==3)
+                                                    <label class="label label-info">已完成</label>
                                                 @endif
                                                 {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
                                                     {{--<option>待上菜</option>--}}
