@@ -124,10 +124,12 @@ class OrderController extends Controller
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
         $paytype = $request->get('paytype');            //订单付款方式
-        dd($request);
+        if ($paytype == '请选择'){
+            return response()->json(['data' => '请选择付款方式！', 'status' => '0']);
+        }
         DB::beginTransaction();
         try {
-            RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
+            RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status,'paytype'=>$paytype]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
