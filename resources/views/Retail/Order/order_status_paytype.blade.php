@@ -17,8 +17,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">选择付款方式</label>
-                            <div class="col-sm-6">
+                            <label class="col-sm-4 control-label" for="input-id-1">选择付款方式</label>
+                            <div class="col-sm-4">
                                 <select name="paytype" class="form-control m-b">
                                         <option>请选择</option>
                                         <option value="-1">现金支付，其他支付</option>
