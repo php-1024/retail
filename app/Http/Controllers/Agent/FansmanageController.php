@@ -39,6 +39,11 @@ class FansmanageController extends Controller
     //商户列表
     public function fansmanage_list(Request $request)
     {
+        $organization_name = $request->input('organization_name');
+        $organization_mobile = $request->input('organization_mobile');
+        if(!empty($organization_name)){
+            var_dump($organization_name);exit;
+        }
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
