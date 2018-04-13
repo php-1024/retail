@@ -209,7 +209,6 @@
                                             <td>
                                                 <label class="label label-danger">¥{{$order_price}}</label>
                                             </td>
-                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
