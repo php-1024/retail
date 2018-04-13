@@ -48,15 +48,15 @@ class FansmanageController extends Controller
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
         if(!empty($organization_name)){
-            $where = ['organization_name', 'like', '%' . $organization_name . '%'];
+            $where = [['parent_id', $organization], ['program_id', 3],['organization_name', 'like', '%' . $organization_name . '%']];
         }
         if(!empty($fansmanage_owner_mobile)){
-            $where = ['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%'];
+            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']];
         }
         if(empty($where)){
-            $where = ['parent_id', $organization];
+            $where = [['parent_id', $organization], ['program_id', 3]];
         }
-        $list = Organization::getPaginagefansmanage([$where, ['program_id', 3]], 10, 'id');
+        $list = Organization::getPaginagefansmanage($where, 10, 'id');
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data,'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
