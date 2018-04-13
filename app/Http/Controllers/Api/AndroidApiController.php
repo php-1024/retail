@@ -240,9 +240,9 @@ class AndroidApiController extends Controller
         $where[] = ['retail_id', $organization_id];
         if ($status) {
 
-            preg_match('/(^[0-9]*$)/',$status,$a);
+            $status = preg_match('/(^[0-9]*$)/',$status,$a)?$a[1]:0;
 
-            $where[] = ['status', $a[1]];
+            $where[] = ['status', $status];
 
         }
         print_r($where);exit;
