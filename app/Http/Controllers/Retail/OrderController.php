@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\RetailGoods;
 use App\Models\RetailOrder;
 use App\Models\OperationLog;
 use App\Models\RetailStock;
