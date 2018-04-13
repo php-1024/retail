@@ -48,13 +48,13 @@ class OrderController extends Controller
         if (!empty($status) && $status != '请选择' || $status == '0') {
             $where[] = ['status' , $status];
         }
+        if ($operator_id == null){
+            $where = [];
+        }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
-        }
-        if ($operator_id == null){
-            $list = [];
         }
         return view('Retail/Order/order_spot',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
