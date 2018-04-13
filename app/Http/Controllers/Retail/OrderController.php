@@ -102,10 +102,15 @@ class OrderController extends Controller
 
         if ($status == '-1'){
             $orders = RetailOrder::getList(['id'=>$order_id],0,'created_at','DESC');
+            $return_goods = [];
             foreach ($orders as $key=>$val){
-                dd($val->RetailOrderGoods);
+                $return_goods[] = [
+                    'goods_id' => $val->RetailOrderGoods->goods_id,
+                    'total' => $val->RetailOrderGoods->total
+                ];
             }
         }
+        dd($return_goods);
 
 
         DB::beginTransaction();
