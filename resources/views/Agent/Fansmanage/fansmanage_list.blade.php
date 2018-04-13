@@ -60,7 +60,7 @@
                                     </div>
                                     <label class="control-label col-lg-1" for="inputSuccess">手机号码</label>
                                     <div class="col-lg-2">
-                                        <input type="text" name="organization_mobile" class="form-control" value="{{ $search_data['fansmanage_owner_mobile'] }}" placeholder="手机号码">
+                                        <input type="text" name="fansmanage_owner_mobile" class="form-control" value="{{ $search_data['fansmanage_owner_mobile'] }}" placeholder="手机号码">
                                     </div>
                                     <div class="col-lg-2">
                                         <button type="submit" class="btn btn-primary"><i class="icon-search"></i> 查询</button>
