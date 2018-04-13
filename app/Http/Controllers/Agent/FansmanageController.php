@@ -57,8 +57,6 @@ class FansmanageController extends Controller
             $where = [['parent_id', $organization], ['program_id', 3]];
         }
         $list = Organization::getPaginagefansmanage($where, 10, 'id');
-
-
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data,'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
