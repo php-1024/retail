@@ -119,9 +119,7 @@ class OrderController extends Controller
         try {
             if ($status == '-1'){
                 $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
-                dd($order);
-
-                foreach ($order as $key=>$val){
+                foreach ($order->RetailOrderGoods as $key=>$val){
                     $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
                     $new_stock = $old_stock+$val->total;         //退货后处理的新库存
                     //1、更新商品信息中的库存
