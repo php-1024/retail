@@ -54,14 +54,9 @@ class RetailStock extends Model
     }
 
     //获取分页列表
-<<<<<<< HEAD
+
     public static function getOne($where){
         return self::with('RetailGoods')->with('RetailCategory')->where($where)->first();
-=======
-    public static function getOne($where)
-    {
-        return self::with('RetailGoods')->with('RetailCategory')->where($where)->get();
->>>>>>> c53def36825a3432b7307afc460c8389298dcef8
     }
 
     //获取分页列表
