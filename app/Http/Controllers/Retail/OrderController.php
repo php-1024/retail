@@ -81,7 +81,15 @@ class OrderController extends Controller
     {
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
-        return view('Retail/Order/order_delete',['order_id'=>$order_id,'status'=>$status]);
+        return view('Retail/Order/order_status',['order_id'=>$order_id,'status'=>$status]);
+    }
+
+    //修改订单状态以及支付方式确认密码弹窗
+    public function order_status_paytype(Request $request)
+    {
+        $order_id = $request->get('order_id');          //订单ID
+        $status = $request->get('status');              //订单状态
+        return view('Retail/Order/order_status_paytype',['order_id'=>$order_id,'status'=>$status]);
     }
 
     //修改订单状态确认操作
