@@ -118,7 +118,7 @@ class OrderController extends Controller
         DB::beginTransaction();
         try {
             if ($status == '-1'){
-                $order = RetailOrder::getOne(['id'=>$order_id])->first();    //获取订单信息
+                $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
                 dd($order);
                 foreach ($order as $key=>$val){
                     $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
