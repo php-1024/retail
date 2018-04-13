@@ -80,7 +80,7 @@ class DispatchController extends Controller
         $dispatch_name = $request->get('dispatch_name');    //模板名称
         $search_data = ['dispatch_name'=>$dispatch_name];       //搜索参数
         $where[] = ['store_id',$admin_data['organization_id']];
-        if (empty($dispatch_name)){
+        if (!empty($dispatch_name)){
             $where[] = ['name','like','%'.$dispatch_name.'%'];
         }
         dump($dispatch_name);
