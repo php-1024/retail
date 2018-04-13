@@ -92,7 +92,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {{$list->links()}}
+                                        {{$list->appends($dispatch_name)->links()}}
                                     </div>
                                 </div>
                             </footer>
