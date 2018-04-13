@@ -73,14 +73,14 @@ class SupplierController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $company_name = $request->get('company_name');         //获取供应商名称
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
-        $where = [
-            'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
-        ];
-        $supplier = RetailSupplier::getPaginage($where,$company_name,'0', 'displayorder', 'DESC');   //供应商信息
-        return  view('Retail/Supplier/supplier_list',['supplier'=>$supplier,'company_name'=>$company_name,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $company_name = $request->get('company_name');      //获取供应商名称
+        $search_data = ['company_name'=>$company_name];         //搜索参数
+        $where[] = ['retail_id' , $admin_data['organization_id']];
+        if(!empty($company_name)){
+            $where[] = ['company_name','like','%'.$company_name.'%'];
+        }
+        $supplier = RetailSupplier::getPaginage($where,'0', 'displayorder', 'DESC');   //供应商信息
+        return  view('Retail/Supplier/supplier_list',['supplier'=>$supplier,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
     //供应商编辑弹窗
