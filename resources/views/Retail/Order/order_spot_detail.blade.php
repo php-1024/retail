@@ -122,7 +122,7 @@
                                                     @elseif($order->status==1)
                                                         <label class="label label-warning">已付款</label>
                                                     @elseif($order->status==2)
-                                                        <label class="label label-success">配送中</label>
+                                                        <label class="label label-success">已发货</label>
                                                     @elseif($order->status==3)
                                                         <label class="label label-info">已完成</label>
                                                     @endif
