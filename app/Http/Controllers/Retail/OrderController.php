@@ -108,11 +108,11 @@ class OrderController extends Controller
         try {
             if ($status == '-1' && $order->status == '0'){//待付款时取消订单    1、判断是否下单减库存
                 if ($power != '1') {//说明下单减库存，此时库存已经减去，需要还原
-                    $this->return_stock($order,'6');
+                    $this->return_stock($order,'7');
                 }
             }else{
                 if ($power == '1') {//说明付款减库存，此时库存已经减去，需要还原
-                    $this->return_stock($order,'6');
+                    $this->return_stock($order,'7');
                 }
             }
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
@@ -147,7 +147,7 @@ class OrderController extends Controller
         }
         if ($status == '1' && $order->status == '0'){//手动确认付款    1、判断是否付款减库存
             if ($power == '1') {//说明付款减库存，此时库存已经减去，需要还原
-                $this->return_stock($order,'7');
+                $this->return_stock($order,'6');
             }
         }
         DB::beginTransaction();
@@ -175,7 +175,6 @@ class OrderController extends Controller
                 $new_stock = $old_stock-$val->total;         //确认付款后处理的新库存
             }elseif($type == '7'){//销退入库
                 $new_stock = $old_stock+$val->total;         //退货后处理的新库存
-                dd($new_stock);
             }
             //1、更新商品信息中的库存
             RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
