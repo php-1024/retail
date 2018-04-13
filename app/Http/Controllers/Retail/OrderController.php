@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\RetailConfig;
 use App\Models\RetailGoods;
 use App\Models\RetailOrder;
 use App\Models\OperationLog;
@@ -102,45 +103,38 @@ class OrderController extends Controller
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
 
-//        if ($status == '-1'){
-//            $orders = RetailOrder::getList(['id'=>$order_id],0,'created_at','DESC');
-//            $return_goods = [];
-//            foreach ($orders as $key=>$val){
-//                foreach ($val->RetailOrderGoods as $kk=>$vv){
-//                    $return_goods[] = [
-//                        'goods_id' => $vv->goods_id,
-//                        'total' => $vv->total
-//                    ];
-//                }
-//            }
-//        }
 
+        $power = RetailConfig::getPluck([['retail_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
         DB::beginTransaction();
         try {
-            if ($status == '-1'){
-                $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
-                foreach ($order->RetailOrderGoods as $key=>$val){
-                    $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
-                    $new_stock = $old_stock+$val->total;         //退货后处理的新库存
-                    //1、更新商品信息中的库存
-                    RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
-                    //2、更新库存表的库存
-                    RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
-                    $stock_data = [
-                        'fansmanage_id' => $order->fansmanage_id,
-                        'retail_id' => $order->retail_id,
-                        'goods_id' => $val->goods_id,
-                        'amount' => $val->total,
-                        'ordersn' => $order->ordersn,
-                        'operator_id' => $order->operator_id,
-                        'remark' => $order->remarks,
-                        'type' => '7',  //退货入库
-                        'status' => '1',
-                    ];
-                    RetailStockLog::addStockLog($stock_data);
-                }
-            }
 
+            if ($status == '-1' && $order->status == '0'){//待付款时取消订单1、判断是否下单减库存
+                if ($power != '1') {//说明下单减库存，此时库存已经减去，需要还原
+                    foreach ($order->RetailOrderGoods as $key=>$val){
+                        $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
+                        $new_stock = $old_stock+$val->total;         //退货后处理的新库存
+                        //1、更新商品信息中的库存
+                        RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
+                        //2、更新库存表的库存
+                        RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
+                        $stock_data = [
+                            'fansmanage_id' => $order->fansmanage_id,
+                            'retail_id' => $order->retail_id,
+                            'goods_id' => $val->goods_id,
+                            'amount' => $val->total,
+                            'ordersn' => $order->ordersn,
+                            'operator_id' => $order->operator_id,
+                            'remark' => $order->remarks,
+                            'type' => '7',  //退货入库
+                            'status' => '1',
+                        ];
+                        RetailStockLog::addStockLog($stock_data);
+                    }
+                }
+            }else{
+
+            }
 
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
