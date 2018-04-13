@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Account;
 use App\Models\RetailOrder;
 use App\Models\OperationLog;
+use App\Models\RetailStock;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -98,6 +99,12 @@ class OrderController extends Controller
         $route_name = $request->path();                     //获取当前的页面路由
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
+
+        if ($status == '-1'){
+            dd('取消订单，还原商品库存！');
+        }
+
+
         DB::beginTransaction();
         try {
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
