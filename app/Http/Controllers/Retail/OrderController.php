@@ -37,7 +37,7 @@ class OrderController extends Controller
             $where[] = ['ordersn' , $ordersn];
         }
         //按用户账号搜索
-        if (!empty($operator_id) || $operator_id == null) {
+        if (!empty($account) && !empty($operator_id) || $operator_id == null) {
             $where[] = ['operator_id' , $operator_id];
         }
         //按照支付方式搜索
@@ -53,7 +53,6 @@ class OrderController extends Controller
             $user = User::getOneUser([['id',$val->user_id]]);
             $val->user = $user;
         }
-        dump($account);
         dump($where);
         return view('Retail/Order/order_spot',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
