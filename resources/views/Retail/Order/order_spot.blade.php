@@ -40,15 +40,22 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
+                                    <label class="col-sm-1 control-label">订单编号</label>
+                                    <div class="col-sm-2">
+                                        <input class="input-sm form-control" name="ordersn" size="16" type="text" value="{{$search_data['ordersn']}}">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row wrapper">
+                                <form class="form-horizontal" method="get">
                                         <label class="col-sm-1 control-label">用户账号</label>
                                         <div class="col-sm-1">
                                             <input class="input-sm form-control" name="account" size="16" type="text" value="{{$search_data['account']}}">
                                         </div>
-                                        <label class="col-sm-1 control-label">订单编号</label>
 
-                                        <div class="col-sm-2">
-                                            <input class="input-sm form-control" name="ordersn" size="16" type="text" value="{{$search_data['ordersn']}}">
-                                        </div>
                                         <label class="col-sm-1 control-label">支付方式</label>
                                         <div class="col-sm-2">
                                             <select name="paytype" class="form-control m-b">
@@ -65,14 +72,14 @@
                                         <div class="col-sm-1">
                                             <select name="status" class="form-control m-b">
                                                 <option @if($search_data['status'] == null ) selected @endif>请选择</option>
-                                                <option value="0" @if($search_data['status']=='0') selected @endif >未支付</option>
-                                                <option value="1" @if($search_data['status']=='1') selected @endif >已支付</option>
+                                                <option value="0" @if($search_data['status']=='0') selected @endif >待付款</option>
+                                                <option value="1" @if($search_data['status']=='1') selected @endif >已付款</option>
                                                 <option value="3" @if($search_data['status']=='3') selected @endif >已完成</option>
                                                 <option value="-1" @if($search_data['status']=='-1') selected @endif >已取消</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-2">
-                                            <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                            <button type="submit" class="btn btn-s-md btn-info"><i class="fa fa-search"></i>&nbsp;&nbsp;高级搜索</button>
                                         </div>
                                 </form>
                             </div>
@@ -103,22 +110,23 @@
                                         <td>{{$val->account->mobile}}</td>
                                         {{--1为余额，2为在线，3为到付,4现场现金， 5现场刷卡，6现场支付宝，7现场微信，8线上手动确认付款--}}
                                         <td>
-                                            <label class="label label-info">
+
 
                                         @if($val->paytype == '0' )
-                                            银行卡支付
+                                                <label class="label label-info">银行卡支付</label>
                                         @elseif($val->paytype == '1' )
-                                            支付宝扫码
+                                                <label class="label label-info">支付宝扫码</label>
                                         @elseif($val->paytype == '2' )
-                                            支付宝二维码
+                                                <label class="label label-info">支付宝二维码</label>
                                         @elseif($val->paytype == '3' )
-                                            微信扫码
+                                                <label class="label label-info">微信扫码</label>
                                         @elseif($val->paytype == '4' )
-                                            微信二维码
+                                                <label class="label label-info">微信二维码</label>
                                         @elseif($val->paytype == '-1' )
-                                            现金支付，其他支付
+                                                <label class="label label-info">现金支付，其他支付</label>
+                                        @elseif($val->paytype == null)
+                                                <label class="label label-danger">暂未支付</label>
                                         @endif
-                                        </label>
                                         </td>
 
                                         <td>{{$val->order_price}}</td>
