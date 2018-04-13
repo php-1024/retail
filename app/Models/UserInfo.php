@@ -16,6 +16,7 @@ class UserInfo extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+    protected $guarded = [];
 
 //    public function user()
 //    {
@@ -72,4 +73,29 @@ class UserInfo extends Model
         return self::where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
+
+    /**
+     * 添加数据
+     * @param $param
+     * @param $type
+     * @param $where
+     * @return bool
+     */
+    public static function insertData($param, $type = "update_create", $where = [])
+    {
+        switch ($type) {
+            case "update_create":
+                $res = self::updateOrCreate($where, $param);
+                break;
+            case "first_create":
+                $res = self::firstOrCreate($param);
+                break;
+        }
+
+        if (!empty($res)) {
+            return $res->toArray();
+        } else {
+            return false;
+        }
+    }
 }

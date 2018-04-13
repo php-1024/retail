@@ -6,7 +6,11 @@
 namespace App\Http\Controllers\Pay;
 
 use App\Http\Controllers\Controller;
+use App\Models\FansmanageUser;
+use App\Models\User;
+use App\Models\UserInfo;
 use App\Models\XhoLog;
+use App\Services\Curl\HttpCurl;
 use Illuminate\Support\Facades\Request;
 use Session;
 
@@ -253,6 +257,216 @@ class SftController extends Controller
 //            $param_body_attach_wxh5["attach"] = "";
 //        }
     }
+
+    protected $zerone_info = [];
+
+    public function test10()
+    {
+        exit;
+        $param["account"] = 10003;
+        $param["password"] = 1;
+        $param["safepassword"] = 1;
+        $param["zerone_open_id"] = 1;
+        $param["mobile"] = 1;
+        $param["status"] = 1;
+        $res = User::updateOrCreate(["account" => 10003], $param);
+        return $res;
+        exit;
+
+        // 获取零壹配置信息
+        $this->zerone_info = config("app.wechat_web_setting");
+
+        // 获取零壹授权信息
+        $res = $this->getAuthorizeZeroneInfo();
+
+
+        if ($res == false) {
+            return redirect("benefit/error404");
+        }
+
+//        // 将参数添加到request 请求中, 后面控制器调用就直接使用request 获取
+//        request()->attributes->add(
+//            [
+//                'user_info' => $this->user_info,
+//                'wechat_config' => $this->wechat_config
+//            ]
+//        );
+    }
+
+
+    /**
+     * 获取用户信息,并判断是否需要进行跳转
+     */
+    public function getAuthorizeZeroneInfo()
+    {
+        // 跳转到下一个授权的地址
+        $url = "";
+        // 判断是否存在 零壹服务用户id
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            $code = request()->input('code');
+            // 保存初次访问的地址
+            session(["zerone_auth_info" => ["zerone_skip_url" => request()->fullUrl()]]);
+            // 如果不存在zerone_openid就进行授权
+            if (empty($code)) {
+                $this->wechatAuthorize(config("app.wechat_web_setting.appid"), $url);
+                exit;
+            } else {
+
+                $this->setAuthorizeInfo();
+            }
+        }
+        return true;
+    }
+
+
+    public function getAuthorizeShopInfo()
+    {
+        // 判断
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            $code = request()->input('code');
+            // 如果不存在zerone_openid就进行授权
+            if (empty($code)) {
+                $url = "";
+                $this->wechatAuthorize(config("app.wechat_web_setting.appid"), $url);
+                exit;
+            } else {
+
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 微信授权的步骤
+     * @param string $appid
+     * @param string $url
+     */
+    public function wechatAuthorize($appid, $url = '')
+    {
+        // 获取访问的地址, 授权之后回调使用
+        if (empty($url)) {
+            $url = request()->fullUrl();
+        }
+        // 进行授权
+        $redirect_url = urlencode($url);
+        // 授权跳转地址
+        $authorize_api
+            = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri=$redirect_url&response_type=code&scope=snsapi_base#wechat_redirect";
+        // 进行跳转
+        Header("Location: {$authorize_api}");
+        exit;
+    }
+
+    /**
+     * 保存用户授权信息
+     * @param $appid
+     * @param $appsecret
+     * @param $type
+     * @param $code
+     * @param bool $get_user_info
+     * @param $re_url
+     */
+    public function setAuthorizeInfo($appid, $appsecret, $type, $code, $get_user_info = false, $re_url)
+    {
+        $access_token = "";
+        // 静默授权：通过授权使用的code,获取到用户openid
+        $access_token_api
+            = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$code}&grant_type=authorization_code";
+        $ret_access = HttpCurl::doGet($access_token_api);
+        $res_access_arr = json_decode($ret_access, true);
+
+        // 如果不存在授权所特有的access_token,则重新获取code,并且验证
+        if (!empty($res_access_arr['access_token'])) {
+            $openid = $res_access_arr['openid'];
+        } else {
+            $url_arr = explode("?", $re_url);
+            $this->wechatAuthorize($url_arr[0]);
+            exit;
+        }
+
+
+        DB::beginTransaction();
+        try {
+            // 判断是哪个类型的数据, 进行相对应数据的保存
+            switch ($type) {
+                // 零壹服务公众号的信息
+                case "zerone_info" :
+                    // 获取account 最大的值，然后就可以进行数据的累加
+                    $account = User::max("account");
+                    $param["account"] = ++$account;
+                    $param["password"] = 123456;
+                    $param["safepassword"] = 123456;
+                    $param["zerone_open_id"] = $openid;
+                    $param["status"] = 1;
+                    $res = User::insertData($param, "update_create", ["zerone_openid" => $param["zerone_open_id"]]);
+                    session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
+                    break;
+                // 店铺公众号的信息
+                case "shop_info":
+                    // 组织id
+                    $param["fansmanage_id"] = 10002;
+                    $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+                    $param["open_id"] = $openid;
+                    $param["status"] = 1;
+                    // 保存粉丝数据
+                    FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
+                    break;
+            }
+
+            // 判断是否需要获取用户数据
+            if ($get_user_info === true) {
+                // 通过openid,获取已关注的用户的用户信息
+                $user_info_api
+                    = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={$access_token}&openid={$openid}&lang=zh_CN";
+                $res_user_info = HttpCurl::doGet($user_info_api);
+                $user_info = json_decode($res_user_info, true);
+                // 判断存在用户消息
+                if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
+                    // 用户id
+                    $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+                    $param["nickname"] = $user_info["nickname"];
+                    $param["sex"] = $user_info["sex"];
+                    $param["city"] = $user_info["city"];
+                    $param["country"] = $user_info["country"];
+                    $param["province"] = $user_info["province"];
+                    $param["head_imgurl"] = $user_info["headimgurl"];
+                    // 保存用户数据
+                    UserInfo::insertData($param);
+                }
+            }
+            // 数据提交
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+        }
+    }
+
+
+    /**
+     * 获取 wx.config 里面的签名,JSSDk 所需要的
+     *
+     * @return array
+     */
+    public function getSignPackage()
+    {
+        // 获取微信的信息
+        $appid = $this->wechat_config["appid"];
+        $ticket = $this->wechat_config["jsapi_ticket"];
+        // 设置得到签名的参数
+        $url = request()->fullUrl();
+        $timestamp = time();
+        $nonceStr = substr(md5(time()), 0, 16);
+        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+        $string
+            = "jsapi_ticket={$ticket}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        $signature = sha1($string);
+        $signPackage = array("appId" => $appid, "nonceStr" => $nonceStr,
+            "timestamp" => $timestamp, "url" => $url,
+            "rawString" => $string, "signature" => $signature);
+        // 返回签名
+        return $signPackage;
+    }
+
 
     /**
      * CURL请求
