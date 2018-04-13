@@ -84,6 +84,43 @@ class Sft
     }
 
 
+    /**
+     * 退款查询 接口
+     * @param $param
+     * @return mixed|string
+     */
+    public function refundQuery($param)
+    {
+        try {
+            // 接口地址
+            $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/refundQuery.htm";
+            // 商家的身份码
+            $param_body["merchantNo"] = $param["merchantNo"];
+            // 字符集
+            $param_body["charset"] = 'UTF-8';
+            // 请求时间-当前时间
+            $param_body["requestTime"] = date('YmdHis');
+            // 退款流水账号
+            $param_body["refundOrderNo"] = $param["refundOrderNo"];
+            // 退款订单号
+            $param_body["merchantOrderNo"] = $param["merchantOrderNo"];
+            // 盛付通退款订单号
+            $param_body["refundTransNo"] = "";
+            // 盛付通系统内针对此商户订单的唯一订单号
+            $param_body["sftOrderNo"] = null;
+            // 其他
+            $param_body["exts"] = null;
+
+            // json 化 参数数据
+            $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
+            // 获取签名
+            $header = self::getSign($param_body_json, $param["origin_key"]);
+            // 发起请求
+            return self::httpRequest($api_url, "post", $param_body_json, $header);
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
+    }
 
 
     /**
