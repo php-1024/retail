@@ -11,13 +11,13 @@
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-id-1">安全密码</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="safe_password" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-4 control-label" for="input-id-1">选择付款方式</label>
+                            <label class="col-sm-3 control-label" for="input-id-1">选择付款方式</label>
                             <div class="col-sm-4">
                                 <select name="paytype" class="form-control m-b">
                                         <option>请选择</option>
