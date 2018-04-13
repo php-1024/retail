@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
+use App\Models\Account;
 use App\Models\RetailOrder;
 use App\Models\OperationLog;
 use App\Models\User;
@@ -24,7 +25,7 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
 
         $account = $request->get('account');                //接收搜索账号
-        $user_id = User::getPluck([['account',$account]],'id')->first();//粉丝账号ID
+        $user_id = Account::getPluck([['account',$account]],'id')->first();//操作员账号ID
 
         $ordersn = $request->get('ordersn');                //接收订单编号
         $paytype = $request->get('paytype');                //接收支付方式
