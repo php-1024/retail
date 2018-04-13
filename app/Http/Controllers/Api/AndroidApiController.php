@@ -483,7 +483,7 @@ class AndroidApiController extends Controller
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
                     $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
                     $retail_stock = $re['stock'] - $value['total'];
-                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+                    RetailStock::editStock([['id', $re['id']]], ['stock' => $retail_stock]);
 
                 }
             } else {
@@ -506,7 +506,7 @@ class AndroidApiController extends Controller
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
                     $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
                     $retail_stock = $re['stock'] + $value['total'];
-                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+                    RetailStock::editStock([['id', $re['id']]], ['stock' => $retail_stock]);
                 }
             }
             DB::commit();//提交事务
