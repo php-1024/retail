@@ -58,6 +58,7 @@ class FansmanageController extends Controller
         }
         $list = Organization::getPaginagefansmanage($where, 10, 'id');
         var_dump($list);exit;
+
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data,'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
