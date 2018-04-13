@@ -1,4 +1,4 @@
-<form class="form-horizontal" id="order_status_check" method="post" action="{{url('retail/ajax/order_status_check')}}">
+<form class="form-horizontal" id="order_status_check" method="post" action="{{url('retail/ajax/order_status_paytype_check')}}">
      <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
      <input type="hidden" name="order_id" id="order_id" value="{{$order_id}}">
      <input type="hidden" name="status" id="status" value="{{$status}}">
@@ -11,14 +11,14 @@
                 <div class="modal-body">
                     <form class="form-horizontal" method="get">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
-                            <div class="col-sm-10">
+                            <label class="col-sm-3 control-label" for="input-id-1">安全密码</label>
+                            <div class="col-sm-8">
                                 <input type="text" class="form-control" name="safe_password" value="">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label" for="input-id-1">选择付款方式</label>
-                            <div class="col-sm-6">
+                            <label class="col-sm-3 control-label" for="input-id-1">选择付款方式</label>
+                            <div class="col-sm-4">
                                 <select name="paytype" class="form-control m-b">
                                         <option>请选择</option>
                                         <option value="-1">现金支付，其他支付</option>

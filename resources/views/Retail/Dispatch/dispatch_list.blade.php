@@ -50,7 +50,7 @@
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">模板名称</label>
                                     <div class="col-sm-2">
-                                        <input type="text" class="form-control" name="name" value="{{$dispatch_name}}" placeholder="模板名称">
+                                        <input type="text" class="form-control" name="dispatch_name" value="{{$search_data['dispatch_name']}}" placeholder="模板名称">
                                     </div>
                                     <div class="col-sm-1">
                                         <button type="submit" class="btn btn-s-md btn-info"><i class="icon icon-magnifier"></i>&nbsp;&nbsp;搜索</button>
@@ -92,7 +92,7 @@
                                 <div class="row">
 
                                     <div class="col-sm-12 text-right text-center-xs">
-                                        {{$list->links()}}
+                                        {{$list->appends($search_data)->links()}}
                                     </div>
                                 </div>
                             </footer>

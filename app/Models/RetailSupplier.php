@@ -65,6 +65,24 @@ class RetailSupplier extends Model{
         $model->save();
         return $model->id;
     }
+
+    //获取单行数据的其中一列
+    public static function getPluck($where, $pluck)
+    {
+        return self::where($where)->value($pluck);
+    }
+
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where)
+    {
+        $row = self::getPluck($where, 'id');
+        if (empty($row)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     //修改数据
     public static function editSupplier($where,$param){
         if($model = self::where($where)->first()){
@@ -76,17 +94,14 @@ class RetailSupplier extends Model{
     }
 
     //获取分页列表
-    public static function getPaginage($where,$company_name,$paginate,$orderby,$sort='DESC'){
+    public static function getPaginage($where,$paginate,$orderby,$sort='DESC'){
         $model = self::with('Organization');
-        if(!empty($company_name)){
-            $model = $model->where('company_name','like','%'.$company_name.'%');
-        }
         return $model->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
     //查询出模型，再删除模型 一定要查询到才能删除
     public static function select_delete($id){
-        $model = Self::find($id);
+        $model = self::find($id);
         return $model->forceDelete();
     }
 }
