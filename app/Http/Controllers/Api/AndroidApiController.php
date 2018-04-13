@@ -231,7 +231,7 @@ class AndroidApiController extends Controller
         $organization_id = $request->organization_id;
         // 订单状态
         $status = $request->status;
-//        $where[] = ['retail_id', $organization_id];
+        $where[] = ['retail_id', $organization_id];
         if ($status) {
             $where[] = ['status', $status];
         }
