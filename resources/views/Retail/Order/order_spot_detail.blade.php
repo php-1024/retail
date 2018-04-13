@@ -48,6 +48,7 @@
                                     <form class="form-horizontal" method="post">
 
                                         <input type="hidden" id="order_status_comfirm_url" value="{{ url('retail/ajax/order_status') }}">
+                                        <input type="hidden" id="order_status_paytype" value="{{ url('retail/ajax/order_status_paytype') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
                                             <label class="col-sm-3 text-right" for="input-id-1">订单编号</label>
@@ -122,7 +123,7 @@
                                                     @elseif($order->status==1)
                                                         <label class="label label-warning">已付款</label>
                                                     @elseif($order->status==2)
-                                                        <label class="label label-success">配送中</label>
+                                                        <label class="label label-success">已发货</label>
                                                     @elseif($order->status==3)
                                                         <label class="label label-info">已完成</label>
                                                     @endif
@@ -184,7 +185,6 @@
                                             <th>商品标题</th>
                                             <th>数量</th>
                                             <th>商品价格</th>
-                                            <th>状态</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -201,23 +201,6 @@
                                             <td>
                                                 <input class="input-sm form-control" style="width: 50px;" type="text" value="{{$val->price}}">
                                             </td>
-                                            <th>
-                                                @if($val->status==-1)
-                                                    <label class="label label-default">已取消</label>
-                                                @elseif($val->status==0)
-                                                    <label class="label label-primary">待付款</label>
-                                                @elseif($val->status==1)
-                                                    <label class="label label-warning">已付款</label>
-                                                @elseif($val->status==2)
-                                                    <label class="label label-success">已发货</label>
-                                                @elseif($val->status==3)
-                                                    <label class="label label-info">已完成</label>
-                                                @endif
-                                                {{--<select name="account" style="width: 100px;" class="form-control form-xs m-b text-xs">--}}
-                                                    {{--<option>待上菜</option>--}}
-                                                    {{--<option>已上菜</option>--}}
-                                                {{--</select>--}}
-                                            </th>
                                         </tr>
                                         @endforeach
                                         <tr>
@@ -227,7 +210,6 @@
                                             <td>
                                                 <label class="label label-danger">¥{{$order_price}}</label>
                                             </td>
-                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>
@@ -271,7 +253,11 @@
 
     //确认订单
     function getPostForm(order_id,status){
-        var url = $('#order_status_comfirm_url').val();
+        if(status == '1'){//判断是否后台手动确认付款
+            var url = $('#order_status_paytype').val();
+        }else{
+            var url = $('#order_status_comfirm_url').val();
+        }
         var token = $('#_token').val();
         var data = {'_token':token,'order_id':order_id,'status':status};
         $.post(url,data,function(response){
