@@ -189,7 +189,6 @@ class AndroidApiController extends Controller
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
@@ -482,9 +481,8 @@ class AndroidApiController extends Controller
                     ];
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
                     $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
-                    $retail_stock = $re->stock - $value['total'];
-                    echo $retail_stock;exit;
-                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+                    $retail_stock = $re['stock'] - $value['total'];
+                    RetailStock::editStock([['id', $re['id']]], ['stock' => $retail_stock]);
 
                 }
             } else {
@@ -507,7 +505,7 @@ class AndroidApiController extends Controller
                     RetailStockLog::addStockLog($stock_data);//商品操作记录
                     $re = RetailStock::getOneRetailStock([['retail_id', $data['retail_id']], ['goods_id', $value['goods_id']]]);
                     $retail_stock = $re['stock'] + $value['total'];
-                    RetailStock::editStock([['id', $stock_data['id']]], ['stock' => $retail_stock]);
+                    RetailStock::editStock([['id', $re['id']]], ['stock' => $retail_stock]);
                 }
             }
             DB::commit();//提交事务
