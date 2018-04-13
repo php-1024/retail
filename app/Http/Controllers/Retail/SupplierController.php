@@ -79,7 +79,7 @@ class SupplierController extends Controller
         if(!empty($company_name)){
             $where[] = ['company_name','like','%'.$company_name.'%'];
         }
-        $supplier = RetailSupplier::getPaginage($where,'1', 'displayorder', 'DESC');   //供应商信息
+        $supplier = RetailSupplier::getPaginage($where,'10', 'displayorder', 'DESC');   //供应商信息
         return  view('Retail/Supplier/supplier_list',['supplier'=>$supplier,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
