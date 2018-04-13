@@ -48,6 +48,7 @@
                                     <form class="form-horizontal" method="post">
 
                                         <input type="hidden" id="order_status_comfirm_url" value="{{ url('retail/ajax/order_status') }}">
+                                        <input type="hidden" id="order_status_paytype" value="{{ url('retail/ajax/order_status_paytype') }}">
                                         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                         <div class="form-group">
                                             <label class="col-sm-3 text-right" for="input-id-1">订单编号</label>
@@ -252,7 +253,11 @@
 
     //确认订单
     function getPostForm(order_id,status){
-        var url = $('#order_status_comfirm_url').val();
+        if(status == '1'){//判断是否后台手动确认付款
+            var url = $('#order_status_paytype').val();
+        }else{
+            var url = $('#order_status_comfirm_url').val();
+        }
         var token = $('#_token').val();
         var data = {'_token':token,'order_id':order_id,'status':status};
         $.post(url,data,function(response){
