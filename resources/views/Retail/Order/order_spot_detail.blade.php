@@ -91,25 +91,21 @@
                                             <label class="col-sm-3 text-right" for="input-id-1">支付方式</label>
                                             <div class="col-sm-9">
                                                 <div>
-                                                    <label class="label label-info">
-                                                        @if($order->paytype==1)
-                                                            余额支付
-                                                        @elseif($order->paytype==2)
-                                                            在线支付
-                                                        @elseif($order->paytype==3)
-                                                            货到付款
-                                                        @elseif($order->paytype==4)
-                                                            现场现金支付
-                                                        @elseif($order->paytype==5)
-                                                            现场刷卡支付
-                                                        @elseif($order->paytype==6)
-                                                            现场支付宝支付
-                                                        @elseif($order->paytype==7)
-                                                            现场微信支付
-                                                        @elseif($order->paytype==8)
-                                                            线上手动确认付款
-                                                        @endif
-                                                    </label>
+                                                    @if($order->paytype == '0' )
+                                                        <label class="label label-info">银行卡支付</label>
+                                                    @elseif($order->paytype == '1' )
+                                                        <label class="label label-info">支付宝扫码</label>
+                                                    @elseif($order->paytype == '2' )
+                                                        <label class="label label-info">支付宝二维码</label>
+                                                    @elseif($order->paytype == '3' )
+                                                        <label class="label label-info">微信扫码</label>
+                                                    @elseif($order->paytype == '4' )
+                                                        <label class="label label-info">微信二维码</label>
+                                                    @elseif($order->paytype == '-1' )
+                                                        <label class="label label-info">现金支付，其他支付</label>
+                                                    @elseif($order->paytype == null)
+                                                        <label class="label label-danger">暂未支付</label>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
