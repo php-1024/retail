@@ -37,7 +37,7 @@ class OrderController extends Controller
             $where[] = ['ordersn' , $ordersn];
         }
         //按用户账号搜索
-        if (!empty($operator_id) && $operator_id != null) {
+        if (!empty($operator_id)) {
             $where[] = ['operator_id' , $operator_id];
         }
         //按照支付方式搜索
@@ -47,9 +47,6 @@ class OrderController extends Controller
         //按照订单状态搜索
         if (!empty($status) && $status != '请选择' || $status == '0') {
             $where[] = ['status' , $status];
-        }
-        if ($operator_id == null){
-            $where[] = ['operator_id' , $operator_id];
         }
         $list = RetailOrder::getPaginage($where,10,'created_at','DESC');
         foreach ( $list as $key=>$val){
