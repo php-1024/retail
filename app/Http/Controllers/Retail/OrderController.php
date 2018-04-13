@@ -105,15 +105,14 @@ class OrderController extends Controller
             $return_goods = [];
             foreach ($orders as $key=>$val){
                 foreach ($val->RetailOrderGoods as $kk=>$vv){
-                    dd($vv->goods_id);
-//                    $return_goods[] = [
-//                        'goods_id' => $vv->goods_id,
-//                        'total' => $vv->total
-//                    ];
+                    $return_goods = [
+                        'goods_id' => $vv->goods_id,
+                        'total' => $vv->total
+                    ];
                 }
             }
         }
-//        dd($return_goods);
+        dd($return_goods);
 
 
         DB::beginTransaction();
