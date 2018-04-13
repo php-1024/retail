@@ -117,7 +117,6 @@ class OrderController extends Controller
                     $this->return_stock($order);
                 }
             }
-
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
