@@ -137,10 +137,6 @@ class AndroidApiController extends Controller
         // 备注
         $remarks = $request->remarks;
 
-        $order_type = $request->order_type;
-        if (empty($order_type)) {
-            $order_type = '1';
-        }
 
         $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
         $order_price = 0;
@@ -158,7 +154,6 @@ class AndroidApiController extends Controller
             'ordersn' => $ordersn,
             'order_price' => $order_price,
             'remarks' => $remarks,
-            'order_type' => $order_type,
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $organization_id,
             'user_id' => $user_id,
