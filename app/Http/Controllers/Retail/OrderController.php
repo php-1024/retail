@@ -112,11 +112,10 @@ class OrderController extends Controller
                 }
             }
         }
-        dd($return_goods);
-
 
         DB::beginTransaction();
         try {
+            $this->edit_stock($return_goods,1);
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
@@ -158,6 +157,25 @@ class OrderController extends Controller
             return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '修改订单状态成功！', 'status' => '1']);
+    }
+
+
+    public static function edit_stock($order_goods,$type)
+    {
+        foreach ($order_goods as $key=>$val){
+            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
+            if ($type == 1){                    //加库存：type=1、进货类型
+                $new_stock = $old_stock+$val['total'];    //新的库存
+            }elseif($type == 2 || $type == 3){  //减库存：type=2|type=3、退货类型|报损类型
+                $new_stock = $old_stock-$val['total'];    //新的库存
+            }elseif($type == 4){                //更新覆盖库存：type=4 盘点类型
+                $new_stock = $val['total'];               //新的库存
+            }
+            //1、更新商品信息中的库存
+            RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
+            //2、更新库存表的库存
+            RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
+        }
     }
 
 }
