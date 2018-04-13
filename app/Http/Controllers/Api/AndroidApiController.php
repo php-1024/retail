@@ -86,9 +86,10 @@ class AndroidApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
         foreach($categorylist as $key=>$value){
-            echo $value;
+            if(RetailGoods::checkRowExists([['category_id',$value['id']]])){
+              unset($categorylist['$key']);
+            };
         }
-        exit;
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
     }
 
@@ -112,7 +113,7 @@ class AndroidApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
         foreach ($goodslist as $key => $value) {
-            $goodslist[$key]['category_name'] = RetailCategory::getPluck([['id', $value['category_id']]], 'name')->first();
+            $goodslist[$key]['category_name'] = RetailCategory::getPluck([['id', $value['category_id']]], 'name');
             $goodslist[$key]['thumb'] = RetailGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
         }
         $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
