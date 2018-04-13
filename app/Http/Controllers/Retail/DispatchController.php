@@ -79,7 +79,11 @@ class DispatchController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $dispatch_name = $request->get('dispatch_name');    //模板名称
         $search_data = ['dispatch_name'=>$dispatch_name];       //搜索参数
-        $list = Dispatch::getPaginage(['store_id'=>$admin_data['organization_id']],$dispatch_name,'0','displayorder','DESC');
+        $where[] = ['store_id',$admin_data['organization_id']];
+        if (empty($dispatch_name)){
+            $where[] = ['name','like','%'.$dispatch_name.'%'];
+        }
+        $list = Dispatch::getPaginage($where,'0','displayorder','DESC');
         return view('Retail/Dispatch/dispatch_list',['list'=>$list,'search_data'=>$search_data,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
     }
 
