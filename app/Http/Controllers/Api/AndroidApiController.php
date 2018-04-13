@@ -237,13 +237,12 @@ class AndroidApiController extends Controller
         // 订单状态
         $status = $request->status;
 
-        echo preg_match('/(^[0-9]*$)/',$status,$a);
-        exit;
-
         $where[] = ['retail_id', $organization_id];
         if ($status) {
 
-            $where[] = ['status', $status];
+            preg_match('/(^[0-9]*$)/',$status,$status);
+
+            $where[] = ['status', $status[1]];
 
         }
         print_r($where);exit;
