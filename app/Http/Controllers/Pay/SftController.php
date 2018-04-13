@@ -199,7 +199,7 @@ class SftController extends Controller
     {
         // 分账
         $api_url = "http://mgw.shengpay.com/web-acquire-channel/pay/sharing.htm";
-        $param_body["merchantNo"] = '11548088';
+        $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
@@ -210,7 +210,7 @@ class SftController extends Controller
 
         $param_body["sharingReqItem"][0]["sharingNo"] = "";
         $param_body["sharingReqItem"][0]["sharingAmount"] = "";
-        $param_body["sharingReqItem"][0]["sharingRate"] = "";
+        $param_body["sharingReqItem"][0]["sharingRate"] = 0.5;
         $param_body["sharingReqItem"][0]["payeeId"] = "";
         $param_body["sharingReqItem"][0]["payeeIdType"] = "";
 
