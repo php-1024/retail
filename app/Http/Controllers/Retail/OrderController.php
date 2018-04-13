@@ -102,7 +102,9 @@ class OrderController extends Controller
 
         if ($status == '-1'){
             $orders = RetailOrder::getList(['id'=>$order_id],0,'created_at','DESC');
-            dd($orders);
+            foreach ($orders as $key=>$val){
+                dd($val->RetailOrderGoods);
+            }
         }
 
 
