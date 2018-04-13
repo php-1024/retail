@@ -37,7 +37,7 @@ class OrderController extends Controller
             $where[] = ['ordersn' , $ordersn];
         }
         //按用户账号搜索
-        if (!empty($operator_id) || $operator_id == null) {
+        if (!empty($operator_id)) {
             $where[] = ['operator_id' , $operator_id];
         }
         //按照支付方式搜索
