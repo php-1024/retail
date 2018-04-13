@@ -54,7 +54,7 @@ class RetailOrder extends Model
         if (!empty($select)) {
             $model = $model->select($select);
         }
-        return $model->where($where)->orderBy($orderby, $sort)->get();
+        return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby, $sort)->get();
     }
 
 
