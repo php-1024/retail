@@ -2,6 +2,7 @@
 /**
  * 微信开放平台操作相关接口
  */
+
 namespace App\Services\Wechat;
 
 use App\Facades\WechatFacade;
@@ -279,25 +280,38 @@ class WechatApi
     // +----------------------------------------------------------------------
     /**
      * 获取网页授权链接
-     * @param $redirect_uri 回调链接
+     * @param string $redirect_uri 回调链接
+     * @param string $appid 微信基础信息
      * @return string
      */
-    public function get_web_auth_url($redirect_uri)
+    public function get_web_auth_url($redirect_uri, $appid = '')
     {
-        $wxparam = config('app.wechat_web_setting');
-        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $wxparam['appid'] . '&redirect_uri=' . $redirect_uri . '&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';
+        // 判断是否存在 appid ,没有的话用系统默认的
+        if (empty($appid)) {
+            $appid = config('app.wechat_web_setting');
+        }
+        // 跳转地址
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}'&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect";
         return $url;
     }
+
 
     /**
      * 获取用户对于默认零壹公众号的唯一open_id
      * @param string $auth_code 用户授权后获取的授权码
+     * @param string $appid 用户授权后获取的授权码
+     * @param string $appsecret 用户授权后获取的授权码
      * @return mixed
      */
-    public function get_web_access_token($auth_code)
+    public function get_web_access_token($auth_code, $appid = '', $appsecret = '')
     {
-        $wxparam = config('app.wechat_web_setting');
-        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxparam['appid'] . '&secret=' . $wxparam['appsecret'] . '&code=' . $auth_code . '&grant_type=authorization_code';
+        // 判断是否存在 appid ,没有的话用系统默认的
+        if (empty($appid)) {
+            $appid = config('app.wechat_web_setting.appid');
+            $appsecret = config('app.wechat_web_setting.appsecret');
+        }
+        // 获取用户数据
+        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$auth_code}&grant_type=authorization_code";
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re, true);
         return $re;
@@ -305,11 +319,6 @@ class WechatApi
     // +----------------------------------------------------------------------
     // | End - 网页授权
     // +----------------------------------------------------------------------
-
-
-
-
-
 
 
     // +----------------------------------------------------------------------
@@ -373,7 +382,6 @@ class WechatApi
     // +----------------------------------------------------------------------
     // | Start - 客服消息
     // +----------------------------------------------------------------------
-
     /**
      * 发送客服消息
      * @param string $authorizer_access_token 第三方平台调用接口凭证
@@ -514,7 +522,6 @@ class WechatApi
         $re = \HttpCurl::doPost($url, $data);
         return $re;
     }
-
     // +----------------------------------------------------------------------
     // | End - 用户基本信息
     // +----------------------------------------------------------------------
@@ -714,5 +721,25 @@ class WechatApi
     // +----------------------------------------------------------------------
     // | End - 其他应用方法
     // +----------------------------------------------------------------------
+
+
+
+
+
+
+//    public function get_web_auth_url($redirect_uri)
+//    {
+//        $wxparam = config('app.wechat_web_setting');
+//        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $wxparam['appid'] . '&redirect_uri=' . $redirect_uri . '&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';
+//        return $url;
+//    }
+//    public function get_web_access_token($auth_code)
+//    {
+//        $wxparam = config('app.wechat_web_setting');
+//        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxparam['appid'] . '&secret=' . $wxparam['appsecret'] . '&code=' . $auth_code . '&grant_type=authorization_code';
+//        $re = \HttpCurl::doGet($url);
+//        $re = json_decode($re, true);
+//        return $re;
+//    }
 }
 
