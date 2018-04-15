@@ -7,8 +7,12 @@ namespace App\Http\Controllers\Retail;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\RetailConfig;
+use App\Models\RetailGoods;
 use App\Models\RetailOrder;
 use App\Models\OperationLog;
+use App\Models\RetailStock;
+use App\Models\RetailStockLog;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -98,8 +102,19 @@ class OrderController extends Controller
         $route_name = $request->path();                     //获取当前的页面路由
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
+        $power = RetailConfig::getPluck([['retail_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
         DB::beginTransaction();
         try {
+            if ($status == '-1' && $order->status == '0'){//待付款时取消订单    1、判断是否下单减库存
+                if ($power != '1') {//说明下单减库存，此时库存已经减去，需要还原
+                    $this->return_stock($order,'7');
+                }
+            }else{
+                if ($power == '1') {//说明付款减库存，此时库存已经减去，需要还原
+                    $this->return_stock($order,'7');
+                }
+            }
             RetailOrder::editRetailOrder(['id'=>$order_id],['status'=>$status]);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
@@ -109,6 +124,7 @@ class OrderController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
         }
@@ -123,8 +139,16 @@ class OrderController extends Controller
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
         $paytype = $request->get('paytype');            //订单付款方式
+
+        $power = RetailConfig::getPluck([['retail_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $order = RetailOrder::getOne(['id'=>$order_id]);    //获取订单信息
         if ($paytype == '请选择'){
             return response()->json(['data' => '请选择付款方式！', 'status' => '0']);
+        }
+        if ($status == '1' && $order->status == '0'){//手动确认付款    1、判断是否付款减库存
+            if ($power == '1') {//说明付款减库存，此时库存已经减去，需要还原
+                $this->return_stock($order,'6');
+            }
         }
         DB::beginTransaction();
         try {
@@ -141,6 +165,34 @@ class OrderController extends Controller
             return response()->json(['data' => '修改订单状态失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '修改订单状态成功！', 'status' => '1']);
+    }
+
+    public static function return_stock($order,$type)
+    {
+        foreach ($order->RetailOrderGoods as $key=>$val){
+            $old_stock = RetailGoods::getPluck(['id'=>$val->goods_id],'stock')->first(); //查询原来商品的库存
+            if ($type == '6'){//销售出库
+                $new_stock = $old_stock-$val->total;         //确认付款后处理的新库存
+            }elseif($type == '7'){//销退入库
+                $new_stock = $old_stock+$val->total;         //退货后处理的新库存
+            }
+            //1、更新商品信息中的库存
+            RetailGoods::editRetailGoods(['id'=>$val->goods_id],['stock'=>$new_stock]);
+            //2、更新库存表的库存
+            RetailStock::editStock(['goods_id'=>$val->goods_id],['stock'=>$new_stock]);
+            $stock_data = [
+                'fansmanage_id' => $order->fansmanage_id,
+                'retail_id' => $order->retail_id,
+                'goods_id' => $val->goods_id,
+                'amount' => $val->total,
+                'ordersn' => $order->ordersn,
+                'operator_id' => $order->operator_id,
+                'remark' => $order->remarks,
+                'type' => $type,  //销售出库、销退入库
+                'status' => '1',
+            ];
+            RetailStockLog::addStockLog($stock_data);
+        }
     }
 
 }

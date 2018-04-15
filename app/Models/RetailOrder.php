@@ -40,8 +40,7 @@ class RetailOrder extends Model
 
     public static function getOne($where)
     {
-        $model = self::with('User')->with('RetailOrderGoods');
-        return $model->where($where)->first();
+        return self::with('User')->with('RetailOrderGoods')->where($where)->first();
     }
 
     //获取列表
@@ -54,7 +53,7 @@ class RetailOrder extends Model
         if (!empty($select)) {
             $model = $model->select($select);
         }
-        return $model->where($where)->orderBy($orderby, $sort)->get();
+        return $model->with('RetailOrderGoods')->where($where)->orderBy($orderby, $sort)->get();
     }
 
 

@@ -270,7 +270,7 @@ class BillingController extends Controller
             $where = [['retail_id',$admin_data['organization_id']],['name','like','%'.$goods_name.'%']];
             $goods = RetailGoods::getList($where,0,'created_at','DESC');
             foreach ($goods as $key=>$val){
-                $stock_list[] = RetailStock::getOne(['goods_id'=>$val->id])->first();
+                $stock_list[] = RetailStock::getOne(['goods_id'=>$val->id]);
             }
         }else{
             $where = [['retail_id',$admin_data['organization_id']]];
