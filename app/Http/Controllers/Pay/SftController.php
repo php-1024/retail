@@ -55,6 +55,10 @@ class SftController extends Controller
 
     public function test()
     {
+
+//        $type = 2;
+        $type = $type ?? 1;
+        dd($type);
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
 //        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
@@ -308,10 +312,9 @@ class SftController extends Controller
             session(["zerone_auth_info" => ["zerone_skip_url" => request()->fullUrl()]]);
             // 如果不存在zerone_openid就进行授权
             if (empty($code)) {
-                $this->wechatAuthorize(config("app.wechat_web_setting.appid"), $url);
+                \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
                 exit;
             } else {
-
                 $this->setAuthorizeInfo();
             }
         }
@@ -370,10 +373,8 @@ class SftController extends Controller
     {
         $access_token = "";
         // 静默授权：通过授权使用的code,获取到用户openid
-        $access_token_api
-            = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$code}&grant_type=authorization_code";
-        $ret_access = HttpCurl::doGet($access_token_api);
-        $res_access_arr = json_decode($ret_access, true);
+        $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
+
 
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
