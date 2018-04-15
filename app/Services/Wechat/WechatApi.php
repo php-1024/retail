@@ -13,6 +13,7 @@ use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 
 class WechatApi
 {
+
     // +----------------------------------------------------------------------
     // | Start - 第三方平台授权
     // +----------------------------------------------------------------------
@@ -297,7 +298,7 @@ class WechatApi
     }
 
     /**
-     * 获取用户对于默认零壹公众号的唯一open_id
+     * 通过 code 获取 access_token 包括用户的openid
      * @param string $auth_code 用户授权后获取的授权码
      * @param string $appid 公众号基本信息
      * @param string $appsecret 公众号基本信息
@@ -309,13 +310,28 @@ class WechatApi
         $appid = $appid ?? config('app.wechat_web_setting.appid');
         $appsecret = $appsecret ?? config('app.wechat_web_setting.appsecret');
 
-        // 获取用户数据
+        // 获取授权信息
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$auth_code}&grant_type=authorization_code";
         $re = \HttpCurl::doGet($url);
         $re = json_decode($re, true);
         return $re;
     }
 
+    /**
+     * 通过 授权得到的 access_token（跟通过 appid 和 appsecret 获取的 access_token 不一样）
+     * 获取用户信息
+     * @param $access_token
+     * @param $openid
+     * @return mixed
+     */
+    public function get_web_user_info($access_token,$openid)
+    {
+        // 获取用户信息
+        $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$access_token}&openid={$openid}&lang=zh_CN";
+        $re = \HttpCurl::doGet($url);
+        $re = json_decode($re, true);
+        return $re;
+    }
 
     // +----------------------------------------------------------------------
     // | End - 网页授权
@@ -724,7 +740,6 @@ class WechatApi
     // +----------------------------------------------------------------------
     // | End - 其他应用方法
     // +----------------------------------------------------------------------
-
 
 //    public function get_web_auth_url($redirect_uri)
 //    {

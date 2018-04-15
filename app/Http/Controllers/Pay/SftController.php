@@ -55,8 +55,9 @@ class SftController extends Controller
 
     public function test()
     {
+        \Wechat()::get_fans_info("1", "2");
 
-//        $type = 2;
+        $type = 3;
         $type = $type ?? 1;
         dd($type);
         // 订单生成
@@ -315,66 +316,58 @@ class SftController extends Controller
                 \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
                 exit;
             } else {
-                $this->setAuthorizeInfo();
+                $appid = config("app.wechat_web_setting.appid");
+                $appsecret = config("app.wechat_web_setting.appsecret");
+                $res = $this->setAuthorizeInfo($appid, $appsecret, $code, "zerone_info");
+                if ($res === true) {
+                    return redirect("/getAuthorizeShopInfo");
+                }
             }
         }
         return true;
     }
 
-
+    /**
+     * 店面授权
+     * @return bool|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getAuthorizeShopInfo()
     {
+        $appid = request()->get("appid");
+        $url = session("zerone_auth_info")["zerone_skip_url"];
         // 判断
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $code = request()->input('code');
-            // 如果不存在zerone_openid就进行授权
+            // 如果不存在 zerone_openid 就进行授权
             if (empty($code)) {
-                $url = "";
-                $this->wechatAuthorize(config("app.wechat_web_setting.appid"), $url);
+                \Wechat::get_web_auth_url($url, $appid);
                 exit;
             } else {
-
+                $appsecret = request()->get("appid");
+                $res = $this->setAuthorizeInfo($appid, $appsecret, $code, "zerone_info");
+                if ($res === true) {
+                    return redirect("/getAuthorizeShopInfo");
+                }
             }
         }
         return true;
     }
 
     /**
-     * 微信授权的步骤
-     * @param string $appid
-     * @param string $url
-     */
-    public function wechatAuthorize($appid, $url = '')
-    {
-        // 获取访问的地址, 授权之后回调使用
-        if (empty($url)) {
-            $url = request()->fullUrl();
-        }
-        // 进行授权
-        $redirect_url = urlencode($url);
-        // 授权跳转地址
-        $authorize_api
-            = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri=$redirect_url&response_type=code&scope=snsapi_base#wechat_redirect";
-        // 进行跳转
-        Header("Location: {$authorize_api}");
-        exit;
-    }
-
-    /**
-     * 保存用户授权信息
+     * 店铺保存用户授权信息
      * @param $appid
      * @param $appsecret
      * @param $type
      * @param $code
      * @param bool $get_user_info
      * @param $re_url
+     * @return boolean
      */
-    public function setAuthorizeInfo($appid, $appsecret, $type, $code, $get_user_info = false, $re_url)
+    public function setAuthorizeInfo($appid, $appsecret, $code, $type, $get_user_info = false, $re_url = "")
     {
         $access_token = "";
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
-
 
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
@@ -384,7 +377,6 @@ class SftController extends Controller
             $this->wechatAuthorize($url_arr[0]);
             exit;
         }
-
 
         DB::beginTransaction();
         try {
@@ -416,11 +408,9 @@ class SftController extends Controller
 
             // 判断是否需要获取用户数据
             if ($get_user_info === true) {
-                // 通过openid,获取已关注的用户的用户信息
-                $user_info_api
-                    = "https://api.weixin.qq.com/cgi-bin/user/info?access_token={$access_token}&openid={$openid}&lang=zh_CN";
-                $res_user_info = HttpCurl::doGet($user_info_api);
-                $user_info = json_decode($res_user_info, true);
+                // 获取用户的信息
+                $user_info = \Wechat::get_fans_info($access_token, $openid);
+
                 // 判断存在用户消息
                 if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
                     // 用户id
@@ -437,8 +427,10 @@ class SftController extends Controller
             }
             // 数据提交
             DB::commit();
+            return true;
         } catch (\Exception $e) {
             DB::rollback();
+            return false;
         }
     }
 

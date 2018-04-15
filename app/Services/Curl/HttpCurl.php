@@ -1,6 +1,10 @@
 <?php
+
 namespace App\Services\Curl;
-class HttpCurl{
+
+
+class HttpCurl
+{
     /**
      * @param string $url
      * @return mixed
@@ -10,7 +14,7 @@ class HttpCurl{
         //初始化
         $ch = curl_init();
 
-        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_URL, $url);
         // 执行后不直接打印出来
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HEADER, false);
@@ -34,7 +38,7 @@ class HttpCurl{
      * @param array | boolean $header
      * @return mixed
      */
-    public static function doPost($url,$post_data,$header='')
+    public static function doPost($url, $post_data, $header = '')
     {
         $ch = curl_init();
 
@@ -58,4 +62,5 @@ class HttpCurl{
         return $output;
     }
 }
+
 ?>
