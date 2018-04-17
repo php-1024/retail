@@ -58,18 +58,18 @@ class LoginController extends Controller
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
         $account_info = Account::getOneForLogin($username);//根据账号查询
-        if ($account_info->id == 1) {
-            $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
-        } else {
-            $key = config("app.fansmanage_encrypt_key");//获取加密盐（店铺专用）
-        }
-        $encrypted = md5($password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
         //实例化错误记录表模型
         $error_log = ErrorLog::getOne([['ip', $ip]]);//查询该IP下的错误记录
         //如果没有错误记录 或 错误次数小于允许错误的最大次数 或 错误次数超出 但时间已经过了10分钟
         if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
             if (!empty($account_info)) {
+                if ($account_info->id == 1) {
+                    $key = config("app.zerone_encrypt_key");//获取加密盐(admin专用)
+                } else {
+                    $key = config("app.fansmanage_encrypt_key");//获取加密盐（店铺专用）
+                }
+                $encrypted = md5($password);//加密密码第一重
+                $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip, 3);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
