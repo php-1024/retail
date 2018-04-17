@@ -381,11 +381,13 @@ class FansmanageController extends Controller
             $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
         // 商户列表查询
-        $list = Organization::getPaginageFansmanage($where, '10', 'id');
+//        $list = Organization::getPaginageFansmanage($where, '10', 'id');
+        
+        $data = Account::where($where)->join('organization',function ($join) use ($mobile){
+            $join->on('account.organization.id','=','organization.id')->where('organization.type','3');
+        })->orderBy('organization.id', 'DESC')->paginate('10');
 
-        $data = Account::where($where)->get();
-
-        dump($data);
+        dd($data);
         // 循环数据
         foreach ($list as $k => $v) {
             // 上级组织名字
