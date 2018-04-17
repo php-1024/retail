@@ -199,14 +199,19 @@ class FansmanageController extends Controller
         }
     }
 
-
-    //添加服务商
+    /**
+     * 添加服务商
+     */
     public function fansmanage_add(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
         $list = Organization::whereIn('type', [1, 2])->where([['status', '1']])->get();
         $listProgram = Program::getListProgram([['is_asset', '1']]);
         return view('Zerone/Fansmanage/fansmanage_add', ['listProgram' => $listProgram, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
