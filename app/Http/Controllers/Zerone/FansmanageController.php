@@ -259,7 +259,6 @@ class FansmanageController extends Controller
         $encrypted = md5($password);
         // 加密密码第二重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);
-        dd($encryptPwd);
         // 商户组织默认为
         $program_id = 3;
 
