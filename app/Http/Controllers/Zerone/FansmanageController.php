@@ -384,7 +384,7 @@ class FansmanageController extends Controller
         $list = Organization::getPaginageFansmanage($where, '10', 'id');
 
         $data = Account::where($where)->join('organization',function ($join) use ($mobile){
-            $join->on('account.organization.id','=','organization.id')->where('type','3');
+            $join->on('account.organization.id','=','organization.id')->where('organization.type','3');
         })->orderBy('organization.id', 'DESC')->paginate('10');
 
         dump($data);
