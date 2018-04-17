@@ -387,7 +387,8 @@ class FansmanageController extends Controller
             if($mobile){
                 $join->where('account.mobile','=',$mobile);
             }
-        })->orderBy('organization.id', 'DESC')->paginate('10');
+        })->select('organization.id,organization.organization_name,organization.created_at')->orderBy('organization.id', 'DESC')->paginate('10');
+
         dump($list);
         // 循环数据
         foreach ($list as $k => $v) {
