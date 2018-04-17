@@ -391,9 +391,10 @@ class FansmanageController extends Controller
         })->orderBy('organization.id', 'DESC')->paginate('10');
 
         // 循环数据
-        foreach ($list as $k => $v) {
+        foreach ($list as $key => $value) {
             // 上级组织名字
-            $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
+            $list[$key]['agent_name'] = Organization::getPluck(['id' => $value['parent_id']], 'organization_name');
+            $list[$key]['username'] = Organizationfansmanageinfo::getPluck(['organization_id' => $value['id']], 'fansmanage_owner');
         }
 //        dd($list);
 
