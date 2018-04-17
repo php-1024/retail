@@ -382,6 +382,7 @@ class FansmanageController extends Controller
         }
         // 商户列表查询
         $list = Organization::getPaginageFansmanage1($where, $mobile, '10', 'id');
+        dump($list);
         // 循环数据
         foreach ($list as $k => $v) {
             // 上级组织名字
