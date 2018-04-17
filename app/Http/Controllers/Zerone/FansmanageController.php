@@ -374,7 +374,7 @@ class FansmanageController extends Controller
         // 手机号
         $mobile = $request->input('fansmanage_owner_mobile');
         // 前端分页 搜索使用
-        $search_data = ['organization_name' => $fansmanage_name, 'fansmanage_owner_mobile' => $mobile];
+        $search_data = ['organization_name' => $fansmanage_name, 'mobile' => $mobile];
         // type为3代表商户
         $where = [['type', '3']];
         if (!empty($fansmanage_name)) {
