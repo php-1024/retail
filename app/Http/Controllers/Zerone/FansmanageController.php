@@ -379,7 +379,7 @@ class FansmanageController extends Controller
             $where[] = ['organization_name', 'like', '%' . $organization_name . '%'];
         }
 
-        $list = Organization::getPaginageFansmanage($where, '5', 'id');
+        $list = Organization::getPaginageFansmanage($where, '10', 'id');
         foreach ($list as $k => $v) {
             $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
         }
