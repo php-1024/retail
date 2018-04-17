@@ -383,10 +383,10 @@ class FansmanageController extends Controller
         // 商户列表查询
 //        $list = Organization::getPaginageFansmanage($where, '10', 'id');
 
-        $list = Account::where($where)->join('organization',function ($join) use ($mobile){
-            $join->on('account.organization_id','=','organization.id')->where('organization.type','3');
-            if($mobile){
-                $join->where('mobile',$mobile);
+        $list = Account::where($where)->join('organization', function ($join) use ($mobile) {
+            $join->on('account.organization_id', '=', 'organization.id')->where('organization.type', '3');
+            if ($mobile) {
+                $join->where('mobile', $mobile);
             }
         })->orderBy('organization.id', 'DESC')->paginate('10');
 
@@ -416,53 +416,63 @@ class FansmanageController extends Controller
         return view('Zerone/Fansmanage/fansmanage_list_edit', ['data' => $data]);
     }
 
-    //商户编辑功能提交
+    /**
+     * 商户编辑功能提交
+     */
     public function fansmanage_list_edit_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $id = $request->input('id');//商户id
-        $organization_name = $request->input('organization_name');//商户名称
-        $realname = $request->input('realname');//用户名字
-        $idcard = $request->input('idcard');//用户身份证号
-        $mobile = $request->input('mobile');//用户手机号
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 商户id
+        $id = $request->input('id');
+        // 商户名称
+        $organization_name = $request->input('organization_name');
+        // 用户名字
+        $realname = $request->input('realname');
+        // 用户身份证号
+        $idcard = $request->input('idcard');
+        // 用户手机号
+        $mobile = $request->input('mobile');
 
         DB::beginTransaction();
         try {
-            $data = Organization::getOneFansmanage(['id' => $id]); //获取商户组织信息
+            // 获取商户组织信息
+            $data = Organization::getOneFansmanage(['id' => $id]);
 
-            if ($data['organization_name'] != $organization_name) {
-                if (Organization::checkRowExists([['organization_name', $organization_name]])) {
-                    return response()->json(['data' => '商户名称已存在', 'status' => '0']);
-                }
-                Organization::editOrganization(['id' => $id], ['organization_name' => $organization_name]);//修改服务商表服务商名称
+
+            if (Organization::checkRowExists([['organization_name', $organization_name], ['id', '<>', $id]])) {
+                return response()->json(['data' => '商户名称已存在', 'status' => '0']);
             }
+            // 修改服务商表服务商名称
+            Organization::editOrganization(['id' => $id], ['organization_name' => $organization_name]);
 
-            if ($data['account']['mobile'] != $mobile) {
-                if (Account::checkRowExists([['mobile', $mobile]])) {
-                    return response()->json(['data' => '手机号已存在', 'status' => '0']);
-                }
-                OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id' => $id], ['fansmanage_owner_mobile' => $mobile]);//修改商户表商户手机号码
-                Account::editAccount(['organization_id' => $id], ['mobile' => $mobile]);//修改用户管理员信息表 手机号
+            if (Account::checkRowExists([['mobile', $mobile], ['organization_id', '<>', $id]])) {
+                return response()->json(['data' => '手机号已存在', 'status' => '0']);
             }
+            // 修改商户表商户手机号码
+            OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id' => $id], ['fansmanage_owner_mobile' => $mobile]);
+            // 修改用户管理员信息表 手机号
+            Account::editAccount(['organization_id' => $id], ['mobile' => $mobile]);
 
-            if ($data['fansmanageinfo']['fansmanage_owner'] != $realname) {
-                OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id' => $id], ['fansmanage_owner' => $realname]);//修改商户信息表 用户姓名
-                AccountInfo::editAccountInfo(['account_id' => $data['account']['id']], ['realname' => $realname]);//修改用户管理员信息表 用户名
-            }
+            // 修改商户信息表 用户姓名
+            OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id' => $id], ['fansmanage_owner' => $realname]);
+            // 修改用户管理员信息表 用户名
+            AccountInfo::editAccountInfo(['account_id' => $data['account']['id']], ['realname' => $realname]);
 
-            if ($data['fansmanageinfo']['fansmanage_owner_idcard'] != $idcard) {
-                AccountInfo::editAccountInfo(['account_id' => $data['account']['id']], ['idcard' => $idcard]);//修改用户管理员信息表 身份证号
-                OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id' => $id], ['fansmanage_owner_idcard' => $idcard]);//修改商户信息表 身份证号
-            }
-
+            // 修改用户管理员信息表 身份证号
+            AccountInfo::editAccountInfo(['account_id' => $data['account']['id']], ['idcard' => $idcard]);
+            // 修改商户信息表 身份证号
+            OrganizationFansmanageinfo::editOrganizationFansmanageinfo(['fansmanage_id' => $id], ['fansmanage_owner_idcard' => $idcard]);
 
             //添加操作日志
-            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了商户信息：' . $data['organization_name']);//保存操作记录
-            DB::commit();//提交事务
+            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了商户信息：' . $data['organization_name']);
+            // 提交事务
+            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '修改失败', 'status' => '0']);
         }
         return response()->json(['data' => '修改成功', 'status' => '1']);
