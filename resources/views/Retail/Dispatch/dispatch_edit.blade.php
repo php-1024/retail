@@ -59,11 +59,11 @@
                                         </div>
                                         <label class="col-sm-1 control-label">模板编号</label>
                                         <div class="col-sm-2">
-                                            <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
+                                            <input class="input-sm form-control" size="16" type="number" value="{{$dispatch->number}}" name="goods_name" readonly="readonly">
                                         </div>
                                     <label class="col-sm-1 control-label">排序</label>
                                     <div class="col-sm-2">
-                                        <input class="input-sm form-control" size="16" type="text" value="{{$dispatch->displayorder}}" name="displayorder">
+                                        <input class="input-sm form-control" size="16" type="number" value="{{$dispatch->displayorder}}" name="displayorder">
                                     </div>
                                 </div>
                                 <div style="clear:both"></div>
