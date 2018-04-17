@@ -48,13 +48,13 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label class="control-label" for="amount">商户名称</label>
-                                <input type="text" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">
+                                <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">
                             </div>
                         </div>
                         {{--<div class="col-sm-3">--}}
                             {{--<div class="form-group">--}}
                                 {{--<label class="control-label" for="amount">手机号码</label>--}}
-                                {{--<input type="text" name="mobile" value="{{ $search_data['mobile'] }}" placeholder="手机号码" class="form-control">--}}
+                                {{--<input type="text" id="amount" name="amount" value="" placeholder="手机号码" class="form-control">--}}
                             {{--</div>--}}
                         {{--</div>--}}
                         {{--<div class="col-sm-3">--}}
@@ -69,12 +69,12 @@
                                 {{--</select>--}}
                             {{--</div>--}}
                         {{--</div>--}}
-                        {{--<div class="col-sm-3">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="control-label" for="amount"> &nbsp;</label>--}}
-                                {{--<button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount"> &nbsp;</label>
+                                <button type="submit" class="block btn btn-info"><i class="fa fa-search"></i>搜索</button>
+                            </div>
+                        </div>
                     </div>
                     </form>
                 </div>
@@ -105,8 +105,8 @@
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->agent_name}}</td>
                                         <td>{{$value['fansmanageinfo']['fansmanage_owner']}}</td>
-                                        <td>{{$value->account}}</td>
-                                        <td>{{$value->mobile}}</td>
+                                        <td>{{$value->account->account}}</td>
+                                        <td>{{$value->account->mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
