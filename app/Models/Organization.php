@@ -225,7 +225,9 @@ class Organization extends Model
         return self::with(['account' => function ($query) {
             $query->where('deepth', '1');
         }])->with(['fansmanageinfo' => function ($query) use ($mobile) {
-                $query->where('fansmanage_owner_mobile', $mobile);
+              if(!empty($mobile)){
+                  $query->where('fansmanage_owner_mobile', $mobile);
+              }
             }])->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
