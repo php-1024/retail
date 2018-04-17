@@ -356,15 +356,19 @@ class FansmanageController extends Controller
         return response()->json(['data' => '添加成功', 'status' => '1']);
     }
 
-
-    //服务商列表
+    /**
+     * 商户列表
+     */
     public function fansmanage_list(Request $request)
     {
-
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
 
         $organization_name = $request->input('organization_name');
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
