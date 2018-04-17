@@ -228,6 +228,7 @@ class AgentController extends Controller
         }
         // 查询代理列表
         $listorg = Organization::getPaginage($where, '10', 'id');
+        dd($listorg);
         foreach ($listorg as $k => $v) {
             // 战区id
             $zone_id = $v['warzoneAgent']['zone_id'];
