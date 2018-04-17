@@ -383,9 +383,7 @@ class FansmanageController extends Controller
         // 商户列表查询
         $list = Organization::getPaginageFansmanage($where, '10', 'id');
 
-        $data = Account::where($where)->join('organization',function ($join) use ($mobile){
-            $join->on('account.organization.id','=','organization.id')->where('organization.type','3');
-        })->orderBy('organization.id', 'DESC')->paginate('10');
+        $data = Account::where($where)->get();
 
         dump($data);
         // 循环数据
