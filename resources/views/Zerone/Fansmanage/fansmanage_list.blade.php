@@ -104,9 +104,9 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->agent_name}}</td>
-                                        <td>{{$value['fansmanageinfo']['fansmanage_owner']}}</td>
-                                        <td>{{$value->account->account}}</td>
-                                        <td>{{$value->account->mobile}}</td>
+                                        <td>{{$value->fansmanage_owner}}</td>
+                                        <td>{{$value->account}}</td>
+                                        <td>{{$value->mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
