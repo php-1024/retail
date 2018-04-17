@@ -394,7 +394,7 @@ class FansmanageController extends Controller
         foreach ($list as $key => $value) {
             // 上级组织名字
             $list[$key]['agent_name'] = Organization::getPluck(['id' => $value['parent_id']], 'organization_name');
-            $list[$key]['username'] = Organizationfansmanageinfo::getPluck(['organization_id' => $value['id']], 'fansmanage_owner');
+            $list[$key]['username'] = Organizationfansmanageinfo::getPluck(['fansmanage_id' => $value['id']], 'fansmanage_owner');
         }
 //        dd($list);
 
