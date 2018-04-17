@@ -253,7 +253,6 @@ class FansmanageController extends Controller
         $asset_id = $request->input('asset_id');
         // 用户密码
         $password = $request->input('password');
-        dd($password);
         // 获取加密盐
         $key = config("app.fansmanage_encrypt_key");
         // 加密密码第一重
