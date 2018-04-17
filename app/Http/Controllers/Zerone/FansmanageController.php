@@ -383,11 +383,11 @@ class FansmanageController extends Controller
         // 商户列表查询
 //        $list = Organization::getPaginageFansmanage1($where, $mobile, '10', 'id');
         $list = Organization::where($where)->join('account',function ($join) use ($mobile){
-            $join->on('organization.id','=','account.organization_id')->where('deepth','=','1')->select('id');
+            $join->on('organization.id','=','account.organization_id')->where('deepth','=','1');
             if($mobile){
                 $join->where('account.mobile','=',$mobile);
             }
-        })->orderBy('organization.id', 'DESC')->paginate('10');
+        })->select('organization.id,organization.organization_name,organization.created_at')->orderBy('organization.id', 'DESC')->paginate('10');
 
         dump($list);
         // 循环数据
