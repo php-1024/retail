@@ -382,7 +382,7 @@ class FansmanageController extends Controller
         }
         // 商户列表查询
 //        $list = Organization::getPaginageFansmanage1($where, $mobile, '10', 'id');
-        $list = Organization::where($where)->join('account',function ($join) use ($mobile){
+        $list = Organization::where($where)->leftjoin('account',function ($join) use ($mobile){
             $join->on('organization.id','=','account.organization_id')->where('deepth','=','1');
             if($mobile){
                 $join->where('account.mobile','=',$mobile);
