@@ -385,6 +385,9 @@ class FansmanageController extends Controller
 
         $list = Account::where($where)->join('organization',function ($join) use ($mobile){
             $join->on('account.organization_id','=','organization.id')->where('organization.type','3');
+            if($mobile){
+                $join->where('mobile',$mobile);
+            }
         })->orderBy('organization.id', 'DESC')->paginate('10');
 
         // 循环数据
