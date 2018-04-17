@@ -376,14 +376,16 @@ class FansmanageController extends Controller
         // 前端分页 搜索使用
         $search_data = ['organization_name' => $fansmanage_name, 'mobile' => $mobile];
         // type为3代表商户
-        $where = [['type', '3']];
+        $where = [['deepth', '1']];
         if (!empty($fansmanage_name)) {
             $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
         // 商户列表查询
         $list = Organization::getPaginageFansmanage($where, '10', 'id');
 
-        $data = Organization::where($where)->leftjoin('account','organization.id','=','account.organization_id')->orderBy('organization.id', 'DESC')->paginate('10');
+        $data = Account::where($where)->join('organization',function ($join) use ($mobile){
+            $join->on('account.organization.id','=','organization.id')->where('type','3');
+        })->orderBy('organization.id', 'DESC')->paginate('10');
 
         dump($data);
         // 循环数据
