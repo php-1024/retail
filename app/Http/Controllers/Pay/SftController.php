@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FansmanageUser;
 use App\Models\User;
 use App\Models\UserInfo;
+use App\Models\WechatAuthorization;
 use App\Models\XhoLog;
 use App\Services\Curl\HttpCurl;
 use Illuminate\Support\Facades\Request;
@@ -298,18 +299,19 @@ class SftController extends Controller
 //        );
     }
 
+
     public function test11()
     {
-        request()->attributes->add(['origanization_id' => 5]);//添加参数
-        dump(request()->get("origanization_id"));
-        exit;
+        request()->attributes->add(['organization_id' => 5]); //添加参数
         $this->authorizeInfo();
-
     }
 
+    protected $wechat_info = [];
 
     public function authorizeInfo()
     {
+        // 判断公众号是否授权给零壹第三方公众号平台
+        $this->getShopBaseInfo();
         // 保存初次访问的地址
         $url = request()->fullUrl();
         // 判断是否存在 零壹服务用户id
@@ -317,7 +319,7 @@ class SftController extends Controller
             $this->getAuthorizeZeroneInfo($url);
             return;
         }
-
+        // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_id"))) {
             $this->getAuthorizeShopInfo($url);
             return;
@@ -325,18 +327,13 @@ class SftController extends Controller
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);//添加参数
     }
 
-
-    /**
-     * 获取用户信息,并判断是否需要进行跳转
-     * @param string $code 授权内容
-     * @param string $url 跳转的地址
-     */
     /**
      * 获取用户信息,并判断是否需要进行跳转
      * @param string $url 跳转的地址
      */
     public function getAuthorizeZeroneInfo($url)
     {
+        // 获取 code 地址
         $code = request()->input('code');
 
         // 如果不存在zerone_openid就进行授权
@@ -344,30 +341,145 @@ class SftController extends Controller
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
             exit;
         } else {
+            // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeInfo($appid, $appsecret, $code, "zerone_info");
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
         }
     }
 
     /**
-     * 店面授权
+     * 店铺 网页授权
      * @param string $url 跳转地址
      */
     public function getAuthorizeShopInfo($url)
     {
         $code = request()->input('code');
-        $appid = request()->get("appid");
-        $appsecret = request()->get("appsecret");
+        $appid = $this->wechat_info["authorizer_appid"];
 
         // 如果不存在 zerone_openid 就进行授权
         if (empty($code)) {
-            \Wechat::get_web_auth_url($url, $appid);
+            \Wechat::get_open_web_auth_url($url, $appid);
             exit;
         } else {
-            $this->setAuthorizeInfo($appid, $appsecret, $code, "shop_info");
+            $this->setAuthorizeShopInfo($appid, $code);
         }
     }
+
+    /**
+     * 获取店铺公众号的基本信息
+     */
+    public function getShopBaseInfo()
+    {
+        // 获取组织id
+        $organization_id = request()->get("organization_id");
+        // 获取公众号的基本信息
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id],["authorizer_appid","authorizer_access_token"]);
+
+        // 判断公众号是否在零壹第三方平台授权过
+        if ($res !== false) {
+            $this->wechat_info = $res;
+        } else {
+            // 公众号信息没有授权应该进行的步骤
+        }
+    }
+
+    /**
+     * @param $appid
+     * @param $appsecret
+     * @param $code
+     * @param string $re_url
+     * @return bool
+     */
+    public function setAuthorizeZeroneInfo($appid, $appsecret, $code, $re_url = "")
+    {
+        // 静默授权：通过授权使用的code,获取到用户openid
+        $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
+
+        // 如果不存在授权所特有的access_token,则重新获取code,并且验证
+        if (!empty($res_access_arr['access_token'])) {
+            $openid = $res_access_arr['openid'];
+        } else {
+            $this->getAuthorizeZeroneInfo(request()->url());
+            return;
+        }
+
+        DB::beginTransaction();
+        try {
+            // 获取account 最大的值，然后就可以进行数据的累加
+            $account = User::max("account");
+            $param["account"] = ++$account;
+            $param["password"] = 123456;
+            $param["safepassword"] = 123456;
+            $param["zerone_open_id"] = $openid;
+            $param["status"] = 1;
+            $res = User::insertData($param, "update_create", ["zerone_openid" => $param["zerone_open_id"]]);
+            session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
+            // 数据提交
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            return false;
+        }
+    }
+
+    /**
+     * @param $appid
+     * @param $code
+     * @param string $re_url
+     * @return bool
+     */
+    public function setAuthorizeShopInfo($appid, $code, $re_url = "")
+    {
+        // 静默授权：通过授权使用的code,获取到用户openid
+        $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
+
+        // 如果不存在授权所特有的access_token,则重新获取code,并且验证
+        if (!empty($res_access_arr['access_token'])) {
+            $openid = $res_access_arr['openid'];
+        } else {
+            $this->getAuthorizeShopInfo(request()->url());
+            return;
+        }
+
+        DB::beginTransaction();
+        try {
+            // 店铺公众号的信息
+            // 组织id
+            $param["fansmanage_id"] = request()->get("organization_id");
+            $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+            $param["open_id"] = $openid;
+            $param["status"] = 1;
+            // 保存粉丝数据
+            FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
+            session(["zerone_auth_info" => ["shop_id" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]]);
+
+            // 获取用户的信息
+            $user_info = \Wechat::get_web_user_info($this->wechat_info["authorizer_access_token"], $openid);
+            // 判断存在用户消息
+            if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
+                // 用户id
+                $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+                $param["nickname"] = $user_info["nickname"];
+                $param["sex"] = $user_info["sex"];
+                $param["city"] = $user_info["city"];
+                $param["country"] = $user_info["country"];
+                $param["province"] = $user_info["province"];
+                $param["head_imgurl"] = $user_info["headimgurl"];
+                // 保存用户数据
+                UserInfo::insertData($param);
+            }
+
+            // 数据提交
+            DB::commit();
+            return true;
+        } catch (\Exception $e) {
+            DB::rollback();
+            return false;
+        }
+    }
+
 
     /**
      * 店铺保存用户授权信息
@@ -379,10 +491,13 @@ class SftController extends Controller
      * @param $re_url
      * @return boolean
      */
-    public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
+    public
+    function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
     {
         $access_token = "";
+
         // 静默授权：通过授权使用的code,获取到用户openid
+
         $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
 
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
@@ -457,7 +572,8 @@ class SftController extends Controller
      *
      * @return array
      */
-    public function getSignPackage()
+    public
+    function getSignPackage()
     {
         // 获取微信的信息
         $appid = $this->wechat_config["appid"];
@@ -487,7 +603,8 @@ class SftController extends Controller
      * @param bool|false $debug 调试开启 默认false
      * @return mixed
      */
-    public function httpRequest($url, $method, $postData = [], $headers = [], $debug = false)
+    public
+    function httpRequest($url, $method, $postData = [], $headers = [], $debug = false)
     {
         // 将方法统一换成大写
         $method = strtoupper($method);

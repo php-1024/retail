@@ -2,7 +2,6 @@
 /**
  * 微信开放平台操作相关接口
  */
-
 namespace App\Services\Wechat;
 
 use App\Facades\WechatFacade;
@@ -13,7 +12,6 @@ use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 
 class WechatApi
 {
-
     // +----------------------------------------------------------------------
     // | Start - 第三方平台授权
     // +----------------------------------------------------------------------
@@ -26,9 +24,8 @@ class WechatApi
     public function get_open_web_auth_url($appid, $redirect_url)
     {
         $wxparam = config('app.wechat_open_setting');
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_url}&response_type=code&scope=snsapi_userinfo&state=lyxkj2018&component_appid={$wxparam['open_appid']}#wechat_redirect";
-        // 结果处理
-        return $this->resultReturnDispose($url, "redirect");
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $appid . '&redirect_uri=' . $redirect_url . '&response_type=code&scope=snsapi_userinfo&state=lyxkj2018&component_appid=' . $wxparam['open_appid'] . '#wechat_redirect';
+        return $url;
     }
 
 
@@ -44,8 +41,8 @@ class WechatApi
         $wxparam = config('app.wechat_open_setting');
         $url = 'https://api.weixin.qq.com/sns/oauth2/component/access_token?appid=' . $appid . '&code=' . $auth_code . '&grant_type=authorization_code&component_appid=' . $wxparam['open_appid'] . '&component_access_token=' . $component_access_token;
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
     /**
@@ -63,8 +60,8 @@ class WechatApi
         );
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
     /**
@@ -160,18 +157,12 @@ class WechatApi
     public function get_auth_url($origanization_id, $redirect_route_name)
     {
         $wxparam = config('app.wechat_open_setting');
-        // 第三方平台方appid
-        $open_appid = $wxparam['open_appid'];
-        // 预授权码
-        $pre_auth_code = $this->get_pre_auth_code();
-        // 回调链接
-        $redirect_url = 'http://o2o.01nnt.com/api/wechat/redirect';
-        // 1则商户扫码后，手机端仅展示公众号、2表示仅展示小程序，3表示公众号和小程序都展示
-        $auth_type = 3;
-
+        $open_appid = $wxparam['open_appid'];//第三方平台方appid
+        $pre_auth_code = $this->get_pre_auth_code();//预授权码
+        $redirect_url = 'http://o2o.01nnt.com/api/wechat/redirect';//回调链接
+        $auth_type = 3;//1则商户扫码后，手机端仅展示公众号、2表示仅展示小程序，3表示公众号和小程序都展示
         $url = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=" . $open_appid . "&pre_auth_code=" . $pre_auth_code . "&redirect_uri=" . $redirect_url . "?zerone_param=" . $origanization_id . "@@" . $redirect_route_name . "&auth_type=" . $auth_type;
-        // 结果处理
-        return $this->resultReturnDispose($url, "redirect");
+        return $url;
     }
 
     /**
@@ -288,62 +279,37 @@ class WechatApi
     // +----------------------------------------------------------------------
     /**
      * 获取网页授权链接
-     * @param string $redirect_uri 回调链接
-     * @param string $appid 微信基础信息
-     * @param string $auth_type 授权类型
+     * @param $redirect_uri 回调链接
      * @return string
      */
-    public function get_web_auth_url($redirect_uri, $appid = '', $auth_type = "")
+    public function get_web_auth_url($redirect_uri)
     {
-        // 判断是否存在 appid ,没有的话用系统默认的
-        $appid = $appid ?? config('app.wechat_web_setting.appid');
-        // 判断是那种授权类型
-        $auth_type = $auth_type ?? "snsapi_userinfo";
-        // 跳转地址
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$auth_type}&state=lyxkj2018#wechat_redirect";
-        // 结果处理
-        return $this->resultReturnDispose($url, "redirect");
+        $wxparam = config('app.wechat_web_setting');
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $wxparam['appid'] . '&redirect_uri=' . $redirect_uri . '&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';
+        return $url;
     }
 
     /**
-     * 通过 code 获取 access_token 包括用户的openid
+     * 获取用户对于默认零壹公众号的唯一open_id
      * @param string $auth_code 用户授权后获取的授权码
-     * @param string $appid 公众号基本信息
-     * @param string $appsecret 公众号基本信息
      * @return mixed
      */
-    public function get_web_access_token($auth_code, $appid = '', $appsecret = '')
+    public function get_web_access_token($auth_code)
     {
-        // 判断是否存在 appid ,没有的话用系统默认的
-        $appid = $appid ?? config('app.wechat_web_setting.appid');
-        $appsecret = $appsecret ?? config('app.wechat_web_setting.appsecret');
-
-        // 获取授权信息
-        $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$auth_code}&grant_type=authorization_code";
+        $wxparam = config('app.wechat_web_setting');
+        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxparam['appid'] . '&secret=' . $wxparam['appsecret'] . '&code=' . $auth_code . '&grant_type=authorization_code';
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
-
-    /**
-     * 通过 授权得到的 access_token（跟通过 appid 和 appsecret 获取的 access_token 不一样）
-     * 获取用户信息
-     * @param $access_token
-     * @param $openid
-     * @return mixed
-     */
-    public function get_web_user_info($access_token, $openid)
-    {
-        // 获取用户信息
-        $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$access_token}&openid={$openid}&lang=zh_CN";
-        $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
-    }
-
     // +----------------------------------------------------------------------
     // | End - 网页授权
     // +----------------------------------------------------------------------
+
+
+
+
+
 
 
     // +----------------------------------------------------------------------
@@ -360,8 +326,7 @@ class WechatApi
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . $authorizer_access_token;
         $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -373,8 +338,7 @@ class WechatApi
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token=' . $authorizer_access_token;
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -386,8 +350,7 @@ class WechatApi
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=' . $authorizer_access_token;
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -401,8 +364,7 @@ class WechatApi
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=' . $authorizer_access_token;
         $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
     // +----------------------------------------------------------------------
     // | End - 菜单设置
@@ -411,12 +373,12 @@ class WechatApi
     // +----------------------------------------------------------------------
     // | Start - 客服消息
     // +----------------------------------------------------------------------
+
     /**
      * 发送客服消息
      * @param string $authorizer_access_token 第三方平台调用接口凭证
      * @param $to_user
      * @param string $text 发送内容
-     * @return mixed
      */
     public function send_fans_text($authorizer_access_token, $to_user, $text)
     {
@@ -430,8 +392,7 @@ class WechatApi
         ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        dump($re);
     }
     // +----------------------------------------------------------------------
     // | End - 客服消息
@@ -445,14 +406,13 @@ class WechatApi
      * 获取粉丝信息详情
      * @param $authorizer_access_token
      * @param $open_id
-     * @return mixed
      */
     public function get_fans_info($authorizer_access_token, $open_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $authorizer_access_token . '&openid=' . $open_id . '&lang=zh_CN ';
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        dump($re);
     }
 
     /**
@@ -465,8 +425,8 @@ class WechatApi
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' . $authorizer_access_token . '&next_openid=' . $next_openid;
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
 
@@ -486,8 +446,7 @@ class WechatApi
         ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -508,8 +467,7 @@ class WechatApi
         ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -528,8 +486,7 @@ class WechatApi
         ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -541,8 +498,7 @@ class WechatApi
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/get?access_token=' . $authorizer_access_token;
         $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
 
     /**
@@ -556,9 +512,9 @@ class WechatApi
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=' . $authorizer_access_token;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        return $re;
     }
+
     // +----------------------------------------------------------------------
     // | End - 用户基本信息
     // +----------------------------------------------------------------------
@@ -566,48 +522,63 @@ class WechatApi
     // +----------------------------------------------------------------------
     // | Start - 生成二维码
     // +----------------------------------------------------------------------
+    /**
+     * 获取生成临时二维码的Ticket
+     * @param string $authorizer_access_token 接口调用凭证
+     * @param $expire_seconds
+     * @param $sence_str
+     * @return bool|string
+     */
+    public function createLsQrcode($authorizer_access_token, $expire_seconds, $sence_str)
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' . $authorizer_access_token;
+        $data = [
+            'expire_seconds' => $expire_seconds,
+            'action_name' => 'QR_STR_SCENE',//默认采用字符串而非ID模式
+            'action_info' => [
+                'scene' => [
+                    'scene_str' => $sence_str,
+                ]
+            ],
+        ];
+        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+        $re = \HttpCurl::doPost($url, $data);
+        $re = json_decode($re, true);
+        if (empty($re['ticket'])) {
+            return false;
+        } else {
+            return 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' . $re['ticket'];
+        }
+    }
 
     /**
      * 获取生成永久二维码的Ticket
      * @param $authorizer_access_token
      * @param $sence_str
-     * @param int $type 生成二维码的类型 ： 1. 临时 2. 永久
-     * @param int $expire_seconds 生成二维码的类型 ： 1. 临时 2. 永久
      * @return bool|string
      */
-    public function createQrcode($authorizer_access_token, $sence_str, $type = 1, $expire_seconds = 604800)
+    public function createQrcode($authorizer_access_token, $sence_str)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' . $authorizer_access_token;
-        if ($type == 1) {
-            $data["expire_seconds"] = $expire_seconds;
-        }
-
-        $data["action_name"] = 'QR_LIMIT_STR_SCENE';
-        $data["action_info"] = [
-            'scene' => [
-                'scene_str' => $sence_str,
-            ]
+        $data = [
+            'action_name' => 'QR_LIMIT_STR_SCENE',//默认采用字符串而非ID模式
+            'action_info' => [
+                'scene' => [
+                    'scene_str' => $sence_str,
+                ]
+            ],
         ];
-
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "qrcode");
+        $re = json_decode($re, true);
+        if (empty($re['ticket'])) {
+            return false;
+        } else {
+            return 'https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=' . $re['ticket'];
+        }
     }
-
-    /**
-     * 展示二维码
-     * @param string $ticket
-     * @return mixed
-     */
-    public function showQrCode($ticket)
-    {
-        $url = "https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket={$ticket}";
-        $re = \HttpCurl::doGet($url);
-        // 结果处理
-        return $this->resultReturnDispose($re, "string");
-    }
-
     // +----------------------------------------------------------------------
     // | End - 生成二维码
     // +----------------------------------------------------------------------
@@ -620,19 +591,12 @@ class WechatApi
      * 上传永久图片素材
      * @param $authorizer_access_token
      * @param $file
-     * @param int $type 1. 临时素材 2. 永久素材
      * @return mixed
      */
-    public function uploadimg($authorizer_access_token, $file, $type = 1)
+    public function uploadimg($authorizer_access_token, $file)
     {
-        if ($type == 1) {
-            //临时素材链接
-            $url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=" . $authorizer_access_token . "&type=image";
-        } else {
-            //永久素材链接
-            $url = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=" . $authorizer_access_token . "&type=image";
-        }
-
+        //$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=".$authorizer_access_token."&type=image";//临时素材链接
+        $url = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=" . $authorizer_access_token . "&type=image";//永久素材链接
         if (class_exists('\CURLFile')) {
             $data = [
                 'media' => new \CURLFile(realpath($file)),
@@ -643,8 +607,8 @@ class WechatApi
             ];
         }
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
     /**
@@ -661,8 +625,8 @@ class WechatApi
         ];
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
     /**
@@ -681,8 +645,8 @@ class WechatApi
         $data['index'] = $index;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
     /**
@@ -696,8 +660,8 @@ class WechatApi
         $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=' . $authorizer_access_token;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
 
 
@@ -713,8 +677,8 @@ class WechatApi
         $data['media_id'] = $media_id;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
         $re = \HttpCurl::doPost($url, $data);
-        // 结果处理
-        return $this->resultReturnDispose($re, "json");
+        $re = json_decode($re, true);
+        return $re;
     }
     // +----------------------------------------------------------------------
     // | End - 素材管理
@@ -747,79 +711,7 @@ class WechatApi
         return @json_decode(@json_encode($object), 1);
     }
 
-    /**
-     * 微信接口返回数据处理
-     * @param $param
-     * @param $type
-     * @return mixed
-     */
-    public function resultReturnDispose($param, $type = "json")
-    {
-        switch ($type) {
-            case "json":
-                $res = json_decode($param, true);
-                if (!empty($res["errcode"]) && $res["errcode"] != 0) {
-                    return $res;
-                } else {
-                    // 错误处理
-                }
-                break;
-            case "string" :
-                return $param;
-                break;
-            case "redirect" :
-                return redirect($param);
-                break;
-            case "qrcode" :
-                $res = json_decode($param, true);
-                if (!empty($res["errcode"]) && $res["errcode"] != 0) {
-                    return $this->showQrCode($param["ticket"]);
-                } else {
-                    // 错误处理
-                }
-        }
-    }
     // +----------------------------------------------------------------------
     // | End - 其他应用方法
     // +----------------------------------------------------------------------
-
-//    public function get_web_auth_url($redirect_uri)
-//    {
-//        $wxparam = config('app.wechat_web_setting');
-//        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $wxparam['appid'] . '&redirect_uri=' . $redirect_uri . '&response_type=code&scope=snsapi_userinfo&state=lyxkj2018#wechat_redirect';
-//        return $url;
-//    }
-//    public function get_web_access_token($auth_code)
-//    {
-//        $wxparam = config('app.wechat_web_setting');
-//        $url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=' . $wxparam['appid'] . '&secret=' . $wxparam['appsecret'] . '&code=' . $auth_code . '&grant_type=authorization_code';
-//        $re = \HttpCurl::doGet($url);
-//        $re = json_decode($re, true);
-//        return $re;
-//    }
-//    /**
-//     * 获取生成临时二维码的Ticket
-//     * @param string $authorizer_access_token 接口调用凭证
-//     * @param $expire_seconds
-//     * @param $sence_str
-//     * @return bool|string
-//     */
-//    public function createLsQrcode($authorizer_access_token, $expire_seconds, $sence_str)
-//    {
-//        $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' . $authorizer_access_token;
-//        $data = [
-//            'expire_seconds' => $expire_seconds,
-//            'action_name' => 'QR_STR_SCENE',//默认采用字符串而非ID模式
-//            'action_info' => [
-//                'scene' => [
-//                    'scene_str' => $sence_str,
-//                ]
-//            ],
-//        ];
-//        $data = json_encode($data, JSON_UNESCAPED_UNICODE);
-//        $re = \HttpCurl::doPost($url, $data);
-//        // 结果处理
-//        return $this->resultReturnDispose($re, "qrcode");
-//    }
 }
-
