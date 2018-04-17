@@ -300,6 +300,10 @@ class SftController extends Controller
 
     public function test11()
     {
+        request()->attributes->add(['origanization_id' => 5]);//添加参数
+        dump(request()->get("origanization_id"));
+        exit;
+        $this->authorizeInfo();
 
     }
 
