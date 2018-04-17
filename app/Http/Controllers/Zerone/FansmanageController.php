@@ -369,20 +369,25 @@ class FansmanageController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-
-        $organization_name = $request->input('organization_name');
+        // 商户名称
+        $fansmanage_name = $request->input('organization_name');
+        // 手机号
         $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
-
-        $search_data = ['organization_name' => $organization_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
+        // 前端分页 搜索使用
+        $search_data = ['organization_name' => $fansmanage_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
+        // type为3代表商户
         $where = [['type', '3']];
-        if (!empty($organization_name)) {
-            $where[] = ['organization_name', 'like', '%' . $organization_name . '%'];
+        if (!empty($fansmanage_name)) {
+            $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
-
-        $list = Organization::getPaginageFansmanage($where, '10', 'id');
+        // 商户列表查询
+        $list = Organization::getPaginageFansmanage1($where, $fansmanage_owner_mobile, '10', 'id');
+        // 循环数据
         foreach ($list as $k => $v) {
+            // 上级组织名字
             $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
         }
+
         return view('Zerone/Fansmanage/fansmanage_list', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
