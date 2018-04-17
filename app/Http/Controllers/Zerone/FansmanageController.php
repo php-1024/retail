@@ -492,30 +492,43 @@ class FansmanageController extends Controller
         return view('Zerone/Fansmanage/fansmanage_list_lock', ['data' => $data, 'status' => $status]);
     }
 
-    //商户冻结功能提交
+    /**
+     * 商户冻结功能提交
+     */
     public function fansmanage_list_lock_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $id = $request->input('id');//商户id
-        $status = $request->input('status');//冻结操作状态
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 商户id
+        $id = $request->input('id');
+        // 冻结操作状态
+        $status = $request->input('status');
+        // 商户信息
         $data = Organization::getOneData([['id', $id]]);
         DB::beginTransaction();
         try {
             if ($status == '1') {
-                Organization::editOrganization([['id', $id]], ['status' => '0']);//商户冻结
+                // 商户冻结
+                Organization::editOrganization([['id', $id]], ['status' => '0']);
+                // 账号信息冻结
                 Account::editOrganizationBatch([['organization_id', $id]], ['status' => '0']);
-                //添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了商户：' . $data['organization_name']);//保存操作记录
+                // 添加操作日志
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了商户：' . $data['organization_name']);
             } elseif ($status == '0') {
+                // 商户解冻
                 Organization::editOrganization([['id', $id]], ['status' => '1']);
+                // 账号信息解冻
                 Account::editOrganizationBatch([['organization_id', $id]], ['status' => '1']);
-                //添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了商户：' . $data['organization_name']);//保存操作记录
+                // 添加操作日志
+                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了商户：' . $data['organization_name']);
             }
-            DB::commit();//提交事务
+            // 提交事务
+            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
