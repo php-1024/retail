@@ -51,12 +51,12 @@
                                 <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">
                             </div>
                         </div>
-                        {{--<div class="col-sm-3">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="control-label" for="amount">手机号码</label>--}}
-                                {{--<input type="text" id="amount" name="amount" value="" placeholder="手机号码" class="form-control">--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount">手机号码</label>
+                                <input type="text" name="mobile" value="{{ $search_data['mobile'] }}" placeholder="手机号码" class="form-control">
+                            </div>
+                        </div>
                         {{--<div class="col-sm-3">--}}
                             {{--<div class="form-group">--}}
                                 {{--<label class="control-label" for="amount">所在战区</label>--}}
