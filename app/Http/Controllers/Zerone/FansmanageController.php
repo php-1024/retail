@@ -383,16 +383,16 @@ class FansmanageController extends Controller
         // 商户列表查询
 //        $list = Organization::getPaginageFansmanage($where, '10', 'id');
 
-        $data = Account::where($where)->join('organization',function ($join) use ($mobile){
+        $list = Account::where($where)->join('organization',function ($join) use ($mobile){
             $join->on('account.organization_id','=','organization.id')->where('organization.type','3');
         })->orderBy('organization.id', 'DESC')->paginate('10');
 
-        dd($data);
         // 循环数据
-//        foreach ($list as $k => $v) {
-//            // 上级组织名字
-//            $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
-//        }
+        foreach ($list as $k => $v) {
+            // 上级组织名字
+            $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
+        }
+        dd($list);
 
         return view('Zerone/Fansmanage/fansmanage_list', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
