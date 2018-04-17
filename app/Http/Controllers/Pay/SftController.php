@@ -298,59 +298,75 @@ class SftController extends Controller
 //        );
     }
 
+    public function test11()
+    {
+        request()->attributes->add(['origanization_id' => 5]);//添加参数
+        dump(request()->get("origanization_id"));
+        exit;
+        $this->authorizeInfo();
+
+    }
+
+
+    public function authorizeInfo()
+    {
+        // 保存初次访问的地址
+        $url = request()->fullUrl();
+        // 判断是否存在 零壹服务用户id
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            $this->getAuthorizeZeroneInfo($url);
+            return;
+        }
+
+        if (empty(session("zerone_auth_info.shop_id"))) {
+            $this->getAuthorizeShopInfo($url);
+            return;
+        }
+        request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);//添加参数
+    }
+
 
     /**
      * 获取用户信息,并判断是否需要进行跳转
+     * @param string $code 授权内容
+     * @param string $url 跳转的地址
      */
-    public function getAuthorizeZeroneInfo()
+    /**
+     * 获取用户信息,并判断是否需要进行跳转
+     * @param string $url 跳转的地址
+     */
+    public function getAuthorizeZeroneInfo($url)
     {
-        // 跳转到下一个授权的地址
-        $url = "";
-        // 判断是否存在 零壹服务用户id
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $code = request()->input('code');
-            // 保存初次访问的地址
-            session(["zerone_auth_info" => ["zerone_skip_url" => request()->fullUrl()]]);
-            // 如果不存在zerone_openid就进行授权
-            if (empty($code)) {
-                \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
-                exit;
-            } else {
-                $appid = config("app.wechat_web_setting.appid");
-                $appsecret = config("app.wechat_web_setting.appsecret");
-                $res = $this->setAuthorizeInfo($appid, $appsecret, $code, "zerone_info");
-                if ($res === true) {
-                    return redirect("/getAuthorizeShopInfo");
-                }
-            }
+        $code = request()->input('code');
+
+        // 如果不存在zerone_openid就进行授权
+        if (empty($code)) {
+            \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
+            exit;
+        } else {
+            $appid = config("app.wechat_web_setting.appid");
+            $appsecret = config("app.wechat_web_setting.appsecret");
+            $this->setAuthorizeInfo($appid, $appsecret, $code, "zerone_info");
         }
-        return true;
     }
 
     /**
      * 店面授权
-     * @return bool|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param string $url 跳转地址
      */
-    public function getAuthorizeShopInfo()
+    public function getAuthorizeShopInfo($url)
     {
+        $code = request()->input('code');
         $appid = request()->get("appid");
-        $url = session("zerone_auth_info")["zerone_skip_url"];
-        // 判断
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $code = request()->input('code');
-            // 如果不存在 zerone_openid 就进行授权
-            if (empty($code)) {
-                \Wechat::get_web_auth_url($url, $appid);
-                exit;
-            } else {
-                $appsecret = request()->get("appid");
-                $res = $this->setAuthorizeInfo($appid, $appsecret, $code, "zerone_info");
-                if ($res === true) {
-                    return redirect("/getAuthorizeShopInfo");
-                }
-            }
+        $appsecret = request()->get("appsecret");
+
+        // 如果不存在 zerone_openid 就进行授权
+        if (empty($code)) {
+            \Wechat::get_web_auth_url($url, $appid);
+            exit;
+        } else {
+            $this->setAuthorizeInfo($appid, $appsecret, $code, "shop_info");
         }
-        return true;
     }
 
     /**
@@ -363,7 +379,7 @@ class SftController extends Controller
      * @param $re_url
      * @return boolean
      */
-    public function setAuthorizeInfo($appid, $appsecret, $code, $type, $get_user_info = false, $re_url = "")
+    public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
     {
         $access_token = "";
         // 静默授权：通过授权使用的code,获取到用户openid
@@ -403,6 +419,7 @@ class SftController extends Controller
                     $param["status"] = 1;
                     // 保存粉丝数据
                     FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
+                    session(["zerone_auth_info" => ["shop_id" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]]);
                     break;
             }
 
