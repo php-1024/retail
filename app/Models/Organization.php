@@ -218,7 +218,7 @@ class Organization extends Model
             $query->where('deepth', '1');
         }])->with('fansmanageinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
-    
+
 
     //获取分页数据-商户
     public static function getPaginageStore($where, $paginate, $orderby, $sort = 'DESC')
