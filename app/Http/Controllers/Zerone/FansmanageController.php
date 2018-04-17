@@ -372,7 +372,7 @@ class FansmanageController extends Controller
         // 商户名称
         $fansmanage_name = $request->input('organization_name');
         // 手机号
-        $mobile = $request->input('fansmanage_owner_mobile');
+        $mobile = $request->input('mobile');
         // 前端分页 搜索使用
         $search_data = ['organization_name' => $fansmanage_name, 'mobile' => $mobile];
         // type为3代表商户
@@ -382,7 +382,6 @@ class FansmanageController extends Controller
         }
         // 商户列表查询
         $list = Organization::getPaginageFansmanage1($where, $mobile, '10', 'id');
-        dump($list);
         // 循环数据
         foreach ($list as $k => $v) {
             // 上级组织名字
