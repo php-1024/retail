@@ -212,100 +212,148 @@ class FansmanageController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
+        // 归属代理
         $list = Organization::whereIn('type', [1, 2])->where([['status', '1']])->get();
+        // 使用程序
         $listProgram = Program::getListProgram([['is_asset', '1']]);
+
         return view('Zerone/Fansmanage/fansmanage_add', ['listProgram' => $listProgram, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //注册提交商户数据
+    /**
+     * 注册提交商户数据
+     */
     public function fansmanage_add_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $agent_id = $request->input('organization_id');//零壹或者服务商organization_id
-        $organization_name = $request->input('organization_name');//商户名称
-        $where = [['organization_name', $organization_name]];
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 零壹或者服务商organization_id
+        $agent_id = $request->input('organization_id');
+        // 商户名称
+        $fansmanage_name = $request->input('organization_name');
+        // 查询名称是否存在
+        $where = [['organization_name', $fansmanage_name]];
         if (Organization::checkRowExists($where)) {
             return response()->json(['data' => '商户已存在', 'status' => '0']);
         }
-        $mobile = $request->input('mobile');//手机号码
+        // 手机号码
+        $mobile = $request->input('mobile');
         if (Account::checkRowExists([['mobile', $mobile]])) {
             return response()->json(['data' => '手机号已存在', 'status' => '0']);
         }
-
+        // 代理信息
         $oneAgent = Organization::getOne([['id', $agent_id]]);
-
-        $parent_id = $agent_id;//上级组织 零壹或者服务商organization_id
-        $parent_tree = $oneAgent['parent_tree'] . $parent_id . ',';//树是上级的树拼接上级的ID；
-        $asset_id = $request->input('asset_id');//开设店铺使用程序id
-
-        $password = $request->input('password');//用户密码
-        $key = config("app.fansmanage_encrypt_key");//获取加密盐
-        $encrypted = md5($password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
-        $program_id = 3; //'商户组织默认为3'
+        // 上级组织 零壹或者服务商organization_id
+        $parent_id = $agent_id;
+        // 树是上级的树拼接上级的ID
+        $parent_tree = $oneAgent['parent_tree'] . $parent_id . ',';
+        // 开设店铺使用程序id
+        $asset_id = $request->input('asset_id');
+        // 用户密码
+        $password = $request->input('password');
+        // 获取加密盐
+        $key = config("app.fansmanage_encrypt_key");
+        // 加密密码第一重
+        $encrypted = md5($password);
+        // 加密密码第二重
+        $encryptPwd = md5("lingyikeji" . $encrypted . $key);
+        // 商户组织默认为
+        $program_id = 3;
 
         DB::beginTransaction();
         try {
+            // 数据处理
             $dataOrg = [
-                'organization_name' => $organization_name,
+                // 商户名称
+                'organization_name' => $fansmanage_name,
+                // 上级组织id
                 'parent_id' => $agent_id,
+                // 组织树
                 'parent_tree' => $parent_tree,
+                // 程序id
                 'program_id' => $program_id,
+                // 商户下级店铺使用程序id
                 'asset_id' => $asset_id,
+                // 3为商户
                 'type' => 3,
+                // 1为正常，0为冻结
                 'status' => 1
             ];
-            $organization_id = Organization::addOrganization($dataOrg); //返回值为商户的id
-
+            // 添加成功返回商户的id
+            $fansmanage_id = Organization::addOrganization($dataOrg);
+            // 账号最大作战
             $user = Account::max('account');
-            $account = $user + 1;//用户账号
-
-            $Accparent_tree = '0' . ',';//管理员组织树
+            // 用户账号
+            $account = $user + 1;
+            // 管理员组织树
+            $accparent_tree = '0' . ',';
+            // 数据处理
             $accdata = [
+                // 上级id
                 'parent_id' => '0',
-                'parent_tree' => $Accparent_tree,
+                // 组织树
+                'parent_tree' => $accparent_tree,
+                // 组织深度
                 'deepth' => '1',
+                // 手机号
                 'mobile' => $mobile,
+                // 用户密码
                 'password' => $encryptPwd,
-                'organization_id' => $organization_id,
+                // 组织id
+                'organization_id' => $fansmanage_id,
+                // 用户账号
                 'account' => $account
             ];
-            $account_id = Account::addAccount($accdata);//添加账号返回id
+            // 添加账号返回id
+            $account_id = Account::addAccount($accdata);
 
-            $realname = $request->input('realname');//负责人姓名
-            $idcard = $request->input('idcard');//负责人身份证号
+            // 负责人姓名
+            $realname = $request->input('realname');
+            // 负责人身份证号
+            $idcard = $request->input('idcard');
+            // 数据处理
             $acinfodata = [
+                // 用户id
                 'account_id' => $account_id,
+                // 负责人姓名
                 'realname' => $realname,
+                // 身份证号
                 'idcard' => $idcard
             ];
-            AccountInfo::addAccountInfo($acinfodata);//添加到管理员信息表
-
+            // 添加到管理员信息表
+            AccountInfo::addAccountInfo($acinfodata);
+            // 数据处理
             $dataOrganizationFansmanageinfo = [
-                'fansmanage_id' => $organization_id,
+                // 组织id
+                'fansmanage_id' => $fansmanage_id,
+                // 负责人姓名
                 'fansmanage_owner' => $realname,
+                // 负责人身份证号
                 'fansmanage_owner_idcard' => $idcard,
+                // 负责人手机号
                 'fansmanage_owner_mobile' => $mobile
             ];
-
-            OrganizationFansmanageinfo::addOrganizationFansmanageinfo($dataOrganizationFansmanageinfo);  //添加到商户组织信息表
-
-            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            // 添加到商户组织信息表
+            OrganizationFansmanageinfo::addOrganizationFansmanageinfo($dataOrganizationFansmanageinfo);
+            // 获取当前系统的所有节点
+            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');
             foreach ($module_node_list as $key => $val) {
                 foreach ($val->program_nodes as $k => $v) {
                     AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
                 }
             }
-            //添加操作日志
-            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '添加了商户：' . $organization_name);//保存操作记录
-            DB::commit();//提交事务
+            // 添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '添加了商户：' . $fansmanage_name);
+            // 提交事务
+            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
-            return response()->json(['data' => '提交失败', 'status' => '0']);
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '添加失败', 'status' => '0']);
         }
-        return response()->json(['data' => '提交成功', 'status' => '1']);
-
+        return response()->json(['data' => '添加成功', 'status' => '1']);
     }
 
 
