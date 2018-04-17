@@ -58,8 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group"><label class="col-sm-2 control-label">商户名称</label>
-                                    <div class="col-sm-10"><input type="text" name="organization_name"
-                                                                  class="form-control"></div>
+                                    <div class="col-sm-10"><input type="text" name="organization_name" class="form-control"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">负责人姓名</label>
@@ -76,27 +75,20 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">商户登录密码</label>
-                                    <div class="col-sm-10"><input type="password" name="fansmanage_password"
-                                                                  class="form-control"></div>
+                                    <div class="col-sm-10"><input type="password" name="password" class="form-control"></div>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">重复登录密码</label>
-                                    <div class="col-sm-10"><input type="password" name="re_fansmanage_password"
-                                                                  class="form-control"></div>
+                                    <div class="col-sm-10"><input type="password" name="re_password" class="form-control"></div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label"><span
-                                                style="color: red">管理员安全密码</span></label>
-                                    <div class="col-sm-10"><input type="password" name="safe_password"
-                                                                  class="form-control"></div>
+                                    <label class="col-sm-2 control-label"><span style="color: red">管理员安全密码</span></label>
+                                    <div class="col-sm-10"><input type="password" name="safe_password" class="form-control"></div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-
                                 <div class="form-group ">
                                     <div class="col-sm-4 col-sm-offset-5">
-                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();"
-                                                type="button">确认申请
-                                        </button>
+                                        <button class="btn btn-primary" id="addbtn" onclick="return postForm();" type="button">确认申请</button>
                                     </div>
                                 </div>
                             </form>
@@ -138,14 +130,13 @@
                     window.location.reload();
                 });
             } else {
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定",
-//                    //type: "warning"
-//                });
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    //type: "warning"
+                });
             }
         });
     }
