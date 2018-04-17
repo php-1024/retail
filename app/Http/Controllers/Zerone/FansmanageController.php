@@ -478,12 +478,17 @@ class FansmanageController extends Controller
         return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
-    //商户冻结ajaxshow显示页面
+    /**
+     * 商户冻结ajaxshow显示页面
+     */
     public function fansmanage_list_lock(Request $request)
     {
-        $id = $request->input('id');//商户id
-        $status = $request->input('status');//冻结操作状态
-        $data = Organization::getOneData([['id', $id]]);//商户信息
+        // 商户id
+        $id = $request->input('id');
+        // 冻结操作状态
+        $status = $request->input('status');
+        // 商户信息
+        $data = Organization::getOneData([['id', $id]]);
         return view('Zerone/Fansmanage/fansmanage_list_lock', ['data' => $data, 'status' => $status]);
     }
 
