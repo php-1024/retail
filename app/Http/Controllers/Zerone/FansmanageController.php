@@ -369,28 +369,41 @@ class FansmanageController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-
-        $organization_name = $request->input('organization_name');
-        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
-
-        $search_data = ['organization_name' => $organization_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
-        $where = [['type', '3']];
-        if (!empty($organization_name)) {
-            $where[] = ['organization_name', 'like', '%' . $organization_name . '%'];
+        // 商户名称
+        $fansmanage_name = $request->input('organization_name');
+        // 手机号
+        $mobile = $request->input('mobile');
+        // 前端分页 搜索使用
+        $search_data = ['organization_name' => $fansmanage_name, 'mobile' => $mobile];
+        // type为3代表商户
+        $where = [['type', '3'],['deleted_at','']];
+        if (!empty($fansmanage_name)) {
+            $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
+        // 商户列表查询
+//        $list = Organization::getPaginageFansmanage1($where, $mobile, '10', 'id');
+        $list = Organization::where($where)->leftjoin('account','organization.id','=','account.organization_id')->orderBy('organization.id', 'DESC')->paginate('10');
 
-        $list = Organization::getPaginageFansmanage($where, '5', 'id');
+        dump($list);
+        // 循环数据
         foreach ($list as $k => $v) {
+            // 上级组织名字
             $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
         }
+
         return view('Zerone/Fansmanage/fansmanage_list', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //商户编辑ajaxshow显示页面
+    /**
+     * 商户编辑ajaxshow显示页面
+     */
     public function fansmanage_list_edit(Request $request)
     {
-        $id = $request->input('id');//商户id
+        // 商户id
+        $id = $request->input('id');
+        // 商户信息
         $data = Organization::getOneFansmanage([['id', $id]]);
+        // 上级组织名字
         $data['agent_name'] = Organization::getPluck(['id' => $data['parent_id']], 'organization_name');
 
         return view('Zerone/Fansmanage/fansmanage_list_edit', ['data' => $data]);

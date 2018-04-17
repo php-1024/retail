@@ -12,7 +12,6 @@ use App\Models\AccountInfo;
 use App\Models\OperationLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
 
 class SubordinateController extends Controller
 {
@@ -46,12 +45,12 @@ class SubordinateController extends Controller
         $organization_id = $admin_data['organization_id'];//当前平台组织id
 
         $chars = md5(uniqid(mt_rand(), true));
-        $uuid  = substr($chars,0,8) . '-';
-        $uuid .= substr($chars,8,4) . '-';
-        $uuid .= substr($chars,12,4) . '-';
-        $uuid .= substr($chars,16,4) . '-';
-        $uuid .= substr($chars,20,12);
-        if(Account::checkRowExists([['uuid',$uuid]])){
+        $uuid = substr($chars, 0, 8) . '-';
+        $uuid .= substr($chars, 8, 4) . '-';
+        $uuid .= substr($chars, 12, 4) . '-';
+        $uuid .= substr($chars, 16, 4) . '-';
+        $uuid .= substr($chars, 20, 12);
+        if (Account::checkRowExists([['uuid', $uuid]])) {
             return response()->json(['data' => 'uuid重复，请重新操作！', 'status' => '0']);
         }
         $account = Account::max('account');
@@ -66,7 +65,7 @@ class SubordinateController extends Controller
             DB::beginTransaction();
             try {
                 //添加用户
-                $account_id = Account::addAccount(['organization_id' => $organization_id, 'parent_id' => $parent_id, 'parent_tree' => $parent_tree, 'deepth' => $deepth, 'account' => $account, 'password' => $encryptPwd, 'mobile' => $mobile,'uuid' =>$uuid]);
+                $account_id = Account::addAccount(['organization_id' => $organization_id, 'parent_id' => $parent_id, 'parent_tree' => $parent_tree, 'deepth' => $deepth, 'account' => $account, 'password' => $encryptPwd, 'mobile' => $mobile, 'uuid' => $uuid]);
                 //添加用户个人信息
                 AccountInfo::addAccountInfo(['account_id' => $account_id, 'realname' => $realname]);
                 if ($admin_data['is_super'] == 1) {

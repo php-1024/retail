@@ -75,7 +75,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">价格</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="price" value="{{$goods->price}}">
+                                                    <input type="number" class="form-control" name="price" value="{{$goods->price}}">
                                                 </div>
                                             </div>
 
@@ -83,7 +83,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">库存</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="stock" value="{{$goods->stock}}">
+                                                    <input type="number" class="form-control" name="stock" value="{{$goods->stock}}">
                                                 </div>
                                             </div>
 
@@ -91,7 +91,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品条码</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="barcode" value="{{$goods->barcode}}">
+                                                    <input type="number" class="form-control" name="barcode" value="{{$goods->barcode}}">
                                                 </div>
                                             </div>
 
@@ -99,7 +99,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">排序</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="displayorder" value="{{$goods->displayorder}}">
+                                                    <input type="number" class="form-control" name="displayorder" value="{{$goods->displayorder}}">
                                                 </div>
                                             </div>
 
@@ -128,7 +128,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </section>
                     </section>
