@@ -381,7 +381,7 @@ class FansmanageController extends Controller
             $where[] = ['organization_name', 'like', '%' . $fansmanage_name . '%'];
         }
         // 商户列表查询
-        $list = Organization::getPaginageFansmanage($where, $mobile, '10', 'id');
+        $list = Organization::getPaginageFansmanage($where, '10', 'id');
 //
         // 循环数据
         foreach ($list as $k => $v) {
