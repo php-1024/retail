@@ -387,12 +387,12 @@ class FansmanageController extends Controller
             if($mobile){
                 $join->where('account.mobile','=',$mobile);
             }
-        })->select('organization.id')->orderBy('organization.id', 'DESC')->paginate('10');
+        })->orderBy('organization.id', 'DESC')->paginate('10');
         // 循环数据
-//        foreach ($list as $k => $v) {
-//            // 上级组织名字
-//            $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
-//        }
+        foreach ($list as $k => $v) {
+            // 上级组织名字
+            $list[$k]['agent_name'] = Organization::getPluck(['id' => $v['parent_id']], 'organization_name');
+        }
 
         return view('Zerone/Fansmanage/fansmanage_list', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
