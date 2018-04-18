@@ -39,7 +39,7 @@ class PaysettingController extends Controller
 //        })->orderBy('organization.id', 'DESC')->paginate('10');
 
 
-        $data = Organization::where([['type',4],['status',1]])->join('retail_shengpay',function ($join){
+        $data = Organization::where([['type',4]])->join('retail_shengpay',function ($join){
             $join->on('organization.id','=','retail_shengpay.retail_id');
         }
         )->get();
