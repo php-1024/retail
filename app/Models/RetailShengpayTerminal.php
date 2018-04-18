@@ -83,7 +83,7 @@ class RetailShengpayTerminal extends Model
             if ($organization_name) {
                 $join->where('organization_name', 'LIKE', "%{$organization_name}%");
             }
-        })->select('retail_shengpay_terminal.id')->orderBy($orderby, $sort)->paginate($paginate);
+        })->select('retail_shengpay_terminal.id','retail_shengpay_terminal.retail_id','retail_shengpay_terminal.created_at','retail_shengpay_terminal.terminal_num','retail_shengpay_terminal.status','o.organization_name')->orderBy($orderby, $sort)->paginate($paginate);
 
     }
 
