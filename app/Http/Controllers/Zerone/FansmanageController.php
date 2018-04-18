@@ -892,13 +892,17 @@ class FansmanageController extends Controller
                     // 程序数量表数据添加
                     OrganizationAssets::addAssets($dataAssets);
                 }
-
+                // 数据处理
                 $data = [
+                    // 操作人id
                     'operator_id' => $admin_data['id'],
                     'fr_organization_id ' => '1',
                     'to_organization_id' => $fansmanage_id,
+                    // 程序id
                     'program_id' => $storeData['program_id'],
+                    // 2表示归还
                     'status' => '2',
+                    // 数量
                     'number' => '1'
                 ];
                 // 添加操作日志
