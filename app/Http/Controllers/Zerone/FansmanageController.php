@@ -597,7 +597,7 @@ class FansmanageController extends Controller
         // 商户信息
         $oneOrg = Organization::getOne([['id', $organization_id]]);
         // 商户下级店铺使用的程序
-        $data = Program::getPaginage([['id', $oneOrg['asset_id']]], 15, 'id');
+        $data = Program::getOne([['id', $oneOrg['asset_id']]]);
         $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $data['id']]]);
         $data['program_balance'] = $re['program_balance'];
         $data['program_used_num'] = $re['program_used_num'];
