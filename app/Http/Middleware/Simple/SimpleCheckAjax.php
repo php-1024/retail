@@ -18,84 +18,84 @@ class SimpleCheckAjax
     {
         $route_name = $request->path();                 //获取当前的页面路由
         switch ($route_name) {
-            case "retail/ajax/login_check":             //检测登录数据提交
+            case "simple/ajax/login_check":             //检测登录数据提交
                 $re = $this->checkLoginPost($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/retail_select":           //超级管理员选择分店提交数据
-            case "retail/ajax/category_delete":         //栏目删除弹窗
-            case "retail/ajax/category_edit":           //栏目编辑页面
+            case "simple/ajax/simple_select":           //超级管理员选择分店提交数据
+            case "simple/ajax/category_delete":         //栏目删除弹窗
+            case "simple/ajax/category_edit":           //栏目编辑页面
 
-            case "retail/ajax/subordinate_edit":        //编辑下属人员信息
-            case "retail/ajax/subordinate_lock":        //冻结下属页面
-            case "retail/ajax/goods_thumb":             //商品图片上传页面
-            case "retail/ajax/goods_delete":            //商品删除弹窗
-            case "retail/ajax/goods_status":            //商品状态修改弹窗
-            case "retail/ajax/order_status":            //订单状态修改确认弹窗
-            case "retail/ajax/order_status_paytype":    //订单状态修改以及邓丹支付方式确认弹窗
-            case "retail/ajax/upload_thumb_check":      //上传图片
-            case "retail/ajax/user_list_edit":          //会员列表编辑显示页面
-            case "retail/ajax/user_list_lock":          //会员列表冻结显示页面
-            case "retail/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
-            case "retail/ajax/select_company":          //选择供应商处理
-            case "retail/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
-            case "retail/ajax/purchase_list_confirm":   //进货退货审核弹窗
-            case "retail/ajax/supplier_delete":         //进销存管理--删除供应商弹窗
-            case "retail/ajax/supplier_edit":           //进销存管理--编辑供应商
-            case "retail/ajax/loss_list_confirm":       //报损订单审核弹窗
-            case "retail/ajax/check_list_confirm":      //盘点订单审核弹窗
-            case "retail/ajax/order_list_details":      //订单详细信息列表
-            case "retail/ajax/goods_thumb_delete":      //删除图片弹窗确认
-            case "retail/ajax/dispatch_province_add_check"://运费模板省份添加
-            case "retail/ajax/dispatch_province_edit_check"://运费模板信息编辑
-            case "retail/ajax/dispatch_province_delete_check"://运费模板信息删除
-            case "retail/ajax/dispatch_list_lock":            //运费模板启用弹窗
-            case "retail/ajax/dispatch_list_delete":          //运费模板删除确认弹窗
+            case "simple/ajax/subordinate_edit":        //编辑下属人员信息
+            case "simple/ajax/subordinate_lock":        //冻结下属页面
+            case "simple/ajax/goods_thumb":             //商品图片上传页面
+            case "simple/ajax/goods_delete":            //商品删除弹窗
+            case "simple/ajax/goods_status":            //商品状态修改弹窗
+            case "simple/ajax/order_status":            //订单状态修改确认弹窗
+            case "simple/ajax/order_status_paytype":    //订单状态修改以及邓丹支付方式确认弹窗
+            case "simple/ajax/upload_thumb_check":      //上传图片
+            case "simple/ajax/user_list_edit":          //会员列表编辑显示页面
+            case "simple/ajax/user_list_lock":          //会员列表冻结显示页面
+            case "simple/ajax/user_list_wallet":        //会员列表粉丝钱包显示页面
+            case "simple/ajax/select_company":          //选择供应商处理
+            case "simple/ajax/goods_list":              //检测登录，权限，及添搜索商品的数据
+            case "simple/ajax/purchase_list_confirm":   //进货退货审核弹窗
+            case "simple/ajax/supplier_delete":         //进销存管理--删除供应商弹窗
+            case "simple/ajax/supplier_edit":           //进销存管理--编辑供应商
+            case "simple/ajax/loss_list_confirm":       //报损订单审核弹窗
+            case "simple/ajax/check_list_confirm":      //盘点订单审核弹窗
+            case "simple/ajax/order_list_details":      //订单详细信息列表
+            case "simple/ajax/goods_thumb_delete":      //删除图片弹窗确认
+            case "simple/ajax/dispatch_province_add_check"://运费模板省份添加
+            case "simple/ajax/dispatch_province_edit_check"://运费模板信息编辑
+            case "simple/ajax/dispatch_province_delete_check"://运费模板信息删除
+            case "simple/ajax/dispatch_list_lock":            //运费模板启用弹窗
+            case "simple/ajax/dispatch_list_delete":          //运费模板删除确认弹窗
 
-            case "retail/ajax/shengpay_edit":           //编辑终端机器号
-            case "retail/ajax/shengpay_apply":          //终端机器号重新申请
-            case "retail/ajax/shengpay_delete":         //终端机器号解除绑定
-            case "retail/ajax/payconfig_edit":          //付款信息编辑
-            case "retail/ajax/payconfig_apply":         //付款信息重新申请
-            case "retail/ajax/payconfig_delete":        //付款信息删除
+            case "simple/ajax/shengpay_edit":           //编辑终端机器号
+            case "simple/ajax/shengpay_apply":          //终端机器号重新申请
+            case "simple/ajax/shengpay_delete":         //终端机器号解除绑定
+            case "simple/ajax/payconfig_edit":          //付款信息编辑
+            case "simple/ajax/payconfig_apply":         //付款信息重新申请
+            case "simple/ajax/payconfig_delete":        //付款信息删除
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
+            case "simple/ajax/profile_edit_check":      //检测修改个人信息的数据以及登录，权限
                 $re = $this->checkLoginAndRuleAndProfileEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/safe_password_edit_check"://检测修改安全密码的数据以及登录，权限
+            case "simple/ajax/safe_password_edit_check"://检测修改安全密码的数据以及登录，权限
                 $re = $this->checkLoginAndRuleAndSafepasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/password_edit_check"://检测修改密码的数据以及登录，权限
+            case "simple/ajax/password_edit_check"://检测修改密码的数据以及登录，权限
                 $re = $this->checkLoginAndRuleAndPasswordEdit($request);
                 return self::format_response($re, $next);
                 break;
 
 
             /****检测是否登录 权限 安全密码****/
-            case "retail/ajax/store_edit_check":        //店铺信息编辑弹窗页面
-            case "retail/ajax/category_delete_check":   //检测是否登录 权限 安全密码
-            case "retail/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
-            case "retail/ajax/goods_status_check":      //检测是否登录 权限 安全密码
-            case "retail/ajax/order_status_check":      //检测是否登录 权限 安全密码
-            case "retail/ajax/order_status_paytype_check"://检测是否登录 权限 安全密码
-            case "retail/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
-            case "retail/ajax/user_list_lock_check":    //检测是否登录 权限 安全密码--冻结粉丝标签
-            case "retail/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
-            case "retail/ajax/loss_list_confirm_check":       //审核订单安全密码确认
-            case "retail/ajax/check_list_confirm_check":      //审核订单安全密码确认
-            case "retail/ajax/supplier_delete_check":         //进销存管理--删除供应商确认
-            case "retail/ajax/dispatch_add_check":            //运费模板--添加运费模板安全密码检测
-            case "retail/ajax/goods_thumb_delete_check":     //商品图片删除--检测登录安全密码和权限
-            case "retail/ajax/dispatch_list_lock_check":     //启用、弃用运费模板确认
-            case "retail/ajax/dispatch_list_delete_check":   //运费模板删除确认操作
-            case "retail/ajax/shengpay_apply_check":            // 终端机器号重新申请功能提交
-            case "retail/ajax/shengpay_delete_check":            // 终端机器号解除绑定功能提交
-            case "retail/ajax/payconfig_delete_check":           // 付款信息解除绑定功能提交
-            case "retail/ajax/payconfig_apply_check":            // 付款信息重新申请功能提交
+            case "simple/ajax/store_edit_check":        //店铺信息编辑弹窗页面
+            case "simple/ajax/category_delete_check":   //检测是否登录 权限 安全密码
+            case "simple/ajax/goods_delete_check":      //检测是否登录 权限 安全密码
+            case "simple/ajax/goods_status_check":      //检测是否登录 权限 安全密码
+            case "simple/ajax/order_status_check":      //检测是否登录 权限 安全密码
+            case "simple/ajax/order_status_paytype_check"://检测是否登录 权限 安全密码
+            case "simple/ajax/subordinate_lock_check":  //检测是否登录 权限 安全密码
+            case "simple/ajax/user_list_lock_check":    //检测是否登录 权限 安全密码--冻结粉丝标签
+            case "simple/ajax/purchase_list_confirm_check":   //审核订单安全密码确认
+            case "simple/ajax/loss_list_confirm_check":       //审核订单安全密码确认
+            case "simple/ajax/check_list_confirm_check":      //审核订单安全密码确认
+            case "simple/ajax/supplier_delete_check":         //进销存管理--删除供应商确认
+            case "simple/ajax/dispatch_add_check":            //运费模板--添加运费模板安全密码检测
+            case "simple/ajax/goods_thumb_delete_check":     //商品图片删除--检测登录安全密码和权限
+            case "simple/ajax/dispatch_list_lock_check":     //启用、弃用运费模板确认
+            case "simple/ajax/dispatch_list_delete_check":   //运费模板删除确认操作
+            case "simple/ajax/shengpay_apply_check":            // 终端机器号重新申请功能提交
+            case "simple/ajax/shengpay_delete_check":            // 终端机器号解除绑定功能提交
+            case "simple/ajax/payconfig_delete_check":           // 付款信息解除绑定功能提交
+            case "simple/ajax/payconfig_apply_check":            // 付款信息重新申请功能提交
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re, $next);
                 break;
@@ -103,22 +103,22 @@ class SimpleCheckAjax
 
 
             /*********下级人员添加*********/
-            case "retail/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
+            case "simple/ajax/subordinate_add_check"://检测 登录 和 权限 和 安全密码 和 添加下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateAdd($request);
                 return self::format_response($re, $next);
                 break;
             /*********下级人员添加*********/
 
             /*********下级人员编辑*********/
-            case "retail/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
+            case "simple/ajax/subordinate_edit_check"://检测 登录 和 权限 和 安全密码 和 编辑下级人员的数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndSubordinateEdit($request);
                 return self::format_response($re, $next);
                 break;
             /*********下级人员编辑*********/
 
             /*********供应商添加和编辑*********/
-            case "retail/ajax/supplier_add_check"://检测登录，权限，及添加栏目分类的数据
-            case "retail/ajax/supplier_edit_check"://检测登录，权限，及编辑栏目分类的数据
+            case "simple/ajax/supplier_add_check"://检测登录，权限，及添加栏目分类的数据
+            case "simple/ajax/supplier_edit_check"://检测登录，权限，及编辑栏目分类的数据
                 $re = $this->checkLoginAndRuleAndSupplier($request);
                 return self::format_response($re, $next);
                 break;
@@ -126,58 +126,58 @@ class SimpleCheckAjax
 
 
             /*********栏目分类添加和编辑*********/
-            case "retail/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
-            case "retail/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
+            case "simple/ajax/category_add_check"://检测登录，权限，及添加栏目分类的数据
+            case "simple/ajax/category_edit_check"://检测登录，权限，及编辑栏目分类的数据
                 $re = $this->checkLoginAndRuleAndCategoryAdd($request);
                 return self::format_response($re, $next);
                 break;
             /*********栏目分类添加和编辑*********/
 
             /*********商品添加和商品编辑*********/
-            case "retail/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
-            case "retail/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
+            case "simple/ajax/goods_add_check"://检测登录，权限，及添加商品的数据
+            case "simple/ajax/goods_edit_check"://检测登录，权限，及编辑商品的数据
                 $re = $this->checkLoginAndRuleAndGoodsAdd($request);
                 return self::format_response($re, $next);
                 break;
             /*********商品添加和商品编辑*********/
 
             /*********进销存商品选择列表*********/
-            case "retail/ajax/search_company":          //检测登录，权限，及供应商搜索的数据处理
+            case "simple/ajax/search_company":          //检测登录，权限，及供应商搜索的数据处理
                 $re = $this->checkLoginAndRuleAndSearchCompany($request);
                 return self::format_response($re, $next);
                 break;
             /*********进销存商品选择列表*********/
 
             /*********进销存--供应商到货开单处理*********/
-            case "retail/ajax/purchase_goods_check"://检测登录，权限，及供应商到货开单的数据处理
+            case "simple/ajax/purchase_goods_check"://检测登录，权限，及供应商到货开单的数据处理
                 $re = $this->checkLoginAndRuleAndPurchaseGoods($request);
                 return self::format_response($re, $next);
                 break;
             /*********进销存--供应商到货开单处理*********/
 
             /*********进销存--报损开单处理*********/
-            case "retail/ajax/loss_goods_check"://检测登录，权限，及报损开单的数据
-            case "retail/ajax/check_goods_check"://检测登录，权限，及盘点开单的数据
+            case "simple/ajax/loss_goods_check"://检测登录，权限，及报损开单的数据
+            case "simple/ajax/check_goods_check"://检测登录，权限，及盘点开单的数据
                 $re = $this->checkLoginAndRuleAndLossAndCheckGoods($request);
                 return self::format_response($re, $next);
                 break;
             /*********进销存--报损开单处理*********/
 
             /****粉丝信息编辑****/
-            case "retail/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
+            case "simple/ajax/user_list_edit_check"://检测 登录 和 权限 和 安全密码 和 用户编辑数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndUserEdit($request);
                 return self::format_response($re, $next);
             /****粉丝信息编辑****/
 
 
             /****支付设置****/
-            case "retail/ajax/payconfig_check":    // 收款信息设置数据监测
-            case "retail/ajax/payconfig_edit_check":    // 收款信息设置数据监测
+            case "simple/ajax/payconfig_check":    // 收款信息设置数据监测
+            case "simple/ajax/payconfig_edit_check":    // 收款信息设置数据监测
                 $re = $this->checkLoginAndRuleAndPayconfig($request);
                 return self::format_response($re, $next);
                 break;
-            case "retail/ajax/shengpay_add_check":            // 添加终端机器号信息功能提交
-            case "retail/ajax/shengpay_edit_check":
+            case "simple/ajax/shengpay_add_check":            // 添加终端机器号信息功能提交
+            case "simple/ajax/shengpay_edit_check":
                 $re = $this->checkLoginAndRuleAndShengpayAdd($request);
                 return self::format_response($re, $next);
                 break;
@@ -253,12 +253,12 @@ class SimpleCheckAjax
 
     public function checkIsLogin($request)
     {
-        $sess_key = Session::get('retail_account_id');                  //获取用户登录存储的SessionId
+        $sess_key = Session::get('simple_account_id');                  //获取用户登录存储的SessionId
         if (!empty($sess_key)) {
-            $sess_key = Session::get('retail_account_id');              //获取管理员ID
+            $sess_key = Session::get('simple_account_id');              //获取管理员ID
             $sess_key = decrypt($sess_key);                             //解密管理员ID
-            Redis::connect('retail');                                   //连接到我的缓存服务器
-            $admin_data = Redis::get('retail_system_admin_data_' . $sess_key);//获取管理员信息
+            Redis::connect('simple');                                   //连接到我的缓存服务器
+            $admin_data = Redis::get('simple_system_admin_data_' . $sess_key);//获取管理员信息
             $admin_data = unserialize($admin_data);                     //解序列我的信息
             $request->attributes->add(['admin_data' => $admin_data]);   //添加参数
             return self::res(1, $request);                        //把参数传递到下一个中间件
@@ -295,7 +295,7 @@ class SimpleCheckAjax
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes, $account_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
-            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.retail_route_except'))) {
+            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.simple_route_except'))) {
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
             }
             //如果没有权限，则报错
@@ -356,7 +356,7 @@ class SimpleCheckAjax
             $key = config("app.zerone_safe_encrypt_key");//获取加安全密码密盐（零壹平台专用）
         } else {
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.retail_safe_encrypt_key");//获取安全密码加密盐（零售专用）
+            $key = config("app.simple_safe_encrypt_key");//获取安全密码加密盐（零售专用）
         }
         $encrypted = md5($safe_password);                       //加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
