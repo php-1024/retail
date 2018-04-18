@@ -93,8 +93,7 @@ class AndroidApiController extends Controller
             };
 
         }
-        $b = array_values($categorylist->toArray());
-        print_r($b);exit;
+        $categorylist = array_values($categorylist->toArray());
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
     }
 
