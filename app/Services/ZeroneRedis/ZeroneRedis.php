@@ -321,6 +321,31 @@ class ZeroneRedis
         Redis::set($menu_key, $menu);
         Redis::set($son_menu_key, $son_menu);
     }
+
+    //内部方法，生成餐饮分店系统账号的菜单
+    /*
+     * id - 用户的ID
+     */
+    public static function create_simple_menu_cache($id)
+    {
+        $menu = ProgramMenu::getList([['parent_id', 0], ['program_id', '9']], 0, 'id', 'asc');//获取分店管理平台系统的一级菜单
+        $son_menu = [];
+        foreach ($menu as $key => $val) {//获取一级菜单下的子菜单
+            $son_menu[$val->id] = ProgramMenu::son_menu($val->id);
+        }
+        if ($id <> 1) {
+            /**
+             * 未完成，这里准备查询用户权限。
+             */
+        }
+        $menu = serialize($menu);
+        $son_menu = serialize($son_menu);
+        Redis::connection('simple');//连接到我的redis零售——商户平台使用
+        $menu_key = 'simple_system_menu_' . $id;  //一级菜单的Redis主键。
+        $son_menu_key = 'simple_system_son_menu_' . $id;//子菜单的Redis主键
+        Redis::set($menu_key, $menu);
+        Redis::set($son_menu_key, $son_menu);
+    }
 }
 
 ?>
