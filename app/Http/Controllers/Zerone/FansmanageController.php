@@ -598,11 +598,10 @@ class FansmanageController extends Controller
         $oneOrg = Organization::getOne([['id', $organization_id]]);
         // 商户下级店铺使用的程序
         $data = Program::getOne([['id', $oneOrg['asset_id']]]);
-        $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $data['id']]]);
-        $data['program_balance'] = $re['program_balance'];
-        $data['program_used_num'] = $re['program_used_num'];
+        // 程序数量表
+        $dataAssets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $data['id']]]);
 
-        return view('Zerone/Fansmanage/fansmanage_program', ['data' => $data, 'oneOrg' => $oneOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Zerone/Fansmanage/fansmanage_program', ['dataAssets' => $dataAssets, 'data' => $data, 'oneOrg' => $oneOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
     //商户资产页面划入js显示
