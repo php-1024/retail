@@ -46,7 +46,7 @@
                                         <div class="inline">
                                             <div class="thumb-lg" >
                                                 @if(!empty($organization->OrganizationRetailinfo->retail_logo))
-                                                <img src="{{asset('/'.$organization->OrganizationRetailinfo->retail_logo)}}" class="img-circle" alt="...">
+                                                <img src="{{asset('/'.$organization->OrganizationRetailinfo->retail_logo)}}" class="img-circle" alt="店铺logo">
                                                 @endif
                                             </div>
                                         </div>
@@ -297,7 +297,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺LOGO</label>
                         <div class="col-sm-10">
-                            <input type="file" name="retail_logo" value="{{$organization->OrganizationRetailinfo->retail_logo}}" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="file" name="retail_logo" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="hidden" id="retail_logo" value="{{$organization->OrganizationRetailinfo->retail_logo}}">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
