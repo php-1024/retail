@@ -368,6 +368,9 @@
 
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=Xv2dLyXPQEWxRVZ3GVGWE9SkkfhS4WBW"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $("#retail_logo").val("{{$organization->OrganizationRetailinfo->retail_logo}}");
+    });
     $('#editBtn').click(function () {
         $('#myModal').modal();
     });
