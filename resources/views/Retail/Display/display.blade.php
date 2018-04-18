@@ -409,7 +409,6 @@
             }
         });
     }
-    $(":file").filestyle('input', '{{$organization->OrganizationRetailinfo->retail_logo}}');
 
     $(function(){
 
