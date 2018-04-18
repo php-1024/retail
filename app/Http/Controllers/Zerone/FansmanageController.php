@@ -579,15 +579,24 @@ class FansmanageController extends Controller
         return $structure;
     }
 
-    //商户程序管理
+    /**
+     * 商户程序管理
+     */
     public function fansmanage_program(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $request->input('organization_id');//服务商id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 商户id
+        $organization_id = $request->input('organization_id');
+        // 商户信息
         $data = Organization::getOne([['id', $organization_id]]);
+        dump($data);
         $list = Program::getPaginage([['is_asset', '1']], 15, 'id');
         foreach ($list as $key => $value) {
             $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $value['id']]]);
