@@ -394,9 +394,9 @@ class FansmanageController extends Controller
         foreach ($list as $key => $value) {
             // 上级组织名字
             $list[$key]['agent_name'] = Organization::getPluck(['id' => $value['parent_id']], 'organization_name');
+            // 用户名
             $list[$key]['username'] = Organizationfansmanageinfo::getPluck(['fansmanage_id' => $value['id']], 'fansmanage_owner');
         }
-//        dd($list);
 
         return view('Zerone/Fansmanage/fansmanage_list', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
@@ -489,6 +489,7 @@ class FansmanageController extends Controller
         $status = $request->input('status');
         // 商户信息
         $data = Organization::getOneData([['id', $id]]);
+
         return view('Zerone/Fansmanage/fansmanage_list_lock', ['data' => $data, 'status' => $status]);
     }
 
@@ -509,21 +510,16 @@ class FansmanageController extends Controller
         $data = Organization::getOneData([['id', $id]]);
         DB::beginTransaction();
         try {
-            if ($status == '1') {
-                // 商户冻结
-                Organization::editOrganization([['id', $id]], ['status' => '0']);
-                // 账号信息冻结
-                Account::editOrganizationBatch([['organization_id', $id]], ['status' => '0']);
-                // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了商户：' . $data['organization_name']);
-            } elseif ($status == '0') {
-                // 商户解冻
-                Organization::editOrganization([['id', $id]], ['status' => '1']);
-                // 账号信息解冻
-                Account::editOrganizationBatch([['organization_id', $id]], ['status' => '1']);
-                // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了商户：' . $data['organization_name']);
-            }
+            // 修改账号状态
+            $status = $status == 1 ? 1 : 0;
+            $log_string = $status == 1 ? "解冻了：{$data['organization_name']}" : "冻结了：{$data['organization_name']}";
+            // 商户修改状态
+            Organization::editOrganization([['id', $id]], ['status' => $status]);
+            // 账号修改状态
+            Account::editOrganizationBatch([['organization_id', $id]], ['status' => $status]);
+            // 添加操作日志
+            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, $log_string);
+
             // 提交事务
             DB::commit();
         } catch (\Exception $e) {
@@ -534,7 +530,9 @@ class FansmanageController extends Controller
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
-    //商户下级店铺架构
+    /**
+     * 商户下级店铺架构
+     */
     public function fansmanage_structure(Request $request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数

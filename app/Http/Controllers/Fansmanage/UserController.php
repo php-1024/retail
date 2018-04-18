@@ -233,7 +233,7 @@ class UserController extends CommonController
             Label::where('id', $id)->forceDelete();
             // 添加操作记录
             if ($this->admin_data['is_super'] != 2) {
-                $this->insertOperationLog("4", '删除会员标签：' . $label_name);
+                $this->insertOperationLog("3", '删除会员标签：' . $label_name);
             }
             DB::commit();
         } catch (\Exception $e) {
