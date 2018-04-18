@@ -34,7 +34,7 @@ class PaysettingController extends Controller
         }
         $search_data = ['organization_name' => $organization_name];
 
-        $aa = DB::table('retail_shengpay')->get();
+        $aa = DB::select("select  * from retail_shengpay where id = :id",['id'=>3])->get();
         dump($aa);
 
 
