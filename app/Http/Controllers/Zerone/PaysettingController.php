@@ -207,14 +207,11 @@ class PaysettingController extends Controller
             // 修改终端号状态
             RetailShengpayTerminal::editShengpayTerminal([['id', $id]], ['status' => $status]);
 
-            if ($status == '1') {
-                // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了--' . $retail_name . '--终端号：' . $terminal_num);
-            } else {
-                // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝通过了--' . $retail_name . '--终端号：' . $terminal_num);
-            }
+            $name = $status == '1'? ('审核通过了--'):('审核通过了--');
 
+            // 添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $name . $retail_name . '--终端号：' . $terminal_num);
+            
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
