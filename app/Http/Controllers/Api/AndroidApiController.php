@@ -83,6 +83,7 @@ class AndroidApiController extends Controller
     {
         $organization_id = $request->organization_id;//店铺id
         $categorylist = RetailCategory::getList([['retail_id', $organization_id]], '0', 'displayorder', 'asc', ['id', 'name', 'displayorder']);
+        print_r($categorylist);exit;
         if (empty($categorylist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有分类', 'data' => '']);
         }
