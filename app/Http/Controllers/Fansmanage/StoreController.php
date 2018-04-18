@@ -35,6 +35,7 @@ class StoreController extends Controller{
         $program_id = $request->get('program_id');     //选择资产程序id
         //程序剩余数量
         $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id',$program_id]])->first();
+        dd($organization_assets);
         //创建后减少程序剩余数量
         $num = $organization_assets['program_balance'] - 1;
         $used_num = $organization_assets['program_used_num'] + 1;
