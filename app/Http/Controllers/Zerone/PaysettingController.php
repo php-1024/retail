@@ -28,7 +28,7 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 店铺名称
         $organization_name = $request->organization_name;
-        $where = [['deleted_at','null']];
+        $where[] = ['deleted_at','null'];
         if($organization_name){
             $where[] = ['organization_name','LIKE',"%{$organization_name}%"];
         }
