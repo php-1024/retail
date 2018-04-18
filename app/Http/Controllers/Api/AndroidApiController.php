@@ -92,8 +92,8 @@ class AndroidApiController extends Controller
                 unset($categorylist[$key]);
             };
 
-            ksort($categorylist[$key]);
         }
+        ksort($categorylist);
 
         return response()->json(['status' => '1', 'msg' => '获取分类成功', 'data' => ['categorylist' => $categorylist]]);
     }
