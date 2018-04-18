@@ -89,7 +89,7 @@ class AndroidApiController extends Controller
         }
         foreach ($categorylist as $key => $value) {
             if (!RetailGoods::checkRowExists([['category_id', $value['id']]])) {
-                array_splice($categorylist[$key],$key);
+                array_values($categorylist[$key]);
             };
         }
         print_r($categorylist->toArray());exit;
