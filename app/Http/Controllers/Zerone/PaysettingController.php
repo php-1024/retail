@@ -33,7 +33,7 @@ class PaysettingController extends Controller
 
         $list = RetailShengpay::getListShengpay([], $organization_name, 10, 'retail_shengpay.id');
 
-        $data = RetailShengpay::where([['r.deleted_at',''],['o.deleted_at','']])->from('retail_shengpay as r')->join('organization as o', function ($join) use ($organization_name) {
+        $data = RetailShengpay::where([['r.deleted_at',null],['o.deleted_at',null]])->from('retail_shengpay as r')->join('organization as o', function ($join) use ($organization_name) {
             $join->on('retail_shengpay.retail_id', '=', 'o.id');
             if ($organization_name) {
                 $join->where('organization_name', 'LIKE', "%{$organization_name}%");
