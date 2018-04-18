@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-sm-1">
 
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_goods()"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_goods()"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择搜索</button>
                                     </div>
                                 </form>
                             </div>

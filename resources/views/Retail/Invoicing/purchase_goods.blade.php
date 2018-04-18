@@ -109,7 +109,7 @@
                                                placeholder="联系人手机">
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_company()"><i class="fa fa-search"></i>&nbsp;&nbsp;选择搜索
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_company()"><i class="fa fa-hand-o-up"></i>&nbsp;&nbsp;选择搜索
                                         </button>
                                     </div>
                                 </form>
