@@ -61,6 +61,7 @@ class AccountController extends Controller
         $realname = $request->input('realname');    //真实姓名
         $mobile = $request->input('mobile');        //手机号码
         $oneAcc = Account::getOne([['id', $admin_data['id']]]);
+        dd($oneAcc);
         $id = AccountInfo::checkRowExists([['account_id', $admin_data['id']]]);//查询是否存在该数据false/true
         DB::beginTransaction();
         try {
