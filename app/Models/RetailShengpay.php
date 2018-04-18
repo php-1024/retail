@@ -18,12 +18,11 @@ class RetailShengpay extends Model
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
 
-
     //和战区表一对一的关系
-    public function organization(){
+    public function organization()
+    {
         return $this->belongsTo('App\Models\Organization', 'retail_id', 'id');
     }
-
 
 
     //获取单条信息
@@ -79,6 +78,21 @@ class RetailShengpay extends Model
         return self::with('organization')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
 
     }
+
+
+    //获取分页列表
+    public static function getListShengpay($where, $organization_name=[], $paginate, $orderby, $sort = 'DESC')
+    {
+        return self::where($where)->join('organization as o', function ($join) use ($organization_name) {
+            $join->on('retail_shengpay.retail_id', '=', 'o.id');
+            if ($organization_name) {
+                $join->where('organization_name', 'LIKE', "%{$organization_name}%");
+            }
+        })->select('retail_shengpay.id', 'retail_shengpay.retail_id', 'retail_shengpay.sft_pos_num', 'retail_shengpay.sft_num', 'retail_shengpay.status', 'retail_shengpay.created_at', 'o.organization_name')->orderBy($orderby, $sort)->paginate($paginate);
+
+    }
+
+
 }
 
 ?>
