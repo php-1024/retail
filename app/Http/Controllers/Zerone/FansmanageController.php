@@ -523,7 +523,6 @@ class FansmanageController extends Controller
             // 提交事务
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
@@ -536,15 +535,21 @@ class FansmanageController extends Controller
      */
     public function fansmanage_structure(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        $organization_id = $request->input('organization_id');//服务商id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 商户id
+        $organization_id = $request->input('organization_id');
+        // 商户信息
         $onefansmanage = Organization::getOnefansmanage([['id', $organization_id]]);
-
+        // 商户下级店铺列表
         $list = Organization::getListFansmanage([['parent_tree', 'like', '%' . $onefansmanage['parent_tree'] . $onefansmanage['id'] . ',%']]);
+        // 店铺排序
         $structure = $this->Com_structure($list, $organization_id);
         return view('Zerone/Fansmanage/fansmanage_structure', ['onefansmanage' => $onefansmanage, 'structure' => $structure, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
