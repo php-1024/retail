@@ -770,8 +770,8 @@ Route::group(['prefix' => 'simple'], function () {
 
     Route::get('/', 'Simple\DisplayController@display')->middleware('SimpleCheck');//分店首页
     Route::get('quit', 'Simple\LoginController@quit');                                                 //退出系统
-    Route::get('retail_list', 'Simple\DisplayController@retail_list')->middleware('SimpleCheck');      //分店列表
-    Route::get('retail_switch', 'Simple\DisplayController@retail_switch')->middleware('SimpleCheck'); //超级管理员退出当前店铺
+    Route::get('simple_list', 'Simple\DisplayController@simple_list')->middleware('SimpleCheck');      //分店列表
+    Route::get('simple_switch', 'Simple\DisplayController@simple_switch')->middleware('SimpleCheck'); //超级管理员退出当前店铺
 
     //账户中心
     Route::group(['prefix' => 'account'], function () {
@@ -836,7 +836,7 @@ Route::group(['prefix' => 'simple'], function () {
     //异步提交数据组
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('login_check', 'Simple\LoginController@login_check')->middleware('SimpleCheckAjax');//提交登录数据
-        Route::post('retail_select', 'Simple\DisplayController@retail_select')->middleware('SimpleCheckAjax');//提交选择分店数据
+        Route::post('simple_select', 'Simple\DisplayController@simple_select')->middleware('SimpleCheckAjax');//提交选择分店数据
         Route::post('store_edit_check', 'Simple\DisplayController@store_edit_check')->middleware('SimpleCheckAjax');;    //分店店铺信息编辑弹窗
         Route::post('profile_edit_check', 'Simple\AccountController@profile_edit_check')->middleware('SimpleCheckAjax');//个人账号信息修改
         Route::post('safe_password_edit_check', 'Simple\AccountController@safe_password_edit_check')->middleware('SimpleCheckAjax');//安全密码设置检测
