@@ -73,6 +73,26 @@ class RetailShengpayTerminal extends Model
         return self::with('organization')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
 
     }
+
+
+    //获取分页列表
+    public static function getPaginageTerminal($where, $organization_name=[], $paginate, $orderby, $sort = 'DESC')
+    {
+        return self::where($where)->join('organization as o', function ($join) use ($organization_name) {
+            $join->on('retail_shengpay.retail_id', '=', 'o.id');
+            if ($organization_name) {
+                $join->where('organization_name', 'LIKE', "%{$organization_name}%");
+            }
+        })->select('retail_shengpay_terminal.id')->orderBy($orderby, $sort)->paginate($paginate);
+
+    }
+
+
+
+
+
+
+
 }
 
 ?>
