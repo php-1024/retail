@@ -64,10 +64,10 @@ class LoginController extends Controller
         if (empty($error_log) || $error_log['error_time'] < $allowed_error_times || (strtotime($error_log['error_time']) >= $allowed_error_times && time() - strtotime($error_log['updated_at']) >= 600)) {
             if (!empty($account_info)) {
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
-                    ErrorLog::addErrorTimes($ip, 10);
+                    ErrorLog::addErrorTimes($ip, 12);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif ($account_info->status <> '1') {//查询账号状态
-                    ErrorLog::addErrorTimes($ip, 10);
+                    ErrorLog::addErrorTimes($ip, 12);
                     return response()->json(['data' => '您的账号状态异常，请联系管理员处理', 'status' => '0']);
                 } else {
                     //登录成功要生成缓存的登录信息
@@ -87,14 +87,14 @@ class LoginController extends Controller
                         'login_time' => time()//登录时间
                     ];
                     if ($account_info->id <> 1) {//如果不是admin这个超级管理员
-                        if ($account_info->organization->program_id <> '10') {//如果账号不属于餐饮分店平台管理系统，则报错，不能登录。5、是餐饮分店管理系统的ID
-                            ErrorLog::addErrorTimes($ip, 10);
+                        if ($account_info->organization->program_id <> '12') {//如果账号不属于简版店铺管理系统，则报错，不能登录。12、是简版店铺管理系统的ID
+                            ErrorLog::addErrorTimes($ip, 12);
                             return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                         } else {
                             ErrorLog::clearErrorTimes($ip);//清除掉错误记录
                             //插入登录记录
-                            if (LoginLog::addLoginLog($account_info['id'], 10, $account_info->organization_id, $ip, $addr)) {//写入登录日志
-                                Session::put('retail_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                            if (LoginLog::addLoginLog($account_info['id'], 12, $account_info->organization_id, $ip, $addr)) {//写入登录日志
+                                Session::put('simple_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                                 //构造用户缓存数据
                                 if (!empty($account_info->account_info->realname)) {
                                     $admin_data['realname'] = $account_info->account_info->realname;
@@ -109,8 +109,8 @@ class LoginController extends Controller
                                 } else {
                                     $admin_data['role_name'] = '角色未设置';
                                 }
-                                ZeroneRedis::create_retail_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                                ZeroneRedis::create_menu_cache($account_info->id, 10);//生成对应账号的商户系统菜单
+                                ZeroneRedis::create_simple_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                                ZeroneRedis::create_menu_cache($account_info->id, 12);//生成对应账号的商户系统菜单
                                 return response()->json(['data' => '登录成功', 'status' => '1']);
                             } else {
                                 return response()->json(['data' => '登录失败', 'status' => '0']);
@@ -118,17 +118,17 @@ class LoginController extends Controller
                         }
                     } else {
                         ErrorLog::clearErrorTimes($ip);//清除掉错误记录
-                        Session::put('retail_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
+                        Session::put('simple_account_id', encrypt($account_info->id));//存储登录session_id为当前用户ID
                         $admin_data['realname'] = '系统管理员';
                         $admin_data['role_name'] = '系统管理员';
                         //构造用户缓存数据
-                        ZeroneRedis::create_retail_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
-                        ZeroneRedis::create_menu_cache($account_info->id, 10);//生成对应账号的商户系统菜单
+                        ZeroneRedis::create_simple_account_cache($account_info->id, $admin_data);//生成账号数据的Redis缓存
+                        ZeroneRedis::create_menu_cache($account_info->id, 12);//生成对应账号的商户系统菜单
                         return response()->json(['data' => '登录成功', 'status' => '1']);
                     }
                 }
             } else {
-                ErrorLog::addErrorTimes($ip, 10);
+                ErrorLog::addErrorTimes($ip, 12);
                 return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
             }
         } else {
@@ -139,8 +139,8 @@ class LoginController extends Controller
     //退出登录
     public function quit()
     {
-        Session::put('retail_account_id', '');
-        return redirect('retail/login');
+        Session::put('simple_account_id', '');
+        return redirect('simple/login');
     }
 }
 
