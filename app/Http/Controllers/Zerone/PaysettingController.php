@@ -34,7 +34,7 @@ class PaysettingController extends Controller
         }
         $search_data = ['organization_name' => $organization_name];
 
-        $data = Organization::where($where)->join('retail_shengpay','organization.id','=','retail_shengpay.retail_id')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
+        $data = Organization::where($where)->rightjoin('retail_shengpay','organization.id','=','retail_shengpay.retail_id')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
         dump($data);
         // 查询收款信息列表
         $list = RetailShengpay::getPaginage([], 15, 'id');
