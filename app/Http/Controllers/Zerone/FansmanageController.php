@@ -727,17 +727,22 @@ class FansmanageController extends Controller
         $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
         // 商户下级店铺列表
         $list = Organization::getPaginageStore([['type', '4'], ['parent_id', $organization_id]], '10', 'id');
-        
+
         return view('Zerone/Fansmanage/fansmanage_store', ['organization_name' => $organization_name, 'list' => $list, 'organization_id' => $organization_id, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //商户店铺管理--划入
+    /**
+     * 商户店铺管理--划入
+     */
     public function fansmanage_store_add(Request $request)
     {
-
-        $organization_id = $request->organization_id; //服务商id
-        $list = Organization::getList([['type', 4], ['parent_id', '<>', $organization_id], ['parent_id', '1']]);
+        // 商户id
+        $organization_id = $request->organization_id;
+        // 商户信息
         $data = Organization::getOne([['id', $organization_id]]);
+        // 店铺组织，并且上级不等于自己，而且属于零壹组织的店铺
+        $list = Organization::getList([['type', 4], ['parent_id', '<>', $organization_id], ['parent_id', '1']]);
+        
         return view('Zerone/Fansmanage/fansmanage_store_add', ['list' => $list, 'data' => $data]);
     }
 
