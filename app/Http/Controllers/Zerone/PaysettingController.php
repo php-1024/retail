@@ -31,15 +31,14 @@ class PaysettingController extends Controller
 
         $search_data = ['organization_name' => $organization_name];
 
-        $data = RetailShengpay::join('organization as o',function ($join) use($organization_name){
+        $list = RetailShengpay::join('organization as o',function ($join) use($organization_name){
             $join->on('retail_shengpay.retail_id','=','o.id');
             if($organization_name){
                 $join->where('organization_name','LIKE',"%{$organization_name}%");
             }
         } )->select('retail_shengpay.id','retail_shengpay.sft_pos_num','retail_shengpay.sft_num','retail_shengpay.status','retail_shengpay.created_at','o.organization_name')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
-        dump($data);
         // 查询收款信息列表
-        $list = RetailShengpay::getPaginage([], 15, 'id');
+//        $list = RetailShengpay::getPaginage([], 15, 'id');
 
         return view('Zerone/Paysetting/payconfig', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
