@@ -28,10 +28,13 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 店铺名称
         $organization_name = $request->organization_name;
-
+        $where = [];
+        if($organization_name){
+            $where[] = ['organization_name','LIKE',"%{$organization_name}%"];
+        }
         $search_data = ['organization_name' => $organization_name];
 
-        $data = Organization::where([['organization_name',$organization_name]])->join('retail_shengpay','organization.id','=','retail_shengpay.retail_id')->get();
+        $data = RetailShengpay::join('organization as o','retail_shengpay.retail_id','=','o.id')->orderBy('retail_shengpay.id', 'DESC')->select('retail_shengpay.id as rid,o.id')->paginate('15');
         dump($data);
         // 查询收款信息列表
         $list = RetailShengpay::getPaginage([], 15, 'id');
