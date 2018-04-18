@@ -51,8 +51,8 @@ return [
     /*******************零售版店铺**************************/
 
     /*******************简版店铺管理系统**************************/
-    'simple_encrypt_key' => 'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 简版店铺登录密码加密盐
-    'simple_safe_encrypt_key' => 'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 简版店铺全密码加密盐
+    'simple_encrypt_key' => 'sdf1564fd56sd4fsdf2sd4f8sd4fgsd5f8sd4f98dsf6dsf89ds4fgsfd5asdf8s5dafdfgh8fgjgh8j',//零壹云管理平台 - 简版店铺登录密码加密盐
+    'simple_safe_encrypt_key' => 'sdgtfh8gfhg8kjhgm5jh4ksf89ddxg48f9c5gf4j98sdgfhfguytsfxcbv5956556584gyudf54g8fd4gh',//零壹云管理平台 - 简版店铺全密码加密盐
     /*******************简版店铺管理系统**************************/
 
 

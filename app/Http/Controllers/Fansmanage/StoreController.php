@@ -56,7 +56,12 @@ class StoreController extends Controller{
 
         $account  = $user+1;//用户账号
         $password = $request->password;
-        $key = config("app.retail_encrypt_key");//获取加密盐
+
+        if ($program_id == 10){
+            $key = config("app.retail_encrypt_key");//获取加密盐
+        }elseif ($program_id == 12){
+            $key = config("app.simple_encrypt_key");//获取加密盐
+        }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
 
