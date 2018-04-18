@@ -53,8 +53,10 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                <input type="radio" name="program_id" value="10"><i class="fa fa-check text-active"></i>零售版管理系统
-                                                <input type="radio" name="program_id" value="12"><i class="fa fa-check text-active"></i>简版店铺管理系统
+                                                    <input type="radio" name="program_id" value="10"><i class="fa fa-check text-active"></i>零售版管理系统
+                                                </label>
+                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
+                                                    <input type="radio" name="program_id" value="12"><i class="fa fa-check text-active"></i>简版店铺管理系统
                                                 </label>
                                             </div>
                                         </div>
