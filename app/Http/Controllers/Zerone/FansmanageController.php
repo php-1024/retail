@@ -511,7 +511,7 @@ class FansmanageController extends Controller
         DB::beginTransaction();
         try {
             // 修改账号状态
-            $status = $status == 1 ? 1 : 0;
+            $status = $status == '1' ? '1' : '0';
             $log_string = $status == 1 ? "解冻了：{$data['organization_name']}" : "冻结了：{$data['organization_name']}";
             // 商户修改状态
             Organization::editOrganization([['id', $id]], ['status' => $status]);
