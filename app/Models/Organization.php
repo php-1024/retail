@@ -219,18 +219,6 @@ class Organization extends Model
         }])->with('fansmanageinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
-    //获取分页数据-商户
-    public static function getPaginageFansmanage1($where,$mobile='', $paginate, $orderby, $sort = 'DESC')
-    {
-        return self::with(['account' => function ($query) {
-            $query->where('deepth', '1');
-        }])->with(['fansmanageinfo' => function ($query) use ($mobile) {
-              if(!empty($mobile)){
-                  $query->where('fansmanage_owner_mobile', $mobile);
-              }
-            }])->where($where)->orderBy($orderby, $sort)->paginate($paginate);
-    }
-
 
     //获取分页数据-商户
     public static function getPaginageStore($where, $paginate, $orderby, $sort = 'DESC')
