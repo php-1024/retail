@@ -27,13 +27,13 @@
         @include('Zerone/Public/Header')
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-sm-4">
-                <h2>“{{$data->organization_name}}”程序管理</h2>
+                <h2>“{{$oneOrg->organization_name}}”程序管理</h2>
                 <ol class="breadcrumb">
                     <li class="active">
                         <a href="JavaScript:;">商户管理</a>
                     </li>
                     <li >
-                        <strong>“{{$data->organization_name}}”程序管理</strong>
+                        <strong>“{{$oneOrg->organization_name}}”程序管理</strong>
                     </li>
                 </ol>
             </div>
