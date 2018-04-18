@@ -821,13 +821,20 @@ class FansmanageController extends Controller
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
-    //商户店铺管理--划出
+    /**
+     * 商户店铺管理--划出
+     */
     public function fansmanage_store_draw(Request $request)
     {
-        $fansmanage_id = $request->fansmanage_id; //商户id
+        // 商户id
+        $fansmanage_id = $request->fansmanage_id;
+        // 商户信息
         $onefansmanage = Organization::getOne([['id', $fansmanage_id]]);
-        $store_id = $request->store_id; //划出店铺id
+        // 划出店铺id
+        $store_id = $request->store_id;
+        // 划出店铺信息
         $onedata = Organization::getOne([['id', $store_id]]);
+        
         return view('Zerone/Fansmanage/fansmanage_store_draw', ['onedata' => $onedata, 'onefansmanage' => $onefansmanage]);
     }
 
