@@ -55,7 +55,6 @@ class AccountController extends Controller
     //个人账号信息修改处理
     public function profile_edit_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');  //中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $organization_id = $admin_data['organization_id'];
