@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RetailShengpay extends Model
 {
-    use SoftDeletes;
+   // use SoftDeletes;
     protected $table = 'retail_shengpay';
     protected $primaryKey = 'id';
     public $timestamps = true;
