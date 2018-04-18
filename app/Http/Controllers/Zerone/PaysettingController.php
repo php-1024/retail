@@ -77,13 +77,10 @@ class PaysettingController extends Controller
             // 修改付款信息状态
             RetailShengpay::editShengpay([['id', $id]], ['status' => $status]);
 
-            if ($status == '1') {
-                // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核通过了付款信息店铺：' . $retail_name);
-            } else {
-                // 添加操作日志
-                OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, '拒绝了付款信息店铺：' . $retail_name);
-            }
+            $name = $status == '1'? ('审核通过了付款信息店铺：'):('拒绝了付款信息店铺：');
+            // 添加操作日志
+            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, $name . $retail_name);
+
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
@@ -211,7 +208,7 @@ class PaysettingController extends Controller
 
             // 添加操作日志
             OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $name . $retail_name . '--终端号：' . $terminal_num);
-            
+
             DB::commit();
         } catch (\Exception $e) {
             // 事件回滚
