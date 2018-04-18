@@ -33,7 +33,7 @@ class DisplayController extends Controller
         //只查询自己相关的数据
         $where = [
             ['account_id', $admin_data['id']],
-            ['program_id', '10'], //查询program_id(10)零售管理系统的操作日志
+            ['program_id', '12'], //查询program_id(12)简版店铺管理系统
             ['organization_id', $admin_data['organization_id']]
         ];
         $login_log_list = LoginLog::getList($where, 10, 'created_at', 'DESC');
