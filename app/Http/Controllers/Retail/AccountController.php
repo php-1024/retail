@@ -25,9 +25,9 @@ class AccountController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $user = Account::getOne(['id' => $admin_data['id']]);     //查询当前用户信息
+        $user = Account::getOne(['id' => $admin_data['id']]);   //查询当前用户信息
         $account_id = $admin_data['id'];                        //当前登录账号ID
-        if ($account_id == 1) {                                  //如果是超级管理员
+        if ($account_id == 1) {                                 //如果是超级管理员
             $module_node_list = Module::getListProgram(10, [], 0, 'id');            //获取当前系统的所有模块和节点
         } else {
             $account_node_list = ProgramModuleNode::getAccountModuleNodes(10, $admin_data['id']);//获取当前用户具有权限的节点
@@ -55,6 +55,7 @@ class AccountController extends Controller
     //个人账号信息修改处理
     public function profile_edit_check(Request $request)
     {
+        dd($request);
         $admin_data = $request->get('admin_data');  //中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $organization_id = $admin_data['organization_id'];
