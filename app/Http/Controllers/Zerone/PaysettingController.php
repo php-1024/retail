@@ -34,7 +34,7 @@ class PaysettingController extends Controller
         }
         $search_data = ['organization_name' => $organization_name];
 
-        $aa = DB::connection('study')->table('test')->get();
+        $aa = DB::table('retail_shengpay')->get();
         dump($aa);
 
 
