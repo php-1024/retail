@@ -737,24 +737,33 @@ class FansmanageController extends Controller
     public function fansmanage_store_add(Request $request)
     {
         // 商户id
-        $organization_id = $request->organization_id;
+        $fansmanage_id = $request->organization_id;
         // 商户信息
-        $data = Organization::getOne([['id', $organization_id]]);
+        $data = Organization::getOne([['id', $fansmanage_id]]);
         // 店铺组织，并且上级不等于自己，而且属于零壹组织的店铺
-        $list = Organization::getList([['type', 4], ['parent_id', '<>', $organization_id], ['parent_id', '1']]);
-        
+        $list = Organization::getList([['type', 4], ['parent_id', '<>', $fansmanage_id], ['parent_id', '1']]);
+
         return view('Zerone/Fansmanage/fansmanage_store_add', ['list' => $list, 'data' => $data]);
     }
 
-    //商户店铺管理--划入数据提交
+    /**
+     * 商户店铺管理--划入数据提交
+     */
     public function fansmanage_store_add_check(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path(); //获取当前的页面路由
-        $fansmanage_id = $request->fansmanage_id; //商户id
-        $oneFansmanage = Organization::getOne([['id', $fansmanage_id]]); //商户信息
-        $status = $request->status; //是否消耗程序数量
-        $store_id = $request->store_id; //商户id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 商户id
+        $fansmanage_id = $request->fansmanage_id;
+        // 商户信息
+        $oneFansmanage = Organization::getOne([['id', $fansmanage_id]]);
+        // 是否消耗程序数量
+        $status = $request->status;
+        // 店铺id
+        $store_id = $request->store_id;
+        // 店铺信息
         $oneStore = Organization::getOne([['id', $store_id]]);
         if ($oneFansmanage['asset_id'] != $oneStore['program_id']) {
             return response()->json(['data' => '该商户的程序与此分店程序不匹配', 'status' => '0']);
