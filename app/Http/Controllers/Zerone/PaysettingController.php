@@ -28,7 +28,7 @@ class PaysettingController extends Controller
         $route_name = $request->path();
         // 店铺名称
         $organization_name = $request->organization_name;
-        $where[] = ['deleted_at','null'];
+        $where[] = [];
         if($organization_name){
             $where[] = ['organization_name','LIKE',"%{$organization_name}%"];
         }
@@ -39,7 +39,7 @@ class PaysettingController extends Controller
 //
 
 
-        $data = RetailShengpay::join('organization as o','retail_shengpay.retail_id','=','o.id')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
+        $data = RetailShengpay::where($where)->join('organization as o','retail_shengpay.retail_id','=','o.id')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
         dump($data);
         // 查询收款信息列表
         $list = RetailShengpay::getPaginage([], 15, 'id');
