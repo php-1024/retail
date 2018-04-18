@@ -34,13 +34,13 @@ class PaysettingController extends Controller
         }
         $search_data = ['organization_name' => $organization_name];
 
-        $aa = DB::select("select  * from zerone_retail_shengpay where id = :id",['id'=>3]);
-        dump($aa);
-
+//        $aa = DB::select("select  * from zerone_retail_shengpay where id = :id",['id'=>3]);
+//        dump($aa);
+//
 
 
         $data = RetailShengpay::join('organization as o','retail_shengpay.retail_id','=','o.id')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
-//        dump($data);
+        dump($data);
         // 查询收款信息列表
         $list = RetailShengpay::getPaginage([], 15, 'id');
 
