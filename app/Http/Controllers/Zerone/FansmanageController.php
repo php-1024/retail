@@ -604,32 +604,46 @@ class FansmanageController extends Controller
         return view('Zerone/Fansmanage/fansmanage_program', ['dataAssets' => $dataAssets, 'data' => $data, 'oneOrg' => $oneOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //商户资产页面划入js显示
+    /**
+     * 商户程序划入划出js显示
+     */
     public function fansmanage_assets(Request $request)
     {
-        $organization_id = $request->input('organization_id'); //服务商id
-        $program_id = $request->input('program_id'); //套餐id
+        // 商户id
+        $organization_id = $request->input('organization_id');
+        // 程序id
+        $program_id = $request->input('program_id');
+        // 商户信息
         $oneData = Organization::getOneagent([['id', $organization_id]]);
+        // 程序信息
         $oneProgram = Program::getOne([['id', $program_id]]);
-        $status = $request->input('status'); //状态
+        // 划入划出状态
+        $status = $request->input('status');
+
         return view('Zerone/Fansmanage/fansmanage_assets', ['oneData' => $oneData, 'oneProgram' => $oneProgram, 'status' => $status]);
     }
 
     //商户资产页面划入js显示
     public function fansmanage_assets_check(Request $request)
     {
-        $admin_data = $request->get('admin_data'); //中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-
-        if ($admin_data['organization_id'] == 0) { //超级管理员没有组织id，操作默认为零壹公司操作
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 超级管理员没有组织id，操作默认为零壹公司操作
+        if ($admin_data['organization_id'] == 0) {
             $to_organization_id = 1;
         } else {
             $to_organization_id = $admin_data['organization_id'];
         }
-        $organization_id = $request->input('organization_id'); //服务商id
-        $fansmanage_name = Organization::getPluck([['id', $organization_id]], 'organization_name');//商户名字
-        $program_id = $request->input('program_id'); //程序id
-        $program_name = Program::getPluck([['id', $program_id]], 'program_name')->first();//程序名字
+        // 商户id
+        $organization_id = $request->input('organization_id');
+        // 商户名字
+        $fansmanage_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
+        // 程序id
+        $program_id = $request->input('program_id');
+        // 程序名字
+        $program_name = Program::getPluck([['id', $program_id]], 'program_name');
         $number = $request->input('number'); //数量
         $status = $request->input('status'); //判断划入或者划出
         DB::beginTransaction();

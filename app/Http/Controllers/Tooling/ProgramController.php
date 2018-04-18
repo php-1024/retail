@@ -91,11 +91,11 @@ class ProgramController extends Controller{
         foreach($list as $key=>$val){
             $program_id = $val->id;
             $module_list[$val->id] =Module::getListProgram($program_id,[],0,'id');
-            $ppname = Program::getPluck([['id',$val->complete_id]],'program_name')->toArray();//获取用户名称
+            $ppname = Program::getPluck([['id',$val->complete_id]],'program_name');//获取用户名称
             if(empty($ppname)){
                 $pname[$val->id] = '独立主程序';
             }else{
-                $pname[$val->id] = $ppname[0];
+                $pname[$val->id] = $ppname;
             }
         }
         return view('Tooling/Program/program_list',['list'=>$list,'search_data'=>$search_data,'module_list'=>$module_list,'pname'=>$pname,'admin_data'=>$admin_data,'route_name'=>$route_name,'action_name'=>'program']);
@@ -270,12 +270,12 @@ class ProgramController extends Controller{
         $program_id = $request->input('program_id');//所属程序ID
         $displayorder = $request->input('displayorder');
         
-        $program_info = Program::getPluck([['id',$program_id]],'program_name')->toArray();
+        $program_info = Program::getPluck([['id',$program_id]],'program_name');
         DB::beginTransaction();
         try{
             ProgramMenu::editMenu([['id',$id]],['displayorder'=>$displayorder]);
             ProgramMenu::refreshMenuCache($program_id);
-            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info[0].'的菜单排序');//保存操作记录
+            ToolingOperationLog::addOperationLog($admin_data['admin_id'],$route_name,'修改了'.$program_info.'的菜单排序');//保存操作记录
             DB::commit();//提交事务
         }catch (\Exception $e) {
             DB::rollBack();//事件回滚
