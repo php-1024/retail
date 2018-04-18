@@ -765,32 +765,57 @@ class FansmanageController extends Controller
         $store_id = $request->store_id;
         // 店铺信息
         $oneStore = Organization::getOne([['id', $store_id]]);
+        // 查询程序是否匹配
         if ($oneFansmanage['asset_id'] != $oneStore['program_id']) {
             return response()->json(['data' => '该商户的程序与此分店程序不匹配', 'status' => '0']);
         }
         DB::beginTransaction();
         try {
-            $parent_tree = $oneFansmanage['parent_tree'] . $fansmanage_id . ','; //组织树
+            // 店铺组织树
+            $parent_tree = $oneFansmanage['parent_tree'] . $fansmanage_id . ',';
+            // 修改店铺信息
             Organization::editOrganization([['id', $store_id]], ['parent_id' => $fansmanage_id, 'parent_tree' => $parent_tree]);
-            if ($status == 1) { //消耗程序数量
-                $Assets = OrganizationAssets::getOne([['organization_id', $fansmanage_id], ['program_id', $oneStore['program_id']]]); //查询服务商程序数量信息
-                if ($Assets['program_balance'] >= 1) { //如果服务商剩余程序数量足够
-                    $program_balance = $Assets->program_balance - 1; //剩余数量
-                    $program_used_num = $Assets->program_used_num + 1; //使用数量
-                    OrganizationAssets::editAssets([['id', $Assets->id]], ['program_balance' => $program_balance, 'program_used_num' => $program_used_num]); //修改数量
-                    $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $fansmanage_id, 'to_organization_id' => $store_id, 'program_id' => $oneStore['program_id'], 'status' => '0', 'number' => '1'];
+            // 消耗程序数量
+            if ($status == 1) {
+                // 查询商户程序数量信息
+                $Assets = OrganizationAssets::getOne([['organization_id', $fansmanage_id], ['program_id', $oneStore['program_id']]]);
+                // 如果商户剩余程序数量足够
+                if ($Assets['program_balance'] >= 1) {
+                    // 剩余数量
+                    $program_balance = $Assets->program_balance - 1;
+                    // 使用数量
+                    $program_used_num = $Assets->program_used_num + 1;
+                    // 修改数量
+                    OrganizationAssets::editAssets([['id', $Assets->id]], ['program_balance' => $program_balance, 'program_used_num' => $program_used_num]);
+                    // 数据处理
+                    $data = [
+                        // 操作人id
+                        'operator_id' => $admin_data['id'],
+                        // 划入或划出的组织
+                        'fr_organization_id ' => $fansmanage_id,
+                        // 操作给予的组织
+                        'to_organization_id' => $store_id,
+                        // 程序id
+                        'program_id' => $oneStore['program_id'],
+                        // 1表示划入0表示划出
+                        'status' => '0',
+                        // 数量
+                        'number' => '1'
+                    ];
                     //添加操作日志
-                    OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
+                    OrganizationAssetsallocation::addOrganizationAssetsallocation($data);
 
                 } else {
                     return response()->json(['data' => '该商户的程序数量不够', 'status' => '0']);
                 }
             }
-            //添加操作日志
-            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '划拨了店铺:' . $oneStore['organization_name'] . '-归属于商户：' . $oneFansmanage['organization_name']); //保存操作记录
-            DB::commit(); //提交事务
+            // 添加操作日志
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, '划拨了店铺:' . $oneStore['organization_name'] . '-归属于商户：' . $oneFansmanage['organization_name']);
+            // 提交事务
+            DB::commit();
         } catch (Exception $e) {
-            DB::rollBack(); //事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
