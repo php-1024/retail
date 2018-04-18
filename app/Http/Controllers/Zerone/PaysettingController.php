@@ -32,7 +32,6 @@ class PaysettingController extends Controller
         $search_data = ['organization_name' => $organization_name];
 
         $list =RetailShengpay::getListShengpay([],$organization_name,10,'retail_shengpay.id');
-        dump($list);
         // 查询收款信息列表
 //        $list = RetailShengpay::getPaginage([], 15, 'id');
 
