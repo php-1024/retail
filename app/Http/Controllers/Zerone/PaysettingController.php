@@ -33,14 +33,6 @@ class PaysettingController extends Controller
 
         $list = RetailShengpay::getListShengpay([], $organization_name, 10, 'retail_shengpay.id');
 
-        $data = RetailShengpay::join('organization as o', function ($join) use ($organization_name) {
-            $join->on('retail_id', '=', 'o.id');
-            if ($organization_name) {
-                $join->where('organization_name', 'LIKE', "%{$organization_name}%");
-            }
-        })->select('id', 'retail_id', 'type', 'sft_pos_num', 'sft_num', 'status', 'created_at', 'o.organization_name')->orderBy('id', 'DESC')->paginate(15);
-
-        dump($data);
         return view('Zerone/Paysetting/payconfig', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
