@@ -31,8 +31,16 @@ class PaysettingController extends Controller
 
         $search_data = ['organization_name' => $organization_name];
 
-        $list =RetailShengpay::getListShengpay([],$organization_name,10,'retail_shengpay.id');
+        $list = RetailShengpay::getListShengpay([], $organization_name, 10, 'retail_shengpay.id');
 
+        $data = RetailShengpay::where([])->join('organization as o', function ($join) use ($organization_name) {
+            $join->on('retail_shengpay.retail_id', '=', 'o.id');
+            if ($organization_name) {
+                $join->where('organization_name', 'LIKE', "%{$organization_name}%");
+            }
+        })->select('retail_shengpay.id', 'retail_shengpay.retail_id', 'retail_shengpay.type', 'retail_shengpay.sft_pos_num', 'retail_shengpay.sft_num', 'retail_shengpay.status', 'retail_shengpay.created_at', 'o.organization_name')->orderBy('retail_shengpay.id', 'DESC')->paginate(15);
+            
+        dump($data);
         return view('Zerone/Paysetting/payconfig', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
@@ -75,7 +83,7 @@ class PaysettingController extends Controller
             // 修改付款信息状态
             RetailShengpay::editShengpay([['id', $id]], ['status' => $status]);
 
-            $name = $status == '1'? ('审核通过了付款信息店铺：'):('拒绝了付款信息店铺：');
+            $name = $status == '1' ? ('审核通过了付款信息店铺：') : ('拒绝了付款信息店铺：');
             // 添加操作日志
             OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, $name . $retail_name);
 
@@ -154,7 +162,7 @@ class PaysettingController extends Controller
         $search_data = ['organization_name' => $organization_name];
 
         // 查询收款信息列表
-        $list = RetailShengpayTerminal::getPaginageTerminal([],$organization_name,15,'retail_shengpay_terminal.id');
+        $list = RetailShengpayTerminal::getPaginageTerminal([], $organization_name, 15, 'retail_shengpay_terminal.id');
 
 
         return view('Zerone/Paysetting/shengpay', ['search_data' => $search_data, 'list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
@@ -204,7 +212,7 @@ class PaysettingController extends Controller
             // 修改终端号状态
             RetailShengpayTerminal::editShengpayTerminal([['id', $id]], ['status' => $status]);
 
-            $name = $status == '1'? ('审核通过了--'):('拒绝通过了--');
+            $name = $status == '1' ? ('审核通过了--') : ('拒绝通过了--');
 
             // 添加操作日志
             OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $name . $retail_name . '--终端号：' . $terminal_num);
