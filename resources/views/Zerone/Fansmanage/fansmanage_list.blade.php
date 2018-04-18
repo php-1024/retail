@@ -118,9 +118,9 @@
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             @if($value->status == 1)
-                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','1')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             @elseif($value->status == 0)
-                                            <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','0')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
 
                                             <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>
