@@ -518,11 +518,12 @@ class FansmanageController extends Controller
             // 账号修改状态
             Account::editOrganizationBatch([['organization_id', $id]], ['status' => $status]);
             // 添加操作日志
-            OperationLog::addOperationLog('1', $admin_data['organization_id'], $admin_data['id'], $route_name, $log_string);
+            OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $log_string);
 
             // 提交事务
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
