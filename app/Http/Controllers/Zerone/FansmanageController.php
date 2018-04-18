@@ -644,43 +644,53 @@ class FansmanageController extends Controller
         $program_id = $request->input('program_id');
         // 程序名字
         $program_name = Program::getPluck([['id', $program_id]], 'program_name');
-        $number = $request->input('number'); //数量
-        $status = $request->input('status'); //判断划入或者划出
+        // 数量
+        $number = $request->input('number');
+        // 判断划入或者划出
+        $status = $request->input('status');
         DB::beginTransaction();
         try {
-            $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
-            $id = $re['id'];
-            if ($status == '1') { //划入
+            $dataAssets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
+            // 划入
+            if ($status == '1') {
                 $state = '划入';
-                if (empty($re)) {
+                if (empty($dataAssets)) {
                     OrganizationAssets::addAssets(['organization_id' => $organization_id, 'program_id' => $program_id, 'program_balance' => $number, 'program_used_num' => '0']);
                 } else {
-                    $num = $re['program_balance'] + $number;
-                    OrganizationAssets::editAssets([['id', $id]], ['program_balance' => $num]);
+                    $num = $dataAssets['program_balance'] + $number;
+                    OrganizationAssets::editAssets([['id', $dataAssets['id']]], ['program_balance' => $num]);
                 }
-            } else { //划出
+                // 划出
+            } else {
                 $state = '划出';
-                if (empty($re)) {
+                if (empty($dataAssets)) {
                     return response()->json(['data' => '数量不足', 'status' => '0']);
                 } else {
-                    if ($re['program_balance'] >= $number) { //划出数量小于或等于剩余数量
-                        $num = $re['program_balance'] - $number;
-                        OrganizationAssets::editAssets([['id', $id]], ['program_balance' => $num]);
+                    if ($dataAssets['program_balance'] >= $number) { //划出数量小于或等于剩余数量
+                        $num = $dataAssets['program_balance'] - $number;
+                        OrganizationAssets::editAssets([['id', $dataAssets['id']]], ['program_balance' => $num]);
                     } else {
                         return response()->json(['data' => '数量不足', 'status' => '0']);
                     }
                 }
             }
-            $data = ['operator_id' => $admin_data['id'], 'fr_organization_id ' => $organization_id, 'to_organization_id' => $to_organization_id, 'program_id' => $program_id, 'status' => $status, 'number' => $number];
+            $data = [
+                'operator_id' => $admin_data['id'],
+                'fr_organization_id ' => $organization_id,
+                'to_organization_id' => $to_organization_id,
+                'program_id' => $program_id,
+                'status' => $status,
+                'number' => $number
+            ];
             //添加操作日志
-            OrganizationAssetsallocation::addOrganizationAssetsallocation($data); //保存操作记录
-
+            OrganizationAssetsallocation::addOrganizationAssetsallocation($data);
             //添加操作日志
             OperationLog::addOperationLog('1', '1', $admin_data['id'], $route_name, $state . '程序--' . $program_name . '*' . $number . ' --商户：' . $fansmanage_name);
-
-            DB::commit(); //提交事务
+            // 提交事务
+            DB::commit();
         } catch (Exception $e) {
-            DB::rollBack(); //事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
         return response()->json(['data' => '操作成功', 'status' => '1']);
