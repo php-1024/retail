@@ -56,7 +56,6 @@
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
 
-
                                     <div class="col-sm-2">
                                         <select name="category_id" class="form-control m-b">
                                             <option value="0">请选择分类</option>
@@ -98,9 +97,9 @@
                                         <select name="company_name" class="form-control m-b">
                                             <option value="0">请选择公司名称</option>
                                             @foreach($supplier as $key=>$val)
-                                        <option value="{{$val->company_name}}">{{$val->company_name}}</option>
+                                            <option value="{{$val->company_name}}">{{$val->company_name}}</option>
                                             @endforeach
-                                            </select>
+                                        </select>
 
 
 
@@ -110,7 +109,7 @@
                                                placeholder="联系人手机">
                                     </div>
                                     <div class="col-sm-1">
-                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_company()"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_company()"><i class="fa fa-search"></i>&nbsp;&nbsp;选择搜索
                                         </button>
                                     </div>
                                 </form>
