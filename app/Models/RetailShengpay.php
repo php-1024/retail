@@ -83,7 +83,7 @@ class RetailShengpay extends Model
     //获取分页列表
     public static function getListShengpay($where, $organization_name=[], $paginate, $orderby, $sort = 'DESC')
     {
-        return self::where($where)->join('organization as o', function ($join) use ($organization_name) {
+        return self::where($where)->form('retail_shengpay as r')->join('organization as o', function ($join) use ($organization_name) {
             $join->on('retail_shengpay.retail_id', '=', 'o.id');
             if ($organization_name) {
                 $join->where('organization_name', 'LIKE', "%{$organization_name}%");
