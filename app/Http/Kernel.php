@@ -82,6 +82,11 @@ class Kernel extends HttpKernel
         'RetailCheckAjax'=>\App\Http\Middleware\Retail\RetailCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************零壹总店管理系统*******************************/
 
+        /**************************简版的店铺管理系统*******************************/
+        'SimpleCheck'=>\App\Http\Middleware\Simple\SimpleCheck::class,//检测普通页面跳转的中间件
+        'SimpleCheckAjax'=>\App\Http\Middleware\Simple\SimpleCheckAjax::class,//检测Ajax数据提交的中间件
+        /**************************简版的店铺管理系统*******************************/
+
         /**************************接口*******************************/
         'AndroidApiCheck'=>\App\Http\Middleware\Api\AndroidApiCheck::class,//检测普通页面跳转的中间件
         /**************************接口*******************************/
