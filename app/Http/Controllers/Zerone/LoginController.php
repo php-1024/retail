@@ -22,6 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
+        dump(Request::getClientIp());
         return view('Zerone/Login/display');
     }
 
