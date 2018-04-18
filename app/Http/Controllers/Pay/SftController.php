@@ -302,6 +302,9 @@ class SftController extends Controller
 
     public function test11()
     {
+
+        \Wechat::
+        exit;
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $this->authorizeInfo();
     }
@@ -374,13 +377,14 @@ class SftController extends Controller
         // 获取组织id
         $organization_id = request()->get("organization_id");
         // 获取公众号的基本信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id],["authorizer_appid","authorizer_access_token"]);
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
 
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;
         } else {
             // 公众号信息没有授权应该进行的步骤
+
         }
     }
 
@@ -470,7 +474,6 @@ class SftController extends Controller
                 // 保存用户数据
                 UserInfo::insertData($param);
             }
-
             // 数据提交
             DB::commit();
             return true;
