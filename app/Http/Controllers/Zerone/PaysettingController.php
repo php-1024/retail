@@ -36,7 +36,7 @@ class PaysettingController extends Controller
             if($organization_name){
                 $join->where('organization_name','LIKE',"%{$organization_name}%");
             }
-        } )->select('retail_shengpay.id','retail_shengpay.sft_pos_num','retail_shengpay.sft_num','retail_shengpay.status','o.organization_name')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
+        } )->select('retail_shengpay.id','retail_shengpay.sft_pos_num','retail_shengpay.sft_num','retail_shengpay.status','retail_shengpay.created_at','o.organization_name')->orderBy('retail_shengpay.id', 'DESC')->paginate('15');
         dump($data);
         // 查询收款信息列表
         $list = RetailShengpay::getPaginage([], 15, 'id');
