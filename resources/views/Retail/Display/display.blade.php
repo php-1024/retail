@@ -298,7 +298,6 @@
                         <label class="col-sm-2 text-right">店铺LOGO</label>
                         <div class="col-sm-10">
                             <input type="file" name="retail_logo" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            <input type="hidden" id="retail_logo" value="{{$organization->OrganizationRetailinfo->retail_logo}}">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
