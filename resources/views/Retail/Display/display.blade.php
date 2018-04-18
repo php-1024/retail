@@ -409,7 +409,7 @@
             }
         });
     }
-    $(":file").filestyle('input', false);
+    $(":file").filestyle('input');
 
     $(function(){
 
