@@ -50,6 +50,11 @@ return [
     'retail_safe_encrypt_key' => 'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 零售版店铺全密码加密盐
     /*******************零售版店铺**************************/
 
+    /*******************简版店铺管理系统**************************/
+    'simple_encrypt_key' => 'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 简版店铺登录密码加密盐
+    'simple_safe_encrypt_key' => 'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 简版店铺全密码加密盐
+    /*******************简版店铺管理系统**************************/
+
 
     /******************微信开放平台相关参数********************/
     'wechat_open_setting' => [
