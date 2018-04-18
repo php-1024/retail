@@ -91,7 +91,7 @@ class AndroidApiController extends Controller
             if (!RetailGoods::checkRowExists([['category_id', $value['id']]])) {
                 unset($categorylist[$key]);
             };
-            print_r($categorylist->toArray());exit;
+            print_r($categorylist[$key]->toArray());exit;
 
             array_values($categorylist[$key]);
         }
