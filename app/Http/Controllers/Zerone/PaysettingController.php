@@ -33,7 +33,7 @@ class PaysettingController extends Controller
 
         $list = RetailShengpay::getListShengpay([], $organization_name, 10, 'retail_shengpay.id');
 
-        $data = RetailShengpaywhere::join('organization as o', function ($join) use ($organization_name) {
+        $data = RetailShengpay::join('organization as o', function ($join) use ($organization_name) {
             $join->on('retail_id', '=', 'o.id');
             if ($organization_name) {
                 $join->where('organization_name', 'LIKE', "%{$organization_name}%");
