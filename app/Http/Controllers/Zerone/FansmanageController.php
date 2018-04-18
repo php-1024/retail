@@ -595,14 +595,14 @@ class FansmanageController extends Controller
         // 商户id
         $organization_id = $request->input('organization_id');
         // 商户信息
-        $data = Organization::getOne([['id', $organization_id]]);
-        $list = Program::getPaginage([['id', $data['asset_id']]], 15, 'id');
-        foreach ($list as $key => $value) {
-            $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $value['id']]]);
-            $list[$key]['program_balance'] = $re['program_balance'];
-            $list[$key]['program_used_num'] = $re['program_used_num'];
-        }
-        return view('Zerone/Fansmanage/fansmanage_program', ['list' => $list, 'data' => $data, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        $oneOrg = Organization::getOne([['id', $organization_id]]);
+        // 商户下级店铺使用的程序
+        $data = Program::getPaginage([['id', $oneOrg['asset_id']]], 15, 'id');
+        $re = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $data['id']]]);
+        $data['program_balance'] = $re['program_balance'];
+        $data['program_used_num'] = $re['program_used_num'];
+
+        return view('Zerone/Fansmanage/fansmanage_program', ['data' => $data, 'oneOrg' => $oneOrg, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
     //商户资产页面划入js显示

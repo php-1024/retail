@@ -58,12 +58,12 @@
 
             <div class="row">
                 <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
-                <input type="hidden" name="organization_id" id="organization_id" value="{{$data->id}}">
+                <input type="hidden" name="organization_id" id="organization_id" value="{{$oneOrg->id}}">
                 <input type="hidden" id="fansmanage_assets" value="{{ url('zerone/ajax/fansmanage_assets') }}">
                 <div class="col-lg-12">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>“{{$data->organization_name}}”程序管理</h5>
+                            <h5>“{{$oneOrg->organization_name}}”程序管理</h5>
                         </div>
                         <div class="ibox-content">
                             <table class="table table-stripped toggle-arrow-tiny" data-page-size="15">
@@ -78,20 +78,18 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($list as $key=>$value)
                                     <tr>
-                                        <td>{{$value->id}}</td>
-                                        <td>{{$value->program_name}}</td>
-                                        <td><div> <span class="label label-primary">剩余：@if(!empty($value->program_balance)){{$value->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                        <td>{{$data->id}}</td>
+                                        <td>{{$data->program_name}}</td>
+                                        <td><div> <span class="label label-primary">剩余：@if(!empty($data->program_balance)){{$data->program_balance}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
 
-                                        <td><div><span class="label label-warning">已用：@if(!empty($value->program_used_num)){{$value->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
-                                        <td>{{$value->created_at}}</td>
+                                        <td><div><span class="label label-warning">已用：@if(!empty($data->program_used_num)){{$data->program_used_num}}@else 0 @endif套</span>&nbsp;&nbsp;</div></td>
+                                        <td>{{$data->created_at}}</td>
                                         <td class="text-right">
-                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$value->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
-                                            <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$value->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
+                                            <button class="btn btn-info btn-xs" onclick="getAssetsAdd('{{$data->id}}','1')"><i class="icon-arrow-down"></i>&nbsp;&nbsp;程序划入</button>
+                                            <button class="btn btn-primary btn-xs" onclick="getAssetsReduce('{{$data->id}}','0')"><i class="icon-arrow-up"></i>&nbsp;&nbsp;程序划出</button>
                                         </td>
                                     </tr>
-                                @endforeach
                                 </tbody>
                                 <tfoot>
                                 <tr>
