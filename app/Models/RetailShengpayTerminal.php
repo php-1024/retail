@@ -79,7 +79,7 @@ class RetailShengpayTerminal extends Model
     public static function getPaginageTerminal($where, $organization_name=[], $paginate, $orderby, $sort = 'DESC')
     {
         return self::where($where)->join('organization as o', function ($join) use ($organization_name) {
-            $join->on('retail_shengpay.retail_id', '=', 'o.id');
+            $join->on('retail_shengpay_terminal.retail_id', '=', 'o.id');
             if ($organization_name) {
                 $join->where('organization_name', 'LIKE', "%{$organization_name}%");
             }
