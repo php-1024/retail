@@ -27,7 +27,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">经手操作人员</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$order->operator_id}}" class="form-control" disabled="" name="operator_id">
+                            <input type="text" value="{{$order->account_info->realname}}" class="form-control" disabled="" name="operator_id">
                         </div>
                     </div>
                     <div class="form-group">
