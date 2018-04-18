@@ -623,19 +623,15 @@ class FansmanageController extends Controller
         return view('Zerone/Fansmanage/fansmanage_assets', ['oneData' => $oneData, 'oneProgram' => $oneProgram, 'status' => $status]);
     }
 
-    //商户资产页面划入js显示
+    /**
+     * 商户程序划入划出功能提交
+     */
     public function fansmanage_assets_check(Request $request)
     {
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-        // 超级管理员没有组织id，操作默认为零壹公司操作
-        if ($admin_data['organization_id'] == 0) {
-            $to_organization_id = 1;
-        } else {
-            $to_organization_id = $admin_data['organization_id'];
-        }
         // 商户id
         $organization_id = $request->input('organization_id');
         // 商户名字
@@ -650,24 +646,34 @@ class FansmanageController extends Controller
         $status = $request->input('status');
         DB::beginTransaction();
         try {
+            // 程序数量表
             $dataAssets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
             // 划入
             if ($status == '1') {
                 $state = '划入';
+                // 没有数据
                 if (empty($dataAssets)) {
+                    // 新添加一条数据
                     OrganizationAssets::addAssets(['organization_id' => $organization_id, 'program_id' => $program_id, 'program_balance' => $number, 'program_used_num' => '0']);
+                // 有数据
                 } else {
+                    // 原来的数量加上划入的数量
                     $num = $dataAssets['program_balance'] + $number;
+                    // 修改数据
                     OrganizationAssets::editAssets([['id', $dataAssets['id']]], ['program_balance' => $num]);
                 }
                 // 划出
             } else {
                 $state = '划出';
+                // 没有数据
                 if (empty($dataAssets)) {
                     return response()->json(['data' => '数量不足', 'status' => '0']);
                 } else {
-                    if ($dataAssets['program_balance'] >= $number) { //划出数量小于或等于剩余数量
+                    // 有数据并且数量足够划出
+                    if ($dataAssets['program_balance'] >= $number) {
+                        // 原来的数量减掉划入的数量
                         $num = $dataAssets['program_balance'] - $number;
+                        // 修改数据
                         OrganizationAssets::editAssets([['id', $dataAssets['id']]], ['program_balance' => $num]);
                     } else {
                         return response()->json(['data' => '数量不足', 'status' => '0']);
@@ -675,11 +681,17 @@ class FansmanageController extends Controller
                 }
             }
             $data = [
+                // 操作人id
                 'operator_id' => $admin_data['id'],
+                // 划出的组织id
                 'fr_organization_id ' => $organization_id,
-                'to_organization_id' => $to_organization_id,
+                // 划入的组织id
+                'to_organization_id' => '1',
+                // 程序id
                 'program_id' => $program_id,
+                // 1表示划入0表示划出
                 'status' => $status,
+                // 数量
                 'number' => $number
             ];
             //添加操作日志
@@ -696,16 +708,26 @@ class FansmanageController extends Controller
         return response()->json(['data' => '操作成功', 'status' => '1']);
     }
 
-    //商户程序管理
+    /**
+     * 商户程序管理
+     */
     public function fansmanage_store(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $request->input('organization_id'); //商户id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的管理员数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 商户id
+        $organization_id = $request->input('organization_id');
+        // 商户名称
         $organization_name = Organization::getPluck([['id', $organization_id]], 'organization_name');
+        // 商户下级店铺列表
         $list = Organization::getPaginageStore([['type', '4'], ['parent_id', $organization_id]], '10', 'id');
+        
         return view('Zerone/Fansmanage/fansmanage_store', ['organization_name' => $organization_name, 'list' => $list, 'organization_id' => $organization_id, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
