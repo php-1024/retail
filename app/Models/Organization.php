@@ -53,6 +53,12 @@ class Organization extends Model
         return $this->hasOne('App\Models\OrganizationRetailinfo', 'organization_id');
     }
 
+    //和OrganizationSimpleinfo表一对一的关系
+    public function OrganizationSimpleinfo()
+    {
+        return $this->hasOne('App\Models\OrganizationSimpleinfo', 'organization_id');
+    }
+
     //和organizationBranchinfo表一对一的关系
     public function fansmanageinfo()
     {
