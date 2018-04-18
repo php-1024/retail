@@ -25,8 +25,6 @@ class StoreController extends Controller{
 
     //创建店铺功能提交
     public function store_create_check(Request $request){
-        dd($request);
-
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                 //获取当前的页面路由
         $organization_id = $admin_data['organization_id']; //组织id
