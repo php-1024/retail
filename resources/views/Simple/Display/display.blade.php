@@ -97,7 +97,9 @@
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">
-                                                    123
+                                                    @if(!empty($organization->OrganizationSimpleinfo->simple_owner))
+                                                        {{$organization->OrganizationSimpleinfo->simple_owner}}
+                                                    @endif
                                                 </label>
                                             </div>
                                         </div>
@@ -288,7 +290,9 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$organization->OrganizationSimpleinfo->simple_owner}}" name="simple_owner" placeholder="负责人" class="form-control">
+                            <input type="text" value=" @if(!empty($organization->OrganizationSimpleinfo->simple_owner))
+                            {{$organization->OrganizationSimpleinfo->simple_owner}}
+                            @endif" name="simple_owner" placeholder="负责人" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -297,7 +301,9 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="number" value="{{$organization->OrganizationSimpleinfo->simple_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
+                            <input type="number" value=" @if(!empty($organization->OrganizationSimpleinfo->simple_owner_mobile))
+                            {{$organization->OrganizationSimpleinfo->simple_owner_mobile}}
+                            @endif" name="mobile" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
