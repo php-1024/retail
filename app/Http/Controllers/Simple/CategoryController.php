@@ -36,7 +36,7 @@ class CategoryController extends Controller
             $category_sort = '0';
         }
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
-        $names = SimpleCategory::checkRowExists(['fansmanage_id' => $fansmanage_id, 'retail_id' => $admin_data['organization_id'], 'name' => $category_name]);
+        $names = SimpleCategory::checkRowExists(['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'name' => $category_name]);
         if ($names) {//判断分类是已经存在
             return response()->json(['data' => '分类名称重名，请重新输入！', 'status' => '0']);
         }
@@ -45,7 +45,7 @@ class CategoryController extends Controller
             'created_by' => $admin_data['id'],
             'displayorder' => $category_sort,
             'fansmanage_id' => $fansmanage_id,
-            'retail_id' => $admin_data['organization_id'],
+            'simple_id' => $admin_data['organization_id'],
         ];
         DB::beginTransaction();
         try {
@@ -73,7 +73,7 @@ class CategoryController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $category_name = $request->get('name');
         $where = [
-            'retail_id' => $admin_data['organization_id'],
+            'simple_id' => $admin_data['organization_id'],
         ];
         $category = SimpleCategory::getPaginage($where, $category_name, '10', 'displayorder', 'ASC');
         return view('Simple/Category/category_list', ['category_name' => $category_name, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
@@ -115,7 +115,7 @@ class CategoryController extends Controller
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $category_id = $request->get('id');                 //获取栏目id
         $where = [
-            'retail_id' => $admin_data['organization_id'],
+            'simple_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category = SimpleCategory::getOne($where);
@@ -134,7 +134,7 @@ class CategoryController extends Controller
             $displayorder = '0';
         }
         $where = [
-            'retail_id' => $admin_data['organization_id'],
+            'simple_id' => $admin_data['organization_id'],
             'id' => $category_id,
         ];
         $category_data = [
