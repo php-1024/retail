@@ -23,9 +23,15 @@ class OrganizationSimpleinfo extends Model{
     public static function addOrganizationSimpleinfo($param){
         $program = new OrganizationSimpleinfo();//实例化程序模型
         $program->organization_id = $param['organization_id'];//组织id
-        $program->simple_owner = $param['simple_owner'];//分店负责人姓名
-        $program->simple_owner_idcard = $param['simple_owner_idcard'];//分店负责人身份证
-        $program->simple_owner_mobile = $param['simple_owner_mobile'];//分店负责人手机号
+        if(!empty($param['simple_owner'])){
+            $program->simple_owner = $param['simple_owner'];//分店负责人姓名
+        }
+        if(!empty($param['simple_owner_mobile'])){
+            $program->simple_owner_idcard = $param['simple_owner_mobile'];//分店负责人手机号
+        }
+        if(!empty($param['simple_owner_idcard'])){
+            $program->simple_owner_idcard = $param['simple_owner_idcard'];//分店负责人身份证
+        }
         if(!empty($param['simple_address'])){
             $program->simple_address = $param['simple_address'];//详细地址
         }
