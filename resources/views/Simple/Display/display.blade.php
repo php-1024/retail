@@ -93,12 +93,14 @@
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    @if(isset($organization->OrganizationSimpleinfo))
-                                        @else
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">{{$organization->OrganizationSimpleinfo->simple_owner}}</label>
+                                                <label class="label label-info">
+                                                    @if(isset($organization->OrganizationSimpleinfo->simple_owner))
+                                                        {{$organization->OrganizationSimpleinfo->simple_owner}}
+                                                    @endif
+                                                </label>
                                             </div>
                                         </div>
 
@@ -107,13 +109,16 @@
                                     <div class="form-group">
                                         <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
                                         <div class="col-sm-8">
-                                            <label class="label label-info">{{$organization->OrganizationSimpleinfo->simple_owner_mobile}}</label>
+                                            <label class="label label-info">
+                                                @if(isset($organization->OrganizationSimpleinfo->simple_owner_mobile))
+                                                    {{$organization->OrganizationSimpleinfo->simple_owner_mobile}}
+                                                @endif
+                                            </label>
                                         </div>
                                     </div>
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    @endif
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">状态</label>
                                             <div class="col-sm-8">
@@ -126,19 +131,21 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    @if(isset($organization->OrganizationSimpleinfo))
                                     <div style="clear:both;"></div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">店铺地址</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-primary">{{$organization->OrganizationSimpleinfo->simple_address}}</label>
+                                                <label class="label label-primary">
+                                                    @if(isset($organization->OrganizationSimpleinfo->simple_address))
+                                                        {{$organization->OrganizationSimpleinfo->simple_address}}
+                                                    @endif
+                                                </label>
                                             </div>
                                         </div>
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    @endif
                                 </div>
                             </section>
                         </div>
