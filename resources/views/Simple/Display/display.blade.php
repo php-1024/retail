@@ -335,13 +335,17 @@
                     <div class="form-group">
                         <div class="col-sm-9">
                             <div class="col-sm-4">
-                                <input type="text" name="lng" id="lng" value="{{$organization->OrganizationSimpleinfo->lng}}"  class="form-control" />
+                                <input type="text" name="lng" id="lng" value="@if(!empty($organization->OrganizationSimpleinfo->lng))
+                                {{$organization->OrganizationSimpleinfo->lng}}
+                                @endif"  class="form-control" />
                             </div>
                             <div class="col-sm-1">
                                 -
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" id="lat" name="lat" value="{{$organization->OrganizationSimpleinfo->lat}}"  class="form-control" />
+                                <input type="text" id="lat" name="lat" value="@if(!empty($organization->OrganizationSimpleinfo->lat))
+                                {{$organization->OrganizationSimpleinfo->lat}}
+                                @endif"  class="form-control" />
                             </div>
                         </div>
                     </div>
