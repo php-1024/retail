@@ -97,9 +97,7 @@
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">
-                                                    @if(!empty($organization->OrganizationSimpleinfo->simple_owner))
-                                                        {{$organization->OrganizationSimpleinfo->simple_owner}}
-                                                    @endif
+                                                    123
                                                 </label>
                                             </div>
                                         </div>
