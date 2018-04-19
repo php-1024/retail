@@ -168,6 +168,7 @@ class DisplayController extends Controller
                 $file_path = 'uploads/simple/' . $new_name;
                 //要存储的数据
                 $simple_info = [
+                    'organization_id' => $organization_id,
                     'simple_logo' => $file_path,
                     'simple_owner' => $simple_owner,
                     'simple_owner_mobile' => $simple_owner_mobile,
