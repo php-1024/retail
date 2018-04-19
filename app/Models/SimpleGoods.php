@@ -28,7 +28,7 @@ class SimpleGoods extends Model{
         return $this->belongsto('App\Models\Organization','simple_id','id');
     }
 
-    //和RetailGoodsThumb表一对多的关系
+    //和SimpleGoodsThumb表一对多的关系
     public function SimpleGoodsThumb(){
         return $this->hasMany('App\Models\SimpleGoodsThumb','goods_id','id');
     }
@@ -57,7 +57,7 @@ class SimpleGoods extends Model{
 
     //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC',$select=[]){
-        $model = new RetailGoods();
+        $model = new SimpleGoods();
         if(!empty($limit)){
             $model = $model->limit($limit);
         }
@@ -68,8 +68,8 @@ class SimpleGoods extends Model{
     }
 
     //添加餐饮商品
-    public static function addRetailGoods($param){
-        $model = new RetailGoods();
+    public static function addSimpleGoods($param){
+        $model = new SimpleGoods();
         $model->name = $param['name'];
         $model->details = $param['details'];
         $model->price = $param['price'];
@@ -85,7 +85,7 @@ class SimpleGoods extends Model{
     }
     
     //修改餐饮商品数据
-    public static function editRetailGoods($where,$param){
+    public static function editSimpleGoods($where,$param){
         if($model = self::where($where)->first()){
             foreach($param as $key=>$val){
                 $model->$key=$val;
