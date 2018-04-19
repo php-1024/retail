@@ -106,6 +106,7 @@ return [
     */
     'simple_route_except' => [
         'simple',//简版店铺管理系统首页
+        'simple/account/password',
     ],
 
     /*
