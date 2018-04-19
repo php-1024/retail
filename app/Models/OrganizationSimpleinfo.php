@@ -26,6 +26,9 @@ class OrganizationSimpleinfo extends Model{
         $program->simple_owner = $param['simple_owner'];//分店负责人姓名
         $program->simple_owner_idcard = $param['simple_owner_idcard'];//分店负责人身份证
         $program->simple_owner_mobile = $param['simple_owner_mobile'];//分店负责人手机号
+        if(!empty($param['simple_address'])){
+            $program->simple_address = $param['simple_address'];//详细地址
+        }
         if(!empty($param['lng'])){
             $program->lng = $param['lng'];//百度经度
         }
@@ -35,6 +38,17 @@ class OrganizationSimpleinfo extends Model{
         $program->save();
         return $program->id;
     }
+
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where){
+        $row = self::getPluck($where,'id')->toArray();
+        if(empty($row)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     //修改数据
     public static function editOrganizationSimpleinfo($where,$param){
         $model = self::where($where)->first();

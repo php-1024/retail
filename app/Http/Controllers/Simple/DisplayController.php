@@ -143,7 +143,6 @@ class DisplayController extends Controller
     }
 
     //店铺信息编辑检测
-
     public function store_edit_check(Request $request)
     {
         $admin_data = $request->get('admin_data');                      //中间件产生的管理员数据参数
@@ -190,7 +189,11 @@ class DisplayController extends Controller
         DB::beginTransaction();
         try {
             Organization::editOrganization([['id', $organization_id]], ['organization_name' => $organization_name]);
-            OrganizationSimpleinfo::editOrganizationSimpleinfo([['organization_id', $organization_id]], $simple_info);
+            if(OrganizationSimpleinfo::checkRowExists([['organization_id', $organization_id]])){
+                OrganizationSimpleinfo::editOrganizationSimpleinfo([['organization_id', $organization_id]], $simple_info);
+            }else{
+                OrganizationSimpleinfo::addOrganizationSimpleinfo($simple_info);
+            }
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员修改店铺信息的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售管理系统修改了店铺信息！');//保存操作记录
