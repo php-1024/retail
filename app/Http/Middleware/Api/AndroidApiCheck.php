@@ -429,6 +429,7 @@ class AndroidApiCheck
         if(time() - ($request->input('timestamp')/1000)>120){//如果超过两分钟
             return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
         }
+        
         $account_id = $request->account_id;//用户账号id
         $token = $request->token;//店铺令牌
         $timestamp = $request->timestamp;//app传过来的时间戳
