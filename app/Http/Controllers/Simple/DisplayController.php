@@ -57,9 +57,6 @@ class DisplayController extends Controller
             }
             //简单数据统计
             $statistics = ['fans' => $fans, 'operating_receipt' => $operating_receipt, 'goods' => $goods, 'order_spot' => $order_spot];
-            if ($organization->OrganizationSimpleinfo === null){
-                dd('11');
-            }
             return view('Simple/Display/display', ['organization' => $organization, 'statistics' => $statistics, 'login_log_list' => $login_log_list, 'operation_log_list' => $operation_log_list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
         }
     }

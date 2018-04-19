@@ -93,7 +93,7 @@
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    @if($organization->OrganizationSimpleinfo === null)
+                                    @if(isset($organization->OrganizationSimpleinfo))
                                         @else
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
@@ -126,7 +126,7 @@
                                                 </label>
                                             </div>
                                         </div>
-                                    @if($organization->OrganizationSimpleinfo != null)
+                                    @if(isset($organization->OrganizationSimpleinfo))
                                     <div style="clear:both;"></div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
