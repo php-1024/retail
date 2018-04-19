@@ -50,7 +50,8 @@ class DisplayController extends Controller
             $fans = FansmanageUser::getCount(['fansmanage_id' => $admin_data['organization_id']]);//查询当前店铺粉丝数量
             $order = SimpleOrder::getList(['simple_id' => $admin_data['organization_id'], 'status' => '1'], '0', 'id', 'DESC');
             $order_spot = SimpleOrder::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC')->count();
-            $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC')->count();
+            $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC');
+            dd($goods);
             $operating_receipt = 0.00;//营业收入
             foreach ($order as $key => $val) {
                 $operating_receipt += $val->order_price;
