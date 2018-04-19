@@ -93,6 +93,7 @@
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    @if(empty($organization->OrganizationSimpleinfo != null))
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
@@ -103,14 +104,15 @@
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-info">{{$organization->OrganizationSimpleinfo->simple_owner_mobile}}</label>
-                                            </div>
+                                        <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
+                                        <div class="col-sm-8">
+                                            <label class="label label-info">{{$organization->OrganizationSimpleinfo->simple_owner_mobile}}</label>
                                         </div>
+                                    </div>
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    @endif
                                     <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">状态</label>
                                             <div class="col-sm-8">
@@ -123,7 +125,7 @@
                                                 </label>
                                             </div>
                                         </div>
-
+                                    @if(empty($organization->OrganizationSimpleinfo != null))
                                     <div style="clear:both;"></div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
@@ -135,6 +137,7 @@
 
                                     <div style="clear:both;"></div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    @endif
                                 </div>
                             </section>
                         </div>
