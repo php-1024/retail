@@ -41,7 +41,7 @@ class SimpleCheck
             case "simple/subordinate/subordinate_add": //添加下级人员
             case "simple/subordinate/subordinate_list"://下级人员列表
 
-            case "simple/order/order_spots":             //订单管理-现场订单
+            case "simple/order/order_spot":             //订单管理-现场订单
             case "simple/order/order_spot_detail":      //订单管理-现场订单详情
 
             case "simple/dispatch/dispatch_add":      //运费模板-添加运费模板

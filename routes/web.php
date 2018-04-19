@@ -795,7 +795,7 @@ Route::group(['prefix' => 'simple'], function () {
 
     //订单管理
     Route::group(['prefix' => 'order'], function () {
-        Route::get('order_spot', 'Simple\OrderController@order_spots')->middleware('SimpleCheck');                       //订单管理-现场订单
+        Route::get('order_spot', 'Simple\OrderController@order_spot')->middleware('SimpleCheck');                       //订单管理-现场订单
         Route::get('order_spot_detail', 'Simple\OrderController@order_spot_detail')->middleware('SimpleCheck');         //订单管理-现场订单详情
         Route::get('order_takeout', 'Simple\OrderController@order_takeout')->middleware('SimpleCheck');                 //订单管理-外卖订单
         Route::get('order_takeout_detail', 'Simple\OrderController@order_takeout_detail')->middleware('SimpleCheck');   //订单管理-外卖订单详情
