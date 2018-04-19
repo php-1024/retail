@@ -1,4 +1,4 @@
-<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('retail/ajax/check_list_confirm_check') }}">
+<form class="form-horizontal tasi-form" method="post" id="currentForm" action="{{ url('simple/ajax/check_list_confirm_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="order_id" value="{{$order->id}}">
     <input type="hidden" name="status" value="{{$status}}">

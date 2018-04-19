@@ -48,8 +48,8 @@
                             </header>
                             <div class="row wrapper">
                                 <form class="form-horizontal" method="get">
-                                    <input type="hidden" id="order_list_details" value="{{ url('retail/ajax/order_list_details') }}">
-                                    <input type="hidden" id="loss_list_confirm" value="{{ url('retail/ajax/loss_list_confirm') }}">
+                                    <input type="hidden" id="order_list_details" value="{{ url('simple/ajax/order_list_details') }}">
+                                    <input type="hidden" id="loss_list_confirm" value="{{ url('simple/ajax/loss_list_confirm') }}">
                                     <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">订单编号</label>
                                     <div class="col-sm-2">
