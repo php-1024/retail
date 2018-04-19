@@ -321,7 +321,9 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺地址</label>
                         <div class="col-sm-8">
-                            <input type="text" id='address' value="{{$organization->OrganizationSimpleinfo->simple_address}}" name="simple_address" placeholder="店铺地址" class="form-control">
+                            <input type="text" id='address' value="@if(!empty($organization->OrganizationSimpleinfo->simple_address))
+                            {{$organization->OrganizationSimpleinfo->simple_address}}
+                            @endif" name="simple_address" placeholder="店铺地址" class="form-control">
                         </div>
                         <div class="col-sm-2">
                             <button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
