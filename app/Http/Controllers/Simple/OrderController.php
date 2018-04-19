@@ -22,42 +22,41 @@ class OrderController extends Controller
     //订单管理-现场订单
     public function order_spot(Request $request)
     {
-        dd($request);
-//        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
-//        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
-//        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
-//        $route_name = $request->path();                         //获取当前的页面路由
-//
-//        $account = $request->get('account');                //接收搜索账号
-//        $operator_id = Account::getPluck([['account', $account]], 'id')->first();//操作员账号ID
-//
-//        $ordersn = $request->get('ordersn');                //接收订单编号
-//        $paytype = $request->get('paytype');                //接收支付方式
-//        $status = $request->get('status');                  //接收订单状态
-//        $search_data = ['operator_id' => $operator_id, 'account' => $account, 'ordersn' => $ordersn, 'paytype' => $paytype, 'status' => $status]; //搜索数据
-//        $where[] = ['simple_id', $admin_data['organization_id']];
-//        //按订单编号搜索
-//        if (!empty($ordersn) && $ordersn != null) {
-//            $where[] = ['ordersn', $ordersn];
-//        }
-//        //按用户账号搜索
-//        if (!empty($operator_id) || !empty($account) && $operator_id == null) {
-//            $where[] = ['operator_id', $operator_id];
-//        }
-//        //按照支付方式搜索
-//        if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
-//            $where[] = ['paytype', $paytype];
-//        }
-//        //按照订单状态搜索
-//        if (!empty($status) && $status != '请选择' || $status == '0') {
-//            $where[] = ['status', $status];
-//        }
-//        $list = SimpleOrder::getPaginage($where, 10, 'created_at', 'DESC');
-//        foreach ($list as $key => $val) {
-//            $user = User::getOneUser([['id', $val->user_id]]);
-//            $val->user = $user;
-//        }
-//        return view('Simple/Order/order_spot', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
+        $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+
+        $account = $request->get('account');                //接收搜索账号
+        $operator_id = Account::getPluck([['account', $account]], 'id')->first();//操作员账号ID
+
+        $ordersn = $request->get('ordersn');                //接收订单编号
+        $paytype = $request->get('paytype');                //接收支付方式
+        $status = $request->get('status');                  //接收订单状态
+        $search_data = ['operator_id' => $operator_id, 'account' => $account, 'ordersn' => $ordersn, 'paytype' => $paytype, 'status' => $status]; //搜索数据
+        $where[] = ['simple_id', $admin_data['organization_id']];
+        //按订单编号搜索
+        if (!empty($ordersn) && $ordersn != null) {
+            $where[] = ['ordersn', $ordersn];
+        }
+        //按用户账号搜索
+        if (!empty($operator_id) || !empty($account) && $operator_id == null) {
+            $where[] = ['operator_id', $operator_id];
+        }
+        //按照支付方式搜索
+        if (!empty($paytype) && $paytype != '请选择' || $paytype == '0') {
+            $where[] = ['paytype', $paytype];
+        }
+        //按照订单状态搜索
+        if (!empty($status) && $status != '请选择' || $status == '0') {
+            $where[] = ['status', $status];
+        }
+        $list = SimpleOrder::getPaginage($where, 10, 'created_at', 'DESC');
+        foreach ($list as $key => $val) {
+            $user = User::getOneUser([['id', $val->user_id]]);
+            $val->user = $user;
+        }
+        return view('Simple/Order/order_spot', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //订单管理-现场订单详情
