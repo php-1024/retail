@@ -148,6 +148,7 @@ class DisplayController extends Controller
         $admin_data = $request->get('admin_data');                      //中间件产生的管理员数据参数
         $route_name = $request->path();                                     //获取当前的页面路由
         $organization_id = $request->get('organization_id');            //获取姓名
+        dd($organization_id);
         $organization_name = $request->get('organization_name');        //获取组织ID
         $simple_owner = $request->get('simple_owner');                  //获取负责人姓名
         $simple_owner_mobile = $request->get('mobile');                 //获取负责人手机号码
