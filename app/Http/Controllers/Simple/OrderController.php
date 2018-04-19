@@ -22,9 +22,6 @@ class OrderController extends Controller
     //订单管理-现场订单
     public function order_spot(Request $request)
     {
-        dump(123456);
-        dump(123456);
-        dump(123456);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
