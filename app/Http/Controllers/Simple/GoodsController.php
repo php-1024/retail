@@ -196,8 +196,8 @@ class GoodsController extends Controller
 
             if ($entension == 'jpg' || $entension == 'png' || $entension == 'gif') {
                 $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $entension;  //重命名
-                $file->move(base_path() . '/uploads/catering/', $new_name);         //$path上传后的文件路径
-                $file_path = 'uploads/catering/' . $new_name;
+                $file->move(base_path() . '/uploads/simple/', $new_name);         //$path上传后的文件路径
+                $file_path = 'uploads/simple/' . $new_name;
             } else {
                 return response()->json(['data' => '上传商品图片格式无效，请检查', 'status' => '0']);
             }
