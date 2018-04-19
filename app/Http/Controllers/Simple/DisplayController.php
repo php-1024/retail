@@ -179,6 +179,7 @@ class DisplayController extends Controller
         } else {
             //要存储的数据
             $simple_info = [
+                'organization_id' => $organization_id,
                 'simple_owner' => $simple_owner,
                 'simple_owner_mobile' => $simple_owner_mobile,
                 'simple_address' => $simple_address,
