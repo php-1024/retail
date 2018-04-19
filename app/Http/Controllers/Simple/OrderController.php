@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 class OrderController extends Controller
 {
     //订单管理-现场订单
-    public function order_spot(Request $request)
+    public function order_spots(Request $request)
     {
         dd("1");
 //        $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
