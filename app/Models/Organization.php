@@ -87,13 +87,25 @@ class Organization extends Model
     //和RetailGoods表一对多的关系
     public function RetailGoods()
     {
-        return $this->hasMany('App\Models\RetailGoods', 'restaurant_id');
+        return $this->hasMany('App\Models\RetailGoods', 'retail_id');
+    }
+
+    //和SimpleGoods表一对多的关系
+    public function SimpleGoods()
+    {
+        return $this->hasMany('App\Models\SimpleGoods', 'simple_id');
     }
 
     //和RetailCategory表一对多的关系
     public function RetailCategory()
     {
         return $this->hasMany('App\Models\RetailCategory', 'retail_id');
+    }
+
+    //和SimpleCategory表一对多的关系
+    public function SimpleCategory()
+    {
+        return $this->hasMany('App\Models\SimpleCategory', 'simple_id');
     }
 
     //和RetailSupplier表一对多的关系
