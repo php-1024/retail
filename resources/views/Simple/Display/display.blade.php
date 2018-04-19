@@ -97,7 +97,7 @@
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">
-                                                    @if(isset($organization->OrganizationSimpleinfo->simple_owner))
+                                                    @if(!empty($organization->OrganizationSimpleinfo->simple_owner))
                                                         {{$organization->OrganizationSimpleinfo->simple_owner}}
                                                     @endif
                                                 </label>
@@ -110,7 +110,7 @@
                                         <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
                                         <div class="col-sm-8">
                                             <label class="label label-info">
-                                                @if(isset($organization->OrganizationSimpleinfo->simple_owner_mobile))
+                                                @if(!empty($organization->OrganizationSimpleinfo->simple_owner_mobile))
                                                     {{$organization->OrganizationSimpleinfo->simple_owner_mobile}}
                                                 @endif
                                             </label>
@@ -137,7 +137,7 @@
                                             <label class="col-sm-4 text-right" for="input-id-1">店铺地址</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-primary">
-                                                    @if(isset($organization->OrganizationSimpleinfo->simple_address))
+                                                    @if(!empty($organization->OrganizationSimpleinfo->simple_address))
                                                         {{$organization->OrganizationSimpleinfo->simple_address}}
                                                     @endif
                                                 </label>
