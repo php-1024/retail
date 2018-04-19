@@ -290,9 +290,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            <input type="text" value=" @if(!empty($organization->OrganizationSimpleinfo->simple_owner))
-                            {{$organization->OrganizationSimpleinfo->simple_owner}}
-                            @endif" name="simple_owner" placeholder="负责人" class="form-control">
+                            @if(!empty($organization->OrganizationSimpleinfo->simple_owner))
+                                <input type="text" value="{{$organization->OrganizationSimpleinfo->simple_owner}}" name="simple_owner" placeholder="负责人" class="form-control">
+                            @else
+                                <input type="text" value="" name="simple_owner" placeholder="负责人" class="form-control">
+                            @endif
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -301,9 +303,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="number" value=" @if(!empty($organization->OrganizationSimpleinfo->simple_owner_mobile))
-                            {{$organization->OrganizationSimpleinfo->simple_owner_mobile}}
-                            @endif" name="mobile" placeholder="手机号码" class="form-control">
+                            @if(!empty($organization->OrganizationSimpleinfo->simple_owner_mobile))
+                                <input type="number" value="{{$organization->OrganizationSimpleinfo->simple_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
+                            @else
+                                <input type="number" value="" name="mobile" placeholder="手机号码" class="form-control">
+                            @endif
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -321,9 +325,11 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺地址</label>
                         <div class="col-sm-8">
-                            <input type="text" id='address' value="@if(!empty($organization->OrganizationSimpleinfo->simple_address))
-                            {{$organization->OrganizationSimpleinfo->simple_address}}
-                            @endif" name="simple_address" placeholder="店铺地址" class="form-control">
+                            @if(!empty($organization->OrganizationSimpleinfo->simple_address))
+                                <input type="text" id='address' value="{{$organization->OrganizationSimpleinfo->simple_address}}" name="simple_address" placeholder="店铺地址" class="form-control">
+                            @else
+                                <input type="text" id='address' value="" name="simple_address" placeholder="店铺地址" class="form-control">
+                            @endif
                         </div>
                         <div class="col-sm-2">
                             <button type="button" class="btn" name="submit" value="搜索" onClick="bmap.searchMapByAddress($('#address').val())">定位</button>
@@ -335,17 +341,21 @@
                     <div class="form-group">
                         <div class="col-sm-9">
                             <div class="col-sm-4">
-                                <input type="text" name="lng" id="lng" value="@if(!empty($organization->OrganizationSimpleinfo->lng))
-                                {{$organization->OrganizationSimpleinfo->lng}}
-                                @endif"  class="form-control" />
+                                @if(!empty($organization->OrganizationSimpleinfo->lng))
+                                    <input type="text" name="lng" id="lng" value="{{$organization->OrganizationSimpleinfo->lng}}"  class="form-control" />
+                                @else
+                                    <input type="text" name="lng" id="lng" value=""  class="form-control" />
+                                @endif
                             </div>
                             <div class="col-sm-1">
                                 -
                             </div>
                             <div class="col-sm-4">
-                                <input type="text" id="lat" name="lat" value="@if(!empty($organization->OrganizationSimpleinfo->lat))
-                                {{$organization->OrganizationSimpleinfo->lat}}
-                                @endif"  class="form-control" />
+                                @if(!empty($organization->OrganizationSimpleinfo->lat))
+                                    <input type="text" id="lat" name="lat" value="{{$organization->OrganizationSimpleinfo->lat}}"  class="form-control" />
+                                    @else
+                                    <input type="text" id="lat" name="lat" value=""  class="form-control" />
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -390,9 +400,10 @@
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=Xv2dLyXPQEWxRVZ3GVGWE9SkkfhS4WBW"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#simple_logo").val("@if(!empty($organization->OrganizationSimpleinfo->simple_logo))
-                {{$organization->OrganizationSimpleinfo->simple_logo}}
-                @endif");
+        @if(!empty($organization->OrganizationSimpleinfo->simple_logo))
+        $("#simple_logo").val("{{$organization->OrganizationSimpleinfo->simple_logo}}");
+        @endif
+
     });
     $('#editBtn').click(function () {
         $('#myModal').modal();
