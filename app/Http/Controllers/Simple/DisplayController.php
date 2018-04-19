@@ -26,7 +26,6 @@ class DisplayController extends Controller
     //首页
     public function display(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
@@ -50,9 +49,9 @@ class DisplayController extends Controller
             $organization->program_name = $program;
             $fans = FansmanageUser::getCount(['fansmanage_id' => $admin_data['organization_id']]);//查询当前店铺粉丝数量
             $order = SimpleOrder::getList(['simple_id' => $admin_data['organization_id'], 'status' => '1'], '0', 'id', 'DESC');
-            $order_spot = SimpleOrder::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC')->count();
-            $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC');
-            dd($goods);
+            $order_spot = SimpleOrder::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC');
+            dd($order_spot);
+            $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']], '0', 'id', 'DESC')->count();
             $operating_receipt = 0.00;//营业收入
             foreach ($order as $key => $val) {
                 $operating_receipt += $val->order_price;
