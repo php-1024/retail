@@ -201,8 +201,6 @@ class GoodsController extends Controller
             } else {
                 return response()->json(['data' => '上传商品图片格式无效，请检查', 'status' => '0']);
             }
-
-
         } else {
 
             return response()->json(['data' => '上传商品图片无效，请检查', 'status' => '0']);
