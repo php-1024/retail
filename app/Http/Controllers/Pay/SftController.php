@@ -51,8 +51,11 @@ class SftController extends Controller
 //    protected $origin_key = "liuxingwen05118888";
 //    protected $merchantNo = "11548088";
 
-    protected $origin_key = "support4test";
-    protected $merchantNo = "540511";
+//    protected $origin_key = "support4test";
+//    protected $merchantNo = "540511";
+
+    protected $origin_key = "dd28576bfe57e5d3";
+    protected $merchantNo = "11591590";
 
     public function test()
     {
@@ -68,7 +71,7 @@ class SftController extends Controller
 //        $param_body["merchantOrderNo"] = "LS20180408_5_1000801";
 
         // 交易金额
-        $param_body["amount"] = "0.02";
+        $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
         $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/notify";
         $param_body["productName"] = md5(microtime(true));
