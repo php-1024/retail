@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
 use App\Models\FansmanageUser;
+use App\Models\Organization;
 use App\Models\UserInfo;
 use DB;
 use App\Models\Label;
@@ -21,6 +22,11 @@ class TestController extends Controller
 {
     public function test()
     {
+
+
+        $res = Organization::getModel();
+        dd($res);
+
 
         $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
         $data['account'] = User::where(['id'=> 1])->value("account");

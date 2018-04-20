@@ -22,17 +22,34 @@ use Session;
 
 class StoreController extends Controller
 {
-    //创建店铺页面
+    /**
+     * 创建店铺页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function store_create(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+
+
+
+        // 渲染页面
         return view('Fansmanage/Store/store_create', ['admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
-    //创建店铺功能提交
+
+    /**
+     * 创建店铺功能提交
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store_create_check(Request $request)
     {
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
@@ -145,17 +162,26 @@ class StoreController extends Controller
         return response()->json(['data' => '创建店铺成功,请前往店铺管理平台进行管理！', 'status' => '1']);
     }
 
-
-    //分店店管理列表
+    /**
+     * 分店店管理列表
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function store_list(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 获取组织id
         $organization_id = $admin_data['organization_id'];
-        $list = Organization::getstore([['parent_id', $organization_id], ['type', 4]], '10', 'id'); //查询有没有总店，如果有，接下来创建的都是分店
-
+        // 获取分店信息
+        $list = Organization::getstore([['parent_id', $organization_id], ['type', 4]], '10', 'id');
+        // 渲染页面
         return view('Fansmanage/Store/store_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
