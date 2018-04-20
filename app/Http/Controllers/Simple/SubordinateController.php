@@ -122,7 +122,6 @@ class SubordinateController extends Controller
             $key = config("app.simple_encrypt_key");//获取加密盐
             $encrypted = md5($password);                //加密密码第一重
             $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
-            dd($encryptPwd);
             $data['password'] = $encryptPwd;
         }
         if (Account::checkRowExists([['id', '<>', $id], ['organization_id', $organization_id], ['mobile', $mobile]])) {//判断零壹管理平台中，判断组织中手机号码是否存在；
