@@ -916,7 +916,6 @@ Route::group(['prefix' => 'api'], function () {
     //android-app接口
     Route::group(['prefix' => 'androidapi'], function () {
         Route::any('login', 'Api\AndroidApiController@login')->middleware('AndroidApiCheck');//登入接口
-        Route::any('simple_login', 'Api\AndroidApiController@simple_login')->middleware('AndroidApiCheck');//登入接口
         Route::any('goodscategory', 'Api\AndroidApiController@goodscategory')->middleware('AndroidApiCheck');//商品分类接口
         Route::any('goodslist', 'Api\AndroidApiController@goodslist')->middleware('AndroidApiCheck');//商品列表接口
         Route::any('order_check', 'Api\AndroidApiController@order_check')->middleware('AndroidApiCheck');//订单提交接口
@@ -928,6 +927,22 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('allow_zero_stock', 'Api\AndroidApiController@allow_zero_stock')->middleware('AndroidApiCheck');//开启/关闭零库存开单接口
         Route::any('change_stock_role', 'Api\AndroidApiController@change_stock_role')->middleware('AndroidApiCheck');//下单减库存/付款减库存接口
         Route::any('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidApiCheck');//查询店铺设置
+    });
+
+    //android-app接口
+    Route::group(['prefix' => 'androidSimpleApi'], function () {
+        Route::any('login', 'Api\AndroidApiController@login')->middleware('AndroidSimpleApiCheck');//登入接口
+        Route::any('goodscategory', 'Api\AndroidApiController@goodscategory')->middleware('AndroidSimpleApiCheck');//商品分类接口
+        Route::any('goodslist', 'Api\AndroidApiController@goodslist')->middleware('AndroidSimpleApiCheck');//商品列表接口
+        Route::any('order_check', 'Api\AndroidApiController@order_check')->middleware('AndroidSimpleApiCheck');//订单提交接口
+        Route::any('cancel_order', 'Api\AndroidApiController@cancel_order')->middleware('AndroidSimpleApiCheck');//取消订单接口
+        Route::any('order_list', 'Api\AndroidApiController@order_list')->middleware('AndroidSimpleApiCheck');//订单列表接口
+        Route::any('order_detail', 'Api\AndroidApiController@order_detail')->middleware('AndroidSimpleApiCheck');//订单详情接口
+        Route::any('cash_payment', 'Api\AndroidApiController@cash_payment')->middleware('AndroidSimpleApiCheck');//现金支付接口
+        Route::any('other_payment', 'Api\AndroidApiController@other_payment')->middleware('AndroidSimpleApiCheck');//其他支付接口
+        Route::any('allow_zero_stock', 'Api\AndroidApiController@allow_zero_stock')->middleware('AndroidSimpleApiCheck');//开启/关闭零库存开单接口
+        Route::any('change_stock_role', 'Api\AndroidApiController@change_stock_role')->middleware('AndroidSimpleApiCheck');//下单减库存/付款减库存接口
+        Route::any('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidSimpleApiCheck');//查询店铺设置
     });
 });
 /*********************接口路由*************************/

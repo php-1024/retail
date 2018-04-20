@@ -10,7 +10,7 @@ use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
-class AndroidApiCheck
+class AndroidSimpleApiCheck
 {
     public function handle($request, Closure $next)
     {
