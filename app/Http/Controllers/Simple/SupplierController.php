@@ -1,6 +1,6 @@
 <?php
 /**
- * 零售版店铺
+ * 简版店铺
  * 进销存管理-进出管理
  **/
 
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\DB;
 
 class SupplierController extends Controller
 {
-    //零售进销存管理--供应商添加
+    //简版店铺进销存管理--供应商添加
     public function supplier_add(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -30,7 +30,7 @@ class SupplierController extends Controller
         return view('Simple/Supplier/supplier_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
-    //零售进销存管理--供应商添加数据操作
+    //简版店铺进销存管理--供应商添加数据操作
     public function supplier_add_check(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -58,10 +58,10 @@ class SupplierController extends Controller
         try {
             SimpleSupplier::addSupplier($supplier_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员添加零售店铺供应商的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统添加了供应商！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了供应商！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员添加简版店铺供应商的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统添加了供应商！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了供应商！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -71,7 +71,7 @@ class SupplierController extends Controller
         return response()->json(['data' => '添加供应商成功', 'status' => '1']);
     }
 
-    //零售进销存管理--供应商列表
+    //简版店铺进销存管理--供应商列表
     public function supplier_list(Request $request)
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
@@ -113,10 +113,10 @@ class SupplierController extends Controller
         try {
             SimpleSupplier::select_delete($supplier_id);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺供应商的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统删除了供应商！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了供应商！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员删除简版店铺供应商的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统删除了供应商！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了供应商！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -144,10 +144,10 @@ class SupplierController extends Controller
         try {
             SimpleSupplier::editSupplier(['id' => $supplier_id], $supplier_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员修改零售店铺供应商的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统修改了供应商信息！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了供应商信息！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员修改简版店铺供应商的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统修改了供应商信息！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了供应商信息！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * 零售版店铺
+ * 简版店铺
  * 进出开单管理
  **/
 
@@ -150,9 +150,9 @@ class BillingController extends Controller
                 SimplePurchaseOrder::editOrder(['id' => $order_id], ['status' => '1']);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员审核订单操作记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统审核了供应商订单！');//保存操作记录
-                } else {//零售店铺本人操作记录
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核了供应商订单！');//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统审核了供应商订单！');//保存操作记录
+                } else {//简版店铺本人操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核了供应商订单！');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -227,9 +227,9 @@ class BillingController extends Controller
                 SimpleLossOrder::editOrder(['id' => $order_id], ['status' => '1']);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员审核订单操作记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统审核了报损订单！');//保存操作记录
-                } else {//零售店铺本人操作记录
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核了报损订单！');//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统审核了报损订单！');//保存操作记录
+                } else {//简版店铺本人操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核了报损订单！');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -274,9 +274,9 @@ class BillingController extends Controller
                 SimpleCheckOrder::editOrder(['id' => $order_id], ['status' => '1']);
                 //添加操作日志
                 if ($admin_data['is_super'] == 1) {//超级管理员审核订单操作记录
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统审核了盘点订单！');//保存操作记录
-                } else {//零售店铺本人操作记录
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核了盘点订单！');//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统审核了盘点订单！');//保存操作记录
+                } else {//简版店铺本人操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '审核了盘点订单！');//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {

@@ -82,9 +82,9 @@ class AccountController extends Controller
                 AccountInfo::addAccountInfo($admininfo);
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统修改了店铺的个人账号信息！');//保存操作记录
-            } else {//零售店铺本人操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统修改了店铺的个人账号信息！');//保存操作记录
+            } else {//简版店铺本人操作记录
                 OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了个人账号信息');//保存操作记录
             }
             DB::commit();
@@ -120,7 +120,7 @@ class AccountController extends Controller
             $key = config("app.zerone_safe_encrypt_key");           //获取加安全密码密盐（零壹平台专用）
         } else {
             $safe_password_check = $admin_data['safe_password'];
-            $key = config("app.simple_safe_encrypt_key");           //获取安全密码加密盐（零售专用）
+            $key = config("app.simple_safe_encrypt_key");           //获取安全密码加密盐（简版店铺专用）
         }
         //原安全密码处理
         $old_encrypted = md5($old_safe_password);                   //加密原安全密码第一重
@@ -132,11 +132,11 @@ class AccountController extends Controller
             DB::beginTransaction();
             try {
                 //添加操作日志
-                if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
+                if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
                     Account::editAccount([['id', '1']], ['safe_password' => $encryptPwd]);                        //设置超级管理员安全密码
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统设置了自己的安全密码！');//保存操作记录
-                } else {//零售店铺本人操作记录
-                    Account::editAccount([['id', $admin_data['id']]], ['safe_password' => $encryptPwd]); //设置零售店铺安全密码
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统设置了自己的安全密码！');//保存操作记录
+                } else {//简版店铺本人操作记录
+                    Account::editAccount([['id', $admin_data['id']]], ['safe_password' => $encryptPwd]); //设置简版店铺安全密码
                     OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '设置了安全密码');//保存操作记录
                 }
                 DB::commit();
@@ -152,11 +152,11 @@ class AccountController extends Controller
                 DB::beginTransaction();
                 try {
                     //添加操作日志
-                    if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
+                    if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
                         Account::editAccount([['id', '1']], ['safe_password' => $encryptPwd]);                        //修改超级管理员安全密码
                         OperationLog::addOperationLog('1', '1', '1', $route_name, '在分店管理系统修改了自己的安全密码！');    //保存操作记录
                     } else {//商户本人操作记录
-                        Account::editAccount([['id', $admin_data['id']]], ['safe_password' => $encryptPwd]);          //设置当前零售店铺的安全密码
+                        Account::editAccount([['id', $admin_data['id']]], ['safe_password' => $encryptPwd]);          //设置当前简版店铺的安全密码
                         OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了安全密码');//保存操作记录
                     }
                     DB::commit();
@@ -200,7 +200,7 @@ class AccountController extends Controller
             $key = config("app.zerone_encrypt_key");//获取加密盐（零壹平台专用）
         } else {
             $account = Account::getOne([['id', $admin_data['id']]]);
-            $key = config("app.simple_encrypt_key");//获取加密盐（零售专用）
+            $key = config("app.simple_encrypt_key");//获取加密盐（简版店铺专用）
         }
         $encrypted = md5($password);                        //加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
@@ -210,11 +210,11 @@ class AccountController extends Controller
             DB::beginTransaction();
             try {
                 //添加操作日志
-                if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
+                if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
                     Account::editAccount([['id', '1']], ['password' => $new_encryptPwd]);    //修改超级管理员登录密码
                     OperationLog::addOperationLog('1', '1', '1', $route_name, '在餐饮分店管理系统修改了自己的登录密码！');  //保存操作记录
-                } else {//零售店铺本人操作记录
-                    Account::editAccount([['id', $admin_data['id']]], ['password' => $new_encryptPwd]);      //修改零售店铺登录密码
+                } else {//简版店铺本人操作记录
+                    Account::editAccount([['id', $admin_data['id']]], ['password' => $new_encryptPwd]);      //修改简版店铺登录密码
                     OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了登录密码');//保存操作记录
                 }
                 DB::commit();

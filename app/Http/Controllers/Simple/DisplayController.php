@@ -61,7 +61,7 @@ class DisplayController extends Controller
         }
     }
 
-    //零售店铺列表（超级管理员使用）
+    //简版店铺列表（超级管理员使用）
     public function simple_list(Request $request)
     {
         $admin_data = $request->get('admin_data');                      //中间件产生的管理员数据参数
@@ -128,7 +128,7 @@ class DisplayController extends Controller
             $admin_data['role_name'] = '角色未设置';
         }
         ZeroneRedis::create_simple_account_cache(1, $admin_data);   //生成账号数据的Redis缓存
-        ZeroneRedis::create_simple_menu_cache(1);                       //生成对应账号的零售系统菜单
+        ZeroneRedis::create_simple_menu_cache(1);                       //生成对应账号的简版店铺系统菜单
     }
 
     //超级管理员以分店平台普通管理员登录处理
@@ -197,9 +197,9 @@ class DisplayController extends Controller
             }
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员修改店铺信息的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在上零售管理系统修改了店铺信息！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在上简版店铺管理系统修改了店铺信息！');//保存操作记录
             } else {//店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺信息！');//保存操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了店铺信息！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {

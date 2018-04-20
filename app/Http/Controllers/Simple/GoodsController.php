@@ -62,9 +62,9 @@ class GoodsController extends Controller
             SimpleStock::addStock($stock_data); //添加商品库信息存到库存表
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统添加了商品！');//保存操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统添加了商品！');//保存操作记录
             } else {//商户本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -119,10 +119,10 @@ class GoodsController extends Controller
             $stock_data = ['category_id' => $category_id, 'stock' => $stock,];
             SimpleStock::editStock(['goods_id' => $goods_id], $stock_data); //修改商品库信息存到库存表
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统编辑了商品！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统编辑了商品！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -155,10 +155,10 @@ class GoodsController extends Controller
             SimpleGoodsThumb::deleteGoodsThumb($goods_thumb_id);
 
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品图片！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员删除简版店铺商品的操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统删除了商品图片！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品图片！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -210,10 +210,10 @@ class GoodsController extends Controller
         try {
             SimpleGoodsThumb::addGoodsThumb($goods_thumb);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员零售商品图片添加的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统上传了商品图片！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员简版店铺商品图片添加的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统上传了商品图片！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '上传了商品图片！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -277,10 +277,10 @@ class GoodsController extends Controller
             SimpleGoods::editSimpleGoods(['id' => $goods_id], ['status' => $status]);
             SimpleStock::editStock(['id' => $id], ['stock' => $stock]);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统' . $tips . '了商品！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, $tips . '了商品！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员删除简版店铺商品的操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统' . $tips . '了商品！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, $tips . '了商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -303,10 +303,10 @@ class GoodsController extends Controller
             SimpleGoods::select_delete($goods_id);
             SimpleStock::select_delete($id);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品的操作记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品！');//保存操作记录
-            } else {//零售店铺本人操作记录
-                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员删除简版店铺商品的操作记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统删除了商品！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除商品！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
