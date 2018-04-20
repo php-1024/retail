@@ -64,7 +64,7 @@ class SftController extends Controller
 
         // 业务参数
         // 订单号
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(100,999);
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000" . rand(100, 999);
 //        $param_body["merchantOrderNo"] = "LS20180408_5_1000801";
 
         // 交易金额
@@ -97,9 +97,6 @@ class SftController extends Controller
 
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res_arr = json_decode($res, true);
-
-        dd($res_arr);
-
 
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
