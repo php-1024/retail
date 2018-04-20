@@ -18,7 +18,7 @@ use Session;
 class WechatController extends Controller{
     /**************************************************************************页面授权开始*********************************************************************************/
     public function auth(){
-        $redirect_url = 'http://develop.01nnt.com/api/wechat/web_redirect';
+        $redirect_url = request()->root().'/api/wechat/web_redirect';
         $url =\Wechat::get_web_auth_url($redirect_url);
         echo $url;
     }
@@ -31,7 +31,7 @@ class WechatController extends Controller{
         if($state == 'lyxkj2018'){
             $re = \Wechat::get_web_access_token($code);
             $appid = 'wxab6d2b312939eb01';
-            $redirect_url = 'http://develop.01nnt.com/api/wechat/open_web_redirect?param='.$appid.'||'.$re['openid'];
+            $redirect_url = request()->root().'/api/wechat/open_web_redirect?param='.$appid.'||'.$re['openid'];
             $url = \Wechat::get_open_web_auth_url($appid,$redirect_url);
             echo "<script>location.href='".$url."'</script>";
             exit();
