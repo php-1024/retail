@@ -57,12 +57,24 @@ return [
 
 
     /******************微信开放平台相关参数********************/
+
+    //正式版参数
+//    'wechat_open_setting' => [
+//        'open_appid' => 'wxd22806e3df9e9d35', //开放平台APPID
+//        'open_token' => 'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
+//        'open_key' => 'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
+//        'open_appsecret' => 'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
+//    ],
+
+    //测试版参数
     'wechat_open_setting' => [
-        'open_appid' => 'wxd22806e3df9e9d35', //开放平台APPID
+        'open_appid' => 'wx60b2de8797f7ef8f', //开放平台APPID
         'open_token' => 'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
         'open_key' => 'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
-        'open_appsecret' => 'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
+        'open_appsecret' => 'a9f148ed3e0f67bab0d67eb51ae748c9',//开放平台AppSecret
     ],
+
+
     /******************微信开放平台相关参数********************/
 
     /*
