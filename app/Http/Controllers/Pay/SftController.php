@@ -51,16 +51,17 @@ class SftController extends Controller
 //    protected $origin_key = "liuxingwen05118888";
 //    protected $merchantNo = "11548088";
 
-//    protected $origin_key = "support4test";
-//    protected $merchantNo = "540511";
+    protected $origin_key = "support4test";
+    protected $merchantNo = "540511";
 
-    protected $origin_key = "dd28576bfe57e5d3";
-    protected $merchantNo = "11591590";
+//    protected $origin_key = "dd28576bfe57e5d3";
+//    protected $merchantNo = "540511";
 
     public function test()
     {
         // 订单生成
-        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
+//        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
+        $api_url = 'http://10.241.80.55:8080/web-acquire-channel/pay/order.htm';
         $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
