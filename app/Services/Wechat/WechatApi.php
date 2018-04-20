@@ -165,7 +165,7 @@ class WechatApi
         // 预授权码
         $pre_auth_code = $this->get_pre_auth_code();
         // 回调链接
-        $redirect_url = 'http://o2o.01nnt.com/api/wechat/redirect';
+        $redirect_url = request()->root().'/api/wechat/redirect';
         // 1则商户扫码后，手机端仅展示公众号、2表示仅展示小程序，3表示公众号和小程序都展示
         $auth_type = 3;
 
