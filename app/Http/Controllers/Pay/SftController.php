@@ -48,11 +48,11 @@ class SftController extends Controller
         ],
     ];
 
-    protected $origin_key = "liuxingwen05118888";
-    protected $merchantNo = "11548088";
+//    protected $origin_key = "liuxingwen05118888";
+//    protected $merchantNo = "11548088";
 
-//    protected $origin_key = "support4test";
-//    protected $merchantNo = "540511";
+    protected $origin_key = "support4test";
+    protected $merchantNo = "540511";
 
 //    protected $origin_key = "dd28576bfe57e5d3";
 //    protected $merchantNo = "540511";
