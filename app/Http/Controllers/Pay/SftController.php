@@ -48,11 +48,11 @@ class SftController extends Controller
         ],
     ];
 
-//    protected $origin_key = "liuxingwen05118888";
-//    protected $merchantNo = "11548088";
+    protected $origin_key = "liuxingwen05118888";
+    protected $merchantNo = "11548088";
 
-    protected $origin_key = "support4test";
-    protected $merchantNo = "540511";
+//    protected $origin_key = "support4test";
+//    protected $merchantNo = "540511";
 
 //    protected $origin_key = "dd28576bfe57e5d3";
 //    protected $merchantNo = "540511";
@@ -77,7 +77,7 @@ class SftController extends Controller
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
-        $param_body["payChannel"] = "hw";
+        $param_body["payChannel"] = "ha";
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://develop.01nnt.com/pay/sft/test2';
@@ -175,10 +175,6 @@ class SftController extends Controller
     }
 
 
-    public function test8()
-    {
-        XhoLog::create(["name" => "退款通知", "content" => \request()->all()]);
-    }
 
     public function test5()
     {
@@ -207,20 +203,20 @@ class SftController extends Controller
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-
-        $param_body["sharingOrderNo"] = "";
-        $param_body["merchantOrderNo"] = "";
+        $num = "001";
+        $param_body["sharingOrderNo"] = "FZ20180408_5_10000$num";
+        $param_body["merchantOrderNo"] = "LS20180420_23_100003";
         $param_body["notifyURL"] = "http://develop.01nnt.com/pay/sft/test8";
 
-        $param_body["sharingReqItem"][0]["sharingNo"] = "";
+        $param_body["sharingReqItem"][0]["sharingNo"] = "NH20180408_5_10000$num";
         $param_body["sharingReqItem"][0]["sharingAmount"] = "";
         $param_body["sharingReqItem"][0]["sharingRate"] = 0.5;
-        $param_body["sharingReqItem"][0]["payeeId"] = "";
-        $param_body["sharingReqItem"][0]["payeeIdType"] = "";
-
+        $param_body["sharingReqItem"][0]["payeeId"] = "540511";
+        $param_body["sharingReqItem"][0]["payeeIdType"] = 1;
 
         $param_body["exts"] = "";
 
+        dd($param_body);
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
@@ -244,6 +240,10 @@ class SftController extends Controller
         $this->httpRequest($api_url, "post", $param_body_json, $header, true);
     }
 
+    public function test8()
+    {
+        XhoLog::create(["name" => "退款通知", "content" => \request()->all()]);
+    }
 
     public function generateSignature($param)
     {
