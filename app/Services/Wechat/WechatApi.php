@@ -756,26 +756,31 @@ class WechatApi
     public function resultReturnDispose($param, $type = "json")
     {
         switch ($type) {
+            // 返回的是接口 json 数据类型的
             case "json":
                 $res = json_decode($param, true);
                 if (!empty($res["errcode"]) && $res["errcode"] != 0) {
-                    return $res;
-                } else {
                     // 错误处理
+                } else {
+                    return $res;
                 }
                 break;
+            // 直接返回结果的，例如二维码
             case "string" :
+                // 直接返回的
                 return $param;
                 break;
+            // 进行跳转的，例如网页授权
             case "redirect" :
                 return redirect($param);
                 break;
+            // 获取二维码，并且渲染的
             case "qrcode" :
                 $res = json_decode($param, true);
                 if (!empty($res["errcode"]) && $res["errcode"] != 0) {
-                    return $this->showQrCode($param["ticket"]);
-                } else {
                     // 错误处理
+                } else {
+                    return $this->showQrCode($param["ticket"]);
                 }
         }
     }
