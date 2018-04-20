@@ -87,9 +87,10 @@ class SftController extends Controller
             "app_name" => "",// APP应用名称
             "bundle_id" => "",//IOS 应用唯一标识
             "package_name" => "",//Android 应用在一台设备上的唯一标识，在manifest文件里声明  ,示例值：com.tecet.tmgp.game
-            "wap_url" => 'http://www.17kx.com',//授权域名(报备时填写的域名地址)
+//            "wap_url" => 'http://www.17kx.com',//授权域名(报备时填写的域名地址)
+            "wap_url" => 'http://o2o.01nnt.com',//授权域名(报备时填写的域名地址)
             "wap_name" => "测试WAP",//WAP应用名称,网页标题
-            "note" => "http://www.17kx.com",//为商户自定义的跟本次交易有关的参数
+            "note" => "http://o2o.01nnt.com",//为商户自定义的跟本次交易有关的参数
             "attach" => "" //可以为空，或者为任何自己想要卡网关回传的校验类型的数据。
         );
         $param_body["exts"] = $exts;
