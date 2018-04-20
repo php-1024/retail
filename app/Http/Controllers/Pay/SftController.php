@@ -220,7 +220,7 @@ class SftController extends Controller
 
         $param_body_json = json_encode($param_body, JSON_UNESCAPED_UNICODE);
         $header = ["signType: MD5", "signMsg: " . strtoupper(md5($param_body_json . $this->origin_key))];
-        $this->httpRequest($api_url, "post", $param_body_json, $header, true);
+        $this->httpRequest($api_url, "post", $param_body_json, $header, false);
     }
 
     public function test7()
