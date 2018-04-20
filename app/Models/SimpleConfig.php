@@ -50,7 +50,7 @@ class SimpleConfig extends Model{
     }
     //查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where){
-        $row = self::getPluck($where,'id')->toArray();
+        $row = self::getPluck($where,'id');
         if(empty($row)){
             return false;
         }else{
@@ -59,7 +59,7 @@ class SimpleConfig extends Model{
     }
     //获取单行数据的其中一列
     public static function getPluck($where,$pluck){
-        return self::where($where)->pluck($pluck);
+        return self::where($where)->value($pluck);
     }
 
 }

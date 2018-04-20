@@ -161,7 +161,7 @@ class AndroidSimpleApiController extends Controller
                     SimpleOrderGoods::addOrderGoods($data);//添加商品快照
                 }
             }
-            $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+            $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
             if ($power != '1') {//说明下单减库存
                 $re = $this->reduce_stock($order_id, '1');//减库存
                 if ($re != 'ok') {
@@ -186,7 +186,7 @@ class AndroidSimpleApiController extends Controller
     {
         $order_id = $request->order_id;//订单id
         $organization_id = $request->organization_id;//店铺
-        $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         DB::beginTransaction();
         try {
             if ($power != '1') {//说明下单减库存 所以要把库存归还
@@ -316,7 +316,7 @@ class AndroidSimpleApiController extends Controller
         }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
-        $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
@@ -347,7 +347,7 @@ class AndroidSimpleApiController extends Controller
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $payment_company = $request->payment_company;//支付公司名字
-        $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
@@ -434,8 +434,10 @@ class AndroidSimpleApiController extends Controller
      */
     private function reduce_stock($order_id, $status)
     {
-        $data = SimpleOrder::getOne([['id', $order_id]]);//订单详情
-        $config = SimpleConfig::getPluck([['simple_id', $data['simple_id']], ['cfg_name', 'allow_zero_stock']], 'cfg_value')->first();//查询是否可零库存开单
+        // 订单详情
+        $data = SimpleOrder::getOne([['id', $order_id]]);
+        // 查询是否可零库存开单
+        $config = SimpleConfig::getPluck([['simple_id', $data['simple_id']], ['cfg_name', 'allow_zero_stock']], 'cfg_value');
         DB::beginTransaction();
         try {
             if ($status == '1') {
