@@ -107,6 +107,7 @@ class SftController extends Controller
         }
     }
 
+
     public function test2()
     {
         $res = json_encode(\request()->all(), JSON_UNESCAPED_UNICODE);
