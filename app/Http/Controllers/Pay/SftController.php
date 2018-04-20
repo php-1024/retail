@@ -56,35 +56,25 @@ class SftController extends Controller
 
     public function test()
     {
-        \Wechat()::get_fans_info("1", "2");
-
-        $type = 3;
-        $type = $type ?? 1;
-        dd($type);
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-//        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-//        $param_body["merchantNo"] = '11548088';
-
-
         $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
         // 业务参数
         // 订单号
-//        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(100,999);
-        $param_body["merchantOrderNo"] = "LS20180408_5_1000" . rand(100, 999);
-//        $param_body["merchantOrderNo"] = "LS20180408_5_1000003";
+        $param_body["merchantOrderNo"] = "LS20180408_5_1000".rand(100,999);
+//        $param_body["merchantOrderNo"] = "LS20180408_5_1000801";
+
         // 交易金额
-        $param_body["amount"] = "0.01";
+        $param_body["amount"] = "0.02";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
         $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/notify";
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
         $param_body["payChannel"] = "hw";
-
 
 //        $param_body["openid"] = '11548088';
         $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
@@ -107,6 +97,9 @@ class SftController extends Controller
 
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res_arr = json_decode($res, true);
+
+        dd($res_arr);
+
 
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
@@ -216,7 +209,7 @@ class SftController extends Controller
 
         $param_body["sharingOrderNo"] = "";
         $param_body["merchantOrderNo"] = "";
-        $param_body["notifyURL"] = "";
+        $param_body["notifyURL"] = "http://o2o.01nnt.com/pay/sft/test8";
 
         $param_body["sharingReqItem"][0]["sharingNo"] = "";
         $param_body["sharingReqItem"][0]["sharingAmount"] = "";
@@ -302,9 +295,6 @@ class SftController extends Controller
 
     public function test11()
     {
-
-        \Wechat::
-        exit;
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $this->authorizeInfo();
     }
@@ -443,7 +433,7 @@ class SftController extends Controller
             $openid = $res_access_arr['openid'];
         } else {
             $this->getAuthorizeShopInfo(request()->url());
-            return ;
+            return;
         }
 
         DB::beginTransaction();
@@ -494,8 +484,7 @@ class SftController extends Controller
      * @param $re_url
      * @return boolean
      */
-    public
-    function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
+    public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
     {
         $access_token = "";
 
