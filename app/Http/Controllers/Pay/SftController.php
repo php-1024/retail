@@ -315,7 +315,7 @@ class SftController extends Controller
     {
         // 判断公众号是否授权给零壹第三方公众号平台
         $this->getShopBaseInfo();
-        // 保存初次访问的地址
+        // 初次访问的地址
         $url = request()->fullUrl();
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
@@ -392,10 +392,9 @@ class SftController extends Controller
      * @param $appid
      * @param $appsecret
      * @param $code
-     * @param string $re_url
      * @return bool
      */
-    public function setAuthorizeZeroneInfo($appid, $appsecret, $code, $re_url = "")
+    public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
@@ -444,7 +443,7 @@ class SftController extends Controller
             $openid = $res_access_arr['openid'];
         } else {
             $this->getAuthorizeShopInfo(request()->url());
-            return;
+            return ;
         }
 
         DB::beginTransaction();
@@ -455,9 +454,10 @@ class SftController extends Controller
             $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
             $param["open_id"] = $openid;
             $param["status"] = 1;
-            // 保存粉丝数据
+
+            // 创建或者更新粉丝数据
             FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
-            session(["zerone_auth_info" => ["shop_id" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]]);
+            session(["zerone_auth_info" => ["shop_id" => request()->get("shop_id")]]);
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($this->wechat_info["authorizer_access_token"], $openid);
