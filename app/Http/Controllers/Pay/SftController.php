@@ -203,9 +203,9 @@ class SftController extends Controller
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
 
-        $num = "001";
+        $num = "003";
         $param_body["sharingOrderNo"] = "FZ20180408_5_10000$num";
-        $param_body["merchantOrderNo"] = "LS20180420_23_100003";
+        $param_body["merchantOrderNo"] = "LS20180420_23_10000$num";
         $param_body["notifyURL"] = "http://develop.01nnt.com/pay/sft/test8";
 
         $param_body["sharingReqItem"][0]["sharingNo"] = "NH20180408_5_10000$num";
@@ -566,8 +566,7 @@ class SftController extends Controller
      *
      * @return array
      */
-    public
-    function getSignPackage()
+    public function getSignPackage()
     {
         // 获取微信的信息
         $appid = $this->wechat_config["appid"];
@@ -597,8 +596,7 @@ class SftController extends Controller
      * @param bool|false $debug 调试开启 默认false
      * @return mixed
      */
-    public
-    function httpRequest($url, $method, $postData = [], $headers = [], $debug = false)
+    public function httpRequest($url, $method, $postData = [], $headers = [], $debug = false)
     {
         // 将方法统一换成大写
         $method = strtoupper($method);
