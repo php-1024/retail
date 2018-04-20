@@ -74,14 +74,14 @@ class SftController extends Controller
         // 交易金额
         $param_body["amount"] = "0.01";
         $param_body["expireTime"] = date('YmdHis', strtotime("+2 hours"));
-        $param_body["notifyUrl"] = "http://o2o.01nnt.com/pay/sft/notify";
+        $param_body["notifyUrl"] = "http://develop.01nnt.com/pay/sft/notify";
         $param_body["productName"] = md5(microtime(true));
         $param_body["currency"] = "CNY";
         $param_body["userIp"] = "120.78.140.10";
         $param_body["payChannel"] = "hw";
 
 //        $param_body["openid"] = '11548088';
-        $param_body["pageUrl"] = 'http://o2o.01nnt.com/pay/sft/test2';
+        $param_body["pageUrl"] = 'http://develop.01nnt.com/pay/sft/test2';
 
         $exts = array(
             "requestFrom" => "WAP",//ANDROID_APP, IOS_APP, WAP
@@ -166,7 +166,7 @@ class SftController extends Controller
         // 退款金额
         $param_body["refundAmount"] = "0.01";
         // 通知地址
-        $param_body["notifyURL"] = "http://o2o.01nnt.com/pay/sft/test8";
+        $param_body["notifyURL"] = "http://develop.01nnt.com/pay/sft/test8";
         // 其他
         $param_body["exts"] = "";
 
@@ -211,7 +211,7 @@ class SftController extends Controller
 
         $param_body["sharingOrderNo"] = "";
         $param_body["merchantOrderNo"] = "";
-        $param_body["notifyURL"] = "http://o2o.01nnt.com/pay/sft/test8";
+        $param_body["notifyURL"] = "http://develop.01nnt.com/pay/sft/test8";
 
         $param_body["sharingReqItem"][0]["sharingNo"] = "";
         $param_body["sharingReqItem"][0]["sharingAmount"] = "";
