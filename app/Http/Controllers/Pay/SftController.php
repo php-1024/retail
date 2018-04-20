@@ -60,8 +60,8 @@ class SftController extends Controller
     public function test()
     {
         // 订单生成
-//        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-        $api_url = 'http://10.241.80.55:8080/web-acquire-channel/pay/order.htm';
+        $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
+//        $api_url = 'http://10.241.80.55:8080/web-acquire-channel/pay/order.htm';
         $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
