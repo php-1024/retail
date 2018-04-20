@@ -46,25 +46,23 @@ class Presenter
         'index'     => 'number',
     );
 
-    public function __construct(OutputFormatter $formatter, $forceArrayIndexes = false)
+    public function __construct(OutputFormatter $formatter)
     {
         // Work around https://github.com/symfony/symfony/issues/23572
         $oldLocale = setlocale(LC_NUMERIC, 0);
         setlocale(LC_NUMERIC, 'C');
 
-        $this->dumper = new Dumper($formatter, $forceArrayIndexes);
+        $this->dumper = new Dumper($formatter);
         $this->dumper->setStyles($this->styles);
 
         // Now put the locale back
         setlocale(LC_NUMERIC, $oldLocale);
 
-        $exceptionsImportants = $this->exceptionsImportants;
-
         $this->cloner = new Cloner();
-        $this->cloner->addCasters(array('*' => function ($obj, array $a, Stub $stub, $isNested, $filter = 0) use ($exceptionsImportants) {
+        $this->cloner->addCasters(array('*' => function ($obj, array $a, Stub $stub, $isNested, $filter = 0) {
             if ($filter || $isNested) {
                 if ($obj instanceof \Exception) {
-                    $a = Caster::filter($a, Caster::EXCLUDE_NOT_IMPORTANT | Caster::EXCLUDE_EMPTY, $exceptionsImportants);
+                    $a = Caster::filter($a, Caster::EXCLUDE_NOT_IMPORTANT | Caster::EXCLUDE_EMPTY, $this->exceptionsImportants);
                 } else {
                     $a = Caster::filter($a, Caster::EXCLUDE_PROTECTED | Caster::EXCLUDE_PRIVATE);
                 }
