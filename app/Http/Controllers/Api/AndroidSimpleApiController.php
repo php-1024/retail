@@ -463,7 +463,7 @@ class AndroidSimpleApiController extends Controller
                     ];
                     SimpleStockLog::addStockLog($stock_data);//商品操作记录
                     $re = SimpleStock::getOneSimpleStock([['simple_id', $data['simple_id']], ['goods_id', $value['goods_id']]]);
-                    $Simple_stock = $re['stock'] - $value['total'];
+                    $simple_stock = $re['stock'] - $value['total'];
                     SimpleStock::editStock([['id', $re['id']]], ['stock' => $simple_stock]);
 
                 }
