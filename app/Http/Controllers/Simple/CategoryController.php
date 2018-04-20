@@ -51,9 +51,9 @@ class CategoryController extends Controller
         try {
             SimpleCategory::addCategory($category_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员添加零售店铺分类的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统添加了栏目分类！');//保存操作记录
-            } else {//零售店铺本人操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员添加简版店铺分类的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统添加了栏目分类！');//保存操作记录
+            } else {//简版店铺本人操作记录
                 OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了栏目分类！');//保存操作记录
             }
             DB::commit();
@@ -96,8 +96,8 @@ class CategoryController extends Controller
         try {
             SimpleCategory::select_delete($category_id);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员删除零售店铺商品分类的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统删除了商品分类！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员删除简版店铺商品分类的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统删除了商品分类！');//保存操作记录
             } else {//分店本人操作记录
                 OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '删除了商品分类！');//保存操作记录
             }
@@ -145,9 +145,9 @@ class CategoryController extends Controller
         try {
             SimpleCategory::editCategory($where, $category_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了栏目分类！');//保存操作记录
-            } else {//零售店铺本人操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统修改了栏目分类！');//保存操作记录
+            } else {//简版店铺本人操作记录
                 OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了栏目分类！');//保存操作记录
             }
             DB::commit();

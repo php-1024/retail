@@ -1,6 +1,6 @@
 <?php
 /**
- * 零售管理系统
+ * 简版店铺管理系统
  * 下属管理
  **/
 
@@ -35,7 +35,7 @@ class SubordinateController extends Controller
         $realname = $request->input('realname');    //用户真实姓名
         $mobile = $request->input('mobile');        //用户手机号码
 
-        $key = config("app.simple_encrypt_key");    //获取加密盐（零售系统加密盐）
+        $key = config("app.simple_encrypt_key");    //获取加密盐（简版店铺系统加密盐）
         $encrypted = md5($password);                    //加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
 
@@ -70,10 +70,10 @@ class SubordinateController extends Controller
                 AccountInfo::addAccountInfo(['account_id' => $account_id, 'realname' => $realname]);
                 if ($admin_data['is_super'] == 1) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺系统添加了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺系统添加了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了操作员：' . $account);//保存操作记录
                 }
                 DB::commit();
             } catch (\Exception $e) {
@@ -141,10 +141,10 @@ class SubordinateController extends Controller
                 }
                 if ($admin_data['is_super'] == 2) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统编辑了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统编辑了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了操作员：' . $account);//保存操作记录
                 }
                 //添加操作日志
                 DB::commit();
@@ -179,19 +179,19 @@ class SubordinateController extends Controller
                 Account::editAccount([['id', $id]], ['status' => '0']);
                 if ($admin_data['is_super'] == 1) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统冻结了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统冻结了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '冻结了操作员：' . $account);//保存操作记录
                 }
             } else {
                 Account::editAccount([['id', $id]], ['status' => '1']);
                 if ($admin_data['is_super'] == 1) {
                     //添加操作日志
-                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统解冻了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统解冻了操作员：' . $account);//保存操作记录
                 } else {
                     //添加操作日志
-                    OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了操作员：' . $account);//保存操作记录
+                    OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '解冻了操作员：' . $account);//保存操作记录
                 }
             }
             DB::commit();

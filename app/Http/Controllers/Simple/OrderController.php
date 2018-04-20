@@ -117,9 +117,9 @@ class OrderController extends Controller
             }
             SimpleOrder::editSimpleOrder(['id' => $order_id], ['status' => $status]);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
-            } else {//零售店铺本人操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺订单状态的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统修改了订单状态！');//保存操作记录
+            } else {//简版店铺本人操作记录
                 OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了订单状态！');//保存操作记录
             }
             DB::commit();
@@ -183,9 +183,9 @@ class OrderController extends Controller
         try {
             SimpleOrder::editSimpleOrder(['id' => $order_id], ['status' => $status, 'paytype' => $paytype]);
             //添加操作日志
-            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺订单状态的记录
-                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了订单状态！');//保存操作记录
-            } else {//零售店铺本人操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺订单状态的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统修改了订单状态！');//保存操作记录
+            } else {//简版店铺本人操作记录
                 OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了订单状态！');//保存操作记录
             }
             DB::commit();
