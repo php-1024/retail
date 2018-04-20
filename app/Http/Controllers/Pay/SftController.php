@@ -309,6 +309,9 @@ class SftController extends Controller
         $this->getShopBaseInfo();
         // 初次访问的地址
         $url = request()->fullUrl();
+        // 刷新并获取授权令牌
+        \Wechat::refresh_authorization_info(request()->get('organization_id'));
+
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);

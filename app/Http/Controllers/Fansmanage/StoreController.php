@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * 店铺 模块，包括：
+ *   店铺信息
+ */
 namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
@@ -157,4 +161,3 @@ class StoreController extends Controller
 
 }
 
-?>

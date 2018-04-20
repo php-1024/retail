@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * 店铺概况模块，包括：
+ *   店铺首页，操作日志，登录日志
+ */
 namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
@@ -140,5 +144,3 @@ class ShopController extends Controller
         return redirect('fansmanage/login');
     }
 }
-
-?>
