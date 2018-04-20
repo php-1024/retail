@@ -102,6 +102,8 @@ class SftController extends Controller
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res_arr = json_decode($res, true);
 
+
+        dd($res_arr);
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
             XhoLog::create(["name" => "跳转前", "content" => $res]);
