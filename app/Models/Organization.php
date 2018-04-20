@@ -127,7 +127,7 @@ class Organization extends Model
 
     public static function getModel()
     {
-        return self::with("programAsset")->where(["id"=>5])->get();
+        return self::where(["id"=>5])->get();
     }
 
     //获取单条数据
