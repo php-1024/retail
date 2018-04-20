@@ -61,7 +61,6 @@ class SftController extends Controller
     {
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
-//        $api_url = 'http://10.241.80.55:8080/web-acquire-channel/pay/order.htm';
         $param_body["merchantNo"] = $this->merchantNo;
         $param_body["charset"] = 'UTF-8';
         $param_body["requestTime"] = date('YmdHis');
@@ -102,8 +101,6 @@ class SftController extends Controller
         $res = $this->httpRequest($api_url, "post", $param_body_json, $header, false);
         $res_arr = json_decode($res, true);
 
-
-        dd($res_arr);
         if (!empty($res_arr["payUrl"])) {
 //            dump($res);
             XhoLog::create(["name" => "跳转前", "content" => $res]);
