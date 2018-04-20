@@ -102,7 +102,7 @@ class OrderController extends Controller
         $route_name = $request->path();                     //获取当前的页面路由
         $order_id = $request->get('order_id');          //订单ID
         $status = $request->get('status');              //订单状态
-        $power = SimpleConfig::getPluck([['simple_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $power = SimpleConfig::getPluck([['simple_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         $order = SimpleOrder::getOne(['id' => $order_id]);    //获取订单信息
         DB::beginTransaction();
         try {
@@ -169,7 +169,7 @@ class OrderController extends Controller
         $status = $request->get('status');              //订单状态
         $paytype = $request->get('paytype');            //订单付款方式
 
-        $power = SimpleConfig::getPluck([['simple_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $power = SimpleConfig::getPluck([['simple_id', $admin_data['organization_id']], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         $order = SimpleOrder::getOne(['id' => $order_id]);    //获取订单信息
         if ($paytype == '请选择') {
             return response()->json(['data' => '请选择付款方式！', 'status' => '0']);
