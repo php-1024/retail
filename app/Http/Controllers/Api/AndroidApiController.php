@@ -77,6 +77,38 @@ class AndroidApiController extends Controller
     }
 
     /**
+     * 登入检测
+     */
+    public function simple_login(Request $request)
+    {
+        // 登入账号
+        $account = $request->account;
+        // 登入密码
+        $password = $request->password;
+        // 根据账号进行查询
+        $data = Account::where([['account', $account]])->orWhere([['mobile', $account]])->first();
+        if (empty($data)) {
+            return response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']);
+        }
+        // 获取加密盐
+        $key = config("app.simple_encrypt_key");
+        // 加密密码第一重
+        $encrypted = md5($password);
+        // 加密密码第二重
+        $encryptPwd = md5("lingyikeji" . $encrypted . $key);
+        if ($encryptPwd != $data['password']) {
+            return response()->json(['msg' => '密码不正确', 'status' => '0', 'data' => '']);
+        }
+        // 店铺名称
+        $organization_name = Organization::getPluck([['id', $data['organization_id']]], 'organization_name');
+        // 数据返回
+        $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id'], 'account' => $data['account'], 'organization_id' => $data['organization_id'], 'uuid' => $data['uuid'], 'organization_name' => $organization_name]];
+
+        return response()->json($data);
+    }
+
+
+    /**
      * 商品分类接口
      */
     public function goodscategory(Request $request)

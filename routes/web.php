@@ -916,6 +916,7 @@ Route::group(['prefix' => 'api'], function () {
     //android-app接口
     Route::group(['prefix' => 'androidapi'], function () {
         Route::any('login', 'Api\AndroidApiController@login')->middleware('AndroidApiCheck');//登入接口
+        Route::any('simple_login', 'Api\AndroidApiController@simple_login')->middleware('AndroidApiCheck');//登入接口
         Route::any('goodscategory', 'Api\AndroidApiController@goodscategory')->middleware('AndroidApiCheck');//商品分类接口
         Route::any('goodslist', 'Api\AndroidApiController@goodslist')->middleware('AndroidApiCheck');//商品列表接口
         Route::any('order_check', 'Api\AndroidApiController@order_check')->middleware('AndroidApiCheck');//订单提交接口
