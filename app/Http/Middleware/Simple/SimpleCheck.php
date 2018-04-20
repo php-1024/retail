@@ -138,7 +138,7 @@ class SimpleCheck
                 $account_routes[] = $val->route_name;
             }
             //查询该程序下所有节点的路由
-            $program_info = Program::getOne([['id', 10]]);
+            $program_info = Program::getOne([['id', 12]]);
             $program_routes = [];
             foreach ($program_info->nodes as $key => $val) {
                 $program_routes[] = $val->route_name;
