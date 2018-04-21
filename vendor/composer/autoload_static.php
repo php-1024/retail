@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf0598cee7183dc8667180346f21027c7
+class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
 {
     public static $files = array (
         '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
@@ -118,8 +118,8 @@ class ComposerStaticInitf0598cee7183dc8667180346f21027c7
     public static $prefixDirsPsr4 = array (
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
         ),
         'Zhuzhichao\\IpLocationZh\\' => 
@@ -4120,11 +4120,11 @@ class ComposerStaticInitf0598cee7183dc8667180346f21027c7
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf0598cee7183dc8667180346f21027c7::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf0598cee7183dc8667180346f21027c7::$prefixDirsPsr4;
-            $loader->fallbackDirsPsr4 = ComposerStaticInitf0598cee7183dc8667180346f21027c7::$fallbackDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitf0598cee7183dc8667180346f21027c7::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitf0598cee7183dc8667180346f21027c7::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00::$classMap;
 
         }, null, ClassLoader::class);
     }
