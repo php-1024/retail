@@ -130,7 +130,7 @@ class FansmanageCheck{
     public function checkHasRule($request)
     {
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if ($admin_data['id'] <> 1 && $admin_data['is_super'] <> 2 || $admin_data['id'] <> 1 && $admin_data['is_super'] <> 1) {
+        if ($admin_data['id'] <> 1 && $admin_data['is_super'] <> 1) {
             $route_name = $request->path();//获取当前的页面路由
 
             //查询用户所具备的所有节点的路由
