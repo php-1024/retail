@@ -654,7 +654,7 @@ class SimpleCheckAjax
 
     public function checkGoodsAdd($request)
     {
-        dd($request->input('price'));
+        dd($this->positive_integer($request->input('price'), true, false));
         if (empty($request->input('name'))) {
             return self::res(0, response()->json(['data' => '请输入商品名称!', 'status' => '0']));
         }
