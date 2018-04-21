@@ -24,7 +24,7 @@ class TestController extends Controller
     {
 
 
-        $res = Organization::getModel();
+        $res = Organization::getModelInfo();
         dd($res);
 
 

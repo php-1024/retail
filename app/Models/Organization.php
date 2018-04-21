@@ -119,16 +119,16 @@ class Organization extends Model
     {
         return $this->belongsTo('App\Models\Program', 'program_id', 'id');
     }
-
-    public function programAsset()
-    {
-        return $this->hasMany("App\Models\Program","asset_id","asset_id");
-    }
-
-    public static function getModel()
-    {
-        return self::where(["id"=>5])->get();
-    }
+//
+//    public function programAsset()
+//    {
+//        return $this->hasMany("App\Models\Program","id","asset_id");
+//    }
+//
+//    public static function getModelInfo()
+//    {
+//        return self::with("programAsset")->where(["id"=>5])->get();
+//    }
 
     //获取单条数据
     public static function getOne($where)
