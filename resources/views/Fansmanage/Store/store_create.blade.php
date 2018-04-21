@@ -54,8 +54,9 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-sm btn-success active" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="{{$info["program"]["id"]}}" checked="checked" disabled><i
+                                                    <input type="radio" value="{{$info["program"]["id"]}}" checked="checked"><i
                                                             class="fa fa-check text-active"></i>{{$info["program"]["program_name"]}}
+                                                    <input type="hidden" name="program_id" value="{{$info["program"]["id"]}}">
                                                 </label>
                                             </div>
                                         </div>
