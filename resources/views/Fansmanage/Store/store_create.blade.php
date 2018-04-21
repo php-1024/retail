@@ -57,11 +57,12 @@
                                                     <input type="radio" name="program_id" value="{{$info["program"]["id"]}}" disabled><i
                                                             class="fa fa-check text-active"></i>{{$info["program"]["program_name"]}}
                                                 </label>
-                                                {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
-                                                {{--<input type="radio" name="program_id" value="12"><i--}}
-                                                {{--class="fa fa-check text-active"></i>简版店铺管理系统--}}
-                                                {{--</label>--}}
-                                                {{----}}
+
+                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
+                                                <input type="radio" name="program_id" value="12"><i
+                                                class="fa fa-check text-active"></i>简版店铺管理系统
+                                                </label>
+
                                             </div>
                                         </div>
                                     </div>
