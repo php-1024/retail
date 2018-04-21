@@ -25,6 +25,7 @@ class ShopController extends Controller
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
+        dump($admin_data);
         if ($admin_data['is_super'] == 1) {
             $organization_name = $request->organization_name;
             $where = ['type' => '3'];
