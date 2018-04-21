@@ -54,7 +54,7 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="text" name="program_id" value="10"><i
+                                                    <input type="radio" name="program_id" value="10"><i
                                                             class="fa fa-check text-active" disabled="true"></i>零售版店铺
                                                 </label>
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
