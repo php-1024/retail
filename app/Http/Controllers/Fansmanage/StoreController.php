@@ -120,7 +120,6 @@ class StoreController extends Controller
         }else{
             $key = config("app.simple_encrypt_key");
         }
-
         // 密码加密
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
