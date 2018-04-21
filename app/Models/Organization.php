@@ -254,10 +254,9 @@ class Organization extends Model
      */
     public static function getAssetProgram($where)
     {
-        self::where("")->first();
-        $res = self::with(["program" => function ($query) {
-            $query->select("program_name", "id");
-        }])->where($where)->first();
+        $res_organization = self::where($where)->first();
+
+//        $res = self::leftJoin("program",)
 
         if (!empty($res)) {
             return $res->toArray();

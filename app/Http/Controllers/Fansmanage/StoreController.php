@@ -38,8 +38,9 @@ class StoreController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
+        dd($admin_data);
 //        // 需要渲染模式里面的数据
-//        $res = Organization::getProgramAlone(["id" => $admin_data["organization_id"]]);
+//        $res = Organization::getAssetProgram(["id" => $admin_data["organization_id"]]);
         // 渲染页面
         return view('Fansmanage/Store/store_create', [ 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
