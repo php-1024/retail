@@ -663,6 +663,9 @@ class RetailCheckAjax
         if (!empty($request->input('price')) && !is_numeric($request->input('price'))) {
             return self::res(0, response()->json(['data' => '请正确输入价格!', 'status' => '0']));
         }
+        if (!$this->positive_integer($request->input('price'), true, false)) {
+            return self::res(0, response()->json(['data' => '商品价格不能为负数!', 'status' => '0']));
+        }
         if (!empty($request->input('barcode')) && !is_numeric($request->input('barcode'))) {
             return self::res(0, response()->json(['data' => '请正确输入商品条码!', 'status' => '0']));
         }
@@ -671,6 +674,45 @@ class RetailCheckAjax
         }
         return self::res(1, $request);
     }
+
+    /**
+     * $num         字符串判断
+     * $positive    正负判断
+     * $int         整数/小数判断
+     */
+    function positive_integer($num, $positive = true, $int = true)
+    {
+        if ($num) {
+            if (is_numeric($num)) {
+                if ($positive && $num > 0 && !$int) {
+                    return true;        //正数
+                } elseif ($int && floor($num) == $num && !$positive) {
+                    return true;        //整数
+                } elseif ($positive && $int && $num > 0 && floor($num) == $num) {
+                    return true;    //正整数
+                } elseif ($positive && $int && $num > 0 && floor($num) != $num) {
+                    return true;    //正小数
+                } elseif ($positive && $num < 0 && !$int) {
+                    return false;       //负数
+                } elseif ($int && floor($num) != $num && !$positive) {
+                    return false;       //小数
+                } elseif ($positive && $int && $num < 0 && floor($num) != $num) {
+                    return false;   //负小数
+                } elseif ($positive && $int && $num < 0 && floor($num) == $num) {
+                    return false;   //负整数
+                } else {
+                    return false; //未知类型的数字
+                }
+            } else {
+                return false;   //不是数字
+            }
+        } elseif ($num === '0') {
+            return false;
+        } else {
+            return true;    //表单未填写
+        }
+    }
+
 
     //检测修改设置安全密码
 
