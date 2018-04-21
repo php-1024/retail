@@ -102,8 +102,8 @@ class ShopController extends Controller
         if (!empty($account_info)) {
             //重新生成缓存的登录信息
             $admin_data = [
-                'organization_id' => $account_info->organization_id,//组织ID
-                'is_super' => '2',//是否超级管理员
+                'organization_id' => '',//组织ID
+                'is_super' => '1',//是否超级管理员
             ];
             Session::put('fansmanage_account_id', encrypt(1));//存储登录session_id为当前用户ID
             ZeroneRedis::create_fansmanage_account_cache(1, $admin_data);//生成账号数据的Redis缓存
