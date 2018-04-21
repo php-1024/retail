@@ -52,59 +52,87 @@ class StoreController extends Controller
      */
     public function store_create_check(Request $request)
     {
-        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
-        $route_name = $request->path();                 //获取当前的页面路由
-        $organization_id = $admin_data['organization_id']; //组织id
-        $oneOrganization = Organization::getOneStore([['id', $organization_id]]);
-        $organization_parent_id = $organization_id;        //组织上级id
-        $parent_tree = $oneOrganization['parent_tree'] . $organization_id . ',';//树型关系
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
 
-        $program_id = $request->get('program_id');     //选择资产程序id
-        //程序剩余数量
+        // 组织id
+        $organization_id = $admin_data['organization_id'];
+        // 获取父级组织id信息
+        $oneOrganization = Organization::getOneStore([['id', $organization_id]]);
+
+        dd($oneOrganization);
+
+        // 组织上级id
+        $organization_parent_id = $organization_id;
+        // 树型关系
+        $parent_tree = $oneOrganization['parent_tree'] . $organization_id . ',';
+
+        // 选择资产程序id
+        $program_id = $request->get('program_id');
+        // 程序剩余数量
         $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
+        // 查看是否有创建资产程序的资格
         if(!empty($organization_assets)){
             $organization_assets->toArray();
         }else{
-            return response()->json(['data' => '创建店铺失败，您暂无资产程序信息！', 'status' => '0']);
+            return response()->json(['data' => '创建店铺失败，没有创建该资产程序的权利！', 'status' => '0']);
         }
 
-        //创建后减少程序剩余数量
+        // 创建后减少程序剩余数量
         $num = $organization_assets['program_balance'] - 1;
         $used_num = $organization_assets['program_used_num'] + 1;
+        // 判断其分配的资产程序数量
         if ($num < 0) {
             return response()->json(['data' => '创建店铺失败，您暂无剩余的资产程序了！', 'status' => '0']);
         }
+
+        // 获取组织名
         $organization_name = $request->organization_name;
+        // 判断该组织名称是否存在
         $re = Organization::checkRowExists([['organization_name', $organization_name]]);
         if ($re) {
             return response()->json(['data' => '平台已存在该名称', 'status' => '0']);
         }
-        $type = '4';                                    //店铺组织为4
-        $realname = $request->realname;            //负责人姓名
-        $mobile = $request->mobile;       //负责人电话
+
+        // 店铺组织为4
+        $type = '4';
+        // 负责人姓名
+        $realname = $request->realname;
+        // 负责人电话
+        $mobile = $request->mobile;
+
+        // 获取账号数值，自增1
         $user = Account::max('account');
-
-
-        $account = $user + 1;//用户账号
+        // 用户账号
+        $account = $user + 1;
         $password = $request->password;
 
-        if ($program_id == 10) {//零售店铺加密方法（retail）
-            $key = config("app.retail_encrypt_key");//获取加密盐
-        } elseif ($program_id == 12) {//简版店铺加密方法（simple）
-            $key = config("app.simple_encrypt_key");//获取加密盐
+        // 零售店铺加密方法（retail）
+        // 获取加密盐
+        if ($program_id == 10) {
+            $key = config("app.retail_encrypt_key");
+        } elseif ($program_id == 12) {
+            $key = config("app.simple_encrypt_key");
         }
+
+        // 密码加密
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
 
+        // 生成uuid 的值
         $chars = md5(uniqid(mt_rand(), true));
         $uuid = substr($chars, 0, 8) . '-';
         $uuid .= substr($chars, 8, 4) . '-';
         $uuid .= substr($chars, 12, 4) . '-';
         $uuid .= substr($chars, 16, 4) . '-';
         $uuid .= substr($chars, 20, 12);
+        // 检测该值是否存在
         if (Account::checkRowExists([['uuid', $uuid]])) {
             return response()->json(['data' => 'uuid重复，请重新操作！', 'status' => '0']);
         }
+        // 事务处理
         DB::beginTransaction();
         try {
             $organization = [
@@ -112,12 +140,13 @@ class StoreController extends Controller
                 'parent_id' => $organization_parent_id,
                 'parent_tree' => $parent_tree,
                 'program_id' => $program_id,
-                'asset_id' => $program_id,
+                'asset_id' => $organization,
                 'type' => $type,
                 'status' => '1',
             ];
             //在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
+
             $storeinfo = [
                 'organization_id' => $id,
                 'retail_owner' => $realname,
@@ -126,6 +155,7 @@ class StoreController extends Controller
             ];
             //在分店织信息表创建店铺组织信息
             OrganizationRetailinfo::addOrganizationRetailinfo($storeinfo);
+
             $accdata = [
                 'organization_id' => $id,
                 'parent_id' => '1',
@@ -136,7 +166,7 @@ class StoreController extends Controller
                 'mobile' => $mobile,
                 'uuid' => $uuid
             ];
-            //在管理员表添加信息
+            // 在管理员表添加信息
             $account_id = Account::addAccount($accdata);
 
             $accdatainfo = [

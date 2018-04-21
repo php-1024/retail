@@ -247,12 +247,14 @@ class Organization extends Model
 
 
     /**
-     * 获取组织还有其程序信息
+     * 获取资产程序的 信息
+     * 通过 组织 id 获取 asset_id 然后 通过 asset_id 找到 他的名称 并且  complete_id = asset_id 并且 is_asset 的值给拿出来
      * @param $where
      * @return array|bool
      */
-    public static function getProgramAlone($where)
+    public static function getAssetProgram($where)
     {
+        self::where("")->first();
         $res = self::with(["program" => function ($query) {
             $query->select("program_name", "id");
         }])->where($where)->first();
