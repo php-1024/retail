@@ -313,7 +313,10 @@ class SftController extends Controller
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info(request()->get('organization_id'));
 
-        dd($authorization_info);
+        dump($authorization_info);
+        dd(request()->get('organization_id'));
+
+
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
