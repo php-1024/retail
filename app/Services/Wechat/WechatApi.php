@@ -627,7 +627,7 @@ class WechatApi
                 break;
             // 进行跳转的，例如网页授权
             case "redirect" :
-                return redirect($param);
+                Header("Location:{$param}");
                 break;
             // 获取二维码，并且渲染的
             case "qrcode" :
