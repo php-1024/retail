@@ -50,7 +50,6 @@ class WechatApi
         $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
         $appsecret = !empty($appsecret) ? $appsecret : config('app.wechat_web_setting.appsecret');
 
-
         // 获取授权信息
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$auth_code}&grant_type=authorization_code";
         $re = \HttpCurl::doGet($url);
