@@ -22,7 +22,6 @@ class TestController extends Controller
 {
     public function test()
     {
-	dd(1);
 
         dd(2);
         dd(realpath("."));
