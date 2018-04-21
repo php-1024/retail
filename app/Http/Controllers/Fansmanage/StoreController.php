@@ -61,8 +61,12 @@ class StoreController extends Controller
 
         $program_id = $request->get('program_id');     //选择资产程序id
         //程序剩余数量
-        $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]])->first();
-
+        $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
+        if(!empty($organization_assets)){
+            $organization_assets->toArray();
+        }else{
+            return response()->json(['data' => '创建店铺失败，您暂无资产程序信息！', 'status' => '0']);
+        }
 
         //创建后减少程序剩余数量
         $num = $organization_assets['program_balance'] - 1;
