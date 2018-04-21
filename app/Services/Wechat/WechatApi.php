@@ -62,9 +62,9 @@ class WechatApi
      * $appid:默认公众号ID
      * $redirect_uri:回调链接
      */
-    public function get_web_auth_url($redirect_uri,$type)
+    public function get_web_auth_url($redirect_uri, $type)
     {
-        $type = empty($type) ? "snsapi_userinfo" : "snsapi_base";
+        $type = empty($type) ? "snsapi_userinfo" : $type;
         $wxparam = config('app.wechat_web_setting');
         $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$wxparam['appid']}&redirect_uri={$redirect_uri}&response_type=code&scope=$type&state=lyxkj2018#wechat_redirect";
         return $url;
@@ -348,7 +348,7 @@ class WechatApi
         $wxparam = config('app.wechat_open_setting');
         $open_appid = $wxparam['open_appid'];//第三方平台方appid
         $pre_auth_code = $this->get_pre_auth_code();//预授权码
-        $redirect_url = request()->root().'/api/wechat/redirect';//回调链接
+        $redirect_url = request()->root() . '/api/wechat/redirect';//回调链接
         $auth_type = 3;//1则商户扫码后，手机端仅展示公众号、2表示仅展示小程序，3表示公众号和小程序都展示
         $url = "https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid=" . $open_appid . "&pre_auth_code=" . $pre_auth_code . "&redirect_uri=" . $redirect_url . "?zerone_param=" . $origanization_id . "@@" . $redirect_route_name . "&auth_type=" . $auth_type;
         return $url;
