@@ -110,9 +110,14 @@ class StoreController extends Controller
 
         // 零售店铺加密方法（retail）
         // 获取加密盐
-        if ($program_id == 10) {
+//        if ($program_id == 10) {
+//            $key = config("app.retail_encrypt_key");
+//        } elseif ($program_id == 12) {
+//            $key = config("app.simple_encrypt_key");
+//        }
+        if($program_id == $oneOrganization["program_id"]){
             $key = config("app.retail_encrypt_key");
-        } elseif ($program_id == 12) {
+        }else{
             $key = config("app.simple_encrypt_key");
         }
 
