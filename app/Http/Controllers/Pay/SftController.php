@@ -297,6 +297,7 @@ class SftController extends Controller
 
     public function test11()
     {
+        dd(123);
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $this->authorizeInfo();
     }
