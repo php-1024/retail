@@ -54,7 +54,7 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-sm btn-success active" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="{{$info["program"]["id"]}}" disabled><i
+                                                    <input type="radio" name="program_id" value="{{$info["program"]["id"]}}" checked disabled><i
                                                             class="fa fa-check text-active"></i>{{$info["program"]["program_name"]}}
                                                 </label>
                                             </div>
@@ -166,13 +166,12 @@
                     window.location.reload();
                 });
             } else {
-                console.log(json);
-//                swal({
-//                    title: "提示信息",
-//                    text: json.data,
-//                    confirmButtonColor: "#DD6B55",
-//                    confirmButtonText: "确定"
-//                });
+               swal({
+                   title: "提示信息",
+                   text: json.data,
+                   confirmButtonColor: "#DD6B55",
+                   confirmButtonText: "确定"
+               });
             }
         });
     }
