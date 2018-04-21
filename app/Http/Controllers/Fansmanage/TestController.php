@@ -24,14 +24,14 @@ class TestController extends Controller
     {
 
         dd(realpath("."));
-        $res = Organization::getModelInfo();
-        dd($res);
+//        $res = Organization::getModelInfo();
+//        dd($res);
 
-
-        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
-        $data['account'] = User::where(['id'=> 1])->value("account");
-//        $data['account'] = User::where(['id'=> 1])->get(["account"]);
-        dump($data);
+//
+//        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
+//        $data['account'] = User::where(['id'=> 1])->value("account");
+////        $data['account'] = User::where(['id'=> 1])->get(["account"]);
+//        dump($data);
 
 //        \DB::enableQueryLog();
 //        $search = "100";
