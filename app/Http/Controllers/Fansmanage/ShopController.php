@@ -4,6 +4,7 @@
  * 店铺概况模块，包括：
  *   店铺首页，操作日志，登录日志
  */
+
 namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
@@ -17,40 +18,67 @@ use Session;
 
 class ShopController extends Controller
 {
-    //首页
+    /**
+     * 首页
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function display(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $organization_id = $admin_data['organization_id'];//服务商id
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+
+        // 组织id
+        $organization_id = $admin_data['organization_id'];
+        // 判断是否为超级管理员
         if ($admin_data['is_super'] == 1) {
+            // 获取组织名
             $organization_name = $request->organization_name;
+            // 获取粉丝管理类型数据
             $where = ['type' => '3'];
-            $listOrg = Organization::getOrganizationAndAccount($organization_name, $where, 20, 'id', 'ASC'); //查询分店
+            // 查询分店
+            $listOrg = Organization::getOrganizationAndAccount($organization_name, $where, 20, 'id', 'ASC');
+            // 渲染页面
             return view('Fansmanage/Shop/select_shop', ['listOrg' => $listOrg]);
         } else {
             $where = [['organization_id', $organization_id]];
-            $account_id = Account::getPluck([['organization_id', $organization_id], ['parent_id', 1]], 'id')->first();//获取负责人id
-            if ($account_id != $admin_data['id']) {//如果不是服务商负责人 只允许看自己的登入记录
+            // 获取负责人id
+            $account_id = Account::getPluck([['organization_id', $organization_id], ['parent_id', 1]], 'id')->first();
+            // 如果不是服务商负责人 只允许看自己的登入记录
+            if ($account_id != $admin_data['id']) {
                 $where[] = ['account_id', $admin_data['id']];
             }
-            $login_log_list = LoginLog::getList($where, 5, 'id');//登录记录
-            $operation_log_list = OperationLog::getList($where, 5, 'id');//操作记录
-            $acc_num = Account::where([['organization_id', $organization_id]])->count();//查询服务商人数
-            $org_num = Organization::where([['parent_id', $organization_id]])->count();//查询服务商附属商务个数
+            // 登录记录列表
+            $login_log_list = LoginLog::getList($where, 5, 'id');
+            // 操作记录列表
+            $operation_log_list = OperationLog::getList($where, 5, 'id');
+            // 查询服务商人数
+            $acc_num = Account::where([['organization_id', $organization_id]])->count();
+            // 查询服务商附属商务个数
+            $org_num = Organization::where([['parent_id', $organization_id]])->count();
+            // 渲染页面
             return view('Fansmanage/Shop/index', ['login_log_list' => $login_log_list, 'operation_log_list' => $operation_log_list, 'acc_num' => $acc_num, 'org_num' => $org_num, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
         }
     }
 
-    //超级管理员选择服务商
+    /**
+     * 超级管理员选择服务商
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function select_shop(Request $request)
     {
         $admin_this = $request->get('admin_data');              //中间件产生的管理员数据参数
 //        $organization_id = $request->input('organization_id');  //中间件产生的管理员数据参数
         $account_id = $request->input('account_id');            //用户ID
 //        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
+
         $account_info = Account::getOneAccount([['id', $account_id]]);//根据账号查询
         if (!empty($account_info)) {
             //重新生成缓存的登录信息
@@ -90,56 +118,100 @@ class ShopController extends Controller
         }
     }
 
-    //超级管理员选择店铺
+    /**
+     * 超级管理员选择店铺
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function switch_status(Request $request)
     {
+        // 渲染页面
         return redirect('fansmanage');
     }
 
-    //我的操作记录
+    /**
+     * 操作日志页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function operation_log(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 通过登录页账号查询
+        $account = $admin_data['account'];
+        // 查询时间开始
+        $time_st = $request->input('time_st');
+        // 查询时间结束
+        $time_nd = $request->input('time_nd');
+        // 实例化时间格式
+        $time_st_format = $time_nd_format = 0;
 
-        $account = $admin_data['account'];//通过登录页账号查询
-        $time_st = $request->input('time_st');//查询时间开始
-        $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        // 筛选条件
         if (!empty($time_st) && !empty($time_nd)) {
-            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
-            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+            // 开始时间转时间戳
+            $time_st_format = strtotime($time_st . ' 00:00:00');
+            // 结束时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');
         }
+        // 处理筛选条件
         $search_data = ['time_st' => $time_st, 'time_nd' => $time_nd];
+        // 获取操作记录列表
         $list = OperationLog::getUnionPaginate($account, $time_st_format, $time_nd_format, 10, 'id');
+        // 渲染页面
         return view('Fansmanage/Shop/operation_log', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //我的登入记录
     public function login_log(Request $request)
     {
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
-        $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
-        $route_name = $request->path();//获取当前的页面路由
-        $account = $admin_data['account'];//通过登录页账号查询
-        $time_st = $request->input('time_st');//查询时间开始
-        $time_nd = $request->input('time_nd');//查询时间结束
-        $time_st_format = $time_nd_format = 0;//实例化时间格式
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 中间件产生的菜单数据参数
+        $menu_data = $request->get('menu_data');
+        // 中间件产生的子菜单数据参数
+        $son_menu_data = $request->get('son_menu_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+
+        // 通过登录页账号查询
+        $account = $admin_data['account'];
+        // 查询时间开始
+        $time_st = $request->input('time_st');
+        // 查询时间结束
+        $time_nd = $request->input('time_nd');
+
+        // 实例化时间格式
+        $time_st_format = $time_nd_format = 0;
         if (!empty($time_st) && !empty($time_nd)) {
-            $time_st_format = strtotime($time_st . ' 00:00:00');//开始时间转时间戳
-            $time_nd_format = strtotime($time_nd . ' 23:59:59');//结束时间转时间戳
+            // 开始时间转时间戳
+            $time_st_format = strtotime($time_st . ' 00:00:00');
+            // 结束时间转时间戳
+            $time_nd_format = strtotime($time_nd . ' 23:59:59');
         }
+        // 处理筛选条件
         $search_data = ['time_st' => $time_st, 'time_nd' => $time_nd];
+        // 获取登录记录列表
         $list = LoginLog::getUnionPaginate($account, $time_st_format, $time_nd_format, 15, 'id');
+        // 渲染页面
         return view('Fansmanage/Shop/login_log', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
-    //退出登录
+
+    /**
+     * 退出登录
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function quit(Request $request)
     {
+        // 清空session 数据
         Session::put('fansmanage_account_id', '');
         return redirect('fansmanage/login');
     }
