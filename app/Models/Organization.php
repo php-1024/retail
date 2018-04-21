@@ -246,10 +246,15 @@ class Organization extends Model
     }
 
 
+    /**
+     * 获取组织还有其程序信息
+     * @param $where
+     * @return array|bool
+     */
     public static function getProgramAlone($where)
     {
         $res = self::with(["program" => function ($query) {
-            $query->select("program_name", "program_id");
+            $query->select("program_name", "id");
         }])->where($where)->get();
 
         if (!empty($res)) {

@@ -53,18 +53,15 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">模式</label>
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
-                                                @foreach()
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="10"><i
-                                                            class="fa fa-check text-active"></i>零售版管理系统
+                                                    <input type="text" name="program_id" value="{{$into["program"]["id"]}}"><i
+                                                            class="fa fa-check text-active" disabled="true"></i>{{$into["program"]["program_name"]}}
                                                 </label>
-                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="12"><i
-                                                            class="fa fa-check text-active"></i>简版店铺管理系统
-                                                </label>
-                                                @endforeach
-
-
+                                                {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
+                                                {{--<input type="radio" name="program_id" value="12"><i--}}
+                                                {{--class="fa fa-check text-active"></i>简版店铺管理系统--}}
+                                                {{--</label>--}}
+                                                {{----}}
                                             </div>
                                         </div>
                                     </div>

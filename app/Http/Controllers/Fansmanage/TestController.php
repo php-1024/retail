@@ -22,7 +22,7 @@ class TestController extends Controller
 {
     public function test()
     {
-        $res = Organization::getProgramAlone(["organization_id"=>5]);
+        $res = Organization::getProgramAlone(["id"=>5]);
         dd($res);
 //        $res = Organization::getModelInfo();
 //        dd($res);

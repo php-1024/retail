@@ -4,6 +4,7 @@
  * 店铺 模块，包括：
  *   店铺信息
  */
+
 namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
@@ -38,11 +39,9 @@ class StoreController extends Controller
         // 获取当前的页面路由
         $route_name = $request->path();
         // 需要渲染模式里面的数据
-
-
-
+        $res = Organization::getProgramAlone(["id" => $admin_data["organization_id"]]);
         // 渲染页面
-        return view('Fansmanage/Store/store_create', ['admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Fansmanage/Store/store_create', ['info' => $res, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
 
