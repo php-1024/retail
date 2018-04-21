@@ -37,6 +37,7 @@ class ShopController extends Controller
         // 组织id
         $organization_id = $admin_data['organization_id'];
         // 判断是否为超级管理员
+        dump($admin_data);
         if ($admin_data['is_super'] == 1) {
             // 获取组织名
             $organization_name = $request->organization_name;
@@ -68,39 +69,53 @@ class ShopController extends Controller
     }
 
     /**
-     * 超级管理员选择服务商
+     * 超级管理员选择商户信息
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function select_shop(Request $request)
     {
-        $admin_this = $request->get('admin_data');              //中间件产生的管理员数据参数
-//        $organization_id = $request->input('organization_id');  //中间件产生的管理员数据参数
-        $account_id = $request->input('account_id');            //用户ID
-//        $account_info = Account::getOneAccount([['organization_id',$organization_id],['parent_id','1']]);//根据账号查询
-
-        $account_info = Account::getOneAccount([['id', $account_id]]);//根据账号查询
+        // 中间件产生的管理员数据参数
+        $admin_this = $request->get('admin_data');
+        // 用户ID
+        $account_id = $request->input('account_id');
+        // 根据账号查询
+        $account_info = Account::getOneAccount([['id', $account_id]]);
         if (!empty($account_info)) {
-            //重新生成缓存的登录信息
+            // 重新生成缓存的登录信息
             $admin_data = [
-                'id' => $account_info->id,    //用户ID
-                'account' => $account_info->account,//用户账号
-                'organization_id' => $account_info->organization_id,//组织ID
-                'is_super' => '2',//是否超级管理员
-                'parent_id' => $account_info->parent_id,//上级ID
-                'parent_tree' => $account_info->parent_tree,//上级树
-                'deepth' => $account_info->deepth,//账号在组织中的深度
-                'mobile' => $account_info->mobile,//绑定手机号
-                'safe_password' => $admin_this['safe_password'],//安全密码-超级管理员
-                'account_status' => $account_info->status,//用户状态
+                // 用户ID
+                'id' => $account_info->id,
+                // 用户账号
+                'account' => $account_info->account,
+                // 组织ID
+                'organization_id' => $account_info->organization_id,
+                // 是否超级管理员
+                'is_super' => '2',
+                // 上级ID
+                'parent_id' => $account_info->parent_id,
+                // 上级树
+                'parent_tree' => $account_info->parent_tree,
+                // 账号在组织中的深度
+                'deepth' => $account_info->deepth,
+                // 绑定手机号
+                'mobile' => $account_info->mobile,
+                // 安全密码-超级管理员
+                'safe_password' => $admin_this['safe_password'],
+                // 用户状态
+                'account_status' => $account_info->status,
             ];
-            Session::put('fansmanage_account_id', encrypt(1));//存储登录session_id为当前用户ID
-            //构造用户缓存数据
+            // 存储登录session_id为当前用户ID
+            Session::put('fansmanage_account_id', encrypt(1));
+
+            // 构造用户缓存数据
             if (!empty($account_info->account_info->realname)) {
                 $admin_data['realname'] = $account_info->account_info->realname;
             } else {
                 $admin_data['realname'] = '未设置';
             }
+
+
             if (!empty($account_info->account_roles) && $account_info->account_roles->count() != 0) {
                 foreach ($account_info->account_roles as $key => $val) {
                     $account_info->role = $val;
@@ -109,8 +124,12 @@ class ShopController extends Controller
             } else {
                 $admin_data['role_name'] = '角色未设置';
             }
-            ZeroneRedis::create_fansmanage_account_cache(1, $admin_data);//生成账号数据的Redis缓存
-            ZeroneRedis::create_fansmanage_menu_cache(1);//生成对应账号的系统菜单
+
+            // 生成账号数据的Redis缓存
+            ZeroneRedis::create_fansmanage_account_cache(1, $admin_data);
+            // 生成对应账号的系统菜单
+            ZeroneRedis::create_fansmanage_menu_cache(1);
+            // 返回提示
             return response()->json(['data' => '操作成功', 'status' => '1']);
 
         } else {
