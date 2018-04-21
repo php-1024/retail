@@ -398,6 +398,7 @@ class SftController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
 
+        dd($res_access_arr);
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
