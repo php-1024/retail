@@ -54,8 +54,8 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="text" name="program_id" value="{{$into["program"]["id"]}}"><i
-                                                            class="fa fa-check text-active" disabled="true"></i>{{$into["program"]["program_name"]}}
+                                                    <input type="text" name="program_id" value="{{$info["program"]["id"]}}"><i
+                                                            class="fa fa-check text-active" disabled="true"></i>{{$info["program"]["program_name"]}}
                                                 </label>
                                                 {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
                                                 {{--<input type="radio" name="program_id" value="12"><i--}}
