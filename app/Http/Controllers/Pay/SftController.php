@@ -342,7 +342,7 @@ class SftController extends Controller
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
             echo 234;
-            \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
+            \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"),"");
             exit;
         } else {
             // 保存相对应的数据

@@ -60,9 +60,10 @@ class WechatApi
     public function get_web_auth_url($redirect_uri, $appid = '', $auth_type = "")
     {
         // 判断是否存在 appid ,没有的话用系统默认的
-        $appid = $appid ?? config('app.wechat_web_setting.appid');
+        $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
         // 判断是那种授权类型
-        $auth_type = $auth_type ?? "snsapi_userinfo";
+        $auth_type = !empty($auth_type) ? $auth_type : "snsapi_userinfo";
+
         // 跳转地址
         $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$auth_type}&state=lyxkj2018#wechat_redirect";
         // 结果处理
