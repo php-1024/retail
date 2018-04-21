@@ -660,7 +660,7 @@ class SimpleCheckAjax
         if (empty($request->input('details'))) {
             return self::res(0, response()->json(['data' => '请填写商品详情!', 'status' => '0']));
         }
-        if (!empty($request->input('price')) && !is_numeric($request->input('price')) && $this->positive_integer($request->input('price'), true, false) == false) {
+        if (!empty($request->input('price')) && !is_numeric($request->input('price')) && $this->positive_integer($request->input('price'), true, false) == 'false') {
             return self::res(0, response()->json(['data' => '请正确输入价格!', 'status' => '0']));
         }
         if (!empty($request->input('barcode')) && !is_numeric($request->input('barcode'))) {
