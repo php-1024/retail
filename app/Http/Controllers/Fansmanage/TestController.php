@@ -23,6 +23,7 @@ class TestController extends Controller
 {
     public function test()
     {
+        dd(config("app.wechat_web_setting.appid"));
         $res = Organization::select(["organization.id", "organization.program_id"])
             ->where(["organization.id" => 5])
             ->first()->toArray();
