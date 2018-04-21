@@ -23,7 +23,7 @@ class TestController extends Controller
     public function test()
     {
 
-        dd(2);
+        dd(3);
         dd(realpath("."));
 //        $res = Organization::getModelInfo();
 //        dd($res);
