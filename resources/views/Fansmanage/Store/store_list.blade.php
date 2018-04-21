@@ -82,15 +82,16 @@
                                     </div>
 
                                 </div>
-                                <div class="panel-body" style="text-align:center;">
-                                    <button class="btn btn-s-md btn-danger">
-                                        @if($value->OrganizationRetailinfo->type == '0')
-                                            进入总店
-                                        @else
-                                            进入分店
-                                        @endif
-                                    </button>
-                                </div>
+                                {{--<div class="panel-body" style="text-align:center;">--}}
+                                    {{--<button class="btn btn-s-md btn-danger">--}}
+                                        {{--@if($value->OrganizationRetailinfo->type == '0')--}}
+                                            {{--进入总店--}}
+                                        {{--@else--}}
+                                            {{--进入分店--}}
+                                        {{--@endif--}}
+                                    {{--</button>--}}
+                                {{--</div>--}}
+
                             </section>
                         </div>
                         @endforeach
