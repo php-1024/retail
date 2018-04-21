@@ -14,6 +14,7 @@ use App\Models\XhoLog;
 use App\Services\Curl\HttpCurl;
 use Illuminate\Support\Facades\Request;
 use Session;
+use Symfony\Component\HttpFoundation\HeaderBag;
 
 class SftController extends Controller
 {
@@ -310,8 +311,9 @@ class SftController extends Controller
         // 初次访问的地址
         $url = request()->fullUrl();
         // 刷新并获取授权令牌
-        \Wechat::refresh_authorization_info(request()->get('organization_id'));
+        $authorization_info = \Wechat::refresh_authorization_info(request()->get('organization_id'));
 
+        dd($authorization_info);
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
@@ -336,7 +338,8 @@ class SftController extends Controller
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
-            \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
+            $res = \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
+            header("location:{$res}");
             exit;
         } else {
             // 保存相对应的数据
@@ -357,7 +360,8 @@ class SftController extends Controller
 
         // 如果不存在 zerone_openid 就进行授权
         if (empty($code)) {
-            \Wechat::get_open_web_auth_url($url, $appid);
+            $res = \Wechat::get_open_web_auth_url($url, $appid);
+            header("location:{$res}");
             exit;
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
