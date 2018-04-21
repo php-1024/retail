@@ -80,6 +80,7 @@ class ShopController extends Controller
         $account_id = $request->input('account_id');
         // 根据账号查询
         $account_info = Account::getOneAccount([['id', $account_id]]);
+
         if (!empty($account_info)) {
             // 重新生成缓存的登录信息
             $admin_data = [
