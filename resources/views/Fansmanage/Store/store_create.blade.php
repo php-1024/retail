@@ -54,7 +54,7 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 <label class="btn btn-sm btn-success active" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="{{$info["program"]["id"]}}" checked disabled><i
+                                                    <input type="radio" name="program_id" value="{{$info["program"]["id"]}}" checked="checked" disabled><i
                                                             class="fa fa-check text-active"></i>{{$info["program"]["program_name"]}}
                                                 </label>
                                             </div>
@@ -110,7 +110,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value=""
+                                            <input type="password" class="form-control" id="input-id-1" value=""
                                                    name="safe_password">
                                         </div>
                                     </div>
