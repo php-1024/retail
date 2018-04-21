@@ -332,6 +332,7 @@ class SftController extends Controller
      */
     public function getAuthorizeZeroneInfo($url)
     {
+        return 2134234;
         // 获取 code 地址
         $code = request()->input('code');
 
