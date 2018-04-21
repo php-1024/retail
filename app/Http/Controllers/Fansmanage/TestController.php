@@ -24,6 +24,7 @@ class TestController extends Controller
     {
 
         dd(realpath("."));
+        dd(realpath("."));
 //        $res = Organization::getModelInfo();
 //        dd($res);
 
