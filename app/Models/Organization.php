@@ -245,19 +245,18 @@ class Organization extends Model
         return self::with(['program'])->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
-
     /**
-     * 获取资产程序的 信息
-     * 通过 组织 id 获取 asset_id 然后 通过 asset_id 找到 他的名称 并且  complete_id = asset_id 并且 is_asset 的值给拿出来
-     * @param $where
-     * @return array|bool
+     * 获取跟组织有关的程序列出来
+     * 通过 组织 id 获取 program_id 然后 通过 program_id 找到 他的名称 并且  complete_id = program_id 并且 is_asset = 1 的值给拿出来
+     * @param $organization_id
+     * @return bool
      */
-    public static function getAssetProgram($where)
+    public static function getProgramAsset($organization_id)
     {
-        $res_organization = self::where($where)->first();
-
-//        $res = self::leftJoin("program",)
-
+        $res_organization = Organization::select(["organization.id", "organization.program_id"])
+            ->where(["organization.id" => $organization_id])
+            ->first()->toArray();
+        $res = Program::select(["id", "program_name"])->where(["complete_id" => $res_organization["program_id"]])->orWhere(["id" => $res_organization["program_id"]])->get();
         if (!empty($res)) {
             return $res->toArray();
         } else {
