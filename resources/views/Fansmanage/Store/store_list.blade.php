@@ -42,7 +42,7 @@
                         </div>
                         @foreach($list as $key=>$value)
                         <div class="col-sm-2">
-                            <section class="panel panel-default"   style="height: 280px;">
+                            <section class="panel panel-default"   style="/*height: 280px;*/ height: auto">
                                 <header class="panel-heading bg-light no-border">
                                     <div class="clearfix">
                                         <a href="#" class="pull-left thumb-md avatar b-3x m-r">
