@@ -38,8 +38,8 @@ class StoreController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-        // 需要渲染模式里面的数据
-        $res = Organization::getProgramAlone(["id" => $admin_data["organization_id"]]);
+//        // 需要渲染模式里面的数据
+//        $res = Organization::getProgramAlone(["id" => $admin_data["organization_id"]]);
         // 渲染页面
         return view('Fansmanage/Store/store_create', ['info' => $res, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
@@ -74,6 +74,8 @@ class StoreController extends Controller
         dump($organization_id);
         dump($program_id);
         dd($organization_assets);
+
+
         // 查看是否有创建资产程序的资格
         if (!empty($organization_assets)) {
             $organization_assets->toArray();
