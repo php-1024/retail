@@ -119,16 +119,7 @@ class Organization extends Model
     {
         return $this->belongsTo('App\Models\Program', 'program_id', 'id');
     }
-//
-//    public function programAsset()
-//    {
-//        return $this->hasMany("App\Models\Program","id","asset_id");
-//    }
-//
-//    public static function getModelInfo()
-//    {
-//        return self::with("programAsset")->where(["id"=>5])->get();
-//    }
+
 
     //获取单条数据
     public static function getOne($where)
@@ -252,6 +243,20 @@ class Organization extends Model
     public static function getPaginageStore($where, $paginate, $orderby, $sort = 'DESC')
     {
         return self::with(['program'])->where($where)->orderBy($orderby, $sort)->paginate($paginate);
+    }
+
+
+    public static function getProgramAlone($where)
+    {
+        $res = self::with(["program" => function ($query) {
+            $query->select("program_name", "program_id");
+        }])->where($where)->get();
+
+        if (!empty($res)) {
+            return $res->toArray();
+        } else {
+            return false;
+        }
     }
 
     //获取分页数据-分店

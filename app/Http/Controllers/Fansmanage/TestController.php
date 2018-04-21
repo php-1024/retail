@@ -22,9 +22,8 @@ class TestController extends Controller
 {
     public function test()
     {
-
-        dd(3);
-        dd(realpath("."));
+        $res = Organization::getProgramAlone(["organization_id"=>5]);
+        dd($res);
 //        $res = Organization::getModelInfo();
 //        dd($res);
 
