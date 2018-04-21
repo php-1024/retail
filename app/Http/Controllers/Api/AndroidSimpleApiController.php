@@ -262,6 +262,8 @@ class AndroidSimpleApiController extends Controller
         $order = $order->toArray();
         $user_account = User::getPluck([['id', $order['user_id']]], 'account')->first();//粉丝账号
         $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account')->first();//操作人员账号
+        //用户昵称
+        $account_realname = AccountInfo::getPluck([['account_id', $order['operator_id']]], 'realname')->first();
         $goodsdata = $order['simple_order_goods'];//订单商品列表
         foreach ($goodsdata as $key => $value) {
             $ordergoods[$key]['goods_id'] = $value['goods_id']; //商品id
@@ -297,6 +299,7 @@ class AndroidSimpleApiController extends Controller
             'operator_id' => $order['operator_id'],//操作人id
             'simple_id' => $order['simple_id'],//店铺ID
             'operator_account' => $operator_account,//操作人账号
+            'realname' => $account_realname,//操作人员昵称
             'created_at' => $order['created_at'],//添加时间
         ];
         $data = [
