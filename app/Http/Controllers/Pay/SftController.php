@@ -176,7 +176,6 @@ class SftController extends Controller
     }
 
 
-
     public function test5()
     {
         // 退款查询
@@ -313,7 +312,7 @@ class SftController extends Controller
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info(request()->get('organization_id'));
 
-        if($authorization_info === false){
+        if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
         }
 
@@ -341,8 +340,7 @@ class SftController extends Controller
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
-            echo 234;
-            \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"),"");
+            \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
             exit;
         } else {
             // 保存相对应的数据

@@ -54,15 +54,16 @@ class WechatApi
      * 获取网页授权链接
      * @param string $redirect_uri 回调链接
      * @param string $appid 微信基础信息
-     * @param string $auth_type 授权类型
+     * @param int $auth_type 授权类型
      * @return string
      */
-    public function get_web_auth_url($redirect_uri, $appid = '', $auth_type = "")
+    public function get_web_auth_url($redirect_uri, $appid = '', $auth_type = 1)
     {
+        $auth_type_arr = ["1" => "snsapi_base", "2" => "snsapi_userinfo"];
         // 判断是否存在 appid ,没有的话用系统默认的
         $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
         // 判断是那种授权类型
-        $auth_type = !empty($auth_type) ? $auth_type : "snsapi_userinfo";
+        $auth_type = $auth_type_arr[$auth_type];
 
         // 跳转地址
         $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$auth_type}&state=lyxkj2018#wechat_redirect";
