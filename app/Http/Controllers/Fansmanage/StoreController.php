@@ -62,8 +62,6 @@ class StoreController extends Controller
         // 获取父级组织id信息
         $oneOrganization = Organization::getOneStore([['id', $organization_id]]);
 
-        dd($oneOrganization);
-
         // 组织上级id
         $organization_parent_id = $organization_id;
         // 树型关系
@@ -73,10 +71,11 @@ class StoreController extends Controller
         $program_id = $request->get('program_id');
         // 程序剩余数量
         $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
+
         // 查看是否有创建资产程序的资格
-        if(!empty($organization_assets)){
+        if (!empty($organization_assets)) {
             $organization_assets->toArray();
-        }else{
+        } else {
             return response()->json(['data' => '创建店铺失败，没有创建该资产程序的权利！', 'status' => '0']);
         }
 
@@ -139,12 +138,12 @@ class StoreController extends Controller
                 'organization_name' => $organization_name,
                 'parent_id' => $organization_parent_id,
                 'parent_tree' => $parent_tree,
-                'program_id' => $program_id,
-                'asset_id' => $organization,
+                'program_id' => $oneOrganization["program_id"],
+                'asset_id' => $program_id,
                 'type' => $type,
                 'status' => '1',
             ];
-            //在组织表创建保存店铺信息
+            // 在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
 
             $storeinfo = [
@@ -153,7 +152,7 @@ class StoreController extends Controller
                 'retail_owner_idcard' => '',
                 'retail_owner_mobile' => $mobile,
             ];
-            //在分店织信息表创建店铺组织信息
+            // 在分店织信息表创建店铺组织信息
             OrganizationRetailinfo::addOrganizationRetailinfo($storeinfo);
 
             $accdata = [
@@ -174,25 +173,31 @@ class StoreController extends Controller
                 'realname' => $realname,
                 'idcard' => '',
             ];
-            //在管理员表添加信息
+            // 在管理员表添加信息
             AccountInfo::addAccountInfo($accdatainfo);
-
+            // 修改资产的数量
             OrganizationAssets::editAssets([['id', $organization_assets['id']]], ['program_balance' => $num, 'program_used_num' => $used_num]);
-            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');//获取当前系统的所有节点
+            // 获取当前系统的所有节点
+            $module_node_list = Module::getListProgram($program_id, [], 0, 'id');
+            // 添加账号节点
             foreach ($module_node_list as $key => $val) {
                 foreach ($val->program_nodes as $k => $v) {
                     AccountNode::addAccountNode(['account_id' => $account_id, 'node_id' => $v['id']]);
                 }
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 2) {//超级管理员操作商户的记录
+            if ($admin_data['is_super'] == 2) {
+                //超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在粉丝管理系统创建了店铺：' . $organization_name);    //保存操作记录
-            } else {//商户本人操作记录
+            } else {
+                //商户本人操作记录
                 OperationLog::addOperationLog('3', $admin_data['organization_id'], $admin_data['id'], $route_name, '创建了店铺：' . $organization_name);//保存操作记录
             }
-            DB::commit();//提交事务
+            // 提交事务
+            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['data' => '创建店铺失败，请稍后再试！', 'status' => '0']);
         }
         return response()->json(['data' => '创建店铺成功,请前往店铺管理平台进行管理！', 'status' => '1']);
