@@ -71,6 +71,8 @@ class StoreController extends Controller
         $program_id = $request->get('program_id');
         // 程序剩余数量
         $organization_assets = OrganizationAssets::getOne([['organization_id', $organization_id], ['program_id', $program_id]]);
+        dump($organization_id);
+        dump($program_id);
         dd($organization_assets);
         // 查看是否有创建资产程序的资格
         if (!empty($organization_assets)) {
