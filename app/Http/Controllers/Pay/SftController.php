@@ -313,9 +313,13 @@ class SftController extends Controller
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info(request()->get('organization_id'));
 
+        if($authorization_info === false){
+            return "微信公众号没有授权到第三方";
+        }
+
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            dump($this->getAuthorizeZeroneInfo($url));
+            $this->getAuthorizeZeroneInfo($url);
             return;
         }
         // 判断 session 中是否存在店铺id
@@ -332,12 +336,12 @@ class SftController extends Controller
      */
     public function getAuthorizeZeroneInfo($url)
     {
-        return 2134234;
         // 获取 code 地址
         $code = request()->input('code');
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
+            echo 234;
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
             exit;
         } else {
