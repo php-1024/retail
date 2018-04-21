@@ -255,7 +255,7 @@ class Organization extends Model
     {
         $res = self::with(["program" => function ($query) {
             $query->select("program_name", "id");
-        }])->where($where)->get();
+        }])->where($where)->first();
 
         if (!empty($res)) {
             return $res->toArray();
