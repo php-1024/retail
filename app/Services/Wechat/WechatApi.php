@@ -1,4 +1,7 @@
 <?php
+/**
+ * 微信开放平台操作相关接口
+ */
 
 namespace App\Services\Wechat;
 
@@ -7,19 +10,9 @@ use App\Models\WechatOpenSetting;
 use App\Models\WechatAuthorization;
 use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 
-/*
-    微信开放平台操作相关接口
-*/
 
 class WechatApi
 {
-    public function test()
-    {
-        //$info = \HttpCurl::doget('http://www.baidu.com');
-        //dump($info);
-        echo 1234;
-    }
-
     /*
      * 第三方平台代公众号页面授权链接，第一步，通过授权链接获取code
     */
