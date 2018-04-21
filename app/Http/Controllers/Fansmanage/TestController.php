@@ -22,7 +22,7 @@ class TestController extends Controller
 {
     public function test()
     {
-
+	dd(1);
 
         $res = Organization::getModelInfo();
         dd($res);
