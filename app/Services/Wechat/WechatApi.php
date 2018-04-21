@@ -57,17 +57,23 @@ class WechatApi
         return $re;
     }
 
-    /*
-     * 获取网页授权链接，
-     * $appid:默认公众号ID
-     * $redirect_uri:回调链接
+    /**
+     * 获取网页授权链接
+     * @param string $redirect_uri 回调链接
+     * @param string $appid 微信基础信息
+     * @param string $auth_type 授权类型
+     * @return string
      */
-    public function get_web_auth_url($redirect_uri, $type)
+    public function get_web_auth_url($redirect_uri, $appid = '', $auth_type = "")
     {
-        $type = empty($type) ? "snsapi_userinfo" : $type;
-        $wxparam = config('app.wechat_web_setting');
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$wxparam['appid']}&redirect_uri={$redirect_uri}&response_type=code&scope=$type&state=lyxkj2018#wechat_redirect";
-        return $url;
+        // 判断是否存在 appid ,没有的话用系统默认的
+        $appid = $appid ?? config('app.wechat_web_setting.appid');
+        // 判断是那种授权类型
+        $auth_type = $auth_type ?? "snsapi_userinfo";
+        // 跳转地址
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$auth_type}&state=lyxkj2018#wechat_redirect";
+        // 结果处理
+        return $this->resultReturnDispose($url, "redirect");
     }
 
     /*
@@ -448,15 +454,6 @@ class WechatApi
     }
 
     /*
-     * XML转化为数组
-     */
-    public function xml2array($xmlstring)
-    {
-        $object = simplexml_load_string($xmlstring, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
-        return @json_decode(@json_encode($object), 1);
-    }
-
-    /*
      * 获取生成临时二维码的Ticket
      * $authorizer_access_token 接口调用凭证
      */
@@ -584,8 +581,15 @@ class WechatApi
         return $re;
     }
 
-    /*
+
+
+    // +----------------------------------------------------------------------
+    // | Start - 其他应用方法
+    // +----------------------------------------------------------------------
+
+    /**
      * 返回加密解密类
+     * @return WXBizMsgCrypt
      */
     public function WXBizMsgCrypt()
     {
@@ -593,4 +597,56 @@ class WechatApi
         $jm = new WXBizMsgCrypt($wxparam['open_token'], $wxparam['open_key'], $wxparam['open_appid']);
         return $jm;
     }
+
+    /**
+     * XML转化为数组
+     * @param $xmlstring
+     * @return mixed
+     */
+    public function xml2array($xmlstring)
+    {
+        $object = simplexml_load_string($xmlstring, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
+        return @json_decode(@json_encode($object), 1);
+    }
+
+    /**
+     * 微信接口返回数据处理
+     * @param $param
+     * @param $type
+     * @return mixed
+     */
+    public function resultReturnDispose($param, $type = "json")
+    {
+        switch ($type) {
+            // 返回的是接口 json 数据类型的
+            case "json":
+                $res = json_decode($param, true);
+                if (!empty($res["errcode"]) && $res["errcode"] != 0) {
+                    // 错误处理
+                } else {
+                    return $res;
+                }
+                break;
+            // 直接返回结果的，例如二维码
+            case "string" :
+                // 直接返回的
+                return $param;
+                break;
+            // 进行跳转的，例如网页授权
+            case "redirect" :
+                return redirect($param);
+                break;
+            // 获取二维码，并且渲染的
+            case "qrcode" :
+                $res = json_decode($param, true);
+                if (!empty($res["errcode"]) && $res["errcode"] != 0) {
+                    // 错误处理
+                } else {
+                    return $this->showQrCode($param["ticket"]);
+                }
+        }
+    }
+    // +----------------------------------------------------------------------
+    // | End - 其他应用方法
+    // +----------------------------------------------------------------------
 }
