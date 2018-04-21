@@ -29,6 +29,7 @@ class StoreController extends Controller
      */
     public function store_create(Request $request)
     {
+
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
         // 中间件产生的菜单数据参数
@@ -37,7 +38,9 @@ class StoreController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
-
+        dump($admin_data);
+        exit;
+        // 需要渲染模式里面的数据
 
 
         // 渲染页面
