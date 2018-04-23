@@ -460,7 +460,7 @@ class SftController extends Controller
             $param_user_info["province"] = $user_info["province"];
             $param_user_info["head_imgurl"] = $user_info["headimgurl"];
 
-
+            dump(session("zerone_auth_info"));
             dump($param_user_info);
             // 保存用户数据
             $res = UserInfo::insertData($param_user_info);
