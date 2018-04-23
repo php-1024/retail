@@ -264,35 +264,7 @@ class SftController extends Controller
 
     public function test10()
     {
-        exit;
-        $param["account"] = 10003;
-        $param["password"] = 1;
-        $param["safepassword"] = 1;
-        $param["zerone_open_id"] = 1;
-        $param["mobile"] = 1;
-        $param["status"] = 1;
-        $res = User::updateOrCreate(["account" => 10003], $param);
-        return $res;
-        exit;
 
-        // 获取零壹配置信息
-        $this->zerone_info = config("app.wechat_web_setting");
-
-        // 获取零壹授权信息
-        $res = $this->getAuthorizeZeroneInfo();
-
-
-        if ($res == false) {
-            return redirect("benefit/error404");
-        }
-
-//        // 将参数添加到request 请求中, 后面控制器调用就直接使用request 获取
-//        request()->attributes->add(
-//            [
-//                'user_info' => $this->user_info,
-//                'wechat_config' => $this->wechat_config
-//            ]
-//        );
     }
 
 
@@ -319,10 +291,12 @@ class SftController extends Controller
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $this->getAuthorizeZeroneInfo($url);
+            $res = $this->getAuthorizeZeroneInfo($url);
+            dump($res);
             return;
         }
 
+        dump(session("zerone_auth_info"));
         return session("zerone_auth_info");
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_id"))) {
@@ -334,7 +308,8 @@ class SftController extends Controller
 
     /**
      * 获取用户信息,并判断是否需要进行跳转
-     * @param string $url 跳转的地址
+     * @param $url
+     * @throws \Exception
      */
     public function getAuthorizeZeroneInfo($url)
     {
@@ -349,13 +324,18 @@ class SftController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return $res;
         }
     }
 
     /**
      * 店铺 网页授权
      * @param string $url 跳转地址
+     */
+    /**
+     * @param $url
+     * @throws \Exception
      */
     public function getAuthorizeShopInfo($url)
     {
@@ -394,7 +374,8 @@ class SftController extends Controller
      * @param $appid
      * @param $appsecret
      * @param $code
-     * @return bool
+     * @return bool|void
+     * @throws \Exception
      */
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
@@ -420,6 +401,7 @@ class SftController extends Controller
             $param["zerone_open_id"] = $openid;
             $param["status"] = 1;
             $res = User::insertData($param, "update_create", ["zerone_openid" => $param["zerone_open_id"]]);
+            dump($res);
             session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
             // 数据提交
             DB::commit();
@@ -431,10 +413,12 @@ class SftController extends Controller
     }
 
     /**
+    /**
      * @param $appid
      * @param $code
      * @param string $re_url
-     * @return bool
+     * @return bool|void
+     * @throws \Exception
      */
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
@@ -487,15 +471,17 @@ class SftController extends Controller
     }
 
 
+
     /**
      * 店铺保存用户授权信息
      * @param $appid
      * @param $appsecret
-     * @param $type
      * @param $code
+     * @param string $type
      * @param bool $get_user_info
-     * @param $re_url
-     * @return boolean
+     * @param string $re_url
+     * @return bool
+     * @throws \Exception
      */
     public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
     {
