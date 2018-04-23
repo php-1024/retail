@@ -399,6 +399,7 @@ class SftController extends Controller
             $param["password"] = 123456;
             $param["safepassword"] = 123456;
             $param["zerone_open_id"] = $openid;
+            $param["mobile"] = "13333333333";
             $param["status"] = 1;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
             dump($res);
