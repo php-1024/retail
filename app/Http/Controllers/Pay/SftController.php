@@ -295,11 +295,13 @@ class SftController extends Controller
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info")["zerone_user_id"])) {
             $this->getAuthorizeZeroneInfo($url);
+            return ;
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info")["shop_user_id"])) {
             $this->getAuthorizeShopInfo($url);
+            return ;
         }
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);//添加参数
     }
@@ -321,7 +323,8 @@ class SftController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return redirect($res);
         }
     }
 
@@ -338,7 +341,6 @@ class SftController extends Controller
 
         if (empty($code)) {
             \Wechat::get_open_web_auth_url($appid, $url);
-//            exit;
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
         }
@@ -443,6 +445,7 @@ class SftController extends Controller
             session(["zerone_auth_info" => ["shop_user_id" => $fansmanage_user["id"]]]);
 
             dump(session("zerone_auth_info"));
+
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
 
