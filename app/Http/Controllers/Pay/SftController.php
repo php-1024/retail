@@ -264,16 +264,9 @@ class SftController extends Controller
 
     public function test10()
     {
-        $a = [
-  "fansmanage_id" => 5,
-  "user_id" => 123,
-  "open_id" => "oyhbt1EjF8vFIQJHG3qPiA-uOwBQ",
-  "status" => 1,
-];
+        session(["zerone_auth_info" => ["zerone_user_id" =>123123123]]);
 
-
-        $user_info = FansmanageUser::insertData($a, "update_create", ["id" => 2]);
-        dd($user_info);
+        return session("zerone_auth_info.zerone_user_id");
     }
 
 
@@ -298,10 +291,11 @@ class SftController extends Controller
             return "微信公众号没有授权到第三方";
         }
 
+        dump(session("zerone_auth_info")["zerone_user_id"]);
         dump(session("zerone_auth_info.zerone_user_id"));
+
         // 判断是否存在 零壹服务用户id
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            dd(2);
+        if (empty(session("zerone_auth_info")["zerone_user_id"])) {
             $this->getAuthorizeZeroneInfo($url);
             return;
         }
