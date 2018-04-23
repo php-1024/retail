@@ -295,6 +295,7 @@ class SftController extends Controller
             return;
         }
 
+
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
@@ -325,11 +326,9 @@ class SftController extends Controller
         }
     }
 
+
     /**
      * 店铺 网页授权
-     * @param string $url 跳转地址
-     */
-    /**
      * @param $url
      * @throws \Exception
      */
@@ -421,7 +420,6 @@ class SftController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
-        dump($res_access_arr);
 
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
@@ -433,8 +431,6 @@ class SftController extends Controller
 
         DB::beginTransaction();
         try {
-            dump(1);
-
             // 店铺公众号的信息
             // 组织id
             $param["fansmanage_id"] = request()->get("organization_id");
@@ -443,7 +439,7 @@ class SftController extends Controller
             $param["status"] = 1;
 
             // 创建或者更新粉丝数据
-            $user_info = FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
+            $user_info = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
             session(["zerone_auth_info" => ["shop_user_id" => $user_info["id"]]]);
 
             // 获取用户的信息
