@@ -312,6 +312,7 @@ class SftController extends Controller
     /**
      * 获取用户信息,并判断是否需要进行跳转
      * @param $url
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
     public function getAuthorizeZeroneInfo($url)
