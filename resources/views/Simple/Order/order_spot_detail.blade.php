@@ -102,6 +102,8 @@
                                                         <label class="label label-info">微信扫码</label>
                                                     @elseif($order->paytype == '4' )
                                                         <label class="label label-info">微信二维码</label>
+                                                    @elseif($order->paytype == '5' )
+                                                        <label class="label label-info">POS机支付</label>
                                                     @elseif($order->paytype == '-1' )
                                                         <label class="label label-info">现金支付，其他支付</label>
                                                     @elseif($order->paytype == null)
