@@ -326,9 +326,8 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            dump($res);
             if ($res === true) {
-                return redirect($url);
+                $this->authorizeInfo();
             }
         }
     }
