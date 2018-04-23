@@ -293,8 +293,7 @@ class SftController extends Controller
         }
 
 
-        dump(session("zerone_auth_info")["zerone_user_id"]);
-        dump(session("zerone_auth_info")["shop_user_id"]);
+
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info")["zerone_user_id"])) {
@@ -421,6 +420,9 @@ class SftController extends Controller
      */
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
+        dump(session("zerone_auth_info")["zerone_user_id"]);
+        dump(session("zerone_auth_info")["shop_user_id"]);
+
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
