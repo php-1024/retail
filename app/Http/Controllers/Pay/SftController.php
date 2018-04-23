@@ -265,8 +265,8 @@ class SftController extends Controller
 
     public function test10()
     {
-        session(["zerone_auth_info" => ["zerone_user_id" =>123123123]]);
-        session(["zerone_auth_info.shop_user_id" => 111111]);
+        session(["zerone_auth_info.zerone_user_id" => 123123123]);
+        session(["zerone_auth_info.shop_user_id" => 1111]);
         return session("zerone_auth_info");
     }
 
@@ -396,7 +396,7 @@ class SftController extends Controller
             $param["mobile"] = "13333333333";
             $param["status"] = 1;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
-            session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
+            session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
             // 数据提交
             DB::commit();
             return true;
@@ -434,7 +434,7 @@ class SftController extends Controller
             // 店铺公众号的信息
             // 组织id
             $param["fansmanage_id"] = request()->get("organization_id");
-            $param["user_id"] = session("zerone_auth_info")["zerone_user_id"];
+            $param["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param["open_id"] = $openid;
             $param["status"] = 1;
 
@@ -455,7 +455,7 @@ class SftController extends Controller
 
 
             // 用户id
-            $param_user_info["user_id"] = session("zerone_auth_info")["zerone_user_id"];
+            $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param_user_info["nickname"] = $user_info["nickname"];
             $param_user_info["sex"] = $user_info["sex"];
             $param_user_info["city"] = $user_info["city"];
