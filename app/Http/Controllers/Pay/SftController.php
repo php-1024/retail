@@ -434,15 +434,12 @@ class SftController extends Controller
             // 组织id
             $param["fansmanage_id"] = request()->get("organization_id");
             $param["user_id"] = session("zerone_auth_info")["zerone_user_id"];
-
             $param["open_id"] = $openid;
             $param["status"] = 1;
-            dump($param);
+
             // 创建或者更新粉丝数据
             $user_info = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
-
-
-
+            // 缓存用户的店铺id
             session(["zerone_auth_info" => ["shop_user_id" => $user_info["id"]]]);
 
             // 获取用户的信息
@@ -464,9 +461,6 @@ class SftController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
-            dump(2);
-            dump($e->getMessage());
-
             DB::rollback();
             return false;
         }
