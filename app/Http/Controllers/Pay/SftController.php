@@ -444,7 +444,7 @@ class SftController extends Controller
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-            dump($user_info);
+
             // 判断存在用户消息
             if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
                 // 用户id
