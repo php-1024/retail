@@ -201,12 +201,10 @@ class AndroidSimpleApiController extends Controller
                 if ($re != 'ok') {
                     return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
                 }
-            }else{
-                if ($stock_status != '-1') {//说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
-                    $re = $this->reduce_stock($order_id, '-1');//加库存
-                    if ($re != 'ok') {
-                        return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
-                    }
+            }elseif ($stock_status != '-1') {//说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                $re = $this->reduce_stock($order_id, '-1');//加库存
+                if ($re != 'ok') {
+                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
                 }
             }
             SimpleOrder::editSimpleOrder([['id', $order_id]], ['status' => '-1']);
@@ -217,7 +215,6 @@ class AndroidSimpleApiController extends Controller
         }
         return response()->json(['status' => '1', 'msg' => '取消订单成功', 'data' => ['order_id' => $order_id]]);
     }
-
 
     /**
      * 订单列表接口
