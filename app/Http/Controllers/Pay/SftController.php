@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Request;
 use Session;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use DB;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class SftController extends Controller
 {
@@ -442,20 +443,18 @@ class SftController extends Controller
             session(["zerone_auth_info" => ["shop_user_id" => $user_info["id"]]]);
 
             // 获取用户的信息
-            $user_info = \Wechat::get_web_user_info($this->wechat_info["authorizer_access_token"], $openid);
-            // 判断存在用户消息
-            if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
-                // 用户id
-                $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
-                $param["nickname"] = $user_info["nickname"];
-                $param["sex"] = $user_info["sex"];
-                $param["city"] = $user_info["city"];
-                $param["country"] = $user_info["country"];
-                $param["province"] = $user_info["province"];
-                $param["head_imgurl"] = $user_info["headimgurl"];
-                // 保存用户数据
-                UserInfo::insertData($param);
-            }
+            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+            // 用户id
+            $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+            $param["nickname"] = $user_info["nickname"];
+            $param["sex"] = $user_info["sex"];
+            $param["city"] = $user_info["city"];
+            $param["country"] = $user_info["country"];
+            $param["province"] = $user_info["province"];
+            $param["head_imgurl"] = $user_info["headimgurl"];
+            // 保存用户数据
+            UserInfo::insertData($param);
+
             // 数据提交
             DB::commit();
             return true;
@@ -466,91 +465,91 @@ class SftController extends Controller
     }
 
 
-    /**
-     * 店铺保存用户授权信息
-     * @param $appid
-     * @param $appsecret
-     * @param $code
-     * @param string $type
-     * @param bool $get_user_info
-     * @param string $re_url
-     * @return bool
-     * @throws \Exception
-     */
-    public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
-    {
-        $access_token = "";
-
-        // 静默授权：通过授权使用的code,获取到用户openid
-
-        $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
-
-        // 如果不存在授权所特有的access_token,则重新获取code,并且验证
-        if (!empty($res_access_arr['access_token'])) {
-            $openid = $res_access_arr['openid'];
-        } else {
-            $url_arr = explode("?", $re_url);
-            $this->wechatAuthorize($url_arr[0]);
-            exit;
-        }
-
-        DB::beginTransaction();
-        try {
-            // 判断是哪个类型的数据, 进行相对应数据的保存
-            switch ($type) {
-                // 零壹服务公众号的信息
-                case "zerone_info" :
-                    // 获取account 最大的值，然后就可以进行数据的累加
-                    $account = User::max("account");
-                    $param["account"] = ++$account;
-                    $param["password"] = 123456;
-                    $param["safepassword"] = 123456;
-                    $param["zerone_open_id"] = $openid;
-                    $param["status"] = 1;
-                    $res = User::insertData($param, "update_create", ["zerone_openid" => $param["zerone_open_id"]]);
-                    session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
-                    break;
-                // 店铺公众号的信息
-                case "shop_info":
-                    // 组织id
-                    $param["fansmanage_id"] = 10002;
-                    $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
-                    $param["open_id"] = $openid;
-                    $param["status"] = 1;
-                    // 保存粉丝数据
-                    FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
-                    session(["zerone_auth_info" => ["shop_id" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]]);
-                    break;
-            }
-
-            // 判断是否需要获取用户数据
-            if ($get_user_info === true) {
-                // 获取用户的信息
-                $user_info = \Wechat::get_fans_info($access_token, $openid);
-
-                // 判断存在用户消息
-                if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
-                    // 用户id
-                    $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
-                    $param["nickname"] = $user_info["nickname"];
-                    $param["sex"] = $user_info["sex"];
-                    $param["city"] = $user_info["city"];
-                    $param["country"] = $user_info["country"];
-                    $param["province"] = $user_info["province"];
-                    $param["head_imgurl"] = $user_info["headimgurl"];
-                    // 保存用户数据
-                    UserInfo::insertData($param);
-                }
-            }
-            // 数据提交
-            DB::commit();
-            return true;
-        } catch (\Exception $e) {
-            DB::rollback();
-            return false;
-        }
-    }
-
+//    /**
+//     * 店铺保存用户授权信息
+//     * @param $appid
+//     * @param $appsecret
+//     * @param $code
+//     * @param string $type
+//     * @param bool $get_user_info
+//     * @param string $re_url
+//     * @return bool
+//     * @throws \Exception
+//     */
+//    public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
+//    {
+//        $access_token = "";
+//
+//        // 静默授权：通过授权使用的code,获取到用户openid
+//
+//        $res_access_arr = \Wechat::get_web_access_token($code, $appid, $appsecret);
+//
+//        // 如果不存在授权所特有的access_token,则重新获取code,并且验证
+//        if (!empty($res_access_arr['access_token'])) {
+//            $openid = $res_access_arr['openid'];
+//        } else {
+//            $url_arr = explode("?", $re_url);
+//            $this->wechatAuthorize($url_arr[0]);
+//            exit;
+//        }
+//
+//        DB::beginTransaction();
+//        try {
+//            // 判断是哪个类型的数据, 进行相对应数据的保存
+//            switch ($type) {
+//                // 零壹服务公众号的信息
+//                case "zerone_info" :
+//                    // 获取account 最大的值，然后就可以进行数据的累加
+//                    $account = User::max("account");
+//                    $param["account"] = ++$account;
+//                    $param["password"] = 123456;
+//                    $param["safepassword"] = 123456;
+//                    $param["zerone_open_id"] = $openid;
+//                    $param["status"] = 1;
+//                    $res = User::insertData($param, "update_create", ["zerone_openid" => $param["zerone_open_id"]]);
+//                    session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
+//                    break;
+//                // 店铺公众号的信息
+//                case "shop_info":
+//                    // 组织id
+//                    $param["fansmanage_id"] = 10002;
+//                    $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+//                    $param["open_id"] = $openid;
+//                    $param["status"] = 1;
+//                    // 保存粉丝数据
+//                    FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
+//                    session(["zerone_auth_info" => ["shop_id" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"]]);
+//                    break;
+//            }
+//
+//            // 判断是否需要获取用户数据
+//            if ($get_user_info === true) {
+//                // 获取用户的信息
+//                $user_info = \Wechat::get_fans_info($access_token, $openid);
+//
+//                // 判断存在用户消息
+//                if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
+//                    // 用户id
+//                    $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+//                    $param["nickname"] = $user_info["nickname"];
+//                    $param["sex"] = $user_info["sex"];
+//                    $param["city"] = $user_info["city"];
+//                    $param["country"] = $user_info["country"];
+//                    $param["province"] = $user_info["province"];
+//                    $param["head_imgurl"] = $user_info["headimgurl"];
+//                    // 保存用户数据
+//                    UserInfo::insertData($param);
+//                }
+//            }
+//            // 数据提交
+//            DB::commit();
+//            return true;
+//        } catch (\Exception $e) {
+//            DB::rollback();
+//            return false;
+//        }
+//    }
+//
 
     /**
      * 获取 wx.config 里面的签名,JSSDk 所需要的
