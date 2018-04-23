@@ -275,6 +275,8 @@ class SftController extends Controller
     {
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $this->authorizeInfo();
+
+
     }
 
     protected $wechat_info = [];
