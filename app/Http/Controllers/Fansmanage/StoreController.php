@@ -190,7 +190,7 @@ class StoreController extends Controller
                 }
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 2) {
+            if ($admin_data['is_super'] == 1) {
                 //超级管理员操作商户的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在粉丝管理系统创建了店铺：' . $organization_name);    //保存操作记录
             } else {
