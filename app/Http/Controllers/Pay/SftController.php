@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Request;
 use Session;
 use Symfony\Component\HttpFoundation\HeaderBag;
 use DB;
+use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class SftController extends Controller
 {
@@ -443,6 +444,7 @@ class SftController extends Controller
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($this->wechat_info["authorizer_access_token"], $openid);
+            dump($user_info);
             // 判断存在用户消息
             if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
                 // 用户id

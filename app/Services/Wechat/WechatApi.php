@@ -693,6 +693,7 @@ class WechatApi
                 $res = json_decode($param, true);
                 if (!empty($res["errcode"]) && $res["errcode"] != 0) {
                     // 错误处理
+                    dump($res);
                 } else {
                     return $res;
                 }
