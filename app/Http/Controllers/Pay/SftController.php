@@ -264,7 +264,14 @@ class SftController extends Controller
 
     public function test10()
     {
-
+        $a = [
+  "fansmanage_id" => 5,
+  "user_id" => null,
+  "open_id" => "oyhbt1EjF8vFIQJHG3qPiA-uOwBQ",
+  "status" => 1,
+];
+        $user_info = FansmanageUser::insertData($a, "update_create", ["open_id" => $a["open_id"]]);
+        dd($user_info);
     }
 
 
