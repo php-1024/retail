@@ -274,9 +274,8 @@ class SftController extends Controller
     public function test11()
     {
         request()->attributes->add(['organization_id' => 5]); //添加参数
-        $this->authorizeInfo();
-
-
+        $res = $this->authorizeInfo();
+        dump(session("zerone_auth_info"));
     }
 
     protected $wechat_info = [];
@@ -292,8 +291,7 @@ class SftController extends Controller
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
         }
-        \Session::flash("zerone_auth_info");
-        return session("zerone_auth_info");
+
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
@@ -328,6 +326,7 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            dump($res);
             if ($res === true) {
                 return redirect($url);
             }
