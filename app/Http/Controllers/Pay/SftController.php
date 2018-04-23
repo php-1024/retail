@@ -453,12 +453,14 @@ class SftController extends Controller
             $param["province"] = $user_info["province"];
             $param["head_imgurl"] = $user_info["headimgurl"];
             // 保存用户数据
-            UserInfo::insertData($param);
+            $res = UserInfo::insertData($param);
+            dd($res);
 
             // 数据提交
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollback();
             return false;
         }
