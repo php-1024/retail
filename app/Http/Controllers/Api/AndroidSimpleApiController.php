@@ -177,7 +177,7 @@ class AndroidSimpleApiController extends Controller
             DB::commit();//提交事务
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+            return response()->json(['msg' => $e.'提交订单失败', 'status' => '0', 'data' => '']);
         }
         return response()->json(['status' => '1', 'msg' => '提交订单成功', 'data' => ['order_id' => $order_id]]);
     }
@@ -364,7 +364,6 @@ class AndroidSimpleApiController extends Controller
         $payment_company = $request->payment_company;   //支付公司名字
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
-        return response()->json(['msg' => $stock_status, 'status' => '0', 'data' => '']);
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
