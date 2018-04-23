@@ -65,6 +65,7 @@
                                                 <option value="2" @if($search_data['paytype']=='2') selected @endif >支付宝二维码</option>
                                                 <option value="3" @if($search_data['paytype']=='3') selected @endif >微信扫码</option>
                                                 <option value="4" @if($search_data['paytype']=='4') selected @endif >微信二维码</option>
+                                                <option value="5" @if($search_data['paytype']=='5') selected @endif >POS机支付</option>
                                                 <option value="-1" @if($search_data['paytype']=='-1') selected @endif >现金支付，其他支付</option>
                                             </select>
                                         </div>
@@ -122,6 +123,8 @@
                                                 <label class="label label-info">微信扫码</label>
                                         @elseif($val->paytype == '4' )
                                                 <label class="label label-info">微信二维码</label>
+                                        @elseif($val->paytype == '5' )
+                                                <label class="label label-info">POS机支付</label>
                                         @elseif($val->paytype == '-1' )
                                                 <label class="label label-info">现金支付，其他支付</label>
                                         @elseif($val->paytype == null)
