@@ -338,12 +338,8 @@ class SftController extends Controller
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
 
-        dump($appid);
-
-        // 如果不存在 zerone_openid 就进行授权
         if (empty($code)) {
-            dump(1);
-            \Wechat::get_open_web_auth_url($url, $appid);
+            \Wechat::get_open_web_auth_url($appid, $url);
             exit;
         } else {
             dump(2);

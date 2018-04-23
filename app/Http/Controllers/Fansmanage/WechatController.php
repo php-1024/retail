@@ -48,7 +48,7 @@ class WechatController extends Controller
             $appid = 'wxab6d2b312939eb01';
             $redirect_url = request()->root() . '/api/wechat/open_web_redirect?param=' . $appid . '||' . $re['openid'];
             $url = \Wechat::get_open_web_auth_url($appid, $redirect_url);
-            echo "<script>location.href='" . $url . "'</script>";
+//            echo "<script>location.href='" . $url . "'</script>";
             exit();
         } else {
             exit('无效的的回调链接');

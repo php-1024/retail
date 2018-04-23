@@ -26,8 +26,7 @@ class WechatApi
     /*
      * 第三方平台代公众号获取页面授权第二步，获取access_token
      */
-    public
-    function get_open_web_access_token($appid, $auth_code)
+    public function get_open_web_access_token($appid, $auth_code)
     {
         $component_access_token = $this->get_component_access_token();
         $wxparam = config('app.wechat_open_setting');
