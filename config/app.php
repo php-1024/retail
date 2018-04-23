@@ -84,7 +84,8 @@ return [
      */
     'wechat_web_setting' => [
         'appid' => 'wx3fb8f4754008e524',
-        'appsecret' => 'e889b1da27356de8858ac9b7934fe228',
+        'appsecret' => 'eff84a38864f33660994eaaa2f258fcf',
+//        'appsecret' => 'e889b1da27356de8858ac9b7934fe228',
     ],
 
 
