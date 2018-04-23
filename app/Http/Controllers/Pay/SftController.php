@@ -355,6 +355,7 @@ class SftController extends Controller
         // 获取公众号的基本信息
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
 
+        dump($res);
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;
@@ -384,7 +385,6 @@ class SftController extends Controller
             return;
         }
 
-
         DB::beginTransaction();
         try {
             // 获取account 最大的值，然后就可以进行数据的累加
@@ -401,7 +401,6 @@ class SftController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
-            dump($e->getMessage());
             DB::rollback();
             return false;
         }
