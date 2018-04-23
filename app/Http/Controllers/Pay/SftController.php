@@ -338,7 +338,6 @@ class SftController extends Controller
         $appid = $this->wechat_info["authorizer_appid"];
 
         if (empty($code)) {
-            dump(11);
             \Wechat::get_open_web_auth_url($appid, $url,2);
             exit;
         } else {
