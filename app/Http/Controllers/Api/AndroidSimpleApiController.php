@@ -350,9 +350,9 @@ class AndroidSimpleApiController extends Controller
         if ($order_status != '0') {
             return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
-        $organization_id = $request->organization_id;//店铺
-        $paytype = $request->paytype;//支付方式
-        $payment_company = $request->payment_company;//支付公司名字
+        $organization_id = $request->organization_id;   //店铺
+        $paytype = $request->paytype;                   //支付方式
+        $payment_company = $request->payment_company;   //支付公司名字
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
         DB::beginTransaction();
         try {
@@ -436,7 +436,7 @@ class AndroidSimpleApiController extends Controller
     /**
      * 减库存
      * @order_id 订单id
-     * @status 1表示加库存，-1表示加库存
+     * @status 1表示减库存，-1表示加库存
      */
     private function reduce_stock($order_id, $status)
     {
@@ -472,7 +472,7 @@ class AndroidSimpleApiController extends Controller
                     $re = SimpleStock::getOneSimpleStock([['simple_id', $data['simple_id']], ['goods_id', $value['goods_id']]]);
                     $simple_stock = $re['stock'] - $value['total'];
                     SimpleStock::editStock([['id', $re['id']]], ['stock' => $simple_stock]);
-
+                    SimpleOrder::editSimpleOrder(['id'=>$order_id],['stock_status'=>'1']);    //修改stock_status为1表示该订单的库存状态已经减去
                 }
             } else {
                 $goodsdata = SimpleOrderGoods::where([['order_id', $order_id]])->get();//订单快照中的商品
@@ -495,6 +495,7 @@ class AndroidSimpleApiController extends Controller
                     $re = SimpleStock::getOneSimpleStock([['simple_id', $data['simple_id']], ['goods_id', $value['goods_id']]]);
                     $simple_stock = $re['stock'] + $value['total'];
                     SimpleStock::editStock([['id', $re['id']]], ['stock' => $simple_stock]);
+                    SimpleOrder::editSimpleOrder(['id'=>$order_id],['stock_status'=>'-1']);    //修改stock_status为-1表示该订单的库存状态已经退回
                 }
             }
             DB::commit();//提交事务
