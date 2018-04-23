@@ -306,7 +306,6 @@ class SftController extends Controller
         }
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
-        dump(session("zerone_auth_info"));
     }
 
     /**
