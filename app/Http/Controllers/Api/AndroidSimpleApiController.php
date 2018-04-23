@@ -389,6 +389,7 @@ class AndroidSimpleApiController extends Controller
         return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
     }
 
+
     /**
      * 开启/关闭零库存开单接口
      */
