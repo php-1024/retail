@@ -209,7 +209,7 @@ class AndroidSimpleApiController extends Controller
                     return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
                 }
             }
-            SimpleOrder::editSimpleOrder([['id', $order_id]], ['stock_status' => '-1']);  //设置订单（库存修改状态），-1表示已经退回订单库存
+            SimpleOrder::editSimpleOrder([['id', $order_id]], ['status' => '-1','stock_status' => '-1']);  //设置订单（库存修改状态），-1表示已经退回订单库存同时修改订单状态为取消
             DB::commit();//提交事务
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
