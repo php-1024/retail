@@ -31,7 +31,7 @@
                     <span class="arrow top"></span>
                     <a href="#"></a>
                 </li>
-                @if($admin_data['is_super'] == 2)
+                @if($admin_data['is_super'] == 1)
                 <li>
                     <a href="{{url('fansmanage/switch_status')}}">切换商铺</a>
                 </li>
