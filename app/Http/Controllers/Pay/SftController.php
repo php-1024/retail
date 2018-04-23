@@ -292,7 +292,7 @@ class SftController extends Controller
             return "微信公众号没有授权到第三方";
         }
 
-        return session("zerone_auth_info");
+        return 1;
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
