@@ -317,6 +317,8 @@ class AndroidSimpleApiController extends Controller
     {
         $order_id = $request->order_id;//订单id
         $order = SimpleOrder::getOne([['id', $order_id]]);
+        echo $order['status'];
+        exit;
         if ($order['status'] != '0') {
             return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
         }
