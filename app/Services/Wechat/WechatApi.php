@@ -13,13 +13,23 @@ use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 
 class WechatApi
 {
-    /*
+    /**
      * 第三方平台代公众号页面授权链接，第一步，通过授权链接获取code
-    */
-    public function get_open_web_auth_url($appid, $redirect_url)
+     * @param $appid
+     * @param $redirect_url
+     * @param int $auth_type
+     * @return mixed
+     */
+    public function get_open_web_auth_url($appid, $redirect_url, $auth_type = 1)
     {
+        $auth_type_arr = ["1" => "snsapi_base", "2" => "snsapi_userinfo"];
+        // 判断是否存在 appid ,没有的话用系统默认的
+        $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
+        // 判断是那种授权类型
+        $auth_type = $auth_type_arr[$auth_type];
+        // 获取开发平台的 基础信息
         $wxparam = config('app.wechat_open_setting');
-        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' . $appid . '&redirect_uri=' . $redirect_url . '&response_type=code&scope=snsapi_userinfo&state=lyxkj2018&component_appid=' . $wxparam['open_appid'] . '#wechat_redirect';
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}'&redirect_uri={$redirect_url}&response_type=code&scope={$auth_type}&state=lyxkj2018&component_appid={$wxparam['open_appid']}#wechat_redirect";
         return $this->resultReturnDispose($url, "redirect");
     }
 
@@ -79,8 +89,7 @@ class WechatApi
      * @param int $auth_type 授权类型
      * @return string
      */
-    public
-    function get_web_auth_url($redirect_uri, $appid = '', $auth_type = 1)
+    public function get_web_auth_url($redirect_uri, $appid = '', $auth_type = 1)
     {
         $auth_type_arr = ["1" => "snsapi_base", "2" => "snsapi_userinfo"];
         // 判断是否存在 appid ,没有的话用系统默认的
