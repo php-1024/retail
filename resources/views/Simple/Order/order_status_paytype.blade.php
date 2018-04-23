@@ -26,6 +26,7 @@
                                         <option value="2">支付宝二维码</option>
                                         <option value="3">微信扫码</option>
                                         <option value="4">微信二维码</option>
+                                        <option value="5">POS机支付</option>
                                         <option value="0">银行卡支付</option>
                                 </select>
                             </div>

@@ -37,7 +37,7 @@ class ShopController extends Controller
         // 组织id
         $organization_id = $admin_data['organization_id'];
         // 判断是否为超级管理员
-        if ($admin_data['is_super'] == 1) {
+        if ($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0) {
             // 获取组织名
             $organization_name = $request->organization_name;
             // 获取粉丝管理类型数据
@@ -91,7 +91,7 @@ class ShopController extends Controller
                 // 组织ID
                 'organization_id' => $account_info->organization_id,
                 // 是否超级管理员
-                'is_super' => '2',
+                'is_super' => '1',
                 // 上级ID
                 'parent_id' => $account_info->parent_id,
                 // 上级树
@@ -143,7 +143,9 @@ class ShopController extends Controller
      */
     public function switch_status(Request $request)
     {
-        // 渲染页面
+        $admin_data = $request->get('admin_data');                //中间件产生的管理员数据参数
+        $admin_data['organization_id'] = 0;
+        ZeroneRedis::create_fansmanage_account_cache(1, $admin_data);//清空所选组织
         return redirect('fansmanage');
     }
 

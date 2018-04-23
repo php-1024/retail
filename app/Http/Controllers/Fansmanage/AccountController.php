@@ -37,7 +37,7 @@ class AccountController extends Controller
         //获取当前的页面路由
         $route_name = $request->path();
         // 如果是超级管理员，获取账号信息
-        if ($admin_data['is_super'] == 2) {
+        if ($admin_data['is_super'] == 1) {
             $user = Account::getOne([['id', 1]]);
         } else {
             $user = Account::getOne([['id', $admin_data['id']]]);
@@ -97,7 +97,7 @@ class AccountController extends Controller
         // 获取组织id
         $organization_id = $request->input('organization_id');
         // 获取账户信息
-        if ($admin_data['is_super'] == 2) {
+        if ($admin_data['is_super'] == 1) {
             $oneAcc = Account::getOne([['id', 1]]);
         } else {
             $oneAcc = Account::getOne([['id', $id]]);
@@ -113,7 +113,7 @@ class AccountController extends Controller
                     return response()->json(['data' => '手机号已存在', 'status' => '0']);
                 }
                 // 判断手机号码是否超级管理员手机号码一致
-                if ($admin_data['is_super'] != 2) {
+                if ($admin_data['is_super'] != 1) {
                     if (Account::checkRowExists([['organization_id', '0'], ['mobile', $mobile]])) {
                         return response()->json(['data' => '手机号码已存在', 'status' => '0']);
                     }
@@ -128,7 +128,7 @@ class AccountController extends Controller
             // 判断姓名是否发生改变
             if ($oneAcc['account_info']['realname'] != $realname) {
                 // 判断真实姓名是否超级管理员真实姓名一致
-                if ($admin_data['is_super'] != 2) {
+                if ($admin_data['is_super'] != 1) {
                     // 修改店铺用户信息表 用户姓名
                     OrganizationStoreinfo::editOrganizationStoreinfo([['organization_id', $organization_id]], ['store_owner' => $realname]);
                 }
@@ -142,7 +142,7 @@ class AccountController extends Controller
             $admin_data['mobile'] = $mobile;
 
             // 保存操作记录
-            if ($admin_data['is_super'] == 2) {
+            if ($admin_data['is_super'] == 1) {
                 OperationLog::addOperationLog('3', '1', '1', $route_name, '在店铺系统修改了个人信息');
             } else {
                 // 将账号信息保存到redis 中，生成账号数据的Redis缓存-店铺
@@ -178,7 +178,7 @@ class AccountController extends Controller
 
         $id = $admin_data['id'];
         // 获取账号信息
-        if ($admin_data['is_super'] == 2) {
+        if ($admin_data['is_super'] == 1) {
             $oneAcc = Account::getOne([['id', 1]]);
         } else {
             $oneAcc = Account::getOne([['id', $id]]);
@@ -206,7 +206,7 @@ class AccountController extends Controller
         $safe_password = $request->input('safe_password');
 
         // 获取加密盐
-        if ($admin_data['is_super'] == 2) {
+        if ($admin_data['is_super'] == 1) {
             $key = config("app.zerone_safe_encrypt_key");
         } else {
             $key = config("app.fansmanage_safe_encrypt_key");
@@ -224,7 +224,7 @@ class AccountController extends Controller
             try {
                 $admin_data['safe_password'] = $encryptPwd;
                 // 判断是不是超级管理员
-                if ($admin_data['is_super'] == 2) {
+                if ($admin_data['is_super'] == 1) {
                     // 编辑安全密码
                     Account::editAccount([['id', 1]], ['safe_password' => $encryptPwd]);
                     // 在零壹保存操作记录
@@ -254,7 +254,7 @@ class AccountController extends Controller
                 try {
                     $admin_data['safe_password'] = $encryptPwd;
                     // 判断是不是超级管理员
-                    if ($admin_data['is_super'] == 2) {
+                    if ($admin_data['is_super'] == 1) {
                         // 编辑安全密码
                         Account::editAccount([['id', 1]], ['safe_password' => $encryptPwd]);
                         // 在零壹保存操作记录
@@ -301,7 +301,7 @@ class AccountController extends Controller
 
         $id = $admin_data['id'];
         // 获取账号信息
-        if ($admin_data['is_super'] == 2) {
+        if ($admin_data['is_super'] == 1) {
             $oneAcc = Account::getOne([['id', 1]]);
         } else {
             $oneAcc = Account::getOne([['id', $id]]);
@@ -332,7 +332,7 @@ class AccountController extends Controller
         $password = $request->input('password');
 
         // 获取加密盐
-        if ($admin_data['is_super'] == 2) {
+        if ($admin_data['is_super'] == 1) {
             $key = config("app.zerone_encrypt_key");
         } else {
             $key = config("app.fansmanage_encrypt_key");
@@ -349,7 +349,7 @@ class AccountController extends Controller
                 // 编辑安全密码
                 Account::editAccount([['id', $id]], ['password' => $encryptPwd]);
                 // 保存操作记录
-                if ($admin_data['is_super'] == 2) {
+                if ($admin_data['is_super'] == 1) {
                     OperationLog::addOperationLog('1', '1', $id, $route_name, '在粉丝管理系统修改了登录密码');
                 } else {
                     OperationLog::addOperationLog('3', $admin_data['organization_id'], $id, $route_name, '修改了登录密码');
