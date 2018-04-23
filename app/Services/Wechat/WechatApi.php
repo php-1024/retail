@@ -660,8 +660,7 @@ class WechatApi
      * @param $type
      * @return mixed
      */
-    public
-    function resultReturnDispose($param, $type = "json")
+    public function resultReturnDispose($param, $type = "json")
     {
         switch ($type) {
             // 返回的是接口 json 数据类型的
@@ -673,11 +672,7 @@ class WechatApi
                     return $res;
                 }
                 break;
-            // 直接返回结果的，例如二维码
-            case "string" :
-                // 直接返回的
-                return $param;
-                break;
+
             // 进行跳转的，例如网页授权
             case "redirect" :
                 Header("Location:{$param}");
@@ -690,6 +685,12 @@ class WechatApi
                 } else {
                     return $this->showQrCode($param["ticket"]);
                 }
+                break;
+            // 直接返回结果的，例如二维码
+            case "string" :
+                // 直接返回的
+                return $param;
+                break;
         }
     }
 

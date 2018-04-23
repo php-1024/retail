@@ -342,7 +342,6 @@ class SftController extends Controller
             \Wechat::get_open_web_auth_url($appid, $url);
             exit;
         } else {
-            dump(2);
             $this->setAuthorizeShopInfo($appid, $code);
         }
     }
@@ -434,6 +433,8 @@ class SftController extends Controller
 
         DB::beginTransaction();
         try {
+            dump(1);
+
             // 店铺公众号的信息
             // 组织id
             $param["fansmanage_id"] = request()->get("organization_id");
@@ -464,6 +465,9 @@ class SftController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            dump(2);
+            dump($e->getMessage());
+
             DB::rollback();
             return false;
         }
