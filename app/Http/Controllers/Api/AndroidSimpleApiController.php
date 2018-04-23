@@ -176,7 +176,7 @@ class AndroidSimpleApiController extends Controller
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
-            dd($e);
+            dd($stock_status);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
