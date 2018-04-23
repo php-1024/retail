@@ -13,9 +13,13 @@ use App\Services\Wechat\wxfiles\WXBizMsgCrypt;
 
 class WechatApi
 {
-    /*
+    /**
      * 第三方平台代公众号页面授权链接，第一步，通过授权链接获取code
-    */
+     * @param $appid
+     * @param $redirect_url
+     * @param int $auth_type
+     * @return mixed
+     */
     public function get_open_web_auth_url($appid, $redirect_url, $auth_type = 1)
     {
         $auth_type_arr = ["1" => "snsapi_base", "2" => "snsapi_userinfo"];
