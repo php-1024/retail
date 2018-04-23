@@ -296,7 +296,7 @@ class SftController extends Controller
         }
 
         // 判断 session 中是否存在店铺id
-        if (empty(session("zerone_auth_info.shop_id"))) {
+        if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
             return;
         }
@@ -410,7 +410,7 @@ class SftController extends Controller
     }
 
     /**
-    /**
+     * /**
      * @param $appid
      * @param $code
      * @param string $re_url
@@ -442,8 +442,8 @@ class SftController extends Controller
             $param["status"] = 1;
 
             // 创建或者更新粉丝数据
-            FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
-            session(["zerone_auth_info" => ["shop_id" => request()->get("shop_id")]]);
+            $user_info = FansmanageUser::insertData($param, "update_create", ["openid" => $param["open_id"]]);
+            session(["zerone_auth_info" => ["shop_user_id" => $user_info["id"]]]);
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($this->wechat_info["authorizer_access_token"], $openid);
@@ -468,7 +468,6 @@ class SftController extends Controller
             return false;
         }
     }
-
 
 
     /**
