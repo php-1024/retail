@@ -444,21 +444,17 @@ class SftController extends Controller
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+            // 用户id
+            $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+            $param["nickname"] = $user_info["nickname"];
+            $param["sex"] = $user_info["sex"];
+            $param["city"] = $user_info["city"];
+            $param["country"] = $user_info["country"];
+            $param["province"] = $user_info["province"];
+            $param["head_imgurl"] = $user_info["headimgurl"];
+            // 保存用户数据
+            UserInfo::insertData($param);
 
-            // 判断存在用户消息
-            if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
-                dump(222);
-                // 用户id
-                $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
-                $param["nickname"] = $user_info["nickname"];
-                $param["sex"] = $user_info["sex"];
-                $param["city"] = $user_info["city"];
-                $param["country"] = $user_info["country"];
-                $param["province"] = $user_info["province"];
-                $param["head_imgurl"] = $user_info["headimgurl"];
-                // 保存用户数据
-                UserInfo::insertData($param);
-            }
             // 数据提交
             DB::commit();
             return true;
