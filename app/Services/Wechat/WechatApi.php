@@ -54,6 +54,7 @@ class WechatApi
         // 获取授权信息
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$auth_code}&grant_type=authorization_code";
         $re = \HttpCurl::doGet($url);
+        return $re;
         // 结果处理
         return $this->resultReturnDispose($re, "json");
     }
