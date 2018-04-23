@@ -167,7 +167,7 @@ class AndroidSimpleApiController extends Controller
             $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
             $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
             if ($power != '1') {//说明下单减库存
-                if ($stock_status != 1){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                if ($stock_status != '1'){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
                     $re = $this->reduce_stock($order_id, '1');//减库存
                     if ($re != 'ok') {
                         return $re;
@@ -197,7 +197,7 @@ class AndroidSimpleApiController extends Controller
         DB::beginTransaction();
         try {
             if ($power != '1') {//说明下单减库存 所以要把库存归还
-                if ($stock_status != -1) {//说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                if ($stock_status != '-1') {//说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
                     $re = $this->reduce_stock($order_id, '-1');//加库存
                     if ($re != 'ok') {
                         return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
@@ -333,7 +333,7 @@ class AndroidSimpleApiController extends Controller
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
-                if ($stock_status != 1) {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                if ($stock_status != '1') {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
                     $re = $this->reduce_stock($order_id, '1');//减库存
                     if ($re != 'ok') {
                         return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
@@ -367,7 +367,7 @@ class AndroidSimpleApiController extends Controller
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
-                if ($stock_status != 1) {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                if ($stock_status != '1') {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
                     $re = $this->reduce_stock($order_id, '1');//减库存
                     if ($re != 'ok') {
                         return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
