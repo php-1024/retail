@@ -327,7 +327,8 @@ class SftController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            dd($res);
         }
     }
 
@@ -462,6 +463,7 @@ class SftController extends Controller
 
             dump(session("zerone_auth_info"));
             dump($param_user_info);
+
             // 保存用户数据
             $res = UserInfo::insertData($param_user_info);
             dump($res);
