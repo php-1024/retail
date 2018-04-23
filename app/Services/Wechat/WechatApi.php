@@ -68,6 +68,21 @@ class WechatApi
         return $this->resultReturnDispose($re, "json");
     }
 
+    /**
+     * 通过 授权得到的 access_token（跟通过 appid 和 appsecret 获取的 access_token 不一样）
+     * 获取用户信息
+     * @param $access_token
+     * @param $openid
+     * @return mixed
+     */
+    public function get_web_user_info($access_token, $openid)
+    {
+        // 获取用户信息
+        $url = "https://api.weixin.qq.com/sns/userinfo?access_token={$access_token}&openid={$openid}&lang=zh_CN";
+        $re = \HttpCurl::doGet($url);
+        // 结果处理
+        return $this->resultReturnDispose($re, "json");
+    }
 
 //    /*
 //     * 获取用户对于默认零壹公众号的唯一open_id;
