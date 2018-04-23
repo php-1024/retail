@@ -323,6 +323,7 @@ class SftController extends Controller
             return;
         }
 
+        dump(session("zerone_auth_info"));
         return session("zerone_auth_info");
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_id"))) {
@@ -334,7 +335,8 @@ class SftController extends Controller
 
     /**
      * 获取用户信息,并判断是否需要进行跳转
-     * @param string $url 跳转的地址
+     * @param $url
+     * @throws \Exception
      */
     public function getAuthorizeZeroneInfo($url)
     {
@@ -356,6 +358,10 @@ class SftController extends Controller
     /**
      * 店铺 网页授权
      * @param string $url 跳转地址
+     */
+    /**
+     * @param $url
+     * @throws \Exception
      */
     public function getAuthorizeShopInfo($url)
     {
@@ -394,7 +400,8 @@ class SftController extends Controller
      * @param $appid
      * @param $appsecret
      * @param $code
-     * @return bool
+     * @return bool|void
+     * @throws \Exception
      */
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
@@ -431,10 +438,12 @@ class SftController extends Controller
     }
 
     /**
+    /**
      * @param $appid
      * @param $code
      * @param string $re_url
-     * @return bool
+     * @return bool|void
+     * @throws \Exception
      */
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
@@ -487,15 +496,17 @@ class SftController extends Controller
     }
 
 
+
     /**
      * 店铺保存用户授权信息
      * @param $appid
      * @param $appsecret
-     * @param $type
      * @param $code
+     * @param string $type
      * @param bool $get_user_info
-     * @param $re_url
-     * @return boolean
+     * @param string $re_url
+     * @return bool
+     * @throws \Exception
      */
     public function setAuthorizeInfo($appid, $appsecret, $code, $type = "zerone_info", $get_user_info = false, $re_url = "")
     {
