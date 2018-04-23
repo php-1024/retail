@@ -329,9 +329,7 @@ class AndroidSimpleApiController extends Controller
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
-        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
-        echo $stock_status;
-        exit;
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
