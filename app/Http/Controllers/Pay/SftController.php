@@ -292,26 +292,23 @@ class SftController extends Controller
             return "微信公众号没有授权到第三方";
         }
 
-
-
-        dump(session("zerone_auth_info"));
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
-            return ;
+            return;
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
-            return ;
+            return;
         }
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);//添加参数
     }
 
     /**
-     * 获取用户信息,并判断是否需要进行跳转
      * @param $url
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
     public function getAuthorizeZeroneInfo($url)
@@ -327,7 +324,9 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return redirect($url);
+            if ($res === true) {
+                return redirect($url);
+            }
         }
     }
 
@@ -341,7 +340,6 @@ class SftController extends Controller
     {
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
-
         if (empty($code)) {
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
@@ -419,7 +417,6 @@ class SftController extends Controller
      */
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
-        dump(session("zerone_auth_info"));
 
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
@@ -440,22 +437,13 @@ class SftController extends Controller
             $param["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param["open_id"] = $openid;
             $param["status"] = 1;
-
-            dump(1);
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
 
-            dump(session("zerone_auth_info"));
-
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
-
-            dump(session("zerone_auth_info"));
-
-
 
             // 用户id
             $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
@@ -465,19 +453,12 @@ class SftController extends Controller
             $param_user_info["country"] = $user_info["country"];
             $param_user_info["province"] = $user_info["province"];
             $param_user_info["head_imgurl"] = $user_info["headimgurl"];
-
-            dump(session("zerone_auth_info"));
-            dump($param_user_info);
-
-            // 保存用户数据
+            // 保存用户数据$
             $res = UserInfo::insertData($param_user_info);
-            dump($res);
-
             // 数据提交
             DB::commit();
             return true;
         } catch (\Exception $e) {
-            dump($e->getMessage());
             DB::rollback();
             return false;
         }
