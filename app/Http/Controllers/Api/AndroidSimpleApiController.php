@@ -178,10 +178,10 @@ class AndroidSimpleApiController extends Controller
             }
             $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
             $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
-            dd($stock_status);
-            exit;
             if ($power != '1') {//说明下单减库存
                 if ($stock_status != '1'){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                    echo 'ok';
+                    exit;
                     $re = $this->reduce_stock($order_id, '1');//减库存
                     SimpleOrder::editSimpleOrder([['id', $order_id]], ['stock_status' => '1']);  //设置订单（库存修改状态），1表示已经减去订单库存
                     if ($re != 'ok') {
