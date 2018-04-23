@@ -300,7 +300,6 @@ class SftController extends Controller
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info")["shop_user_id"])) {
             $this->getAuthorizeShopInfo($url);
-            return;
         }
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);//添加参数
     }
@@ -443,9 +442,14 @@ class SftController extends Controller
             // 缓存用户的店铺id
             session(["zerone_auth_info" => ["shop_user_id" => $fansmanage_user["id"]]]);
 
-
+            dump(session("zerone_auth_info"));
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+
+
+            dump(session("zerone_auth_info"));
+
+
 
             // 用户id
             $param_user_info["user_id"] = session("zerone_auth_info")["zerone_user_id"];
