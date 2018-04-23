@@ -399,8 +399,9 @@ class SftController extends Controller
             $param["password"] = 123456;
             $param["safepassword"] = 123456;
             $param["zerone_open_id"] = $openid;
+            $param["mobile"] = "13333333333";
             $param["status"] = 1;
-            $res = User::insertData($param, "update_create", ["zerone_openid" => $param["zerone_open_id"]]);
+            $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
             dump($res);
             session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
             // 数据提交
