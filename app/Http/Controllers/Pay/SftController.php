@@ -291,13 +291,10 @@ class SftController extends Controller
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $res = $this->getAuthorizeZeroneInfo($url);
-            dump($res);
+            $this->getAuthorizeZeroneInfo($url);
             return;
         }
 
-        dump(session("zerone_auth_info"));
-        return session("zerone_auth_info");
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_id"))) {
             $this->getAuthorizeShopInfo($url);
@@ -324,8 +321,7 @@ class SftController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return $res;
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
         }
     }
 
@@ -402,7 +398,6 @@ class SftController extends Controller
             $param["mobile"] = "13333333333";
             $param["status"] = 1;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
-            dump($res);
             session(["zerone_auth_info" => ["zerone_user_id" => $res["id"]]]);
             // 数据提交
             DB::commit();
