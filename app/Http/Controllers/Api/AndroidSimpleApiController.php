@@ -109,7 +109,7 @@ class AndroidSimpleApiController extends Controller
     }
 
     /**
-     * 提单提交接口
+     * 订单提交接口
      */
     public function order_check(Request $request)
     {
@@ -135,6 +135,10 @@ class AndroidSimpleApiController extends Controller
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
+                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status');//查询商品是否下架
+                if ($goods_status == '0'){
+                    return response()->json(['msg' => '对不起该账号，就在刚刚部分商品被下架了，请返回首页重新选购！', 'status' => '0', 'data' => '']);
+                }
                 $order_price += $v['price'] * $v['num'];
             }
         }
