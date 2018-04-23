@@ -135,8 +135,7 @@ class AndroidSimpleApiController extends Controller
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
-                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status');//查询商品是否下架
-                dd($goods_status);
+                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status')->first();//查询商品是否下架
                 if ($goods_status == '0'){
                     return response()->json(['msg' => '对不起该账号，就在刚刚部分商品被下架了，请返回首页重新选购！', 'status' => '0', 'data' => '']);
                 }
