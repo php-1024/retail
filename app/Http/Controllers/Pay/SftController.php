@@ -338,9 +338,11 @@ class SftController extends Controller
         $appid = $this->wechat_info["authorizer_appid"];
 
         if (empty($code)) {
+            dump(11);
             \Wechat::get_open_web_auth_url($appid, $url,2);
             exit;
         } else {
+            dump(22);
             $this->setAuthorizeShopInfo($appid, $code);
         }
     }
@@ -355,7 +357,6 @@ class SftController extends Controller
         // 获取公众号的基本信息
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
 
-        dump($res);
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;
