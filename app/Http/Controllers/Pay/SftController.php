@@ -15,6 +15,7 @@ use App\Services\Curl\HttpCurl;
 use Illuminate\Support\Facades\Request;
 use Session;
 use Symfony\Component\HttpFoundation\HeaderBag;
+use DB;
 
 class SftController extends Controller
 {
@@ -407,6 +408,7 @@ class SftController extends Controller
             $this->getAuthorizeZeroneInfo(request()->url());
             return;
         }
+
 
         DB::beginTransaction();
         try {
