@@ -276,9 +276,7 @@ class SftController extends Controller
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $res = $this->authorizeInfo();
         dump(session("zerone_auth_info"));
-
-
-//        \Session::flash("zerone_auth_info");
+        \Session::flash("zerone_auth_info");
     }
 
     protected $wechat_info = [];
