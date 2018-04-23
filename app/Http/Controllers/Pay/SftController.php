@@ -443,7 +443,7 @@ class SftController extends Controller
             session(["zerone_auth_info" => ["shop_user_id" => $user_info["id"]]]);
 
             // 获取用户的信息
-            $user_info = \Wechat::get_web_user_info($this->wechat_info["authorizer_access_token"], $openid);
+            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
             dump($user_info);
             // 判断存在用户消息
             if (!empty($user_info["errcode"]) && $user_info["errcode"] != 0) {
