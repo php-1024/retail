@@ -266,13 +266,13 @@ class SftController extends Controller
     {
         $a = [
   "fansmanage_id" => 5,
-  "user_id" => null,
+  "user_id" => 123,
   "open_id" => "oyhbt1EjF8vFIQJHG3qPiA-uOwBQ",
   "status" => 1,
 ];
-        dd($a);
 
-        $user_info = FansmanageUser::insertData($a, "update_create", ["open_id" => $a["open_id"]]);
+
+        $user_info = FansmanageUser::insertData($a, "update_create", ["id" => 2]);
         dd($user_info);
     }
 
@@ -443,8 +443,6 @@ class SftController extends Controller
             $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
             $param["open_id"] = $openid;
             $param["status"] = 1;
-
-            dump($param);
 
             // 创建或者更新粉丝数据
             $user_info = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
