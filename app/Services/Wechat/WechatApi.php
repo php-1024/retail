@@ -695,6 +695,7 @@ class WechatApi
                     // 错误处理
                     dump($res);
                 } else {
+                    dump($res);
                     return $res;
                 }
                 break;
