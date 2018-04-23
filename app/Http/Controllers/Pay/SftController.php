@@ -295,7 +295,6 @@ class SftController extends Controller
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info")["zerone_user_id"])) {
             $this->getAuthorizeZeroneInfo($url);
-            return;
         }
 
         // 判断 session 中是否存在店铺id
@@ -309,7 +308,6 @@ class SftController extends Controller
     /**
      * 获取用户信息,并判断是否需要进行跳转
      * @param $url
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @throws \Exception
      */
     public function getAuthorizeZeroneInfo($url)
@@ -325,7 +323,6 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return redirect($url);
         }
     }
 
