@@ -291,9 +291,7 @@ class SftController extends Controller
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
         }
-
-
-
+        dump(session("zerone_auth_info"));
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info")["zerone_user_id"])) {
@@ -323,7 +321,6 @@ class SftController extends Controller
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
-//            exit;
         } else {
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
@@ -444,6 +441,7 @@ class SftController extends Controller
             $param["open_id"] = $openid;
             $param["status"] = 1;
 
+            dump(1);
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
             // 缓存用户的店铺id
