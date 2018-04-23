@@ -411,12 +411,19 @@ Route::group(['prefix' => 'fansmanage'], function () {
     });
 
     //切换公众号粉丝平台
-    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');                                //系统首页
-    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');              //超级管理员切换代理
-    Route::get('quit', 'Fansmanage\ShopController@quit');                                                               //退出系统
-    Route::post('select_shop', 'Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');                  //超级管理员选择登入的代理
-    Route::get('operation_log', 'Fansmanage\ShopController@operation_log')->middleware('FansmanageCheck');              //操作日记
-    Route::get('login_log', 'Fansmanage\ShopController@login_log')->middleware('FansmanageCheck');                      //登入日记
+
+    //系统首页
+    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');
+    //超级管理员切换代理
+    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');
+    //退出系统
+    Route::get('quit', 'Fansmanage\ShopController@quit');
+    //超级管理员选择登入的代理
+    Route::post('select_shop', 'Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');
+    //操作日记
+    Route::get('operation_log', 'Fansmanage\ShopController@operation_log')->middleware('FansmanageCheck');
+    //登入日记
+    Route::get('login_log', 'Fansmanage\ShopController@login_log')->middleware('FansmanageCheck');
 
 
     //账号中心
@@ -431,17 +438,18 @@ Route::group(['prefix' => 'fansmanage'], function () {
     //公众号管理
     Route::group(['prefix' => 'api'], function () {
         Route::get('store_auth', 'Fansmanage\ApiController@store_auth')->middleware('FansmanageCheck');                 //公众号管理
-        Route::get('material_image', 'Fansmanage\ApiController@material_image')->middleware('FansmanageCheck');         //公众号管理
-        Route::get('material_article', 'Fansmanage\ApiController@material_article')->middleware('FansmanageCheck');//图文素材列表
-        Route::get('material_article_add', 'Fansmanage\ApiController@material_article_add')->middleware('FansmanageCheck');//图文素材列表
-        Route::get('material_articles_add', 'Fansmanage\ApiController@material_articles_add')->middleware('FansmanageCheck');//添加多条图文列表
-        Route::get('material_article_edit', 'Fansmanage\ApiController@material_article_edit')->middleware('FansmanageCheck');//添加多条图文列表
-        Route::get('material_articles_edit', 'Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//添加多条图文列表
+        Route::get('material_image', 'Fansmanage\ApiController@material_image')->middleware('FansmanageCheck');         //图片素材列表
+
+
+        Route::get('material_article', 'Fansmanage\ApiController@material_article')->middleware('FansmanageCheck');     //图文素材列表
+        Route::get('material_article_add', 'Fansmanage\ApiController@material_article_add')->middleware('FansmanageCheck');//编辑素材列表
+        Route::get('material_articles_add', 'Fansmanage\ApiController@material_articles_add')->middleware('FansmanageCheck');//添加多条图文
+        Route::get('material_article_edit', 'Fansmanage\ApiController@material_article_edit')->middleware('FansmanageCheck');//编辑单条图文
+        Route::get('material_articles_edit', 'Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//编辑多条图文
     });
 
     //公众号管理--消息管理
     Route::group(['prefix' => 'message'], function () {
-        Route::get('defined_menu', 'Fansmanage\MessageController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
         Route::get('auto_reply', 'Fansmanage\MessageController@auto_reply')->middleware('FansmanageCheck');//关键词自动回复
         Route::get('subscribe_reply', 'Fansmanage\MessageController@subscribe_reply')->middleware('FansmanageCheck');//关注事件自动回复
         Route::get('default_reply', 'Fansmanage\MessageController@default_reply')->middleware('FansmanageCheck');//默认回复
@@ -461,7 +469,7 @@ Route::group(['prefix' => 'fansmanage'], function () {
         //粉丝用户管理
         Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                              //粉丝搜索
         Route::post('user_search', 'Fansmanage\UserController@user_list_search')->middleware('FansmanageCheck');                    //粉丝用户管理
-        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
+//        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 
 
@@ -508,18 +516,23 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::post('auto_reply_edit_check', 'Fansmanage\MessageController@auto_reply_edit_check')->middleware('FansmanageCheckAjax');//编辑自动回复关键字功能提交
         Route::post('auto_reply_delete_confirm', 'Fansmanage\MessageController@auto_reply_delete_confirm')->middleware('FansmanageCheckAjax');//删除关键字ajax显示
         Route::post('auto_reply_delete_check', 'Fansmanage\MessageController@auto_reply_delete_check')->middleware('FansmanageCheckAjax');//删除关键字功能提交
+
         Route::post('subscribe_reply_text_edit', 'Fansmanage\MessageController@subscribe_reply_text_edit')->middleware('FansmanageCheckAjax');//关注后自动回复文字ajax显示
         Route::post('subscribe_reply_text_edit_check', 'Fansmanage\MessageController@subscribe_reply_text_edit_check')->middleware('FansmanageCheckAjax');//关注后自动回复文字功能提交
         Route::post('subscribe_reply_image_edit', 'Fansmanage\MessageController@subscribe_reply_image_edit')->middleware('FansmanageCheckAjax');//关注后图片回复ajax显示
         Route::post('subscribe_reply_image_edit_check', 'Fansmanage\MessageController@subscribe_reply_image_edit_check')->middleware('FansmanageCheckAjax');//关注后图片回复功能提交
         Route::post('subscribe_reply_article_edit', 'Fansmanage\MessageController@subscribe_reply_article_edit')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材ajax显示
         Route::post('subscribe_reply_article_edit_check', 'Fansmanage\MessageController@subscribe_reply_article_edit_check')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材功能提交
+
         Route::post('default_reply_text_edit', 'Fansmanage\MessageController@default_reply_text_edit')->middleware('FansmanageCheckAjax');//默认回复文字回复ajax显示
         Route::post('default_reply_text_edit_check', 'Fansmanage\MessageController@default_reply_text_edit_check')->middleware('FansmanageCheckAjax');//默认回复文字回复功能提交
         Route::post('default_reply_image_edit', 'Fansmanage\MessageController@default_reply_image_edit')->middleware('FansmanageCheckAjax');//默认回复图片素材ajax显示
         Route::post('default_reply_image_edit_check', 'Fansmanage\MessageController@default_reply_image_edit_check')->middleware('FansmanageCheckAjax');//默认回复图片素材功能提交
         Route::post('default_reply_article_edit', 'Fansmanage\MessageController@default_reply_article_edit')->middleware('FansmanageCheckAjax');//默认回复图文素材ajax显示
         Route::post('default_reply_article_edit_check', 'Fansmanage\MessageController@default_reply_article_edit_check')->middleware('FansmanageCheckAjax');//默认回复图文素材能提交
+
+
+
 
 
         //公众号管理--菜单管理--自定义
@@ -544,6 +557,9 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
         Route::any('wechat_conditional_menu_add', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
         Route::any('wechat_conditional_menu_add_check', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
+
+
+
 
 
         //用户管理
