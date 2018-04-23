@@ -2,6 +2,7 @@
 /**
  * 粉丝管理系统登录体系
  */
+
 namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
