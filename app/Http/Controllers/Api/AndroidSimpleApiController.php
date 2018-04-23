@@ -167,16 +167,16 @@ class AndroidSimpleApiController extends Controller
             $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
             $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
             if ($power != '1') {//说明下单减库存
-                if ($stock_status != 1){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+//                if ($stock_status != 1){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
                     $re = $this->reduce_stock($order_id, '1');//减库存
                     if ($re != 'ok') {
                         return $re;
-                    }
+//                    }
                 }
             }
             DB::commit();//提交事务
         } catch (\Exception $e) {
-            dd($e);
+//            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
         }
