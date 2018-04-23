@@ -295,6 +295,9 @@ class SftController extends Controller
             return;
         }
 
+        dump(session("zerone_auth_info.shop_user_id"));
+        dump(session("zerone_auth_info.zerone_user_id"));
+        return 1;
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
