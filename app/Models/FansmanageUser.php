@@ -159,7 +159,6 @@ class FansmanageUser extends Model
                 $res = self::firstOrCreate($param);
                 break;
         }
-        dd($res);
 
         if (!empty($res)) {
             return $res->toArray();
