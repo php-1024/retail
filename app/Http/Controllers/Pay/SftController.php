@@ -273,6 +273,7 @@ class SftController extends Controller
 
     public function test11()
     {
+        \Session::flash("zerone_auth_info");
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $res = $this->authorizeInfo();
         dump(session("zerone_auth_info"));
@@ -326,6 +327,7 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            dump($res);
             if ($res === true) {
                 return redirect($url);
             }
