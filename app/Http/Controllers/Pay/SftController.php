@@ -275,6 +275,8 @@ class SftController extends Controller
     {
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $this->authorizeInfo();
+
+
     }
 
     protected $wechat_info = [];
@@ -287,11 +289,11 @@ class SftController extends Controller
         $url = request()->fullUrl();
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info(request()->get('organization_id'));
-
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
         }
-
+        \Session::flash("zerone_auth_info");
+        return session("zerone_auth_info");
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
@@ -303,9 +305,9 @@ class SftController extends Controller
             $this->getAuthorizeShopInfo($url);
             return;
         }
-        request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);//添加参数
+        // 添加参数
+        request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
         dump(session("zerone_auth_info"));
-
     }
 
     /**
