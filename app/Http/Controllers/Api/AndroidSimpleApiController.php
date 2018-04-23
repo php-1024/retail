@@ -40,9 +40,6 @@ class AndroidSimpleApiController extends Controller
         if (empty($data)) {
             return response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']);
         }
-        if (empty($data)) {
-
-        }
         // 获取加密盐
         $key = config("app.simple_encrypt_key");
         // 加密密码第一重
