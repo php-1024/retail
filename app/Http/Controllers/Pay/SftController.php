@@ -407,6 +407,7 @@ class SftController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollback();
             return false;
         }
