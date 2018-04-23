@@ -274,6 +274,7 @@ class SftController extends Controller
     public function test11()
     {
         \Session::flash("zerone_auth_info");
+        return 123;
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $res = $this->authorizeInfo();
         dump(session("zerone_auth_info"));
