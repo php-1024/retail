@@ -266,8 +266,8 @@ class SftController extends Controller
     public function test10()
     {
         session(["zerone_auth_info" => ["zerone_user_id" =>123123123]]);
-
-        return session("zerone_auth_info.zerone_user_id");
+        session(["zerone_auth_info.shop_user_id" => 111111]);
+        return session("zerone_auth_info");
     }
 
 
@@ -442,7 +442,7 @@ class SftController extends Controller
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
             // 缓存用户的店铺id
-            session(["zerone_auth_info" => ["shop_user_id" => $fansmanage_user["id"]]]);
+            session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
 
             dump(session("zerone_auth_info"));
 
