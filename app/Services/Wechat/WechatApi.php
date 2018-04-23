@@ -45,8 +45,7 @@ class WechatApi
      * @param string $appsecret 公众号基本信息
      * @return mixed
      */
-    public
-    function get_web_access_token($auth_code, $appid = '', $appsecret = '')
+    public function get_web_access_token($auth_code, $appid = '', $appsecret = '')
     {
         // 判断是否存在 appid ,没有的话用系统默认的
         $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
