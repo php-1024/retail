@@ -43,6 +43,10 @@ class AndroidApiController extends Controller
         if (empty($data)) {
             return response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']);
         }
+        //检查该账号是否被冻结
+        if ($data->status == '0') {
+            return response()->json(['msg' => '对不起该账号已经被冻结！', 'status' => '0', 'data' => '']);
+        }
         // 获取加密盐
         $key = config("app.retail_encrypt_key");
         // 加密密码第一重
