@@ -388,16 +388,20 @@ class AndroidApiController extends Controller
         if ($order_status != '0') {
             return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
-        $organization_id = $request->organization_id;//店铺
-        $paytype = $request->paytype;//支付方式
-        $payment_company = $request->payment_company;//支付公司名字
-        $power = RetailConfig::getPluck([['retail_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value')->first();//查询是下单减库存/付款减库存
+        $organization_id = $request->organization_id;   //店铺
+        $paytype = $request->paytype;                   //支付方式
+        $payment_company = $request->payment_company;   //支付公司名字
+        $power = RetailConfig::getPluck([['retail_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
+        $stock_status = RetailOrder::getPluck([['retail_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
-                $re = $this->reduce_stock($order_id, '1');//减库存
-                if ($re != 'ok') {
-                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                if ($stock_status != '1') {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                    $re = $this->reduce_stock($order_id, '1');//减库存
+                    RetailOrder::editRetailOrder([['id', $order_id]], ['stock_status' => '1']);  //设置订单（库存修改状态），1表示已经减去订单库存
+                    if ($re != 'ok') {
+                        return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                    }
                 }
             }
             RetailOrder::editRetailOrder([['id', $order_id]], ['paytype' => $paytype, 'status' => '1', 'payment_company' => $payment_company]);//修改订单状态
@@ -406,7 +410,6 @@ class AndroidApiController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '付款失败', 'status' => '0', 'data' => '']);
         }
-
         return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
     }
 
