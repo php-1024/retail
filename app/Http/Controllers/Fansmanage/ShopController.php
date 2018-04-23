@@ -37,7 +37,8 @@ class ShopController extends Controller
         // 组织id
         $organization_id = $admin_data['organization_id'];
         // 判断是否为超级管理员
-        if ($admin_data['is_super'] == 1) {
+        dump($admin_data);
+        if ($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0) {
             // 获取组织名
             $organization_name = $request->organization_name;
             // 获取粉丝管理类型数据
