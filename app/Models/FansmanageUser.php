@@ -16,6 +16,7 @@ class FansmanageUser extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+    protected $guarded = [];
 
     //用户零壹账号源头表一对一的关系
     public function userOrigin()
@@ -158,6 +159,7 @@ class FansmanageUser extends Model
                 $res = self::firstOrCreate($param);
                 break;
         }
+        dd($res);
 
         if (!empty($res)) {
             return $res->toArray();
