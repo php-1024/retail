@@ -36,9 +36,11 @@ class AndroidSimpleApiController extends Controller
 
         // 根据账号进行查询
         $data = Account::where([['account', $account]])->orWhere([['mobile', $account]])->first();
-        dd($data);
         if (empty($data)) {
             return response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']);
+        }
+        if ($data->status == '0') {
+            return response()->json(['msg' => '对不起该账号已经被冻结！', 'status' => '0', 'data' => '']);
         }
         // 获取加密盐
         $key = config("app.simple_encrypt_key");
