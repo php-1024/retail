@@ -270,6 +270,8 @@ class SftController extends Controller
   "open_id" => "oyhbt1EjF8vFIQJHG3qPiA-uOwBQ",
   "status" => 1,
 ];
+        dd($a);
+
         $user_info = FansmanageUser::insertData($a, "update_create", ["open_id" => $a["open_id"]]);
         dd($user_info);
     }
