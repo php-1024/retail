@@ -291,9 +291,6 @@ class SftController extends Controller
             return "微信公众号没有授权到第三方";
         }
 
-        dump(session("zerone_auth_info")["zerone_user_id"]);
-        dump(session("zerone_auth_info.zerone_user_id"));
-
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info")["zerone_user_id"])) {
             $this->getAuthorizeZeroneInfo($url);
@@ -316,8 +313,6 @@ class SftController extends Controller
      */
     public function getAuthorizeZeroneInfo($url)
     {
-        dump(1);
-        exit;
         // 获取 code 地址
         $code = request()->input('code');
 
@@ -438,14 +433,15 @@ class SftController extends Controller
             // 店铺公众号的信息
             // 组织id
             $param["fansmanage_id"] = request()->get("organization_id");
-            $param["user_id"] = session(["zerone_auth_info"])["zerone_user_id"];
+            $param["user_id"] = session("zerone_auth_info")["zerone_user_id"];
+
             $param["open_id"] = $openid;
             $param["status"] = 1;
-
+            dump($param);
             // 创建或者更新粉丝数据
             $user_info = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
 
-            dump($user_info);
+
 
             session(["zerone_auth_info" => ["shop_user_id" => $user_info["id"]]]);
 
