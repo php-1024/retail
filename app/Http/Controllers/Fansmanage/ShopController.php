@@ -92,7 +92,7 @@ class ShopController extends Controller
                 // 组织ID
                 'organization_id' => $account_info->organization_id,
                 // 是否超级管理员
-                'is_super' => '2',
+                'is_super' => '1',
                 // 上级ID
                 'parent_id' => $account_info->parent_id,
                 // 上级树
