@@ -435,6 +435,7 @@ class SftController extends Controller
             return;
         }
 
+        dd(session(["zerone_auth_info"])["zerone_user_id"]);
         DB::beginTransaction();
         try {
             // 店铺公众号的信息
