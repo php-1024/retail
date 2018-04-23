@@ -335,7 +335,7 @@ class AndroidApiController extends Controller
         $order_id = $request->order_id;//订单id
         $order = RetailOrder::getOne([['id', $order_id]]);
         if ($order['status'] != '0') {
-            return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
+            return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
@@ -365,7 +365,7 @@ class AndroidApiController extends Controller
         $order_id = $request->order_id;//订单id
         $order_status = RetailOrder::getPluck([['id', $order_id]], 'status')->first();
         if ($order_status != '0') {
-            return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
+            return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式

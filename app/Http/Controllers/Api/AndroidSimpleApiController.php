@@ -165,10 +165,13 @@ class AndroidSimpleApiController extends Controller
                 }
             }
             $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
+            $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
             if ($power != '1') {//说明下单减库存
-                $re = $this->reduce_stock($order_id, '1');//减库存
-                if ($re != 'ok') {
-                    return $re;
+                if ($stock_status != 1){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                    $re = $this->reduce_stock($order_id, '1');//减库存
+                    if ($re != 'ok') {
+                        return $re;
+                    }
                 }
             }
             DB::commit();//提交事务
@@ -190,12 +193,15 @@ class AndroidSimpleApiController extends Controller
         $order_id = $request->order_id;//订单id
         $organization_id = $request->organization_id;//店铺
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power != '1') {//说明下单减库存 所以要把库存归还
-                $re = $this->reduce_stock($order_id, '-1');//加库存
-                if ($re != 'ok') {
-                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                if ($stock_status != -1) {//说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                    $re = $this->reduce_stock($order_id, '-1');//加库存
+                    if ($re != 'ok') {
+                        return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                    }
                 }
             }
             SimpleOrder::editSimpleOrder([['id', $order_id]], ['status' => '-1']);
@@ -318,17 +324,20 @@ class AndroidSimpleApiController extends Controller
         $order_id = $request->order_id;//订单id
         $order = SimpleOrder::getOne([['id', $order_id]]);
         if ($order['status'] != '0') {
-            return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
+            return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
-                $re = $this->reduce_stock($order_id, '1');//减库存
-                if ($re != 'ok') {
-                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                if ($stock_status != 1) {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                    $re = $this->reduce_stock($order_id, '1');//减库存
+                    if ($re != 'ok') {
+                        return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                    }
                 }
             }
             SimpleOrder::editSimpleOrder([['id', $order_id]], ['paytype' => $paytype, 'status' => '1']);//修改订单状态
@@ -348,18 +357,21 @@ class AndroidSimpleApiController extends Controller
         $order_id = $request->order_id;//订单id
         $order_status = SimpleOrder::getPluck([['id', $order_id]], 'status')->first();
         if ($order_status != '0') {
-            return response()->json(['msg' => '订单不是代付款，不能操作', 'status' => '0', 'data' => '']);
+            return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
-        $organization_id = $request->organization_id;//店铺
-        $paytype = $request->paytype;//支付方式
-        $payment_company = $request->payment_company;//支付公司名字
+        $organization_id = $request->organization_id;   //店铺
+        $paytype = $request->paytype;                   //支付方式
+        $payment_company = $request->payment_company;   //支付公司名字
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
-                $re = $this->reduce_stock($order_id, '1');//减库存
-                if ($re != 'ok') {
-                    return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                if ($stock_status != 1) {//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
+                    $re = $this->reduce_stock($order_id, '1');//减库存
+                    if ($re != 'ok') {
+                        return response()->json(['msg' => '提交订单失败', 'status' => '0', 'data' => '']);
+                    }
                 }
             }
             SimpleOrder::editSimpleOrder([['id', $order_id]], ['paytype' => $paytype, 'status' => '1', 'payment_company' => $payment_company]);//修改订单状态
@@ -368,7 +380,6 @@ class AndroidSimpleApiController extends Controller
             DB::rollBack();//事件回滚
             return response()->json(['msg' => '付款失败', 'status' => '0', 'data' => '']);
         }
-
         return response()->json(['status' => '1', 'msg' => '现金付款成功', 'data' => ['order_id' => $order_id]]);
     }
 
@@ -436,7 +447,7 @@ class AndroidSimpleApiController extends Controller
     /**
      * 减库存
      * @order_id 订单id
-     * @status 1表示加库存，-1表示加库存
+     * @status 1表示减库存，-1表示加库存
      */
     private function reduce_stock($order_id, $status)
     {
@@ -465,14 +476,14 @@ class AndroidSimpleApiController extends Controller
                         'ordersn' => $data['ordersn'],
                         'operator_id' => $data['operator_id'],
                         'remark' => $data['remarks'],
-                        'type' => '6',
+                        'type' => '6', //销售出库类型
                         'status' => '1',
                     ];
                     SimpleStockLog::addStockLog($stock_data);//商品操作记录
                     $re = SimpleStock::getOneSimpleStock([['simple_id', $data['simple_id']], ['goods_id', $value['goods_id']]]);
                     $simple_stock = $re['stock'] - $value['total'];
                     SimpleStock::editStock([['id', $re['id']]], ['stock' => $simple_stock]);
-
+                    SimpleOrder::editSimpleOrder(['id'=>$order_id],['stock_status'=>'1']);    //修改stock_status为1表示该订单的库存状态已经减去
                 }
             } else {
                 $goodsdata = SimpleOrderGoods::where([['order_id', $order_id]])->get();//订单快照中的商品
@@ -488,13 +499,14 @@ class AndroidSimpleApiController extends Controller
                         'ordersn' => $data['ordersn'],
                         'operator_id' => $data['operator_id'],
                         'remark' => $data['remarks'],
-                        'type' => '7',
+                        'type' => '7',  //退货入库类型
                         'status' => '1',
                     ];
                     SimpleStockLog::addStockLog($stock_data);//商品操作记录
                     $re = SimpleStock::getOneSimpleStock([['simple_id', $data['simple_id']], ['goods_id', $value['goods_id']]]);
                     $simple_stock = $re['stock'] + $value['total'];
                     SimpleStock::editStock([['id', $re['id']]], ['stock' => $simple_stock]);
+                    SimpleOrder::editSimpleOrder(['id'=>$order_id],['stock_status'=>'-1']);    //修改stock_status为-1表示该订单的库存状态已经退回
                 }
             }
             DB::commit();//提交事务
