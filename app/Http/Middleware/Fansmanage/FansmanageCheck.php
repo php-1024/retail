@@ -99,7 +99,7 @@ class FansmanageCheck{
                 return $re2;
             }else{
                 $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-                if($admin_data['is_super'] != 2){ //防止直接输入地址访问
+                if($admin_data['is_super'] != 1){ //防止直接输入地址访问
                     return self::res(0,$request);
                 }
                 $admin_data['is_super'] = 1; //切换权限

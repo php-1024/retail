@@ -234,7 +234,7 @@ class FansmanageCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
-        if($admin_data['is_super'] == '2'){
+        if($admin_data['is_super'] == '1'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
             $key = config("app.fansnamage_safe_encrypt_key");//获取加密盐
@@ -244,7 +244,7 @@ class FansmanageCheckAjax
         if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
-        if(empty($admin_data['safe_password']) && $admin_data['is_super'] != '2'){
+        if(empty($admin_data['safe_password']) && $admin_data['is_super'] != '1'){
             return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
         }
         if($encryptPwd != $admin_data['safe_password']){
