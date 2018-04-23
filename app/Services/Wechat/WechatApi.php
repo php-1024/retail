@@ -45,8 +45,7 @@ class WechatApi
      * @param string $appsecret 公众号基本信息
      * @return mixed
      */
-    public
-    function get_web_access_token($auth_code, $appid = '', $appsecret = '')
+    public function get_web_access_token($auth_code, $appid = '', $appsecret = '')
     {
         // 判断是否存在 appid ,没有的话用系统默认的
         $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
@@ -55,6 +54,7 @@ class WechatApi
         // 获取授权信息
         $url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid={$appid}&secret={$appsecret}&code={$auth_code}&grant_type=authorization_code";
         $re = \HttpCurl::doGet($url);
+        return $re;
         // 结果处理
         return $this->resultReturnDispose($re, "json");
     }
