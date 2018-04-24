@@ -162,8 +162,8 @@ class StoreController extends Controller
 
             $accdata = [
                 'organization_id' => $id,
-                'parent_id' => '1',
-                'parent_tree' => '0' . ',' . '1' . ',',
+                'parent_id' => '0',
+                'parent_tree' => '0' . ',',
                 'deepth' => '1',
                 'account' => $account,
                 'password' => $encryptPwd,
