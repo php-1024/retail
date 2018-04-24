@@ -136,7 +136,7 @@ class OrderController extends Controller
     public static function return_stock($order, $type)
     {
         foreach ($order->SimpleOrderGoods as $key => $val) {
-            $old_stock = SimpleGoods::getPluck(['id' => $val->goods_id], 'stock')->first(); //查询原来商品的库存
+            $old_stock = SimpleGoods::getPluck(['id' => $val->goods_id], 'stock'); //查询原来商品的库存
             if ($type == '6') {//销售出库
                 $new_stock = $old_stock - $val->total;         //确认付款后处理的新库存
             } elseif ($type == '7') {//销退入库

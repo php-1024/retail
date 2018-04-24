@@ -47,19 +47,15 @@ class FansmanageController extends Controller
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
-        if(!empty($organization_name)){
-            $where = [['parent_id', $organization], ['program_id', 3],['organization_name', 'like', '%' . $organization_name . '%']]; //页面商户名称查询
+        if (!empty($organization_name)) {
+            $where = [['parent_id', $organization], ['program_id', 3], ['organization_name', 'like', '%' . $organization_name . '%']]; //页面商户名称查询
         }
-//        if(!empty($fansmanage_owner_mobile)){
-//            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']]; //电话号码查询
-//        }
         dd($fansmanage_owner_mobile);
-        if(empty($where)){
+        if (empty($where)) {
             $where = [['parent_id', $organization], ['program_id', 3]];
         }
-
         $list = Organization::getPaginagefansmanage($where, 10, 'id'); //数据库条件查询商户
-        return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data,'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
     //店铺结构

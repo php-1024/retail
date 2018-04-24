@@ -135,7 +135,8 @@ class AndroidSimpleApiController extends Controller
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
-                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status')->first();//查询商品是否下架
+                // 查询商品是否下架
+                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status');
                 if ($goods_status == '0'){
                     return response()->json(['msg' => '对不起就在刚刚部分商品被下架了，请返回首页重新选购！', 'status' => '0', 'data' => '']);
                 }
@@ -143,10 +144,13 @@ class AndroidSimpleApiController extends Controller
             }
         }
         $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id');
-        $num = SimpleOrder::where([['simple_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
+        // 查询订单今天的数量
+        $num = SimpleOrder::where([['simple_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();
         $num += 1;
         $sort = 100000 + $num;
-        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;//订单号
+        // 订单号
+        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;
+        // 数据处理
         $orderData = [
             'ordersn' => $ordersn,
             'order_price' => $order_price,
@@ -159,10 +163,12 @@ class AndroidSimpleApiController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $order_id = SimpleOrder::addSimpleOrder($orderData);//添加入订单表
+            // 添加入订单表
+            $order_id = SimpleOrder::addSimpleOrder($orderData);
             foreach ($goodsdata as $key => $value) {
                 foreach ($value as $k => $v) {
-                    $onedata = SimpleGoods::getOne([['id', $v['id']]]);//查询商品库存数量
+                    // 查询商品库存数量
+                    $onedata = SimpleGoods::getOne([['id', $v['id']]]);
                     $thumb = SimpleGoodsThumb::getPluck([['goods_id', $v['id']]], 'thumb')->first();//商品图片一张
                     $data = [
                         'order_id' => $order_id,
@@ -289,7 +295,7 @@ class AndroidSimpleApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
         }
         $order = $order->toArray();
-        $user_account = User::getPluck([['id', $order['user_id']]], 'account')->first();//粉丝账号
+        $user_account = User::getPluck([['id', $order['user_id']]], 'account');//粉丝账号
         $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account');//操作人员账号
         //用户昵称
         $account_realname = AccountInfo::getPluck([['account_id', $order['operator_id']]], 'realname')->first();
@@ -514,7 +520,7 @@ class AndroidSimpleApiController extends Controller
             } else {
                 $goodsdata = SimpleOrderGoods::where([['order_id', $order_id]])->get();//订单快照中的商品
                 foreach ($goodsdata as $key => $value) {
-                    $stock = SimpleGoods::getPluck([['id', $value['goods_id']]], 'stock')->first();//商品剩下的库存
+                    $stock = SimpleGoods::getPluck([['id', $value['goods_id']]], 'stock');//商品剩下的库存
                     $stock = $stock + $value['total'];
                     SimpleGoods::editSimpleGoods([['id', $value['goods_id']]], ['stock' => $stock]);//修改商品库存
                     $stock_data = [
