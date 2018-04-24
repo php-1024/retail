@@ -103,6 +103,7 @@ class UserCheck
     {
         // 获取组织id
         $organization_id = request()->get("organization_id");
+        dump($organization_id);
         // 获取公众号的基本信息
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
 
