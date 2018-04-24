@@ -287,6 +287,7 @@ class SftController extends Controller
 
     public function test12()
     {
+        $this->getShopBaseInfo();
         // 获取 code 地址
         $code = request()->input('code');
         // 如果不存在zerone_openid就进行授权
@@ -340,6 +341,7 @@ class SftController extends Controller
     }
 
     protected $wechat_info = [];
+    protected $organization_id = 2;
 
     /**
      * 获取店铺公众号的基本信息
@@ -359,6 +361,7 @@ class SftController extends Controller
 
     public function test13()
     {
+        $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         if (empty($code)) {
