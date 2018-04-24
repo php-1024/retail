@@ -27,7 +27,7 @@ class UserCheck
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
             case "pay/sft/test11":            //测试
-            case "pay/sft/test14":            //测试
+//            case "pay/sft/test14":            //测试
                 $this->authorizeInfo();
         }
         return $next($request);
