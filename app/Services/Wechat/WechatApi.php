@@ -455,7 +455,7 @@ class WechatApi
         $ticket_info = WechatOpenSetting::getComponentVerifyTicket();
 
         if (empty($ticket_info->param_value)) {
-            exit('获取微信开放平台ComponentVerifyTicket失败1');
+            exit('获取微信开放平台ComponentVerifyTicket失败');
         } else {
 
 
@@ -474,7 +474,7 @@ class WechatApi
                 WechatOpenSetting::editComponentAccessToken($re['component_access_token'], time() + 7200);
                 return $re['component_access_token'];
             } else {
-                exit('获取微信开放平台ComponentAccessToken失败2');
+                exit('获取微信开放平台ComponentAccessToken失败');
             }
         }
     }
