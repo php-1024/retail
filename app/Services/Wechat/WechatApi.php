@@ -454,6 +454,7 @@ class WechatApi
         $wxparam = config('app.wechat_open_setting');
         $ticket_info = WechatOpenSetting::getComponentVerifyTicket();
         dump($ticket_info);
+        dump($ticket_info->param_value);
 
         if (empty($ticket_info->param_value)) {
             exit('获取微信开放平台ComponentVerifyTicket失败');
