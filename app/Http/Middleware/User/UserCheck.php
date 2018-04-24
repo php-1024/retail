@@ -46,12 +46,12 @@ class UserCheck
         }
 
         // 判断是否存在 零壹服务用户id
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $res = $this->getAuthorizeZeroneInfo($url);
-            if($res == true){
-                $this->authorizeInfo();
-            }
-        }
+//        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+//            $res = $this->getAuthorizeZeroneInfo($url);
+//            if($res == true){
+//                $this->authorizeInfo();
+//            }
+//        }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
@@ -132,7 +132,7 @@ class UserCheck
             $param["password"] = 123456;
             $param["safepassword"] = 123456;
             $param["zerone_open_id"] = $openid;
-            $param["mobile"] = "13333333333";
+            $param["mobile"] = "";
             $param["status"] = 1;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
             session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
