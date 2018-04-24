@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redis;
 class UserCheck
 {
     protected $wechat_info = [];
-    protected $organization_id = 5;
+    protected $organization_id = 2;
 
     public function handle($request, Closure $next)
     {
