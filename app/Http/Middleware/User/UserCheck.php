@@ -48,7 +48,6 @@ class UserCheck
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
         }
-
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
@@ -58,7 +57,6 @@ class UserCheck
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
-
 
     public function getAuthorizeZeroneInfo($url)
     {
@@ -77,8 +75,6 @@ class UserCheck
             \Session::save();
         }
     }
-
-
 
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
@@ -141,7 +137,6 @@ class UserCheck
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
-            dump(session("zerone_auth_info"));
         }
     }
 
