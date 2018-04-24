@@ -45,10 +45,8 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-        dump(session("zerone_auth_info"));
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            dump(1);
             $this->getAuthorizeZeroneInfo($url);
         }
         dump(session("zerone_auth_info"));
