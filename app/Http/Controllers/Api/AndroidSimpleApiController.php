@@ -135,7 +135,8 @@ class AndroidSimpleApiController extends Controller
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
-                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status')->first();//查询商品是否下架
+                // 查询商品是否下架
+                $goods_status = SimpleGoods::getPluck(['id'=>$v['id']],'status');
                 if ($goods_status == '0'){
                     return response()->json(['msg' => '对不起就在刚刚部分商品被下架了，请返回首页重新选购！', 'status' => '0', 'data' => '']);
                 }
@@ -514,7 +515,7 @@ class AndroidSimpleApiController extends Controller
             } else {
                 $goodsdata = SimpleOrderGoods::where([['order_id', $order_id]])->get();//订单快照中的商品
                 foreach ($goodsdata as $key => $value) {
-                    $stock = SimpleGoods::getPluck([['id', $value['goods_id']]], 'stock')->first();//商品剩下的库存
+                    $stock = SimpleGoods::getPluck([['id', $value['goods_id']]], 'stock');//商品剩下的库存
                     $stock = $stock + $value['total'];
                     SimpleGoods::editSimpleGoods([['id', $value['goods_id']]], ['stock' => $stock]);//修改商品库存
                     $stock_data = [
