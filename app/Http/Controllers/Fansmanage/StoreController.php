@@ -41,6 +41,7 @@ class StoreController extends Controller
         // 需要渲染模式里面的数据
         $res = Organization::getProgramAsset(["id" => $admin_data["organization_id"]]);
         // 渲染页面
+        dump($admin_data);
         return view('Fansmanage/Store/store_create', ["program_info" => $res, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
@@ -52,6 +53,8 @@ class StoreController extends Controller
      */
     public function store_create_check(Request $request)
     {
+        dd($request);
+
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
         // 获取当前的页面路由
@@ -161,8 +164,8 @@ class StoreController extends Controller
 
             $accdata = [
                 'organization_id' => $id,
-                'parent_id' => '1',
-                'parent_tree' => '0' . ',' . '1' . ',',
+                'parent_id' => '0',
+                'parent_tree' => '0' . ',',
                 'deepth' => '1',
                 'account' => $account,
                 'password' => $encryptPwd,
