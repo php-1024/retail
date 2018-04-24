@@ -265,9 +265,11 @@ class SftController extends Controller
 
     public function test10()
     {
-        session(["zerone_auth_info.zerone_user_id" => 123123123]);
-        session(["zerone_auth_info.shop_user_id" => 1111]);
-        return session("zerone_auth_info");
+        dump(request()->url());
+        dump(request()->root());
+        dump(request()->path());
+        dump(request()->session());
+        dump(request()->decodedPath());
     }
 
 
