@@ -426,7 +426,8 @@ class AndroidSimpleApiCheck
         if (empty($request->input('token'))) {
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
-        if(time() - ($request->input('timestamp')/1000)>120){//如果超过两分钟
+        // 如果超过两分钟
+        if(time() - ($request->input('timestamp')/1000)>120){
             return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
         }
         // 用户账号id

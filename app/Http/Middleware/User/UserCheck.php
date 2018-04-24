@@ -41,9 +41,13 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
+        $self_path = ["pay/sft/test12","pay/sft/test13","pay/sft/test14"];
         // 初次访问的地址
         $url = request()->fullUrl();
-        session(["zerone_auth_info.initial_url_address " => $url]);
+
+        if(!in_array(request()->path(),$self_path)) {
+            session(["zerone_auth_info.initial_url_address" => $url]);
+        }
 
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
@@ -63,6 +67,7 @@ class UserCheck
             Header("Location:http://develop.01nnt.com/pay/sft/test13");
         }
 
+        Header("Location:http://develop.01nnt.com/pay/sft/test14");
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
