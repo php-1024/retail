@@ -48,7 +48,7 @@ class UserCheck
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $res = $this->getAuthorizeZeroneInfo($url);
-            return redirect($url);
+            return redirect(request()->path());
         }
 
         // 判断 session 中是否存在店铺id
