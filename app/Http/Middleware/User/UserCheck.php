@@ -37,6 +37,8 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
+        \Session::flash("zerone_auth_info");
+        exit;
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
 
@@ -44,10 +46,13 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-//        // 判断是否存在 零壹服务用户id
-//        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-//            $this->getAuthorizeZeroneInfo($url);
-//        }
+        // 判断是否存在 零壹服务用户id
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            $res = $this->getAuthorizeZeroneInfo($url);
+            if($res == true){
+                $this->authorizeInfo();
+            }
+        }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
@@ -66,19 +71,14 @@ class UserCheck
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
-//            $url = request()->url();
+            $url = request()->url();
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-//            if ($res === true) {
-//                $this->authorizeInfo();
-////                $url = request()->url();
-////                return redirect($url);
-////                Header("Location:{$url}");
-//            }
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return $res;
         }
     }
 
@@ -88,6 +88,7 @@ class UserCheck
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         if (empty($code)) {
+            $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
@@ -164,35 +165,37 @@ class UserCheck
         try {
             // 店铺公众号的信息
             // 组织id
-            $param["fansmanage_id"] = request()->get("organization_id");
-            $param["user_id"] = session("zerone_auth_info.zerone_user_id");
+            $param["fansmanage_id"] = $this->organization_id;
+//            $param["user_id"] = session("zerone_auth_info.zerone_user_id");
+            $param["user_id"] = 2;
             $param["open_id"] = $openid;
             $param["status"] = 1;
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
-
-            dump($fansmanage_user);
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
-
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
-            dump($user_info);
             // 用户id
-            $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
+//            $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
+            $param_user_info["user_id"] = "2";
             $param_user_info["nickname"] = $user_info["nickname"];
             $param_user_info["sex"] = $user_info["sex"];
             $param_user_info["city"] = $user_info["city"];
             $param_user_info["country"] = $user_info["country"];
             $param_user_info["province"] = $user_info["province"];
             $param_user_info["head_imgurl"] = $user_info["headimgurl"];
+            $param_user_info["remark"] = "111";
+            $param_user_info["qq"] = "111";
+
+
             // 保存用户数据$
             $res = UserInfo::insertData($param_user_info);
             // 数据提交
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollback();
             return false;
         }
