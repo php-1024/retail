@@ -32,6 +32,10 @@ class UserCheck
 
     public function authorizeInfo()
     {
+
+        \Session::flash("zerone_auth_info");
+
+        dd(session("zerone_auth_info"));
         // 判断公众号是否授权给零壹第三方公众号平台
         $this->getShopBaseInfo();
         // 初次访问的地址
