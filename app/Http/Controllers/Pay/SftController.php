@@ -374,6 +374,7 @@ class SftController extends Controller
 
     public function test14()
     {
+        dump(request()->path());
         $zerone_auth_info = request()->get("zerone_auth_info");
         var_dump($zerone_auth_info);
 //        $url = session("zerone_auth_info.initial_url_address");
