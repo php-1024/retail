@@ -60,7 +60,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label" for="input-id-1">手机号码</label>
                                             <div class="col-sm-9">
-                                                <input type="text" name="mobile" class="form-control" value="{{$user['mobile']}}">
+                                                <input type="number" name="mobile" class="form-control" value="{{$user['mobile']}}">
                                                 <span class="help-block m-b-none">该手机号码可用作登录，与负责人手机号码可分别设置</span>
                                             </div>
                                         </div>

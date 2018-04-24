@@ -11,6 +11,8 @@ namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
 use App\Models\FansmanageUser;
+use App\Models\Organization;
+use App\Models\Program;
 use App\Models\UserInfo;
 use DB;
 use App\Models\Label;
@@ -21,11 +23,19 @@ class TestController extends Controller
 {
     public function test()
     {
+        dd(config("app.wechat_web_setting.appid"));
+        $res = Organization::select(["organization.id", "organization.program_id"])
+            ->where(["organization.id" => 5])
+            ->first()->toArray();
+        $res = Program::select(["id","program_name"])->where(["complete_id" => $res["program_id"], "is_asset" => 1])->orWhere(["id" => $res["program_id"]])->get();
+//        $res = Organization::getModelInfo();
+        dd($res->toArray());
 
-        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
-        $data['account'] = User::where(['id'=> 1])->value("account");
-//        $data['account'] = User::where(['id'=> 1])->get(["account"]);
-        dump($data);
+//
+//        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
+//        $data['account'] = User::where(['id'=> 1])->value("account");
+////        $data['account'] = User::where(['id'=> 1])->get(["account"]);
+//        dump($data);
 
 //        \DB::enableQueryLog();
 //        $search = "100";
@@ -42,8 +52,6 @@ class TestController extends Controller
 //        }])->leftJoin('user', 'fansmanage_user.user_id', '=', 'user.id');
 //
 //
-
-
 
 
 //        $model = FansmanageUser::select("fansmanage_user.id", "fansmanage_user.store_id", "fansmanage_user.fansmanage_id", "fansmanage_user.user_id", "fansmanage_user.open_id", "fansmanage_user.mobile", "user.account")->with(["userOrigin", "user" => function ($query) use ($search) {

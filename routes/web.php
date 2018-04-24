@@ -411,12 +411,19 @@ Route::group(['prefix' => 'fansmanage'], function () {
     });
 
     //切换公众号粉丝平台
-    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');                                //系统首页
-    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');              //超级管理员切换代理
-    Route::get('quit', 'Fansmanage\ShopController@quit');                                                               //退出系统
-    Route::post('select_shop', 'Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');                  //超级管理员选择登入的代理
-    Route::get('operation_log', 'Fansmanage\ShopController@operation_log')->middleware('FansmanageCheck');              //操作日记
-    Route::get('login_log', 'Fansmanage\ShopController@login_log')->middleware('FansmanageCheck');                      //登入日记
+
+    //系统首页
+    Route::get('/', 'Fansmanage\ShopController@display')->middleware('FansmanageCheck');
+    //超级管理员切换代理
+    Route::get('switch_status', 'Fansmanage\ShopController@switch_status')->middleware('FansmanageCheck');
+    //退出系统
+    Route::get('quit', 'Fansmanage\ShopController@quit');
+    //超级管理员选择登入的代理
+    Route::post('select_shop', 'Fansmanage\ShopController@select_shop')->middleware('FansmanageCheck');
+    //操作日记
+    Route::get('operation_log', 'Fansmanage\ShopController@operation_log')->middleware('FansmanageCheck');
+    //登入日记
+    Route::get('login_log', 'Fansmanage\ShopController@login_log')->middleware('FansmanageCheck');
 
 
     //账号中心
@@ -431,17 +438,18 @@ Route::group(['prefix' => 'fansmanage'], function () {
     //公众号管理
     Route::group(['prefix' => 'api'], function () {
         Route::get('store_auth', 'Fansmanage\ApiController@store_auth')->middleware('FansmanageCheck');                 //公众号管理
-        Route::get('material_image', 'Fansmanage\ApiController@material_image')->middleware('FansmanageCheck');         //公众号管理
-        Route::get('material_article', 'Fansmanage\ApiController@material_article')->middleware('FansmanageCheck');//图文素材列表
-        Route::get('material_article_add', 'Fansmanage\ApiController@material_article_add')->middleware('FansmanageCheck');//图文素材列表
-        Route::get('material_articles_add', 'Fansmanage\ApiController@material_articles_add')->middleware('FansmanageCheck');//添加多条图文列表
-        Route::get('material_article_edit', 'Fansmanage\ApiController@material_article_edit')->middleware('FansmanageCheck');//添加多条图文列表
-        Route::get('material_articles_edit', 'Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//添加多条图文列表
+        Route::get('material_image', 'Fansmanage\ApiController@material_image')->middleware('FansmanageCheck');         //图片素材列表
+
+
+        Route::get('material_article', 'Fansmanage\ApiController@material_article')->middleware('FansmanageCheck');     //图文素材列表
+        Route::get('material_article_add', 'Fansmanage\ApiController@material_article_add')->middleware('FansmanageCheck');//编辑素材列表
+        Route::get('material_articles_add', 'Fansmanage\ApiController@material_articles_add')->middleware('FansmanageCheck');//添加多条图文
+        Route::get('material_article_edit', 'Fansmanage\ApiController@material_article_edit')->middleware('FansmanageCheck');//编辑单条图文
+        Route::get('material_articles_edit', 'Fansmanage\ApiController@material_articles_edit')->middleware('FansmanageCheck');//编辑多条图文
     });
 
     //公众号管理--消息管理
     Route::group(['prefix' => 'message'], function () {
-        Route::get('defined_menu', 'Fansmanage\MessageController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
         Route::get('auto_reply', 'Fansmanage\MessageController@auto_reply')->middleware('FansmanageCheck');//关键词自动回复
         Route::get('subscribe_reply', 'Fansmanage\MessageController@subscribe_reply')->middleware('FansmanageCheck');//关注事件自动回复
         Route::get('default_reply', 'Fansmanage\MessageController@default_reply')->middleware('FansmanageCheck');//默认回复
@@ -461,7 +469,7 @@ Route::group(['prefix' => 'fansmanage'], function () {
         //粉丝用户管理
         Route::get('user_list', 'Fansmanage\UserController@user_list')->middleware('FansmanageCheck');                              //粉丝搜索
         Route::post('user_search', 'Fansmanage\UserController@user_list_search')->middleware('FansmanageCheck');                    //粉丝用户管理
-        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
+//        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 
 
@@ -508,18 +516,23 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::post('auto_reply_edit_check', 'Fansmanage\MessageController@auto_reply_edit_check')->middleware('FansmanageCheckAjax');//编辑自动回复关键字功能提交
         Route::post('auto_reply_delete_confirm', 'Fansmanage\MessageController@auto_reply_delete_confirm')->middleware('FansmanageCheckAjax');//删除关键字ajax显示
         Route::post('auto_reply_delete_check', 'Fansmanage\MessageController@auto_reply_delete_check')->middleware('FansmanageCheckAjax');//删除关键字功能提交
+
         Route::post('subscribe_reply_text_edit', 'Fansmanage\MessageController@subscribe_reply_text_edit')->middleware('FansmanageCheckAjax');//关注后自动回复文字ajax显示
         Route::post('subscribe_reply_text_edit_check', 'Fansmanage\MessageController@subscribe_reply_text_edit_check')->middleware('FansmanageCheckAjax');//关注后自动回复文字功能提交
         Route::post('subscribe_reply_image_edit', 'Fansmanage\MessageController@subscribe_reply_image_edit')->middleware('FansmanageCheckAjax');//关注后图片回复ajax显示
         Route::post('subscribe_reply_image_edit_check', 'Fansmanage\MessageController@subscribe_reply_image_edit_check')->middleware('FansmanageCheckAjax');//关注后图片回复功能提交
         Route::post('subscribe_reply_article_edit', 'Fansmanage\MessageController@subscribe_reply_article_edit')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材ajax显示
         Route::post('subscribe_reply_article_edit_check', 'Fansmanage\MessageController@subscribe_reply_article_edit_check')->middleware('FansmanageCheckAjax');//关注后自动回复文本素材功能提交
+
         Route::post('default_reply_text_edit', 'Fansmanage\MessageController@default_reply_text_edit')->middleware('FansmanageCheckAjax');//默认回复文字回复ajax显示
         Route::post('default_reply_text_edit_check', 'Fansmanage\MessageController@default_reply_text_edit_check')->middleware('FansmanageCheckAjax');//默认回复文字回复功能提交
         Route::post('default_reply_image_edit', 'Fansmanage\MessageController@default_reply_image_edit')->middleware('FansmanageCheckAjax');//默认回复图片素材ajax显示
         Route::post('default_reply_image_edit_check', 'Fansmanage\MessageController@default_reply_image_edit_check')->middleware('FansmanageCheckAjax');//默认回复图片素材功能提交
         Route::post('default_reply_article_edit', 'Fansmanage\MessageController@default_reply_article_edit')->middleware('FansmanageCheckAjax');//默认回复图文素材ajax显示
         Route::post('default_reply_article_edit_check', 'Fansmanage\MessageController@default_reply_article_edit_check')->middleware('FansmanageCheckAjax');//默认回复图文素材能提交
+
+
+
 
 
         //公众号管理--菜单管理--自定义
@@ -544,6 +557,9 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
         Route::any('wechat_conditional_menu_add', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
         Route::any('wechat_conditional_menu_add_check', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
+
+
+
 
 
         //用户管理
@@ -759,6 +775,146 @@ Route::group(['prefix' => 'retail'], function () {
 });
 /**********************零售版店铺管理系统*********************/
 
+
+/**********************简单的*********************/
+Route::group(['prefix' => 'simple'], function () {
+    //登录页面组
+    Route::group(['prefix' => 'login'], function () {
+        Route::get('/', 'Simple\LoginController@display')->middleware('SimpleCheck');//登录页面路由
+        Route::get('captcha/{tmp}', 'Simple\LoginController@captcha');//验证码路由
+    });
+
+    Route::get('/', 'Simple\DisplayController@display')->middleware('SimpleCheck');//分店首页
+    Route::get('quit', 'Simple\LoginController@quit');                                                 //退出系统
+    Route::get('simple_list', 'Simple\DisplayController@simple_list')->middleware('SimpleCheck');      //分店列表
+    Route::get('simple_switch', 'Simple\DisplayController@simple_switch')->middleware('SimpleCheck'); //超级管理员退出当前店铺
+
+    //账户中心
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('profile', 'Simple\AccountController@profile')->middleware('SimpleCheck'); //账号中心-账户信息
+        Route::get('safe_password', 'Simple\AccountController@safe_password')->middleware('SimpleCheck');//安全密码
+        Route::get('password', 'Simple\AccountController@password')->middleware('SimpleCheck');          //登录密码页面
+    });
+
+    //栏目管理
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('category_add', 'Simple\CategoryController@category_add')->middleware('SimpleCheck');   //商品管理-添加商品分类
+        Route::get('category_list', 'Simple\CategoryController@category_list')->middleware('SimpleCheck'); //商品管理-商品分类列表
+    });
+
+    //商品管理
+    Route::group(['prefix' => 'goods'], function () {
+        Route::get('goods_add', 'Simple\GoodsController@goods_add')->middleware('SimpleCheck');         //商品管理-添加商品
+        Route::get('goods_edit', 'Simple\GoodsController@goods_edit')->middleware('SimpleCheck');       //商品管理-编辑商品
+        Route::get('goods_list', 'Simple\GoodsController@goods_list')->middleware('SimpleCheck');       //商品管理-商品列表
+    });
+
+    //订单管理
+    Route::group(['prefix' => 'order'], function () {
+        Route::get('order_spot', 'Simple\OrderController@order_spot')->middleware('SimpleCheck');                       //订单管理-现场订单
+        Route::get('order_spot_detail', 'Simple\OrderController@order_spot_detail')->middleware('SimpleCheck');         //订单管理-现场订单详情
+        Route::get('order_takeout', 'Simple\OrderController@order_takeout')->middleware('SimpleCheck');                 //订单管理-外卖订单
+        Route::get('order_takeout_detail', 'Simple\OrderController@order_takeout_detail')->middleware('SimpleCheck');   //订单管理-外卖订单详情
+        Route::get('order_appointment', 'Simple\OrderController@order_appointment')->middleware('SimpleCheck');         //预约管理
+    });
+
+
+    //进销存开单处理
+    Route::group(['prefix' => 'supplier'], function () {
+        Route::get('supplier_add', 'Simple\SupplierController@supplier_add')->middleware('SimpleCheck');        //添加供应商
+        Route::get('supplier_list', 'Simple\SupplierController@supplier_list')->middleware('SimpleCheck');      //供应商列表
+    });
+
+    //进销存供应商管理
+    Route::group(['prefix' => 'invoicing'], function () {
+        Route::get('purchase_goods', 'Simple\InvoicingController@purchase_goods')->middleware('SimpleCheck');    //从供应商进货开单
+        Route::get('return_goods', 'Simple\InvoicingController@return_goods')->middleware('SimpleCheck');        //从供应商退货开单
+        Route::get('loss_goods', 'Simple\InvoicingController@loss_goods')->middleware('SimpleCheck');           //报损开单
+        Route::get('check_goods', 'Simple\InvoicingController@check_goods')->middleware('SimpleCheck');        //盘点开单
+    });
+
+    //进出开单管理
+    Route::group(['prefix' => 'billing'], function () {
+        Route::get('purchase_goods', 'Simple\BillingController@purchase_goods')->middleware('SimpleCheck');    //从供应商进货开单管理
+        Route::get('return_goods', 'Simple\BillingController@return_goods')->middleware('SimpleCheck');        //从供应商退货开单管理
+        Route::get('loss_goods', 'Simple\BillingController@loss_goods')->middleware('SimpleCheck');           //报损开单管理
+        Route::get('check_goods', 'Simple\BillingController@check_goods')->middleware('SimpleCheck');        //盘点开单管理
+        Route::get('stock_list', 'Simple\BillingController@stock_list')->middleware('SimpleCheck');         //库存查询
+    });
+
+
+    //下属管理--添加组
+    Route::group(['prefix' => 'subordinate'], function () {
+        Route::get('subordinate_add', 'Simple\SubordinateController@subordinate_add')->middleware('SimpleCheck');    //添加下级人员
+        Route::get('subordinate_list', 'Simple\SubordinateController@subordinate_list')->middleware('SimpleCheck');  //下级人员列表
+    });
+
+    //异步提交数据组
+    Route::group(['prefix' => 'ajax'], function () {
+        Route::post('login_check', 'Simple\LoginController@login_check')->middleware('SimpleCheckAjax');//提交登录数据
+        Route::post('simple_select', 'Simple\DisplayController@simple_select')->middleware('SimpleCheckAjax');//提交选择分店数据
+        Route::post('store_edit_check', 'Simple\DisplayController@store_edit_check')->middleware('SimpleCheckAjax');;    //分店店铺信息编辑弹窗
+        Route::post('profile_edit_check', 'Simple\AccountController@profile_edit_check')->middleware('SimpleCheckAjax');//个人账号信息修改
+        Route::post('safe_password_edit_check', 'Simple\AccountController@safe_password_edit_check')->middleware('SimpleCheckAjax');//安全密码设置检测
+        Route::post('password_edit_check', 'Simple\AccountController@password_edit_check')->middleware('SimpleCheckAjax');          //密码检测
+
+
+        Route::post('subordinate_add_check', 'Simple\SubordinateController@subordinate_add_check')->middleware('SimpleCheckAjax');  //下属添加检测
+        Route::post('subordinate_edit', 'Simple\SubordinateController@subordinate_edit')->middleware('SimpleCheckAjax');            //下属信息编辑页面
+        Route::post('subordinate_edit_check', 'Simple\SubordinateController@subordinate_edit_check')->middleware('SimpleCheckAjax');//下属信息编辑检测
+        Route::post('subordinate_lock', 'Simple\SubordinateController@subordinate_lock')->middleware('SimpleCheckAjax');            //下属冻结检测
+        Route::post('subordinate_delete', 'Simple\SubordinateController@subordinate_delete')->middleware('SimpleCheckAjax');        //下属删除检测
+        Route::post('subordinate_lock', 'Simple\SubordinateController@subordinate_lock')->middleware('SimpleCheckAjax');            //下属冻结页面
+        Route::post('subordinate_lock_check', 'Simple\SubordinateController@subordinate_lock_check')->middleware('SimpleCheckAjax');//下属冻结检测
+
+
+        Route::post('goods_list', 'Simple\InvoicingController@goods_list')->middleware('SimpleCheckAjax');                       //开单异步加载部分（商品列表）
+        Route::post('supplier_add_check', 'Simple\SupplierController@supplier_add_check')->middleware('SimpleCheckAjax');          //供应商添加检测
+        Route::post('supplier_delete', 'Simple\SupplierController@supplier_delete')->middleware('SimpleCheckAjax');               //删除供应商弹窗
+        Route::post('supplier_delete_check', 'Simple\SupplierController@supplier_delete_check')->middleware('SimpleCheckAjax');   //删除供应商操作
+        Route::post('supplier_edit', 'Simple\SupplierController@supplier_edit')->middleware('SimpleCheckAjax');                   //编辑供应商弹窗
+        Route::post('supplier_edit_check', 'Simple\SupplierController@supplier_edit_check')->middleware('SimpleCheckAjax');       //编辑供应商操作
+        Route::post('purchase_goods_check', 'Simple\InvoicingController@purchase_goods_check')->middleware('SimpleCheckAjax');   //从供应商进货、退货开单检测
+        Route::post('loss_goods_check', 'Simple\InvoicingController@loss_goods_check')->middleware('SimpleCheckAjax');          //报损开单检测
+        Route::post('check_goods_check', 'Simple\InvoicingController@check_goods_check')->middleware('SimpleCheckAjax');        //盘点开单检测
+        Route::post('search_company', 'Simple\InvoicingController@search_company')->middleware('SimpleCheckAjax');              //搜索供应商检测
+        Route::post('select_company', 'Simple\InvoicingController@select_company')->middleware('SimpleCheckAjax');              //选择供应商检测
+
+
+        Route::post('purchase_list_confirm', 'Simple\BillingController@purchase_list_confirm')->middleware('SimpleCheckAjax');           //进货退货审核订单弹出页面
+        Route::post('purchase_list_confirm_check', 'Simple\BillingController@purchase_list_confirm_check')->middleware('SimpleCheckAjax');//进货退货审核订单操作
+        Route::post('loss_list_confirm', 'Simple\BillingController@loss_list_confirm')->middleware('SimpleCheckAjax');               //报损审核订单弹出页面
+        Route::post('loss_list_confirm_check', 'Simple\BillingController@loss_list_confirm_check')->middleware('SimpleCheckAjax');   //报损审核订单操作
+        Route::post('check_list_confirm', 'Simple\BillingController@check_list_confirm')->middleware('SimpleCheckAjax');             //盘点审核订单弹出页面
+        Route::post('check_list_confirm_check', 'Simple\BillingController@check_list_confirm_check')->middleware('SimpleCheckAjax');   //盘点审核订单操作
+        Route::post('order_list_details', 'Simple\BillingController@order_list_details')->middleware('SimpleCheckAjax');             //订单详细信息列表
+
+        Route::post('category_add_check', 'Simple\CategoryController@category_add_check')->middleware('SimpleCheckAjax');          //栏目添加检测
+        Route::post('category_delete', 'Simple\CategoryController@category_delete')->middleware('SimpleCheckAjax');          //栏目添加检测
+        Route::post('category_delete_check', 'Simple\CategoryController@category_delete_check')->middleware('SimpleCheckAjax');          //栏目添加检测
+        Route::post('category_edit', 'Simple\CategoryController@category_edit')->middleware('SimpleCheckAjax');                    //栏目编辑页面
+        Route::post('category_edit_check', 'Simple\CategoryController@category_edit_check')->middleware('SimpleCheckAjax');        //栏目编辑检测
+        Route::post('goods_add_check', 'Simple\GoodsController@goods_add_check')->middleware('SimpleCheckAjax');                   //商品添加检测
+
+        Route::post('goods_delete', 'Simple\GoodsController@goods_delete')->middleware('SimpleCheckAjax');                         //商品删除弹窗
+        Route::post('goods_status', 'Simple\GoodsController@goods_status')->middleware('SimpleCheckAjax');                         //商品状态修改弹窗
+        Route::post('goods_delete_check', 'Simple\GoodsController@goods_delete_check')->middleware('SimpleCheckAjax');             //商品删除检测
+        Route::post('goods_status_check', 'Simple\GoodsController@goods_status_check')->middleware('SimpleCheckAjax');             //商品状态修改检测
+        Route::post('goods_thumb_delete', 'Simple\GoodsController@goods_thumb_delete')->middleware('SimpleCheckAjax');              //商品图片删除弹窗
+        Route::post('goods_thumb_delete_check', 'Simple\GoodsController@goods_thumb_delete_check')->middleware('SimpleCheckAjax');  //商品图片删除检测
+        Route::post('goods_edit_check', 'Simple\GoodsController@goods_edit_check')->middleware('SimpleCheckAjax');                 //商品编辑检测
+        Route::post('order_status', 'Simple\OrderController@order_status')->middleware('SimpleCheckAjax');                         //修改订单状态弹窗
+        Route::post('order_status_check', 'Simple\OrderController@order_status_check')->middleware('SimpleCheckAjax');             //修改订单状态检测
+        Route::post('order_status_paytype', 'Simple\OrderController@order_status_paytype')->middleware('SimpleCheckAjax');                         //修改订单状态弹窗
+        Route::post('order_status_paytype_check', 'Simple\OrderController@order_status_paytype_check')->middleware('SimpleCheckAjax');             //修改订单状态检测
+        Route::any('goods_thumb', 'Simple\GoodsController@goods_thumb')->middleware('SimpleCheckAjax');                           //商品规格异步加载页面
+        Route::post('upload_thumb_check', 'Simple\GoodsController@upload_thumb_check')->middleware('SimpleCheckAjax');             //上传文件检测
+
+    });
+});
+/**********************简单的*********************/
+
+
 /*********************接口路由*************************/
 Route::group(['prefix' => 'api'], function () {
     //微信通用路由组
@@ -787,6 +943,22 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('allow_zero_stock', 'Api\AndroidApiController@allow_zero_stock')->middleware('AndroidApiCheck');//开启/关闭零库存开单接口
         Route::any('change_stock_role', 'Api\AndroidApiController@change_stock_role')->middleware('AndroidApiCheck');//下单减库存/付款减库存接口
         Route::any('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidApiCheck');//查询店铺设置
+    });
+
+    //android-app接口
+    Route::group(['prefix' => 'androidSimpleApi'], function () {
+        Route::any('login', 'Api\AndroidSimpleApiController@login')->middleware('AndroidSimpleApiCheck');//登入接口
+        Route::any('goodscategory', 'Api\AndroidSimpleApiController@goodscategory')->middleware('AndroidSimpleApiCheck');//商品分类接口
+        Route::any('goodslist', 'Api\AndroidSimpleApiController@goodslist')->middleware('AndroidSimpleApiCheck');//商品列表接口
+        Route::any('order_check', 'Api\AndroidSimpleApiController@order_check')->middleware('AndroidSimpleApiCheck');//订单提交接口
+        Route::any('cancel_order', 'Api\AndroidSimpleApiController@cancel_order')->middleware('AndroidSimpleApiCheck');//取消订单接口
+        Route::any('order_list', 'Api\AndroidSimpleApiController@order_list')->middleware('AndroidSimpleApiCheck');//订单列表接口
+        Route::any('order_detail', 'Api\AndroidSimpleApiController@order_detail')->middleware('AndroidSimpleApiCheck');//订单详情接口
+        Route::any('cash_payment', 'Api\AndroidSimpleApiController@cash_payment')->middleware('AndroidSimpleApiCheck');//现金支付接口
+        Route::any('other_payment', 'Api\AndroidSimpleApiController@other_payment')->middleware('AndroidSimpleApiCheck');//其他支付接口
+        Route::any('allow_zero_stock', 'Api\AndroidSimpleApiController@allow_zero_stock')->middleware('AndroidSimpleApiCheck');//开启/关闭零库存开单接口
+        Route::any('change_stock_role', 'Api\AndroidSimpleApiController@change_stock_role')->middleware('AndroidSimpleApiCheck');//下单减库存/付款减库存接口
+        Route::any('stock_cfg', 'Api\AndroidSimpleApiController@stock_cfg')->middleware('AndroidSimpleApiCheck');//查询店铺设置
     });
 });
 /*********************接口路由*************************/

@@ -12,7 +12,6 @@ use App\Models\RetailShengpay;
 use App\Models\RetailShengpayTerminal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
 
 class PaysettingController extends Controller
 {
@@ -130,7 +129,7 @@ class PaysettingController extends Controller
             ];
 
             // 修改付款信息
-            RetailShengpay::editShengpay([['id',$id]],$data);
+            RetailShengpay::editShengpay([['id', $id]], $data);
             // 如果不是超级管理员
             if ($admin_data['is_super'] != 1) {
                 // 保存操作记录
@@ -156,6 +155,7 @@ class PaysettingController extends Controller
 
         return view('Retail/Paysetting/payconfig_apply', ['id' => $id]);
     }
+
     /**
      * 终端机器号重新申请功能提交
      */

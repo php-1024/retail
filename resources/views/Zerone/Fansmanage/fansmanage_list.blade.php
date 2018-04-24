@@ -51,12 +51,12 @@
                                 <input type="text" id="amount" name="organization_name" value="{{ $search_data['organization_name'] }}" placeholder="请输入商户名称" class="form-control">
                             </div>
                         </div>
-                        {{--<div class="col-sm-3">--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="control-label" for="amount">手机号码</label>--}}
-                                {{--<input type="text" id="amount" name="amount" value="" placeholder="手机号码" class="form-control">--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label class="control-label" for="amount">手机号码</label>
+                                <input type="text" name="mobile" value="{{ $search_data['mobile'] }}" placeholder="手机号码" class="form-control">
+                            </div>
+                        </div>
                         {{--<div class="col-sm-3">--}}
                             {{--<div class="form-group">--}}
                                 {{--<label class="control-label" for="amount">所在战区</label>--}}
@@ -104,9 +104,9 @@
                                         <td>{{$value->id}}</td>
                                         <td>{{$value->organization_name}}</td>
                                         <td>{{$value->agent_name}}</td>
-                                        <td>{{$value['fansmanageinfo']['fansmanage_owner']}}</td>
-                                        <td>{{$value->account->account}}</td>
-                                        <td>{{$value->account->mobile}}</td>
+                                        <td>{{$value->username}}</td>
+                                        <td>{{$value->account}}</td>
+                                        <td>{{$value->mobile}}</td>
                                         <td>
                                             @if($value->status == 1)
                                                 <label class="label label-primary">正常</label>
@@ -118,9 +118,9 @@
                                         <td class="text-right">
                                             <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getEditForm({{ $value->id }})"><i class="fa fa-edit"></i>&nbsp;&nbsp;编辑</button>
                                             @if($value->status == 1)
-                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
+                                            <button type="button" class="btn  btn-xs btn-warning" onclick="getLockForm('{{ $value->id }}','0')"><i class="fa fa-lock"></i>&nbsp;&nbsp;冻结</button>
                                             @elseif($value->status == 0)
-                                            <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','{{$value->status}}')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
+                                            <button type="button" class="btn  btn-xs btn-info" onclick="getLockForm('{{ $value->id }}','1')"><i class="fa fa-unlock"></i>&nbsp;&nbsp;解冻</button>
                                             @endif
 
                                             <button type="submit" id="peoplesBtn" onclick="location.href='{{url('zerone/fansmanage/fansmanage_structure')}}?organization_id={{$value->id}}'" class="btn btn-outline btn-xs btn-primary"><i class="fa fa-users"></i>&nbsp;&nbsp;店铺架构</button>

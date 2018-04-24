@@ -50,14 +50,31 @@ return [
     'retail_safe_encrypt_key' => 'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 零售版店铺全密码加密盐
     /*******************零售版店铺**************************/
 
+    /*******************简版店铺管理系统**************************/
+    'simple_encrypt_key' => 'sdf1564fd56sd4fsdf2sd4f8sd4fgsd5f8sd4f98dsf6dsf89ds4fgsfd5asdf8s5dafdfgh8fgjgh8j',//零壹云管理平台 - 简版店铺登录密码加密盐
+    'simple_safe_encrypt_key' => 'sdgtfh8gfhg8kjhgm5jh4ksf89ddxg48f9c5gf4j98sdgfhfguytsfxcbv5956556584gyudf54g8fd4gh',//零壹云管理平台 - 简版店铺全密码加密盐
+    /*******************简版店铺管理系统**************************/
+
 
     /******************微信开放平台相关参数********************/
+
+    //正式版参数
+//    'wechat_open_setting' => [
+//        'open_appid' => 'wxd22806e3df9e9d35', //开放平台APPID
+//        'open_token' => 'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
+//        'open_key' => 'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
+//        'open_appsecret' => 'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
+//    ],
+
+    //测试版参数
     'wechat_open_setting' => [
-        'open_appid' => 'wxd22806e3df9e9d35', //开放平台APPID
+        'open_appid' => 'wx60b2de8797f7ef8f', //开放平台APPID
         'open_token' => 'yc4uE4D8OUQEy47do91QLEQc7h4UD9O7',//消息校验Token
         'open_key' => 'o1fcrKVU3NXkPt3P7p51ufHwKFOmUCq7XhzqqiPm6sr',//消息加解密Key
-        'open_appsecret' => 'f4de34d9a9c6000d1efdbaa9462c273a',//开放平台AppSecret
+        'open_appsecret' => 'a9f148ed3e0f67bab0d67eb51ae748c9',//开放平台AppSecret
     ],
+
+
     /******************微信开放平台相关参数********************/
 
     /*
@@ -67,7 +84,8 @@ return [
      */
     'wechat_web_setting' => [
         'appid' => 'wx3fb8f4754008e524',
-        'appsecret' => 'e889b1da27356de8858ac9b7934fe228',
+        'appsecret' => 'eff84a38864f33660994eaaa2f258fcf',
+//        'appsecret' => 'e889b1da27356de8858ac9b7934fe228',
     ],
 
 
@@ -94,6 +112,13 @@ return [
     */
     'retail_route_except' => [
         'retail',//零售管理系统首页
+    ],
+
+    /*
+    * 简版店铺管理系统无需检验权限的路由
+    */
+    'simple_route_except' => [
+        'simple',//简版店铺管理系统首页
     ],
 
     /*

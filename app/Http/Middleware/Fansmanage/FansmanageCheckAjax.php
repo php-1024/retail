@@ -3,6 +3,8 @@
  * 检测中间件囖
  */
 namespace App\Http\Middleware\Fansmanage;
+use App\Models\Account;
+use App\Models\Program;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -232,7 +234,7 @@ class FansmanageCheckAjax
     public function checkSafePassword($request){
         $admin_data = $request->get('admin_data');
         $safe_password = $request->input('safe_password');
-        if($admin_data['is_super'] == '2'){
+        if($admin_data['is_super'] == '1'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
             $key = config("app.fansnamage_safe_encrypt_key");//获取加密盐
@@ -242,7 +244,7 @@ class FansmanageCheckAjax
         if(empty($safe_password)){
             return self::res(0,response()->json(['data' => '请输入安全密码', 'status' => '0']));
         }
-        if(empty($admin_data['safe_password']) && $admin_data['is_super'] != '2'){
+        if(empty($admin_data['safe_password']) && $admin_data['is_super'] != '1'){
             return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
         }
         if($encryptPwd != $admin_data['safe_password']){
@@ -251,20 +253,44 @@ class FansmanageCheckAjax
         return self::res(1,$request);
     }
 
-    /*
-     * 部分页面检测用户是否admin，否则检测是否有权限
-     */
-    public function checkHasRule($request){
+    //部分页面检测用户是否admin，否则检测是否有权限
+    public function checkHasRule($request)
+    {
         $admin_data = $request->get('admin_data');
-        if($admin_data['id']!=1){
-            //暂定除admin外所有用户都没有权限
-            //return self::res(0, response()->json(['data' => '您没有该功能的权限！', 'status' => '-1']));
-            return self::res(1,$request);
-        }else{
-            return self::res(1,$request);
+        if ($admin_data['id'] <> 1 && $admin_data['is_super'] <> 1) {
+            //暂定所有用户都有权限
+            //return self::res(1,redirect('zerone'));
+            $route_name = $request->path();//获取当前的页面路由
+
+            //查询用户所具备的所有节点的路由
+            $account_info = Account::getOne([['id', $admin_data['id']]]);
+            $account_routes = [];
+            foreach ($account_info->nodes as $key => $val) {
+                $account_routes[] = $val->route_name;
+            }
+
+            //查询该程序下所有节点的路由
+            $program_info = Program::getOne([['id', 3]]);
+            $program_routes = [];
+            foreach ($program_info->nodes as $key => $val) {
+                $program_routes[] = $val->route_name;
+            }
+
+            //计算数组差集，获取用户所没有的权限
+            $unset_routes = array_diff($program_routes, $account_routes);
+            //如果跳转的路由不在该程序的所有节点中。则报错
+            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.simple_route_except'))) {
+                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
+            }
+            //如果没有权限，则报错
+            if (in_array($route_name, $unset_routes)) {
+                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
+            }
+            return self::res(1, $request);
+        } else {
+            return self::res(1, $request);
         }
     }
-
     /*
      * 检测是否登录
      */

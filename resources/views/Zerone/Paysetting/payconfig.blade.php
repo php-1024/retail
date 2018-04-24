@@ -83,7 +83,7 @@
                                 @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td>{{$value->organization->organization_name}}</td>
+                                        <td>{{$value->organization_name}}</td>
                                         <td>{{$value->sft_pos_num}}</td>
                                         <td>{{$value->sft_num }}</td>
                                         <td>
@@ -96,7 +96,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <select style="width:100px" onchange="changeUserTag(this,'{{$value->id}}','{{$value->organization->id}}')">
+                                            <select style="width:100px" onchange="changeUserTag(this,'{{$value->id}}','{{$value->retail_id}}')">
                                                 <option @if($value->type == 0) selected @endif value="0">未设置</option>
                                                 <option @if($value->type == 1) selected @endif value="1">T0</option>
                                                 <option @if($value->type == 2) selected @endif value="2">T1</option>
@@ -105,9 +105,9 @@
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
                                             @if($value->status == 0)
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->retail_id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
                                             @endif
-                                            <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
+                                            <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->retail_id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
                                         </td>
 
                                     </tr>

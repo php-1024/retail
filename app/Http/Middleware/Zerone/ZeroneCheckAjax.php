@@ -782,9 +782,9 @@ class ZeroneCheckAjax
         if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
-        if (empty($request->input('fansmanage_password'))) {
+        if (empty($request->input('password'))) {
             return self::res(0, response()->json(['data' => '请输入代理登录密码', 'status' => '0']));
-        }elseif ($request->input('fansmanage_password')!=$request->input('re_fansmanage_password')){
+        }elseif ($request->input('password')!=$request->input('re_password')){
             return self::res(0, response()->json(['data' => '两次密码不一致', 'status' => '0']));
         }
         return self::res(1, $request);

@@ -502,7 +502,7 @@ class AgentController extends Controller
         // 程序id
         $program_id = $request->input('program_id');
         // 程序名字
-        $program_name = Program::getPluck([['id', $program_id]], 'program_name')->first();
+        $program_name = Program::getPluck([['id', $program_id]], 'program_name');
         // 数量
         $number = $request->input('number');
         // 判断划入或者划出
@@ -598,7 +598,7 @@ class AgentController extends Controller
             // 计算店铺数量
             $list[$key]['store'] = count($data);
             // 程序名字
-            $list[$key]['program_name'] = Program::getPluck([['id', $value['asset_id']]], 'program_name')->first();
+            $list[$key]['program_name'] = Program::getPluck([['id', $value['asset_id']]], 'program_name');
             // 程序剩余数量
             $list[$key]['program_balance'] = OrganizationAssets::getPluck([['program_id', $value['asset_id']], ['organization_id', $value['id']]], 'program_balance')->first();
         }

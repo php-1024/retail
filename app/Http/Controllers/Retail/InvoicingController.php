@@ -3,27 +3,23 @@
  * 零售版店铺
  * 进销存管理-进出开单
  **/
+
 namespace App\Http\Controllers\Retail;
+
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Models\FansmanageUser;
-use App\Models\LoginLog;
 use App\Models\OperationLog;
 use App\Models\Organization;
-use App\Models\OrganizationRetailinfo;
-use App\Models\Program;
 use App\Models\RetailCategory;
 use App\Models\RetailCheckOrder;
 use App\Models\RetailCheckOrderGoods;
 use App\Models\RetailGoods;
 use App\Models\RetailLossOrder;
 use App\Models\RetailLossOrderGoods;
-use App\Models\RetailOrder;
 use App\Models\RetailPurchaseOrder;
 use App\Models\RetailPurchaseOrderGoods;
 use App\Models\RetailStockLog;
 use App\Models\RetailSupplier;
-use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -39,16 +35,16 @@ class InvoicingController extends Controller
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
         //查询操作人员信息
-        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']], '0', 'id', 'DESC');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        $supplier = RetailSupplier::getList($where,'0', 'displayorder', 'DESC');   //供应商信息
+        $supplier = RetailSupplier::getList($where, '0', 'displayorder', 'DESC');   //供应商信息
 
-        return  view('Retail/Invoicing/purchase_goods',['supplier'=>$supplier,'account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Invoicing/purchase_goods', ['supplier' => $supplier, 'account' => $account, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //零售进销存开单--退供应商货物开单
@@ -61,15 +57,15 @@ class InvoicingController extends Controller
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
         //查询操作人员信息
-        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']], '0', 'id', 'DESC');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        $supplier = RetailSupplier::getList($where,'0', 'displayorder', 'DESC');   //供应商信息
-        return  view('Retail/Invoicing/return_goods',['supplier'=>$supplier,'account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $supplier = RetailSupplier::getList($where, '0', 'displayorder', 'DESC');   //供应商信息
+        return view('Retail/Invoicing/return_goods', ['supplier' => $supplier, 'account' => $account, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
 
@@ -81,14 +77,13 @@ class InvoicingController extends Controller
         $company_id = $request->get('company_id');      //供应商ID
         $company_name = $request->get('company_name');      //供应商ID
         $contactmobile = $request->get('contactmobile');      //供应商ID
-        $company = RetailSupplier::SearchCompany($retail_id,$company_id,$company_name,$contactmobile);
-        if ($company == null){
+        $company = RetailSupplier::SearchCompany($retail_id, $company_id, $company_name, $contactmobile);
+        if ($company == null) {
             return response()->json(['data' => '商户不存在！请重新选择！', 'status' => '0']);
-        }else{
-            return view('Retail/Invoicing/select_company',['company'=>$company]);
+        } else {
+            return view('Retail/Invoicing/select_company', ['company' => $company]);
         }
     }
-
 
 
     //零售进销存开单--报损开单
@@ -101,14 +96,14 @@ class InvoicingController extends Controller
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
         //查询操作人员信息
-        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']], '0', 'id', 'DESC');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        return  view('Retail/Invoicing/loss_goods',['account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Invoicing/loss_goods', ['account' => $account, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
 
@@ -122,14 +117,14 @@ class InvoicingController extends Controller
         $organization_id = $admin_data['organization_id'];//零壹管理平台只有一个组织
         $parent_tree = $admin_data['parent_tree'] . $admin_data['id'] . ',';
         //查询操作人员信息
-        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']],'0','id','DESC');
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');    //获取粉丝管理平台的组织id
+        $account = Account::getList([['organization_id', $organization_id], ['parent_tree', 'like', '%' . $parent_tree . '%']], '0', 'id', 'DESC');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');    //获取粉丝管理平台的组织id
         $where = [
             'fansmanage_id' => $fansmanage_id,
             'retail_id' => $admin_data['organization_id'],
         ];
         $category = RetailCategory::getList($where, '0', 'displayorder', 'DESC');   //栏目
-        return  view('Retail/Invoicing/check_goods',['account'=>$account,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Invoicing/check_goods', ['account' => $account, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //零售进销存开单--商品列表
@@ -138,17 +133,17 @@ class InvoicingController extends Controller
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $category_id = $request->get('category_id');    //栏目分类id
         $goods_name = $request->get('goods_name');      //商品名称
-        if (!empty($category_id) && !empty($goods_name)){
-            $where = [['retail_id',$admin_data['organization_id']],['category_id',$category_id],['name', 'LIKE', '%' . $goods_name . '%']];
-        }elseif (!empty($category_id)){
-            $where = ['retail_id'=>$admin_data['organization_id'],'category_id'=>$category_id];
-        }elseif (!empty($goods_name)){
-            $where = [['retail_id',$admin_data['organization_id']],['name', 'LIKE', '%' . $goods_name . '%']];
-        }else{
-            $where = ['retail_id'=>$admin_data['organization_id']];
+        if (!empty($category_id) && !empty($goods_name)) {
+            $where = [['retail_id', $admin_data['organization_id']], ['category_id', $category_id], ['name', 'LIKE', '%' . $goods_name . '%']];
+        } elseif (!empty($category_id)) {
+            $where = ['retail_id' => $admin_data['organization_id'], 'category_id' => $category_id];
+        } elseif (!empty($goods_name)) {
+            $where = [['retail_id', $admin_data['organization_id']], ['name', 'LIKE', '%' . $goods_name . '%']];
+        } else {
+            $where = ['retail_id' => $admin_data['organization_id']];
         }
-        $goods = RetailGoods::getList($where,'0','id','DESC');
-        return  view('Retail/Invoicing/goods_list',['goods'=>$goods]);
+        $goods = RetailGoods::getList($where, '0', 'id', 'DESC');
+        return view('Retail/Invoicing/goods_list', ['goods' => $goods]);
     }
 
 
@@ -157,19 +152,19 @@ class InvoicingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
 
 
         $organization_id = $admin_data['organization_id'];
-        $num = RetailPurchaseOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        $num = RetailPurchaseOrder::where([['retail_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
         $num += 1;
         $sort = 100000 + $num;
-        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
+        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;//订单号
 
         $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
-        if ($type == 1){
+        if ($type == 1) {
             $tips = '进货开单';
-        }else{
+        } else {
             $tips = '退货开单';
         }
         $orders = $request->get('orders');                  //接收订单信息
@@ -188,8 +183,8 @@ class InvoicingController extends Controller
         try {
             $id = RetailPurchaseOrder::addOrder($order_data);
             //进货开单对应商品信息处理
-            foreach ($orders['goods'] as $key=>$val){
-                $goods = RetailGoods::getOne(['id'=>$val['id']]);
+            foreach ($orders['goods'] as $key => $val) {
+                $goods = RetailGoods::getOne(['id' => $val['id']]);
                 $order_goods_data = [
                     'order_id' => $id,
                     'goods_id' => $val['id'],
@@ -201,10 +196,10 @@ class InvoicingController extends Controller
                 ];
                 RetailPurchaseOrderGoods::addOrderGoods($order_goods_data);
             }
-            $order = RetailPurchaseOrder::getOne(['id'=>$id])->first();    //获取订单信息
+            $order = RetailPurchaseOrder::getOne(['id' => $id])->first();    //获取订单信息
             $order_goods = $order->RetailPurchaseOrderGoods;    //订单对应的商品
             //添加库存操作记录日志
-            foreach($order_goods as $key=>$val){
+            foreach ($order_goods as $key => $val) {
                 $stock_data = [
                     'fansmanage_id' => $order->fansmanage_id,
                     'retail_id' => $order->retail_id,
@@ -219,17 +214,17 @@ class InvoicingController extends Controller
                 RetailStockLog::addStockLog($stock_data);
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员在零售店进货开单的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了'.$tips.'！');//保存操作记录
-            }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了'.$tips.'！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员在零售店进货开单的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统进行了' . $tips . '！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '进行了' . $tips . '！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();//事件回滚
-            return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips . '失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,请前往开单管理进行审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips . '成功,请前往开单管理进行审核确认', 'status' => '1']);
     }
 
 
@@ -238,18 +233,18 @@ class InvoicingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
 
         $organization_id = $admin_data['organization_id'];
-        $num = RetailLossOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        $num = RetailLossOrder::where([['retail_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
         $num += 1;
         $sort = 100000 + $num;
-        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
+        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;//订单号
 
         $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
-        if ($type == 3){
+        if ($type == 3) {
             $tips = '报损开单';
-        }else{
+        } else {
             $tips = '开单操作(操作类型未知)';
         }
         $orders = $request->get('orders');                  //接收订单信息
@@ -267,8 +262,8 @@ class InvoicingController extends Controller
         try {
             $id = RetailLossOrder::addOrder($order_data);
             //报损开单对应商品信息处理
-            foreach ($orders['goods'] as $key=>$val){
-                $goods = RetailGoods::getOne(['id'=>$val['id']]);
+            foreach ($orders['goods'] as $key => $val) {
+                $goods = RetailGoods::getOne(['id' => $val['id']]);
                 $order_goods_data = [
                     'order_id' => $id,
                     'goods_id' => $val['id'],
@@ -280,10 +275,10 @@ class InvoicingController extends Controller
                 ];
                 RetailLossOrderGoods::addOrderGoods($order_goods_data);
             }
-            $order = RetailLossOrder::getOne(['id'=>$id])->first();    //获取订单信息
+            $order = RetailLossOrder::getOne(['id' => $id])->first();    //获取订单信息
             $order_goods = $order->RetailLossOrderGoods;    //订单对应的商品
             //添加库存操作记录日志
-            foreach($order_goods as $key=>$val){
+            foreach ($order_goods as $key => $val) {
                 $stock_data = [
                     'fansmanage_id' => $order->fansmanage_id,
                     'retail_id' => $order->retail_id,
@@ -298,18 +293,18 @@ class InvoicingController extends Controller
                 RetailStockLog::addStockLog($stock_data);
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员在零售店报损开单的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了'.$tips.'！');//保存操作记录
-            }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了'.$tips.'！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员在零售店报损开单的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统进行了' . $tips . '！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '进行了' . $tips . '！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips . '失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,请前往开单管理进行审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips . '成功,请前往开单管理进行审核确认', 'status' => '1']);
     }
 
 
@@ -318,19 +313,19 @@ class InvoicingController extends Controller
     {
         $admin_data = $request->get('admin_data');          //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
 
         $organization_id = $admin_data['organization_id'];
-        $num = RetailCheckOrder::where([['retail_id',$organization_id],['ordersn','LIKE','%'.date("Ymd",time()).'%']])->count();//查询订单今天的数量
+        $num = RetailCheckOrder::where([['retail_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
         $num += 1;
         $sort = 100000 + $num;
-        $ordersn ='LS'.date("Ymd",time()).'_'.$organization_id.'_'.$sort;//订单号
+        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;//订单号
 
 
         $type = $request->get('type');          //接收订单类型  1：为进货订单、2为退货订单
-        if ($type == 4){
+        if ($type == 4) {
             $tips = '盘点操作';
-        }else{
+        } else {
             $tips = '开单操作(操作类型未知)';
         }
         $orders = $request->get('orders');                  //接收订单信息
@@ -348,8 +343,8 @@ class InvoicingController extends Controller
         try {
             $id = RetailCheckOrder::addOrder($order_data);
             //盘点开单对应商品信息处理
-            foreach ($orders['goods'] as $key=>$val){
-                $goods = RetailGoods::getOne(['id'=>$val['id']]);
+            foreach ($orders['goods'] as $key => $val) {
+                $goods = RetailGoods::getOne(['id' => $val['id']]);
                 $order_goods_data = [
                     'order_id' => $id,
                     'goods_id' => $val['id'],
@@ -361,10 +356,10 @@ class InvoicingController extends Controller
                 ];
                 RetailCheckOrderGoods::addOrderGoods($order_goods_data);
             }
-            $order = RetailCheckOrder::getOne(['id'=>$id])->first();    //获取订单信息
+            $order = RetailCheckOrder::getOne(['id' => $id])->first();    //获取订单信息
             $order_goods = $order->RetailCheckOrderGoods;    //订单对应的商品
             //添加库存操作记录日志
-            foreach($order_goods as $key=>$val){
+            foreach ($order_goods as $key => $val) {
                 $stock_data = [
                     'fansmanage_id' => $order->fansmanage_id,
                     'retail_id' => $order->retail_id,
@@ -379,18 +374,18 @@ class InvoicingController extends Controller
                 RetailStockLog::addStockLog($stock_data);
             }
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员在零售店报盘点单的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统进行了'.$tips.'！');//保存操作记录
-            }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '进行了'.$tips.'！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员在零售店报盘点单的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统进行了' . $tips . '！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '进行了' . $tips . '！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
             dd($e);
             DB::rollBack();//事件回滚
-            return response()->json(['data' => $tips.'失败，请检查', 'status' => '0']);
+            return response()->json(['data' => $tips . '失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => $tips.'成功,请前往开单管理进行审核确认', 'status' => '1']);
+        return response()->json(['data' => $tips . '成功,请前往开单管理进行审核确认', 'status' => '1']);
     }
 }
 

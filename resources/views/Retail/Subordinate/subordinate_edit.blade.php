@@ -1,4 +1,5 @@
-<form class="form-horizontal tasi-form"method="post" role="form" id="currentForm" action="{{ url('retail/ajax/subordinate_edit_check') }}">
+<form class="form-horizontal tasi-form" method="post" role="form" id="currentForm"
+      action="{{ url('retail/ajax/subordinate_edit_check') }}">
     <input type="hidden" name="_token" value="{{csrf_token()}}">
     <input type="hidden" name="id" id="id" value="{{ $info->id }}">
     <input type="hidden" name="account" id="account" value="{{ $info->account }}">
@@ -27,21 +28,22 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">真实姓名</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="realname" value="@if(!empty($info->account_info)){{ $info->account_info->realname }}@endif">
+                            <input type="text" class="form-control" name="realname"
+                                   value="@if(!empty($info->account_info)){{ $info->account_info->realname }}@endif">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control"  name="mobile" value="{{ $info->mobile }}">
+                            <input type="number" class="form-control" name="mobile" value="{{ $info->mobile }}">
                         </div>
                     </div>
                     <div class="line line-dashed b-b line-lg pull-in"></div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label" for="input-id-1">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" value=""  name="safe_password">
+                            <input type="text" class="form-control" value="" name="safe_password">
                         </div>
                     </div>
 
@@ -63,16 +65,16 @@
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 window.location.reload();
-            } else if(json.status == 1) {
+            } else if (json.status == 1) {
                 swal({
                     title: "提示信息",
                     text: json.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
-                },function(){
+                }, function () {
                     window.location.reload();
                 });
-            }else{
+            } else {
                 swal({
                     title: "提示信息",
                     text: json.data,

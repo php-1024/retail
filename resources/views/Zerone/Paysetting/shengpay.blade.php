@@ -79,7 +79,7 @@
                                 @foreach($list as $key=>$value)
                                     <tr>
                                         <td>{{$value->id}}</td>
-                                        <td>{{$value->organization->organization_name}}</td>
+                                        <td>{{$value->organization_name}}</td>
                                         <td>{{$value->terminal_num}}</td>
                                         <td>
                                             @if($value->status == 1)
@@ -93,9 +93,9 @@
                                         <td>{{ $value->created_at }}</td>
                                         <td class="text-right">
                                             @if($value->status == 0)
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-primary" onclick="getApplyForm('{{ $value->id }}','1','{{$value->retail_id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;审核通过</button>
                                             @endif
-                                                <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->organization->id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
+                                                <button type="button" id="editBtn" class="btn  btn-xs btn-danger" onclick="getApplyForm('{{ $value->id }}','-1','{{$value->retail_id}}')"><i class="fa fa-edit"></i>&nbsp;&nbsp;拒绝通过</button>
 
                                         </td>
 

@@ -53,6 +53,12 @@ class Organization extends Model
         return $this->hasOne('App\Models\OrganizationRetailinfo', 'organization_id');
     }
 
+    //和OrganizationSimpleinfo表一对一的关系
+    public function OrganizationSimpleinfo()
+    {
+        return $this->hasOne('App\Models\OrganizationSimpleinfo', 'organization_id');
+    }
+
     //和organizationBranchinfo表一对一的关系
     public function fansmanageinfo()
     {
@@ -81,13 +87,25 @@ class Organization extends Model
     //和RetailGoods表一对多的关系
     public function RetailGoods()
     {
-        return $this->hasMany('App\Models\RetailGoods', 'restaurant_id');
+        return $this->hasMany('App\Models\RetailGoods', 'retail_id');
+    }
+
+    //和SimpleGoods表一对多的关系
+    public function SimpleGoods()
+    {
+        return $this->hasMany('App\Models\SimpleGoods', 'simple_id');
     }
 
     //和RetailCategory表一对多的关系
     public function RetailCategory()
     {
         return $this->hasMany('App\Models\RetailCategory', 'retail_id');
+    }
+
+    //和SimpleCategory表一对多的关系
+    public function SimpleCategory()
+    {
+        return $this->hasMany('App\Models\SimpleCategory', 'simple_id');
     }
 
     //和RetailSupplier表一对多的关系
@@ -102,10 +120,11 @@ class Organization extends Model
         return $this->belongsTo('App\Models\Program', 'program_id', 'id');
     }
 
+
     //获取单条数据
     public static function getOne($where)
     {
-        return self::with('OrganizationRetailinfo')->where($where)->first();
+        return self::with('OrganizationRetailinfo')->with('OrganizationSimpleinfo')->where($where)->first();
     }
 
     //获取单条信息-服务商
@@ -219,10 +238,30 @@ class Organization extends Model
         }])->with('fansmanageinfo')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
+
     //获取分页数据-商户
     public static function getPaginageStore($where, $paginate, $orderby, $sort = 'DESC')
     {
         return self::with(['program'])->where($where)->orderBy($orderby, $sort)->paginate($paginate);
+    }
+
+    /**
+     * 获取跟组织有关的程序列出来
+     * 通过 组织 id 获取 program_id 然后 通过 program_id 找到 他的名称 并且  complete_id = program_id 并且 is_asset = 1 的值给拿出来
+     * @param $organization_id
+     * @return bool
+     */
+    public static function getProgramAsset($organization_id)
+    {
+        $res_organization = Organization::select(["organization.id", "organization.program_id"])
+            ->where(["organization.id" => $organization_id])
+            ->first()->toArray();
+        $res = Program::select(["id", "program_name"])->where(["complete_id" => $res_organization["program_id"], "is_asset" => 1])->orWhere(["id" => $res_organization["program_id"]])->get();
+        if (!empty($res)) {
+            return $res->toArray();
+        } else {
+            return false;
+        }
     }
 
     //获取分页数据-分店
@@ -232,4 +271,3 @@ class Organization extends Model
     }
 }
 
-?>

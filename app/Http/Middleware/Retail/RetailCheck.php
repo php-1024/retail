@@ -2,21 +2,25 @@
 /**
  * 检测是否登录的中间件
  */
+
 namespace App\Http\Middleware\Retail;
+
 use App\Models\Account;
 use App\Models\Program;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
-class RetailCheck{
-    public function handle($request,Closure $next){
+class RetailCheck
+{
+    public function handle($request, Closure $next)
+    {
         $route_name = $request->path();     //获取当前的页面路由
-        switch($route_name){
+        switch ($route_name) {
             /*****登录页,如果已经登录则不需要再次登录*****/
             case "retail/login":                                //登录页,如果已经登录则不需要再次登录
                 $sess_key = Session::get('retail_account_id');  //获取用户登录存储的SessionId
-                if(!empty($sess_key)) {                         //如果不为空跳转到选择零售店铺组织页面
+                if (!empty($sess_key)) {                         //如果不为空跳转到选择零售店铺组织页面
                     return redirect('retail');
                 }
                 break;
@@ -63,59 +67,48 @@ class RetailCheck{
             case "retail/paysetting/shengpay_add":     //支付设置-添加终端机器号信息
             case "retail/paysetting/shengpay_list":    //支付设置-终端机器号信息列表
                 $re = $this->checkLoginAndRule($request);//判断是否登录
-                return self::format_response($re,$next);
+                return self::format_response($re, $next);
                 break;
         }
         return $next($request);
     }
 
     //检测是否admin或是否有权限
-    public function checkLoginAndRule($request){
+    public function checkLoginAndRule($request)
+    {
         $re = $this->checkIsLogin($request);            //判断是否登录
-        if($re['status']=='0'){
+        if ($re['status'] == '0') {
             return $re;
-        }else{
+        } else {
             $re2 = $this->checkHasRule($re['response']);//判断用户是否admin或是否有权限
-            if($re2['status']=='0'){
+            if ($re2['status'] == '0') {
                 return $re2;
-            }else{
-                return self::res(1,$re2['response']);
+            } else {
+                return self::res(1, $re2['response']);
             }
         }
     }
 
     //部分页面检测用户是否admin，否则检测是否有权限
-    public function checkHasRule($request){
-        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
-        if($admin_data['id']<>1 && $admin_data['is_super']<>1){
-            $route_name = $request->path();//获取当前的页面路由
 
-            //查询用户所具备的所有节点的路由
-            $account_info = Account::getOne([['id',$admin_data['id']]]);
-            $account_routes = [];
-            foreach($account_info->nodes as $key=>$val){
-                $account_routes[] = $val->route_name;
-            }
-            //查询该程序下所有节点的路由
-            $program_info = Program::getOne([['id',10]]);
-            $program_routes = [];
-            foreach($program_info->nodes as $key=>$val){
-                $program_routes[] = $val->route_name;
-            }
 
-            //计算数组差集，获取用户所没有的权限
-            $unset_routes = array_diff($program_routes,$account_routes);
-            //如果跳转的路由不在该程序的所有节点中。则报错
-            if(!in_array($route_name,$program_routes) && !in_array($route_name,config('app.retail_route_except'))){
-                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
-            }
-            //如果没有权限，则报错
-            if(in_array($route_name,$unset_routes)){
-                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
-            }
-            return self::res(1,$request);
-        }else{
-            return self::res(1,$request);
+    public function checkIsLogin($request)
+    {
+        $sess_key = Session::get('retail_account_id');              //获取用户登录存储的SessionId
+        if (!empty($sess_key)) {
+            $sess_key = Session::get('retail_account_id');          //获取管理员ID
+            $sess_key = decrypt($sess_key);                         //解密管理员ID
+            Redis::connect('zeo');                                  //连接到我的缓存服务器
+            $admin_data = Redis::get('retail_system_admin_data_' . $sess_key);//获取管理员信息
+            $menu_data = Redis::get('zerone_system_menu_10_' . $sess_key);
+            $son_menu_data = Redis::get('zerone_system_son_menu_10_' . $sess_key);
+            $admin_data = unserialize($admin_data);                 //解序列我的信息
+            $menu_data = unserialize($menu_data);                  //解序列一级菜单
+            $son_menu_data = unserialize($son_menu_data);          //解序列子菜单
+            $request->attributes->add(['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]); //添加参数
+            return self::res(1, $request);                     //把参数传递到下一个中间件
+        } else {                                                      //如果为空跳转到登录页面
+            return self::res(0, redirect('retail/login'));
         }
     }
 
@@ -125,37 +118,58 @@ class RetailCheck{
      * 3、格式化返回值
      */
     //1、普通页面检测用户是否登录
-    public function checkIsLogin($request){
-        $sess_key = Session::get('retail_account_id');              //获取用户登录存储的SessionId
-        if(!empty($sess_key)) {
-            $sess_key = Session::get('retail_account_id');          //获取管理员ID
-            $sess_key = decrypt($sess_key);                         //解密管理员ID
-            Redis::connect('zeo');                                  //连接到我的缓存服务器
-            $admin_data = Redis::get('retail_system_admin_data_'.$sess_key);//获取管理员信息
-            $menu_data = Redis::get('zerone_system_menu_10_'.$sess_key);
-            $son_menu_data = Redis::get('zerone_system_son_menu_10_'.$sess_key);
-            $admin_data = unserialize($admin_data);                 //解序列我的信息
-            $menu_data =  unserialize($menu_data);                  //解序列一级菜单
-            $son_menu_data =  unserialize($son_menu_data);          //解序列子菜单
-            $request->attributes->add(['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data]); //添加参数
-            return self::res(1,$request);                     //把参数传递到下一个中间件
-        }else{                                                      //如果为空跳转到登录页面
-            return self::res(0,redirect('retail/login'));
-        }
+    public static function res($status, $response)
+    {
+        return ['status' => $status, 'response' => $response];
     }
 
     //2、工厂方法返回结果
-    public static function res($status,$response){
-        return ['status'=>$status,'response'=>$response];
+
+    public function checkHasRule($request)
+    {
+        $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
+        if ($admin_data['id'] <> 1 && $admin_data['is_super'] <> 1) {
+            $route_name = $request->path();//获取当前的页面路由
+
+            //查询用户所具备的所有节点的路由
+            $account_info = Account::getOne([['id', $admin_data['id']]]);
+            $account_routes = [];
+            foreach ($account_info->nodes as $key => $val) {
+                $account_routes[] = $val->route_name;
+            }
+            //查询该程序下所有节点的路由
+            $program_info = Program::getOne([['id', 10]]);
+            $program_routes = [];
+            foreach ($program_info->nodes as $key => $val) {
+                $program_routes[] = $val->route_name;
+            }
+
+            //计算数组差集，获取用户所没有的权限
+            $unset_routes = array_diff($program_routes, $account_routes);
+            //如果跳转的路由不在该程序的所有节点中。则报错
+            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.retail_route_except'))) {
+                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
+            }
+            //如果没有权限，则报错
+            if (in_array($route_name, $unset_routes)) {
+                return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '0']));
+            }
+            return self::res(1, $request);
+        } else {
+            return self::res(1, $request);
+        }
     }
 
     //3、格式化返回值
-    public static function format_response($re,Closure $next){
-        if($re['status']=='0'){
+
+    public static function format_response($re, Closure $next)
+    {
+        if ($re['status'] == '0') {
             return $re['response'];
-        }else{
+        } else {
             return $next($re['response']);
         }
     }
 }
+
 ?>

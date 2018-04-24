@@ -46,7 +46,7 @@
                                         <div class="inline">
                                             <div class="thumb-lg" >
                                                 @if(!empty($organization->OrganizationRetailinfo->retail_logo))
-                                                <img src="{{asset('/'.$organization->OrganizationRetailinfo->retail_logo)}}" class="img-circle" alt="...">
+                                                <img src="{{asset('/'.$organization->OrganizationRetailinfo->retail_logo)}}" class="img-circle" alt="店铺logo">
                                                 @endif
                                             </div>
                                         </div>
@@ -288,7 +288,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            <input type="text" value="{{$organization->OrganizationRetailinfo->retail_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
+                            <input type="number" value="{{$organization->OrganizationRetailinfo->retail_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -297,7 +297,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">店铺LOGO</label>
                         <div class="col-sm-10">
-                            <input type="file" name="retail_logo" value="{{$organization->OrganizationRetailinfo->retail_logo}}" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+                            <input type="file" name="retail_logo" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -368,6 +368,9 @@
 
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=Xv2dLyXPQEWxRVZ3GVGWE9SkkfhS4WBW"></script>
 <script type="text/javascript">
+    $(document).ready(function() {
+        $("#retail_logo").val("{{$organization->OrganizationRetailinfo->retail_logo}}");
+    });
     $('#editBtn').click(function () {
         $('#myModal').modal();
     });

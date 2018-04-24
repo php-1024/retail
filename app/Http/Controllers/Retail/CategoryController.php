@@ -12,7 +12,6 @@ use App\Models\RetailCategory;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Session;
 
 class CategoryController extends Controller
 {
@@ -23,7 +22,7 @@ class CategoryController extends Controller
         $menu_data = $request->get('menu_data');            //中间件产生的菜单数据参数
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
-        return view('Retail/Category/category_add',['admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        return view('Retail/Category/category_add', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //添加商品分类操作
@@ -33,12 +32,12 @@ class CategoryController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
         $category_name = $request->get('category_name');    //栏目名称
         $category_sort = $request->get('category_sort');    //栏目排序
-        if (empty($category_sort)){
+        if (empty($category_sort)) {
             $category_sort = '0';
         }
-        $fansmanage_id = Organization::getPluck(['id'=>$admin_data['organization_id']],'parent_id');
-        $names = RetailCategory::checkRowExists(['fansmanage_id' => $fansmanage_id,'retail_id' => $admin_data['organization_id'],'name' => $category_name]);
-        if($names) {//判断分类是已经存在
+        $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
+        $names = RetailCategory::checkRowExists(['fansmanage_id' => $fansmanage_id, 'retail_id' => $admin_data['organization_id'], 'name' => $category_name]);
+        if ($names) {//判断分类是已经存在
             return response()->json(['data' => '分类名称重名，请重新输入！', 'status' => '0']);
         }
         $category_data = [
@@ -52,10 +51,10 @@ class CategoryController extends Controller
         try {
             RetailCategory::addCategory($category_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员添加零售店铺分类的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售管理系统添加了栏目分类！');//保存操作记录
-            }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '添加了栏目分类！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员添加零售店铺分类的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售管理系统添加了栏目分类！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '添加了栏目分类！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {
@@ -76,15 +75,15 @@ class CategoryController extends Controller
         $where = [
             'retail_id' => $admin_data['organization_id'],
         ];
-        $category = RetailCategory::getPaginage($where,$category_name,'10','displayorder','ASC');
-        return view('Retail/Category/category_list',['category_name'=>$category_name,'category'=>$category,'admin_data'=>$admin_data,'menu_data'=>$menu_data,'son_menu_data'=>$son_menu_data,'route_name'=>$route_name]);
+        $category = RetailCategory::getPaginage($where, $category_name, '10', 'displayorder', 'ASC');
+        return view('Retail/Category/category_list', ['category_name' => $category_name, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
     //商品分类删除弹窗
     public function category_delete(Request $request)
     {
         $category_id = $request->get('id');              //分类栏目的id
-        return view('Retail/Category/category_delete',['category_id'=>$category_id]);
+        return view('Retail/Category/category_delete', ['category_id' => $category_id]);
     }
 
     //商品分类删除弹窗
@@ -120,7 +119,7 @@ class CategoryController extends Controller
             'id' => $category_id,
         ];
         $category = RetailCategory::getOne($where);
-        return view('Retail/Category/category_edit',['category'=>$category,'admin_data'=>$admin_data]);
+        return view('Retail/Category/category_edit', ['category' => $category, 'admin_data' => $admin_data]);
     }
 
     //商品分类编辑提交
@@ -131,7 +130,7 @@ class CategoryController extends Controller
         $name = $request->get('category_name');            //栏目名称
         $displayorder = $request->get('displayorder');     //栏目排序
         $category_id = $request->get('category_id');       //栏目id
-        if (empty($displayorder)){
+        if (empty($displayorder)) {
             $displayorder = '0';
         }
         $where = [
@@ -144,12 +143,12 @@ class CategoryController extends Controller
         ];
         DB::beginTransaction();
         try {
-            RetailCategory::editCategory($where,$category_data);
+            RetailCategory::editCategory($where, $category_data);
             //添加操作日志
-            if ($admin_data['is_super'] == 1){//超级管理员操作零售店铺的记录
-                OperationLog::addOperationLog('1','1','1',$route_name,'在零售店铺管理系统修改了栏目分类！');//保存操作记录
-            }else{//零售店铺本人操作记录
-                OperationLog::addOperationLog('10',$admin_data['organization_id'],$admin_data['id'],$route_name, '修改了栏目分类！');//保存操作记录
+            if ($admin_data['is_super'] == 1) {//超级管理员操作零售店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了栏目分类！');//保存操作记录
+            } else {//零售店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '修改了栏目分类！');//保存操作记录
             }
             DB::commit();
         } catch (\Exception $e) {

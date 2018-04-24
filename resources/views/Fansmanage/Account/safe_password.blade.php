@@ -110,7 +110,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">原安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="" name="old_safe_password">
+                                            <input type="password" class="form-control" id="input-id-1" value="" name="old_safe_password">
                                         </div>
                                     </div>
 
@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">新安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="" name="safe_password">
+                                            <input type="password" class="form-control" id="input-id-1" value="" name="safe_password">
                                         </div>
                                     </div>
 
@@ -126,7 +126,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">重复安全密码</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="input-id-1" value="" name="re_safe_password">
+                                            <input type="password" class="form-control" id="input-id-1" value="" name="re_safe_password">
                                         </div>
                                     </div>
 
@@ -169,7 +169,14 @@
         var data = target.serialize();
         $.post(url, data, function (json) {
             if (json.status == -1) {
-                window.location.reload();
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                },function(){
+                    window.location.reload();
+                });
             } else if(json.status == 1) {
                 swal({
                     title: "提示信息",

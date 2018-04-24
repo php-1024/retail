@@ -19,7 +19,7 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label" for="input-id-1">分类排序</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="displayorder" value="{{$category->displayorder}}">
+                                <input type="number" class="form-control" name="displayorder" value="{{$category->displayorder}}">
                             </div>
                         </div>
                         <div class="line line-dashed b-b line-lg pull-in"></div>
