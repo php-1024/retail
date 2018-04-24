@@ -31,7 +31,7 @@ class WechatApi
         // 获取开发平台的 基础信息
         $wxparam = config('app.wechat_open_setting');
 
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_url}&response_type=code&scope={$auth_type}&state=lyxkj2018&component_appid={$wxparam['open_appid']}#wechat_redirect";
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_url}&response_type=code&scope={$auth_type}&state=lyxkj2018&component_appid={$wxparam['open_appid']}&connect_redirect=1#wechat_redirect";
         return $this->resultReturnDispose($url, "redirect");
     }
 
@@ -115,7 +115,7 @@ class WechatApi
         $auth_type = $auth_type_arr[$auth_type];
 
         // 跳转地址
-        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$auth_type}&state=lyxkj2018#wechat_redirect";
+        $url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope={$auth_type}&state=lyxkj2018&connect_redirect=1#wechat_redirect";
         // 结果处理
         return $this->resultReturnDispose($url, "redirect");
     }
