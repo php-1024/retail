@@ -360,6 +360,7 @@ class SftController extends Controller
 
     public function test13()
     {
+
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
