@@ -116,8 +116,6 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
             SimpleGoods::editSimpleGoods($where, $goods_data);
-            $stock_data = ['category_id' => $category_id, 'stock' => $stock,];
-            SimpleStock::editStock(['goods_id' => $goods_id], $stock_data); //修改商品库信息存到库存表
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
                 OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统编辑了商品！');//保存操作记录
