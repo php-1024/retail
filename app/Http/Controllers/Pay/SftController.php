@@ -358,17 +358,16 @@ class SftController extends Controller
 
     public function test13()
     {
-
-        var_dump(session("zerone_auth_info"));
-
-//        $code = request()->input('code');
-//        $appid = $this->wechat_info["authorizer_appid"];
-//        if (empty($code)) {
-//            $url = request()->url();
-//            \Wechat::get_open_web_auth_url($appid, $url);
-//        } else {
-//            $this->setAuthorizeShopInfo($appid, $code);
-//        }
+        $code = request()->input('code');
+        $appid = $this->wechat_info["authorizer_appid"];
+        if (empty($code)) {
+            $url = request()->url();
+            \Wechat::get_open_web_auth_url($appid, $url);
+        } else {
+            $this->setAuthorizeShopInfo($appid, $code);
+            $url = session("zerone_auth_info.url");
+            return redirect($url);
+        }
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
