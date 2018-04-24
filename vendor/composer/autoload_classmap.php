@@ -74,7 +74,7 @@ return array(
     'App\\Http\\Controllers\\Zerone\\RoleController' => $baseDir . '/app/Http/Controllers/Zerone/RoleController.php',
     'App\\Http\\Controllers\\Zerone\\SubordinateController' => $baseDir . '/app/Http/Controllers/Zerone/SubordinateController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
-    'App\\Http\\Middleware\\Agent\\AgentCheck' => $baseDir . '/app/Http/Middleware/Agent/AgentCheck.php',
+    'App\\Http\\Middleware\\Agent\\UserCheck' => $baseDir . '/app/Http/Middleware/Agent/AgentCheck.php',
     'App\\Http\\Middleware\\Agent\\AgentCheckAjax' => $baseDir . '/app/Http/Middleware/Agent/AgentCheckAjax.php',
     'App\\Http\\Middleware\\Api\\AndroidApiCheck' => $baseDir . '/app/Http/Middleware/Api/AndroidApiCheck.php',
     'App\\Http\\Middleware\\Api\\AndroidSimpleApiCheck' => $baseDir . '/app/Http/Middleware/Api/AndroidSimpleApiCheck.php',
