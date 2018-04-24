@@ -275,7 +275,7 @@ class SftController extends Controller
     {
         request()->attributes->add(['organization_id' => 5]); //添加参数
         $res = $this->authorizeInfo();
-        dump(session("zerone_auth_info"));
+
 //        \Session::flash("zerone_auth_info");
     }
 
@@ -421,7 +421,7 @@ class SftController extends Controller
      */
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
-
+        dump(session("zerone_auth_info"));
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
