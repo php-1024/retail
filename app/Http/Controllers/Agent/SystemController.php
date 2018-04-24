@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
 use App\Models\OrganizationRole;
 use App\Models\Warzone;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -51,7 +52,7 @@ class SystemController extends Controller{
                 'id'=>$account_info->id,    //用户ID
                 'account'=>$account_info->account,//用户账号
                 'organization_id'=>$account_info->organization_id,//组织ID
-                'is_super'=>'2',//是否超级管理员
+                'is_super'=>'1',//是否超级管理员
                 'parent_id'=>$account_info->parent_id,//上级ID
                 'parent_tree'=>$account_info->parent_tree,//上级树
                 'deepth'=>$account_info->deepth,//账号在组织中的深度
@@ -84,6 +85,9 @@ class SystemController extends Controller{
 
     //超级管理员选择服务商
     public function switch_status(Request $request){
+        $admin_data = $request->get('admin_data');                //中间件产生的管理员数据参数
+        $admin_data['organization_id'] = 0;
+        ZeroneRedis::create_agent_account_cache(1, $admin_data);//清空所选组织
         return redirect('agent');
     }
 
