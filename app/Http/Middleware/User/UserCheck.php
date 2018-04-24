@@ -39,6 +39,7 @@ class UserCheck
 
         request()->attributes->add(["organization_id"=>5]);
 
+        return request()->get("organization_id");
         $organization_id = 5;
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
@@ -103,11 +104,8 @@ class UserCheck
     {
         // 获取组织id
         $organization_id = request()->get("organization_id");
-        dump($organization_id);
         // 获取公众号的基本信息
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
-
-        dump($res);
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;
