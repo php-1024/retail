@@ -339,6 +339,7 @@ class SftController extends Controller
         }
     }
 
+    protected $wechat_info = [];
 
     /**
      * 获取店铺公众号的基本信息
