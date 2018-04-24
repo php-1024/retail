@@ -33,8 +33,6 @@ class UserCheck
     public function authorizeInfo()
     {
 
-
-
         // 判断公众号是否授权给零壹第三方公众号平台
         $this->getShopBaseInfo();
         // 初次访问的地址
@@ -50,10 +48,7 @@ class UserCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $res = $this->getAuthorizeZeroneInfo($url);
-            if($res == true){
-                $this->authorizeInfo();
-            }
+            $this->getAuthorizeZeroneInfo($url);
         }
 
         // 添加参数
@@ -71,11 +66,11 @@ class UserCheck
             $url = request()->url();
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
-            // 保存相对应的数据
-            $appid = config("app.wechat_web_setting.appid");
-            $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return $res;
+            dump($code);
+//            // 保存相对应的数据
+//            $appid = config("app.wechat_web_setting.appid");
+//            $appsecret = config("app.wechat_web_setting.appsecret");
+//            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
         }
     }
 
