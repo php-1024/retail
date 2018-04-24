@@ -104,6 +104,7 @@ class GoodsController extends Controller
         $price = $request->get('price');                    //商品价格
         $barcode = $request->get('barcode');                //商品条码
         $stock = $request->get('stock');                    //商品库存
+        dd($stock);
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
