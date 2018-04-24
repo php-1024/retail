@@ -48,6 +48,11 @@ class UserCheck
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
+            dump(session("zerone_auth_info.zerone_user_id"));
+//            if (!empty(session("zerone_auth_info.zerone_user_id"))) {
+//                Header("Location:" . request()->url() . "/?s=" . time());
+//                exit;
+//            }
         }
 
 //        // 判断 session 中是否存在店铺id
