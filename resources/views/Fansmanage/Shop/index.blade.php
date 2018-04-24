@@ -72,21 +72,21 @@
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">商户名称</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">刘记鸡煲王</label>
+                                                <label class="label label-info">{{ $company_info->organization_name }}</label>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">负责人</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">张老三</label>
+                                                <label class="label label-info">{{ $company_info->fansmanageinfo->fansmanage_owner }}</label>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">手机号码</label>
                                             <div class="col-sm-8">
-                                                <label class="label label-info">13123456789</label>
+                                                <label class="label label-info">{{ $company_info->fansmanageinfo->fansmanage_owner_mobile }}</label>
                                             </div>
                                         </div>
 
