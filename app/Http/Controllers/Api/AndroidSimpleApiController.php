@@ -123,15 +123,15 @@ class AndroidSimpleApiController extends Controller
         // 操作员id
         $account_id = $request->account_id;
         // 根据账号进行查询
-        $data = Account::where([['id', $account_id]])->first();
-        if ($data->status == '0') {
+        $status = Account::getPluck([['id', $account_id]],'status');
+        if ($status == '0') {
             return response()->json(['msg' => '对不起该账号，就在刚刚被冻结啦，请联系管理员！', 'status' => '0', 'data' => '']);
         }
         // 备注
         $remarks = $request->remarks;
 
-
-        $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
+        // 商品数组
+        $goodsdata = json_decode($request->goodsdata, TRUE);
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
@@ -290,7 +290,7 @@ class AndroidSimpleApiController extends Controller
         }
         $order = $order->toArray();
         $user_account = User::getPluck([['id', $order['user_id']]], 'account')->first();//粉丝账号
-        $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account')->first();//操作人员账号
+        $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account');//操作人员账号
         //用户昵称
         $account_realname = AccountInfo::getPluck([['account_id', $order['operator_id']]], 'realname')->first();
         $goodsdata = $order['simple_order_goods'];//订单商品列表

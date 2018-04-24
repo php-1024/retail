@@ -49,7 +49,7 @@ class ShopController extends Controller
         } else {
             $where = [['organization_id', $organization_id]];
             // 获取负责人id
-            $account_id = Account::getPluck([['organization_id', $organization_id], ['parent_id', 1]], 'id')->first();
+            $account_id = Account::getPluck([['organization_id', $organization_id], ['parent_id', 1]], 'id');
             // 如果不是服务商负责人 只允许看自己的登入记录
             if ($account_id != $admin_data['id']) {
                 $where[] = ['account_id', $admin_data['id']];
