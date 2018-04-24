@@ -273,6 +273,7 @@ class SftController extends Controller
 
     public function test11()
     {
+        dump(1);
         dump(session("zerone_auth_info"));
 //        request()->attributes->add(['organization_id' => 5]); //添加参数
 //        $res = $this->authorizeInfo();
