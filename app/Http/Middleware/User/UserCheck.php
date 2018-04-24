@@ -49,7 +49,7 @@ class UserCheck
             $this->getAuthorizeZeroneInfo($url);
         }
         dump(2);
-        dump(session("zerone_auth_info"));
+        dd(session("zerone_auth_info"));
 
 
         // 判断 session 中是否存在店铺id
