@@ -54,7 +54,7 @@
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
                                                 @if(!empty($program_info))
-                                                        <label class="btn btn-sm btn-success" style="margin-right: 10px;">
+                                                        <label class="btn btn-sm btn-success active" style="margin-right: 10px;">
                                                             <input type="radio" name="program_id" value="{{$program_info->id}}"><i
                                                                     class="fa fa-check text-active" disabled="true"></i>{{$program_info->program_name}}
                                                         </label>
