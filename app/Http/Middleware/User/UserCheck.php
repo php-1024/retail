@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WechatAuthorization;
 use Closure;
+use DB;
 use Session;
 use Illuminate\Support\Facades\Redis;
 
@@ -39,7 +40,6 @@ class UserCheck
         $organization_id = 5;
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
-
 
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
@@ -124,6 +124,7 @@ class UserCheck
             $this->getAuthorizeZeroneInfo(request()->url());
             return;
         }
+
 
         DB::beginTransaction();
         try {
