@@ -48,11 +48,10 @@ class UserCheck
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
         }
-        // 判断 session 中是否存在店铺id
-        if (empty(session("zerone_auth_info.shop_user_id"))) {
-            $this->getAuthorizeShopInfo($url);
-            \Session::save();
-        }
+//        // 判断 session 中是否存在店铺id
+//        if (empty(session("zerone_auth_info.shop_user_id"))) {
+//            $this->getAuthorizeShopInfo($url);
+//        }
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
@@ -72,7 +71,7 @@ class UserCheck
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            \Session::save();
+
         }
     }
 
@@ -102,6 +101,7 @@ class UserCheck
             $param["status"] = 1;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
             session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
+            \Session::save();
             // 数据提交
             DB::commit();
             return true;
@@ -167,6 +167,8 @@ class UserCheck
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
+            \Session::save();
+
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
             // 用户id
