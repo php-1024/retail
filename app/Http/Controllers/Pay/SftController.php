@@ -273,7 +273,11 @@ class SftController extends Controller
 
     public function test11()
     {
-        return session("zerone_auth_info");
+        if(empty(session("zerone_auth_info.zerone_user_id")) || empty(session("zerone_auth_info.shop_user_id"))) {
+          return redirect(request()->url());
+        }else{
+            return session("zerone_auth_info");
+        }
 //        request()->attributes->add(['organization_id' => 5]); //添加参数
 //        $res = $this->authorizeInfo();
 //        \Session::flash("zerone_auth_info");
