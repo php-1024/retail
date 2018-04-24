@@ -222,6 +222,7 @@ class AndroidSimpleApiController extends Controller
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');
         DB::beginTransaction();
         try {
+            print_r($order);exit;
             // 说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
             if ($order['stock_status'] != '-1') {
                 echo 1;exit;
