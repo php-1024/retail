@@ -76,6 +76,7 @@ class UserCheck
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             if ($res === true) {
 //                $this->authorizeInfo();
+                $url = request()->url();
                 return redirect($url);
             }
         }

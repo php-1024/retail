@@ -297,7 +297,7 @@ class AndroidApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '不存在订单', 'data' => '']);
         }
         $order = $order->toArray();
-        $user_account = User::getPluck([['id', $order['user_id']]], 'account')->first();//粉丝账号
+        $user_account = User::getPluck([['id', $order['user_id']]], 'account');//粉丝账号
         $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account');//操作人员账号
         $goodsdata = $order['retail_order_goods'];//订单商品列表
         foreach ($goodsdata as $key => $value) {
