@@ -46,14 +46,15 @@ class UserCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $this->getAuthorizeZeroneInfo($url);
-            return ;
+            $res = $this->getAuthorizeZeroneInfo($url);
+            if($res == true){
+                $this->authorizeInfo();
+            }
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
-            return ;
         }
 
         // 添加参数
@@ -74,8 +75,8 @@ class UserCheck
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-//            Header("Location:{$url}");
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return $res;
         }
     }
 
