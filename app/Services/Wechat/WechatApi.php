@@ -453,21 +453,23 @@ class WechatApi
         }
         $wxparam = config('app.wechat_open_setting');
         $ticket_info = WechatOpenSetting::getComponentVerifyTicket();
-        dump($ticket_info);
-        dump($ticket_info->param_value);
 
         if (empty($ticket_info->param_value)) {
             exit('获取微信开放平台ComponentVerifyTicket失败');
         } else {
+
+
             $url = 'https://api.weixin.qq.com/cgi-bin/component/api_component_token';
             $data = array(
                 'component_appid' => $wxparam['open_appid'],
                 'component_appsecret' => $wxparam['open_appsecret'],
                 'component_verify_ticket' => $ticket_info->param_value
             );
+
             $data = json_encode($data, JSON_UNESCAPED_UNICODE);
             $re = \HttpCurl::doPost($url, $data);
             $re = json_decode($re, true);
+
             if (!empty($re['component_access_token'])) {
                 WechatOpenSetting::editComponentAccessToken($re['component_access_token'], time() + 7200);
                 return $re['component_access_token'];
