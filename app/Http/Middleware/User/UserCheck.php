@@ -37,6 +37,7 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
+
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
 
@@ -46,7 +47,10 @@ class UserCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $this->getAuthorizeZeroneInfo($url);
+            $res = $this->getAuthorizeZeroneInfo($url);
+            if($res == true){
+                $this->authorizeInfo();
+            }
         }
 
         // 判断 session 中是否存在店铺id
@@ -72,7 +76,8 @@ class UserCheck
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return $res;
         }
     }
 
@@ -160,7 +165,8 @@ class UserCheck
             // 店铺公众号的信息
             // 组织id
             $param["fansmanage_id"] = $this->organization_id;
-            $param["user_id"] = session("zerone_auth_info.zerone_user_id");
+//            $param["user_id"] = session("zerone_auth_info.zerone_user_id");
+            $param["user_id"] = 2;
             $param["open_id"] = $openid;
             $param["status"] = 1;
             // 创建或者更新粉丝数据
@@ -170,7 +176,8 @@ class UserCheck
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
             // 用户id
-            $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
+//            $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
+            $param_user_info["user_id"] = "2";
             $param_user_info["nickname"] = $user_info["nickname"];
             $param_user_info["sex"] = $user_info["sex"];
             $param_user_info["city"] = $user_info["city"];
