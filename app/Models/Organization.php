@@ -124,7 +124,7 @@ class Organization extends Model
     //获取单条数据
     public static function getOne($where)
     {
-        return self::with('OrganizationRetailinfo')->with('OrganizationSimpleinfo')->where($where)->first();
+        return self::with('fansmanageinfo')->with('OrganizationRetailinfo')->with('OrganizationSimpleinfo')->where($where)->first();
     }
 
     //获取单条信息-服务商
