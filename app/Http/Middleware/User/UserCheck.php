@@ -41,7 +41,7 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-        $self_path = ["/pay/sft/test12","/pay/sft/test13","/pay/sft/test14"];
+        $self_path = ["pay/sft/test12","pay/sft/test13","pay/sft/test14"];
         // 初次访问的地址
         $url = request()->fullUrl();
 
