@@ -53,6 +53,7 @@ class FansmanageController extends Controller
 //        if(!empty($fansmanage_owner_mobile)){
 //            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']]; //电话号码查询
 //        }
+        dd($fansmanage_owner_mobile);
         if(empty($where)){
             $where = [['parent_id', $organization], ['program_id', 3]];
         }
