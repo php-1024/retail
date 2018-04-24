@@ -120,7 +120,6 @@ class Organization extends Model
         return $this->belongsTo('App\Models\Program', 'program_id', 'id');
     }
 
-
     //获取单条数据
     public static function getOne($where)
     {
