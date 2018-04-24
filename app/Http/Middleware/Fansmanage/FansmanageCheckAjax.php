@@ -237,7 +237,7 @@ class FansmanageCheckAjax
         if($admin_data['is_super'] == '1'){
             $key = config("app.zerone_safe_encrypt_key");//获取加密盐
         }else{
-            $key = config("app.fansnamage_safe_encrypt_key");//获取加密盐
+            $key = config("app.fansmanage_safe_encrypt_key");//获取加密盐
         }
         $encrypted = md5($safe_password);//加密密码第一重
         $encryptPwd = md5("lingyikeji".$encrypted.$key);//加密密码第二重
