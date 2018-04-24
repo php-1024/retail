@@ -287,6 +287,7 @@ class SftController extends Controller
 
     public function test12()
     {
+        $this->getShopBaseInfo();
         // 获取 code 地址
         $code = request()->input('code');
         // 如果不存在zerone_openid就进行授权
