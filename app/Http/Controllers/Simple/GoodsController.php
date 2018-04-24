@@ -96,7 +96,6 @@ class GoodsController extends Controller
     //编辑商品操作
     public function goods_edit_check(Request $request)
     {
-        dd($request);
         $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         $goods_id = $request->get('goods_id');              //商品ID
@@ -127,6 +126,7 @@ class GoodsController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
+            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '编辑商品失败，请检查', 'status' => '0']);
         }
