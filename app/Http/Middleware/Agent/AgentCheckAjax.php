@@ -5,6 +5,8 @@
 
 namespace App\Http\Middleware\Agent;
 
+use App\Models\Account;
+use App\Models\Program;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
