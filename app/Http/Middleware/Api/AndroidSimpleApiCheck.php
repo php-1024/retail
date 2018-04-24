@@ -426,10 +426,9 @@ class AndroidSimpleApiCheck
         if (empty($request->input('token'))) {
             return self::res(0, response()->json(['msg' => 'token值不能为空', 'status' => '0', 'data' => '']));
         }
-//        if(time() - ($request->input('timestamp')/1000)>120){//如果超过两分钟
-//            return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
-//        }
-
+        if(time() - ($request->input('timestamp')/1000)>120){//如果超过两分钟
+            return self::res(0, response()->json(['msg' => '访问超时', 'status' => '0', 'data' => '']));
+        }
         // 用户账号id
         $account_id = $request->account_id;
         // 店铺令牌
@@ -449,7 +448,6 @@ class AndroidSimpleApiCheck
 
         $store_token = base64_encode($store_token . $data['uuid']) . 'lingyi2018';//第一次加密
         $store_token = md5($store_token);//第二次加密
-        echo $store_token;exit;
         if ($store_token != $token) {
             return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));
         }
