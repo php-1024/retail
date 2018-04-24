@@ -380,12 +380,11 @@ class SftController extends Controller
 
     public function test14()
     {
-//        $url = session("zerone_auth_info.initial_url_address");
+        $url = session("zerone_auth_info.initial_url_address");
 ////        dump($url);
 //        return redirect($url);
 
-        Header("Location:http://develop.01nnt.com/pay/sft/test11");
-//        return redirect("http://develop.01nnt.com/pay/sft/test10");
+        Header("Location:{$url}");
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
