@@ -310,8 +310,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            @if(!empty($company_info->OrganizationSimpleinfo->simple_owner))
-                                <input type="text" value="{{$organization->OrganizationSimpleinfo->simple_owner}}" name="simple_owner" placeholder="负责人" class="form-control">
+                            @if(!empty($company_info->fansmanageinfo->simple_owner))
+                                <input type="text" value="{{$organization->fansmanageinfo->simple_owner}}" name="simple_owner" placeholder="负责人" class="form-control">
                             @else
                                 <input type="text" value="" name="simple_owner" placeholder="负责人" class="form-control">
                             @endif
@@ -323,8 +323,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            @if(!empty($organization->OrganizationSimpleinfo->simple_owner_mobile))
-                                <input type="number" value="{{$organization->OrganizationSimpleinfo->simple_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
+                            @if(!empty($organization->fansmanageinfo->simple_owner_mobile))
+                                <input type="number" value="{{$organization->fansmanageinfo->simple_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
                             @else
                                 <input type="number" value="" name="mobile" placeholder="手机号码" class="form-control">
                             @endif
@@ -375,8 +375,8 @@
 <script src="{{asset('public/Fansmanage/sweetalert')}}/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        @if(!empty($organization->OrganizationSimpleinfo->simple_logo))
-        $("#retail_logo").val("{{$organization->OrganizationSimpleinfo->simple_logo}}");
+        @if(!empty($organization->fansmanageinfo->logo))
+        $("#retail_logo").val("{{$organization->fansmanageinfo->logo}}");
         @endif
     });
     $('#editBtn').click(function () {
@@ -387,7 +387,7 @@
     function EditStore() {
         var formData = new FormData($( "#store_edit" )[0]);
         $.ajax({
-            url: '{{ url('simple/ajax/store_edit_check') }}',
+            url: '{{ url('fansmanage/ajax/store_edit_check') }}',
             type: 'post',
             data: formData,
             async: false,
