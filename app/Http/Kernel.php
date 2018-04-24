@@ -95,5 +95,9 @@ class Kernel extends HttpKernel
         'AndroidSimpleApiCheck'=>\App\Http\Middleware\Api\AndroidSimpleApiCheck::class,//检测普通页面跳转的中间件
         /**************************接口*******************************/
 
+
+
+        // 账号体系测试
+        'UserCheck'=>\App\Http\Middleware\User\UserCheck::class,//检测普通页面跳转的中间件
     ];
 }
