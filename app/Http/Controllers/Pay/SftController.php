@@ -273,7 +273,8 @@ class SftController extends Controller
 
     public function test11()
     {
-        dump(session("zerone_auth_info"));
+        $zerone_auth_info = request()->get("zerone_auth_info");
+        var_dump($zerone_auth_info);
 //        if (empty(session("zerone_auth_info.zerone_user_id")) || empty(session("zerone_auth_info.shop_user_id"))) {
 //            return redirect(request()->url());
 //        } else {
