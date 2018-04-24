@@ -44,15 +44,15 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-        // 判断是否存在 零壹服务用户id
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $this->getAuthorizeZeroneInfo($url);
-        }
-
-//        // 判断 session 中是否存在店铺id
-//        if (empty(session("zerone_auth_info.shop_user_id"))) {
-//            $this->getAuthorizeShopInfo($url);
+//        // 判断是否存在 零壹服务用户id
+//        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+//            $this->getAuthorizeZeroneInfo($url);
 //        }
+
+        // 判断 session 中是否存在店铺id
+        if (empty(session("zerone_auth_info.shop_user_id"))) {
+            $this->getAuthorizeShopInfo($url);
+        }
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
@@ -88,7 +88,6 @@ class UserCheck
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         if (empty($code)) {
-            $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
@@ -152,6 +151,7 @@ class UserCheck
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
+
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
@@ -164,18 +164,21 @@ class UserCheck
         try {
             // 店铺公众号的信息
             // 组织id
-            $param["fansmanage_id"] = request()->get("organization_id");
+            $param["fansmanage_id"] = $this->organization_id;
             $param["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param["open_id"] = $openid;
             $param["status"] = 1;
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
+
+            dump($fansmanage_user);
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
 
+            dump($user_info);
             // 用户id
             $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param_user_info["nickname"] = $user_info["nickname"];
@@ -184,12 +187,17 @@ class UserCheck
             $param_user_info["country"] = $user_info["country"];
             $param_user_info["province"] = $user_info["province"];
             $param_user_info["head_imgurl"] = $user_info["headimgurl"];
+            $param_user_info["remark"] = "111";
+            $param_user_info["qq"] = "111";
+
+
             // 保存用户数据$
             $res = UserInfo::insertData($param_user_info);
             // 数据提交
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollback();
             return false;
         }
