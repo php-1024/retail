@@ -46,7 +46,7 @@ class UserCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            return $this->getAuthorizeZeroneInfo($url);
+            $this->getAuthorizeZeroneInfo($url);
             return;
         }
 
@@ -76,6 +76,7 @@ class UserCheck
             if ($res === true) {
 //                $this->authorizeInfo();
                 $url = request()->url();
+                return redirect($url);
 //                Header("Location:{$url}");
             }
         }
@@ -98,6 +99,7 @@ class UserCheck
      */
     public function getShopBaseInfo()
     {
+        dump($this->organization_id);
         // 获取公众号的基本信息
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
         // 判断公众号是否在零壹第三方平台授权过
