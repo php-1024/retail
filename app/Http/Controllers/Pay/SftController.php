@@ -304,6 +304,20 @@ class SftController extends Controller
         }
     }
 
+    public function test13()
+    {
+
+        $this->getShopBaseInfo();
+        $code = request()->input('code');
+        $appid = $this->wechat_info["authorizer_appid"];
+        if (empty($code)) {
+            $url = request()->url();
+            \Wechat::get_open_web_auth_url($appid, $url);
+        } else {
+            $this->setAuthorizeShopInfo($appid, $code);
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
+        }
+    }
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
         // 静默授权：通过授权使用的code,获取到用户openid
@@ -358,20 +372,7 @@ class SftController extends Controller
         }
     }
 
-    public function test13()
-    {
 
-        $this->getShopBaseInfo();
-        $code = request()->input('code');
-        $appid = $this->wechat_info["authorizer_appid"];
-        if (empty($code)) {
-            $url = request()->url();
-            \Wechat::get_open_web_auth_url($appid, $url);
-        } else {
-            $this->setAuthorizeShopInfo($appid, $code);
-            return redirect("http://develop.01nnt.com/pay/sft/test14");
-        }
-    }
 
     public function test14()
     {
