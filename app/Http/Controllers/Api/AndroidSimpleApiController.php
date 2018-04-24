@@ -144,10 +144,13 @@ class AndroidSimpleApiController extends Controller
             }
         }
         $fansmanage_id = Organization::getPluck([['id', $organization_id]], 'parent_id');
-        $num = SimpleOrder::where([['simple_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();//查询订单今天的数量
+        // 查询订单今天的数量
+        $num = SimpleOrder::where([['simple_id', $organization_id], ['ordersn', 'LIKE', '%' . date("Ymd", time()) . '%']])->count();
         $num += 1;
         $sort = 100000 + $num;
-        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;//订单号
+        // 订单号
+        $ordersn = 'LS' . date("Ymd", time()) . '_' . $organization_id . '_' . $sort;
+        // 数据处理
         $orderData = [
             'ordersn' => $ordersn,
             'order_price' => $order_price,
@@ -160,10 +163,12 @@ class AndroidSimpleApiController extends Controller
         ];
         DB::beginTransaction();
         try {
-            $order_id = SimpleOrder::addSimpleOrder($orderData);//添加入订单表
+            // 添加入订单表
+            $order_id = SimpleOrder::addSimpleOrder($orderData);
             foreach ($goodsdata as $key => $value) {
                 foreach ($value as $k => $v) {
-                    $onedata = SimpleGoods::getOne([['id', $v['id']]]);//查询商品库存数量
+                    // 查询商品库存数量
+                    $onedata = SimpleGoods::getOne([['id', $v['id']]]);
                     $thumb = SimpleGoodsThumb::getPluck([['goods_id', $v['id']]], 'thumb')->first();//商品图片一张
                     $data = [
                         'order_id' => $order_id,
