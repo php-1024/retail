@@ -5,6 +5,10 @@
 
 namespace App\Http\Middleware\User;
 
+use App\Models\FansmanageUser;
+use App\Models\User;
+use App\Models\UserInfo;
+use App\Models\WechatAuthorization;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
