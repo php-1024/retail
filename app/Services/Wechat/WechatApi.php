@@ -22,6 +22,7 @@ class WechatApi
      */
     public function get_open_web_auth_url($appid, $redirect_url, $auth_type = 1)
     {
+        // 授权类型组
         $auth_type_arr = ["1" => "snsapi_base", "2" => "snsapi_userinfo"];
         // 判断是否存在 appid ,没有的话用系统默认的
         $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
@@ -373,8 +374,7 @@ class WechatApi
      * $auth_code  公众号授权后回调时返回的授权码
      * $organization_id 该公众号关联组织ID
      */
-    public
-    function get_authorization_info($auth_code)
+    public function get_authorization_info($auth_code)
     {
         $wxparam = config('app.wechat_open_setting');
         $component_access_token = $this->get_component_access_token();
@@ -407,8 +407,7 @@ class WechatApi
     /*
      * 获取授权链接
      */
-    public
-    function get_auth_url($origanization_id, $redirect_route_name)
+    public function get_auth_url($origanization_id, $redirect_route_name)
     {
         $wxparam = config('app.wechat_open_setting');
         $open_appid = $wxparam['open_appid'];//第三方平台方appid

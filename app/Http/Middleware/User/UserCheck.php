@@ -37,6 +37,7 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
+
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
 
@@ -44,17 +45,20 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
+        dump(session("zerone_auth_info"));
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            dump(1);
             $this->getAuthorizeZeroneInfo($url);
-            return;
         }
+        dump(session("zerone_auth_info"));
+
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
-            return;
         }
+
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
@@ -73,13 +77,13 @@ class UserCheck
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            if ($res === true) {
-                $this->authorizeInfo();
-//                $url = request()->url();
-//                return redirect($url);
-//                Header("Location:{$url}");
-            }
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+//            if ($res === true) {
+//                $this->authorizeInfo();
+////                $url = request()->url();
+////                return redirect($url);
+////                Header("Location:{$url}");
+//            }
         }
     }
 
