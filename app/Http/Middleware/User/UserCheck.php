@@ -9,6 +9,7 @@ use App\Models\FansmanageUser;
 use App\Models\User;
 use App\Models\UserInfo;
 use App\Models\WechatAuthorization;
+use App\Models\XhoLog;
 use Closure;
 use DB;
 use Session;
@@ -17,6 +18,10 @@ use Illuminate\Support\Facades\Redis;
 
 class UserCheck
 {
+    protected $wechat_info = [];
+    protected $organization_id = 2;
+
+
     public function handle($request, Closure $next)
     {
         $route_name = $request->path();//获取当前的页面路由
@@ -48,11 +53,13 @@ class UserCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            XhoLog::create(["name"=>"跳转1","content"=>"zerone_user_id"]);
             Header("Location:http://develop.01nnt.com/pay/sft/test12");
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
+            XhoLog::create(["name"=>"跳转3","content"=>"shop_user_id"]);
             Header("Location:http://develop.01nnt.com/pay/sft/test13");
         }
 
