@@ -340,6 +340,7 @@ class SftController extends Controller
     }
 
     protected $wechat_info = [];
+    protected $organization_id = 2;
 
     /**
      * 获取店铺公众号的基本信息
