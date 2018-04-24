@@ -299,14 +299,12 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            $url = session("zerone_auth_info.initial_url_address");
-            return redirect("http://develop.01nnt.com/pay/sft/test11");
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
 
     public function test13()
     {
-
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
@@ -315,7 +313,7 @@ class SftController extends Controller
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
-            return redirect("http://develop.01nnt.com/pay/sft/test11");
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
@@ -376,9 +374,8 @@ class SftController extends Controller
 
     public function test14()
     {
-        dump(session("zerone_auth_info"));
-//        $url = session("zerone_auth_info.initial_url_address");
-//        return redirect($url);
+        $url = session("zerone_auth_info.initial_url_address");
+        return redirect($url);
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
