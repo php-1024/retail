@@ -140,7 +140,6 @@ class UserCheck
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
-            dump(session("zerone_auth_info"));
         }
     }
 
