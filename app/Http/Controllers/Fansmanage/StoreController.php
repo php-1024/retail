@@ -54,6 +54,7 @@ class StoreController extends Controller
     public function store_create_check(Request $request)
     {
         dd($request);
+
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
         // 获取当前的页面路由
