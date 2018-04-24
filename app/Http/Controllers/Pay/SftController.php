@@ -329,7 +329,6 @@ class SftController extends Controller
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             if ($res === true) {
 //                $this->authorizeInfo();
-                dump(session("zerone_auth_info"));
                 return redirect($url);
             }
         }
@@ -422,8 +421,6 @@ class SftController extends Controller
      */
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
-        dump(session("zerone_auth_info"));
-        dump(1);
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
