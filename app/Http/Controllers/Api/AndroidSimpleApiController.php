@@ -557,11 +557,14 @@ class AndroidSimpleApiController extends Controller
                     SimpleOrder::editSimpleOrder(['id' => $order_id], ['stock_status' => '1']);
                 }
             } else {
-                $goodsdata = SimpleOrderGoods::where([['order_id', $order_id]])->get();//订单快照中的商品
+                // 订单快照中的商品
+                $goodsdata = SimpleOrderGoods::where([['order_id', $order_id]])->get();
                 foreach ($goodsdata as $key => $value) {
-                    $stock = SimpleGoods::getPluck([['id', $value['goods_id']]], 'stock');//商品剩下的库存
+                    // 商品剩下的库存
+                    $stock = SimpleGoods::getPluck([['id', $value['goods_id']]], 'stock');
                     $stock = $stock + $value['total'];
-                    SimpleGoods::editSimpleGoods([['id', $value['goods_id']]], ['stock' => $stock]);//修改商品库存
+                    // 修改商品库存
+                    SimpleGoods::editSimpleGoods([['id', $value['goods_id']]], ['stock' => $stock]);
                     $stock_data = [
                         'fansmanage_id' => $data['fansmanage_id'],
                         'simple_id' => $data['simple_id'],
@@ -570,10 +573,12 @@ class AndroidSimpleApiController extends Controller
                         'ordersn' => $data['ordersn'],
                         'operator_id' => $data['operator_id'],
                         'remark' => $data['remarks'],
-                        'type' => '7',  //退货入库类型
+                        // 退货入库类型
+                        'type' => '7',
                         'status' => '1',
                     ];
-                    SimpleStockLog::addStockLog($stock_data);//商品操作记录
+                    // 商品操作记录
+                    SimpleStockLog::addStockLog($stock_data);
                     $re = SimpleStock::getOneSimpleStock([['simple_id', $data['simple_id']], ['goods_id', $value['goods_id']]]);
                     $simple_stock = $re['stock'] + $value['total'];
                     SimpleStock::editStock([['id', $re['id']]], ['stock' => $simple_stock]);
@@ -581,9 +586,11 @@ class AndroidSimpleApiController extends Controller
                     SimpleOrder::editSimpleOrder(['id' => $order_id], ['stock_status' => '-1']);
                 }
             }
-            DB::commit();//提交事务
+            // 提交事务
+            DB::commit();
         } catch (\Exception $e) {
-            DB::rollBack();//事件回滚
+            // 事件回滚
+            DB::rollBack();
             return response()->json(['msg' => '提交失败', 'status' => '0', 'data' => '']);
         }
         return 'ok';
