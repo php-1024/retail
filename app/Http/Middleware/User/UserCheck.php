@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Redis;
 
 class UserCheck
 {
+    protected $wechat_info = [];
+    protected $organization_id = 2;
+
+
     public function handle($request, Closure $next)
     {
         $route_name = $request->path();//获取当前的页面路由
