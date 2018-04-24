@@ -384,7 +384,7 @@ class SftController extends Controller
 //        return redirect($url);
 
         dump(session("zerone_auth_info"));
-//        return redirect("http://develop.01nnt.com/pay/sft/test10");
+        return redirect("http://develop.01nnt.com/pay/sft/test11");
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
