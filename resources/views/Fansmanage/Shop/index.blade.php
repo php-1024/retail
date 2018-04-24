@@ -97,7 +97,6 @@
                                                 <label class="label label-danger">未关联公众服务号</label>
                                             </div>
                                         </div>
-
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">公众号</label>
