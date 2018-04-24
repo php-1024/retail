@@ -67,6 +67,7 @@ class UserCheck
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
+            $url = request()->url();
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
             // 保存相对应的数据
@@ -88,6 +89,7 @@ class UserCheck
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         if (empty($code)) {
+            $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
