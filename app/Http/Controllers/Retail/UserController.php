@@ -30,12 +30,12 @@ class UserController extends Controller
         $route_name = $request->path();                     //获取当前的页面路由
         $organization_id = $admin_data['organization_id'];  //组织id
         $account = $request->get('account');            //接收用户账号
-        $user_id = User::getPluck(['account' => $account], 'id')->first();                                 //获取用户id
+        $user_id = User::getPluck(['account' => $account], 'id');                                 //获取用户id
         $store_name = Organization::getPluck([['id', $organization_id]], 'organization_name'); //组织名称
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], $user_id, '10', 'id', 'DESC');
         foreach ($list as $key => $value) {
             $list[$key]['nickname'] = UserInfo::getPluck([['user_id', $value->user_id]], 'nickname')->first();//微信昵称
-            $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id')->first();
+            $recommender_id = User::getPluck([['id', $value->userRecommender->recommender_id]], 'id');
             $list[$key]['recommender_name'] = UserInfo::getPluck([['user_id', $recommender_id]], 'nickname')->first();//推荐人
             $list[$key]['label_id'] = UserLabel::getPluck([['user_id', $value->user_id], ['organization_id', $organization_id]], 'label_id')->first();//粉丝对应的标签id
         }
@@ -94,7 +94,7 @@ class UserController extends Controller
         $organization_id = $admin_data['organization_id'];  //组织id
         $user_id = $request->id;                            //会员标签id
         $userInfo = UserInfo::getOneUserInfo([['user_id', $user_id]]);//微信昵称
-        $data['account'] = User::getPluck([['id', $user_id]], 'account')->first();//粉丝账号
+        $data['account'] = User::getPluck([['id', $user_id]], 'account');//粉丝账号
         $data['mobile'] = FansmanageUser::getPluck([['user_id', $user_id]], 'mobile')->first();//手机号
         $yauntou = UserOrigin::getPluck([['user_id', $user_id]], 'store_id')->first();
         if ($yauntou == $organization_id) {
