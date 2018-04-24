@@ -76,7 +76,7 @@ class DashboardController extends Controller
         foreach ($zone_info->province as $key => $val) {
             $selected_province[] = $val->id;
         }
-        return view('Zerone/Dashboard/warzone_edit', ['zone_info' => $zone_info, 'province' => $province, 'selected_province' => $selected_province]);
+        return view('Zerone/Dashboard/warzone_edit', ['zone_info' => $zone_info, 'province' => $province]);
     }
 
     /**
