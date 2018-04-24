@@ -193,6 +193,7 @@ class UserCheck
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            dump($e->getMessage());
             DB::rollback();
             return false;
         }
