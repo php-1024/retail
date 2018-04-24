@@ -27,6 +27,7 @@ class AndroidSimpleApiCheck
                 return self::format_response($re, $next);
                 break;
             case "api/AndroidSimpleApiCheck/goodslist"://检测Token和商品列表数据
+                echo 1;exit;
                 $re = $this->checkTokenAndGoodsListData($request);
                 return self::format_response($re, $next);
                 break;
