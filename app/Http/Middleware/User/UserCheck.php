@@ -46,7 +46,7 @@ class UserCheck
         $url = request()->fullUrl();
 
         if(!in_array(request()->path(),$self_path)) {
-            session(["zerone_auth_info.initial_url_address " => $url]);
+            session(["zerone_auth_info.initial_url_address" => $url]);
         }
 
         // 刷新并获取授权令牌
