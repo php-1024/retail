@@ -48,14 +48,11 @@ class UserCheck
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
         }
-        dump(2);
-        dd(session("zerone_auth_info"));
 
-
-        // 判断 session 中是否存在店铺id
-        if (empty(session("zerone_auth_info.shop_user_id"))) {
-            $this->getAuthorizeShopInfo($url);
-        }
+//        // 判断 session 中是否存在店铺id
+//        if (empty(session("zerone_auth_info.shop_user_id"))) {
+//            $this->getAuthorizeShopInfo($url);
+//        }
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
