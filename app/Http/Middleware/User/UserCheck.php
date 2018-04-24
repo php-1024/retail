@@ -187,6 +187,10 @@ class UserCheck
             $param_user_info["country"] = $user_info["country"];
             $param_user_info["province"] = $user_info["province"];
             $param_user_info["head_imgurl"] = $user_info["headimgurl"];
+            $param_user_info["remark"] = "111";
+            $param_user_info["qq"] = "111";
+
+
             // 保存用户数据$
             $res = UserInfo::insertData($param_user_info);
             // 数据提交
