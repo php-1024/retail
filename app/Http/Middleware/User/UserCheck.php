@@ -27,7 +27,7 @@ class UserCheck
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
             case "pay/sft/test11":            //测试
-//            case "pay/sft/test14":            //测试
+            case "pay/sft/test14":            //测试
                 $this->authorizeInfo();
         }
         return $next($request);
@@ -67,7 +67,6 @@ class UserCheck
             Header("Location:http://develop.01nnt.com/pay/sft/test13");
         }
 
-        Header("Location:http://develop.01nnt.com/pay/sft/test14");
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }

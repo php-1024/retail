@@ -265,9 +265,10 @@ class SftController extends Controller
 
     public function test10()
     {
-        $array = array_collapse([[1, 2, 3, 565, 1231], [4, 5, 6], [7, 8, 9]]);
-        dump($array);
-
+//        $array = array_collapse([[1, 2, 3, 565, 1231], [4, 5, 6], [7, 8, 9]]);
+//        dump($array);
+        $zerone_auth_info = session("zerone_auth_info");
+        var_dump($zerone_auth_info);
     }
 
 
@@ -300,9 +301,9 @@ class SftController extends Controller
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
 
-            $url = session("zerone_auth_info.initial_url_address");
-            return redirect($url);
-//            return redirect("http://develop.01nnt.com/pay/sft/test14");
+//            $url = session("zerone_auth_info.initial_url_address");
+//            return redirect($url);
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
 
@@ -316,9 +317,9 @@ class SftController extends Controller
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
-//            return redirect("http://develop.01nnt.com/pay/sft/test14");
-            $url = session("zerone_auth_info.initial_url_address");
-            return redirect($url);
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
+//            $url = session("zerone_auth_info.initial_url_address");
+//            return redirect($url);
         }
     }
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
@@ -379,12 +380,11 @@ class SftController extends Controller
 
     public function test14()
     {
-//        $url = session("zerone_auth_info.initial_url_address");
+        $url = session("zerone_auth_info.initial_url_address");
 ////        dump($url);
 //        return redirect($url);
 
-        dump(session("zerone_auth_info"));
-//        return redirect("http://develop.01nnt.com/pay/sft/test10");
+        Header("Location:{$url}");
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
