@@ -248,7 +248,6 @@ class FansmanageCheckAjax
             return self::res(0,response()->json(['data' => '您尚未设置安全密码，请先前往 个人中心 》安全密码设置 设置', 'status' => '0']));
         }
         if($encryptPwd != $admin_data['safe_password']){
-            dd($encryptPwd);
             return self::res(0,response()->json(['data' => '您输入的安全密码不正确', 'status' => '0']));
         }
         return self::res(1,$request);
