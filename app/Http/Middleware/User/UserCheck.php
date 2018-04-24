@@ -37,6 +37,8 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
+        \Session::flash("zerone_auth_info");
+        exit;
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
 
