@@ -44,7 +44,6 @@ class UserCheck
         $url = request()->fullUrl();
         session(["zerone_auth_info.initial_url_address " => $url]);
 
-
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
         if ($authorization_info === false) {
