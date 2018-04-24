@@ -22,6 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
+        dd('1');
         return view('Agent/Login/display');
     }
 
