@@ -53,25 +53,12 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">模式</label>
                                         <div class="col-sm-10">
                                             <div class="btn-group" data-toggle="buttons">
-                                                {{--@if(!empty($program_info))--}}
-                                                    {{--@foreach($program_info as $val)--}}
-
-                                                        {{--<label class="btn btn-sm btn-success" style="margin-right: 10px;">--}}
-                                                            {{--<input type="radio" name="program_id" value="{{$val["id"]}}"><i--}}
-                                                                    {{--class="fa fa-check text-active" disabled="true"></i>{{$val["program_name"]}}--}}
-                                                        {{--</label>--}}
-                                                    {{--@endforeach--}}
-                                                {{--@endif--}}
-
-                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="10"><i
-                                                            class="fa fa-check text-active" disabled="true"></i>retail版零售版店铺
-                                                </label>
-
-                                                <label class="btn btn-sm btn-success" style="margin-right: 10px;">
-                                                    <input type="radio" name="program_id" value="12"><i
-                                                            class="fa fa-check text-active" disabled="true"></i>simple版简单的店铺管理程序
-                                                </label>
+                                                @if(!empty($program_info))
+                                                        <label class="btn btn-sm btn-success" style="margin-right: 10px;">
+                                                            <input type="radio" name="program_id" value="{{$program_info->id}}"><i
+                                                                    class="fa fa-check text-active" disabled="true"></i>{{$program_info->program_name}}
+                                                        </label>
+                                                @endif
 
                                             </div>
                                         </div>
