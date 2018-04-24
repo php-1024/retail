@@ -457,7 +457,7 @@ class WechatApi
         dump($ticket_info->param_value);
 
         if (empty($ticket_info->param_value)) {
-            exit('获取微信开放平台ComponentVerifyTicket失败');
+            exit('获取微信开放平台ComponentVerifyTicket失败1');
         } else {
             $url = 'https://api.weixin.qq.com/cgi-bin/component/api_component_token';
             $data = array(
