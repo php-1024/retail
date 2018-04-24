@@ -49,6 +49,7 @@ class ZeroneCheck
             $this->getAuthorizeZeroneInfo($url);
         }
 
+        sleep(3);
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }

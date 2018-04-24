@@ -125,8 +125,7 @@ class WechatApi
      * $authorizer_access_token 第三方平台调用接口凭证
      * $menu_data 创建的菜单数据
      */
-    public
-    function create_menu($authorizer_access_token, $menu_data)
+    public function create_menu($authorizer_access_token, $menu_data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token=' . $authorizer_access_token;
         $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
