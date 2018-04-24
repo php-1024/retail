@@ -458,7 +458,6 @@ class WechatApi
             exit('获取微信开放平台ComponentVerifyTicket失败');
         } else {
 
-
             $url = 'https://api.weixin.qq.com/cgi-bin/component/api_component_token';
             $data = array(
                 'component_appid' => $wxparam['open_appid'],

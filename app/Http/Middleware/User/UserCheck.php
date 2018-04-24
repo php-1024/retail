@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redis;
 class UserCheck
 {
     protected $wechat_info = [];
-    protected $organization_id = 5;
+    protected $organization_id = 2;
 
     public function handle($request, Closure $next)
     {
@@ -47,7 +47,6 @@ class UserCheck
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
-            return;
         }
 
         // 判断 session 中是否存在店铺id
@@ -67,18 +66,19 @@ class UserCheck
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
+            $url = request()->url();
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            if ($res === true) {
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+//            if ($res === true) {
 //                $this->authorizeInfo();
-                $url = request()->url();
-                return redirect($url);
-//                Header("Location:{$url}");
-            }
+////                $url = request()->url();
+////                return redirect($url);
+////                Header("Location:{$url}");
+//            }
         }
     }
 
@@ -88,6 +88,7 @@ class UserCheck
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         if (empty($code)) {
+            $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
