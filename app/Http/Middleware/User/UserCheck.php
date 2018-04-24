@@ -37,6 +37,7 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
+
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
 
@@ -47,14 +48,14 @@ class UserCheck
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
-            return ;
         }
+        dump(session("zerone_auth_info"));
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             $this->getAuthorizeShopInfo($url);
-            return;
         }
+
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
