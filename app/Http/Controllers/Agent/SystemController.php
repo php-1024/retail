@@ -29,7 +29,7 @@ class SystemController extends Controller{
             return view('Agent/System/select_agent',['list'=>$list]);
         }else{
             $where = [['organization_id',$organization_id]];
-            $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id')->first();//获取负责人id
+            $account_id = Account::getPluck([['organization_id',$organization_id],['parent_id',1]],'id');//获取负责人id
             if($account_id != $admin_data['id']) {//如果不是服务商负责人 只允许看自己的登入记录
                 $where[] = ['account_id',$admin_data['id']];
             }

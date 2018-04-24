@@ -277,7 +277,7 @@ class AgentController extends Controller
             return response()->json(['data' => '代理名称已存在', 'status' => '0']);
         }
         // 查询用户id
-        $account_id = Account::getPluck([['organization_id', $id], ['deepth', '1']], 'id')->first();
+        $account_id = Account::getPluck([['organization_id', $id], ['deepth', '1']], 'id');
         DB::beginTransaction();
         try {
             // 修改代理表代理名称
