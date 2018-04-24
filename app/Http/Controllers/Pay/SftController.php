@@ -265,7 +265,7 @@ class SftController extends Controller
 
     public function test10()
     {
-        $array = array_collapse([[1, 2, 3,565,1231], [4, 5, 6], [7, 8, 9]]);
+        $array = array_collapse([[1, 2, 3, 565, 1231], [4, 5, 6], [7, 8, 9]]);
         dump($array);
 
     }
@@ -273,9 +273,9 @@ class SftController extends Controller
 
     public function test11()
     {
-        if(empty(session("zerone_auth_info.zerone_user_id")) || empty(session("zerone_auth_info.shop_user_id"))) {
-          return redirect(request()->url());
-        }else{
+        if (empty(session("zerone_auth_info.zerone_user_id")) || empty(session("zerone_auth_info.shop_user_id"))) {
+            return redirect(request()->url());
+        } else {
             return session("zerone_auth_info");
         }
 //        request()->attributes->add(['organization_id' => 5]); //添加参数
