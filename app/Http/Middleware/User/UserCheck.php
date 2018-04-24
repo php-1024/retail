@@ -76,7 +76,7 @@ class UserCheck
             if ($res === true) {
 //                $this->authorizeInfo();
                 $url = request()->url();
-                Header("Location:{$url}");
+//                Header("Location:{$url}");
             }
         }
     }
