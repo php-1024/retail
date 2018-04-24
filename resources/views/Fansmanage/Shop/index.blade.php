@@ -310,7 +310,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">负责人</label>
                         <div class="col-sm-10">
-                            @if(!empty($company_info->fansmanageinfo->simple_owner))
+                            @if(!empty($company_info->fansmanageinfo->fansmanage_owner))
                                 <input type="text" value="{{ $organization->fansmanageinfo->fansmanage_owner }}" name="simple_owner" placeholder="负责人" class="form-control">
                             @else
                                 <input type="text" value="" name="simple_owner" placeholder="负责人" class="form-control">
@@ -323,7 +323,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">手机号码</label>
                         <div class="col-sm-10">
-                            @if(!empty($organization->fansmanageinfo->simple_owner_mobile))
+                            @if(!empty($organization->fansmanageinfo->fansmanage_owner_mobile))
                                 <input type="number" value="{{$organization->fansmanageinfo->fansmanage_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
                             @else
                                 <input type="number" value="" name="mobile" placeholder="手机号码" class="form-control">
