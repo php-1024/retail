@@ -176,6 +176,7 @@ class UserCheck
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
 
+            dump($user_info);
             // 用户id
             $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param_user_info["nickname"] = $user_info["nickname"];
