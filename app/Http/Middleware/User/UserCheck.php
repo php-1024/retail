@@ -49,6 +49,7 @@ class UserCheck
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             $this->getAuthorizeZeroneInfo($url);
         }
+        dump(2);
         dump(session("zerone_auth_info"));
 
 
