@@ -44,10 +44,10 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-//        // 判断是否存在 零壹服务用户id
-//        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-//            $this->getAuthorizeZeroneInfo($url);
-//        }
+        // 判断是否存在 零壹服务用户id
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            $this->getAuthorizeZeroneInfo($url);
+        }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
@@ -66,19 +66,13 @@ class UserCheck
 
         // 如果不存在zerone_openid就进行授权
         if (empty($code)) {
-//            $url = request()->url();
+            $url = request()->url();
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-//            if ($res === true) {
-//                $this->authorizeInfo();
-////                $url = request()->url();
-////                return redirect($url);
-////                Header("Location:{$url}");
-//            }
         }
     }
 
@@ -88,6 +82,7 @@ class UserCheck
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         if (empty($code)) {
+            $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
@@ -170,15 +165,10 @@ class UserCheck
             $param["status"] = 1;
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
-
-            dump($fansmanage_user);
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
-
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
-            dump($user_info);
             // 用户id
             $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param_user_info["nickname"] = $user_info["nickname"];
