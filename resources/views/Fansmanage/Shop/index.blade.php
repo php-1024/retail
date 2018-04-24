@@ -285,8 +285,11 @@
     </section>
 </section>
 
+{{--编辑店铺信息--}}
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <form class="form-horizontal tasi-form" method="get">
+    <form class="form-horizontal" role="form" id="store_edit" method="post" enctype="multipart/form-data" action="">
+        <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+        <input type="hidden" name="organization_id" id="organization_id" value="{{$company_info['id']}}">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -294,63 +297,70 @@
                     <h4 class="modal-title">店铺信息编辑</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" method="get">
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺名称</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="刘记鸡煲王" placeholder="店铺名称" class="form-control">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">店铺名称</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{$company_info->organization_name}}" name="organization_name" placeholder="店铺名称" class="form-control">
                         </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
 
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">负责人</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="张老三" placeholder="负责人" class="form-control">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">负责人</label>
+                        <div class="col-sm-10">
+                            @if(!empty($company_info->fansmanageinfo->simple_owner))
+                                <input type="text" value="{{$organization->fansmanageinfo->simple_owner}}" name="simple_owner" placeholder="负责人" class="form-control">
+                            @else
+                                <input type="text" value="" name="simple_owner" placeholder="负责人" class="form-control">
+                            @endif
                         </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">手机号码</label>
-                            <div class="col-sm-10">
-                                <input type="text" value="13123456789" placeholder="手机号码" class="form-control">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">手机号码</label>
+                        <div class="col-sm-10">
+                            @if(!empty($organization->fansmanageinfo->simple_owner_mobile))
+                                <input type="number" value="{{$organization->fansmanageinfo->simple_owner_mobile}}" name="mobile" placeholder="手机号码" class="form-control">
+                            @else
+                                <input type="number" value="" name="mobile" placeholder="手机号码" class="form-control">
+                            @endif
                         </div>
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">店铺LOGO</label>
-                            <div class="col-sm-10">
-                                <input type="file" class="filestyle" style="display: none;" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">店铺LOGO</label>
+                        <div class="col-sm-10">
+                            <input type="file" name="simple_logo" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                        <div style="clear:both;"></div>
-                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                        <div class="form-group">
-                            <label class="col-sm-2 text-right">安全密码</label>
-                            <div class="col-sm-10">
-                                <input type="password" value="" placeholder="安全密码" class="form-control" >
-                            </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 text-right">安全密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control" >
                         </div>
-                        <div style="clear:both;"></div>
+                    </div>
+                    <div style="clear:both;"></div>
 
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button data-dismiss="modal" class="btn btn-default" type="button">取消</button>
-                    <button class="btn btn-success" type="button" id="save_btn">确定</button>
+                    <button class="btn btn-success" type="button" onclick="return EditStore()">确定</button>
                 </div>
             </div>
         </div>
     </form>
 </div>
+{{--编辑店铺信息--}}
+
 <script src="{{asset('public/Fansmanage')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Fansmanage')}}/js/bootstrap.js"></script>
@@ -365,17 +375,58 @@
 <script src="{{asset('public/Fansmanage/sweetalert')}}/sweetalert.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#editBtn').click(function(){
-            $('#myModal').modal();
-        });
-        $('#save_btn').click(function(){
-            swal({
-                title: "温馨提示",
-                text: "操作成功",
-                type: "success"
-            });
-        });
+        @if(!empty($organization->fansmanageinfo->logo))
+        $("#retail_logo").val("{{$organization->fansmanageinfo->logo}}");
+        @endif
     });
+    $('#editBtn').click(function () {
+        $('#myModal').modal();
+    });
+
+    //编辑店铺信息
+    function EditStore() {
+        var formData = new FormData($( "#store_edit" )[0]);
+        $.ajax({
+            url: '{{ url('fansmanage/ajax/store_edit_check') }}',
+            type: 'post',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (json) {
+                if (json.status == -1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                } else if(json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    },function(){
+                        window.location.reload();
+                    });
+                }else{
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定"
+                    });
+                }
+            },
+            error: function (json) {
+                console.log(json);
+            }
+        });
+    }
 </script>
 </body>
 </html>
