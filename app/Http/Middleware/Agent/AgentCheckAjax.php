@@ -5,6 +5,8 @@
 
 namespace App\Http\Middleware\Agent;
 
+use App\Models\Account;
+use App\Models\Program;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -241,7 +243,7 @@ class AgentCheckAjax
             }
 
             //查询该程序下所有节点的路由
-            $program_info = Program::getOne([['id', 3]]);
+            $program_info = Program::getOne([['id', 2]]);
             $program_routes = [];
             foreach ($program_info->nodes as $key => $val) {
                 $program_routes[] = $val->route_name;
@@ -250,7 +252,7 @@ class AgentCheckAjax
             //计算数组差集，获取用户所没有的权限
             $unset_routes = array_diff($program_routes, $account_routes);
             //如果跳转的路由不在该程序的所有节点中。则报错
-            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.simple_route_except'))) {
+            if (!in_array($route_name, $program_routes) && !in_array($route_name, config('app.agent_route_except'))) {
                 return self::res(0, response()->json(['data' => '对不起，您不具备权限', 'status' => '-1']));
             }
             //如果没有权限，则报错
