@@ -106,34 +106,6 @@
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">微支付</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未设置</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">零舍壹得</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未设置</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">总店</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未创建</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">允许分店数</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">10间</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
                                 </div>
                             </section>
                         </div>
