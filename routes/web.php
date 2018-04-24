@@ -345,7 +345,7 @@ Route::group(['prefix' => 'agent'], function () {
 
     //登录页面组
     Route::group(['prefix' => 'login'], function () {
-        Route::get('/', 'Agent\LoginController@display')->middleware('AgentCheck');//登录页面路由
+        Route::get('/', 'Agent\LoginController@display');//登录页面路由
         Route::get('captcha/{tmp}', 'Agent\LoginController@captcha');//验证码路由
     });
 
