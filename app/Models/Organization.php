@@ -120,11 +120,10 @@ class Organization extends Model
         return $this->belongsTo('App\Models\Program', 'program_id', 'id');
     }
 
-
     //获取单条数据
     public static function getOne($where)
     {
-        return self::with('OrganizationRetailinfo')->with('OrganizationSimpleinfo')->where($where)->first();
+        return self::with('fansmanageinfo')->with('OrganizationRetailinfo')->with('OrganizationSimpleinfo')->where($where)->first();
     }
 
     //获取单条信息-服务商

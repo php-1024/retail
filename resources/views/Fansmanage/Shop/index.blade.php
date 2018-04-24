@@ -38,7 +38,7 @@
                 <section class="vbox">
                     <section class="scrollable padder">
                         <div class="m-b-md">
-                            <h3 class="m-b-none">总店概况</h3>
+                            <h3 class="m-b-none">系统概况</h3>
                         </div>
 
                         <div class="col-lg-3">
@@ -63,14 +63,14 @@
                                             <div class="col-sm-8">
                                                 <div>
                                                     <label class="label label-success m-t-xs">
-                                                        餐饮系统【先吃后付】
+                                                        {{$program->program_name}}
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">总店名称</label>
+                                            <label class="col-sm-4 text-right" for="input-id-1">商户名称</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-info">刘记鸡煲王</label>
                                             </div>
@@ -97,40 +97,11 @@
                                                 <label class="label label-danger">未关联公众服务号</label>
                                             </div>
                                         </div>
-
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-4 text-right" for="input-id-1">公众号</label>
                                             <div class="col-sm-8">
                                                 <label class="label label-danger">未关联</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">微支付</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未设置</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">零舍壹得</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未设置</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">总店</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未创建</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">允许分店数</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">10间</label>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
