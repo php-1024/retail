@@ -385,6 +385,7 @@ class SftController extends Controller
 //        return redirect($url);
         dump(session("zerone_auth_info"));
 
+        Header("Location:http://develop.01nnt.com/pay/sft/test11");
 //        return redirect("http://develop.01nnt.com/pay/sft/test10");
     }
 
