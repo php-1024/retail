@@ -17,6 +17,7 @@ use App\Models\Organization;
 use App\Models\OrganizationAssets;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Package;
+use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -39,10 +40,11 @@ class StoreController extends Controller
         // 获取当前的页面路由
         $route_name = $request->path();
         // 需要渲染模式里面的数据
-        $res = Organization::getProgramAsset(["id" => $admin_data["organization_id"]]);
+        $res = Organization::getProgramAsset(["organization_id" => $admin_data["organization_id"]]);
+        $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]],'program_id')->first();
+        $program = Program::getOne(['id'=>$program_id]);//获取当前粉丝管理系统能使用的资产程序
         // 渲染页面
-        dump($admin_data);
-        return view('Fansmanage/Store/store_create', ["program_info" => $res, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+        return view('Fansmanage/Store/store_create', ["program_info" => $program, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
 
@@ -136,6 +138,15 @@ class StoreController extends Controller
         if (Account::checkRowExists([['uuid', $uuid]])) {
             return response()->json(['data' => 'uuid重复，请重新操作！', 'status' => '0']);
         }
+        $organization = [
+            'organization_name' => $organization_name,
+            'parent_id' => $organization_parent_id,
+            'parent_tree' => $parent_tree,
+            'program_id' => $oneOrganization["program_id"],
+            'asset_id' => $program_id,
+            'type' => $type,
+            'status' => '1',
+        ];
         // 事务处理
         DB::beginTransaction();
         try {
