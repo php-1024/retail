@@ -66,11 +66,10 @@ class UserCheck
             $url = request()->url();
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
-            dump($code);
-//            // 保存相对应的数据
-//            $appid = config("app.wechat_web_setting.appid");
-//            $appsecret = config("app.wechat_web_setting.appsecret");
-//            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            // 保存相对应的数据
+            $appid = config("app.wechat_web_setting.appid");
+            $appsecret = config("app.wechat_web_setting.appsecret");
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
         }
     }
 
