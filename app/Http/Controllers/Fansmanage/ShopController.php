@@ -71,7 +71,7 @@ class ShopController extends Controller
             $company_info = Organization::getOne(['id'=>$admin_data["organization_id"]]);
             dump($company_info);
             // 渲染页面
-            return view('Fansmanage/Shop/index', ['login_log_list' => $login_log_list, 'program'=>$program, 'operation_log_list' => $operation_log_list, 'acc_num' => $acc_num, 'org_num' => $org_num, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+            return view('Fansmanage/Shop/index', ['login_log_list' => $login_log_list, 'company_info'=>$company_info,'program'=>$program, 'operation_log_list' => $operation_log_list, 'acc_num' => $acc_num, 'org_num' => $org_num, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
         }
     }
 
