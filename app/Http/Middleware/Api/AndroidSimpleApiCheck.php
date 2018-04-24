@@ -440,6 +440,9 @@ class AndroidSimpleApiCheck
         if (empty($data)) {
             return self::res(0, response()->json(['msg' => '用户不存在', 'status' => '0', 'data' => '']));
         }
+        if ($data->status == '0') {
+            return self::res(0, response()->json(['msg' => '对不起该账号被冻结啦，请联系管理员！', 'status' => '0', 'data' => '']));
+        }
         $sort = array($data['account'], $timestamp);
         ksort($sort);//字典排序
         $store_token = '';
