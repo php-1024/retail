@@ -40,24 +40,24 @@ class FansmanageController extends Controller
     public function fansmanage_list(Request $request)
     {
         $organization_name = $request->input('organization_name');
-        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile');
-        $search_data = ['organization_name' => $organization_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile];
+        $fansmanage_owner_mobile = $request->input('fansmanage_owner_mobile'); // 接收查询条件
+        $search_data = ['organization_name' => $organization_name, 'fansmanage_owner_mobile' => $fansmanage_owner_mobile]; //返回查询默认参数
         $admin_data = $request->get('admin_data');//中间件产生的管理员数据参数
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization = $admin_data['organization_id'];
         if(!empty($organization_name)){
-            $where = [['parent_id', $organization], ['program_id', 3],['organization_name', 'like', '%' . $organization_name . '%']];
+            $where = [['parent_id', $organization], ['program_id', 3],['organization_name', 'like', '%' . $organization_name . '%']]; //页面商户名称查询
         }
 //        if(!empty($fansmanage_owner_mobile)){
-//            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']];
+//            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']]; //电话号码查询
 //        }
         if(empty($where)){
             $where = [['parent_id', $organization], ['program_id', 3]];
         }
 
-        $list = Organization::getPaginagefansmanage($where, 10, 'id');
+        $list = Organization::getPaginagefansmanage($where, 10, 'id'); //数据库条件查询商户
         return view('Agent/Fansmanage/fansmanage_list', ['list' => $list, 'search_data' => $search_data,'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
