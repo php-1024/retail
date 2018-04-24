@@ -9,6 +9,7 @@ use App\Models\Organization;
 use App\Models\OrganizationAgentinfo;
 use App\Models\OrganizationRole;
 use App\Models\Warzone;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -84,6 +85,9 @@ class SystemController extends Controller{
 
     //超级管理员选择服务商
     public function switch_status(Request $request){
+        $admin_data = $request->get('admin_data');                //中间件产生的管理员数据参数
+        $admin_data['organization_id'] = 0;
+        ZeroneRedis::create_agent_account_cache(1, $admin_data);//清空所选组织
         return redirect('agent');
     }
 
