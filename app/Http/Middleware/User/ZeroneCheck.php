@@ -15,7 +15,7 @@ use Session;
 use Illuminate\Support\Facades\Redis;
 
 
-class UserCheck
+class ZeroneCheck
 {
     protected $wechat_info = [];
     protected $organization_id = 2;
@@ -32,12 +32,10 @@ class UserCheck
 
     public function authorizeInfo()
     {
-
         // 判断公众号是否授权给零壹第三方公众号平台
         $this->getShopBaseInfo();
         // 初次访问的地址
         $url = request()->fullUrl();
-
 
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
@@ -73,24 +71,6 @@ class UserCheck
         }
     }
 
-
-
-    /**
-     * 获取店铺公众号的基本信息
-     */
-    public function getShopBaseInfo()
-    {
-        // 获取公众号的基本信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
-        // 判断公众号是否在零壹第三方平台授权过
-        if ($res !== false) {
-            $this->wechat_info = $res;
-        } else {
-            // 公众号信息没有授权应该进行的步骤
-
-        }
-    }
-
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
         // 静默授权：通过授权使用的code,获取到用户openid
@@ -103,7 +83,6 @@ class UserCheck
             $this->getAuthorizeZeroneInfo(request()->url());
             return;
         }
-
 
         DB::beginTransaction();
         try {
@@ -123,6 +102,22 @@ class UserCheck
         } catch (\Exception $e) {
             DB::rollback();
             return false;
+        }
+    }
+
+    /**
+     * 获取店铺公众号的基本信息
+     */
+    public function getShopBaseInfo()
+    {
+        // 获取公众号的基本信息
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
+        // 判断公众号是否在零壹第三方平台授权过
+        if ($res !== false) {
+            $this->wechat_info = $res;
+        } else {
+            // 公众号信息没有授权应该进行的步骤
+
         }
     }
 }
