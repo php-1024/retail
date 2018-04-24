@@ -43,12 +43,12 @@ class ShopCheck
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
         }
-        dd(session("zerone_auth_info"));
+        dump(session("zerone_auth_info"));
 
         // 判断 session 中是否存在店铺id
-        if (empty(session("zerone_auth_info.shop_user_id"))) {
-            $this->getAuthorizeShopInfo($url);
-        }
+//        if (empty(session("zerone_auth_info.shop_user_id"))) {
+//            $this->getAuthorizeShopInfo($url);
+//        }
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
