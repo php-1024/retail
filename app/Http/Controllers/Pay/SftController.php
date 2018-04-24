@@ -265,11 +265,9 @@ class SftController extends Controller
 
     public function test10()
     {
-        dump(request()->url());
-        dump(request()->root());
-        dump(request()->path());
-        dump(request()->session());
-        dump(request()->decodedPath());
+        $array = array_collapse([[1, 2, 3,565,1231], [4, 5, 6], [7, 8, 9]]);
+        dump($array);
+
     }
 
 

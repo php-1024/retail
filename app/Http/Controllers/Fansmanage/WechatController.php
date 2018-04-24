@@ -426,6 +426,8 @@ class WechatController extends Controller
         $encrypt_type = $_GET['encrypt_type'];
         $msg_sign = $_GET['msg_signature'];
         $encryptMsg = file_get_contents('php://input');
+        dump($encryptMsg);
+
         //file_put_contents('testopen.txt',$timeStamp.'|'.$nonce.'|'.$encrypt_type.'|'.$msg_sign.'|'.$encryptMsg);
         $result = \Wechat::getVerify_Ticket($timeStamp, $nonce, $encrypt_type, $msg_sign, $encryptMsg);
         if ($result) {
