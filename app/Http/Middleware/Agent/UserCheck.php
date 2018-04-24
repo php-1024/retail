@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redis;
 class UserCheck
 {
     protected $wechat_info = [];
-    protected $organization_id = 5;
+
 
     public function handle($request, Closure $next)
     {
@@ -37,8 +37,9 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
+        $organization_id = 5;
         // 刷新并获取授权令牌
-        $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
+        $authorization_info = \Wechat::refresh_authorization_info($organization_id);
 
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
@@ -75,9 +76,7 @@ class UserCheck
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             if ($res === true) {
 //                $this->authorizeInfo();
-                $url = request()->url();
                 return redirect($url);
-//                Header("Location:{$url}");
             }
         }
     }
@@ -99,8 +98,11 @@ class UserCheck
      */
     public function getShopBaseInfo()
     {
+        // 获取组织id
+        $organization_id = request()->get("organization_id");
         // 获取公众号的基本信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
+
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;

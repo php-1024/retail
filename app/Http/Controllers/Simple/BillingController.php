@@ -178,7 +178,7 @@ class BillingController extends Controller
     public static function edit_stock($order_goods, $type)
     {
         foreach ($order_goods as $key => $val) {
-            $old_stock = SimpleGoods::getPluck(['id' => $val->goods_id], 'stock')->first(); //查询原来商品的库存
+            $old_stock = SimpleGoods::getPluck(['id' => $val->goods_id], 'stock'); //查询原来商品的库存
             if ($type == 1) {                    //加库存：type=1、进货类型
                 $new_stock = $old_stock + $val->total;    //新的库存
             } elseif ($type == 2 || $type == 3) {  //减库存：type=2|type=3、退货类型|报损类型

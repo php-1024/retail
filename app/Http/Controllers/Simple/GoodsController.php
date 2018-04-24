@@ -264,7 +264,7 @@ class GoodsController extends Controller
         $status = $request->get('status');                  //获取商品状态
         if ($status == 0) {
             $status = 1;
-            $stock = SimpleGoods::getPluck(['id' => $goods_id], 'stock')->first();
+            $stock = SimpleGoods::getPluck(['id' => $goods_id], 'stock');
             $tips = '上架';
         } elseif ($status == 1) {
             $status = '0';

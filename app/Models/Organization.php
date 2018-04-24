@@ -255,13 +255,16 @@ class Organization extends Model
     {
         $res_organization = Organization::select(["organization.id", "organization.program_id"])
             ->where(["organization.id" => $organization_id])
-            ->first()->toArray();
-        $res = Program::select(["id", "program_name"])->where(["complete_id" => $res_organization["program_id"], "is_asset" => 1])->orWhere(["id" => $res_organization["program_id"]])->get();
-        if (!empty($res)) {
-            return $res->toArray();
-        } else {
-            return false;
+            ->first();
+        if(!empty($res_organization)) {
+            $res_organization = $res_organization->toArray();
+
+            $res = Program::select(["id", "program_name"])->where(["complete_id" => $res_organization["program_id"], "is_asset" => 1])->orWhere(["id" => $res_organization["program_id"]])->get();
+            if (!empty($res)) {
+                return $res->toArray();
+            }
         }
+        return false;
     }
 
     //获取分页数据-分店

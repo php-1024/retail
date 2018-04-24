@@ -28,7 +28,7 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
 
         $account = $request->get('account');                //接收搜索账号
-        $operator_id = Account::getPluck([['account', $account]], 'id')->first();//操作员账号ID
+        $operator_id = Account::getPluck([['account', $account]], 'id');//操作员账号ID
 
         $ordersn = $request->get('ordersn');                //接收订单编号
         $paytype = $request->get('paytype');                //接收支付方式
@@ -136,7 +136,7 @@ class OrderController extends Controller
     public static function return_stock($order, $type)
     {
         foreach ($order->SimpleOrderGoods as $key => $val) {
-            $old_stock = SimpleGoods::getPluck(['id' => $val->goods_id], 'stock')->first(); //查询原来商品的库存
+            $old_stock = SimpleGoods::getPluck(['id' => $val->goods_id], 'stock'); //查询原来商品的库存
             if ($type == '6') {//销售出库
                 $new_stock = $old_stock - $val->total;         //确认付款后处理的新库存
             } elseif ($type == '7') {//销退入库

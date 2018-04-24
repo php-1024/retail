@@ -28,7 +28,7 @@ class OrderController extends Controller
         $route_name = $request->path();                         //获取当前的页面路由
 
         $account = $request->get('account');                //接收搜索账号
-        $operator_id = Account::getPluck([['account', $account]], 'id')->first();//操作员账号ID
+        $operator_id = Account::getPluck([['account', $account]], 'id');//操作员账号ID
 
         $ordersn = $request->get('ordersn');                //接收订单编号
         $paytype = $request->get('paytype');                //接收支付方式
