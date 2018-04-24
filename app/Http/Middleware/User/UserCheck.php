@@ -151,6 +151,7 @@ class UserCheck
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
+
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
@@ -169,12 +170,15 @@ class UserCheck
             $param["status"] = 1;
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
+
+            dump($fansmanage_user);
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
 
+            dump($user_info);
             // 用户id
             $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param_user_info["nickname"] = $user_info["nickname"];
