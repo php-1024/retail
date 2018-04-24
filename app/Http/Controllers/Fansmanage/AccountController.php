@@ -44,7 +44,7 @@ class AccountController extends Controller
         }
         // 获取权限节点的部分：
         // 获取一级账号id
-        $account_id = Account::getPluck([['organization_id', $admin_data['organization_id']], ['parent_id', 1]], 'id')->first();
+        $account_id = Account::getPluck([['organization_id', $admin_data['organization_id']], ['parent_id', 1]], 'id');
         // 判断是否处于一级账号状态
         if ($account_id == $admin_data['id']) {
             // 获取当前系统的所有模块和节点

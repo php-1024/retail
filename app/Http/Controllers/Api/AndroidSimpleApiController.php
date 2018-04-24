@@ -123,15 +123,15 @@ class AndroidSimpleApiController extends Controller
         // 操作员id
         $account_id = $request->account_id;
         // 根据账号进行查询
-        $data = Account::where([['id', $account_id]])->first();
-        if ($data->status == '0') {
+        $status = Account::getPluck([['id', $account_id]],'status');
+        if ($status == '0') {
             return response()->json(['msg' => '对不起该账号，就在刚刚被冻结啦，请联系管理员！', 'status' => '0', 'data' => '']);
         }
         // 备注
         $remarks = $request->remarks;
 
-
-        $goodsdata = json_decode($request->goodsdata, TRUE);//商品数组
+        // 商品数组
+        $goodsdata = json_decode($request->goodsdata, TRUE);
         $order_price = 0;
         foreach ($goodsdata as $key => $value) {
             foreach ($value as $k => $v) {
@@ -177,7 +177,7 @@ class AndroidSimpleApiController extends Controller
                 }
             }
             $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
-            $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
+            $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
             if ($power != '1') {//说明下单减库存
                 if ($stock_status != '1' || is_null($stock_status)){//说明该订单的库存还未减去，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
                     $re = $this->reduce_stock($order_id, '1');//减库存
@@ -206,7 +206,7 @@ class AndroidSimpleApiController extends Controller
         $order_id = $request->order_id;//订单id
         $organization_id = $request->organization_id;//店铺
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
-        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power != '1') {//说明下单减库存 所以要把库存归还
@@ -290,7 +290,7 @@ class AndroidSimpleApiController extends Controller
         }
         $order = $order->toArray();
         $user_account = User::getPluck([['id', $order['user_id']]], 'account')->first();//粉丝账号
-        $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account')->first();//操作人员账号
+        $operator_account = Account::getPluck([['id', $order['operator_id']]], 'account');//操作人员账号
         //用户昵称
         $account_realname = AccountInfo::getPluck([['account_id', $order['operator_id']]], 'realname')->first();
         $goodsdata = $order['simple_order_goods'];//订单商品列表
@@ -352,7 +352,7 @@ class AndroidSimpleApiController extends Controller
         $organization_id = $request->organization_id;//店铺
         $paytype = $request->paytype;//支付方式
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
-        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
@@ -379,7 +379,7 @@ class AndroidSimpleApiController extends Controller
     public function other_payment(Request $request)
     {
         $order_id = $request->order_id;//订单id
-        $order_status = SimpleOrder::getPluck([['id', $order_id]], 'status')->first();
+        $order_status = SimpleOrder::getPluck([['id', $order_id]], 'status');
         if ($order_status != '0') {
             return response()->json(['msg' => '订单不是待付款，不能操作', 'status' => '0', 'data' => '']);
         }
@@ -387,7 +387,7 @@ class AndroidSimpleApiController extends Controller
         $paytype = $request->paytype;                   //支付方式
         $payment_company = $request->payment_company;   //支付公司名字
         $power = SimpleConfig::getPluck([['simple_id', $organization_id], ['cfg_name', 'change_stock_role']], 'cfg_value');//查询是下单减库存/付款减库存
-        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status')->first();//查询库存是否已经减去
+        $stock_status = SimpleOrder::getPluck([['simple_id', $organization_id], ['id', $order_id]], 'stock_status');//查询库存是否已经减去
         DB::beginTransaction();
         try {
             if ($power == '1') {//说明付款减库存
