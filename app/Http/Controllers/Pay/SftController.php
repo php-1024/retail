@@ -375,9 +375,7 @@ class SftController extends Controller
     public function test14()
     {
         $url = session("zerone_auth_info.initial_url_address");
-        dump($url);
-
-//        return redirect($url);
+        return redirect($url);
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
