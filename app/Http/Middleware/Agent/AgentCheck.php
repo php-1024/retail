@@ -124,7 +124,7 @@ class AgentCheck
                 $account_routes[] = $val->route_name;
             }
             //查询该程序下所有节点的路由
-            $program_info = Program::getOne([['id', 3]]);
+            $program_info = Program::getOne([['id', 2]]);
             $program_routes = [];
             foreach ($program_info->nodes as $key => $val) {
                 $program_routes[] = $val->route_name;
