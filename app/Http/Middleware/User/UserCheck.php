@@ -74,10 +74,10 @@ class UserCheck
             $appsecret = config("app.wechat_web_setting.appsecret");
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             if ($res === true) {
-//                $this->authorizeInfo();
-                $url = request()->url();
+                $this->authorizeInfo();
+//                $url = request()->url();
 //                return redirect($url);
-                Header("Location:{$url}");
+//                Header("Location:{$url}");
             }
         }
     }
