@@ -50,9 +50,9 @@ class FansmanageController extends Controller
         if(!empty($organization_name)){
             $where = [['parent_id', $organization], ['program_id', 3],['organization_name', 'like', '%' . $organization_name . '%']];
         }
-        if(!empty($fansmanage_owner_mobile)){
-            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']];
-        }
+//        if(!empty($fansmanage_owner_mobile)){
+//            $where = [['parent_id', $organization], ['program_id', 3],['fansmanage_owner_mobile', 'like', '%' . $fansmanage_owner_mobile . '%']];
+//        }
         if(empty($where)){
             $where = [['parent_id', $organization], ['program_id', 3]];
         }
