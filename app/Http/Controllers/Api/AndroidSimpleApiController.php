@@ -224,13 +224,10 @@ class AndroidSimpleApiController extends Controller
         try {
             // 说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
             if ($order['stock_status'] == '-1') {
-                // 说明下单减库存 所以要把库存归还
-                if ($power != '1') {
-                    // 归还库存
-                    $re = $this->reduce_stock($order_id, '-1');
-                    if ($re != 'ok') {
-                        return response()->json(['msg' => '取消订单失败', 'status' => '0', 'data' => '']);
-                    }
+                // 归还库存
+                $re = $this->reduce_stock($order_id, '-1');
+                if ($re != 'ok') {
+                    return response()->json(['msg' => '取消订单失败', 'status' => '0', 'data' => '']);
                 }
             }
             // 修改订单状态为取消
