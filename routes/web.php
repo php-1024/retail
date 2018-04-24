@@ -387,7 +387,6 @@ Route::group(['prefix' => 'agent'], function () {
     Route::group(['prefix' => 'ajax'], function () {
         Route::post('login_check', 'Agent\LoginController@login_check')->middleware('AgentCheckAjax');//提交登录数据
         Route::post('agent_info_check', 'Agent\SystemController@agent_info_check')->middleware('AgentCheckAjax');//提交公司信息修改
-
         Route::post('account_info_check', 'Agent\PersonalController@account_info_check')->middleware('AgentCheckAjax');//个人信息修改
         Route::post('safe_password_check', 'Agent\PersonalController@safe_password_check')->middleware('AgentCheckAjax');//安全密码设置
         Route::post('password_check', 'Agent\PersonalController@password_check')->middleware('AgentCheckAjax');//登入密码修改

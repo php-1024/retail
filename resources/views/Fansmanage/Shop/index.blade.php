@@ -387,7 +387,7 @@
     function EditStore() {
         var formData = new FormData($( "#store_edit" )[0]);
         $.ajax({
-            url: '{{ url('fansmanage/ajax/store_edit_check') }}',
+            url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',
             type: 'post',
             data: formData,
             async: false,
