@@ -138,15 +138,6 @@ class StoreController extends Controller
         if (Account::checkRowExists([['uuid', $uuid]])) {
             return response()->json(['data' => 'uuid重复，请重新操作！', 'status' => '0']);
         }
-        $organization = [
-            'organization_name' => $organization_name,
-            'parent_id' => $organization_parent_id,
-            'parent_tree' => $parent_tree,
-            'program_id' => $oneOrganization["program_id"],
-            'asset_id' => $program_id,
-            'type' => $type,
-            'status' => '1',
-        ];
         // 事务处理
         DB::beginTransaction();
         try {
