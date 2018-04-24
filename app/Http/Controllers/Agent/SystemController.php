@@ -21,7 +21,7 @@ class SystemController extends Controller{
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
         $organization_id = $admin_data['organization_id'];//服务商id
-        if($admin_data['is_super'] == 1 ){
+        if($admin_data['is_super'] == 1 && $admin_data['organization_id'] == 0 ){
             $list = Organization::getPaginage([['program_id','2']],20,'id');
             foreach($list as $key=>$value){
                 $list[$key]['warzone'] = Warzone::getPluck([['id', $value['warzoneAgent']['zone_id']]],'zone_name')->first();
@@ -75,8 +75,8 @@ class SystemController extends Controller{
             }else{
                 $admin_data['role_name'] = '角色未设置';
             }
-            \ZeroneRedis::create_agent_account_cache(1,$admin_data);//生成账号数据的Redis缓存
-            \ZeroneRedis::create_menu_cache(1,2);//生成对应账号的系统菜单
+            ZeroneRedis::create_agent_account_cache(1,$admin_data);//生成账号数据的Redis缓存
+            ZeroneRedis::create_menu_cache(1,2);//生成对应账号的系统菜单
             return response()->json(['data' => '操作成功', 'status' => '1']);
         }else{
             return response()->json(['data' => '操作失败', 'status' => '0']);
