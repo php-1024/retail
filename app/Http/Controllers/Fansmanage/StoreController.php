@@ -145,7 +145,6 @@ class StoreController extends Controller
             'type' => $type,
             'status' => '1',
         ];
-        dd($organization);
         // 事务处理
         DB::beginTransaction();
         try {

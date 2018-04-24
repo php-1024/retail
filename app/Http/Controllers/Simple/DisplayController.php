@@ -75,7 +75,6 @@ class DisplayController extends Controller
             $catering = Organization::getOneStore(['id' => $val->parent_id]);
             $val->cateringname = $catering->organization_name;
         }
-        dump($organization);
         return view('Simple/Account/simple_list', ['organization' => $organization, 'organization_name' => $organization_name]);
     }
 
