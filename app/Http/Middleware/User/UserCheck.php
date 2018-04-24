@@ -35,8 +35,12 @@ class UserCheck
         $this->getShopBaseInfo();
         // 初次访问的地址
         $url = request()->fullUrl();
+
+        $organization_id = 5;
         // 刷新并获取授权令牌
-        $authorization_info = \Wechat::refresh_authorization_info(request()->get('organization_id'));
+        $authorization_info = \Wechat::refresh_authorization_info($organization_id);
+
+
         if ($authorization_info === false) {
             return "微信公众号没有授权到第三方";
         }
