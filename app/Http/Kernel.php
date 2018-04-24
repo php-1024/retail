@@ -67,7 +67,7 @@ class Kernel extends HttpKernel
         /**************************零壹平台管理系统*******************************/
 
         /**************************代理平台管理系统*******************************/
-        'AgentCheck'=>\App\Http\Middleware\Agent\AgentCheck::class,//检测普通页面跳转的中间件
+        'AgentCheck'=>\App\Http\Middleware\Agent\UserCheck::class,//检测普通页面跳转的中间件
         'AgentCheckAjax'=>\App\Http\Middleware\Agent\AgentCheckAjax::class,//检测Ajax数据提交的中间件
         /**************************代理平台管理系统*******************************/
 
@@ -95,5 +95,9 @@ class Kernel extends HttpKernel
         'AndroidSimpleApiCheck'=>\App\Http\Middleware\Api\AndroidSimpleApiCheck::class,//检测普通页面跳转的中间件
         /**************************接口*******************************/
 
+
+
+        // 账号体系测试
+        'UserCheck'=>\App\Http\Middleware\User\UserCheck::class,//检测普通页面跳转的中间件
     ];
 }

@@ -396,7 +396,7 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Http\\Controllers\\Zerone\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/RoleController.php',
         'App\\Http\\Controllers\\Zerone\\SubordinateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/SubordinateController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
-        'App\\Http\\Middleware\\Agent\\AgentCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent/AgentCheck.php',
+        'App\\Http\\Middleware\\Agent\\UserCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent/AgentCheck.php',
         'App\\Http\\Middleware\\Agent\\AgentCheckAjax' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent/AgentCheckAjax.php',
         'App\\Http\\Middleware\\Api\\AndroidApiCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/AndroidApiCheck.php',
         'App\\Http\\Middleware\\Api\\AndroidSimpleApiCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/AndroidSimpleApiCheck.php',
