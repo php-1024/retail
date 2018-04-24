@@ -99,5 +99,6 @@ class Kernel extends HttpKernel
 
         // 账号体系测试
         'UserCheck'=>\App\Http\Middleware\User\UserCheck::class,//检测普通页面跳转的中间件
+        'ShopCheck'=>\App\Http\Middleware\User\ShopCheck::class,//检测普通页面跳转的中间件
     ];
 }

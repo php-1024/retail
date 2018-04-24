@@ -15,7 +15,7 @@ use Session;
 use Illuminate\Support\Facades\Redis;
 
 
-class UserCheck
+class ShopCheck
 {
     protected $wechat_info = [];
     protected $organization_id = 2;
@@ -32,7 +32,7 @@ class UserCheck
 
     public function authorizeInfo()
     {
-        dump(1);
+        dump(2);
 
 //
 //
