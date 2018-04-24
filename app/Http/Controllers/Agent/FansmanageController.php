@@ -50,7 +50,6 @@ class FansmanageController extends Controller
         if (!empty($organization_name)) {
             $where = [['parent_id', $organization], ['program_id', 3], ['organization_name', 'like', '%' . $organization_name . '%']]; //页面商户名称查询
         }
-        dd($fansmanage_owner_mobile);
         if (empty($where)) {
             $where = [['parent_id', $organization], ['program_id', 3]];
         }
