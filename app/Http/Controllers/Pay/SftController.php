@@ -355,7 +355,6 @@ class SftController extends Controller
             $this->wechat_info = $res;
         } else {
             // 公众号信息没有授权应该进行的步骤
-
         }
     }
 
