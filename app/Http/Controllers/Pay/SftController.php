@@ -265,9 +265,10 @@ class SftController extends Controller
 
     public function test10()
     {
-        $array = array_collapse([[1, 2, 3, 565, 1231], [4, 5, 6], [7, 8, 9]]);
-        dump($array);
-
+//        $array = array_collapse([[1, 2, 3, 565, 1231], [4, 5, 6], [7, 8, 9]]);
+//        dump($array);
+        $zerone_auth_info = session("zerone_auth_info");
+        var_dump($zerone_auth_info);
     }
 
 
@@ -384,7 +385,7 @@ class SftController extends Controller
 //        return redirect($url);
 
         dump(session("zerone_auth_info"));
-//        return redirect("http://develop.01nnt.com/pay/sft/test11");
+        return redirect("http://develop.01nnt.com/pay/sft/test10");
     }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
