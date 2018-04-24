@@ -37,7 +37,6 @@ class UserCheck
         // 初次访问的地址
         $url = request()->fullUrl();
 
-
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($this->organization_id);
 
@@ -45,15 +44,15 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-        // 判断是否存在 零壹服务用户id
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $this->getAuthorizeZeroneInfo($url);
-        }
-
-//        // 判断 session 中是否存在店铺id
-//        if (empty(session("zerone_auth_info.shop_user_id"))) {
-//            $this->getAuthorizeShopInfo($url);
+//        // 判断是否存在 零壹服务用户id
+//        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+//            $this->getAuthorizeZeroneInfo($url);
 //        }
+        // 判断 session 中是否存在店铺id
+        if (empty(session("zerone_auth_info.shop_user_id"))) {
+            $this->getAuthorizeShopInfo($url);
+            \Session::save();
+        }
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
@@ -73,40 +72,12 @@ class UserCheck
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return $res;
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            \Session::save();
         }
     }
 
 
-    public function getAuthorizeShopInfo($url)
-    {
-        $code = request()->input('code');
-        $appid = $this->wechat_info["authorizer_appid"];
-        if (empty($code)) {
-            $url = request()->url();
-            \Wechat::get_open_web_auth_url($appid, $url);
-        } else {
-            $this->setAuthorizeShopInfo($appid, $code);
-            dump(session("zerone_auth_info"));
-        }
-    }
-
-    /**
-     * 获取店铺公众号的基本信息
-     */
-    public function getShopBaseInfo()
-    {
-        // 获取公众号的基本信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
-        // 判断公众号是否在零壹第三方平台授权过
-        if ($res !== false) {
-            $this->wechat_info = $res;
-        } else {
-            // 公众号信息没有授权应该进行的步骤
-
-        }
-    }
 
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
@@ -143,6 +114,34 @@ class UserCheck
         }
     }
 
+
+    /**
+     * 获取店铺公众号的基本信息
+     */
+    public function getShopBaseInfo()
+    {
+        // 获取公众号的基本信息
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
+        // 判断公众号是否在零壹第三方平台授权过
+        if ($res !== false) {
+            $this->wechat_info = $res;
+        } else {
+            // 公众号信息没有授权应该进行的步骤
+
+        }
+    }
+
+    public function getAuthorizeShopInfo($url)
+    {
+        $code = request()->input('code');
+        $appid = $this->wechat_info["authorizer_appid"];
+        if (empty($code)) {
+            $url = request()->url();
+            \Wechat::get_open_web_auth_url($appid, $url);
+        } else {
+            $this->setAuthorizeShopInfo($appid, $code);
+        }
+    }
 
     public function setAuthorizeShopInfo($appid, $code, $re_url = "")
     {
