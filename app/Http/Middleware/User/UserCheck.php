@@ -44,10 +44,10 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
-        // 判断是否存在 零壹服务用户id
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            $this->getAuthorizeZeroneInfo($url);
-        }
+//        // 判断是否存在 零壹服务用户id
+//        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+//            $this->getAuthorizeZeroneInfo($url);
+//        }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
