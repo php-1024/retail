@@ -329,6 +329,7 @@ class SftController extends Controller
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             if ($res === true) {
 //                $this->authorizeInfo();
+                dump(session("zerone_auth_info"));
                 return redirect($url);
             }
         }
