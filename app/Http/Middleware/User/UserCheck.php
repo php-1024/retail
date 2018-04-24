@@ -164,7 +164,7 @@ class UserCheck
         try {
             // 店铺公众号的信息
             // 组织id
-            $param["fansmanage_id"] = request()->get("organization_id");
+            $param["fansmanage_id"] = $this->organization_id;
             $param["user_id"] = session("zerone_auth_info.zerone_user_id");
             $param["open_id"] = $openid;
             $param["status"] = 1;
