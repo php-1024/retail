@@ -67,6 +67,7 @@ class UserCheck
             Header("Location:http://develop.01nnt.com/pay/sft/test13");
         }
 
+        Header("Location:http://develop.01nnt.com/pay/sft/test14");
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
