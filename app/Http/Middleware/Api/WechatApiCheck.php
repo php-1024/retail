@@ -95,9 +95,6 @@ class WechatApiCheck
      */
     public function checkCategory($request)
     {
-        if (empty($request->input('fansmanager_id'))) {
-            return self::res(0, response()->json(['msg' => '商户id不能为空', 'status' => '0', 'data' => '']));
-        }
         if (empty($request->input('retail_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
