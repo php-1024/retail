@@ -235,6 +235,7 @@ class GoodsController extends Controller
         $where = ['simple_id' => $admin_data['organization_id']];
         $category = SimpleCategory::getList($where, 0, 'created_at', 'DESC');
         $goods = SimpleGoods::getPaginage($where, $search_data, '10', 'displayorder', 'ASC'); //查询商品信息
+        dump($goods);
         return view('Simple/Goods/goods_list', ['goods' => $goods, 'search_data' => $search_data, 'category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 

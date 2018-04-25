@@ -122,11 +122,7 @@ class AndroidSimpleApiController extends Controller
         }
         // 操作员id
         $account_id = $request->account_id;
-        // 根据账号进行查询
-        $status = Account::getPluck([['id', $account_id]], 'status');
-        if ($status == '0') {
-            return response()->json(['msg' => '对不起该账号，就在刚刚被冻结啦，请联系管理员！', 'status' => '0', 'data' => '']);
-        }
+
         // 备注
         $remarks = $request->remarks;
 

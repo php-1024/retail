@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Simple;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
-use App\Models\SimpleConfig;
 use App\Models\SimpleGoods;
 use App\Models\SimpleOrder;
 use App\Models\OperationLog;

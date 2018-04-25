@@ -33,7 +33,6 @@ class TestController extends Controller
         // 保存源头数据
         UserOrigin::insertData($param_user_origin, "update_create", ["fansmanager_id" => 3,"store_id" =>2,"user_id" => 2]);
 
-
 //
 //        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
 //        $data['account'] = User::where(['id'=> 1])->value("account");
