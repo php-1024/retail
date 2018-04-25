@@ -61,7 +61,7 @@ class SimpleGoods extends Model{
         if($row == '1' || $row == '0'){//false证明唯一
             return false;
         }else{//true证明不唯一
-            return $row;
+            return true;
         }
     }
 
