@@ -120,6 +120,7 @@ class StoreController extends Controller
 //        } elseif ($program_id == 12) {
 //            $key = config("app.simple_encrypt_key");
 //        }
+        dd($oneOrganization);
         if ($program_id == $oneOrganization["program_id"]) {
             $key = config("app.retail_encrypt_key");
         } else {
