@@ -35,8 +35,8 @@ class WechatApiController extends Controller
         if (empty($data)) {
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
-        foreach($data as $key=>$value){
-            $ss = $this->GetDistance('22.724083','114.260654',$value['OrganizationSimpleinfo']['lat'],$value['OrganizationSimpleinfo']['lng']);
+        foreach($data->OrganizationSimpleinfo as $key=>$value){
+            $ss = $this->GetDistance('22.724083','114.260654',$value['lat'],$value['lng']);
             echo $ss;
         }
 
