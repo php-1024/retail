@@ -59,7 +59,7 @@
                                                     {{ $company_info->fansmanageinfo->logo }}
                                                     @if(!empty($company_info->fansmanageinfo->logo))
 
-                                                        <img src="{{asset('public/Fansmanage')}}/img/a5.png" class="img-circle" alt="...">
+                                                        <img src="{{asset('public/Fansmanage')}}/img/shop_logo.png" class="img-circle" alt="...">
                                                     @else
                                                         <img src="{{asset($company_info->logo)}}" class="img-circle" alt="...">
                                                     @endif
