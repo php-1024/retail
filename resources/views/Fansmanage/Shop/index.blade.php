@@ -52,8 +52,6 @@
                                     </button>
                                 </header>
                                 <div class="panel-body">
-
-
                                     <div class="form-horizontal">
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
