@@ -402,6 +402,7 @@ Route::group(['prefix' => 'agent'], function () {
 Route::group(['prefix' => 'fansmanage'], function () {
 
     Route::get('/test', 'Fansmanage\TestController@test');
+    Route::get('/test2', 'Fansmanage\TestController@test2');
 
 
     //登录页面组

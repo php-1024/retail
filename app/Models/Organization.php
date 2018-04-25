@@ -159,12 +159,11 @@ class Organization extends Model
         return self::with('fansmanageinfo')->where($where)->get();
     }
 
-    //获取分页列表
+    //获取多条信息零售简版
     public static function getListSimple($where)
     {
-        return self::where($where)->join('organization_simpleinfo as s', 'organization.id', '=', 's.organization_id')->select('organization.id', 'organization.organization_name','s.description', 's.simple_logo', 's.simple_address', 's.lat', 's.lng')->get();
+        return self::with('OrganizationSimpleinfo')->where($where)->get();
     }
-
 
     //获取多条信息
     public static function getList($where)
@@ -263,7 +262,7 @@ class Organization extends Model
         $res_organization = Organization::select(["organization.id", "organization.program_id"])
             ->where(["organization.id" => $organization_id])
             ->first();
-        if(!empty($res_organization)) {
+        if (!empty($res_organization)) {
             $res_organization = $res_organization->toArray();
 
             $res = Program::select(["id", "program_name"])->where(["complete_id" => $res_organization["program_id"], "is_asset" => 1])->orWhere(["id" => $res_organization["program_id"]])->get();
@@ -304,6 +303,71 @@ class Organization extends Model
         } else {
             return false;
         }
+    }
+
+
+    public function getSimpleOrder()
+    {
+        return $this->hasMany('App\Models\SimpleOrder', 'simple_id', "id");
+    }
+
+
+    public function getRetailOrder()
+    {
+        return $this->hasMany('App\Models\RetailOrder', 'retail_id', "id");
+    }
+
+
+    /**
+     * 获取营收情况数据
+     */
+    public static function getRevenueInfo($organization_id)
+    {
+        $res = self::select(["asset_id", "parent_tree"])->where(["id" => $organization_id])->first();
+        if (!empty($res)) {
+            $res = $res->toArray();
+            $parent_tree = "{$res["parent_tree"]}{$organization_id}";
+            if ($res["asset_id"] == 10) {
+                $model = self::with(["getRetailOrder" => function ($query) {
+                    $query->select(["order_price", "retail_id", "id", "created_at"])->where(["status" => 1]);
+                }]);
+            } else {
+                $model = self::with(["getSimpleOrder" => function ($query) {
+                    $query->select(["order_price", "simple_id", "id", "created_at"])->where(["status" => 1]);
+                }]);
+            }
+            $res_shop = $model->select(["id", "organization_name"])->where("parent_tree", "like", "%$parent_tree%")->where(["type" => 4])->get();
+
+            $today = date("Y-m-d") . " 00:00:00";
+            $today_start = strtotime($today);
+            $today_end = strtotime("+1 day", $today_start);
+
+            if (!empty($res_shop)) {
+                $res_shop = $res_shop->toArray();
+                foreach ($res_shop as $key => $val) {
+                    $today_revenue_order_money = 0;
+                    $today_revenue_order_num = 0;
+                    $before_revenue_order_money = 0;
+                    $before_revenue_order_num = 0;
+                    foreach ($val["get_simple_order"] as $k => $v) {
+                        if ($v["created_at"] > $today_start && $v["created_at"] <= $today_end) {
+                            $today_revenue_order_money += $v["order_price"];
+                            $today_revenue_order_num += 1;
+                        } else {
+                            $before_revenue_order_money += $v["order_price"];
+                            $before_revenue_order_num += 1;
+                        }
+                    }
+                    $res_shop[$key]["today_order_money"] = $today_revenue_order_money;
+                    $res_shop[$key]["today_order_num"] = $today_revenue_order_num;
+                    $res_shop[$key]["before_order_money"] = $before_revenue_order_money;
+                    $res_shop[$key]["before_order_num"] = $before_revenue_order_num;
+                    $res_shop[$key]["all_order_money"] = $today_revenue_order_money + $before_revenue_order_money;
+                }
+            }
+            return $res_shop;
+        }
+        return false;
     }
 }
 

@@ -15,6 +15,7 @@ class SimpleOrder extends Model
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
+    public $guarded = [];
 
     //和User表多对一的关系
     public function User()

@@ -99,17 +99,17 @@
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         {{--<div class="form-group">--}}
-                                            {{--<label class="col-sm-4 text-right" for="input-id-1">状态</label>--}}
-                                            {{--<div class="col-sm-8">--}}
-                                                {{--<label class="label label-danger">未关联公众服务号</label>--}}
-                                            {{--</div>--}}
+                                        {{--<label class="col-sm-4 text-right" for="input-id-1">状态</label>--}}
+                                        {{--<div class="col-sm-8">--}}
+                                        {{--<label class="label label-danger">未关联公众服务号</label>--}}
+                                        {{--</div>--}}
                                         {{--</div>--}}
                                         {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
                                         {{--<div class="form-group">--}}
-                                            {{--<label class="col-sm-4 text-right" for="input-id-1">公众号</label>--}}
-                                            {{--<div class="col-sm-8">--}}
-                                                {{--<label class="label label-danger">未关联</label>--}}
-                                            {{--</div>--}}
+                                        {{--<label class="col-sm-4 text-right" for="input-id-1">公众号</label>--}}
+                                        {{--<div class="col-sm-8">--}}
+                                        {{--<label class="label label-danger">未关联</label>--}}
+                                        {{--</div>--}}
                                         {{--</div>--}}
                                         {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
                                     </div>
@@ -164,70 +164,26 @@
                                             <thead>
                                             <tr>
                                                 <th>店铺名称</th>
-                                                <th>店铺类型</th>
                                                 <th>今日成交</th>
                                                 <th>今日营收</th>
                                                 <th>历史成交</th>
                                                 <th>历史营收</th>
+                                                <th>总营收</th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>刘记鸡煲王【龙岗店】</td>
-                                                <td><label class="label label-primary">总店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>刘记鸡煲王【中心城店】</td>
-                                                <td><label class="label label-warning">分店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>刘记鸡煲王【中心城店】</td>
-                                                <td><label class="label label-warning">分店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>刘记鸡煲王【中心城店】</td>
-                                                <td><label class="label label-warning">分店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>刘记鸡煲王【中心城店】</td>
-                                                <td><label class="label label-warning">分店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>刘记鸡煲王【中心城店】</td>
-                                                <td><label class="label label-warning">分店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
-                                            <tr>
-                                                <td>刘记鸡煲王【中心城店】</td>
-                                                <td><label class="label label-warning">分店</label></td>
-                                                <td>111笔</td>
-                                                <td>&yen;10000.3</td>
-                                                <td>888笔</td>
-                                                <td>&yen;88888.33</td>
-                                            </tr>
+                                            @if(!empty($revenue_info))
+                                                @foreach($revenue_info as $val)
+                                                    <tr>
+                                                        <td>{{$val["organization_name"]}}</td>
+                                                        <td>{{$val["today_order_num"]}}笔</td>
+                                                        <td>&yen;{{$val["today_order_money"]}}</td>
+                                                        <td>{{$val["before_order_num"]}}笔</td>
+                                                        <td>&yen;{{$val["before_order_money"]}}</td>
+                                                        <td>&yen;{{$val["all_order_money"]}}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                             </tbody>
                                         </table>
                                     </section>
