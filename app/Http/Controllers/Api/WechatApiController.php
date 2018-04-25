@@ -38,7 +38,7 @@ class WechatApiController extends Controller
         foreach($data as $key=>$value){
 
             $ss = $this->GetDistance('22.724083','114.260654',$value['organization_simpleinfo']['lat'],$value['organization_simpleinfo']['lng']);
-            echo $ss.'////////';exit;
+            echo $ss.'////////';
         }
 
 //        // 数据返回
