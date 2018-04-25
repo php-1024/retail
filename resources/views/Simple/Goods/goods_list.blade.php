@@ -81,7 +81,9 @@
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->name}}</td>
                                         <td>
+                                            @if(!empty($val->GoodsThumb->thumb))
                                             {{ $val->GoodsThumb->thumb }}
+                                            @endif
                                         </td>
                                         <td>
                                             {{$val->price}}
