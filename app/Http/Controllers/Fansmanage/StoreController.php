@@ -15,13 +15,11 @@ use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAssets;
-use App\Models\OrganizationFansmanageinfo;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Mockery\Exception;
 use Session;
 
 class StoreController extends Controller
@@ -43,8 +41,8 @@ class StoreController extends Controller
         $route_name = $request->path();
         // 需要渲染模式里面的数据
         $res = Organization::getProgramAsset(["organization_id" => $admin_data["organization_id"]]);
-        $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]], 'program_id')->first();
-        $program = Program::getOne(['id' => $program_id]);//获取当前粉丝管理系统能使用的资产程序
+        $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]],'program_id')->first();
+        $program = Program::getOne(['id'=>$program_id]);//获取当前粉丝管理系统能使用的资产程序
         // 渲染页面
         return view('Fansmanage/Store/store_create', ["program_info" => $program, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
@@ -120,7 +118,6 @@ class StoreController extends Controller
 //        } elseif ($program_id == 12) {
 //            $key = config("app.simple_encrypt_key");
 //        }
-        dd($oneOrganization);
         if ($program_id == $oneOrganization["program_id"]) {
             $key = config("app.retail_encrypt_key");
         } else {
@@ -234,61 +231,6 @@ class StoreController extends Controller
         $list = Organization::getstore([['parent_id', $organization_id], ['type', 4]], '10', 'id');
         // 渲染页面
         return view('Fansmanage/Store/store_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
-    }
-
-    public function fansmanage_edit_check(Request $request)
-    {
-        // 中间件产生的管理员数据参数
-        $admin_data = $request->get('admin_data');
-        // 获取组织id
-        $organization_id = $request->input('organization_id');
-        // 店铺名称
-        $organization_name = $request->input('organization_name');
-        // 负责人
-        $simple_owner = $request->input('simple_owner');
-        // 手机号码
-        $mobile = $request->input('mobile');
-        // 获取上传上来的图片信息
-        $file = $request->file('simple_logo');
-
-        if (!empty($file)) {
-            // 判断图片的格式
-            if (!in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'gif', 'gpeg', 'png'])) {
-                // 不对就进行数据的返回
-                return response()->json(['status' => '0', 'data' => '错误的图片格式']);
-            }
-            // 检测图片是否有效
-            if ($file->isValid()) {
-                // 重命名
-                $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
-                // 文件路径
-                $path = '/uploads/simple_logo/' . $admin_data['organization_id'] . '/';
-                $base_path = base_path() . $path;
-                // 将图片进行保存
-                $file->move($base_path, $new_name);
-
-                // 文件名称
-                $file_path = $path . $new_name;
-                $param_organization_fansmanage_info["logo"] = $file_path;
-            }
-        }
-
-        DB::beginTransaction();
-        try {
-            // 商户信息
-            $param_organization["organization_name"] = $organization_name;
-            Organization::insertData($param_organization, "update_create", ["id" => $organization_id]);
-            // 商户负责人信息
-            $param_organization_fansmanage_info["fansmanage_owner"] = $simple_owner;
-            $param_organization_fansmanage_info["fansmanage_owner_mobile"] = $mobile;
-            // 保存商户信息
-            OrganizationFansmanageinfo::insertData($param_organization_fansmanage_info, "update_create", ["fansmanage_id" => $organization_id]);
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollBack();
-            return response()->json(['data' => '修改失败，请检查', 'status' => '0']);
-        }
-        return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
 }
