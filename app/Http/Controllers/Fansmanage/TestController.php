@@ -24,6 +24,12 @@ class TestController extends Controller
 {
     public function test()
     {
+        $key = config("app.retail_encrypt_key");
+        // 密码加密
+        $password = 'admin';
+        $encrypted = md5($password);//加密密码第一重
+        $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+        dd($encryptPwd);
         $param_user_origin["user_id"] = 2;
         $param_user_origin["fansmanager_id"] = 3;
         $param_user_origin["store_id"] = 2;
