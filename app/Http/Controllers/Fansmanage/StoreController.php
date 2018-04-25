@@ -250,34 +250,33 @@ class StoreController extends Controller
         // 获取上传上来的图片信息
         $file = $request->file('simple_logo');
 
-        dump(request()->all());
-
-        dump($file);
-        exit;
-        // 判断图片的格式
-        if (!in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'gif', 'gpeg', 'png'])) {
-            // 不对就进行数据的返回
-            return response()->json(['status' => '0', 'data' => '错误的图片格式']);
+        if(!empty($file)) {
+            // 判断图片的格式
+            if (!in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'gif', 'gpeg', 'png'])) {
+                // 不对就进行数据的返回
+                return response()->json(['status' => '0', 'data' => '错误的图片格式']);
+            }
+            // 检测图片是否有效
+            if ($file->isValid()) {
+                // 重命名
+                $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
+                // 文件路径
+                $path = base_path() . '/uploads/simple_logo/' . $admin_data['organization_id'] . '/';
+                // 将图片进行保存
+                $file->move($path, $new_name);
+                // 文件名称
+                $file_path = $path . $new_name;
+                $data["logo"] = $file_path;
+            }
         }
 
-        // 检测图片是否有效
-        if ($file->isValid()) {
-            // 重命名
-            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
-            // 文件路径
-            $path = base_path() . '/uploads/simple_logo/' . $admin_data['organization_id'] . '/';
-            // 将图片进行保存
-            $file->move($path, $new_name);
-            // 文件名称
-            $file_path = $path . $new_name;
-        }
 
         DB::beginTransaction();
         try {
             $data["organization_name"] = $organization_name;
             $data["simple_owner"] = $simple_owner;
             $data["mobile"] = $mobile;
-            $data["logo"] = $file_path;
+
             // 保存商户信息
             OrganizationFansmanageinfo::insertData($data, "update_create", ["fansmanage_id" => $organization_id]);
             \DB::commit();
