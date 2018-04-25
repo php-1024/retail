@@ -399,12 +399,9 @@ class Organization extends Model
 
             if (!empty($res_shop)) {
                 $res_shop = $res_shop->toArray();
-
-                $res_shop["shop_num"] = 0;
+                $res_shop["shop_num"] = count($res_shop);
                 $res_shop["order_money"] = 0;
                 $res_shop["fans_num"] = 0;
-
-                $res_shop["shop_num"] = count($res_shop);
 
                 foreach ($res_shop as $val) {
                     $res_shop["fans_num"] += FansmanageUser::where(["id" => $val["id"]])->count("id");
