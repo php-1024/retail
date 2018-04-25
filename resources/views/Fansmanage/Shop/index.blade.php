@@ -362,7 +362,6 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="_token" value="{{csrf_token()}}">
     </form>
 </div>
 {{--编辑店铺信息--}}
@@ -391,11 +390,11 @@
 
     //编辑店铺信息
     function EditStore() {
-        // var formData = new FormData($( "#store_edit" )[0]);
+        var formData = new FormData($( "#store_edit" )[0]);
 
-        var target = $("#store_edit");
-        var data = target.serialize();
-        console.log(data);
+        // var target = $("#store_edit");
+        // var data = target.serialize();
+        console.log(formData);
         {{--$.ajax({--}}
         {{--url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',--}}
         {{--type: 'post',--}}
