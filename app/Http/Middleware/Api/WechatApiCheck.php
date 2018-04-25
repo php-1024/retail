@@ -17,12 +17,14 @@ class WechatApiCheck
         // 获取当前的页面路由
         $route_name = $request->path();
         switch ($route_name) {
-            /*****登录*****/
             case "api/wechatApi/store_list"://检测店铺列表提交数据
                 $re = $this->checkTokenAndStoreList($request);
                 return self::format_response($re, $next);
                 break;
-            /****登录****/
+            case "api/wechatApi/category"://检测店铺分类提交数据
+                $re = $this->checkTokenAndCategory($request);
+                return self::format_response($re, $next);
+                break;
         }
         return $next($request);
     }
@@ -48,6 +50,23 @@ class WechatApiCheck
         }
     }
 
+    /**
+     * 检测token值 And 店铺分类列表提交数据
+     */
+    public function checkTokenAndCategory($request)
+    {
+        $re = $this->checkToken($request);//判断Token值是否正确
+        if ($re['status'] == '0') {
+            return $re;
+        } else {
+            $re2 = $this->checkCategory($re['response']);//检测数据提交
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
+        }
+    }
 
 
     /******************************单项检测*********************************/
@@ -71,6 +90,19 @@ class WechatApiCheck
     }
 
 
+    /**
+     * 店铺分类列表数据提交检测
+     */
+    public function checkCategory($request)
+    {
+        if (empty($request->input('fansmanager_id'))) {
+            return self::res(0, response()->json(['msg' => '商户id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('retail_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
 
 
 
