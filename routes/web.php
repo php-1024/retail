@@ -944,7 +944,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidApiCheck');//查询店铺设置
     });
 
-    //android-app接口
+    //android-app简版接口
     Route::group(['prefix' => 'androidSimpleApi'], function () {
         Route::post('login', 'Api\AndroidSimpleApiController@login')->middleware('AndroidSimpleApiCheck');//登入接口
         Route::post('goodscategory', 'Api\AndroidSimpleApiController@goodscategory')->middleware('AndroidSimpleApiCheck');//商品分类接口
@@ -959,6 +959,12 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('change_stock_role', 'Api\AndroidSimpleApiController@change_stock_role')->middleware('AndroidSimpleApiCheck');//下单减库存/付款减库存接口
         Route::post('stock_cfg', 'Api\AndroidSimpleApiController@stock_cfg')->middleware('AndroidSimpleApiCheck');//查询店铺设置
     });
+
+    //wechat接口
+    Route::group(['prefix' => 'wechatApi'], function () {
+        Route::post('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//登入接口
+    });
+
 });
 /*********************接口路由*************************/
 
