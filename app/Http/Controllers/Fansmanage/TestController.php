@@ -14,6 +14,7 @@ use App\Models\FansmanageUser;
 use App\Models\Organization;
 use App\Models\Program;
 use App\Models\UserInfo;
+use App\Models\UserOrigin;
 use DB;
 use App\Models\Label;
 use App\Models\User;
@@ -23,13 +24,15 @@ class TestController extends Controller
 {
     public function test()
     {
-        dd(config("app.wechat_web_setting.appid"));
-        $res = Organization::select(["organization.id", "organization.program_id"])
-            ->where(["organization.id" => 5])
-            ->first()->toArray();
-        $res = Program::select(["id","program_name"])->where(["complete_id" => $res["program_id"], "is_asset" => 1])->orWhere(["id" => $res["program_id"]])->get();
-//        $res = Organization::getModelInfo();
-        dd($res->toArray());
+        $param_user_origin["user_id"] = 2;
+        $param_user_origin["fansmanager_id"] = 3;
+        $param_user_origin["store_id"] = 2;
+        $param_user_origin["status"] = "1";
+        $param_user_origin["invalid_time"] = 0;
+
+        // 保存源头数据
+        UserOrigin::insertData($param_user_origin, "update_create", ["fansmanager_id" => 3,"store_id" =>2,"user_id" => 2]);
+
 
 //
 //        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
