@@ -339,7 +339,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">店铺LOGO</label>
+                        <label class="col-sm-2 text-right">商户LOGO</label>
                         <div class="col-sm-10">
                             <input type="file" name="simple_logo" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
