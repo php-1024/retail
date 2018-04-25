@@ -68,7 +68,7 @@ class WechatApiController extends Controller
         // 店铺id
         $retail_id = $request->retail_id;
         // 分类列表
-        $category = SimpleCategory::getList([['fansmannage_id', $fansmannage_id], ['simple', $retail_id]], 0, 'id');
+        $category = SimpleCategory::getList([['fansmannage_id', $fansmannage_id], ['simple_id', $retail_id]], 0, 'id');
 
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['categorylist' => $category]];
