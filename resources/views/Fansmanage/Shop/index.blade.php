@@ -125,7 +125,7 @@
                                             <i class="fa fa-money"></i>
                                         </div>
                                         <div class="value">
-                                            <h1>@if(!empty($shop_simple_info["order_money"]))@else 0 @endif</h1>
+                                            <h1>@if(!empty($shop_simple_info["order_money"])) {{$shop_simple_info["order_money"]}} @else 0 @endif</h1>
                                             <p>元 总营收</p>
                                         </div>
                                     </section>
@@ -136,7 +136,7 @@
                                             <i class="icon icon-user"></i>
                                         </div>
                                         <div class="value">
-                                            <h1>@if(!empty($shop_simple_info["fans_num"]))@else 0 @endif</h1>
+                                            <h1>@if(!empty($shop_simple_info["fans_num"])) {{$shop_simple_info["fans_num"]}} @else 0 @endif</h1>
                                             <p>个粉丝</p>
                                         </div>
                                     </section>
@@ -147,7 +147,7 @@
                                             <i class="fa fa-cutlery"></i>
                                         </div>
                                         <div class="value">
-                                            <h1>@if(!empty($shop_simple_info["shop_num"]))@else 0 @endif</h1>
+                                            <h1>@if(!empty($shop_simple_info["shop_num"])) {{$shop_simple_info["shop_num"]}} @else 0 @endif</h1>
                                             <p>间店铺</p>
                                         </div>
                                     </section>
