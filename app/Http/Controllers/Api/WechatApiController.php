@@ -63,9 +63,7 @@ class WechatApiController extends Controller
         $s = 2 * asin(sqrt(pow(sin($a / 2), 2) + cos($radLat1) * cos($radLat2) * pow(sin($b / 2), 2)));
         $s = $s * 6378.137;
         $s = round($s * 1000);
-        if ($len_type -- > 1) {
-            $s /= 1000;
-        }
+
         return round($s, $decimal);
     }
 
