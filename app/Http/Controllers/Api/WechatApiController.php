@@ -21,6 +21,10 @@ class WechatApiController extends Controller
     {
         // 商户id
         $fansmannage_id = $request->organization_id;
+        // 纬度
+        $lat = $request->lat;
+        // 经度
+        $lng = $request->lng;
         // 查询条件
         $where[] = ['parent_id', $fansmannage_id];
         // 前端页面搜索
@@ -37,11 +41,11 @@ class WechatApiController extends Controller
         }
         foreach ($data as $key => $value) {
             // 计算距离
-            $data[$key]['distance'] = $this->GetDistance('22.724083', '114.260654', $value['lat'], $value['lng']);
+            $data[$key]['distance'] = $this->GetDistance($lat, $lng, $value['lat'], $value['lng']);
         }
         // 冒泡距离排序
         $data = $this->order($data);
-        foreach($data as $k=>$v){
+        foreach ($data as $k => $v) {
             unset($data[$k]['lat']);
             unset($data[$k]['lng']);
         }
