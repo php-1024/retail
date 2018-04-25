@@ -31,16 +31,17 @@ class WechatApiController extends Controller
         }
         // 查询店铺信息
         $data = Organization::getListSimple($where)->toArray();
+        print_r($data);exit;
         // 是否存在店铺
         if (empty($data)) {
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
         foreach ($data as $key => $value) {
+            // 计算距离
             $data[$key]['distance'] = $this->GetDistance('22.724083', '114.260654', $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
         }
-
+        // 冒泡距离排序
         $data = $this->order($data);
-        print_r($data);
 //        // 数据返回
 //        $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id']]];
 
