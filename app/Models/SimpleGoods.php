@@ -53,7 +53,7 @@ class SimpleGoods extends Model{
     //查询数据是否唯一
     public static function checkRowOne($where){
         $row = self::where($where)->get()->count();
-        if($row == 1){//false证明唯一
+        if($row == '1'){//false证明唯一
             return false;
         }else{//true证明不唯一
             return true;
