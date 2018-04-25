@@ -82,7 +82,7 @@
                                         <td>{{$val->name}}</td>
                                         <td>
                                             @if(!empty($val->GoodsThumb->thumb))
-                                            {{asset($val->GoodsThumb->thumb)}}
+                                            <img src="{{asset($val->GoodsThumb->thumb)}}" />
                                             @endif
                                         </td>
                                         <td>
