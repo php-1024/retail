@@ -250,7 +250,7 @@ class StoreController extends Controller
         // 获取上传上来的图片信息
         $file = $request->file('simple_logo');
 
-        if(!empty($file)) {
+        if (!empty($file)) {
             // 判断图片的格式
             if (!in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'gif', 'gpeg', 'png'])) {
                 // 不对就进行数据的返回
@@ -266,22 +266,23 @@ class StoreController extends Controller
                 $file->move($path, $new_name);
                 // 文件名称
                 $file_path = $path . $new_name;
-                $data["logo"] = $file_path;
+                $param_organization_fansmanage_info["logo"] = $file_path;
             }
         }
 
-
         DB::beginTransaction();
         try {
-            $data["organization_name"] = $organization_name;
-            $data["simple_owner"] = $simple_owner;
-            $data["mobile"] = $mobile;
-
+            // 商户信息
+            $param_organization["organization_name"] = $organization_name;
+            Organization::insertData($param_organization, "update_create", ["id" => $organization_id]);
+            // 商户负责人信息
+            $param_organization_fansmanage_info["fansmanage_owner"] = $simple_owner;
+            $param_organization_fansmanage_info["fansmanage_owner_mobile"] = $mobile;
             // 保存商户信息
-            OrganizationFansmanageinfo::insertData($data, "update_create", ["fansmanage_id" => $organization_id]);
-            \DB::commit();
+            OrganizationFansmanageinfo::insertData($param_organization_fansmanage_info, "update_create", ["fansmanage_id" => $organization_id]);
+            DB::commit();
         } catch (Exception $e) {
-            \DB::rollBack();
+            DB::rollBack();
             return response()->json(['data' => '添加失败', 'status' => '0']);
         }
         return response()->json(['data' => '添加成功', 'status' => '1']);
