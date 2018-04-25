@@ -279,7 +279,7 @@ class StoreController extends Controller
             // 保存商户信息
             OrganizationFansmanageinfo::insertData($param_organization_fansmanage_info, "update_create", ["fansmanage_id" => $organization_id]);
             DB::commit();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['data' => '修改失败，请检查', 'status' => '0']);
         }

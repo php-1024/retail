@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
+use App\Models\SimpleCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -55,6 +56,25 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    //organization_id=2&lat=22.724083&lng=114.260654
+
+    /**
+     * 分类接口列表
+     */
+    public function category(Request $request)
+    {
+        // 商户id
+        $fansmanage_id = $request->fansmanager_id;
+        // 店铺id
+        $retail_id = $request->retail_id;
+        // 分类列表
+        $category = SimpleCategory::getList([['fansmanage_id', $fansmanage_id], ['simple_id', $retail_id]], 0, 'id', 'DESC', ['id', 'name', 'displayorder']);
+
+        // 数据返回
+        $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['categorylist' => $category]];
+
+        return response()->json($data);
+    }
 
     /**
      *  计算两组经纬度坐标 之间的距离

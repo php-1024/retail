@@ -49,7 +49,8 @@ class VerifyCsrfToken extends Middleware
         /****Android接口****/
 
         /****wechat接口****/
-        'api/wechatApi/store_list',//店铺接口
+        'api/wechatApi/store_list',//店铺列表接口
+        'api/wechatApi/category',//店铺分类列表接口
         /****wechat接口****/
 
     ];
