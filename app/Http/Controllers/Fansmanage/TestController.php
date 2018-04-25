@@ -117,7 +117,7 @@ class TestController extends Controller
 
     public function test2()
     {
-        $res = Organization::getRevenueInfo(2);
+        $res = Organization::getShopSimpleInfo(2);
         dd($res);
     }
 }
