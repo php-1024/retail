@@ -138,7 +138,6 @@ class ShopController extends Controller
             ZeroneRedis::create_fansmanage_menu_cache(1);
             // 返回提示
             return response()->json(['data' => '操作成功', 'status' => '1']);
-
         } else {
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
