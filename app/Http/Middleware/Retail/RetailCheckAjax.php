@@ -46,6 +46,8 @@ class RetailCheckAjax
             case "retail/ajax/check_list_confirm":      //盘点订单审核弹窗
             case "retail/ajax/order_list_details":      //订单详细信息列表
             case "retail/ajax/goods_thumb_delete":      //删除图片弹窗确认
+            case "retail/ajax/thumb_edit_displayorder": //修改图片排序
+
             case "retail/ajax/dispatch_province_add_check"://运费模板省份添加
             case "retail/ajax/dispatch_province_edit_check"://运费模板信息编辑
             case "retail/ajax/dispatch_province_delete_check"://运费模板信息删除
