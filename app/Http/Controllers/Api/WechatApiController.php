@@ -31,6 +31,7 @@ class WechatApiController extends Controller
         }
         // 查询店铺信息
         $data = Organization::getListSimple($where)->toArray();
+        print_r($data);exit;
         // 是否存在店铺
         if (empty($data)) {
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
