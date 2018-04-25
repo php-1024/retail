@@ -118,6 +118,7 @@ class GoodsController extends Controller
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
+
         $where = ['id' => $goods_id];
         //商品数据
         $goods_data = ['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name, 'price' => $price, 'barcode' => $barcode, 'displayorder' => $displayorder, 'details' => $details];
