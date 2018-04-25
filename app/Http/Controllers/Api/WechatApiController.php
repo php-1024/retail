@@ -64,7 +64,7 @@ class WechatApiController extends Controller
     public function category(Request $request)
     {
         // 商户id
-        $fansmanage_id = $request->fansmanager_id;
+        $fansmanage_id = Session::get('fansmanage_id');
         // 店铺id
         $retail_id = $request->retail_id;
         // 分类列表
