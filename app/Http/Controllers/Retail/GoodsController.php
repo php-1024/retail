@@ -141,6 +141,32 @@ class GoodsController extends Controller
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
 
+
+    //修改图片排序
+    public function thumb_edit_displayorder(Request $request)
+    {
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $thumb_id = $request->get('id');
+        $displayorder = $request->get('displayorder');
+        DB::beginTransaction();
+        try {
+            RetailGoodsThumb::editGoodsThumb(['id'=>$thumb_id],['displayorder'=>$displayorder]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在零售店铺管理系统修改了商品图片排序！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('10', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品图片排序！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改图片排序失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改排序成功', 'status' => '1']);
+
+    }
+
     //删除商品图片弹窗
     public function goods_thumb_delete(Request $request)
     {
