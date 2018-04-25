@@ -46,7 +46,9 @@
                                         <div class="inline">
                                             <div class="thumb-lg" >
                                                 @if(!empty($organization->OrganizationSimpleinfo->simple_logo))
-                                                <img src="{{asset('/'.$organization->OrganizationSimpleinfo->simple_logo)}}" class="img-circle" alt="店铺logo">
+                                                    <img src="{{asset('/'.$organization->OrganizationSimpleinfo->simple_logo)}}" class="img-circle" alt="店铺logo">
+                                                @else
+                                                    <img src="{{asset('public/Fansmanage')}}/img/shop_logo.png" class="img-circle" alt="...">
                                                 @endif
                                             </div>
                                         </div>
