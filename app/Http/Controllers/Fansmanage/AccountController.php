@@ -315,6 +315,7 @@ class AccountController extends Controller
      * 修改登入密码功能提交
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function password_check(Request $request)
     {

@@ -137,8 +137,7 @@ class WechatApi
      * 查询自定义菜单
      * $authorizer_access_token 第三方平台调用接口凭证
      */
-    public
-    function search_menu($authorizer_access_token)
+    public function search_menu($authorizer_access_token)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/get?access_token=' . $authorizer_access_token;
         $re = \HttpCurl::doGet($url);
@@ -149,8 +148,7 @@ class WechatApi
      * 删除自定义菜单
      * $authorizer_access_token 第三方平台调用接口凭证
      */
-    public
-    function delete_menu($authorizer_access_token)
+    public function delete_menu($authorizer_access_token)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/delete?access_token=' . $authorizer_access_token;
         $re = \HttpCurl::doGet($url);
@@ -162,8 +160,7 @@ class WechatApi
      * $authorizer_access_token 第三方平台调用接口凭证
      * $menu_data 创建的菜单数据
      */
-    public
-    function create_conditional_menu($authorizer_access_token, $menu_data)
+    public function create_conditional_menu($authorizer_access_token, $menu_data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/menu/addconditional?access_token=' . $authorizer_access_token;
         $data = json_encode($menu_data, JSON_UNESCAPED_UNICODE);
@@ -176,8 +173,7 @@ class WechatApi
      * $authorizer_access_token 第三方平台调用接口凭证
      * $text 发送内容
      */
-    public
-    function send_fans_text($authorizer_access_token, $to_user, $text)
+    public function send_fans_text($authorizer_access_token, $to_user, $text)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token=' . $authorizer_access_token;
         $data = [
@@ -197,8 +193,7 @@ class WechatApi
      *  $authorizer_access_token 第三方平台调用接口凭证
      * $open_id 粉丝在该公众号下的open_id
      */
-    public
-    function get_fans_info($authorizer_access_token, $open_id)
+    public function get_fans_info($authorizer_access_token, $open_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $authorizer_access_token . '&openid=' . $open_id . '&lang=zh_CN ';
         $re = \HttpCurl::doGet($url);
@@ -210,8 +205,7 @@ class WechatApi
      * 获取粉丝列表
      *  $authorizer_access_token 第三方平台调用接口凭证
      */
-    public
-    function get_fans_list($authorizer_access_token, $next_openid = '')
+    public function get_fans_list($authorizer_access_token, $next_openid = '')
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/get?access_token=' . $authorizer_access_token . '&next_openid=' . $next_openid;
         $re = \HttpCurl::doGet($url);
@@ -223,8 +217,7 @@ class WechatApi
      * 创建粉丝标签
      * organization_id 绑定授权组织的ID
      */
-    public
-    function create_fans_tag($authorizer_access_token, $tag_name)
+    public function create_fans_tag($authorizer_access_token, $tag_name)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/create?access_token=' . $authorizer_access_token;
         $data = [
@@ -241,8 +234,7 @@ class WechatApi
      * 修改粉丝标签
      * organization_id 绑定授权组织的ID
      */
-    public
-    function create_fans_tag_edit($authorizer_access_token, $tag_name, $id)
+    public function create_fans_tag_edit($authorizer_access_token, $tag_name, $id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/update?access_token=' . $authorizer_access_token;
         $data = [
@@ -260,8 +252,7 @@ class WechatApi
      * 删除粉丝标签
      * organization_id 绑定授权组织的ID
      */
-    public
-    function create_fans_tag_delete($authorizer_access_token, $id)
+    public function create_fans_tag_delete($authorizer_access_token, $id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/delete?access_token=' . $authorizer_access_token;
         $data = [
@@ -278,8 +269,7 @@ class WechatApi
      * 获取公众号已创建的标签
      * organization_id 绑定授权组织的ID
      */
-    public
-    function create_fans_tag_list($authorizer_access_token)
+    public function create_fans_tag_list($authorizer_access_token)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/get?access_token=' . $authorizer_access_token;
         $re = \HttpCurl::doGet($url);
@@ -290,8 +280,7 @@ class WechatApi
      * 批量为用户打标签
      * organization_id 绑定授权组织的ID
      */
-    public
-    function add_fans_tag_label($authorizer_access_token, $data)
+    public function add_fans_tag_label($authorizer_access_token, $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/tags/members/batchtagging?access_token=' . $authorizer_access_token;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -303,8 +292,7 @@ class WechatApi
      * 获取授权方基本信息
      * 授权方APPID
      */
-    public
-    function get_authorizer_info($authorizer_appid)
+    public function get_authorizer_info($authorizer_appid)
     {
         $wxparam = config('app.wechat_open_setting');
         $component_access_token = $this->get_component_access_token();
@@ -319,17 +307,20 @@ class WechatApi
         return $re;
     }
 
-    /*
-     * 刷新授权调用令牌凭证
-     * $organization_id 绑定的组织ID
+    /**
+     * 刷新授权方的调用令牌凭证
+     * @param $organization_id
+     * @return array|bool
      */
-    public
-    function refresh_authorization_info($organization_id)
+    public function refresh_authorization_info($organization_id)
     {
+        // 获取数据库中的授权信息
         $info = WechatAuthorization::getOne([['organization_id', $organization_id]]);
+        // 不存在信息就返回未授权
         if (empty($info) || empty($info->authorizer_access_token)) {
             exit('您尚未授权，请先前往进行授权操作');
         }
+        // 如果更新的信息在 10分钟 之内，就直接返回
         if ($info->expire_time - time() > 600) {//仍未过期直接返回值
             return array(
                 'authorizer_appid' => $info->authorizer_appid,
@@ -337,17 +328,24 @@ class WechatApi
                 'authorizer_refresh_token' => $info->authorizer_refresh_token,
             );
         }
+
+        // 获取第三方公众号平台的信息
         $wxparam = config('app.wechat_open_setting');
+        // 获取第三方平台的 component_access_token
         $component_access_token = $this->get_component_access_token();
+        // 获取（刷新）授权公众号或小程序的接口调用凭据
         $url = 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=' . $component_access_token;
+        // 授权方的信息
         $data = array(
             'component_appid' => $wxparam['open_appid'],
             'authorizer_appid' => $info->authorizer_appid,
             'authorizer_refresh_token' => $info->authorizer_refresh_token,
         );
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        // 获取数据
         $origin_re = \HttpCurl::doPost($url, $data);
         $re = json_decode($origin_re, true);
+        // 获取到 授权方的 access_token
         if (!empty($re['authorizer_access_token'])) {
             $authorizer_access_token = $re['authorizer_access_token'];
             $authorizer_refresh_token = $re['authorizer_refresh_token'];
@@ -357,13 +355,16 @@ class WechatApi
                 'origin_data' => $origin_re,
                 'expire_time' => time() + 7200,
             );
+            // 修改授权信息
             WechatAuthorization::editAuthorization([['id', $info->id]], $auth_data);
+            // 返回授权信息
             return array(
                 'authorizer_appid' => $info->authorizer_appid,
                 'authorizer_access_token' => $authorizer_access_token,
                 'authorizer_refresh_token' => $authorizer_refresh_token,
             );
         } else {
+            // 不存在则返回false
             return false;
         }
     }
@@ -420,8 +421,7 @@ class WechatApi
     /*
     *获取开放平台的预授权码
     */
-    public
-    function get_pre_auth_code()
+    public function get_pre_auth_code()
     {
         $wxparam = config('app.wechat_open_setting');
         $component_access_token = $this->get_component_access_token();
@@ -440,47 +440,54 @@ class WechatApi
         }
     }
 
-    /*
-     *获取开放平台的接口调用凭据
+
+    /**
+     * 获取第三方开放平台的接口调用凭据
+     * @return mixed
      */
     public function get_component_access_token()
     {
         $token_info = WechatOpenSetting::getComponentAccessToken();
-        if (!empty($token_info->param_value) && $token_info->expire_time - time() > 300) {//过时前5分钟也需要重置了
+        // 过时前5分钟也需要重置了
+        if (!empty($token_info->param_value) && $token_info->expire_time - time() > 300) {
             return $token_info->param_value;
         }
+        // 获取第三方的授权信息
         $wxparam = config('app.wechat_open_setting');
+        // 获取第三方每10分钟推送过来的信息
         $ticket_info = WechatOpenSetting::getComponentVerifyTicket();
 
         if (empty($ticket_info->param_value)) {
             exit('获取微信开放平台ComponentVerifyTicket失败');
         } else {
-
+            // 获取第三方的 component_token
             $url = 'https://api.weixin.qq.com/cgi-bin/component/api_component_token';
             $data = array(
                 'component_appid' => $wxparam['open_appid'],
                 'component_appsecret' => $wxparam['open_appsecret'],
                 'component_verify_ticket' => $ticket_info->param_value
             );
-
             $data = json_encode($data, JSON_UNESCAPED_UNICODE);
             $re = \HttpCurl::doPost($url, $data);
             $re = json_decode($re, true);
-
+            // 如果获取成功就进行更新
             if (!empty($re['component_access_token'])) {
                 WechatOpenSetting::editComponentAccessToken($re['component_access_token'], time() + 7200);
                 return $re['component_access_token'];
             } else {
+                // 没有获取到就返回失败
                 exit('获取微信开放平台ComponentAccessToken失败');
             }
         }
     }
 
-    /* 出于安全考虑，在第三方平台创建审核通过后，微信服务器 每隔10分钟会向第三方的消息接收地址推送一次component_verify_ticket，用于获取第三方平台接口调用凭据
-     *  获取该参数
-    */
-    public
-    function getVerify_Ticket($timeStamp, $nonce, $encrypt_type, $msg_sign, $encryptMsg)
+    /**
+     * 出于安全考虑，在第三方平台创建审核通过后，
+     * 微信服务器 每隔10分钟会向第三方的消息接收地址推送一次component_verify_ticket，
+     * 用于获取第三方平台接口调用凭据
+     * 获取该参数
+     */
+    public function getVerify_Ticket($timeStamp, $nonce, $encrypt_type, $msg_sign, $encryptMsg)
     {
         $wxparam = config('app.wechat_open_setting');
         $jm = new WXBizMsgCrypt($wxparam['open_token'], $wxparam['open_key'], $wxparam['open_appid']);
@@ -520,8 +527,7 @@ class WechatApi
      * 获取生成临时二维码的Ticket
      * $authorizer_access_token 接口调用凭证
      */
-    public
-    function createLsQrcode($authorizer_access_token, $expire_seconds, $sence_str)
+    public function createLsQrcode($authorizer_access_token, $expire_seconds, $sence_str)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' . $authorizer_access_token;
         $data = [
@@ -547,8 +553,7 @@ class WechatApi
     /*
      * 获取生成永久二维码的Ticket
      */
-    public
-    function createQrcode($authorizer_access_token, $sence_str)
+    public function createQrcode($authorizer_access_token, $sence_str)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/qrcode/create?access_token=' . $authorizer_access_token;
         $data = [
@@ -573,8 +578,7 @@ class WechatApi
     /*
      * 上传永久图片素材
      */
-    public
-    function uploadimg($authorizer_access_token, $file)
+    public function uploadimg($authorizer_access_token, $file)
     {
         //$url = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=".$authorizer_access_token."&type=image";//临时素材链接
         $url = "https://api.weixin.qq.com/cgi-bin/material/add_material?access_token=" . $authorizer_access_token . "&type=image";//永久素材链接
@@ -595,8 +599,7 @@ class WechatApi
     /*
      * 永久删除素材
      */
-    public
-    function delete_meterial($authorizer_access_token, $media_id)
+    public function delete_meterial($authorizer_access_token, $media_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/del_material?access_token=' . $authorizer_access_token;
         $data = [
@@ -611,8 +614,7 @@ class WechatApi
     /*
      * 修改永久素材
      */
-    public
-    function update_meterial($authorizer_access_token, $media_id, $index, $content_data)
+    public function update_meterial($authorizer_access_token, $media_id, $index, $content_data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/update_news?access_token=' . $authorizer_access_token;
         $data = $content_data;
@@ -627,8 +629,7 @@ class WechatApi
     /*
      * 添加图文素材
      */
-    public
-    function upload_article($authorizer_access_token, $data)
+    public function upload_article($authorizer_access_token, $data)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=' . $authorizer_access_token;
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -640,8 +641,7 @@ class WechatApi
     /*
      * 获取图文信息
      */
-    public
-    function get_article_info($authorizer_access_token, $media_id)
+    public function get_article_info($authorizer_access_token, $media_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/material/get_material?access_token=' . $authorizer_access_token;
         $data['media_id'] = $media_id;
@@ -660,8 +660,7 @@ class WechatApi
      * 返回加密解密类
      * @return WXBizMsgCrypt
      */
-    public
-    function WXBizMsgCrypt()
+    public function WXBizMsgCrypt()
     {
         $wxparam = config('app.wechat_open_setting');
         $jm = new WXBizMsgCrypt($wxparam['open_token'], $wxparam['open_key'], $wxparam['open_appid']);
@@ -673,8 +672,7 @@ class WechatApi
      * @param $xmlstring
      * @return mixed
      */
-    public
-    function xml2array($xmlstring)
+    public function xml2array($xmlstring)
     {
         $object = simplexml_load_string($xmlstring, 'SimpleXMLElement', LIBXML_NOCDATA | LIBXML_NOBLANKS);
         return @json_decode(@json_encode($object), 1);

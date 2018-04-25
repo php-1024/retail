@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FansmanageUser;
 use App\Models\User;
 use App\Models\UserInfo;
+use App\Models\UserOrigin;
 use App\Models\WechatAuthorization;
 use App\Models\XhoLog;
 use App\Services\Curl\HttpCurl;
@@ -300,9 +301,6 @@ class SftController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-
-//            $url = session("zerone_auth_info.initial_url_address");
-//            return redirect($url);
             return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
@@ -318,10 +316,9 @@ class SftController extends Controller
         } else {
             $this->setAuthorizeShopInfo($appid, $code);
             return redirect("http://develop.01nnt.com/pay/sft/test14");
-//            $url = session("zerone_auth_info.initial_url_address");
-//            return redirect($url);
         }
     }
+
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
         // 静默授权：通过授权使用的code,获取到用户openid
@@ -334,7 +331,6 @@ class SftController extends Controller
             $this->getAuthorizeZeroneInfo(request()->url());
             return;
         }
-
 
         DB::beginTransaction();
         try {
@@ -377,7 +373,6 @@ class SftController extends Controller
     }
 
 
-
     public function test14()
     {
         $url = session("zerone_auth_info.initial_url_address");
@@ -392,7 +387,6 @@ class SftController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
-
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
@@ -401,38 +395,50 @@ class SftController extends Controller
             return;
         }
 
+        // 零壹用户id
+        $zerone_user_id = session("zerone_auth_info.zerone_user_id");
+        // 组织id
+        $organization_id = 2;
+
         DB::beginTransaction();
         try {
             // 店铺公众号的信息
             // 组织id
-            $param["fansmanage_id"] = $this->organization_id;
-//            $param["user_id"] = session("zerone_auth_info.zerone_user_id");
-            $param["user_id"] = 2;
+            $param["fansmanage_id"] = $organization_id;
+            $param["user_id"] = $zerone_user_id;
             $param["open_id"] = $openid;
             $param["status"] = 1;
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
+
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+
             // 用户id
-//            $param_user_info["user_id"] = session("zerone_auth_info.zerone_user_id");
-            $param_user_info["user_id"] = "2";
+            $param_user_info["user_id"] = $zerone_user_id;
             $param_user_info["nickname"] = $user_info["nickname"];
             $param_user_info["sex"] = $user_info["sex"];
             $param_user_info["city"] = $user_info["city"];
             $param_user_info["country"] = $user_info["country"];
             $param_user_info["province"] = $user_info["province"];
             $param_user_info["head_imgurl"] = $user_info["headimgurl"];
-            $param_user_info["remark"] = "111";
-            $param_user_info["qq"] = "111";
+            $param_user_info["remark"] = "";
+            $param_user_info["qq"] = "";
+            // 保存用户数据
+            UserInfo::insertData($param_user_info);
 
+            $param_user_origin["user_id"] = $zerone_user_id;
+            $param_user_origin["fansmanager_id"] = $organization_id;
+            $param_user_origin["store_id"] = 0;
+            $param_user_origin["status"] = "1";
+            $param_user_origin["invalid_time"] = 0;
+            // 保存源头数据
+            UserOrigin::insertData($param_user_origin, "update_create", ["fansmanager_id" => $organization_id, "user_id" => $zerone_user_id]);
 
-            // 保存用户数据$
-            $res = UserInfo::insertData($param_user_info);
             // 数据提交
             DB::commit();
             return true;

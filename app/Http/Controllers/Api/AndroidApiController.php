@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\AccountInfo;
 use App\Models\Organization;
 use App\Models\RetailCategory;
 use App\Models\RetailConfig;
