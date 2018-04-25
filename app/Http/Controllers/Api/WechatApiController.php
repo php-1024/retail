@@ -41,11 +41,14 @@ class WechatApiController extends Controller
         }
         // 冒泡距离排序
         $data = $this->order($data);
-        print_r($data);
-//        // 数据返回
-//        $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id']]];
+        foreach($data as $k=>$v){
+            unset($data[$k]['lat']);
+            unset($data[$k]['lng']);
+        }
+        // 数据返回
+        $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $data]];
 
-//        return response()->json($data);
+        return response()->json($data);
     }
 
 
