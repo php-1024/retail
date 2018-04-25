@@ -157,6 +157,7 @@ class FansmanageCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+            case "fansmanage/ajax/fansmanage_edit_check"://修改账户信息
             case "fansmanage/ajax/user_list_lock_check"://检测是否登录 权限 安全密码--冻结粉丝标签
                 $re = $this->checkLoginAndRuleAndSafe($request);
                 return self::format_response($re,$next);
@@ -206,7 +207,7 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
             case "fansmanage/ajax/wechat_menu_add"://一键同步到微信菜单
             case "fansmanage/ajax/store_label_add_check"://给粉丝添加标签
-            case "fansmanage/ajax/fansmanage_edit_check"://修改账户信息
+
 
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);
