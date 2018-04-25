@@ -80,12 +80,9 @@
                 });
             }else{
                 swal({
-                    title: "提示信息",
+                    title: "温馨提示",
                     text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    //window.location.reload();
+                    type: "success"
                 });
             }
 
