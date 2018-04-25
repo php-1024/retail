@@ -31,15 +31,14 @@ class WechatApiController extends Controller
         }
         // 查询店铺信息
         $data = Organization::getListSimple($where)->toArray();
-
         // 是否存在店铺
         if (empty($data)) {
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
-        foreach($data['organization_simpleinfo'] as $key=>$value){
-            print_r($value);
-//            $ss = $this->GetDistance('22.724083','114.260654',$value['lat'],$value['lng']);
-//            echo $ss;
+        foreach($data as $key=>$value){
+
+            $ss = $this->GetDistance('22.724083','114.260654',$value['organization_simpleinfo']['lat'],$value['organization_simpleinfo']['lng']);
+            echo $ss;
         }
 
 //        // 数据返回
