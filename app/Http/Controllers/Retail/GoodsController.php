@@ -111,10 +111,6 @@ class GoodsController extends Controller
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
-        $is_barcode = RetailGoods::checkRowExists(['barcode' => $barcode ]);
-        if ($is_barcode) {//判断商品条码是已经存在
-            return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
-        }
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
@@ -123,6 +119,11 @@ class GoodsController extends Controller
         $goods_data = ['fansmanage_id' => $fansmanage_id, 'retail_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name, 'price' => $price, 'barcode' => $barcode, 'displayorder' => $displayorder, 'details' => $details];
         DB::beginTransaction();
         try {
+            RetailGoods::editRetailGoods(['id' => $goods_id],['barcode'=>'']);//修改商品前现将商品条码设置为空,在检测还有没有重复的商品条码
+            $is_barcode = RetailGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
+            if ($is_barcode) {//判断商品条码是否唯一
+                return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
+            }
             RetailGoods::editRetailGoods($where, $goods_data);
 //            $stock_data = ['category_id' => $category_id, 'stock' => $stock,];
 //            RetailStock::editStock(['goods_id' => $goods_id], $stock_data); //修改商品库信息存到库存表
