@@ -28,16 +28,11 @@ class WechatApiController extends Controller
     /**
      * 登入检测
      */
-    public function login(Request $request)
+    public function store_list(Request $request)
     {
-        // 登入账号
-        $account = $request->account;
-        // 登入密码
-        $password = $request->password;
-        // 商户号
-        $sft_pos_num = $request->sft_pos_num;
-        // pos机终端号
-        $terminal_num = $request->terminal_num;
+        // 商户id
+        $fansmannage_id = $request->organization_id;
+
         // 根据账号进行查询
         $data = Account::where([['account', $account]])->orWhere([['mobile', $account]])->first();
         if (empty($data)) {

@@ -532,9 +532,6 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::post('default_reply_article_edit_check', 'Fansmanage\MessageController@default_reply_article_edit_check')->middleware('FansmanageCheckAjax');//默认回复图文素材能提交
 
 
-
-
-
         //公众号管理--菜单管理--自定义
         Route::any('defined_menu_get', 'Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::any('defined_menu_add', 'Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
@@ -557,9 +554,6 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
         Route::any('wechat_conditional_menu_add', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
         Route::any('wechat_conditional_menu_add_check', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
-
-
-
 
 
         //用户管理
@@ -945,7 +939,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('stock_cfg', 'Api\AndroidApiController@stock_cfg')->middleware('AndroidApiCheck');//查询店铺设置
     });
 
-    //android-app接口
+    //android-app简版接口
     Route::group(['prefix' => 'androidSimpleApi'], function () {
         Route::post('login', 'Api\AndroidSimpleApiController@login')->middleware('AndroidSimpleApiCheck');//登入接口
         Route::post('goodscategory', 'Api\AndroidSimpleApiController@goodscategory')->middleware('AndroidSimpleApiCheck');//商品分类接口
@@ -960,6 +954,12 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('change_stock_role', 'Api\AndroidSimpleApiController@change_stock_role')->middleware('AndroidSimpleApiCheck');//下单减库存/付款减库存接口
         Route::post('stock_cfg', 'Api\AndroidSimpleApiController@stock_cfg')->middleware('AndroidSimpleApiCheck');//查询店铺设置
     });
+
+    //wechat接口
+    Route::group(['prefix' => 'wechatApi'], function () {
+        Route::post('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//登入接口
+    });
+
 });
 /*********************接口路由*************************/
 
