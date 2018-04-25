@@ -899,6 +899,7 @@ Route::group(['prefix' => 'simple'], function () {
         Route::post('goods_status', 'Simple\GoodsController@goods_status')->middleware('SimpleCheckAjax');                         //商品状态修改弹窗
         Route::post('goods_delete_check', 'Simple\GoodsController@goods_delete_check')->middleware('SimpleCheckAjax');             //商品删除检测
         Route::post('goods_status_check', 'Simple\GoodsController@goods_status_check')->middleware('SimpleCheckAjax');             //商品状态修改检测
+        Route::post('thumb_edit_displayorder', 'Simple\GoodsController@thumb_edit_displayorder')->middleware('SimpleCheckAjax');              //商品图片删除弹窗
         Route::post('goods_thumb_delete', 'Simple\GoodsController@goods_thumb_delete')->middleware('SimpleCheckAjax');              //商品图片删除弹窗
         Route::post('goods_thumb_delete_check', 'Simple\GoodsController@goods_thumb_delete_check')->middleware('SimpleCheckAjax');  //商品图片删除检测
         Route::post('goods_edit_check', 'Simple\GoodsController@goods_edit_check')->middleware('SimpleCheckAjax');                 //商品编辑检测

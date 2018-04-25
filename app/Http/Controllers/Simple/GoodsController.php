@@ -140,6 +140,12 @@ class GoodsController extends Controller
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
     }
 
+    //修改图片排序
+    public function thumb_edit_displayorder(Request $request)
+    {
+        dd($request);
+    }
+
     //删除商品图片弹窗
     public function goods_thumb_delete(Request $request)
     {
