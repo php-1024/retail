@@ -55,16 +55,6 @@ class SimpleGoods extends Model{
         }
     }
 
-    //查询数据是否唯一
-    public static function checkRowOne($where){
-        $row = self::where($where)->get()->count();
-        if($row == '1' || $row == '0'){//false证明唯一
-            return false;
-        }else{//true证明不唯一
-            return true;
-        }
-    }
-
     //获取餐饮商品列表
     public static function getList($where,$limit=0,$orderby,$sort='DESC',$select=[]){
         $model = new SimpleGoods();
