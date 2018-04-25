@@ -163,6 +163,7 @@ class FansmanageCheckAjax
                 return self::format_response($re,$next);
                 break;
 
+
             case "fansmanage/ajax/store_create_check"://检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndStoreCreate($request);
                 return self::format_response($re,$next);
