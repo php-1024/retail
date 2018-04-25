@@ -101,7 +101,7 @@ class SimpleGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('SimpleGoodsThumb')->with('GoodsThumb');
+        $model = self::with('GoodsThumb');
         if(!empty($search_data['category_id'])){
             $model = $model->where([['category_id',$search_data['category_id']]]);
         }

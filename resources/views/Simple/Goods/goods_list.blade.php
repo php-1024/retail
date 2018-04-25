@@ -65,6 +65,7 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>商品标题</th>
+                                        <th>缩略图</th>
                                         <th>商品价格</th>
                                         <th>商品分类</th>
                                         <th>库存</th>
@@ -79,6 +80,9 @@
                                     <tr>
                                         <td>{{$val->id}}</td>
                                         <td>{{$val->name}}</td>
+                                        <td>
+                                            {{ $val->GoodsThumb->thumb }}
+                                        </td>
                                         <td>
                                             {{$val->price}}
                                         </td>
