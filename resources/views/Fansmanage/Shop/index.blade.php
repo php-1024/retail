@@ -117,171 +117,171 @@
                         <div class="col-lg-9 ">
                             <div class="col-lg-12">
                                 <div class="col-lg-4 state-overview">
-                                <section class="panel">
-                                    <div class="symbol bg-danger">
-                                        <i class="fa fa-money"></i>
-                                    </div>
-                                    <div class="value">
-                                        <h1>1688888.03</h1>
-                                        <p>元 总营收</p>
-                                    </div>
-                                </section>
+                                    <section class="panel">
+                                        <div class="symbol bg-danger">
+                                            <i class="fa fa-money"></i>
+                                        </div>
+                                        <div class="value">
+                                            <h1>1688888.03</h1>
+                                            <p>元 总营收</p>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="col-lg-4 state-overview">
+                                    <section class="panel">
+                                        <div class="symbol bg-success">
+                                            <i class="icon icon-user"></i>
+                                        </div>
+                                        <div class="value">
+                                            <h1>1680</h1>
+                                            <p>个粉丝</p>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <div class="col-lg-4 state-overview">
+                                    <section class="panel">
+                                        <div class="symbol bg-info">
+                                            <i class="fa fa-cutlery"></i>
+                                        </div>
+                                        <div class="value">
+                                            <h1>10</h1>
+                                            <p>间店铺</p>
+                                        </div>
+                                    </section>
+                                </div>
                             </div>
 
-                            <div class="col-lg-4 state-overview">
-                                <section class="panel">
-                                    <div class="symbol bg-success">
-                                        <i class="icon icon-user"></i>
-                                    </div>
-                                    <div class="value">
-                                        <h1>1680</h1>
-                                        <p>个粉丝</p>
-                                    </div>
-                                </section>
-                            </div>
-
-                            <div class="col-lg-4 state-overview">
-                                <section class="panel">
-                                    <div class="symbol bg-info">
-                                        <i class="fa fa-cutlery"></i>
-                                    </div>
-                                    <div class="value">
-                                        <h1>10</h1>
-                                        <p>间店铺</p>
-                                    </div>
-                                </section>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12">
                             <div class="col-lg-12">
-                                <section class="panel panel-default">
-                                    <header class="panel-heading">分店营收明细</header>
-                                    <table class="table table-striped m-b-none">
-                                        <thead>
-                                        <tr>
-                                            <th>店铺名称</th>
-                                            <th>店铺类型</th>
-                                            <th>今日成交</th>
-                                            <th>今日营收</th>
-                                            <th>历史成交</th>
-                                            <th>历史营收</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>刘记鸡煲王【龙岗店】</td>
-                                            <td><label class="label label-primary">总店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        <tr>
-                                            <td>刘记鸡煲王【中心城店】</td>
-                                            <td><label class="label label-warning">分店</label></td>
-                                            <td>111笔</td>
-                                            <td>&yen;10000.3</td>
-                                            <td>888笔</td>
-                                            <td>&yen;88888.33</td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </section>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-12">
-                            <div class="col-lg-6">
-                                <section class="panel panel-default">
-                                    <header class="panel-heading">最近登录日志</header>
-                                    <table class="table table-striped m-b-none">
-                                        <thead>
-                                        <tr>
-                                            <th>登录账号</th>
-                                            <th>登录IP</th>
-                                            <th>登录地址</th>
-                                            <th>登录时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($login_log_list as $key=>$val)
+                                <div class="col-lg-12">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading">分店营收明细</header>
+                                        <table class="table table-striped m-b-none">
+                                            <thead>
                                             <tr>
-                                                <td>{{  $val->accounts->account }}</td>
-                                                <td>{{  long2ip($val->ip) }}</td>
-                                                <td>{{  $val->ip_position }}</td>
-                                                <td>{{  $val->created_at }}</td>
+                                                <th>店铺名称</th>
+                                                <th>店铺类型</th>
+                                                <th>今日成交</th>
+                                                <th>今日营收</th>
+                                                <th>历史成交</th>
+                                                <th>历史营收</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </section>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td>刘记鸡煲王【龙岗店】</td>
+                                                <td><label class="label label-primary">总店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>刘记鸡煲王【中心城店】</td>
+                                                <td><label class="label label-warning">分店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>刘记鸡煲王【中心城店】</td>
+                                                <td><label class="label label-warning">分店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>刘记鸡煲王【中心城店】</td>
+                                                <td><label class="label label-warning">分店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>刘记鸡煲王【中心城店】</td>
+                                                <td><label class="label label-warning">分店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>刘记鸡煲王【中心城店】</td>
+                                                <td><label class="label label-warning">分店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>刘记鸡煲王【中心城店】</td>
+                                                <td><label class="label label-warning">分店</label></td>
+                                                <td>111笔</td>
+                                                <td>&yen;10000.3</td>
+                                                <td>888笔</td>
+                                                <td>&yen;88888.33</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
                             </div>
 
-                            <div class="col-lg-6">
-                                <section class="panel panel-default">
-                                    <header class="panel-heading">最近操作日志</header>
-                                    <table class="table table-striped m-b-none">
-                                        <thead>
-                                        <tr>
-                                            <th>操作账号</th>
-                                            <th>操作内容</th>
-                                            <th>操作时间</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($operation_log_list as $key=>$val)
+                            <div class="col-lg-12">
+                                <div class="col-lg-6">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading">最近登录日志</header>
+                                        <table class="table table-striped m-b-none">
+                                            <thead>
                                             <tr>
-                                                <td>{{ $val->accounts->account }}</td>
-                                                <td>{{ $val->operation_info }}</td>
-                                                <td>{{ $val->created_at }}</td>
+                                                <th>登录账号</th>
+                                                <th>登录IP</th>
+                                                <th>登录地址</th>
+                                                <th>登录时间</th>
                                             </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </section>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($login_log_list as $key=>$val)
+                                                <tr>
+                                                    <td>{{  $val->accounts->account }}</td>
+                                                    <td>{{  long2ip($val->ip) }}</td>
+                                                    <td>{{  $val->ip_position }}</td>
+                                                    <td>{{  $val->created_at }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <section class="panel panel-default">
+                                        <header class="panel-heading">最近操作日志</header>
+                                        <table class="table table-striped m-b-none">
+                                            <thead>
+                                            <tr>
+                                                <th>操作账号</th>
+                                                <th>操作内容</th>
+                                                <th>操作时间</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($operation_log_list as $key=>$val)
+                                                <tr>
+                                                    <td>{{ $val->accounts->account }}</td>
+                                                    <td>{{ $val->operation_info }}</td>
+                                                    <td>{{ $val->created_at }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </section>
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </section>
                 </section>
@@ -339,7 +339,7 @@
                     <div class="line line-dashed b-b line-lg pull-in"></div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 text-right">店铺LOGO</label>
+                        <label class="col-sm-2 text-right">商户LOGO</label>
                         <div class="col-sm-10">
                             <input type="file" name="simple_logo" class="filestyle" style="display: none;" data-icon="true" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
                         </div>
@@ -390,52 +390,47 @@
 
     //编辑店铺信息
     function EditStore() {
-        var formData = new FormData($( "#store_edit" )[0]);
-
-        // var target = $("#store_edit");
-        // var data = target.serialize();
-        console.log(formData);
-        {{--$.ajax({--}}
-        {{--url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',--}}
-        {{--type: 'post',--}}
-        {{--// data: formData,--}}
-        {{--data: data,--}}
-        {{--async: false,--}}
-        {{--cache: false,--}}
-        {{--contentType: false,--}}
-        {{--processData: false,--}}
-        {{--success: function (json) {--}}
-        {{--if (json.status == -1) {--}}
-        {{--swal({--}}
-        {{--title: "提示信息",--}}
-        {{--text: json.data,--}}
-        {{--confirmButtonColor: "#DD6B55",--}}
-        {{--confirmButtonText: "确定",--}}
-        {{--},function(){--}}
-        {{--window.location.reload();--}}
-        {{--});--}}
-        {{--} else if(json.status == 1) {--}}
-        {{--swal({--}}
-        {{--title: "提示信息",--}}
-        {{--text: json.data,--}}
-        {{--confirmButtonColor: "#DD6B55",--}}
-        {{--confirmButtonText: "确定",--}}
-        {{--},function(){--}}
-        {{--window.location.reload();--}}
-        {{--});--}}
-        {{--}else{--}}
-        {{--swal({--}}
-        {{--title: "提示信息",--}}
-        {{--text: json.data,--}}
-        {{--confirmButtonColor: "#DD6B55",--}}
-        {{--confirmButtonText: "确定"--}}
-        {{--});--}}
-        {{--}--}}
-        {{--},--}}
-        {{--error: function (json) {--}}
-        {{--console.log(json);--}}
-        {{--}--}}
-        {{--});--}}
+        var formData = new FormData($("#store_edit")[0]);
+        $.ajax({
+            url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',
+            type: 'post',
+            data: formData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (json) {
+                if (json.status == -1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    }, function () {
+                        window.location.reload();
+                    });
+                } else if (json.status == 1) {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                    }, function () {
+                        window.location.reload();
+                    });
+                } else {
+                    swal({
+                        title: "提示信息",
+                        text: json.data,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定"
+                    });
+                }
+            },
+            error: function (json) {
+                console.log(json);
+            }
+        });
     }
 </script>
 </body>

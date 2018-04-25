@@ -35,10 +35,8 @@ class FansmanageCheckAjax
                 $re = $this->checkLoginAndRuleAndSafeEdit($request);
                 return self::format_response($re, $next);
                 break;
-            case "fansmanage/ajax/fansmanage_edit_check"://修改账户信息
-                $re = $this->checkLoginAndRuleAndSafe($request);
-                return self::format_response($re, $next);
-                break;
+
+
 
 
             /****粉丝标签添加、删除、编辑****/
@@ -173,6 +171,11 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/store_create_check"://检测 登录 和 权限 和 安全密码 和 店铺添加数据提交
                 $re = $this->checkLoginAndRuleAndSafeAndStoreCreate($request);
                 return self::format_response($re, $next);
+            case "fansmanage/ajax/fansmanage_edit_check"://修改账户信息
+                $re = $this->checkLoginAndRuleAndSafe($request);
+                return self::format_response($re, $next);
+                break;
+
 
             /****公众号管理****/
             case "fansmanage/ajax/material_image_delete_check"://检测是否登陆 权限 安全密码--删除图片素材
