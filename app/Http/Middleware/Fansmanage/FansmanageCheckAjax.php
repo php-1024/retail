@@ -23,6 +23,7 @@ class FansmanageCheckAjax
                 return self::format_response($re, $next);
                 break;
 
+
             case "fansmanage/ajax/profile_check"://检测登录和权限和安全密码和账号信息是否为空
                 $re = $this->checkLoginAndRuleAndSafeAndProfile($request);
                 return self::format_response($re, $next);
