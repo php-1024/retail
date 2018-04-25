@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" class="app">
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title>零壹云管理平台 | 总店管理系统</title>
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/jPlayer/jplayer.flat.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/bootstrap.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/animate.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/simple-line-icons.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font.css" type="text/css" />
-    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/app.css" type="text/css" />
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/js/jPlayer/jplayer.flat.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/bootstrap.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/animate.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font-awesome.min.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/simple-line-icons.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/font.css" type="text/css"/>
+    <link rel="stylesheet" href="{{asset('public/Fansmanage')}}/css/app.css" type="text/css"/>
     <link href="{{asset('public/Fansmanage/library/sweetalert')}}/css/sweetalert.css" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{asset('public/Fansmanage')}}/js/ie/html5shiv.js"></script>
@@ -47,13 +47,17 @@
                                 <header class="panel-heading font-bold">
                                     概况
 
-                                    <button id="editBtn" class="btn btn-default btn-xs pull-right"><i class="fa fa-edit "></i>&nbsp;编辑</button>
+                                    <button id="editBtn" class="btn btn-default btn-xs pull-right">
+                                        <i class="fa fa-edit "></i>&nbsp;编辑
+                                    </button>
                                 </header>
                                 <div class="panel-body">
-                                    <form class="form-horizontal" method="get">
+
+
+                                    <div class="form-horizontal">
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
-                                                <div class="thumb-lg" >
+                                                <div class="thumb-lg">
                                                     <img src="{{asset('public/Fansmanage')}}/img/a5.png" class="img-circle" alt="...">
                                                 </div>
                                             </div>
@@ -105,13 +109,14 @@
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    </div>
                                 </div>
                             </section>
                         </div>
 
                         <div class="col-lg-9 ">
                             <div class="col-lg-12">
-                                <div class="col-lg-4 state-overview"">
+                                <div class="col-lg-4 state-overview">
                                 <section class="panel">
                                     <div class="symbol bg-danger">
                                         <i class="fa fa-money"></i>
@@ -123,29 +128,29 @@
                                 </section>
                             </div>
 
-                            <div class="col-lg-4 state-overview"">
-                            <section class="panel">
-                                <div class="symbol bg-success">
-                                    <i class="icon icon-user"></i>
-                                </div>
-                                <div class="value">
-                                    <h1>1680</h1>
-                                    <p>个粉丝</p>
-                                </div>
-                            </section>
-                        </div>
+                            <div class="col-lg-4 state-overview">
+                                <section class="panel">
+                                    <div class="symbol bg-success">
+                                        <i class="icon icon-user"></i>
+                                    </div>
+                                    <div class="value">
+                                        <h1>1680</h1>
+                                        <p>个粉丝</p>
+                                    </div>
+                                </section>
+                            </div>
 
-                        <div class="col-lg-4 state-overview">
-                        <section class="panel">
-                            <div class="symbol bg-info">
-                                <i class="fa fa-cutlery"></i>
+                            <div class="col-lg-4 state-overview">
+                                <section class="panel">
+                                    <div class="symbol bg-info">
+                                        <i class="fa fa-cutlery"></i>
+                                    </div>
+                                    <div class="value">
+                                        <h1>10</h1>
+                                        <p>间店铺</p>
+                                    </div>
+                                </section>
                             </div>
-                            <div class="value">
-                                <h1>10</h1>
-                                <p>间店铺</p>
-                            </div>
-                        </section>
-                        </div>
                         </div>
 
                         <div class="col-lg-12">
@@ -241,12 +246,12 @@
                                         </thead>
                                         <tbody>
                                         @foreach($login_log_list as $key=>$val)
-                                        <tr>
-                                            <td>{{  $val->accounts->account }}</td>
-                                            <td>{{  long2ip($val->ip) }}</td>
-                                            <td>{{  $val->ip_position }}</td>
-                                            <td>{{  $val->created_at }}</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{  $val->accounts->account }}</td>
+                                                <td>{{  long2ip($val->ip) }}</td>
+                                                <td>{{  $val->ip_position }}</td>
+                                                <td>{{  $val->created_at }}</td>
+                                            </tr>
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -345,7 +350,7 @@
                     <div class="form-group">
                         <label class="col-sm-2 text-right">安全密码</label>
                         <div class="col-sm-10">
-                            <input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control" >
+                            <input type="password" value="" name="safe_password" placeholder="安全密码" class="form-control">
                         </div>
                     </div>
                     <div style="clear:both;"></div>
@@ -375,7 +380,7 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script src="{{asset('public/Fansmanage/sweetalert')}}/sweetalert.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         @if(!empty($organization->fansmanageinfo->logo))
         $("#retail_logo").val("{{$organization->fansmanageinfo->logo}}");
         @endif
@@ -390,47 +395,48 @@
 
         var target = $("#store_edit");
         var data = target.serialize();
-        $.ajax({
-            url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',
-            type: 'post',
-            // data: formData,
-            data: data,
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
-            success: function (json) {
-                if (json.status == -1) {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    },function(){
-                        window.location.reload();
-                    });
-                } else if(json.status == 1) {
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定",
-                    },function(){
-                        window.location.reload();
-                    });
-                }else{
-                    swal({
-                        title: "提示信息",
-                        text: json.data,
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "确定"
-                    });
-                }
-            },
-            error: function (json) {
-                console.log(json);
-            }
-        });
+        console.log(data);
+        {{--$.ajax({--}}
+        {{--url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',--}}
+        {{--type: 'post',--}}
+        {{--// data: formData,--}}
+        {{--data: data,--}}
+        {{--async: false,--}}
+        {{--cache: false,--}}
+        {{--contentType: false,--}}
+        {{--processData: false,--}}
+        {{--success: function (json) {--}}
+        {{--if (json.status == -1) {--}}
+        {{--swal({--}}
+        {{--title: "提示信息",--}}
+        {{--text: json.data,--}}
+        {{--confirmButtonColor: "#DD6B55",--}}
+        {{--confirmButtonText: "确定",--}}
+        {{--},function(){--}}
+        {{--window.location.reload();--}}
+        {{--});--}}
+        {{--} else if(json.status == 1) {--}}
+        {{--swal({--}}
+        {{--title: "提示信息",--}}
+        {{--text: json.data,--}}
+        {{--confirmButtonColor: "#DD6B55",--}}
+        {{--confirmButtonText: "确定",--}}
+        {{--},function(){--}}
+        {{--window.location.reload();--}}
+        {{--});--}}
+        {{--}else{--}}
+        {{--swal({--}}
+        {{--title: "提示信息",--}}
+        {{--text: json.data,--}}
+        {{--confirmButtonColor: "#DD6B55",--}}
+        {{--confirmButtonText: "确定"--}}
+        {{--});--}}
+        {{--}--}}
+        {{--},--}}
+        {{--error: function (json) {--}}
+        {{--console.log(json);--}}
+        {{--}--}}
+        {{--});--}}
     }
 </script>
 </body>
