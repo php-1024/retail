@@ -82,7 +82,7 @@
                                         <td>{{$val->name}}</td>
                                         <td>
                                             @if(!empty($val->GoodsThumb->thumb))
-                                            {{ $val->GoodsThumb->thumb }}
+                                            {{ base_path().'/'.$val->GoodsThumb->thumb }}
                                             @endif
                                         </td>
                                         <td>
