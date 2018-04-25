@@ -48,5 +48,9 @@ class VerifyCsrfToken extends Middleware
         'api/androidSimpleApi/stock_cfg',//查询店铺设置
         /****Android接口****/
 
+        /****wechat接口****/
+        'api/wechatApi/store_list',//店铺接口
+        /****wechat接口****/
+
     ];
 }

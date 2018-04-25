@@ -58,7 +58,7 @@
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg">
-                                                    <img src="{{asset('public/Fansmanage')}}/img/a5.png" class="img-circle" alt="...">
+                                                    <img src="{{asset($company_info->logo)}}" class="img-circle" alt="...">
                                                 </div>
                                             </div>
                                         </div>

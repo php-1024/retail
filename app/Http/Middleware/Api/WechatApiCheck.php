@@ -18,7 +18,7 @@ class WechatApiCheck
         $route_name = $request->path();
         switch ($route_name) {
             /*****登录*****/
-            case "api/wechatapi/store_list"://检测店铺列表提交数据
+            case "api/wechatApi/store_list"://检测店铺列表提交数据
                 $re = $this->checkTokenAndStoreList($request);
                 return self::format_response($re, $next);
                 break;
@@ -61,12 +61,12 @@ class WechatApiCheck
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '商户id不能为空', 'status' => '0', 'data' => '']));
         }
-        if (empty($request->input('lat'))) {
-            return self::res(0, response()->json(['msg' => '微信地理位置纬度', 'status' => '0', 'data' => '']));
-        }
-        if (empty($request->input('lng'))) {
-            return self::res(0, response()->json(['msg' => '微信地理位置经度', 'status' => '0', 'data' => '']));
-        }
+//        if (empty($request->input('lat'))) {
+//            return self::res(0, response()->json(['msg' => '微信地理位置纬度', 'status' => '0', 'data' => '']));
+//        }
+//        if (empty($request->input('lng'))) {
+//            return self::res(0, response()->json(['msg' => '微信地理位置经度', 'status' => '0', 'data' => '']));
+//        }
         return self::res(1, $request);
     }
 
