@@ -482,12 +482,17 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
     //异步提交数据组
     Route::group(['prefix' => 'ajax'], function () {
+
         Route::post('login_check', 'Fansmanage\LoginController@login_check')->middleware('FansmanageCheckAjax');             //提交登录数据
 
         //账号中心
         Route::post('profile_check', 'Fansmanage\AccountController@profile_check')->middleware('FansmanageCheckAjax');       //提交登录数据
         Route::post('safe_password_check', 'Fansmanage\AccountController@safe_password_check')->middleware('FansmanageCheckAjax');//安全密码数据提交
         Route::post('password_check', 'Fansmanage\AccountController@password_check')->middleware('FansmanageCheckAjax');     //安全密码数据提交
+
+        //账号信息修改
+        Route::post('fansmanage_edit_check', 'Fansmanage\AccountController@fansmanage_edit_check')->middleware('FansmanageCheckAjax');
+
 
         //公众号管理--图文素材
         Route::post('meterial_image_upload', 'Fansmanage\ApiController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材

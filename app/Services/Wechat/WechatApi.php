@@ -307,16 +307,20 @@ class WechatApi
         return $re;
     }
 
-    /*
-     * 刷新授权调用令牌凭证
-     * $organization_id 绑定的组织ID
+    /**
+     * 刷新授权方的调用令牌凭证
+     * @param $organization_id
+     * @return array|bool
      */
     public function refresh_authorization_info($organization_id)
     {
+        // 获取数据库中的授权信息
         $info = WechatAuthorization::getOne([['organization_id', $organization_id]]);
+        // 不存在信息就返回未授权
         if (empty($info) || empty($info->authorizer_access_token)) {
             exit('您尚未授权，请先前往进行授权操作');
         }
+        // 如果更新的信息在 10分钟 之内，就直接返回
         if ($info->expire_time - time() > 600) {//仍未过期直接返回值
             return array(
                 'authorizer_appid' => $info->authorizer_appid,
@@ -324,17 +328,24 @@ class WechatApi
                 'authorizer_refresh_token' => $info->authorizer_refresh_token,
             );
         }
+
+        // 获取第三方公众号平台的信息
         $wxparam = config('app.wechat_open_setting');
+        // 获取第三方平台的 component_access_token
         $component_access_token = $this->get_component_access_token();
+        // 获取（刷新）授权公众号或小程序的接口调用凭据
         $url = 'https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token=' . $component_access_token;
+        // 授权方的信息
         $data = array(
             'component_appid' => $wxparam['open_appid'],
             'authorizer_appid' => $info->authorizer_appid,
             'authorizer_refresh_token' => $info->authorizer_refresh_token,
         );
         $data = json_encode($data, JSON_UNESCAPED_UNICODE);
+        // 获取数据
         $origin_re = \HttpCurl::doPost($url, $data);
         $re = json_decode($origin_re, true);
+        // 获取到 授权方的 access_token
         if (!empty($re['authorizer_access_token'])) {
             $authorizer_access_token = $re['authorizer_access_token'];
             $authorizer_refresh_token = $re['authorizer_refresh_token'];
@@ -344,13 +355,16 @@ class WechatApi
                 'origin_data' => $origin_re,
                 'expire_time' => time() + 7200,
             );
+            // 修改授权信息
             WechatAuthorization::editAuthorization([['id', $info->id]], $auth_data);
+            // 返回授权信息
             return array(
                 'authorizer_appid' => $info->authorizer_appid,
                 'authorizer_access_token' => $authorizer_access_token,
                 'authorizer_refresh_token' => $authorizer_refresh_token,
             );
         } else {
+            // 不存在则返回false
             return false;
         }
     }
@@ -426,45 +440,53 @@ class WechatApi
         }
     }
 
-    /*
-     *获取开放平台的接口调用凭据
+
+    /**
+     * 获取第三方开放平台的接口调用凭据
+     * @return mixed
      */
     public function get_component_access_token()
     {
         $token_info = WechatOpenSetting::getComponentAccessToken();
-        if (!empty($token_info->param_value) && $token_info->expire_time - time() > 300) {//过时前5分钟也需要重置了
+        // 过时前5分钟也需要重置了
+        if (!empty($token_info->param_value) && $token_info->expire_time - time() > 300) {
             return $token_info->param_value;
         }
+        // 获取第三方的授权信息
         $wxparam = config('app.wechat_open_setting');
+        // 获取第三方每10分钟推送过来的信息
         $ticket_info = WechatOpenSetting::getComponentVerifyTicket();
 
         if (empty($ticket_info->param_value)) {
             exit('获取微信开放平台ComponentVerifyTicket失败');
         } else {
-
+            // 获取第三方的 component_token
             $url = 'https://api.weixin.qq.com/cgi-bin/component/api_component_token';
             $data = array(
                 'component_appid' => $wxparam['open_appid'],
                 'component_appsecret' => $wxparam['open_appsecret'],
                 'component_verify_ticket' => $ticket_info->param_value
             );
-
             $data = json_encode($data, JSON_UNESCAPED_UNICODE);
             $re = \HttpCurl::doPost($url, $data);
             $re = json_decode($re, true);
-
+            // 如果获取成功就进行更新
             if (!empty($re['component_access_token'])) {
                 WechatOpenSetting::editComponentAccessToken($re['component_access_token'], time() + 7200);
                 return $re['component_access_token'];
             } else {
+                // 没有获取到就返回失败
                 exit('获取微信开放平台ComponentAccessToken失败');
             }
         }
     }
 
-    /* 出于安全考虑，在第三方平台创建审核通过后，微信服务器 每隔10分钟会向第三方的消息接收地址推送一次component_verify_ticket，用于获取第三方平台接口调用凭据
-     *  获取该参数
-    */
+    /**
+     * 出于安全考虑，在第三方平台创建审核通过后，
+     * 微信服务器 每隔10分钟会向第三方的消息接收地址推送一次component_verify_ticket，
+     * 用于获取第三方平台接口调用凭据
+     * 获取该参数
+     */
     public function getVerify_Ticket($timeStamp, $nonce, $encrypt_type, $msg_sign, $encryptMsg)
     {
         $wxparam = config('app.wechat_open_setting');
