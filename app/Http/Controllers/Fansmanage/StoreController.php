@@ -261,9 +261,12 @@ class StoreController extends Controller
                 // 重命名
                 $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
                 // 文件路径
-                $path = base_path() . '/uploads/simple_logo/' . $admin_data['organization_id'] . '/';
+                $path = '/uploads/simple_logo/' . $admin_data['organization_id'] . '/';
+                $base_path = base_path() . $path;
                 // 将图片进行保存
-                $file->move($path, $new_name);
+                $file->move($base_path, $new_name);
+
+
                 // 文件名称
                 $file_path = $path . $new_name;
                 $param_organization_fansmanage_info["logo"] = $file_path;
