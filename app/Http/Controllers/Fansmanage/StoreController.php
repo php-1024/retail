@@ -15,11 +15,13 @@ use App\Models\Module;
 use App\Models\OperationLog;
 use App\Models\Organization;
 use App\Models\OrganizationAssets;
+use App\Models\OrganizationFansmanageinfo;
 use App\Models\OrganizationRetailinfo;
 use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 use Session;
 
 class StoreController extends Controller
@@ -41,8 +43,8 @@ class StoreController extends Controller
         $route_name = $request->path();
         // 需要渲染模式里面的数据
         $res = Organization::getProgramAsset(["organization_id" => $admin_data["organization_id"]]);
-        $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]],'program_id')->first();
-        $program = Program::getOne(['id'=>$program_id]);//获取当前粉丝管理系统能使用的资产程序
+        $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]], 'program_id')->first();
+        $program = Program::getOne(['id' => $program_id]);//获取当前粉丝管理系统能使用的资产程序
         // 渲染页面
         return view('Fansmanage/Store/store_create', ["program_info" => $program, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
@@ -237,19 +239,14 @@ class StoreController extends Controller
     {
         // 中间件产生的管理员数据参数
         $admin_data = $request->get('admin_data');
-        // 获取当前的页面路由
-        $route_name = $request->path();
-
         // 获取组织id
-        $id = $request->input('organization_id');
+        $organization_id = $request->input('organization_id');
         // 店铺名称
         $organization_name = $request->input('organization_name');
         // 负责人
         $simple_owner = $request->input('simple_owner');
         // 手机号码
         $mobile = $request->input('mobile');
-
-
         // 获取上传上来的图片信息
         $file = $request->file('simple_logo');
         // 判断图片的格式
@@ -257,18 +254,32 @@ class StoreController extends Controller
             // 不对就进行数据的返回
             return response()->json(['status' => '0', 'data' => '错误的图片格式']);
         }
-
-
         // 检测图片是否有效
         if ($file->isValid()) {
             // 重命名
             $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
-            $file_path = base_path() . '/uploads/simple_logo/' . $admin_data['organization_id'] . '/' . $new_name;
-
+            // 文件路径
+            $path = base_path() . '/uploads/simple_logo/' . $admin_data['organization_id'] . '/';
             // 将图片进行保存
-            $file->move(base_path() . '/uploads/simple_logo/' . $admin_data['organization_id'] . '/', $new_name);
+            $file->move($path, $new_name);
+            // 文件名称
+            $file_path = $path . $new_name;
         }
 
+        DB::beginTransaction();
+        try {
+            $data["organization_name"] = $organization_name;
+            $data["simple_owner"] = $simple_owner;
+            $data["mobile"] = $mobile;
+            $data["logo"] = $file_path;
+            // 保存商户信息
+            OrganizationFansmanageinfo::insertData($data, "update_create", ["fansmanage_id" => $organization_id]);
+            \DB::commit();
+        } catch (Exception $e) {
+            \DB::rollBack();
+            return response()->json(['data' => '添加失败', 'status' => '0']);
+        }
+        return response()->json(['data' => '添加成功', 'status' => '1']);
     }
 
 }
