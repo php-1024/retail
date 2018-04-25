@@ -266,7 +266,6 @@ class StoreController extends Controller
                 // 将图片进行保存
                 $file->move($base_path, $new_name);
 
-
                 // 文件名称
                 $file_path = $path . $new_name;
                 $param_organization_fansmanage_info["logo"] = $file_path;
@@ -286,9 +285,9 @@ class StoreController extends Controller
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
-            return response()->json(['data' => '添加失败', 'status' => '0']);
+            return response()->json(['data' => '修改失败，请检查', 'status' => '0']);
         }
-        return response()->json(['data' => '添加成功', 'status' => '1']);
+        return response()->json(['data' => '修改成功', 'status' => '1']);
     }
 
 }
