@@ -482,12 +482,17 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
     //异步提交数据组
     Route::group(['prefix' => 'ajax'], function () {
+
         Route::post('login_check', 'Fansmanage\LoginController@login_check')->middleware('FansmanageCheckAjax');             //提交登录数据
 
         //账号中心
         Route::post('profile_check', 'Fansmanage\AccountController@profile_check')->middleware('FansmanageCheckAjax');       //提交登录数据
         Route::post('safe_password_check', 'Fansmanage\AccountController@safe_password_check')->middleware('FansmanageCheckAjax');//安全密码数据提交
         Route::post('password_check', 'Fansmanage\AccountController@password_check')->middleware('FansmanageCheckAjax');     //安全密码数据提交
+
+        //账号信息修改
+        Route::post('fansmanage_edit_check', 'Fansmanage\AccountController@fansmanage_edit_check')->middleware('FansmanageCheckAjax');
+
 
         //公众号管理--图文素材
         Route::post('meterial_image_upload', 'Fansmanage\ApiController@meterial_image_upload')->middleware('FansmanageCheckAjax');//上传图片素材
@@ -532,9 +537,6 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::post('default_reply_article_edit_check', 'Fansmanage\MessageController@default_reply_article_edit_check')->middleware('FansmanageCheckAjax');//默认回复图文素材能提交
 
 
-
-
-
         //公众号管理--菜单管理--自定义
         Route::any('defined_menu_get', 'Fansmanage\WechatmenuController@defined_menu_get')->middleware('FansmanageCheckAjax');//获取自定义菜单数据
         Route::any('defined_menu_add', 'Fansmanage\WechatmenuController@defined_menu_add')->middleware('FansmanageCheckAjax');//添加自定义菜单板块
@@ -557,9 +559,6 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
         Route::any('wechat_conditional_menu_add', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
         Route::any('wechat_conditional_menu_add_check', 'Fansmanage\WechatmenuController@wechat_conditional_menu_add_check')->middleware('FansmanageCheckAjax');//一键同步到微信菜单
-
-
-
 
 
         //用户管理
