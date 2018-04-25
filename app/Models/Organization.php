@@ -262,7 +262,7 @@ class Organization extends Model
         $res_organization = Organization::select(["organization.id", "organization.program_id"])
             ->where(["organization.id" => $organization_id])
             ->first();
-        if(!empty($res_organization)) {
+        if (!empty($res_organization)) {
             $res_organization = $res_organization->toArray();
 
             $res = Program::select(["id", "program_name"])->where(["complete_id" => $res_organization["program_id"], "is_asset" => 1])->orWhere(["id" => $res_organization["program_id"]])->get();
@@ -302,6 +302,59 @@ class Organization extends Model
             return $res->toArray();
         } else {
             return false;
+        }
+    }
+
+
+    public function getSimpleOrder()
+    {
+        return $this->hasMany('App\Models\SimpleOrder', 'simple_id', "id");
+    }
+
+
+    public function getRetailorder()
+    {
+        return $this->hasMany('App\Models\RetailOrder', 'retail_id', "id");
+    }
+
+
+    /**
+     * 获取营收情况数据
+     */
+    public static function getRevenueInfo($organization_id)
+    {
+        $res = self::select(["asset_id", "parent_tree"])->where(["id" => $organization_id])->first();
+        if (!empty($res)) {
+            $res = $res->toArray();
+            $parent_tree = "{$res["parent_tree"]}{$organization_id}";
+            $res_shop = self::with(["getSimpleOrder" => function ($query) {
+                $query->select(["order_price","simple_id","id"])->where(["status" => 1]);
+            }])->select(["id", "organization_name"])->where("parent_tree", "like", "%$parent_tree%")->where(["type" => 4])->get();
+
+            dd($res_shop);
+
+//            $model = self::select("fansmanage_user.id", "fansmanage_user.fansmanage_id", "fansmanage_user.user_id", "fansmanage_user.open_id", "fansmanage_user.mobile", "fansmanage_user.status", "fansmanage_user.created_at", "user.account")->with(["userOrigin", "user" => function ($query) {
+//                $query->select("id", "account");
+//            }, "userRecommender" => function ($query) {
+//                $query->select("recommender_id", "user_id");
+//            }, "userInfo" => function ($query) {
+//                $query->select("id", "nickname", "head_imgurl", "user_id");
+//            }, "userLabel" => function ($query) {
+//                $query->select("label_id", "user_id");
+//            }])->leftJoin('user', 'fansmanage_user.user_id', '=', 'user.id');
+
+
+
+//            if (!empty($res_shop)) {
+//                $res_shop = $res->toArray();
+//                foreach ($res_shop as $key => $val) {
+//                    if ($res["asset_id"] == 10) {
+//
+//                    } else if ($res["asset_id"] == 12) {
+//
+//                    }
+//                }
+//            }
         }
     }
 }

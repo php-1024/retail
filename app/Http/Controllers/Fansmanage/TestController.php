@@ -114,4 +114,10 @@ class TestController extends Controller
 //        }
 //        dump($list);
     }
+
+    public function test2()
+    {
+        $res = Organization::getRevenueInfo(2);
+        dd($res);
+    }
 }
