@@ -40,6 +40,7 @@ class WechatApiController extends Controller
         }
 
         $data = $this->order($data);
+        print_r($data);
 //        // 数据返回
 //        $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id']]];
 
