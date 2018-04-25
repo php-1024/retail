@@ -35,12 +35,12 @@ class WechatApiController extends Controller
         if (empty($data)) {
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
-        foreach($data as $key=>$value){
-
-            $ss = $this->GetDistance('22.724083','114.260654',$value['organization_simpleinfo']['lat'],$value['organization_simpleinfo']['lng']);
-            echo $ss.'////////';
+        foreach ($data as $key => $value) {
+            $data[$key]['length'] = $this->GetDistance('22.724083', '114.260654', $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
         }
 
+        $data = $this->order($data);
+        print_r($data);
 //        // 数据返回
 //        $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['account_id' => $data['id']]];
 
@@ -68,5 +68,21 @@ class WechatApiController extends Controller
         }
         return round($s, $decimal);
     }
+
+
+    private function order($arr)
+    {
+        $len = count($arr);//6
+        for ($k = 0; $k <= $len; $k++) {
+            for ($j = $len - 1; $j > $k; $j--) {
+                if ($arr[$j]['length'] < $arr[$j - 1]['length']) {
+                    $temp = $arr[$j];
+                    $arr[$j] = $arr[$j - 1];
+                    $arr[$j - 1] = $temp;
+                }
+            }
+        }
+    }
+
 
 }
