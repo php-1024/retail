@@ -69,7 +69,6 @@ class ShopController extends Controller
             $program = Program::getOne(['id'=>$program_id]);//获取当前粉丝管理系统能使用的资产程序
             //查询商户信息
             $company_info = Organization::getOne(['id'=>$admin_data["organization_id"]]);
-//            dd($company_info);
             // 渲染页面
             return view('Fansmanage/Shop/index', ['login_log_list' => $login_log_list, 'company_info'=>$company_info,'program'=>$program, 'operation_log_list' => $operation_log_list, 'acc_num' => $acc_num, 'org_num' => $org_num, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
         }
@@ -138,7 +137,6 @@ class ShopController extends Controller
             ZeroneRedis::create_fansmanage_menu_cache(1);
             // 返回提示
             return response()->json(['data' => '操作成功', 'status' => '1']);
-
         } else {
             return response()->json(['data' => '操作失败', 'status' => '0']);
         }
