@@ -14,6 +14,7 @@ use App\Models\FansmanageUser;
 use App\Models\Organization;
 use App\Models\Program;
 use App\Models\UserInfo;
+use App\Models\UserOrigin;
 use DB;
 use App\Models\Label;
 use App\Models\User;
@@ -23,6 +24,8 @@ class TestController extends Controller
 {
     public function test()
     {
+        $res = UserOrigin::all();
+        dd($res);
         dd(config("app.wechat_web_setting.appid"));
         $res = Organization::select(["organization.id", "organization.program_id"])
             ->where(["organization.id" => 5])
