@@ -233,5 +233,44 @@ class StoreController extends Controller
         return view('Fansmanage/Store/store_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
+    public function fansmanage_edit_check(Request $request)
+    {
+        // 中间件产生的管理员数据参数
+        $admin_data = $request->get('admin_data');
+        // 获取当前的页面路由
+        $route_name = $request->path();
+        // 获取修改登入密码的id
+        $id = $request->input('id');
+
+
+        dump(request()->all());
+
+//        // 店铺名称
+//        $organization_name = $request->input('organization_name');
+//        // 负责人
+//        $simple_owner = $request->input('simple_owner');
+//        // 手机号码
+//        $mobile = $request->input('mobile');
+//
+//
+//        // 获取上传上来的图片信息
+//        $file = $request->file('simple_logo');
+//        // 判断图片的格式
+//        if (!in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'gif', 'gpeg', 'png'])) {
+//            // 不对就进行数据的返回
+//            return response()->json(['status' => '0', 'data' => '错误的图片格式']);
+//        }
+//        // 检测图片是否有效
+//        if ($file->isValid()) {
+//            // 重命名
+//            $new_name = date('Ymdhis') . mt_rand(100, 999) . '.' . $file->getClientOriginalExtension();
+//            $file_path = base_path() . '/uploads/wechat/' . $admin_data['organization_id'] . '/' . $new_name;
+//
+//            // 将图片进行保存
+//            $file->move(base_path() . '/uploads/wechat/' . $admin_data['organization_id'] . '/', $new_name);
+//        }
+
+    }
+
 }
 

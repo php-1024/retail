@@ -391,14 +391,9 @@
     //编辑店铺信息
     function EditStore() {
         var formData = new FormData($("#store_edit")[0]);
-
-        // var target = $("#store_edit");
-        // var data = target.serialize();
-
         $.ajax({
             url: '{{ url('fansmanage/ajax/fansmanage_edit_check') }}',
             type: 'post',
-            // data: formData,
             data: formData,
             async: false,
             cache: false,
