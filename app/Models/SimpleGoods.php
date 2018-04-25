@@ -50,13 +50,13 @@ class SimpleGoods extends Model{
         return self::where($where)->value($pluck);
     }
 
-    //查询数据是否存在（仅仅查询ID增加数据查询速度）
-    public static function checkRowExists($where){
+    //查询数据是否唯一
+    public static function checkRowOne($where){
         $row = self::where($where)->get()->count();
-        if(empty($row)){
+        if($row == 1){
             return false;
         }else{
-            return $row;
+            return true;
         }
     }
 

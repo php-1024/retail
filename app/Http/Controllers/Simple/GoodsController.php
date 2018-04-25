@@ -111,7 +111,7 @@ class GoodsController extends Controller
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
-        $is_barcode = SimpleGoods::checkRowExists(['barcode' => $barcode ]);
+        $is_barcode = SimpleGoods::checkRowOne(['barcode' => $barcode ]);
         dd($is_barcode);
         if ($is_barcode) {//判断商品条码是已经存在
             return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
