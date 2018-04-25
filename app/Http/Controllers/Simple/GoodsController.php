@@ -47,7 +47,7 @@ class GoodsController extends Controller
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
         $goods_name = SimpleGoods::checkRowExists(['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'name' => $name]);
-        $is_barcode = SimpleGoods::checkRowOne(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
+        $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
         if ($goods_name) {//判断商品名称是已经存在
             return response()->json(['data' => '商品名称重名，请重新输入！', 'status' => '0']);
         }
@@ -111,10 +111,6 @@ class GoodsController extends Controller
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
-        $is_barcode = SimpleGoods::checkRowOne(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
-        if ($is_barcode) {//判断商品条码是否唯一
-            return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
-        }
         if ($category_id == 0) {
             return response()->json(['data' => '请选择分类！', 'status' => '0']);
         }
@@ -124,6 +120,11 @@ class GoodsController extends Controller
         $goods_data = ['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'created_by' => $admin_data['id'], 'category_id' => $category_id, 'name' => $name, 'price' => $price, 'barcode' => $barcode, 'displayorder' => $displayorder, 'details' => $details];
         DB::beginTransaction();
         try {
+            SimpleGoods::editSimpleGoods(['id' => $goods_id],['barcode'=>'']);//修改商品前现将商品条码设置为空,在检测还有没有重复的商品条码
+            $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
+            if ($is_barcode) {//判断商品条码是否唯一
+                return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
+            }
             SimpleGoods::editSimpleGoods($where, $goods_data);
             //添加操作日志
             if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
@@ -137,6 +138,31 @@ class GoodsController extends Controller
             return response()->json(['data' => '编辑商品失败，请检查', 'status' => '0']);
         }
         return response()->json(['data' => '编辑商品信息成功', 'status' => '1', 'goods_id' => $goods_id]);
+    }
+
+    //修改图片排序
+    public function thumb_edit_displayorder(Request $request)
+    {
+        $admin_data = $request->get('admin_data');      //中间件产生的管理员数据参数
+        $route_name = $request->path();                         //获取当前的页面路由
+        $thumb_id = $request->get('id');
+        $displayorder = $request->get('displayorder');
+        DB::beginTransaction();
+        try {
+            SimpleGoodsThumb::editGoodsThumb(['id'=>$thumb_id],['displayorder'=>$displayorder]);
+            //添加操作日志
+            if ($admin_data['is_super'] == 1) {//超级管理员操作简版店铺的记录
+                OperationLog::addOperationLog('1', '1', '1', $route_name, '在简版店铺管理系统修改了商品图片排序！');//保存操作记录
+            } else {//简版店铺本人操作记录
+                OperationLog::addOperationLog('12', $admin_data['organization_id'], $admin_data['id'], $route_name, '编辑了商品图片排序！');//保存操作记录
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollBack();//事件回滚
+            return response()->json(['data' => '修改图片排序失败，请检查', 'status' => '0']);
+        }
+        return response()->json(['data' => '修改排序成功', 'status' => '1']);
+
     }
 
     //删除商品图片弹窗

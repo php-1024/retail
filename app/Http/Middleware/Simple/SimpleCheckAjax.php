@@ -44,6 +44,7 @@ class SimpleCheckAjax
             case "simple/ajax/check_list_confirm":      //盘点订单审核弹窗
             case "simple/ajax/order_list_details":      //订单详细信息列表
             case "simple/ajax/goods_thumb_delete":      //删除图片弹窗确认
+            case "simple/ajax/thumb_edit_displayorder": //修改图片排序
 
                 $re = $this->checkLoginAndRule($request);
                 return self::format_response($re, $next);

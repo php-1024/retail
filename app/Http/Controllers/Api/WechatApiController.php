@@ -8,6 +8,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\SimpleCategory;
+use App\Models\SimpleGoods;
+use App\Models\SimpleGoodsThumb;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -63,18 +65,54 @@ class WechatApiController extends Controller
      */
     public function category(Request $request)
     {
+        Session::put('fansmanage_id', 2);
         // 商户id
-        $fansmannage_id = $request->fansmanager_id;
+        $fansmanage_id = Session::get('fansmanage_id');
         // 店铺id
         $retail_id = $request->retail_id;
         // 分类列表
-        $category = SimpleCategory::getList([['fansmannage_id', $fansmannage_id], ['simple_id', $retail_id]], 0, 'id');
+        $category = SimpleCategory::getList([['fansmanage_id', $fansmanage_id], ['simple_id', $retail_id]], 0, 'id', 'DESC', ['id', 'name', 'displayorder']);
 
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['categorylist' => $category]];
 
         return response()->json($data);
     }
+
+    /**
+     * 商品列表接口
+     */
+    public function goods_list(Request $request)
+    {
+        Session::put('fansmanage_id', 2);
+        // 商户id
+        $fansmanage_id = Session::get('fansmanage_id');
+        // 店铺id
+        $retail_id = $request->retail_id;
+        // 关键字
+        $keyword = $request->keyword;
+        // 条码
+        $scan_code = $request->scan_code;
+        $where = [['fansmanage_id', $fansmanage_id],['simple_id', $retail_id], ['status', '1']];
+        if ($keyword) {
+            $where[] = ['name', 'LIKE', '%' . $keyword . '%'];
+        }
+        if ($scan_code) {
+            $where[] = ['barcode', $scan_code];
+        }
+        $goodslist = SimpleGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
+        if (empty($goodslist->toArray())) {
+            return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
+        }
+        foreach ($goodslist as $key => $value) {
+            $goodslist[$key]['category_name'] = SimpleCategory::getPluck([['id', $value['category_id']]], 'name');
+            $goodslist[$key]['thumb'] = SimpleGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
+        }
+        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
+        return response()->json($data);
+    }
+
+
 
     /**
      *  计算两组经纬度坐标 之间的距离

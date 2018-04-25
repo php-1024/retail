@@ -1,6 +1,7 @@
 <div class="table-responsive">
     <form class="form-horizontal" method="get">
         <input type="hidden" id="goods_thumb_delete_comfirm_url" value="{{ url('simple/ajax/goods_thumb_delete') }}">
+        <input type="hidden" id="thumb_edit_displayorder_url" value="{{ url('simple/ajax/thumb_edit_displayorder') }}">
         <input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
     </form>
     <table class="table table-bordered table-stripped">
@@ -30,7 +31,7 @@
                 {{asset('/'.$val->thumb)}}
             </td>
             <td>
-                <input type="text" name="displayorder" size="3" value="{{$val->displayorder}}" />
+                <input type="text" name="displayorder" size="3" onchange="return editDisplayorder('{{ $val->id }}',this);" value="{{$val->displayorder}}" />
             </td>
             <td>
                 <button type="button" id="deleteBtn" class="btn btn-danger btn-xs" onclick="getDeleteForm({{ $val->id }})"><i class="fa fa-times"></i></button>
@@ -46,4 +47,46 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function editDisplayorder(id,obj){
+        var url = $('#thumb_edit_displayorder_url').val();
+        var token = $('#_token').val();
+        var displayorder = $(obj).val();
+
+        if(id==''){
+            swal({
+                title: "提示信息",
+                text: '数据传输错误',
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确定",
+            },function(){
+                window.location.reload();
+            });
+            return;
+        }
+
+        var data = {'id':id,'displayorder':displayorder,'_token':token};
+        $.post(url,data,function(response){
+            if(response.status!='1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    //window.location.reload();
+                });
+            }else{
+                swal({
+                    title: "温馨提示",
+                    text: response.data,
+                    type: "success"
+                });
+            }
+
+        });
+    }
+</script>
 
