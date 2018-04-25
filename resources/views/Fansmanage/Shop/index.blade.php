@@ -56,10 +56,11 @@
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg">
+
                                                     @if(!empty($company_info->fansmanageinfo->logo))
-                                                        <img src="{{asset('public/Fansmanage')}}/img/a5.png" class="img-circle" alt="...">
+                                                        <img src="{{asset($company_info->fansmanageinfo->logo)}}" class="img-circle" alt="...">
                                                     @else
-                                                        <img src="{{asset($company_info->logo)}}" class="img-circle" alt="...">
+                                                        <img src="{{asset('public/Fansmanage')}}/img/shop_logo.png" class="img-circle" alt="...">
                                                     @endif
                                                 </div>
                                             </div>
@@ -97,20 +98,20 @@
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">状态</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未关联公众服务号</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        <div class="form-group">
-                                            <label class="col-sm-4 text-right" for="input-id-1">公众号</label>
-                                            <div class="col-sm-8">
-                                                <label class="label label-danger">未关联</label>
-                                            </div>
-                                        </div>
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-sm-4 text-right" for="input-id-1">状态</label>--}}
+                                            {{--<div class="col-sm-8">--}}
+                                                {{--<label class="label label-danger">未关联公众服务号</label>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
+                                        {{--<div class="form-group">--}}
+                                            {{--<label class="col-sm-4 text-right" for="input-id-1">公众号</label>--}}
+                                            {{--<div class="col-sm-8">--}}
+                                                {{--<label class="label label-danger">未关联</label>--}}
+                                            {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="line line-dashed b-b line-lg pull-in"></div>--}}
                                     </div>
                                 </div>
                             </section>
