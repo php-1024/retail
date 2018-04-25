@@ -159,12 +159,11 @@ class Organization extends Model
         return self::with('fansmanageinfo')->where($where)->get();
     }
 
-    //获取分页列表
+    //获取多条信息零售简版
     public static function getListSimple($where)
     {
-        return self::where($where)->join('organization_simpleinfo as s', 'organization.id', '=', 's.organization_id')->select('organization.id', 'organization.organization_name','s.description', 's.simple_logo', 's.simple_address', 's.lat', 's.lng')->get();
+        return self::with('OrganizationSimpleinfo')->where($where)->get();
     }
-
 
     //获取多条信息
     public static function getList($where)
@@ -313,7 +312,7 @@ class Organization extends Model
     }
 
 
-    public function getRetailorder()
+    public function getRetailOrder()
     {
         return $this->hasMany('App\Models\RetailOrder', 'retail_id', "id");
     }
@@ -328,35 +327,47 @@ class Organization extends Model
         if (!empty($res)) {
             $res = $res->toArray();
             $parent_tree = "{$res["parent_tree"]}{$organization_id}";
-            $res_shop = self::with(["getSimpleOrder" => function ($query) {
-                $query->select(["order_price","simple_id","id"])->where(["status" => 1]);
-            }])->select(["id", "organization_name"])->where("parent_tree", "like", "%$parent_tree%")->where(["type" => 4])->get();
+            if ($res["asset_id"] == 10) {
+                $model = self::with(["getRetailOrder" => function ($query) {
+                    $query->select(["order_price", "retail_id", "id", "created_at"])->where(["status" => 1]);
+                }]);
+            } else {
+                $model = self::with(["getSimpleOrder" => function ($query) {
+                    $query->select(["order_price", "simple_id", "id", "created_at"])->where(["status" => 1]);
+                }]);
+            }
+            $res_shop = $model->select(["id", "organization_name"])->where("parent_tree", "like", "%$parent_tree%")->where(["type" => 4])->get();
 
-            dd($res_shop);
+            $today = date("Y-m-d") . " 00:00:00";
+            $today_start = strtotime($today);
+            $today_end = strtotime("+1 day", $today_start);
 
-//            $model = self::select("fansmanage_user.id", "fansmanage_user.fansmanage_id", "fansmanage_user.user_id", "fansmanage_user.open_id", "fansmanage_user.mobile", "fansmanage_user.status", "fansmanage_user.created_at", "user.account")->with(["userOrigin", "user" => function ($query) {
-//                $query->select("id", "account");
-//            }, "userRecommender" => function ($query) {
-//                $query->select("recommender_id", "user_id");
-//            }, "userInfo" => function ($query) {
-//                $query->select("id", "nickname", "head_imgurl", "user_id");
-//            }, "userLabel" => function ($query) {
-//                $query->select("label_id", "user_id");
-//            }])->leftJoin('user', 'fansmanage_user.user_id', '=', 'user.id');
-
-
-
-//            if (!empty($res_shop)) {
-//                $res_shop = $res->toArray();
-//                foreach ($res_shop as $key => $val) {
-//                    if ($res["asset_id"] == 10) {
-//
-//                    } else if ($res["asset_id"] == 12) {
-//
-//                    }
-//                }
-//            }
+            if (!empty($res_shop)) {
+                $res_shop = $res_shop->toArray();
+                foreach ($res_shop as $key => $val) {
+                    $today_revenue_order_money = 0;
+                    $today_revenue_order_num = 0;
+                    $before_revenue_order_money = 0;
+                    $before_revenue_order_num = 0;
+                    foreach ($val["get_simple_order"] as $k => $v) {
+                        if ($v["created_at"] > $today_start && $v["created_at"] <= $today_end) {
+                            $today_revenue_order_money += $v["order_price"];
+                            $today_revenue_order_num += 1;
+                        } else {
+                            $before_revenue_order_money += $v["order_price"];
+                            $before_revenue_order_num += 1;
+                        }
+                    }
+                    $res_shop[$key]["today_order_money"] = $today_revenue_order_money;
+                    $res_shop[$key]["today_order_num"] = $today_revenue_order_num;
+                    $res_shop[$key]["before_order_money"] = $before_revenue_order_money;
+                    $res_shop[$key]["before_order_num"] = $before_revenue_order_num;
+                    $res_shop[$key]["all_order_money"] = $today_revenue_order_money + $before_revenue_order_money;
+                }
+            }
+            return $res_shop;
         }
+        return false;
     }
 }
 

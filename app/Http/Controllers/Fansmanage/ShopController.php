@@ -65,18 +65,16 @@ class ShopController extends Controller
             // 查询服务商附属商务个数
             $org_num = Organization::where([['parent_id', $organization_id]])->count();
             //查询当前商户用的哪套程序
-            $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]],'program_id')->first();
-            $program = Program::getOne(['id'=>$program_id]);//获取当前粉丝管理系统能使用的资产程序
+            $program_id = OrganizationAssets::getPluck(["organization_id" => $admin_data["organization_id"]], 'program_id')->first();
+            $program = Program::getOne(['id' => $program_id]);//获取当前粉丝管理系统能使用的资产程序
             //查询商户信息
-            $company_info = Organization::getOne(['id'=>$admin_data["organization_id"]]);
-
+            $company_info = Organization::getOne(['id' => $admin_data["organization_id"]]);
 
             // 获取营收情况的数据
-
-
+            $revenue_info = Organization::getRevenueInfo($admin_data["organization_id"]);
 
             // 渲染页面
-            return view('Fansmanage/Shop/index', ['login_log_list' => $login_log_list, 'company_info'=>$company_info,'program'=>$program, 'operation_log_list' => $operation_log_list, 'acc_num' => $acc_num, 'org_num' => $org_num, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
+            return view('Fansmanage/Shop/index', ['revenue_info' => $revenue_info, 'login_log_list' => $login_log_list, 'company_info' => $company_info, 'program' => $program, 'operation_log_list' => $operation_log_list, 'acc_num' => $acc_num, 'org_num' => $org_num, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
         }
     }
 
