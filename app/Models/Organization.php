@@ -159,11 +159,12 @@ class Organization extends Model
         return self::with('fansmanageinfo')->where($where)->get();
     }
 
-    //获取多条信息零售简版
+    //获取分页列表
     public static function getListSimple($where)
     {
-        return self::with('OrganizationSimpleinfo')->where($where)->get();
+        return self::where($where)->join('organization_simpleinfo as s', 'organization.id', '=', 's.organization_id')->select('organization.id', 'organization.name','organization.description', 's.logo', 's.address', 's.lat', 's.lng')->get();
     }
+
 
     //获取多条信息
     public static function getList($where)
