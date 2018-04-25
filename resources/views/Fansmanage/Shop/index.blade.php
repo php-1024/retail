@@ -125,37 +125,34 @@
                                             <i class="fa fa-money"></i>
                                         </div>
                                         <div class="value">
-                                            <h1>1688888.03</h1>
+                                            <h1>@if(!empty($shop_simple_info["order_money"]))@else 0 @endif</h1>
                                             <p>元 总营收</p>
                                         </div>
                                     </section>
                                 </div>
-
                                 <div class="col-lg-4 state-overview">
                                     <section class="panel">
                                         <div class="symbol bg-success">
                                             <i class="icon icon-user"></i>
                                         </div>
                                         <div class="value">
-                                            <h1>1680</h1>
+                                            <h1>@if(!empty($shop_simple_info["fans_num"]))@else 0 @endif</h1>
                                             <p>个粉丝</p>
                                         </div>
                                     </section>
                                 </div>
-
                                 <div class="col-lg-4 state-overview">
                                     <section class="panel">
                                         <div class="symbol bg-info">
                                             <i class="fa fa-cutlery"></i>
                                         </div>
                                         <div class="value">
-                                            <h1>10</h1>
+                                            <h1>@if(!empty($shop_simple_info["shop_num"]))@else 0 @endif</h1>
                                             <p>间店铺</p>
                                         </div>
                                     </section>
                                 </div>
                             </div>
-
                             <div class="col-lg-12">
                                 <div class="col-lg-12">
                                     <section class="panel panel-default">

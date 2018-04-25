@@ -317,16 +317,20 @@ class Organization extends Model
         return $this->hasMany('App\Models\RetailOrder', 'retail_id', "id");
     }
 
-
     /**
      * 获取营收情况数据
+     * @param $organization_id
+     * @return array|bool|\Illuminate\Database\Eloquent\Collection|static[]
      */
     public static function getRevenueInfo($organization_id)
     {
+        // 找到该组织id 下面的 店铺
         $res = self::select(["asset_id", "parent_tree"])->where(["id" => $organization_id])->first();
         if (!empty($res)) {
             $res = $res->toArray();
+            // 通过结构树找到所有的店铺信息
             $parent_tree = "{$res["parent_tree"]}{$organization_id}";
+            // 如果为10 就是零售的 订单信息，12 就是 简版餐饮 的订单信息
             if ($res["asset_id"] == 10) {
                 $model = self::with(["getRetailOrder" => function ($query) {
                     $query->select(["order_price", "retail_id", "id", "created_at"])->where(["status" => 1]);
@@ -336,28 +340,37 @@ class Organization extends Model
                     $query->select(["order_price", "simple_id", "id", "created_at"])->where(["status" => 1]);
                 }]);
             }
+            // 获取数据
             $res_shop = $model->select(["id", "organization_name"])->where("parent_tree", "like", "%$parent_tree%")->where(["type" => 4])->get();
 
-            $today = date("Y-m-d") . " 00:00:00";
-            $today_start = strtotime($today);
+            // 今天开始的时间戳
+            $today_start = strtotime(date("Y-m-d") . " 00:00:00");
+            // 今天结束的时间戳
             $today_end = strtotime("+1 day", $today_start);
 
             if (!empty($res_shop)) {
                 $res_shop = $res_shop->toArray();
                 foreach ($res_shop as $key => $val) {
+                    // 今天的营收金额情况
                     $today_revenue_order_money = 0;
+                    // 今天的营收订单情况
                     $today_revenue_order_num = 0;
+                    // 今天的营收金额情况
                     $before_revenue_order_money = 0;
+                    // 历史的营收订单情况
                     $before_revenue_order_num = 0;
                     foreach ($val["get_simple_order"] as $k => $v) {
                         if ($v["created_at"] > $today_start && $v["created_at"] <= $today_end) {
+                            // 累加金额
                             $today_revenue_order_money += $v["order_price"];
+                            // 累加订单
                             $today_revenue_order_num += 1;
                         } else {
                             $before_revenue_order_money += $v["order_price"];
                             $before_revenue_order_num += 1;
                         }
                     }
+                    // 处理数据
                     $res_shop[$key]["today_order_money"] = $today_revenue_order_money;
                     $res_shop[$key]["today_order_num"] = $today_revenue_order_num;
                     $res_shop[$key]["before_order_money"] = $before_revenue_order_money;
@@ -365,7 +378,44 @@ class Organization extends Model
                     $res_shop[$key]["all_order_money"] = $today_revenue_order_money + $before_revenue_order_money;
                 }
             }
+            // 返回数据
             return $res_shop;
+        }
+        return false;
+    }
+
+
+    public static function getShopSimpleInfo($organization_id)
+    {
+        $res = self::select(["asset_id", "parent_tree"])->where(["id" => $organization_id])->first();
+
+
+        if (!empty($res)) {
+            $res = $res->toArray();
+            // 通过结构树找到所有的店铺信息
+            $parent_tree = "{$res["parent_tree"]}{$organization_id}";
+            // 获取数据
+            $res_shop = self::select(["id", "organization_name"])->where("parent_tree", "like", "%$parent_tree%")->where(["type" => 4])->get();
+
+            if (!empty($res_shop)) {
+                $res_shop = $res_shop->toArray();
+
+                $res_shop["shop_num"] = 0;
+                $res_shop["order_money"] = 0;
+                $res_shop["fans_num"] = 0;
+
+                $res_shop["shop_num"] = count($res_shop);
+
+                foreach ($res_shop as $val) {
+                    $res_shop["fans_num"] += FansmanageUser::where(["id" => $val["id"]])->count("id");
+                    if ($res["asset_id"] == 10) {
+                        $res_shop["order_money"] += RetailOrder::where(["status" => 1, "retail_id" => $val["id"]])->sum("order_price");
+                    } else {
+                        $res_shop["order_money"] += SimpleOrder::where(["status" => 1, "simple_id" => $val["id"]])->sum("order_price");
+                    }
+                }
+                return $res_shop;
+            }
         }
         return false;
     }
