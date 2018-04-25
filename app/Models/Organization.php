@@ -162,7 +162,7 @@ class Organization extends Model
     //获取分页列表
     public static function getListSimple($where)
     {
-        return self::where($where)->join('organization_simpleinfo as s', 'organization.id', '=', 's.organization_id')->select('organization.id', 'organization.organization_name','organization.description', 's.logo', 's.address', 's.lat', 's.lng')->get();
+        return self::where($where)->join('organization_simpleinfo as s', 'organization.id', '=', 's.organization_id')->select('organization.id', 'organization.organization_name','s.description', 's.logo', 's.address', 's.lat', 's.lng')->get();
     }
 
 
