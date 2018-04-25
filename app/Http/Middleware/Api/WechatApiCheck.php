@@ -18,7 +18,7 @@ class WechatApiCheck
         $route_name = $request->path();
         switch ($route_name) {
             /*****登录*****/
-            case "api/wechatapi/store_list"://检测店铺列表提交数据
+            case "api/wechatApi/store_list"://检测店铺列表提交数据
                 $re = $this->checkTokenAndStoreList($request);
                 return self::format_response($re, $next);
                 break;
