@@ -46,7 +46,7 @@ class WechatApiController extends Controller
             unset($data[$k]['lng']);
         }
         // 数据返回
-        $data = ['status' => '1', 'msg' => '登陆成功', 'data' => ['storelist' => $data]];
+        $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $data]];
 
         return response()->json($data);
     }
