@@ -56,7 +56,9 @@
                                         <div class="form-group clearfix text-center m-t">
                                             <div class="inline">
                                                 <div class="thumb-lg">
+                                                    {{ $company_info->fansmanageinfo->logo }}
                                                     @if(!empty($company_info->fansmanageinfo->logo))
+
                                                         <img src="{{asset('public/Fansmanage')}}/img/a5.png" class="img-circle" alt="...">
                                                     @else
                                                         <img src="{{asset($company_info->logo)}}" class="img-circle" alt="...">
