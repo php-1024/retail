@@ -962,7 +962,8 @@ Route::group(['prefix' => 'api'], function () {
 
     //wechat接口
     Route::group(['prefix' => 'wechatApi'], function () {
-        Route::post('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//登入接口
+        Route::post('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//店铺列表
+        Route::any('category', 'Api\WechatApiController@category')->middleware('WechatApiCheck');//店铺分类接口
     });
 
 });
