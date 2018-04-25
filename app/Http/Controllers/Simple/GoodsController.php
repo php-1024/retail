@@ -47,11 +47,11 @@ class GoodsController extends Controller
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
         $goods_name = SimpleGoods::checkRowExists(['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'name' => $name]);
-        $is_barcode = SimpleGoods::checkRowExists(['barcode' => $barcode ]);
+        $is_barcode = SimpleGoods::checkRowOne(['barcode' => $barcode ]);
         if ($goods_name) {//判断商品名称是已经存在
             return response()->json(['data' => '商品名称重名，请重新输入！', 'status' => '0']);
         }
-        if ($is_barcode) {//判断商品条码是已经存在
+        if ($is_barcode) {//判断商品条码是否唯一
             return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
         }
         if ($category_id == 0) {
@@ -112,8 +112,7 @@ class GoodsController extends Controller
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
         $is_barcode = SimpleGoods::checkRowOne(['barcode' => $barcode ]);
-        dd($is_barcode);
-        if ($is_barcode) {//判断商品条码是已经存在
+        if ($is_barcode) {//判断商品条码是否唯一
             return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
         }
         if ($category_id == 0) {
