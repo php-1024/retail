@@ -33,11 +33,6 @@ class SimpleGoods extends Model{
         return $this->hasMany('App\Models\SimpleGoodsThumb','goods_id','id');
     }
 
-    //和SimpleGoodsThumb表一对一的关系
-    public function GoodsThumb(){
-        return $this->hasOne('App\Models\SimpleGoodsThumb','goods_id','id');
-    }
-
 
 
     //获取单条餐饮商品信息
@@ -50,12 +45,22 @@ class SimpleGoods extends Model{
         return self::where($where)->value($pluck);
     }
 
+    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    public static function checkRowExists($where){
+        $row = self::getPluck($where,'id');
+        if(empty($row)){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     //查询数据是否唯一
     public static function checkRowOne($where){
         $row = self::where($where)->get()->count();
-        if($row == 1){
+        if($row == '1' || $row == '0'){//false证明唯一
             return false;
-        }else{
+        }else{//true证明不唯一
             return true;
         }
     }
@@ -101,14 +106,14 @@ class SimpleGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('GoodsThumb');
+        $model = self::with('Organization');
         if(!empty($search_data['category_id'])){
             $model = $model->where([['category_id',$search_data['category_id']]]);
         }
         if(!empty($search_data['goods_name'])){
             $model = $model->where('name','like','%'.$search_data['goods_name'].'%');
         }
-        return $model->with('Organization')->with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 
