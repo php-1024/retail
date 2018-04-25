@@ -249,11 +249,17 @@ class StoreController extends Controller
         $mobile = $request->input('mobile');
         // 获取上传上来的图片信息
         $file = $request->file('simple_logo');
+
+        dump(request()->all());
+
+        dump($file);
+        exit;
         // 判断图片的格式
         if (!in_array(strtolower($file->getClientOriginalExtension()), ['jpeg', 'jpg', 'gif', 'gpeg', 'png'])) {
             // 不对就进行数据的返回
             return response()->json(['status' => '0', 'data' => '错误的图片格式']);
         }
+
         // 检测图片是否有效
         if ($file->isValid()) {
             // 重命名
