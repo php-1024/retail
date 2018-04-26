@@ -84,6 +84,7 @@ class WechatApiCheck
             return self::res(1, $re['response']);
         }
     }
+
     /**
      * 检测token值 And 检测店铺购物车商品添加提交数据
      */
@@ -125,7 +126,7 @@ class WechatApiCheck
      */
     public function checkRetailId($request)
     {
-        if (empty($request->input('retail_id'))) {
+        if (empty($request->input('store_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1, $request);
