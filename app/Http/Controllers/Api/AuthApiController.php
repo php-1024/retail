@@ -177,6 +177,8 @@ class AuthApiController extends Controller
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+            var_dump($user_info);
+            exit;
             // 用户数据处理
             $param_user_info["user_id"] = $zerone_user_id;
             $param_user_info["nickname"] = $user_info["nickname"];
