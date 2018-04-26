@@ -22,7 +22,7 @@ class LoginController extends Controller
      */
     public function display()
     {
-        dump(Session::flashInput('zerone_system_captcha'));
+        dump(Session::get('zerone_system_captcha'))
         return view('Zerone/Login/display');
     }
 
