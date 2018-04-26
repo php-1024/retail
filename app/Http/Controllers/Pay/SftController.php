@@ -21,7 +21,6 @@ use Symfony\Component\VarDumper\Dumper\DataDumperInterface;
 
 class SftController extends Controller
 {
-
     protected $payChannel = [
         "wp" => ["payment_institution" => "WXZF", "mark" => "微信支付", "pay_type" => "PT312"],
         "ap" => ["payment_institution" => "ALZF", "mark" => "支付宝", "pay_type" => "PT312"],
@@ -64,7 +63,6 @@ class SftController extends Controller
 
     public function test()
     {
-
         // 订单生成
         $api_url = 'http://mgw.shengpay.com/web-acquire-channel/pay/order.htm';
         $param_body["merchantNo"] = $this->merchantNo;
