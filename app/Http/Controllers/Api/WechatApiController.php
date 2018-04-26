@@ -122,9 +122,11 @@ class WechatApiController extends Controller
     {
         Session::put('fansmanage_id', 2);
         // 用户店铺id
-        $user_id = $request->user_id;
+//        $user_id = $request->user_id;
+        $user_id = '1';
         // 用户零壹id
-        $zerone_user_id = $request->zerone_user_id;
+//        $zerone_user_id = $request->zerone_user_id;
+        $zerone_user_id = '1';
         // 联盟主id
         $fansmanage_id = Session::get('fansmanage_id');
         // 店铺id
