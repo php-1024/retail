@@ -166,8 +166,8 @@ class SimpleCheckAjax
             return self::res(1, $request);
         } else {
             //用户输入验证码错误
-            //return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
-            return self::res(1, $request);
+            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
+//            return self::res(1, $request);
         }
     }
 
