@@ -40,7 +40,7 @@ class DashboardController extends Controller
         /**
          * 服务商管理系统--管理人员
          */
-        $organization_id = Organization::getList(['program_id'=>'2']);
+        $organization_id = Organization::getList(['type'=>'2']);
         $angnt_account = '0';
         foreach ($organization_id as $key=>$val){
             $angnt_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
@@ -49,12 +49,22 @@ class DashboardController extends Controller
         /**
          * 商户管理系统--管理人员
          */
-        $organization_id = Organization::getList(['program_id'=>'3']);
+        $organization_id = Organization::getList(['type'=>'3']);
         $fansmanage_account = '0';
         foreach ($organization_id as $key=>$val){
             $fansmanage_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
         }
         dump($fansmanage_account);
+
+        /**
+         * 所有业务系统--管理人员
+         */
+        $organization_id = Organization::getList(['type'=>'4']);
+        $store_account = '0';
+        foreach ($organization_id as $key=>$val){
+            $store_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
+        }
+        dump($store_account);
 
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
