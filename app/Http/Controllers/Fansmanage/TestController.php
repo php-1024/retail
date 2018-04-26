@@ -31,6 +31,8 @@ class TestController extends Controller
         $param["open_id"] = 1;
 
         $res = FansmanageUser::insertData($param, "update_create",["open_id" => 1]);
+
+        $a = "9_9WDSjSu5LG0h-6fQDC3cdLRsQ9PZyOAjCjRbcdXkwgV8Y9smltRNwUaF2mjjljupgRdg7v6umsLvP_KJPYVArw";
         var_dump($res);
 
 

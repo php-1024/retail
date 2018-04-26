@@ -414,6 +414,9 @@ class SftController extends Controller
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
+            var_dump($openid);
+            var_dump($res_access_arr['access_token']);
+            exit;
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
