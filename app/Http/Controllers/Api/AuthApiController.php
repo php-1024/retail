@@ -108,6 +108,7 @@ class AuthApiController extends Controller
         try {
             // 获取account 最大的值，然后就可以进行数据的累加
             $account = User::max("account");
+            $param["account"] = ++$account;
             $param["password"] = 123456;
             $param["safepassword"] = 123456;
             $param["zerone_open_id"] = $openid;
