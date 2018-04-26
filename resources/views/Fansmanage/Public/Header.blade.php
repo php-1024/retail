@@ -37,11 +37,11 @@
                 </li>
                 @endif
                 <li>
-                    <a href="profile.html">账号信息</a>
+                    <a href="{{url('fansmanage/account/profile')}}">账号信息</a>
                 </li>
 
                 <li>
-                    <a href="password.html">修改密码</a>
+                    <a href="{{url('fansmanage/account/password')}}">修改密码</a>
                 </li>
                 <li class="divider"></li>
                 <li>
