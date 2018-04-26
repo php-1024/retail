@@ -66,6 +66,7 @@ class AuthApiController extends Controller
      */
     public function getShopAuth()
     {
+        var_dump(request()->get("organization_id"));
         // 获取第三方授权信息
         $this->getShopBaseInfo(request()->get("organization_id"));
         $code = request()->input('code');
