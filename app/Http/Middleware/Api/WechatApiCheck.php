@@ -29,6 +29,7 @@ class WechatApiCheck
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/shopping_cart_add"://检测店铺购物车商品添加提交数据
+            case "api/wechatApi/shopping_cart_reduce"://检测店铺购物车商品减少提交数据
                 $re = $this->checkTokenAndShoppingCartAdd($request);
                 return self::format_response($re, $next);
                 break;
