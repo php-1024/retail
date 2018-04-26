@@ -50,10 +50,10 @@ class AuthApiController extends Controller
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
             $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            if($res == true) {
+            if ($res == true) {
                 return redirect(request()->root() . "/api/authApi/change_trains");
-            }else{
-                Header("Location:".request()->root() . "/api/authApi/zerone_auth");
+            } else {
+                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
             }
         }
     }
@@ -154,7 +154,6 @@ class AuthApiController extends Controller
         var_dump(session("zerone_auth_info"));
         var_dump($organization_id);
         exit;
-
 
 
         // 事务处理
