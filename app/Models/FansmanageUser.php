@@ -160,8 +160,6 @@ class FansmanageUser extends Model
                 break;
         }
 
-        var_dump($res);
-        exit;
         if (!empty($res)) {
             return $res->toArray();
         } else {

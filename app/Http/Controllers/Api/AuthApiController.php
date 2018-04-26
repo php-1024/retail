@@ -170,7 +170,7 @@ class AuthApiController extends Controller
 
 
             // 创建或者更新粉丝数据
-            $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $openid]);
+            $fansmanage_user = FansmanageUser::insertData($param, "update_create",["open_id" => $openid]);
 
 
             var_dump($fansmanage_user);
