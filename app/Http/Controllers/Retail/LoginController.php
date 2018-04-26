@@ -20,6 +20,7 @@ class LoginController extends Controller
     //登录处理
     public function display()
     {
+        dump(Session::get('retail_system_captcha'));
         return view('Retail/Login/display');
     }
 
