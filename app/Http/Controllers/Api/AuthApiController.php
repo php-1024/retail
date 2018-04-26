@@ -74,8 +74,12 @@ class AuthApiController extends Controller
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
-            $this->setAuthorizeShopInfo($appid, $code);
-            return redirect(request()->root() . "/api/authApi/change_trains");
+            $res = $this->setAuthorizeShopInfo($appid, $code);
+            if ($res == true) {
+                return redirect(request()->root() . "/api/authApi/change_trains");
+            } else {
+                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
+            }
         }
     }
 
@@ -149,12 +153,6 @@ class AuthApiController extends Controller
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
         $organization_id = 2;
-
-
-        var_dump(session("zerone_auth_info"));
-        var_dump($organization_id);
-        exit;
-
 
         // 事务处理
         DB::beginTransaction();
