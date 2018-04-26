@@ -49,8 +49,12 @@ class AuthApiController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return redirect(request()->root() . "/api/authApi/change_trains");
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            if($res == true) {
+                return redirect(request()->root() . "/api/authApi/change_trains");
+            }else{
+                Header("Location:".request()->root() . "/api/authApi/zerone_auth");
+            }
         }
     }
 
@@ -107,8 +111,6 @@ class AuthApiController extends Controller
             $param["zerone_open_id"] = $openid;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
 
-
-            dd($res);
             session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
             \Session::save();
             // 数据提交
