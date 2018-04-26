@@ -6,6 +6,7 @@
 namespace App\Http\Middleware\Api;
 
 use App\Models\Account;
+use App\Models\WechatAuthorization;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
@@ -26,6 +27,11 @@ class WechatApiCheck
                 $re = $this->checkTokenAndCategory($request);
                 return self::format_response($re, $next);
                 break;
+
+                // 测试
+            case "api/authApi/test11" :
+                $this->checkToken($request);
+
         }
         return $next($request);
     }
@@ -103,14 +109,61 @@ class WechatApiCheck
     }
 
 
-
-
     /**
      * 进入所有页面的前置流程
      */
     public function checkToken($request)
     {
-        return self::res(1, $request);
+//        return self::res(1, $request);
+
+        // 获取组织id
+        $organization_id = request()->get("organization_id");
+
+        // 判断公众号是否授权给零壹第三方公众号平台
+        $res = $this->getShopBaseInfo($organization_id);
+        if ($res === false) {
+            return "微信公众号没有授权到第三方";
+        }
+
+        // 跳转自己的地址
+        $self_path = ["api/authApi/zerone_auth", "api/authApi/shop_auth", "api/authApi/change_trains"];
+        // 初次访问的地址
+        $url = request()->fullUrl();
+
+        if (!in_array(request()->path(), $self_path)) {
+            session(["zerone_auth_info.initial_url_address" => $url]);
+        }
+
+        // 刷新并获取授权令牌
+        $authorization_info = \Wechat::refresh_authorization_info($organization_id);
+        if ($authorization_info === false) {
+            return "微信公众号没有授权到第三方";
+        }
+
+        // 判断是否存在 零壹服务用户id
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            Header("Location:http://develop.01nnt.com/pay/sft/test12");
+        }
+
+        // 判断 session 中是否存在店铺id
+        if (empty(session("zerone_auth_info.shop_user_id"))) {
+            Header("Location:http://develop.01nnt.com/pay/sft/test13");
+        }
+
+        // 添加参数
+        request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
+    }
+
+
+    /**
+     * 获取店铺公众号的基本信息
+     */
+    public function getShopBaseInfo($organization_id)
+    {
+        // 获取公众号的基本信息
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
+        // 判断公众号是否在零壹第三方平台授权过
+        return $res;
     }
 
 
