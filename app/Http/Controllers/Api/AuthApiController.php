@@ -175,7 +175,7 @@ class AuthApiController extends Controller
             var_dump($fansmanage_user);
 
             // 缓存用户的店铺id
-            session(["zerone_auth_info.shop_user_id" =>2222222]);
+            session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
 
             var_dump(session("zerone_auth_info"));
