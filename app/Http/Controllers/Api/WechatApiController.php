@@ -281,6 +281,9 @@ class WechatApiController extends Controller
                     if ($cart_data[$key]['num'] == '0') {
                         // 删除缓存中的商品
                         unset($cart_data[$key]);
+                        // 防止跳出循环，查不到商品
+                        $goods_repeat[] = $value['goods_id'];
+                        // 跳出这次循环
                         continue;
                         // 如果商品减少为负数
                     } elseif ($cart_data[$key]['num'] < 0) {
