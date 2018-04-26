@@ -147,8 +147,7 @@ class AuthApiController extends Controller
         $organization_id = request()->get("organization_id");
 
 
-        var_dump($openid);
-        var_dump($zerone_user_id);
+        var_dump(session("zerone_auth_info"));
         var_dump($organization_id);
         exit;
 
