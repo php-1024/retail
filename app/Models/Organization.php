@@ -351,7 +351,6 @@ class Organization extends Model
             if (!empty($res_shop)) {
                 $res_shop = $res_shop->toArray();
                 foreach ($res_shop as $key => $val) {
-                    dump($val);
                     // 今天的营收金额情况
                     $today_revenue_order_money = 0;
                     // 今天的营收订单情况
