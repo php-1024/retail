@@ -167,6 +167,7 @@ class AuthApiController extends Controller
             $param["user_id"] = $zerone_user_id;
             // 店铺公众号  openid
             $param["open_id"] = $openid;
+
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
 
@@ -174,7 +175,7 @@ class AuthApiController extends Controller
             var_dump($fansmanage_user);
 
             // 缓存用户的店铺id
-            session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
+            session(["zerone_auth_info.shop_user_id" =>2222222]);
             \Session::save();
 
             var_dump(session("zerone_auth_info"));
