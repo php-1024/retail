@@ -307,6 +307,11 @@ class SftController extends Controller
 
     public function test13()
     {
+        if(empty(session("zerone_auth_info.zerone_user_id"))){
+            dd(111);
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
+        }
+
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
@@ -319,6 +324,7 @@ class SftController extends Controller
             return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
+
 
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
@@ -398,6 +404,7 @@ class SftController extends Controller
         // 组织id
         $organization_id = 2;
 
+
         DB::beginTransaction();
         try {
             // 店铺公众号的信息
@@ -441,6 +448,8 @@ class SftController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            exit;
             DB::rollback();
             return false;
         }
