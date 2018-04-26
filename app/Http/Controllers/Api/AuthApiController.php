@@ -171,22 +171,12 @@ class AuthApiController extends Controller
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create",["open_id" => $openid]);
 
-
-            var_dump($fansmanage_user);
-
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
 
-            var_dump(session("zerone_auth_info"));
-            var_dump($openid);
-
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
-            var_dump($user_info);
-            exit;
-
 
             // 用户数据处理
             $param_user_info["user_id"] = $zerone_user_id;
