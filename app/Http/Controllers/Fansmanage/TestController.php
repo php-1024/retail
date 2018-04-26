@@ -30,7 +30,7 @@ class TestController extends Controller
         // 店铺公众号  openid
         $param["open_id"] = 1;
 
-        $res = FansmanageUser::updateOrCreate($param, ["open_id" => 1])->toArray();
+        $res = FansmanageUser::insertData($param, ["open_id" => 1]);
         var_dump($res);
 
 
