@@ -41,6 +41,7 @@ class DashboardController extends Controller
          * 服务商管理系统--管理人员
          */
         $organization_id = Organization::getList(['program_id'=>'2']);
+        $angnt_account = '0';
         foreach ($organization_id as $key=>$val){
             $angnt_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
         }
