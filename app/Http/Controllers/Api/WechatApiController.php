@@ -265,7 +265,6 @@ class WechatApiController extends Controller
         $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
         // 查看缓存是否存有商品
         $cart_data = Redis::get($key_id);
-        print_r($cart_data);exit;
         // 如果有商品
         if (empty($cart_data)) {
             return response()->json(['status' => '0', 'msg' => '购物车没商品，无法操作', 'data' => '']);
