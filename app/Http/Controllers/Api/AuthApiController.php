@@ -63,9 +63,6 @@ class AuthApiController extends Controller
     {
         // 获取第三方授权信息
         $this->getShopBaseInfo();
-
-        dd(session("zerone_auth_info"));
-
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
 
