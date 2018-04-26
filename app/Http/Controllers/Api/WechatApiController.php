@@ -268,6 +268,8 @@ class WechatApiController extends Controller
         if (empty($cart_data)) {
             return response()->json(['status' => '0', 'msg' => '购物车没商品，无法操作', 'data' => '']);
         } else {
+            // 库存
+            $stock += $num;
             // 序列化转成数组
             $cart_data = unserialize($cart_data);
             $total = 0;
