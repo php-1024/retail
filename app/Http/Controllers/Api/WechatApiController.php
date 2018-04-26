@@ -142,7 +142,7 @@ class WechatApiController extends Controller
         // 商品库存
         $stock = $request->stock;
         // 查询该店铺是否可以零库存开单
-        $config = SimpleConfig::getPluck([['simple_id', $store_id], ['cfg_name'], 'allow_zero_stock'], 'cfg_value');
+        $config = SimpleConfig::getPluck([['simple_id', $store_id], ['cfg_name', 'allow_zero_stock']], 'cfg_value');
         // 如果值为1 表示不能
         if ($config != '1') {
             // 库存不足
