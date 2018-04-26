@@ -24,15 +24,18 @@ class TestController extends Controller
 {
     public function test()
     {
-        $param["fansmanage_id"] = 1;
-        // 用户id
-        $param["user_id"] = 1;
-        // 店铺公众号  openid
-        $param["open_id"] = 1;
+//        $param["fansmanage_id"] = 1;
+//        // 用户id
+//        $param["user_id"] = 1;
+//        // 店铺公众号  openid
+//        $param["open_id"] = 1;
+//
+//        $res = FansmanageUser::insertData($param, "update_create",["open_id" => 1]);
 
-        $res = FansmanageUser::insertData($param, "update_create",["open_id" => 1]);
-
+        $b = "oyhbt1D_a5HEwdcT6pPQVq94TBxw";
         $a = "9_9WDSjSu5LG0h-6fQDC3cdLRsQ9PZyOAjCjRbcdXkwgV8Y9smltRNwUaF2mjjljupgRdg7v6umsLvP_KJPYVArw";
+
+        $res = \Wechat::get_web_user_info($a,$b);
         var_dump($res);
 
 
