@@ -198,6 +198,7 @@ class AuthApiController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump(session("zerone_auth_info"));
             var_dump($e->getMessage());
             exit;
             DB::rollback();
