@@ -307,9 +307,10 @@ class SftController extends Controller
 
     public function test13()
     {
-//        if(empty(session("zerone_auth_info.zerone_user_id"))){
-//            return redirect("http://develop.01nnt.com/pay/sft/test14");
-//        }
+        if(empty(session("zerone_auth_info.zerone_user_id"))){
+            dd(111);
+            return redirect("http://develop.01nnt.com/pay/sft/test14");
+        }
 
         $this->getShopBaseInfo();
         $code = request()->input('code');
