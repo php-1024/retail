@@ -295,7 +295,7 @@ class WechatApiController extends Controller
                 // 购物车总数量
                 $total += $cart_data[$key]['num'];
             }
-            
+            echo $total;exit;
             // 查询缓存中是否有该商品
             $re = in_array($goods_id, $goods_repeat);
             // 如果没有该商品
