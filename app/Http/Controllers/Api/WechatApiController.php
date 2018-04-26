@@ -270,6 +270,7 @@ class WechatApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '购物车没商品，无法操作', 'data' => '']);
         } else {
             $cart_data = unserialize($cart_data);
+            print_r($cart_data);exit;
             $total = 0;
             $goods_repeat = [];
             foreach ($cart_data as $key => $value) {
