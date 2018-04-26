@@ -25,6 +25,7 @@ class WechatApiCheck
                 break;
             case "api/wechatApi/category"://检测店铺分类提交数据
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
+            case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
                 $re = $this->checkTokenAndCategory($request);
                 return self::format_response($re, $next);
                 break;
@@ -83,6 +84,7 @@ class WechatApiCheck
             return self::res(1, $re['response']);
         }
     }
+
     /**
      * 检测token值 And 检测店铺购物车商品添加提交数据
      */
@@ -124,7 +126,7 @@ class WechatApiCheck
      */
     public function checkRetailId($request)
     {
-        if (empty($request->input('retail_id'))) {
+        if (empty($request->input('store_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1, $request);

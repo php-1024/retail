@@ -18,7 +18,7 @@ class ZeroneCheck
         $route_name = $request->path();//获取当前的页面路由
         switch ($route_name) {
             /*****登录页,如果已经登录则不需要再次登录*****/
-                // 登录页,如果已经登录则不需要再次登录
+            // 登录页,如果已经登录则不需要再次登录
             case "zerone/login":
                 // 获取用户登录存储的SessionId
                 $sess_key = Session::get('zerone_account_id');
@@ -30,7 +30,7 @@ class ZeroneCheck
 
             /****仅检测是否登录及是否具有权限****/
 
-                // 系统管理
+            // 系统管理
             case "zerone":                           //后台首页
             case "zerone/dashboard/operation_log":   //战区管理所有操作记录
             case "zerone/dashboard/login_log":       //战区管理所有登录记录
@@ -66,7 +66,6 @@ class ZeroneCheck
             case "zerone/fansmanage/fansmanage_structure":    //商户店铺架构
             case "zerone/fansmanage/fansmanage_program":      //商户程序管理
             case "zerone/fansmanage/fansmanage_store":        //商户划拨管理
-
 
 
                 //支付审核
