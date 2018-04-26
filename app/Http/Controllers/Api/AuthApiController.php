@@ -48,12 +48,13 @@ class AuthApiController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            if ($res == true) {
-                return redirect(request()->root() . "/api/authApi/change_trains");
-            } else {
-                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
-            }
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return redirect(request()->root() . "/api/authApi/change_trains");
+//            if ($res == true) {
+//                return redirect(request()->root() . "/api/authApi/change_trains");
+//            } else {
+//                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
+//            }
         }
     }
 
@@ -74,12 +75,13 @@ class AuthApiController extends Controller
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
-            $res = $this->setAuthorizeShopInfo($appid, $code, $access_token);
-            if ($res == true) {
-                return redirect(request()->root() . "/api/authApi/change_trains");
-            } else {
-                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
-            }
+            $this->setAuthorizeShopInfo($appid, $code, $access_token);
+            return redirect(request()->root() . "/api/authApi/change_trains");
+//            if ($res == true) {
+//                return redirect(request()->root() . "/api/authApi/change_trains");
+//            } else {
+//                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
+//            }
         }
     }
 
