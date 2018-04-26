@@ -182,8 +182,8 @@ class WechatApiCheck
         }
 
         // 判断组织id 是否 跟之前一致
-        if(!empty(session("zerone_auth_info.organization_id")) && session("zerone_auth_info.organization_id") != $organization_id){
-            \Session::put("zerone_auth_info","");
+        if (!empty(session("zerone_auth_info.organization_id")) && session("zerone_auth_info.organization_id") != $organization_id) {
+            \Session::put("zerone_auth_info", "");
         }
 
         session(["zerone_auth_info.organization_id" => $organization_id]);
@@ -197,14 +197,13 @@ class WechatApiCheck
         }
 
 
-
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
-
         if ($authorization_info === false) {
             exit("微信公众号没有授权到第三方");
         }
 
+        // 判断是否存在 地址
         if (empty(session("zerone_auth_info.initial_url_address"))) {
             Header("Location:" . $url);
             return;
@@ -263,4 +262,3 @@ class WechatApiCheck
 
 }
 
-?>
