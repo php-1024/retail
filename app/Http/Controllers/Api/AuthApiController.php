@@ -75,6 +75,8 @@ class AuthApiController extends Controller
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $res = $this->setAuthorizeShopInfo($appid, $code);
+            var_dump($res);
+            exit;
             if ($res == true) {
                 return redirect(request()->root() . "/api/authApi/change_trains");
             } else {
