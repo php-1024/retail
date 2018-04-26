@@ -982,6 +982,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('change_trains', 'Api\AuthApiController@changeTrains')->middleware('WechatApiCheck');
         // 测试
         Route::any('test11', 'Api\AuthApiController@test11')->middleware('WechatApiCheck');
+        Route::any('test12', 'Api\AuthApiController@test12')->middleware('WechatApiCheck');
 
     });
 
