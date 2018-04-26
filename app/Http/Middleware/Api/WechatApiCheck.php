@@ -186,6 +186,7 @@ class WechatApiCheck
             \Session::put("zerone_auth_info","");
         }
 
+        var_dump(session("zerone_auth_info"));
 
 
         // 跳转自己的地址
