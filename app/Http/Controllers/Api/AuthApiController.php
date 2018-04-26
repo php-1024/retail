@@ -94,7 +94,7 @@ class AuthApiController extends Controller
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
         } else {
-            $this->getAuthorizeZeroneInfo(request()->url());
+            $this->getZeroneAuth();
             return;
         }
 
@@ -138,7 +138,7 @@ class AuthApiController extends Controller
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
         } else {
-            $this->getAuthorizeShopInfo(request()->url());
+            $this->getShopAuth();
             return;
         }
 
