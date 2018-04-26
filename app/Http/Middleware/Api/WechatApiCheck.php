@@ -190,16 +190,18 @@ class WechatApiCheck
             session(["zerone_auth_info.initial_url_address" => $url]);
         }
 
-        var_dump(session("zerone_auth_info"));
-        exit;
-
-
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
 
         if ($authorization_info === false) {
             exit("微信公众号没有授权到第三方");
         }
+
+        if (empty(session("zerone_auth_info.initial_url_address"))) {
+            Header("Location:" . $url);
+            exit;
+        }
+
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
