@@ -3,6 +3,7 @@
  * simple_order表的模型
  *
  */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -30,13 +31,15 @@ class SimpleOrder extends Model
     }
 
     //和account表一对一的关系
-    public function account(){
-        return $this->hasOne('App\Models\Account', 'id','operator_id');
+    public function account()
+    {
+        return $this->hasOne('App\Models\Account', 'id', 'operator_id');
     }
 
     //和个人信息表一对一的关系
-    public function account_info(){
-        return $this->hasOne('App\Models\AccountInfo', 'account_id','operator_id');
+    public function account_info()
+    {
+        return $this->hasOne('App\Models\AccountInfo', 'account_id', 'operator_id');
     }
 
     public static function getOne($where)
@@ -55,6 +58,16 @@ class SimpleOrder extends Model
             $model = $model->select($select);
         }
         return $model->with('SimpleOrderGoods')->where($where)->orderBy($orderby, $sort)->get();
+    }
+
+    //获取列表
+    public static function getListPaginate($where, $paginate, $orderby, $sort = 'DESC', $select = [])
+    {
+        $model = new SimpleOrder();
+        if (!empty($select)) {
+            $model = $model->select($select);
+        }
+        return $model->with('SimpleOrderGoods')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
 
