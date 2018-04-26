@@ -414,6 +414,7 @@ class SftController extends Controller
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
+            var_dump($openid);
             var_dump($res_access_arr['access_token']);
             exit;
 
