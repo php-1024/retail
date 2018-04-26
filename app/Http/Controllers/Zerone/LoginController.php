@@ -26,6 +26,7 @@ class LoginController extends Controller
         return view('Zerone/Login/display');
     }
 
+
     /**
      * 生成验证码
      */
