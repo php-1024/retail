@@ -188,17 +188,18 @@ class WechatApi
         dump($re);
     }
 
-    /*
+    /**
      * 获取粉丝信息详情
-     *  $authorizer_access_token 第三方平台调用接口凭证
-     * $open_id 粉丝在该公众号下的open_id
+     * @param $authorizer_access_token
+     * @param $open_id
+     * @return mixed
      */
     public function get_fans_info($authorizer_access_token, $open_id)
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $authorizer_access_token . '&openid=' . $open_id . '&lang=zh_CN ';
         $re = \HttpCurl::doGet($url);
-        $re = json_decode($re, true);
-        dump($re);
+        // 结果返回
+        return $this->resultReturnDispose($re, "json");
     }
 
     /*

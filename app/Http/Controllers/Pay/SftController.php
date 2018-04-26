@@ -310,12 +310,13 @@ class SftController extends Controller
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
+        $access_token = $this->wechat_info["authorizer_access_token"];
 
         if (empty($code)) {
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
-            $this->setAuthorizeShopInfo($appid, $code);
+            $this->setAuthorizeShopInfo($appid, $code,$access_token);
             return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
@@ -377,11 +378,13 @@ class SftController extends Controller
 
     public function test14()
     {
+        var_dump(session("zerone_auth_info"));
+        exit;
         $url = session("zerone_auth_info.initial_url_address");
         Header("Location:{$url}");
     }
 
-    public function setAuthorizeShopInfo($appid, $code, $re_url = "")
+    public function setAuthorizeShopInfo($appid, $code, $access_token = "")
     {
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
@@ -414,12 +417,10 @@ class SftController extends Controller
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
-            var_dump($openid);
-            var_dump($res_access_arr['access_token']);
-            exit;
 
             // 获取用户的信息
-            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+//            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+            $user_info = \Wechat::get_fans_info($access_token,$openid);
 
             // 用户id
             $param_user_info["user_id"] = $zerone_user_id;

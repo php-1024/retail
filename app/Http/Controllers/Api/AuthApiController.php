@@ -48,12 +48,13 @@ class AuthApiController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            if ($res == true) {
-                return redirect(request()->root() . "/api/authApi/change_trains");
-            } else {
-                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
-            }
+            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            return redirect(request()->root() . "/api/authApi/change_trains");
+//            if ($res == true) {
+//                return redirect(request()->root() . "/api/authApi/change_trains");
+//            } else {
+//                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
+//            }
         }
     }
 
@@ -68,17 +69,19 @@ class AuthApiController extends Controller
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
+        $access_token = $this->wechat_info["authorizer_access_token"];
 
         if (empty($code)) {
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
-            $res = $this->setAuthorizeShopInfo($appid, $code);
-            if ($res == true) {
-                return redirect(request()->root() . "/api/authApi/change_trains");
-            } else {
-                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
-            }
+            $this->setAuthorizeShopInfo($appid, $code, $access_token);
+            return redirect(request()->root() . "/api/authApi/change_trains");
+//            if ($res == true) {
+//                return redirect(request()->root() . "/api/authApi/change_trains");
+//            } else {
+//                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
+//            }
         }
     }
 
@@ -130,11 +133,11 @@ class AuthApiController extends Controller
      * 保存店铺公众号的用户信息
      * @param $appid
      * @param $code
-     * @param string $re_url
+     * @param string $access_token
      * @return bool
      * @throws \Exception
      */
-    public function setAuthorizeShopInfo($appid, $code, $re_url = "")
+    public function setAuthorizeShopInfo($appid, $code, $access_token)
     {
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
@@ -151,7 +154,7 @@ class AuthApiController extends Controller
         // 零壹用户id
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
-        $organization_id = request()->get("organization_id");
+        $organization_id = 2;
 
         // 事务处理
         DB::beginTransaction();
@@ -164,15 +167,15 @@ class AuthApiController extends Controller
             // 店铺公众号  openid
             $param["open_id"] = $openid;
             // 创建或者更新粉丝数据
-            $fansmanage_user = FansmanageUser::insertData($param, "update_create",["open_id" => $openid]);
+            $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $openid]);
 
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
 
             // 获取用户的信息
-            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
+//            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+            $user_info = \Wechat::get_fans_info($access_token, $openid);
             // 用户数据处理
             $param_user_info["user_id"] = $zerone_user_id;
             $param_user_info["nickname"] = $user_info["nickname"];
