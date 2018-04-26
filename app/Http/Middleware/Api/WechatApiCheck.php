@@ -192,6 +192,8 @@ class WechatApiCheck
 
         var_dump(session("zerone_auth_info"));
         exit;
+
+
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
 
