@@ -973,7 +973,7 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'authApi'], function () {
         // 零壹服务授权
-        Route::any('zerone_auth', 'Api\AuthApiController@getZeroneAuth');
+        Route::any('zerone_auth', 'Api\AuthApiController@getZeroneAuth')->middleware('WechatApiCheck');
         // 商户公众号授权
         Route::any('shop_auth', 'Api\AuthApiController@getShopAuth')->middleware('WechatApiCheck');
         // 授权完毕中转站
