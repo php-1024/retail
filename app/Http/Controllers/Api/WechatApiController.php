@@ -277,7 +277,6 @@ class WechatApiController extends Controller
                 if ($value['goods_id'] == $goods_id) {
                     // 减少商品数量
                     $cart_data[$key]['num'] = $value['num'] - $num;
-                    echo $cart_data[$key]['num'];exit;
                     // 如果数量为0
                     if ($cart_data[$key]['num'] == '0') {
                         // 删除缓存中的商品
@@ -288,6 +287,7 @@ class WechatApiController extends Controller
                     }
                     // 购物车中商品的数量
                     $num = $value['num'] - $num;
+                    echo $num;exit;
                 }
                 //储存商品id
                 $goods_repeat[] = $value['goods_id'];
