@@ -23,6 +23,15 @@ use App\Models\OrganizationRole;
 class DashboardController extends Controller
 {
 
+    //查询系统管理人员数
+    public function account($type,$account)
+    {
+        $organization_id = Organization::getList(['type'=>$type]);
+        foreach ($organization_id as $key=>$val){
+            $account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
+        }
+        return $account;
+    }
     /**
      * 系统管理首页
      */
@@ -36,34 +45,22 @@ class DashboardController extends Controller
          * 零壹管理系统--管理人员
          */
         $zerone_account = Account::getList(['organization_id'=>'1'],0,'id','DESC')->count();
-        dump($zerone_account);
         /**
          * 服务商管理系统--管理人员
          */
-        $organization_id = Organization::getList(['type'=>'2']);
-        $angnt_account = '0';
-        foreach ($organization_id as $key=>$val){
-            $angnt_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
-        }
-        dump($angnt_account);
+        $agent_account = $this->account('2','0');
+
         /**
          * 商户管理系统--管理人员
          */
-        $organization_id = Organization::getList(['type'=>'3']);
-        $fansmanage_account = '0';
-        foreach ($organization_id as $key=>$val){
-            $fansmanage_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
-        }
-        dump($fansmanage_account);
-
+        $company_account = $this->account('3','0');
         /**
          * 所有业务系统--管理人员
          */
-        $organization_id = Organization::getList(['type'=>'4']);
-        $store_account = '0';
-        foreach ($organization_id as $key=>$val){
-            $store_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
-        }
+        $store_account = $this->account('4','0');
+        dump($zerone_account);
+        dump($agent_account);
+        dump($company_account);
         dump($store_account);
 
         $list = Statistics::pluck('item_value')->toArray();//所有数据
