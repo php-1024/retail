@@ -22,7 +22,6 @@ class LoginController extends Controller
      */
     public function display()
     {
-        dump(Session::all());
         return view('Zerone/Login/display');
     }
 
