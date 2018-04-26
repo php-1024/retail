@@ -41,7 +41,10 @@ class DashboardController extends Controller
          * 服务商管理系统--管理人员
          */
         $organization_id = Organization::getList(['program_id'=>'2']);
-        dump($organization_id);
+        foreach ($organization_id as $key=>$val){
+            $angnt_account[] = Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
+        }
+        dump($angnt_account);
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
             'system_personnel' => $list['0'],     //零壹管理系统人员数量
