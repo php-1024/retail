@@ -153,7 +153,6 @@ class FansmanageUser extends Model
     {
         switch ($type) {
             case "update_create":
-                dd(1);
                 $res = self::updateOrCreate($where, $param);
                 break;
             case "first_create":
@@ -161,8 +160,6 @@ class FansmanageUser extends Model
                 break;
         }
 
-        var_dump($res);
-        exit;
         if (!empty($res)) {
             return $res->toArray();
         } else {
