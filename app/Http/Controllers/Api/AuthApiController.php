@@ -96,6 +96,11 @@ class AuthApiController extends Controller
             return;
         }
 
+
+        var_dump($openid);
+        var_dump(123123);
+        exit;
+
         // 事务处理
         DB::beginTransaction();
         try {
@@ -106,6 +111,9 @@ class AuthApiController extends Controller
             $param["safepassword"] = 123456;
             $param["zerone_open_id"] = $openid;
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
+
+
+
 
             session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
             \Session::save();
