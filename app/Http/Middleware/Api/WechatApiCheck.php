@@ -226,6 +226,8 @@ class WechatApiCheck
      */
     public function getShopBaseInfo($organization_id)
     {
+        var_dump($organization_id);
+        exit;
         // 获取公众号的基本信息
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
         // 判断公众号是否在零壹第三方平台授权过
