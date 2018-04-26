@@ -44,7 +44,6 @@ class AuthApiController extends Controller
      */
     public function getZeroneAuth()
     {
-        $this->getShopBaseInfo();
         // 获取 code 地址
         $code = request()->input('code');
         // 如果不存在zerone_openid就进行授权
@@ -68,7 +67,11 @@ class AuthApiController extends Controller
     public function getShopAuth()
     {
         // 获取第三方授权信息
-        $this->getShopBaseInfo();
+        $this->getShopBaseInfo(request()->get("organization_id"));
+        var_dump(request()->get("organization_id"));
+
+
+        exit;
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         $access_token = $this->wechat_info["authorizer_access_token"];
@@ -213,10 +216,10 @@ class AuthApiController extends Controller
     /**
      * 获取店铺公众号的基本信息
      */
-    public function getShopBaseInfo()
+    public function getShopBaseInfo($organization_id)
     {
         // 获取公众号的基本信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => request()->get("organization_id")], ["authorizer_appid", "authorizer_access_token"]);
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;
