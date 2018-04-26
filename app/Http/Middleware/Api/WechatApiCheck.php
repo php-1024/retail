@@ -7,6 +7,7 @@ namespace App\Http\Middleware\Api;
 
 use App\Models\Account;
 use App\Models\WechatAuthorization;
+use App\Models\XhoLog;
 use Closure;
 use Session;
 use Illuminate\Support\Facades\Redis;
