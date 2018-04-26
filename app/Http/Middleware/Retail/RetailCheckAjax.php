@@ -205,14 +205,13 @@ class RetailCheckAjax
         if (empty($request->input('captcha'))) {
             return self::res(0, response()->json(['data' => '请输入验证码', 'status' => '0']));
         }
-        if (Session::get('retail_system_captcha') == $request->input('captcha')) {
+        if (Session::get('branch_system_captcha') == $request->input('captcha')) {
             //把参数传递到下一个程序
             return self::res(1, $request);
         } else {
-            dd(Session::get('retail_system_captcha'),$request->input('captcha'));
             //用户输入验证码错误
-            return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
-//            return self::res(1, $request);
+            //return self::res(0, response()->json(['data' => '验证码错误', 'status' => '0']));
+            return self::res(1, $request);
         }
     }
 
