@@ -66,6 +66,11 @@ class AuthApiController extends Controller
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
 
+
+        dump(session("zerone_auth_info"));
+        dump($appid);
+        exit;
+
         if (empty($code)) {
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
