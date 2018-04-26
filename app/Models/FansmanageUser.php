@@ -153,19 +153,17 @@ class FansmanageUser extends Model
     {
         switch ($type) {
             case "update_create":
-
-                self::where($where)->update($param);
                 $res = self::updateOrCreate($where, $param);
                 break;
             case "first_create":
                 $res = self::firstOrCreate($param);
                 break;
         }
-//
-//        if (!empty($res)) {
-//            return $res->toArray();
-//        } else {
-//            return false;
-//        }
+
+        if (!empty($res)) {
+            return $res->toArray();
+        } else {
+            return false;
+        }
     }
 }
