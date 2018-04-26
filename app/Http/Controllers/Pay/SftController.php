@@ -307,15 +307,10 @@ class SftController extends Controller
 
     public function test13()
     {
-
-
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
 
-        var_dump($appid);
-        var_dump(session("zerone_auth_info"));
-        exit;
         if (empty($code)) {
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
@@ -324,6 +319,7 @@ class SftController extends Controller
             return redirect("http://develop.01nnt.com/pay/sft/test14");
         }
     }
+
 
     public function setAuthorizeZeroneInfo($appid, $appsecret, $code)
     {
@@ -390,6 +386,8 @@ class SftController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
+        dd($res_access_arr);
+        exit;
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
