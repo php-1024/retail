@@ -360,7 +360,13 @@ class Organization extends Model
                     $before_revenue_order_money = 0;
                     // 历史的营收订单情况
                     $before_revenue_order_num = 0;
-                    foreach ($val["get_simple_order"] as $k => $v) {
+                    if ($res["asset_id"] == 10) {
+                        $order_info = $val["get_retail_order"];
+                    }else{
+                        $order_info = $val["get_simple_order"];
+
+                    }
+                    foreach ($order_info as $k => $v) {
                         if ($v["created_at"] > $today_start && $v["created_at"] <= $today_end) {
                             // 累加金额
                             $today_revenue_order_money += $v["order_price"];
