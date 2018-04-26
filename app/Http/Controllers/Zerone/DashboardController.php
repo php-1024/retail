@@ -46,6 +46,15 @@ class DashboardController extends Controller
             $angnt_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
         }
         dump($angnt_account);
+        /**
+         * 商户管理系统--管理人员
+         */
+        $organization_id = Organization::getList(['program_id'=>'3']);
+        $fansmanage_account = '0';
+        foreach ($organization_id as $key=>$val){
+            $fansmanage_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
+        }
+        dump($fansmanage_account);
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
             'system_personnel' => $list['0'],     //零壹管理系统人员数量
