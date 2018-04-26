@@ -307,15 +307,10 @@ class SftController extends Controller
 
     public function test13()
     {
-
-
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
 
-        var_dump($appid);
-        var_dump(session("zerone_auth_info"));
-        exit;
         if (empty($code)) {
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
