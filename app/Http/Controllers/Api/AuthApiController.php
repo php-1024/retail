@@ -96,11 +96,6 @@ class AuthApiController extends Controller
             return;
         }
 
-
-        var_dump($openid);
-        var_dump(123123);
-        exit;
-
         // 事务处理
         DB::beginTransaction();
         try {
@@ -113,8 +108,7 @@ class AuthApiController extends Controller
             $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
 
 
-
-
+            dd($res);
             session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
             \Session::save();
             // 数据提交
