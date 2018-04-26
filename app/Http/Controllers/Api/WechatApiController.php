@@ -112,6 +112,20 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 购物车添加商品
+     */
+    public function shopping_cart_add(Request $request)
+    {
+        Session::put('fansmanage_id', 2);
+        // 商户id
+        $fansmanage_id = Session::get('fansmanage_id');
+        // 店铺id
+        $retail_id = $request->retail_id;
+
+//        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
+        return response()->json($data);
+    }
 
 
     /**
