@@ -63,8 +63,7 @@ class UserCheck
         }
 
 
-        var_dump(session("zerone_auth_info"));
-        exit;
+
 
 
         // 判断 session 中是否存在店铺id
