@@ -66,8 +66,6 @@ class AuthApiController extends Controller
      */
     public function getShopAuth()
     {
-        var_dump(request()->get("organization_id"));
-        exit;
         // 获取第三方授权信息
         $this->getShopBaseInfo(request()->get("organization_id"));
         $code = request()->input('code');
@@ -75,7 +73,7 @@ class AuthApiController extends Controller
         $access_token = $this->wechat_info["authorizer_access_token"];
 
         if (empty($code)) {
-            $url = request()->url();
+//            $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code, $access_token);
