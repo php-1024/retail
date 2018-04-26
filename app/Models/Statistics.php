@@ -22,6 +22,7 @@ class Statistics extends Model
     public static function editStatistics($where,$param){
         $model = self::where($where)->first();
         dump($model->item_value);
+        dump($param);
         $model->save();
     }
 }
