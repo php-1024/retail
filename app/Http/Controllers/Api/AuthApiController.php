@@ -168,6 +168,7 @@ class AuthApiController extends Controller
             // 店铺公众号  openid
             $param["open_id"] = $openid;
 
+
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $openid]);
 
