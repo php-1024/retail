@@ -33,9 +33,9 @@ class TestController extends Controller
 //        $res = FansmanageUser::insertData($param, "update_create",["open_id" => 1]);
 
         $b = "oyhbt1D_a5HEwdcT6pPQVq94TBxw";
-        $a = "9_9WDSjSu5LG0h-6fQDC3cdLRsQ9PZyOAjCjRbcdXkwgV8Y9smltRNwUaF2mjjljupgRdg7v6umsLvP_KJPYVArw";
+        $a = "9_CRuVtir57UeeX22dMp2QTa1IgnsYqaq9Nzf7kkNk7oKr4yy50rGwGf9yhMzAfmbhiFbrzZUezNvJy2HuHqq_EEzQvzX1ajW4h6zJ-GRCymcng6ueC028sYrWbW9DyhvrjHq24vLNwtEjpSQeZTBaAFDVPX";
 
-        $res = \Wechat::get_web_user_info($a,$b);
+        $res = \Wechat::get_fans_info($a,$b);
         var_dump($res);
 
 
