@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Zerone;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Organization;
 use App\Models\Province;
 use App\Models\Warzone;
 use App\Models\LoginLog;
@@ -36,6 +37,11 @@ class DashboardController extends Controller
          */
         $zerone_account = Account::getList(['organization_id'=>'1'],0,'id','DESC')->count();
         dump($zerone_account);
+        /**
+         * 服务商管理系统--管理人员
+         */
+        $organization_id = Organization::getList(['program_id'=>'2']);
+        dump($organization_id);
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
             'system_personnel' => $list['0'],     //零壹管理系统人员数量
