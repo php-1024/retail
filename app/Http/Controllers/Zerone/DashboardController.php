@@ -42,7 +42,7 @@ class DashboardController extends Controller
          */
         $organization_id = Organization::getList(['program_id'=>'2']);
         foreach ($organization_id as $key=>$val){
-            $angnt_account[] = Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
+            $angnt_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
         }
         dump($angnt_account);
         $list = Statistics::pluck('item_value')->toArray();//所有数据
