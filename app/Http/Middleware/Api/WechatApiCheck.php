@@ -31,10 +31,10 @@ class WechatApiCheck
 
             // 测试
             case "api/authApi/test11" :
-                // 零壹服务授权
-            case "api/authApi/zerone_auth" :
-                // 商户公众号授权
-            case "api/authApi/shop_auth" :
+//                 零壹服务授权
+//            case "api/authApi/zerone_auth" :
+//                // 商户公众号授权
+//            case "api/authApi/shop_auth" :
                 // 授权完毕中转站
             case "api/authApi/change_trains" :
                 request()->attributes->add(['organization_id' => 2]);
