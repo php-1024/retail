@@ -184,6 +184,8 @@ class WechatApiCheck
         session(["zerone_auth_info.organization_id" => $organization_id]);
         if(session("zerone_auth_info.organization_id") != $organization_id){
             \Session::put("zerone_auth_info","");
+            var_dump(session("zerone_auth_info"));
+            exit;
         }
 
         var_dump(session("zerone_auth_info"));
