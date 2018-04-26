@@ -153,6 +153,8 @@ class WechatApiCheck
             Header("Location:".request()->root() . "/api/authApi/zerone_auth");
         }
 
+        dump(session("zerone_auth_info"));
+        exit;
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             Header("Location:".request()->root() . "/api/authApi/shop_auth");
