@@ -24,8 +24,11 @@ class WechatApiCheck
                 break;
             case "api/wechatApi/category"://检测店铺分类提交数据
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
-            case "api/wechatApi/shopping_cart_add"://检测店铺分类提交数据
                 $re = $this->checkTokenAndCategory($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/wechatApi/shopping_cart_add"://检测店铺购物车商品添加提交数据
+                $re = $this->checkTokenAndShoppingCartAdd($request);
                 return self::format_response($re, $next);
                 break;
 
@@ -78,6 +81,19 @@ class WechatApiCheck
             return self::res(1, $re['response']);
         }
     }
+    /**
+     * 检测token值 And 检测店铺购物车商品添加提交数据
+     */
+    public function checkTokenAndShoppingCartAdd($request)
+    {
+        $re = $this->checkShoppingCartAdd($request);//判断Token值是否正确
+        if ($re['status'] == '0') {
+            return $re;
+        } else {
+            return self::res(1, $re['response']);
+        }
+    }
+
 
 
     /******************************单项检测*********************************/
@@ -108,6 +124,38 @@ class WechatApiCheck
     {
         if (empty($request->input('retail_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+    /**
+     * 检测店铺购物车商品添加提交数据
+     */
+    public function checkShoppingCartAdd($request)
+    {
+        if (empty($request->input('store_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('fansmanager_id'))) {
+            return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('goods_id'))) {
+            return self::res(0, response()->json(['msg' => '商品id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('goods_price'))) {
+            return self::res(0, response()->json(['msg' => '商品价格不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('goods_name'))) {
+            return self::res(0, response()->json(['msg' => '商品名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('goods_thumb'))) {
+            return self::res(0, response()->json(['msg' => '商品图片不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('num'))) {
+            return self::res(0, response()->json(['msg' => '商品数量不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('stock'))) {
+            return self::res(0, response()->json(['msg' => '商品库存不能为空', 'status' => '0', 'data' => '']));
         }
         return self::res(1, $request);
     }
