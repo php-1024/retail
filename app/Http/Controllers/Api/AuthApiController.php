@@ -174,6 +174,9 @@ class AuthApiController extends Controller
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
 
+            var_dump(session("zerone_auth_info"));
+            var_dump($openid);
+
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
 
