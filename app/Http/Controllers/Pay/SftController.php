@@ -386,8 +386,6 @@ class SftController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
-        dd($res_access_arr);
-        exit;
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
@@ -400,6 +398,7 @@ class SftController extends Controller
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
         $organization_id = 2;
+
 
         DB::beginTransaction();
         try {
@@ -415,6 +414,9 @@ class SftController extends Controller
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
+            var_dump($openid);
+            var_dump($res_access_arr['access_token']);
+            exit;
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
@@ -444,6 +446,8 @@ class SftController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            exit;
             DB::rollback();
             return false;
         }

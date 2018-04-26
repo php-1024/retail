@@ -253,7 +253,7 @@ class AndroidSimpleApiController extends Controller
             }
             $where[] = ['status', $status];
         }
-        $orderlist = SimpleOrder::getList($where, '0', 'id', '', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
+        $orderlist = SimpleOrder::getListPaginate($where, '20', 'id', 'DESC', ['id', 'ordersn', 'order_price', 'status', 'created_at']);
         if ($orderlist->toArray()) {
             // 订单数量
             $total_num = count($orderlist);
