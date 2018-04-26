@@ -196,6 +196,7 @@ class WechatApiCheck
         if ($authorization_info === false) {
             exit("微信公众号没有授权到第三方");
         }
+        dump(session("zerone_auth_info.initial_url_address"));
         exit;
 
         if (empty(session("zerone_auth_info.initial_url_address"))) {
