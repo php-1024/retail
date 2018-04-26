@@ -188,10 +188,11 @@ class WechatApi
         dump($re);
     }
 
-    /*
+    /**
      * 获取粉丝信息详情
-     *  $authorizer_access_token 第三方平台调用接口凭证
-     * $open_id 粉丝在该公众号下的open_id
+     * @param $authorizer_access_token
+     * @param $open_id
+     * @return mixed
      */
     public function get_fans_info($authorizer_access_token, $open_id)
     {
