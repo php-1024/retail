@@ -122,9 +122,11 @@ class WechatApiController extends Controller
     {
         Session::put('fansmanage_id', 2);
         // 用户店铺id
-        $user_id = $request->user_id;
+//        $user_id = $request->user_id;
+        $user_id = '1';
         // 用户零壹id
-        $zerone_user_id = $request->zerone_user_id;
+//        $zerone_user_id = $request->zerone_user_id;
+        $zerone_user_id = '1';
         // 联盟主id
         $fansmanage_id = Session::get('fansmanage_id');
         // 店铺id
@@ -142,7 +144,7 @@ class WechatApiController extends Controller
         // 商品库存
         $stock = $request->stock;
         // 查询该店铺是否可以零库存开单
-        $config = SimpleConfig::getPluck([['store_id', $store_id], ['cfg_name'], 'allow_zero_stock'], 'cfg_val');
+        $config = SimpleConfig::getPluck([['simple_id', $store_id], ['cfg_name', 'allow_zero_stock']], 'cfg_value');
         // 如果值为1 表示不能
         if ($config != '1') {
             // 库存不足
@@ -156,10 +158,12 @@ class WechatApiController extends Controller
         $cart_data = Redis::get($key_id);
         // 如果有商品
         if ($cart_data) {
+            $cart_data = unserialize($cart_data);
             $total = 0;
+            $goods_repeat = [];
             foreach ($cart_data as $key => $value) {
                 // 查询缓存中的商品是否存在添加的商品
-                if ($value['$goods_id'] == $goods_id) {
+                if ($value['goods_id'] == $goods_id) {
                     // 添加商品数量
                     $cart_data[$key]['num'] = $value['num'] + $num;
                     // 购物车中商品的数量
