@@ -197,16 +197,22 @@ class WechatApiCheck
             exit("微信公众号没有授权到第三方");
         }
 
+        if (empty(session("zerone_auth_info.initial_url_address"))) {
+            Header("Location:" . $url);
+            return ;
+        }
+
+
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
-            exit;
+            return ;
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/shop_auth");
-            exit;
+            return ;
         }
 
         // 添加参数
