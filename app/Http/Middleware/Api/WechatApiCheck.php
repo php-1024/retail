@@ -123,15 +123,16 @@ class WechatApiCheck
     {
 //        return self::res(1, $request);
 
-        dump(123123);
-
         // 获取组织id
         $organization_id = request()->get("organization_id");
+
+        var_dump($organization_id);
+
 
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
-            return "微信公众号没有授权到第三方";
+            exit("微信公众号没有授权到第三方");
         }
 
         // 跳转自己的地址
