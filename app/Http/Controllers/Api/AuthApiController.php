@@ -112,7 +112,7 @@ class AuthApiController extends Controller
             $param["password"] = 123456;
             $param["safepassword"] = 123456;
             $param["zerone_open_id"] = $openid;
-            $res = User::insertData($param, "update_create", ["zerone_open_id" => $param["zerone_open_id"]]);
+            $res = User::insertData($param, "first_create", ["zerone_open_id" => $param["zerone_open_id"]]);
 
             session(["zerone_auth_info.zerone_user_id" => $res["id"]]);
             \Session::save();
