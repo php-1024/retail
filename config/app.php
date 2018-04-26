@@ -15,36 +15,11 @@ return [
     'agent_safe_encrypt_key' => 'sdf4ds4f545e4gfds12gds54gfdg54dsf5g4ds1g2df5sg4fd12sg',//零壹管理平台安全密码加密盐
     /*******************服务商**************************/
 
-    /*******************商户***************************/
-    'company_encrypt_key' => 'asdfghjklqwerasxczdfgrtijnjhbjhgysjughaysasaisdsyssd',//零壹管理平台登录密码加密盐
-    'company_safe_encrypt_key' => 'qwertyuiopnjuashdsdnsjdhgshdsksjdijsdjsbdsdhushd',//零壹管理平台安全密码加密盐
-    /*******************商户***************************/
-
-    /*******************总店**************************/
-    'catering_encrypt_key' => 'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
-    'catering_safe_encrypt_key' => 'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
-    /*******************总店**************************/
-
-
     /*******************粉丝管理系统**************************/
     'fansmanage_encrypt_key' => 'sdfjklhdskjfhkdsfkjdshjkf121sd2fds5fds12154sd12fds12f45s',//零壹总店管理平台登录密码加密盐
     'fansmanage_safe_encrypt_key' => 'sdfdsf4545sdfd5sf45dsf45ds54sdf4ds5f45ds4f5ds4f5ds4',//零壹总店管理平台安全密码加密盐
     /*******************粉丝管理系统**************************/
 
-    /*******************餐饮分店**************************/
-    'branch_encrypt_key' => 'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店业务系统登录密码加密盐
-    'branch_safe_encrypt_key' => 'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店业务系统全密码加密盐
-    /*******************餐饮分店**************************/
-
-    /*******************餐饮分店简版**************************/
-    'catering_branch_encrypt_key' => 'as1a894dfsaf16d5sg4df84adsw894gdsvs4fw8egb1d6b49r84nsfdw98g',//零壹云管理平台 - 餐饮分店简版业务系统登录密码加密盐
-    'catering_branch_safe_encrypt_key' => 'wqew48rf4we98f1q984ffrerncfnbygk5d498hjyukipfghdfb154dvds4f84',//零壹云管理平台 - 餐饮分店简版业务系统全密码加密盐
-    /*******************餐饮分店简版**************************/
-
-    /*************
-     * 2018年03-15
-     * 最新整理
-     **********/
     /*******************零售版店铺**************************/
     'retail_encrypt_key' => 'sadfwefdsf654dfasd5ffsc65a4dsAFDA6G4E8GFHYK4HGG4HTRjhhg9hgd6h5jdf4h48',//零壹云管理平台 - 零售版店铺登录密码加密盐
     'retail_safe_encrypt_key' => 'rtubsdgasdgjafh654896545adsg54hsdgaashfagrtghmhjuil554sdg8sg54ag4q4',//零壹云管理平台 - 零售版店铺全密码加密盐
