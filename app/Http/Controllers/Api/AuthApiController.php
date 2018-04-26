@@ -151,7 +151,7 @@ class AuthApiController extends Controller
         // 零壹用户id
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
-        $organization_id = request()->organization_id;
+        $organization_id = request()->get("organization_id");
 
         // 事务处理
         DB::beginTransaction();
@@ -216,7 +216,7 @@ class AuthApiController extends Controller
     public function getShopBaseInfo()
     {
         // 获取公众号的基本信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => $this->organization_id], ["authorizer_appid", "authorizer_access_token"]);
+        $res = WechatAuthorization::getAuthInfo(["organization_id" => request()->get("organization_id")], ["authorizer_appid", "authorizer_access_token"]);
         // 判断公众号是否在零壹第三方平台授权过
         if ($res !== false) {
             $this->wechat_info = $res;
