@@ -37,6 +37,7 @@ class WechatApiCheck
             case "api/authApi/shop_auth" :
                 // 授权完毕中转站
             case "api/authApi/change_trains" :
+                request()->attributes->add(['organization_id' => 2]);
                 $this->checkToken($request);
 
         }
