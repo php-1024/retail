@@ -22,7 +22,7 @@ class Statistics extends Model
     public static function editStatistics($where,$param){
         $model = self::where($where)->first();
         foreach($param as $key=>$val){
-            $model->item_value = $val;
+            $model->item_value = $val['item_value'];
         }
         $model->save();
     }
