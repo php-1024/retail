@@ -8,10 +8,13 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\SimpleCategory;
+use App\Models\SimpleConfig;
 use App\Models\SimpleGoods;
 use App\Models\SimpleGoodsThumb;
+use App\Services\ZeroneRedis\ZeroneRedis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Session;
 
 class WechatApiController extends Controller
@@ -93,7 +96,7 @@ class WechatApiController extends Controller
         $keyword = $request->keyword;
         // 条码
         $scan_code = $request->scan_code;
-        $where = [['fansmanage_id', $fansmanage_id],['simple_id', $retail_id], ['status', '1']];
+        $where = [['fansmanage_id', $fansmanage_id], ['simple_id', $retail_id], ['status', '1']];
         if ($keyword) {
             $where[] = ['name', 'LIKE', '%' . $keyword . '%'];
         }
@@ -117,6 +120,7 @@ class WechatApiController extends Controller
      */
     public function shopping_cart_add(Request $request)
     {
+        echo 1;exit;
         Session::put('fansmanage_id', 2);
         // 用户店铺id
         $user_id = $request->user_id;
@@ -127,17 +131,102 @@ class WechatApiController extends Controller
         // 店铺id
         $store_id = $request->store_id;
         // 商品id
-        $store_id = $request->goods_id;
+        $goods_id = $request->goods_id;
         // 商品名称
         $goods_name = $request->goods_name;
+        // 商品价格
+        $goods_price = $request->goods_price;
         // 商品图片
         $goods_thumb = $request->goods_thumb;
         // 商品数量
         $num = $request->num;
         // 商品库存
         $stock = $request->stock;
+        // 查询该店铺是否可以零库存开单
+        $config = SimpleConfig::getPluck([['store_id', $store_id], ['cfg_name'], 'allow_zero_stock'], 'cfg_val');
+        // 如果值为1 表示不能
+        if ($config != '1') {
+            // 库存不足
+            if ($stock - $num < 0) {
+                return response()->json(['status' => '0', 'msg' => '商品' . $goods_name . '库存不足', 'data' => '']);
+            }
+        }
+        // 缓存键值
+        $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
+        // 查看缓存是否存有商品
+        $cart_data = Redis::get($key_id);
+        // 如果有商品
+        if ($cart_data) {
+            $total = 0;
+            foreach ($cart_data as $key => $value) {
+                // 查询缓存中的商品是否存在添加的商品
+                if ($value['$goods_id'] == $goods_id) {
+                    // 添加商品数量
+                    $cart_data[$key]['num'] = $value['num'] + $num;
+                    // 购物车中商品的数量
+                    $num += $value['num'];
+                }
+                //储存商品id
+                $goods_repeat[] = $value['goods_id'];
+                // 购物车总数量
+                $total += $cart_data[$key]['num'];
 
-//        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
+            }
+
+            // 查询缓存中是否有该商品
+            $re = in_array($goods_id, $goods_repeat);
+            // 如果没有该商品
+            if (empty($re)) {
+                // 数据处理
+                $cart_data[] = [
+                    'store_id' => $store_id,
+                    'goods_id' => $goods_id,
+                    'goods_name' => $goods_name,
+                    'goods_price' => $goods_price,
+                    'goods_thumb' => $goods_thumb,
+                    'num' => $num,
+                    'stock' => $stock,
+                ];
+                // 购物车总数量
+                $total += $num;
+            }
+            // 更新缓存
+            ZeroneRedis::create_shopping_cart($key_id, $cart_data);
+        } else {
+            // 数据处理
+            $cart_data[] = [
+                'store_id' => $store_id,
+                'goods_id' => $goods_id,
+                'goods_name' => $goods_name,
+                'goods_price' => $goods_price,
+                'goods_thumb' => $goods_thumb,
+                'num' => $num,
+                'stock' => $stock,
+            ];
+            // 新增缓存
+            ZeroneRedis::create_shopping_cart($key_id, $cart_data);
+            // 购物车商品总数
+            $total = $num;
+        }
+        // 数据处理
+        $goods_data = [
+            // 商品ID
+            'goods_id' => $goods_id,
+            //商品名称
+            'goods_name' => $goods_name,
+            // 商品图片
+            'goods_thumb' => $goods_thumb,
+            // 商品单价
+            'goods_price' => $goods_price,
+            // 购物车中商品的数量
+            'num' => $num,
+            // 减去购物车种商品数量后的库存
+            'stock' => $stock,
+            // 购物车商品总数
+            'total' => $total
+        ];
+        $data = ['status' => '1', 'msg' => '添加成功', 'data' => $goods_data];
+
         return response()->json($data);
     }
 

@@ -25,7 +25,6 @@ class AuthApiController extends Controller
 
     public function test11()
     {
-        dump(11);
         $zerone_auth_info = request()->get("zerone_auth_info");
         var_dump($zerone_auth_info);
     }
@@ -177,9 +176,9 @@ class AuthApiController extends Controller
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+
             var_dump($user_info);
             exit;
-
 
 
             // 用户数据处理

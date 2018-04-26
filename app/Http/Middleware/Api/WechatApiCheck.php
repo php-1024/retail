@@ -145,8 +145,9 @@ class WechatApiCheck
 
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
+
         if ($authorization_info === false) {
-            return "微信公众号没有授权到第三方";
+            exit("微信公众号没有授权到第三方");
         }
 
         // 判断是否存在 零壹服务用户id
