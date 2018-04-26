@@ -165,8 +165,6 @@ class WechatApiController extends Controller
                 if ($value['goods_id'] == $goods_id) {
                     // 添加商品数量
                     $cart_data[$key]['num'] = $value['num'] + $num;
-                    // 库存减少
-                    $cart_data[$key]['stock'] = $value['stock'] - $num;
                     // 购物车中商品的数量
                     $num += $value['num'];
                 }
@@ -189,7 +187,6 @@ class WechatApiController extends Controller
                     'goods_price' => $goods_price,
                     'goods_thumb' => $goods_thumb,
                     'num' => $num,
-                    'stock' => $stock - $num,
                 ];
                 // 购物车总数量
                 $total += $num;
@@ -205,7 +202,6 @@ class WechatApiController extends Controller
                 'goods_price' => $goods_price,
                 'goods_thumb' => $goods_thumb,
                 'num' => $num,
-                'stock' => $stock - $num,
             ];
             // 新增缓存
             ZeroneRedis::create_shopping_cart($key_id, $cart_data);
