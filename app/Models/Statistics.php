@@ -21,7 +21,10 @@ class Statistics extends Model
     //修改账号
     public static function editStatistics($where,$param){
         $model = self::where($where)->first();
-        $model->item_value = $param['item_value'];
+        foreach($param as $key=>$val){
+            dump($model->$key);
+            dump($val);
+        }
         $model->save();
     }
 }

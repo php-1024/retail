@@ -233,6 +233,98 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 购物车减商品
+     */
+    public function shopping_cart_reduce(Request $request)
+    {
+        Session::put('fansmanage_id', 2);
+        // 用户店铺id
+//        $user_id = $request->user_id;
+        $user_id = '1';
+        // 用户零壹id
+//        $zerone_user_id = $request->zerone_user_id;
+        $zerone_user_id = '1';
+        // 联盟主id
+        $fansmanage_id = Session::get('fansmanage_id');
+        // 店铺id
+        $store_id = $request->store_id;
+        // 商品id
+        $goods_id = $request->goods_id;
+        // 商品名称
+        $goods_name = $request->goods_name;
+        // 商品价格
+        $goods_price = $request->goods_price;
+        // 商品图片
+        $goods_thumb = $request->goods_thumb;
+        // 商品数量
+        $num = $request->num;
+        // 商品库存
+        $stock = $request->stock;
+        // 缓存键值
+        $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
+        // 查看缓存是否存有商品
+        $cart_data = Redis::get($key_id);
+        // 如果有商品
+        if (empty($cart_data)) {
+            return response()->json(['status' => '0', 'msg' => '购物车没商品，无法操作', 'data' => '']);
+        } else {
+            $cart_data = unserialize($cart_data);
+            $total = 0;
+            $goods_repeat = [];
+            foreach ($cart_data as $key => $value) {
+                // 查询缓存中的商品是否存在减少的商品
+                if ($value['goods_id'] == $goods_id) {
+                    // 减少商品数量
+                    $cart_data[$key]['num'] = $value['num'] - $num;
+                    // 如果数量为0
+                    if ($cart_data[$key]['num'] == '0') {
+                        // 删除缓存中的商品
+                        unset($cart_data[$key]);
+                        // 如果商品减少为负数
+                    } elseif ($cart_data[$key]['num'] < 0) {
+                        return response()->json(['status' => '0', 'msg' => '购物车商品数量不足，无法减少', 'data' => '']);
+                    }
+                    // 购物车中商品的数量
+                    $num = $value['num'] - $num;
+                    echo $num;exit;
+                }
+                //储存商品id
+                $goods_repeat[] = $value['goods_id'];
+                // 购物车总数量
+                $total += $cart_data[$key]['num'];
+            }
+
+            // 查询缓存中是否有该商品
+            $re = in_array($goods_id, $goods_repeat);
+            // 如果没有该商品
+            if (empty($re)) {
+                return response()->json(['status' => '0', 'msg' => '购物车没商品，无法操作', 'data' => '']);
+            }
+            // 更新缓存
+            ZeroneRedis::create_shopping_cart($key_id, $cart_data);
+        }
+        // 数据处理
+        $goods_data = [
+            // 商品ID
+            'goods_id' => $goods_id,
+            //商品名称
+            'goods_name' => $goods_name,
+            // 商品图片
+            'goods_thumb' => $goods_thumb,
+            // 商品单价
+            'goods_price' => $goods_price,
+            // 购物车中商品的数量
+            'num' => $num,
+            // 减去购物车种商品数量后的库存
+            'stock' => $stock,
+            // 购物车商品总数
+            'total' => $total
+        ];
+        $data = ['status' => '1', 'msg' => '减少商品成功', 'data' => $goods_data];
+
+        return response()->json($data);
+    }
 
     /**
      *  计算两组经纬度坐标 之间的距离
