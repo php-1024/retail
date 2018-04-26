@@ -25,6 +25,7 @@ class AuthApiController extends Controller
 
     public function test11()
     {
+        dump(11);
         $zerone_auth_info = request()->get("zerone_auth_info");
         var_dump($zerone_auth_info);
     }
