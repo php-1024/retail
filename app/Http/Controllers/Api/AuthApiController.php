@@ -68,6 +68,7 @@ class AuthApiController extends Controller
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             Header("Location:".request()->root() . "/api/authApi/zerone_auth");
         }
+
         // 获取第三方授权信息
         $this->getShopBaseInfo();
         $code = request()->input('code');
@@ -124,8 +125,6 @@ class AuthApiController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            exit;
             DB::rollback();
             return false;
         }
