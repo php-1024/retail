@@ -55,17 +55,24 @@ class UserCheck
             return "微信公众号没有授权到第三方";
         }
 
+
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             XhoLog::create(["name"=>"跳转1","content"=>"zerone_user_id"]);
             Header("Location:http://develop.01nnt.com/pay/sft/test12");
         }
 
+
+//        var_dump(1);
+//        exit;
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             XhoLog::create(["name"=>"跳转3","content"=>"shop_user_id"]);
             Header("Location:http://develop.01nnt.com/pay/sft/test13");
         }
+
+        var_dump(session("zerone_auth_info"));
+        exit;
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
