@@ -185,8 +185,8 @@ class WechatApiCheck
         if(!empty(session("zerone_auth_info.organization_id")) && session("zerone_auth_info.organization_id") != $organization_id){
             \Session::put("zerone_auth_info","");
         }
-        session(["zerone_auth_info.organization_id" => $organization_id]);
 
+        session(["zerone_auth_info.organization_id" => $organization_id]);
 
         // 跳转自己的地址
         $self_path = ["api/authApi/zerone_auth", "api/authApi/shop_auth", "api/authApi/change_trains"];
