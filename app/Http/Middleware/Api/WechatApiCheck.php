@@ -176,19 +176,16 @@ class WechatApiCheck
         $organization_id = request()->get("organization_id");
 
         // 判断公众号是否授权给零壹第三方公众号平台
-//        $res = $this->getShopBaseInfo($organization_id);
-//        if ($res === false) {
-//            exit("微信公众号没有授权到第三方");
-//        }
+        $res = $this->getShopBaseInfo($organization_id);
+        if ($res === false) {
+            exit("微信公众号没有授权到第三方");
+        }
 
-
+        // 判断组织id 是否 跟之前一致
         if(!empty(session("zerone_auth_info.organization_id")) && session("zerone_auth_info.organization_id") != $organization_id){
             \Session::put("zerone_auth_info","");
-            var_dump(session("zerone_auth_info"));
-            exit;
         }
         session(["zerone_auth_info.organization_id" => $organization_id]);
-
 
 
         // 跳转自己的地址
