@@ -57,7 +57,7 @@ class DashboardController extends Controller
         dump($fansmanage_account);
 
         /**
-         * 店铺管理系统--管理人员
+         * 所有业务系统--管理人员
          */
         $organization_id = Organization::getList(['type'=>'4']);
         $store_account = '0';
