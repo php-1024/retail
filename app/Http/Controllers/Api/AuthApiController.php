@@ -212,15 +212,8 @@ class AuthApiController extends Controller
      */
     public function changeTrains()
     {
-        var_dump(session("zerone_auth_info"));
-        exit;
-
-        dump(111);
         $url = session("zerone_auth_info.initial_url_address");
-        dump($url);
-        dump(session("zerone_auth_info"));
-
-//        Header("Location:{$url}");
+        Header("Location:{$url}");
     }
 
     /**
