@@ -418,8 +418,6 @@ class SftController extends Controller
 
             // 获取用户的信息
 //            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
-
             $user_info = \Wechat::get_fans_info($access_token,$openid);
 
             // 用户id

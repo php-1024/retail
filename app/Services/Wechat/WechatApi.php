@@ -197,8 +197,8 @@ class WechatApi
     {
         $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token=' . $authorizer_access_token . '&openid=' . $open_id . '&lang=zh_CN ';
         $re = \HttpCurl::doGet($url);
-        $re = json_decode($re, true);
-        dump($re);
+        // 结果返回
+        return $this->resultReturnDispose($re, "json");
     }
 
     /*
