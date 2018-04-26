@@ -362,7 +362,7 @@ class Organization extends Model
                     $before_revenue_order_num = 0;
                     if ($res["asset_id"] == 10) {
                         $order_info = $val["get_retail_order"];
-                    }else{
+                    }elseif (($res["asset_id"] == 12)){
                         $order_info = $val["get_simple_order"];
 
                     }
