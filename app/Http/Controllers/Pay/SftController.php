@@ -378,6 +378,8 @@ class SftController extends Controller
 
     public function test14()
     {
+        var_dump(session("zerone_auth_info"));
+        exit;
         $url = session("zerone_auth_info.initial_url_address");
         Header("Location:{$url}");
     }
