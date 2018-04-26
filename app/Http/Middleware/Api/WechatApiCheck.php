@@ -181,14 +181,14 @@ class WechatApiCheck
 //            exit("微信公众号没有授权到第三方");
 //        }
 
-        session(["zerone_auth_info.organization_id" => $organization_id]);
+
         if(session("zerone_auth_info.organization_id") != $organization_id){
             \Session::put("zerone_auth_info","");
             var_dump(session("zerone_auth_info"));
             exit;
         }
+        session(["zerone_auth_info.organization_id" => $organization_id]);
 
-        var_dump(session("zerone_auth_info"));
 
 
         // 跳转自己的地址
