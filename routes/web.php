@@ -970,6 +970,19 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('shopping_cart_add', 'Api\WechatApiController@shopping_cart_add')->middleware('WechatApiCheck');//购物车添加商品
     });
 
+
+    Route::group(['prefix' => 'authApi'], function () {
+        // 零壹服务授权
+        Route::any('zerone_auth', 'Api\AuthController@getZeroneAuth')->middleware('WechatApiCheck');
+        // 商户公众号授权
+        Route::any('shop_auth', 'Api\AuthController@getShopAuth')->middleware('WechatApiCheck');
+        // 授权完毕中转站
+        Route::any('change_trains', 'Api\AuthController@changeTrains')->middleware('WechatApiCheck');
+        // 测试
+        Route::any('test11', 'Api\AuthController@test11')->middleware('WechatApiCheck');
+
+    });
+
 });
 /*********************接口路由*************************/
 
