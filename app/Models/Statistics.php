@@ -18,8 +18,4 @@ class Statistics extends Model
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
 
-    //修改账号
-    public static function editStatistics($where,$param){
-        self::where($where)->first()->update($param);
-    }
 }
