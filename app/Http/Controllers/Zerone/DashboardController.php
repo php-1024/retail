@@ -58,10 +58,10 @@ class DashboardController extends Controller
          * 所有业务系统--管理人员
          */
         $store_account = $this->account('4','0');
-//        dump($zerone_account);
-//        dump($agent_account);
-//        dump($company_account);
-//        dump($store_account);
+        dump($zerone_account);
+        dump($agent_account);
+        dump($company_account);
+        dump($store_account);
 
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
