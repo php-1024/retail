@@ -56,13 +56,13 @@ class DashboardController extends Controller
         //店铺数量
         $store_num = Organization::getList(['type'=>'4'])->count();
 
-        Statistics::editStatistics(['id'=>'1'],$zerone_account);
-        Statistics::editStatistics(['id'=>'2'],$agent_account);
-        Statistics::editStatistics(['id'=>'3'],$company_account);
-        Statistics::editStatistics(['id'=>'4'],$store_account);
-        Statistics::editStatistics(['id'=>'5'],$agent_num);
-        Statistics::editStatistics(['id'=>'6'],$company_num);
-        Statistics::editStatistics(['id'=>'7'],$store_num);
+        Statistics::editStatistics(['id'=>'1'],['item_value'=>$zerone_account]);
+        Statistics::editStatistics(['id'=>'2'],['item_value'=>$agent_account]);
+        Statistics::editStatistics(['id'=>'3'],['item_value'=>$company_account]);
+        Statistics::editStatistics(['id'=>'4'],['item_value'=>$store_account]);
+        Statistics::editStatistics(['id'=>'5'],['item_value'=>$agent_num]);
+        Statistics::editStatistics(['id'=>'6'],['item_value'=>$company_num]);
+        Statistics::editStatistics(['id'=>'7'],['item_value'=>$store_num]);
 
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
