@@ -41,27 +41,28 @@ class DashboardController extends Controller
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
-        /**
-         * 零壹管理系统--管理人员
-         */
+        //零壹管理系统--管理人员
         $zerone_account = Account::getList(['organization_id'=>'1'],0,'id','DESC')->count();
-        /**
-         * 服务商管理系统--管理人员
-         */
+        //服务商管理系统--管理人员
         $agent_account = $this->account('2','0');
-
-        /**
-         * 商户管理系统--管理人员
-         */
+        //商户管理系统--管理人员
         $company_account = $this->account('3','0');
-        /**
-         * 所有业务系统--管理人员
-         */
+        //所有业务系统--管理人员
         $store_account = $this->account('4','0');
-        dump($zerone_account);
-        dump($agent_account);
-        dump($company_account);
-        dump($store_account);
+        //服务商数量
+        $agent_num = Organization::getList(['type'=>'2'])->count();
+        //商户数量
+        $company_num = Organization::getList(['type'=>'3'])->count();
+        //店铺数量
+        $store_num = Organization::getList(['type'=>'4'])->count();
+
+        Statistics::editStatistics(['id'=>'1'],['item_value'=>$zerone_account]);
+        Statistics::editStatistics(['id'=>'2'],['item_value'=>$agent_account]);
+        Statistics::editStatistics(['id'=>'3'],['item_value'=>$company_account]);
+        Statistics::editStatistics(['id'=>'4'],['item_value'=>$store_account]);
+        Statistics::editStatistics(['id'=>'5'],['item_value'=>$agent_num]);
+        Statistics::editStatistics(['id'=>'6'],['item_value'=>$company_num]);
+        Statistics::editStatistics(['id'=>'7'],['item_value'=>$store_num]);
 
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
