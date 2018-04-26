@@ -120,7 +120,6 @@ class WechatApiController extends Controller
      */
     public function shopping_cart_add(Request $request)
     {
-        echo 1;exit;
         Session::put('fansmanage_id', 2);
         // 用户店铺id
         $user_id = $request->user_id;
