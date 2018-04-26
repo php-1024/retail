@@ -77,11 +77,17 @@ class WechatApiCheck
      */
     public function checkTokenAndCategory($request)
     {
-        $re = $this->checkRetailId($request);//判断Token值是否正确
+        $re = $this->checkToken($request);//判断Token值是否正确
         if ($re['status'] == '0') {
             return $re;
         } else {
-            return self::res(1, $re['response']);
+            $re2 = $this->checkRetailId($request);//判断Token值是否正确
+
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
         }
     }
 
@@ -90,11 +96,16 @@ class WechatApiCheck
      */
     public function checkTokenAndShoppingCartAdd($request)
     {
-        $re = $this->checkShoppingCartAdd($request);//判断Token值是否正确
+        $re = $this->checkToken($request);//判断Token值是否正确
         if ($re['status'] == '0') {
             return $re;
         } else {
-            return self::res(1, $re['response']);
+            $re2 = $this->checkShoppingCartAdd($request);//判断Token值是否正确
+            if ($re2['status'] == '0') {
+                return $re2;
+            } else {
+                return self::res(1, $re2['response']);
+            }
         }
     }
 
@@ -224,6 +235,7 @@ class WechatApiCheck
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
+        return self::res(1, $request);
     }
 
     /**
