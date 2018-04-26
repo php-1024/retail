@@ -151,15 +151,16 @@ class FansmanageUser extends Model
      */
     public static function insertData($param, $type = "update_create", $where = [])
     {
-        return $data["id"] = 123123;
-//        switch ($type) {
-//            case "update_create":
-//                $res = self::updateOrCreate($where, $param);
-//                break;
-//            case "first_create":
-//                $res = self::firstOrCreate($param);
-//                break;
-//        }
+        switch ($type) {
+            case "update_create":
+
+                self::where($where)->update($param);
+                $res = self::updateOrCreate($where, $param);
+                break;
+            case "first_create":
+                $res = self::firstOrCreate($param);
+                break;
+        }
 //
 //        if (!empty($res)) {
 //            return $res->toArray();
