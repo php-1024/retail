@@ -31,7 +31,6 @@ class AuthApiController extends Controller
     }
 
 
-
     /**
      * 获取 零壹服务 的授权信息
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
@@ -64,6 +63,8 @@ class AuthApiController extends Controller
     {
         // 获取第三方授权信息
         $this->getShopBaseInfo();
+
+        dd(session("zerone_auth_info"));
 
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
