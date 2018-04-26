@@ -307,6 +307,9 @@ class SftController extends Controller
 
     public function test13()
     {
+
+        var_dump(session("zerone_auth_info"));
+        exit;
         $this->getShopBaseInfo();
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
