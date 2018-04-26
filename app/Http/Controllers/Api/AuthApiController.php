@@ -153,10 +153,6 @@ class AuthApiController extends Controller
         // 组织id
         $organization_id = request()->get("organization_id");
 
-
-        var_dump(11);
-        var_dump($organization_id);
-        exit;
         // 事务处理
         DB::beginTransaction();
         try {
