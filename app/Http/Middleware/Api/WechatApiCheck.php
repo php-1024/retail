@@ -162,9 +162,10 @@ class WechatApiCheck
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
 
-
     /**
      * 获取店铺公众号的基本信息
+     * @param $organization_id
+     * @return bool
      */
     public function getShopBaseInfo($organization_id)
     {
