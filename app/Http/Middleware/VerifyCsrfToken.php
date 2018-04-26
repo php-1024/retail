@@ -52,6 +52,7 @@ class VerifyCsrfToken extends Middleware
         'api/wechatApi/store_list',//店铺列表接口
         'api/wechatApi/category',//店铺分类列表接口
         'api/wechatApi/goods_list',//店铺商品列表接口
+        'api/wechatApi/shopping_cart_add',//购物车添加商品
         /****wechat接口****/
 
     ];

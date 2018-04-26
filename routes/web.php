@@ -967,6 +967,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//店铺列表
         Route::any('category', 'Api\WechatApiController@category')->middleware('WechatApiCheck');//店铺分类接口
         Route::any('goods_list', 'Api\WechatApiController@goods_list')->middleware('WechatApiCheck');//店铺商品接口
+        Route::any('shopping_cart_add', 'Api\WechatApiController@shopping_cart_add')->middleware('WechatApiCheck');//购物车添加商品
     });
 
 });
