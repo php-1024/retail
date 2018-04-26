@@ -132,7 +132,8 @@ class AuthApiController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
-
+        var_dump($res_access_arr);
+        exit;
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
@@ -158,11 +159,6 @@ class AuthApiController extends Controller
             $param["open_id"] = $openid;
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $param["open_id"]]);
-
-            var_dump($fansmanage_user);
-            exit;
-
-
 
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
