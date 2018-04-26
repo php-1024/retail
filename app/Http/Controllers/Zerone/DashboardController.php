@@ -55,6 +55,7 @@ class DashboardController extends Controller
             $fansmanage_account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
         }
         dump($fansmanage_account);
+
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
             'system_personnel' => $list['0'],     //零壹管理系统人员数量
