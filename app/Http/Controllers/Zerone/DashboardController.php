@@ -56,7 +56,7 @@ class DashboardController extends Controller
         //店铺数量
         $store_num = Organization::getList(['type'=>'4'])->count();
 
-        Statistics::editStatistics(['id'=>'1'],['item_value'=>$zerone_account]);
+        Statistics::editStatistics(['id'=>'1'],['item_value'=>'2']);
 //        Statistics::editStatistics(['id'=>'2'],['item_value'=>$agent_account]);
 //        Statistics::editStatistics(['id'=>'3'],['item_value'=>$company_account]);
 //        Statistics::editStatistics(['id'=>'4'],['item_value'=>$store_account]);
