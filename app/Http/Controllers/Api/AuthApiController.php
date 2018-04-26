@@ -144,8 +144,7 @@ class AuthApiController extends Controller
         // 零壹用户id
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
-//        $organization_id = request()->get("organization_id");
-        $organization_id = 2;
+        $organization_id = request()->get("organization_id");
 
 
         var_dump($openid);
