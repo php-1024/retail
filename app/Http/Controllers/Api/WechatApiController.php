@@ -168,6 +168,8 @@ class WechatApiController extends Controller
                 if ($value['goods_id'] == $goods_id) {
                     // 添加商品数量
                     $cart_data[$key]['num'] = $value['num'] + $num;
+                    // 缓存的库存
+                    $cart_data[$key]['stock'] = $stock;
                     // 购物车中商品的数量
                     $num += $value['num'];
                 }
@@ -190,6 +192,7 @@ class WechatApiController extends Controller
                     'goods_price' => $goods_price,
                     'goods_thumb' => $goods_thumb,
                     'num' => $num,
+                    'stock' => $stock,
                 ];
                 // 购物车总数量
                 $total += $num;
@@ -279,6 +282,7 @@ class WechatApiController extends Controller
                 if ($value['goods_id'] == $goods_id) {
                     // 减少商品数量
                     $cart_data[$key]['num'] = $value['num'] - $num;
+                    $cart_data[$key]['stock'] = $stock;
                     // 如果数量为0
                     if ($cart_data[$key]['num'] == '0') {
                         // 删除缓存中的商品
