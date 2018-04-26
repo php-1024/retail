@@ -64,10 +64,6 @@ class AuthApiController extends Controller
      */
     public function getShopAuth()
     {
-        if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            Header("Location:".request()->root() . "/api/authApi/zerone_auth");
-        }
-
         // 获取第三方授权信息
         $this->getShopBaseInfo();
         $code = request()->input('code');
@@ -155,7 +151,7 @@ class AuthApiController extends Controller
         // 零壹用户id
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
-        $organization_id = 2;
+        $organization_id = request()->get("organization_id");
 
         // 事务处理
         DB::beginTransaction();
@@ -168,26 +164,15 @@ class AuthApiController extends Controller
             // 店铺公众号  openid
             $param["open_id"] = $openid;
 
-
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create",["open_id" => $openid]);
-
-
-            var_dump($fansmanage_user);
 
             // 缓存用户的店铺id
             session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
             \Session::save();
 
-            var_dump(session("zerone_auth_info"));
-            var_dump($openid);
-
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
-
-            var_dump($user_info);
-            exit;
-
 
             // 用户数据处理
             $param_user_info["user_id"] = $zerone_user_id;
