@@ -148,11 +148,6 @@ class AuthApiController extends Controller
         $organization_id = 2;
 
 
-        var_dump($openid);
-        var_dump($zerone_user_id);
-        var_dump($organization_id);
-        exit;
-
 
 
         // 事务处理
