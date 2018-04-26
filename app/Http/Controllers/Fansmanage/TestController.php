@@ -24,21 +24,31 @@ class TestController extends Controller
 {
     public function test()
     {
-        $key = config("app.retail_encrypt_key");
-        // 密码加密
-        $password = 'admin';
-        $encrypted = md5($password);//加密密码第一重
-        $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
-        dd($encryptPwd);
+        $param["fansmanage_id"] = 1;
+        // 用户id
+        $param["user_id"] = 1;
+        // 店铺公众号  openid
+        $param["open_id"] = 1;
 
-        $param_user_origin["user_id"] = 2;
-        $param_user_origin["fansmanager_id"] = 3;
-        $param_user_origin["store_id"] = 2;
-        $param_user_origin["status"] = "1";
-        $param_user_origin["invalid_time"] = 0;
+        $res = FansmanageUser::updateOrCreate($param, ["open_id" => 1])->toArray();
+        var_dump($res);
 
-        // 保存源头数据
-        UserOrigin::insertData($param_user_origin, "update_create", ["fansmanager_id" => 3,"store_id" =>2,"user_id" => 2]);
+
+//        $key = config("app.retail_encrypt_key");
+//        // 密码加密
+//        $password = 'admin';
+//        $encrypted = md5($password);//加密密码第一重
+//        $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
+//        dd($encryptPwd);
+//
+//        $param_user_origin["user_id"] = 2;
+//        $param_user_origin["fansmanager_id"] = 3;
+//        $param_user_origin["store_id"] = 2;
+//        $param_user_origin["status"] = "1";
+//        $param_user_origin["invalid_time"] = 0;
+//
+//        // 保存源头数据
+//        UserOrigin::insertData($param_user_origin, "update_create", ["fansmanager_id" => 3,"store_id" =>2,"user_id" => 2]);
 
 //
 //        $userInfo = UserInfo::getOneUserInfo([['user_id', 1]]);
