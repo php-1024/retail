@@ -198,7 +198,7 @@ class AuthApiController extends Controller
      */
     public function changeTrains()
     {
-        dump(session("zerone_auth_info"));
+        var_dump(session("zerone_auth_info"));
         exit;
 
         dump(111);
