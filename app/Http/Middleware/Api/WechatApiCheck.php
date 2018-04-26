@@ -124,6 +124,7 @@ class WechatApiCheck
 //        return self::res(1, $request);
 
         dump(123123);
+
         // 获取组织id
         $organization_id = request()->get("organization_id");
 
