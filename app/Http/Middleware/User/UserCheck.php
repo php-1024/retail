@@ -64,7 +64,6 @@ class UserCheck
 
 
 
-
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             XhoLog::create(["name"=>"跳转3","content"=>"shop_user_id"]);

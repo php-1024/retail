@@ -281,20 +281,21 @@ class WechatApiController extends Controller
                     if ($cart_data[$key]['num'] == '0') {
                         // 删除缓存中的商品
                         unset($cart_data[$key]);
+                        continue;
                         // 如果商品减少为负数
                     } elseif ($cart_data[$key]['num'] < 0) {
                         return response()->json(['status' => '0', 'msg' => '购物车商品数量不足，无法减少', 'data' => '']);
                     }
                     // 购物车中商品的数量
                     $num = $value['num'] - $num;
-                    echo $num;exit;
+
                 }
                 //储存商品id
                 $goods_repeat[] = $value['goods_id'];
                 // 购物车总数量
                 $total += $cart_data[$key]['num'];
             }
-
+            echo $total;exit;
             // 查询缓存中是否有该商品
             $re = in_array($goods_id, $goods_repeat);
             // 如果没有该商品
