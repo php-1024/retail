@@ -25,10 +25,10 @@ class AuthApiController extends Controller
 
     public function test11()
     {
+        dump(11);
         $zerone_auth_info = request()->get("zerone_auth_info");
         var_dump($zerone_auth_info);
     }
-
 
 
     /**
@@ -49,8 +49,12 @@ class AuthApiController extends Controller
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
-            $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
-            return redirect(request()->root() . "/api/authApi/change_trains");
+            $res = $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
+            if ($res == true) {
+                return redirect(request()->root() . "/api/authApi/change_trains");
+            } else {
+                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
+            }
         }
     }
 
@@ -61,9 +65,12 @@ class AuthApiController extends Controller
      */
     public function getShopAuth()
     {
+        if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            Header("Location:".request()->root() . "/api/authApi/zerone_auth");
+        }
+
         // 获取第三方授权信息
         $this->getShopBaseInfo();
-
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
 
@@ -71,8 +78,12 @@ class AuthApiController extends Controller
             $url = request()->url();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
-            $this->setAuthorizeShopInfo($appid, $code);
-            return redirect(request()->root() . "/api/authApi/change_trains");
+            $res = $this->setAuthorizeShopInfo($appid, $code);
+            if ($res == true) {
+                return redirect(request()->root() . "/api/authApi/change_trains");
+            } else {
+                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
+            }
         }
     }
 
@@ -93,7 +104,7 @@ class AuthApiController extends Controller
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
         } else {
-            $this->getAuthorizeZeroneInfo(request()->url());
+            $this->getZeroneAuth();
             return;
         }
 
@@ -133,18 +144,19 @@ class AuthApiController extends Controller
         // 静默授权：通过授权使用的code,获取到用户openid
         $res_access_arr = \Wechat::get_open_web_access_token($appid, $code);
 
+
         // 如果不存在授权所特有的access_token,则重新获取code,并且验证
         if (!empty($res_access_arr['access_token'])) {
             $openid = $res_access_arr['openid'];
         } else {
-            $this->getAuthorizeShopInfo(request()->url());
+            $this->getShopAuth();
             return;
         }
 
         // 零壹用户id
         $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 组织id
-        $organization_id = request()->get("organization_id");
+        $organization_id = 2;
 
         // 事务处理
         DB::beginTransaction();
@@ -165,6 +177,11 @@ class AuthApiController extends Controller
 
             // 获取用户的信息
             $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
+            var_dump($user_info);
+            exit;
+
+
+
             // 用户数据处理
             $param_user_info["user_id"] = $zerone_user_id;
             $param_user_info["nickname"] = $user_info["nickname"];
@@ -188,6 +205,8 @@ class AuthApiController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            exit;
             DB::rollback();
             return false;
         }
@@ -199,8 +218,15 @@ class AuthApiController extends Controller
      */
     public function changeTrains()
     {
+        var_dump(session("zerone_auth_info"));
+        exit;
+
+        dump(111);
         $url = session("zerone_auth_info.initial_url_address");
-        Header("Location:{$url}");
+        dump($url);
+        dump(session("zerone_auth_info"));
+
+//        Header("Location:{$url}");
     }
 
     /**

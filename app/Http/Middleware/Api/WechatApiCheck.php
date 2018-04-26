@@ -29,8 +29,16 @@ class WechatApiCheck
                 return self::format_response($re, $next);
                 break;
 
-                // 测试
+            // 测试
             case "api/authApi/test11" :
+//                 零壹服务授权
+//            case "api/authApi/zerone_auth" :
+//                // 商户公众号授权
+//            case "api/authApi/shop_auth" :
+                // 授权完毕中转站
+            case "api/authApi/change_trains" :
+
+                request()->attributes->add(['organization_id' => 2]);
                 $this->checkToken($request);
 
         }
@@ -123,7 +131,7 @@ class WechatApiCheck
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
-            return "微信公众号没有授权到第三方";
+            exit("微信公众号没有授权到第三方");
         }
 
         // 跳转自己的地址
@@ -143,21 +151,22 @@ class WechatApiCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            Header("Location:http://develop.01nnt.com/pay/sft/test12");
+            Header("Location:".request()->root() . "/api/authApi/zerone_auth");
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
-            Header("Location:http://develop.01nnt.com/pay/sft/test13");
+            Header("Location:".request()->root() . "/api/authApi/shop_auth");
         }
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
 
-
     /**
      * 获取店铺公众号的基本信息
+     * @param $organization_id
+     * @return bool
      */
     public function getShopBaseInfo($organization_id)
     {

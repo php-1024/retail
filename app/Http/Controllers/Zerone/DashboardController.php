@@ -8,6 +8,7 @@ namespace App\Http\Controllers\Zerone;
 
 use App\Http\Controllers\Controller;
 use App\Models\Account;
+use App\Models\Organization;
 use App\Models\Province;
 use App\Models\Warzone;
 use App\Models\LoginLog;
@@ -22,6 +23,15 @@ use App\Models\OrganizationRole;
 class DashboardController extends Controller
 {
 
+    //查询系统管理人员数
+    public function account($type,$account)
+    {
+        $organization_id = Organization::getList(['type'=>$type]);
+        foreach ($organization_id as $key=>$val){
+            $account += Account::getList(['organization_id'=>$val->id],0,'id','DESC')->count();
+        }
+        return $account;
+    }
     /**
      * 系统管理首页
      */
@@ -31,6 +41,28 @@ class DashboardController extends Controller
         $menu_data = $request->get('menu_data');//中间件产生的管理员数据参数
         $son_menu_data = $request->get('son_menu_data');//中间件产生的管理员数据参数
         $route_name = $request->path();//获取当前的页面路由
+        /**
+         * 零壹管理系统--管理人员
+         */
+        $zerone_account = Account::getList(['organization_id'=>'1'],0,'id','DESC')->count();
+        /**
+         * 服务商管理系统--管理人员
+         */
+        $agent_account = $this->account('2','0');
+
+        /**
+         * 商户管理系统--管理人员
+         */
+        $company_account = $this->account('3','0');
+        /**
+         * 所有业务系统--管理人员
+         */
+        $store_account = $this->account('4','0');
+        dump($zerone_account);
+        dump($agent_account);
+        dump($company_account);
+        dump($store_account);
+
         $list = Statistics::pluck('item_value')->toArray();//所有数据
         $zerone = [
             'system_personnel' => $list['0'],     //零壹管理系统人员数量
