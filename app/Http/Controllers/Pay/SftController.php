@@ -34,6 +34,7 @@ class SftController extends Controller
         "ha" => ["payment_institution" => "H5WA", "mark" => "支付宝H5", "pay_type" => "PT312"],
 
 
+
     ];
 
     protected $requestFrom = [
