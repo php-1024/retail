@@ -74,6 +74,7 @@ class AuthApiController extends Controller
 
         if (empty($code)) {
 //            $url = request()->url();
+            $url = request()->fullUrl();
             \Wechat::get_open_web_auth_url($appid, $url);
         } else {
             $this->setAuthorizeShopInfo($appid, $code, $access_token);
