@@ -973,13 +973,13 @@ Route::group(['prefix' => 'api'], function () {
 
     Route::group(['prefix' => 'authApi'], function () {
         // 零壹服务授权
-        Route::any('zerone_auth', 'Api\AuthController@getZeroneAuth')->middleware('WechatApiCheck');
+        Route::any('zerone_auth', 'Api\AuthApiController@getZeroneAuth')->middleware('WechatApiCheck');
         // 商户公众号授权
-        Route::any('shop_auth', 'Api\AuthController@getShopAuth')->middleware('WechatApiCheck');
+        Route::any('shop_auth', 'Api\AuthApiController@getShopAuth')->middleware('WechatApiCheck');
         // 授权完毕中转站
-        Route::any('change_trains', 'Api\AuthController@changeTrains')->middleware('WechatApiCheck');
+        Route::any('change_trains', 'Api\AuthApiController@changeTrains')->middleware('WechatApiCheck');
         // 测试
-        Route::any('test11', 'Api\AuthController@test11')->middleware('WechatApiCheck');
+        Route::any('test11', 'Api\AuthApiController@test11')->middleware('WechatApiCheck');
 
     });
 
