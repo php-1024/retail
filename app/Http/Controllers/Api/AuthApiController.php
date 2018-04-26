@@ -25,10 +25,17 @@ class AuthApiController extends Controller
 
     public function test11()
     {
+        var_dump(11);
         $zerone_auth_info = request()->get("zerone_auth_info");
         var_dump($zerone_auth_info);
     }
 
+    public function test12()
+    {
+        var_dump(12);
+        $zerone_auth_info = request()->get("zerone_auth_info");
+        var_dump($zerone_auth_info);
+    }
 
     /**
      * 获取 零壹服务 的授权信息
@@ -50,11 +57,6 @@ class AuthApiController extends Controller
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             return redirect(request()->root() . "/api/authApi/change_trains");
-//            if ($res == true) {
-//                return redirect(request()->root() . "/api/authApi/change_trains");
-//            } else {
-//                Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
-//            }
         }
     }
 
@@ -77,11 +79,6 @@ class AuthApiController extends Controller
         } else {
             $this->setAuthorizeShopInfo($appid, $code, $access_token);
             return redirect(request()->root() . "/api/authApi/change_trains");
-//            if ($res == true) {
-//                return redirect(request()->root() . "/api/authApi/change_trains");
-//            } else {
-//                Header("Location:" . request()->root() . "/api/authApi/shop_auth");
-//            }
         }
     }
 
@@ -148,7 +145,7 @@ class AuthApiController extends Controller
             $openid = $res_access_arr['openid'];
         } else {
             $this->getShopAuth();
-            return;
+            return ;
         }
 
         // 零壹用户id
@@ -174,7 +171,6 @@ class AuthApiController extends Controller
             \Session::save();
 
             // 获取用户的信息
-//            $user_info = \Wechat::get_web_user_info($res_access_arr['access_token'], $openid);
             $user_info = \Wechat::get_fans_info($access_token, $openid);
             // 用户数据处理
             $param_user_info["user_id"] = $zerone_user_id;
@@ -199,8 +195,6 @@ class AuthApiController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            exit;
             DB::rollback();
             return false;
         }

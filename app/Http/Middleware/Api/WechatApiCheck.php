@@ -37,6 +37,7 @@ class WechatApiCheck
 
             // 测试
             case "api/authApi/test11" :
+            case "api/authApi/test12" :
 //                 零壹服务授权
 //            case "api/authApi/zerone_auth" :
 //                // 商户公众号授权
