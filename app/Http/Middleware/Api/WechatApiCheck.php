@@ -44,8 +44,7 @@ class WechatApiCheck
 //            case "api/authApi/shop_auth" :
                 // 授权完毕中转站
             case "api/authApi/change_trains" :
-
-                request()->attributes->add(['organization_id' => 2]);
+                request()->offsetSet('organization_id', 1);
                 $this->checkToken($request);
 
         }
@@ -176,6 +175,10 @@ class WechatApiCheck
         // 获取组织id
         $organization_id = request()->get("organization_id");
 
+        var_dump($organization_id);
+        exit;
+
+
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
@@ -200,20 +203,20 @@ class WechatApiCheck
 
         if (empty(session("zerone_auth_info.initial_url_address"))) {
             Header("Location:" . $url);
-            return ;
+            return;
         }
 
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
-            return ;
+            return;
         }
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/shop_auth");
-            return ;
+            return;
         }
 
         // 添加参数
