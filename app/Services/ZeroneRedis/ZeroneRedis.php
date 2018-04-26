@@ -99,6 +99,16 @@ class ZeroneRedis
         Redis::set($data_key, $admin_data);
     }
 
+    /*
+     * 简版店铺管理系统（重写的新版简版）---购物车缓存
+     */
+    public static function create_shopping_cart($key_id, $admin_data)
+    {
+        $admin_data = serialize($admin_data);//序列化数组数据
+        Redis::connection('zeo');//连接到我的redis服务器-简版店铺管理系统使用
+        Redis::set($key_id, $admin_data);
+    }
+
 
     //内部方法，生成对应程序及账号的菜单
     /*
