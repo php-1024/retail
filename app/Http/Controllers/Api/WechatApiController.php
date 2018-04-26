@@ -159,8 +159,8 @@ class WechatApiController extends Controller
         // 如果有商品
         if ($cart_data) {
             $cart_data = unserialize($cart_data);
-            print_r($cart_data);exit;
             $total = 0;
+            $goods_repeat = [];
             foreach ($cart_data as $key => $value) {
                 // 查询缓存中的商品是否存在添加的商品
                 if ($value['goods_id'] == $goods_id) {
