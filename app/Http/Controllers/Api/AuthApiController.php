@@ -68,10 +68,6 @@ class AuthApiController extends Controller
     {
         // 获取第三方授权信息
         $this->getShopBaseInfo(request()->get("organization_id"));
-        var_dump(request()->get("organization_id"));
-
-
-        exit;
         $code = request()->input('code');
         $appid = $this->wechat_info["authorizer_appid"];
         $access_token = $this->wechat_info["authorizer_access_token"];
@@ -156,6 +152,9 @@ class AuthApiController extends Controller
         // 组织id
         $organization_id = request()->get("organization_id");
 
+
+        var_dump($organization_id);
+        exit;
         // 事务处理
         DB::beginTransaction();
         try {
