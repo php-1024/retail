@@ -46,10 +46,7 @@ class AuthApiController extends Controller
     {
         // 判断是否存在 地址
         if (empty(session("zerone_auth_info.initial_url_address"))) {
-            exit;
-            Header("Location:" . request()->get("initial_url_address"));
-            exit;
-            return ;
+            session(["zerone_auth_info.initial_url_address" => request()->get("initial_url_address")]);
         }
 
         // 获取 code 地址
