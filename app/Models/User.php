@@ -113,7 +113,10 @@ class User extends Model
                 $res = self::updateOrCreate($where, $param);
                 break;
             case "first_create":
-                $res = self::firstOrCreate($param);
+                $res = self::where($where)->first();
+                if(empty($res)){
+                    $res = self::firstOrCreate($param);
+                }
                 break;
         }
 
