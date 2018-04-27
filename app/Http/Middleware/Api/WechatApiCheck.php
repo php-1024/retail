@@ -185,7 +185,7 @@ class WechatApiCheck
 
         // 获取组织id
         $organization_id = request()->get("organization_id");
-
+        echo $organization_id;exit;
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
