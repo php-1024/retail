@@ -45,7 +45,6 @@ class AuthApiController extends Controller
     public function getZeroneAuth()
     {
         var_dump(session("zerone_auth_info"));
-        var_dump($_SERVER["HTTP_REFERER"]);
         return 111;
 
         // 获取 code 地址
