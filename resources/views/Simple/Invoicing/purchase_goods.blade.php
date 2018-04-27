@@ -52,6 +52,23 @@
                             <div class="line line-border b-b pull-in"></div>
 
                             <div class="col-sm-12">
+                                <form method="post" class="form-horizontal"  role="form" id="stock" action="{{ url('simple/ajax/goods_list') }}">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <label class="col-sm-1 control-label">低库存查询</label>
+                                    <div class="col-sm-2">
+                                        <select name="stock" class="form-control m-b">
+                                            <option value="0">否</option>
+                                            <option value="1">是</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-1">
+
+                                        <button type="button" class="btn btn-s-md btn-info" onclick="search_goods()"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-sm-12">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('simple/ajax/goods_list') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                                     <label class="col-sm-1 control-label">商&nbsp; &nbsp; &nbsp;品</label>
