@@ -44,7 +44,7 @@ class WechatApiCheck
 //            case "api/authApi/shop_auth" :
                 // 授权完毕中转站
             case "api/authApi/change_trains" :
-                request()->offsetSet('organization_id', 2);
+//                request()->offsetSet('organization_id', 2);
                 $this->checkToken($request);
 
         }
@@ -185,8 +185,10 @@ class WechatApiCheck
     {
 //        return self::res(1, $request);
 
+
         // 获取组织id
         $organization_id = request()->get("organization_id");
+        dd($organization_id);
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
