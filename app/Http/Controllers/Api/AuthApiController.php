@@ -197,6 +197,8 @@ class AuthApiController extends Controller
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            exit;
             DB::rollback();
             return false;
         }
