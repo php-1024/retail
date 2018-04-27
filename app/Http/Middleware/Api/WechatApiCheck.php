@@ -121,7 +121,7 @@ class WechatApiCheck
     {
 
 
-        if (empty($request->input('organization_id'))) {
+        if (empty($request->get('organization_id'))) {
             return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
         }
 //        if (empty($request->input('lat'))) {
