@@ -44,6 +44,8 @@ class AuthApiController extends Controller
      */
     public function getZeroneAuth()
     {
+        var_dump(session("zerone_auth_info"));
+        exit;
         // 获取 code 地址
         $code = request()->input('code');
         // 如果不存在zerone_openid就进行授权
