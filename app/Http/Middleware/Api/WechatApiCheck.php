@@ -184,8 +184,6 @@ class WechatApiCheck
     public function checkToken($request)
     {
 //        return self::res(1, $request);
-
-
         // 获取组织id
         $organization_id = request()->get("organization_id");
         // 判断公众号是否授权给零壹第三方公众号平台
