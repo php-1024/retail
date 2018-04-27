@@ -25,7 +25,7 @@ class WechatApiController extends Controller
      */
     public function store_list(Request $request)
     {
-  
+
         // 商户id
         $fansmannage_id = $request->organization_id;
         // 纬度
