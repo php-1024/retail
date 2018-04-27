@@ -44,7 +44,7 @@ class WechatApiCheck
 //            case "api/authApi/shop_auth" :
                 // 授权完毕中转站
             case "api/authApi/change_trains" :
-                request()->offsetSet('organization_id', 2);
+//                request()->offsetSet('organization_id', 2);
                 $this->checkToken($request);
 
         }
@@ -184,6 +184,7 @@ class WechatApiCheck
     public function checkToken($request)
     {
 //        return self::res(1, $request);
+
 
         // 获取组织id
         $organization_id = request()->get("organization_id");
