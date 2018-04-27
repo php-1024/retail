@@ -222,7 +222,7 @@ class WechatApiCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            Header("Location:" . request()->root() . "/api/authApi/zerone_auth?url=$url");
+            Header("Location:" . request()->root() . "/api/authApi/zerone_auth?initial_url_address=$url");
             return;
         }
 

@@ -44,9 +44,11 @@ class AuthApiController extends Controller
      */
     public function getZeroneAuth()
     {
-        var_dump(session("zerone_auth_info"));
-        var_dump(request()->url());
-        return 111;
+        // 判断是否存在 地址
+        if (empty(session("zerone_auth_info.initial_url_address"))) {
+            Header("Location:" . request()->get("initial_url_address"));
+            return ;
+        }
 
         // 获取 code 地址
         $code = request()->input('code');
