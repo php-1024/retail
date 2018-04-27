@@ -119,6 +119,8 @@ class WechatApiCheck
      */
     public function checkStoreList($request)
     {
+       $organization_id =  Session::put('organization_id');
+       echo $organization_id;exit;
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '商户id不能为空', 'status' => '0', 'data' => '']));
         }
@@ -221,7 +223,6 @@ class WechatApiCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            echo 1;exit;
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
             return;
         }
