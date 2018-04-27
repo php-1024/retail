@@ -56,6 +56,7 @@ class AuthApiController extends Controller
             $appsecret = config("app.wechat_web_setting.appsecret");
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             $organization_id = request()->get("organization_id");
+            var_dump($organization_id);
             return $organization_id;
 
             return redirect(request()->root() . "/api/authApi/change_trains?organization_id={$organization_id}");
