@@ -206,11 +206,9 @@ class WechatApiCheck
         if (!in_array(request()->path(), $self_path)) {
             session(["zerone_auth_info.initial_url_address" => $url]);
         }
-        var_dump(session("zerone_auth_info.initial_url_address"));
-        exit;
+
         // 判断是否存在 地址
         if (empty(session("zerone_auth_info.initial_url_address"))) {
-
             Header("Location:" . $url);
             return;
         }
@@ -223,6 +221,8 @@ class WechatApiCheck
 
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
+            var_dump(session("zerone_auth_info.initial_url_address"));
+            exit;
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
             return;
         }
