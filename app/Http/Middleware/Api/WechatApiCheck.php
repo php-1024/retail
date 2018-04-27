@@ -204,15 +204,17 @@ class WechatApiCheck
         // 初次访问的地址
         $url = request()->fullUrl();
         var_dump(request()->path());
+        var_dump(request()->path());
         if (!in_array(request()->path(), $self_path)) {
-//            session(["zerone_auth_info.initial_url_address" => $url]);
+            session(["zerone_auth_info.initial_url_address" => $url]);
             echo 1;
-            exit;
+
         }else{
             echo 2;
-            exit;
+
         }
 
+        var_dump(session("zerone_auth_info"));exit;
 
 
 
