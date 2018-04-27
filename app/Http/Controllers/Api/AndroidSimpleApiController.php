@@ -268,7 +268,7 @@ class AndroidSimpleApiController extends Controller
         $data = [
             'orderlist' => $orderlist,
             'total_num' => $total_num,
-            'total_amount' => $total_amount,
+            'total_amount' => round($total_amount,2),
         ];
         return response()->json(['status' => '1', 'msg' => '订单列表查询成功', 'data' => $data]);
     }
