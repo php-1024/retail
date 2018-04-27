@@ -205,6 +205,7 @@ class WechatApiCheck
         $url = request()->fullUrl();
         if (!in_array(request()->path(), $self_path)) {
             session(["zerone_auth_info.initial_url_address" => $url]);
+            \Session::save();
         }
 
         // 判断是否存在 地址
