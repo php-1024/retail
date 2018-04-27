@@ -266,10 +266,6 @@ class AndroidSimpleApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '没有订单', 'data' => '']);
         }
 
-        print_r($orderlist['first_page_url']);exit;
-
-
-
         $data = [
             'orderlist' => $orderlist,
             'total_num' => $total_num,
