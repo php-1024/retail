@@ -258,7 +258,7 @@ class AndroidSimpleApiController extends Controller
             // 订单数量
             $total_num = count($orderlist);
             $total_amount = 0;
-            foreach ($orderlist as $key => $value) {
+            foreach ($orderlist->toArray() as $key => $value) {
                 // 订单总价格
                 $total_amount += $value['order_price'];
                 print_r($value);exit;
