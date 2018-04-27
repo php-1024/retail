@@ -52,7 +52,7 @@ class AuthApiController extends Controller
             \Wechat::get_web_auth_url($url, config("app.wechat_web_setting.appid"));
         } else {
             var_dump(session("zerone_user_info"));
-
+exit;
             // 保存相对应的数据
             $appid = config("app.wechat_web_setting.appid");
             $appsecret = config("app.wechat_web_setting.appsecret");
