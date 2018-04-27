@@ -65,7 +65,13 @@
                                         </select>
                                     </div>
 
-
+                                    <label class="col-sm-1 control-label">低库存查询</label>
+                                    <div class="col-sm-2">
+                                        <select name="stock" class="form-control m-b">
+                                            <option value="0">否</option>
+                                            <option value="1">是</option>
+                                        </select>
+                                    </div>
                                     <div class="col-sm-2">
                                         <input class="input-sm form-control" size="16" type="text" value="" name="goods_name" placeholder="关键字">
                                     </div>
