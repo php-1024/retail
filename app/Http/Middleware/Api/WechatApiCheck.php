@@ -206,7 +206,7 @@ class WechatApiCheck
             session(["zerone_auth_info.initial_url_address" => $url]);
         }
 
-
+        echo $organization_id;exit;
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
         if ($authorization_info === false) {
@@ -234,7 +234,6 @@ class WechatApiCheck
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
-        print_r($request);exit;
         return self::res(1, $request);
     }
 
