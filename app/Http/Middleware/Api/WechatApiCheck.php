@@ -211,6 +211,7 @@ class WechatApiCheck
         if ($authorization_info === false) {
             exit("微信公众号没有授权到第三方");
         }
+        echo $organization_id;exit;
 
         // 判断是否存在 地址
         if (empty(session("zerone_auth_info.initial_url_address"))) {
@@ -224,7 +225,6 @@ class WechatApiCheck
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
             return;
         }
-        echo $organization_id;exit;
 
 
         // 判断 session 中是否存在店铺id
