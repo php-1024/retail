@@ -25,10 +25,9 @@ class WechatApiController extends Controller
      */
     public function store_list(Request $request)
     {
-        echo 1;exit;
-
         // 商户id
         $fansmannage_id = $request->organization_id;
+
         // 纬度
         $lat = $request->lat;
         // 经度
