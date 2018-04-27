@@ -119,8 +119,7 @@ class WechatApiCheck
      */
     public function checkStoreList($request)
     {
-        $organization_id = Session::get('organization_id');
-        echo $organization_id;exit;
+
         if (empty($request->input('organization_id'))) {
             return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
         }
