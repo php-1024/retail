@@ -57,7 +57,7 @@ class AuthApiController extends Controller
             $this->setAuthorizeZeroneInfo($appid, $appsecret, $code);
             $organization_id = request()->get("organization_id");
             var_dump($organization_id);
-            return $organization_id;
+            exit;
 
             return redirect(request()->root() . "/api/authApi/change_trains?organization_id={$organization_id}");
         }
