@@ -206,7 +206,6 @@ class WechatApiCheck
             session(["zerone_auth_info.initial_url_address" => $url]);
         }
 
-        echo $organization_id;exit;
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
         if ($authorization_info === false) {
@@ -225,6 +224,8 @@ class WechatApiCheck
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
             return;
         }
+        echo $organization_id;exit;
+
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
