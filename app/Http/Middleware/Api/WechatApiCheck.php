@@ -203,21 +203,9 @@ class WechatApiCheck
         $self_path = ["api/authApi/zerone_auth", "api/authApi/shop_auth", "api/authApi/change_trains"];
         // 初次访问的地址
         $url = request()->fullUrl();
-        var_dump(request()->path());
-        var_dump(request()->path());
         if (!in_array(request()->path(), $self_path)) {
             session(["zerone_auth_info.initial_url_address" => $url]);
-            echo 1;
-
-        }else{
-            echo 2;
-
         }
-
-        var_dump(session("zerone_auth_info"));exit;
-
-
-
 
         // 判断是否存在 地址
         if (empty(session("zerone_auth_info.initial_url_address"))) {
