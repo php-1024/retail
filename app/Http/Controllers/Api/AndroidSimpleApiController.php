@@ -261,7 +261,6 @@ class AndroidSimpleApiController extends Controller
             foreach ($orderlist->toArray() as $key => $value) {
                 // 订单总价格
                 $total_amount += $value['order_price'];
-                print_r($value);exit;
             }
         } else {
             return response()->json(['status' => '0', 'msg' => '没有订单', 'data' => '']);
