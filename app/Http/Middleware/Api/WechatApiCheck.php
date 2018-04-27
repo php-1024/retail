@@ -119,8 +119,10 @@ class WechatApiCheck
      */
     public function checkStoreList($request)
     {
+        $organization_id = Session::get('organization_id');
+        echo $organization_id;exit;
         if (empty($request->input('organization_id'))) {
-            return self::res(0, response()->json(['msg' => '商户id不能为空', 'status' => '0', 'data' => '']));
+            return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
         }
         if (empty($request->input('lat'))) {
             return self::res(0, response()->json(['msg' => '微信地理位置纬度不能为空', 'status' => '0', 'data' => '']));
@@ -185,7 +187,6 @@ class WechatApiCheck
 
         // 获取组织id
         $organization_id = request()->get("organization_id");
-
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
@@ -207,7 +208,6 @@ class WechatApiCheck
             session(["zerone_auth_info.initial_url_address" => $url]);
         }
 
-
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
         if ($authorization_info === false) {
@@ -226,6 +226,7 @@ class WechatApiCheck
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
             return;
         }
+
 
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {

@@ -67,11 +67,11 @@ class LoginController extends Controller
         $allowed_error_times = config("app.allowed_error_times");//允许登录错误次数
         $username = Request::input('username');//接收用户名
         $password = Request::input('password');//接收用户密码
-        $captcha = Request::input('captcha');//接收验证码
-        $check_captcha = $this->getCode($captcha);
-        if($check_captcha ==0){
-            return response()->json(['data' => '验证码输入错误', 'status' => '0']);
-        }
+//        $captcha = Request::input('captcha');//接收验证码
+//        $check_captcha = $this->getCode($captcha);
+//        if($check_captcha ==0){
+//            return response()->json(['data' => '验证码输入错误', 'status' => '0']);
+//        }
         $account_info = Account::getOneForLogin($username);//根据账号查询
         if (empty($account_info)) {   //若果没有查询到数据，账号名称错误
             ErrorLog::addErrorTimes($ip, 2);

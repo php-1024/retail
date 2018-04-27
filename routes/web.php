@@ -953,7 +953,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('goodslist', 'Api\AndroidSimpleApiController@goodslist')->middleware('AndroidSimpleApiCheck');//商品列表接口
         Route::post('order_check', 'Api\AndroidSimpleApiController@order_check')->middleware('AndroidSimpleApiCheck');//订单提交接口
         Route::post('cancel_order', 'Api\AndroidSimpleApiController@cancel_order')->middleware('AndroidSimpleApiCheck');//取消订单接口
-        Route::post('order_list', 'Api\AndroidSimpleApiController@order_list')->middleware('AndroidSimpleApiCheck');//订单列表接口
+        Route::any('order_list', 'Api\AndroidSimpleApiController@order_list')->middleware('AndroidSimpleApiCheck');//订单列表接口
         Route::post('order_detail', 'Api\AndroidSimpleApiController@order_detail')->middleware('AndroidSimpleApiCheck');//订单详情接口
         Route::post('cash_payment', 'Api\AndroidSimpleApiController@cash_payment')->middleware('AndroidSimpleApiCheck');//现金支付接口
         Route::post('other_payment', 'Api\AndroidSimpleApiController@other_payment')->middleware('AndroidSimpleApiCheck');//其他支付接口
@@ -964,7 +964,7 @@ Route::group(['prefix' => 'api'], function () {
 
     //wechat接口
     Route::group(['prefix' => 'wechatApi'], function () {
-        Route::post('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//店铺列表
+        Route::any('store_list', 'Api\WechatApiController@store_list')->middleware('WechatApiCheck');//店铺列表
         Route::any('category', 'Api\WechatApiController@category')->middleware('WechatApiCheck');//店铺分类接口
         Route::any('goods_list', 'Api\WechatApiController@goods_list')->middleware('WechatApiCheck');//店铺商品接口
         Route::any('shopping_cart_add', 'Api\WechatApiController@shopping_cart_add')->middleware('WechatApiCheck');//购物车添加商品
