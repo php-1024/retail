@@ -25,6 +25,8 @@ class WechatApiController extends Controller
      */
     public function store_list(Request $request)
     {
+        $zerone_auth_info = $request->zerone_auth_info;
+        echo $zerone_auth_info;exit;
         // 商户id
         $fansmannage_id = $request->organization_id;
         // 纬度
@@ -241,8 +243,7 @@ class WechatApiController extends Controller
      */
     public function shopping_cart_reduce(Request $request)
     {
-        $zerone_auth_info = $request->zerone_auth_info;
-        echo $zerone_auth_info;exit;
+
         // 用户店铺id
 //        $user_id = $request->user_id;
         $user_id = '1';
