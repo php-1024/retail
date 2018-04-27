@@ -25,7 +25,7 @@ class WechatApiController extends Controller
      */
     public function store_list(Request $request)
     {
-        var_dump(session("zerone_user_info"));
+        var_dump(session("zerone_auth_info"));
         exit;
         // 商户id
         $fansmannage_id = $request->organization_id;
