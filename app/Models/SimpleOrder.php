@@ -67,7 +67,7 @@ class SimpleOrder extends Model
         if (!empty($select)) {
             $model = $model->select($select);
         }
-        return $model->with('SimpleOrderGoods')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
+        return $model->where($where)->orderBy($orderby, $sort)->paginate($paginate);
     }
 
 
