@@ -25,8 +25,7 @@ class WechatApiController extends Controller
      */
     public function store_list(Request $request)
     {
-        $zerone_auth_info = $request->zerone_auth_info;
-        echo $zerone_auth_info;exit;
+  
         // 商户id
         $fansmannage_id = $request->organization_id;
         // 纬度
