@@ -20,7 +20,6 @@ class LoginController extends Controller
     //登录处理
     public function display()
     {
-        dump(Session::get('branch_system_captcha'));
         return view('Simple/Login/display');
     }
 
@@ -39,6 +38,7 @@ class LoginController extends Controller
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
+        dump(Session::get('branch_system_captcha'));
     }
 
     //检测登录
