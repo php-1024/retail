@@ -56,6 +56,9 @@ class LoginController extends Controller
         } else {
             $key = config("app.simple_encrypt_key");//获取加密盐（分店专用）
         }
+        if ($account_info->deepth != 1){
+            return response()->json(['data' => '您的账号是操作员身份，操作员不能登录后台，谢谢您的配合！', 'status' => '0']);
+        }
         $encrypted = md5($password);//加密密码第一重
         $encryptPwd = md5("lingyikeji" . $encrypted . $key);//加密密码第二重
         //实例化错误记录表模型
@@ -65,7 +68,6 @@ class LoginController extends Controller
             if (!empty($account_info)) {
                 if ($encryptPwd != $account_info->password) {//查询密码是否对的上
                     ErrorLog::addErrorTimes($ip, 12);
-                    dd($encryptPwd);
                     return response()->json(['data' => '登录账号、手机号或密码输入错误', 'status' => '0']);
                 } elseif ($account_info->status <> '1') {//查询账号状态
                     ErrorLog::addErrorTimes($ip, 12);
