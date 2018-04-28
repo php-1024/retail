@@ -27,7 +27,7 @@ class Address extends Model
     }
 
     //获取多条信息
-    public static function getOneData($where)
+    public static function getOne($where)
     {
         return self::where($where)->first();
     }
