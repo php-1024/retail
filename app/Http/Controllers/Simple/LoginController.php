@@ -20,7 +20,6 @@ class LoginController extends Controller
     //登录处理
     public function display()
     {
-        dump(Session::get('branch_system_captcha'));
         return view('Simple/Login/display');
     }
 
@@ -34,7 +33,7 @@ class LoginController extends Controller
         //获取验证码的内容
         $phrase = $builder->getPhrase();
         //把内容存入session
-        Session::put('branch_system_captcha', $phrase);
+        Session::put('simple_system_captcha', $phrase);
         //生成图片
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
