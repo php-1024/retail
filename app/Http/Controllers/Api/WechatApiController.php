@@ -409,7 +409,7 @@ class WechatApiController extends Controller
 
 
         $address = Address::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
-        $dispatch = Dispatch::getList([['fansmanage_id', 11], ['store_id', 12], ['status', '1']], '', 'id');
+        $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
         return response()->json($data);
