@@ -20,7 +20,8 @@ class LoginController extends Controller
     //登录处理
     public function display()
     {
-        dump(Request::all());
+        $a = \Illuminate\Http\Request::all();
+        dump($a);
         return view('Simple/Login/display');
     }
 
