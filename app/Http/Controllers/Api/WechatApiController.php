@@ -416,6 +416,30 @@ class WechatApiController extends Controller
     }
 
     /**
+     * 查询用户默认取货信息
+     */
+    public function selftake(Request $request)
+    {
+        // 用户店铺id
+//        $user_id = $request->user_id;
+        $user_id = '1';
+        // 用户零壹id
+//        $zerone_user_id = $request->zerone_user_id;
+        $zerone_user_id = '7';
+        // 联盟主id
+        $fansmanage_id = $request->fansmanage_id;
+        // 店铺id
+        $store_id = $request->store_id;
+
+
+        $address = Address::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
+        return response()->json($data);
+    }
+
+    /**
      *  计算两组经纬度坐标 之间的距离
      *   params ：lat1 纬度1； lng1 经度1； lat2 纬度2； lng2 经度2； len_type （1:m or 2:km);
      *   return m or km
