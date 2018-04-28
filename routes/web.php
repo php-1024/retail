@@ -916,6 +916,15 @@ Route::group(['prefix' => 'simple'], function () {
 /**********************简单的*********************/
 
 
+/**********************微信端*********************/
+Route::group(['prefix' => 'zerone'], function () {
+    Route::group(['prefix' => 'wechat'], function () {
+        Route::get('/', 'Api\WechatController@display');
+    });
+
+});
+/**********************微信端*********************/
+
 /*********************接口路由*************************/
 Route::group(['prefix' => 'api'], function () {
     //微信通用路由组
