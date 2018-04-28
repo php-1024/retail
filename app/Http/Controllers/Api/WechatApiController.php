@@ -399,7 +399,7 @@ class WechatApiController extends Controller
         $user_id = '1';
         // 用户零壹id
 //        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '1';
+        $zerone_user_id = '7';
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
