@@ -138,9 +138,9 @@ class WechatApiCheck
      */
     public function checkRetailId($request)
     {
-        if (empty($request->input('store_id'))) {
-            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
-        }
+//        if (empty($request->input('store_id'))) {
+//            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+//        }
         return self::res(1, $request);
     }
 
