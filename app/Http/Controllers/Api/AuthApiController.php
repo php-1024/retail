@@ -44,6 +44,11 @@ class AuthApiController extends Controller
      */
     public function getZeroneAuth()
     {
+        // 判断是否存在 地址
+        if (empty(session("zerone_auth_info.initial_url_address"))) {
+            session(["zerone_auth_info.initial_url_address" => request()->get("initial_url_address")]);
+        }
+
         // 获取 code 地址
         $code = request()->input('code');
         // 如果不存在zerone_openid就进行授权
@@ -166,9 +171,6 @@ class AuthApiController extends Controller
             // 创建或者更新粉丝数据
             $fansmanage_user = FansmanageUser::insertData($param, "update_create", ["open_id" => $openid]);
 
-            // 缓存用户的店铺id
-            session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
-            \Session::save();
 
             // 获取用户的信息
             $user_info = \Wechat::get_fans_info($access_token, $openid);
@@ -191,10 +193,17 @@ class AuthApiController extends Controller
             // 保存源头数据
             UserOrigin::insertData($param_user_origin, "update_create", ["fansmanager_id" => $organization_id, "user_id" => $zerone_user_id]);
 
+
+            // 缓存用户的店铺id
+            session(["zerone_auth_info.shop_user_id" => $fansmanage_user["id"]]);
+            \Session::save();
+
             // 数据提交
             DB::commit();
             return true;
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            exit;
             DB::rollback();
             return false;
         }
@@ -207,6 +216,7 @@ class AuthApiController extends Controller
     public function changeTrains()
     {
         $url = session("zerone_auth_info.initial_url_address");
+        var_dump(session("zerone_auth_info"));
         Header("Location:{$url}");
     }
 

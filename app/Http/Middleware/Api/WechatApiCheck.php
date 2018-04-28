@@ -19,10 +19,10 @@ class WechatApiCheck
         // 获取当前的页面路由
         $route_name = $request->path();
         switch ($route_name) {
-            case "api/wechatApi/store_list"://检测店铺列表提交数据
-                $re = $this->checkTokenAndStoreList($request);
-                return self::format_response($re, $next);
-                break;
+//            case "api/wechatApi/store_list"://检测店铺列表提交数据
+//                $re = $this->checkTokenAndStoreList($request);
+//                return self::format_response($re, $next);
+//                break;
             case "api/wechatApi/category"://检测店铺分类提交数据
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
             case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
@@ -38,13 +38,13 @@ class WechatApiCheck
             // 测试
             case "api/authApi/test11" :
             case "api/authApi/test12" :
+            case "api/wechatApi/store_list"://检测店铺列表提交数据
 //                 零壹服务授权
 //            case "api/authApi/zerone_auth" :
 //                // 商户公众号授权
 //            case "api/authApi/shop_auth" :
                 // 授权完毕中转站
-            case "api/authApi/change_trains" :
-//                request()->offsetSet('organization_id', 2);
+//            case "api/authApi/change_trains" :
                 $this->checkToken($request);
 
         }
@@ -184,8 +184,6 @@ class WechatApiCheck
     public function checkToken($request)
     {
 //        return self::res(1, $request);
-
-
         // 获取组织id
         $organization_id = request()->get("organization_id");
         // 判断公众号是否授权给零壹第三方公众号平台
@@ -207,6 +205,13 @@ class WechatApiCheck
         $url = request()->fullUrl();
         if (!in_array(request()->path(), $self_path)) {
             session(["zerone_auth_info.initial_url_address" => $url]);
+            \Session::save();
+        }
+
+        // 判断是否存在 地址
+        if (empty(session("zerone_auth_info.initial_url_address"))) {
+            Header("Location:" . $url);
+            return ;
         }
 
         // 刷新并获取授权令牌
@@ -215,16 +220,9 @@ class WechatApiCheck
             exit("微信公众号没有授权到第三方");
         }
 
-        // 判断是否存在 地址
-        if (empty(session("zerone_auth_info.initial_url_address"))) {
-            Header("Location:" . $url);
-            return;
-        }
-
-
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
-            Header("Location:" . request()->root() . "/api/authApi/zerone_auth");
+            Header("Location:" . request()->root() . "/api/authApi/zerone_auth?initial_url_address=$url");
             return;
         }
 
