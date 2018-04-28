@@ -5,7 +5,7 @@
   <meta charset=utf-8>
   <meta name=viewport content="width=device-width,initial-scale=1">
   <title>new-retail</title>
-  <link rel=stylesheet type=text/css href=static/light7.min.css>
+  <link rel=stylesheet type=text/css href={{asset('public/Wechat')}}/static/light7.min.css>
   <link href={{asset('public/Wechat')}}/static/css/app.df36b0d9c770a649a8ef8870adbfd0fd.css rel=stylesheet>
 </head>
 
