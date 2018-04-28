@@ -218,7 +218,7 @@ class WechatApiCheck
         if ($authorization_info === false) {
             exit("微信公众号没有授权到第三方");
         }
-
+        echo 1;exit;
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_user_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth?initial_url_address=$url");
