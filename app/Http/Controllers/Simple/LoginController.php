@@ -38,7 +38,7 @@ class LoginController extends Controller
         header("Cache-Control: no-cache, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
-        dump(Session::get('branch_system_captcha'));
+        dd(Session::get('branch_system_captcha'));
     }
 
     //检测登录
