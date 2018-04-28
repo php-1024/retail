@@ -25,10 +25,10 @@ class WechatApiController extends Controller
      */
     public function store_list(Request $request)
     {
-        var_dump(session("zerone_auth_info"));
-        exit;
+
         // 商户id
-        $fansmannage_id = $request->organization_id;
+        $fansmannage_id = session("zerone_auth_info.organization_id");
+//        $fansmannage_id = $request->organization_id;
 
         // 纬度
         $lat = $request->lat;
@@ -125,10 +125,10 @@ class WechatApiController extends Controller
     {
         // 用户店铺id
 //        $user_id = $request->user_id;
-        $user_id = '1';
+        $user_id = session("zerone_auth_info.shop_user_id");
         // 用户零壹id
 //        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '1';
+        $zerone_user_id = session("zerone_auth_info.zerone_user_id");
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
