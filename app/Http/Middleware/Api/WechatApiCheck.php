@@ -19,10 +19,10 @@ class WechatApiCheck
         // 获取当前的页面路由
         $route_name = $request->path();
         switch ($route_name) {
-//            case "api/wechatApi/store_list"://检测店铺列表提交数据
-//                $re = $this->checkTokenAndStoreList($request);
-//                return self::format_response($re, $next);
-//                break;
+            case "api/wechatApi/store_list"://检测店铺列表提交数据
+                $re = $this->checkTokenAndStoreList($request);
+                return self::format_response($re, $next);
+                break;
             case "api/wechatApi/category"://检测店铺分类提交数据
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
             case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
@@ -36,16 +36,16 @@ class WechatApiCheck
                 break;
 
             // 测试
-            case "api/authApi/test11" :
-            case "api/authApi/test12" :
-            case "api/wechatApi/store_list"://检测店铺列表提交数据
+//            case "api/authApi/test11" :
+//            case "api/authApi/test12" :
+//            case "api/wechatApi/store_list"://检测店铺列表提交数据
 //                 零壹服务授权
 //            case "api/authApi/zerone_auth" :
 //                // 商户公众号授权
 //            case "api/authApi/shop_auth" :
                 // 授权完毕中转站
 //            case "api/authApi/change_trains" :
-                $this->checkToken($request);
+//                $this->checkToken($request);
 
         }
         return $next($request);
