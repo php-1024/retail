@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Dispatch;
 use App\Models\Organization;
+use App\Models\Selftake;
 use App\Models\SimpleCategory;
 use App\Models\SimpleConfig;
 use App\Models\SimpleGoods;
@@ -432,10 +433,9 @@ class WechatApiController extends Controller
         $store_id = $request->store_id;
 
 
-        $address = Address::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
-        $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
+        $selftake = Selftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftake]];
         return response()->json($data);
     }
 
