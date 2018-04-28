@@ -212,7 +212,6 @@ class WechatApiCheck
             Header("Location:" . $url);
             return ;
         }
-        echo 1;exit;
 
         // 刷新并获取授权令牌
         $authorization_info = \Wechat::refresh_authorization_info($organization_id);
