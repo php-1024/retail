@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Address;
 use App\Models\Organization;
 use App\Models\SimpleCategory;
 use App\Models\SimpleConfig;
@@ -404,39 +405,11 @@ class WechatApiController extends Controller
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
         $store_id = $request->store_id;
-        // 缓存键值
-        $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
-        // 查看缓存是否存有商品
-        $cart_data = Redis::get($key_id);
-        // 如果有商品
-        if (empty($cart_data)) {
-            return response()->json(['status' => '0', 'msg' => '购物车没有商品', 'data' => '']);
-        } else {
-            // 序列化转成数组
-            $cart_data = unserialize($cart_data);
-            $total = 0;
-            $goods_list = [];
-            foreach ($cart_data as $key => $value) {
-                // 数据处理
-                $goods_list[$key] = [
-                    // 商品ID
-                    'goods_id' => $value['goods_id'],
-                    //商品名称
-                    'goods_name' => $value['goods_name'],
-                    // 商品图片
-                    'goods_thumb' => $value['goods_thumb'],
-                    // 商品单价
-                    'goods_price' => $value['goods_price'],
-                    // 购物车中商品的数量
-                    'num' => $value['num'],
-                    // 商品库存
-                    'stock' => $value['stock'],
-                ];
-                // 购物车总数量
-                $total += $value['num'];
-            }
-        }
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['goods_list' => $goods_list, 'total' => $total]];
+
+
+        $address = Address::getone([['zerone_user_id',$zerone_user_id],['status','1']]);
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address' => $address]];
         return response()->json($data);
     }
 

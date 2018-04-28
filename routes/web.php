@@ -979,6 +979,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('shopping_cart_add', 'Api\WechatApiController@shopping_cart_add')->middleware('WechatApiCheck');//购物车添加商品
         Route::any('shopping_cart_reduce', 'Api\WechatApiController@shopping_cart_reduce')->middleware('WechatApiCheck');//购物车减少商品
         Route::any('shopping_cart_list', 'Api\WechatApiController@shopping_cart_list')->middleware('WechatApiCheck');//购物车列表
+        Route::any('address', 'Api\WechatApiController@address')->middleware('WechatApiCheck');//查询用户默认收货地址信息
     });
 
 
