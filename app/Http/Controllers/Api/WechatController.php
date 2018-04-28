@@ -17,6 +17,7 @@ class WechatController extends Controller
      */
     public function display(Request $request)
     {
+        echo 1;
         // 渲染页面
         return view('Simple/Wechat/display');
 
