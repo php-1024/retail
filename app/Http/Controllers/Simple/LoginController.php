@@ -20,7 +20,7 @@ class LoginController extends Controller
     //登录处理
     public function display()
     {
-        dump(Session::all());
+        dump(Session::get('branch_system_captcha'));
         return view('Simple/Login/display');
     }
 
