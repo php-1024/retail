@@ -24,7 +24,7 @@ class WechatCheck
     /**
      * 进入所有页面的前置流程
      */
-    public function checkToken($request)
+    public function checkToken()
     {
         // 获取组织id
         $organization_id = request()->get("organization_id");
