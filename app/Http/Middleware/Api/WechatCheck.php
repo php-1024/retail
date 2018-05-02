@@ -18,10 +18,8 @@ class WechatCheck
         $route_name = $request->path();
         switch ($route_name) {
             case "zerone/wechat"://检测店铺列表提交数据
-                var_dump(111);
-                exit;
                 $re = $this->checkToken($request);
-                return self::format_response($re, $next);
+//                return self::format_response($re, $next);
                 break;
         }
         return $next($request);
