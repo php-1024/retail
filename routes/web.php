@@ -919,7 +919,7 @@ Route::group(['prefix' => 'simple'], function () {
 /**********************微信端*********************/
 Route::group(['prefix' => 'zerone'], function () {
     Route::group(['prefix' => 'wechat'], function () {
-        Route::get('/', 'Api\WechatController@display');
+        Route::get('/', 'Api\WechatController@display')->middleware('WechatCheck');
     });
 
 });
