@@ -13,6 +13,7 @@ class WechatCheck
     {
         // 获取当前的页面路由
         $route_name = $request->path();
+        echo $route_name;exit;
         switch ($route_name) {
             case "zerone/wechat"://检测店铺列表提交数据
                 break;
