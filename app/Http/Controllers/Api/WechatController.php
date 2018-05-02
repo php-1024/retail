@@ -17,7 +17,7 @@ class WechatController extends Controller
      */
     public function display(Request $request)
     {
-        print_r(request()->get("zerone_auth_info"));exit;
+        print_r(request()->get("zerone_auth_info.organization_id"));exit;
         session("organization_id",request()->get("zerone_auth_info.organization_id"));
         session("zerone_user_id",request()->get("zerone_auth_info.zerone_user_id"));
         session("fansmanage_user_id",request()->get("zerone_auth_info.shop_user_id"));
