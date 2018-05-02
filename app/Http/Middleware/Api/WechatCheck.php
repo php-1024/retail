@@ -7,9 +7,6 @@ namespace App\Http\Middleware\Api;
 
 use App\Models\WechatAuthorization;
 use Closure;
-use Session;
-use Illuminate\Support\Facades\Redis;
-
 class WechatCheck
 {
     public function handle($request, Closure $next)
@@ -18,8 +15,6 @@ class WechatCheck
         $route_name = $request->path();
         switch ($route_name) {
             case "zerone/wechat"://检测店铺列表提交数据
-                $re = $this->checkToken($request);
-//                return self::format_response($re, $next);
                 break;
         }
         return $next($request);
@@ -71,17 +66,13 @@ class WechatCheck
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth?initial_url_address=$url");
             return;
         }
-
-
         // 判断 session 中是否存在店铺id
         if (empty(session("zerone_auth_info.shop_user_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/shop_auth?organization_id={$organization_id}");
             return;
         }
-
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
-//        return self::res(1, $request);
     }
 
     /**
@@ -96,27 +87,5 @@ class WechatCheck
         // 判断公众号是否在零壹第三方平台授权过
         return $res;
     }
-
-
-    /**
-     * 工厂方法返回结果
-     */
-        public static function res($status, $response)
-    {
-        return ['status' => $status, 'response' => $response];
-    }
-
-        /**
-         * 格式化返回值
-         */
-        public static function format_response($re, Closure $next)
-    {
-        if ($re['status'] == '0') {
-            return $re['response'];
-        } else {
-            return $next($re['response']);
-        }
-    }
-
 }
 
