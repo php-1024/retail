@@ -13,9 +13,9 @@ class WechatCheck
     {
         // 获取当前的页面路由
         $route_name = $request->path();
-        echo $route_name;exit;
         switch ($route_name) {
             case "zerone/wechat"://检测店铺列表提交数据
+                 $this->checkToken($request);
                 break;
         }
         return $next($request);
@@ -27,7 +27,6 @@ class WechatCheck
      */
     public function checkToken()
     {
-        echo 1;exit;
         // 获取组织id
         $organization_id = request()->get("organization_id");
         // 判断公众号是否授权给零壹第三方公众号平台
