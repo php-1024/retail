@@ -17,7 +17,7 @@ class WechatCheck
         // 获取当前的页面路由
         $route_name = $request->path();
         switch ($route_name) {
-            case "zerone/wechat/display"://检测店铺列表提交数据
+            case "zerone/wechat"://检测店铺列表提交数据
                 $re = $this->checkToken($request);
                 return self::format_response($re, $next);
                 break;
