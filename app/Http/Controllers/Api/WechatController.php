@@ -20,7 +20,7 @@ class WechatController extends Controller
         session("organization_id",request()->get("zerone_auth_info.organization_id"));
         session("zerone_user_id",request()->get("zerone_auth_info.zerone_user_id"));
         session("fansmanage_user_id",request()->get("zerone_auth_info.shop_user_id"));
-        print_r(session());
+       echo  Session::get('fansmanage_user_id');
         // 渲染页面
         return view('Simple/Wechat/display');
 
