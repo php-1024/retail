@@ -31,6 +31,7 @@ class WechatCheck
      */
     public function checkToken($request)
     {
+        echo 1;exit;
         // 获取组织id
         $organization_id = request()->get("organization_id");
         // 判断公众号是否授权给零壹第三方公众号平台
