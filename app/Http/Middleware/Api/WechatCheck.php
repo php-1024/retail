@@ -81,7 +81,7 @@ class WechatCheck
 
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
-        return self::res(1, $request);
+//        return self::res(1, $request);
     }
 
     /**
@@ -101,15 +101,15 @@ class WechatCheck
     /**
      * 工厂方法返回结果
      */
-    public static function res($status, $response)
+        public static function res($status, $response)
     {
         return ['status' => $status, 'response' => $response];
     }
 
-    /**
-     * 格式化返回值
-     */
-    public static function format_response($re, Closure $next)
+        /**
+         * 格式化返回值
+         */
+        public static function format_response($re, Closure $next)
     {
         if ($re['status'] == '0') {
             return $re['response'];
