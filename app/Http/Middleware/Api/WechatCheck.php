@@ -20,10 +20,6 @@ class WechatCheck
             case "zerone/wechat"://检测店铺列表提交数据
                 $this->checkToken();
                 break;
-
-            case "api/authApi/test11"://检测店铺列表提交数据
-                $this->checkToken();
-                break;
         }
         return $next($request);
     }
