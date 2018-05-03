@@ -619,6 +619,7 @@ class WechatApiController extends Controller
             // 删除用户取货信息
             SimpleSelftake::where([['id', $self_take_id]])->forceDelete();
             if (SimpleSelftake::getPluck([['id', $self_take_id]], 'status')) {
+                echo 1;exit;
                 $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id]], 'id');
                 if ($id) {
                     // 修改信息为默认地址
