@@ -58,6 +58,7 @@ class VerifyCsrfToken extends Middleware
         'api/wechatApi/address',//用户收货地址
         'api/wechatApi/selftake',//用户默认取货信息
         'api/wechatApi/address_add',//用户添加收货地址
+        'api/wechatApi/address_list',//用户收货地址列表
         /****wechat接口****/
 
     ];

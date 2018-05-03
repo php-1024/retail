@@ -982,6 +982,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('address', 'Api\WechatApiController@address')->middleware('WechatApiCheck');//查询用户默认收货地址信息
         Route::any('selftake', 'Api\WechatApiController@selftake')->middleware('WechatApiCheck');//用户默认取货信息
         Route::any('address_add', 'Api\WechatApiController@address_add')->middleware('WechatApiCheck');//添加收货地址
+        Route::any('address_list', 'Api\WechatApiController@address_list')->middleware('WechatApiCheck');//收货地址列表
     });
 
 
