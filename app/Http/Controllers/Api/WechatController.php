@@ -20,6 +20,8 @@ class WechatController extends Controller
        echo session("zerone_auth_info.organization_id");
        echo session("zerone_auth_info.zerone_user_id");
        echo session("zerone_auth_info.shop_user_id");
+       print_r(session("zerone_jssdk_info"));
+       
         // 渲染页面
         return view('Simple/Wechat/display');
 

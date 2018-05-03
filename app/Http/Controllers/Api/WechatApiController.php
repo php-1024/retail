@@ -544,7 +544,50 @@ class WechatApiController extends Controller
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
-            dd($e);
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '添加失败', 'data' => '']);
+        }
+        $data = ['status' => '1', 'msg' => '添加成功', 'data' => ['selftake_id' => $selftake_id]];
+        return response()->json($data);
+    }
+
+    /**
+     * 用户取货信息列表
+     */
+    public function selftake_list(Request $request)
+    {
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 真实姓名
+        $realname = $request->realname;
+        // 性别
+        $sex = $request->sex;
+        // 手机号
+        $mobile = $request->mobile;
+        // 默认取货信息 1为默认
+        $status = $request->status;
+        // 如果没传值，查询是否设置有地址，没有的话为默认地址
+        if (empty($status)) {
+            $status = SimpleSelftake::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
+        }
+        DB::beginTransaction();
+        try {
+            if ($status && !empty(SimpleSelftake::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
+                SimpleSelftake::editSelftake([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
+            }
+            // 数据处理
+            $selftakeData = [
+                'zerone_user_id' => $zerone_user_id,
+                'realname' => $realname,
+                'sex' => $sex,
+                'mobile' => $mobile,
+                'status' => $status,
+            ];
+            $selftake_id = SimpleSelftake::addSelftake($selftakeData);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
             // 事件回滚
             DB::rollBack();
             return response()->json(['status' => '0', 'msg' => '添加失败', 'data' => '']);
