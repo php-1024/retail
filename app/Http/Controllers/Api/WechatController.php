@@ -23,7 +23,6 @@ class WechatController extends Controller
         $this->getSignPackage();
         // 获取组织id
         $organization_id = request()->get("organization_id");
-        echo $organization_id;
         // 赋值
         $zerone_jssdk_info = (request()->get("zerone_jssdk_info"));
         // 渲染页面
