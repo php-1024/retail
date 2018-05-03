@@ -467,23 +467,38 @@ class WechatApiController extends Controller
         // 默认收货地址 1为默认
         $status = $request->status;
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
-        if(empty($status)){
-            $status = Address::checkRowExists([['zerone_user_id',$zerone_user_id]])?0:1;
+        if (empty($status)) {
+            $status = Address::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? 0 : 1;
         }
         DB::beginTransaction();
         try {
-
-
+            if ($status) {
+                Address::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => 0]);
+            }
+            // 数据处理
+            $addressData = [
+                'zerone_user_id' => $zerone_user_id,
+                'province_id' => $province_id,
+                'province_name' => $province_name,
+                'city_id' => $city_id,
+                'city_name' => $city_name,
+                'district_id' => $district_id,
+                'district_name' => $district_name,
+                'address' => $address,
+                'realname' => $realname,
+                'mobile' => $mobile,
+                'status' => $status
+            ];
+            $address_id = Address::addAddress($addressData);
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
+            dd($e);
             // 事件回滚
             DB::rollBack();
-            return response()->json(['data' => '拒绝失败', 'status' => '0']);
+            return response()->json(['status' => '0', 'msg' => '添加失败', 'data' => '']);
         }
-
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
-
+        $data = ['status' => '1', 'msg' => '添加成功', 'data' => ['address_id' => $address_id]];
         return response()->json($data);
     }
 
