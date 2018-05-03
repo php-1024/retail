@@ -229,13 +229,13 @@
   	       	var longitude = res.longitude ; // 经度，浮点数，范围为180 ~ -180。
   	        var speed = res.speed; // 速度，以米/每秒计
   	        var accuracy = res.accuracy; // 位置精度
-  	        //var organization_id=$("#organization_id").val();
-  	        //var _token=$("#_token").val();
-  	        //var keyword=$("#keyword").val();
-  	        //alert(organization_id);
-  	        //alert(_token);
-  	        //alert(keyword);
-  	        /*$.post({
+  	        var organization_id=$("#organization_id").val();
+  	        var _token=$("#_token").val();
+  	        var keyword=$("#keyword").val();
+  	        alert(organization_id);
+  	        alert(_token);
+  	        alert(keyword);
+  	        $.post({
   	        	url: 'http://develop.01nnt.com/api/wechatApi/store_list',
   	        	data: {organization_id: organization_id,_token:_token,keyword:keyword,lat:latitude,lng:longitude},
   	        	function(json){
@@ -243,7 +243,7 @@
   	        			alert();
   	        		}
   	        	}
-  	        })*/
+  	        })
           },
           cancel: function (res) {
             alert('用户拒绝授权获取地理位置');
