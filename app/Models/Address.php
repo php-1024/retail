@@ -36,17 +36,21 @@ class Address extends Model
     //添加数据
     public static function addAddress($param)
     {
-        $organization = new Address();//实例化程序模型
+        $address = new Address();//实例化程序模型
 
-        $organization->organization_name = $param['organization_name'];//组织名称
-        $organization->parent_id = $param['parent_id'];//多级组织的关系
-        $organization->parent_tree = $param['parent_tree'];//上级程序
-        $organization->program_id = $param['program_id'];//组织关系树
-        $organization->asset_id = $param['asset_id'];//下级组织使用程序id（商户使用）
-        $organization->type = $param['type'];//类型 2为服务商
-        $organization->status = $param['status'];//状态 1-正常 0-冻结
-        $organization->save();
-        return $organization->id;
+        $address->zerone_user_id = $param['zerone_user_id'];//用户零壹id
+        $address->province_id = $param['province_id'];//省份id
+        $address->province_name = $param['province_name'];//省份名称
+        $address->city_id = $param['city_id'];//城市ID
+        $address->city_name = $param['city_name'];//城市名称
+        $address->district_id = $param['district_id'];//地区ID
+        $address->district_name = $param['district_name'];//地区名称
+        $address->address = $param['address'];//详细地址
+        $address->realname = $param['realname'];//收货人真实姓名
+        $address->mobile = $param['mobile'];//手机号码
+        $address->status = $param['status'];//1为默认收货地址
+        $address->save();
+        return $address->id;
     }
 
     //修改数据

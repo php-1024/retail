@@ -440,6 +440,55 @@ class WechatApiController extends Controller
     }
 
     /**
+     * 添加收货地址
+     */
+    public function address_add(Request $request)
+    {
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 省份id
+        $province_id = $request->province_id;
+        // 省份名称
+        $province_name = $request->province_name;
+        // 城市ID
+        $city_id = $request->city_id;
+        // 城市名称
+        $city_name = $request->city_name;
+        // 地区ID
+        $district_id = $request->district_id;
+        // 地区名称
+        $district_name = $request->district_name;
+        // 详细地址
+        $address = $request->address;
+        // 收货人真实姓名
+        $realname = $request->realname;
+        // 手机号码
+        $mobile = $request->mobile;
+        // 默认收货地址 1为默认
+        $status = $request->status;
+        // 如果没传值，查询是否设置有地址，没有的话为默认地址
+        if(empty($status)){
+            $status = Address::checkRowExists([['zerone_user_id',$zerone_user_id]])?0:1;
+        }
+        DB::beginTransaction();
+        try {
+
+
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '拒绝失败', 'status' => '0']);
+        }
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
+
+        return response()->json($data);
+    }
+
+
+    /**
      *  计算两组经纬度坐标 之间的距离
      *   params ：lat1 纬度1； lng1 经度1； lat2 纬度2； lng2 经度2； len_type （1:m or 2:km);
      *   return m or km

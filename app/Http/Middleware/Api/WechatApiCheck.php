@@ -36,6 +36,10 @@ class WechatApiCheck
                 $re = $this->checkShoppingCartAdd($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/wechatApi/address_add"://检测添加收货地址提交数据
+                $re = $this->checkAddressAdd($request);
+                return self::format_response($re, $next);
+                break;
         }
         return $next($request);
     }
@@ -104,6 +108,46 @@ class WechatApiCheck
         }
         return self::res(1, $request);
     }
+
+    /**
+     * 检测店铺购物车商品添加提交数据
+     */
+    public function checkAddressAdd($request)
+    {
+        if (empty($request->input('zerone_user_id'))) {
+            return self::res(0, response()->json(['msg' => '用户零壹id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('province_id'))) {
+            return self::res(0, response()->json(['msg' => '省份id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('province_name'))) {
+            return self::res(0, response()->json(['msg' => '省份名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('city_id'))) {
+            return self::res(0, response()->json(['msg' => '城市id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('city_name'))) {
+            return self::res(0, response()->json(['msg' => '城市名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('district_id'))) {
+            return self::res(0, response()->json(['msg' => '地区id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('district_name'))) {
+            return self::res(0, response()->json(['msg' => '地区名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('address'))) {
+            return self::res(0, response()->json(['msg' => '详细地址不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['msg' => '收货人真实姓名不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+
 
     /**
      * 工厂方法返回结果
