@@ -227,7 +227,7 @@ body{
 	-ms-user-select: none;
 	user-select: none;
 	overflow: hidden;
-	padding: 0.525rem 0.7rem 1.3rem 0.9rem;
+	padding: 0.525rem 0.7rem 0 0.9rem;
 }
 .shoplist_box ul li a .shop_right .shop_name{
 	overflow: hidden;
