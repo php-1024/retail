@@ -567,6 +567,41 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 用户取货信息编辑
+     */
+    public function selftake_edit(Request $request)
+    {
+        // 自取表id
+        $self_take_id = $request->self_take_id;
+        // 真实姓名
+        $realname = $request->realname;
+        // 性别
+        $sex = $request->sex;
+        // 手机号
+        $mobile = $request->mobile;
+
+        DB::beginTransaction();
+        try {
+            //数据处理
+            $Selftakedata = [
+                'realname' => $realname,
+                'sex' => $sex,
+                'mobile' => $mobile,
+            ];
+            // 修改用户自取信息
+            SimpleSelftake::editSelftake([['id', $self_take_id]], $Selftakedata);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
+        }
+        $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['self_take_id' => $self_take_id]];
+
+        return response()->json($data);
+    }
 
 
     /**
