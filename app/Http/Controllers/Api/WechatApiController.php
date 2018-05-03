@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\Dispatch;
 use App\Models\Organization;
-use App\Models\Selftake;
+use App\Models\SimpleSelftake;
 use App\Models\SimpleCategory;
 use App\Models\SimpleConfig;
 use App\Models\SimpleGoods;
@@ -421,19 +421,10 @@ class WechatApiController extends Controller
      */
     public function selftake(Request $request)
     {
-        // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '7';
-        // 联盟主id
-        $fansmanage_id = $request->fansmanage_id;
-        // 店铺id
-        $store_id = $request->store_id;
-
-
-        $selftake = Selftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询默认取货信息
+        $selftake = SimpleSelftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftake]];
         return response()->json($data);
@@ -514,6 +505,20 @@ class WechatApiController extends Controller
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
 
+        return response()->json($data);
+    }
+
+    /**
+     * 添加用户默认取货信息
+     */
+    public function selftake_add(Request $request)
+    {
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询默认取货信息
+        $selftake = SimpleSelftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftake]];
         return response()->json($data);
     }
 
