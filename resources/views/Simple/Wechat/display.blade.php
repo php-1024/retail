@@ -174,5 +174,28 @@
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/selectshop.js" charset='utf-8'></script>
+    <script type="text/javascript">
+     wx.config({
+        debug: true,
+          appId:'{{$appId}}',
+          timestamp: '{{$timestamp}}',
+          nonceStr: '{{$nonceStr}}',
+          signature: '{{$signature}}',
+          jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            ...
+          ]
+      });
+
+      </script>
+
+    作者：Javen205
+    链接：https://www.jianshu.com/p/bb88f7520b9e
+    來源：简书
+    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
   </body>
 </html>
