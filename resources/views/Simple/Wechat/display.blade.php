@@ -47,7 +47,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">
@@ -84,7 +84,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">
@@ -121,7 +121,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">
@@ -158,7 +158,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">
@@ -195,7 +195,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">
@@ -232,7 +232,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">
@@ -269,7 +269,7 @@
         <div class="gl_item">
           <div class="gl_item_fl">
             <div class="goods_img">
-              <img src="images/emotion@2x.png">
+              <img src="{{asset('public/Wechat')}}/images/emotion@2x.png">
             </div>
             <div class="goods_right">
               <div class="goods_right_item">

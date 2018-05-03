@@ -204,7 +204,6 @@ body{
     overflow: hidden;
 }
 .goodslist .gl_item .gl_item_fl .goods_right .goods_right_item{
-	height: 100%;
 	display: -webkit-flex;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -249,19 +248,21 @@ body{
 	overflow: hidden;
 	font-size: 0.7rem;
 	color: #000;
-	margin-bottom: 0.3rem;
+	margin-bottom: 0.7rem;
 }
 .goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .goods_tltie span{
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .goods_details{
+.goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .goods_details,
+.goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .goods_distance{
 	font-size: 0.6rem;
 	color: #666;
 	overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    margin-bottom: 0.35rem;
 }
 .goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center_juzhong{
 	-webkit-align-items: center;
