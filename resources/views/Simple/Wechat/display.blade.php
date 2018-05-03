@@ -224,7 +224,7 @@
          wx.getLocation({
           success: function (res) {
           	var data = JSON.stringify(res);
-            console.log(data.errMsg);
+            console.log(typeOf(data));
           },
           cancel: function (res) {
             alert('用户拒绝授权获取地理位置');
