@@ -28,6 +28,7 @@ class AuthApiController extends Controller
         var_dump(12);
         $zerone_auth_info = request()->get("zerone_jssdk_info");
         var_dump($zerone_auth_info);
+        return view("Fansmanage/Test/test11",["item"=>$zerone_auth_info]);
     }
 
     public function test12()
