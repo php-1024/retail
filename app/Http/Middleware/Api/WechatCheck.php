@@ -103,7 +103,6 @@ class WechatCheck
      */
     public function getSignPackage()
     {
-        dd(1231);
         $wxid = "gh_c548784211ab";
         $wechat_config = WechatWebAuthorization::getWechatConfig($wxid);
         $res = WechatWebAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
