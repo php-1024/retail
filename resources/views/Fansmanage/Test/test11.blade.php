@@ -11,7 +11,7 @@
 <script>
 
 
-    wechatInit({{$item["appid"]}},{{$item["timestamp"]}},{{$item["nonceStr"]}},{{$item["signature"]}})
+    wechatInit({{$item["appId"]}},{{$item["timestamp"]}},{{$item["nonceStr"]}},{{$item["signature"]}})
 
 
     function wechatInit($appid,$timestamp,$nonceStr,$signature){
