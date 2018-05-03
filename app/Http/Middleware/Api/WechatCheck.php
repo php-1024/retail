@@ -111,11 +111,17 @@ class WechatCheck
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
         $res = HttpCurl::doGet($url);
 
+        $res = json_decode($res,true);
+        $access_token = $res["access_token"];
+
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$access_token}&type=jsapi";
+        $res = HttpCurl::doGet($url);
+        $res = json_decode($res,true);
         var_dump($res);
         exit;
+        $ticket = $res["ticket"];
 
 
-        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi";
 
 
         $ticket = config('app.wechat_open_setting');
