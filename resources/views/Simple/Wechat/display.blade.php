@@ -232,7 +232,9 @@
   	        var organization_id=$("#organization_id").val();
   	        var _token=$("#_token").val();
   	        var keyword=$("#keyword").val();
-  	        
+  	        alert(organization_id);
+  	        alert(_token);
+  	        alert(keyword);
   	        $.post({
   	        	url: 'http://develop.01nnt.com/api/wechatApi/store_list',
   	        	data: {organization_id: organization_id,_token:_token,keyword:keyword,lat:latitude,lng:longitude},
