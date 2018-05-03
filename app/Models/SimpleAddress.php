@@ -9,10 +9,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Address extends Model
+class SimpleAddress extends Model
 {
     use SoftDeletes;
-    protected $table = 'address';
+    protected $table = 'simple_address';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -36,7 +36,7 @@ class Address extends Model
     //添加数据
     public static function addAddress($param)
     {
-        $address = new Address();//实例化程序模型
+        $address = new SimpleAddress();//实例化程序模型
 
         $address->zerone_user_id = $param['zerone_user_id'];//用户零壹id
         $address->province_id = $param['province_id'];//省份id

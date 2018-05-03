@@ -6,7 +6,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
+use App\Models\SimpleAddress;
 use App\Models\Dispatch;
 use App\Models\Organization;
 use App\Models\SimpleSelftake;
@@ -409,7 +409,7 @@ class WechatApiController extends Controller
         $store_id = $request->store_id;
 
 
-        $address = Address::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        $address = SimpleAddress::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
         $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
@@ -459,12 +459,12 @@ class WechatApiController extends Controller
         $status = $request->status;
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
         if (empty($status)) {
-            $status = Address::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
+            $status = SimpleAddress::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
         }
         DB::beginTransaction();
         try {
-            if ($status && !empty(Address::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
-                Address::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
+            if ($status && !empty(SimpleAddress::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
+                SimpleAddress::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
             }
             // 数据处理
             $addressData = [
@@ -480,7 +480,7 @@ class WechatApiController extends Controller
                 'mobile' => $mobile,
                 'status' => $status
             ];
-            $address_id = Address::addAddress($addressData);
+            $address_id = SimpleAddress::addAddress($addressData);
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
@@ -501,7 +501,7 @@ class WechatApiController extends Controller
         // 用户零壹id
         $zerone_user_id = $request->zerone_user_id;
         // 查询收货地址列表
-        $address_list = Address::getList([['zerone_user_id', $zerone_user_id]]);
+        $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
 
