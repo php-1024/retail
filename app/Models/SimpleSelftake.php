@@ -9,10 +9,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Selftake extends Model
+class SimpleSelftake extends Model
 {
     use SoftDeletes;
-    protected $table = 'selftake';
+    protected $table = 'simple_selftake';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -36,7 +36,7 @@ class Selftake extends Model
     //添加数据
     public static function addSelftake($param)
     {
-        $organization = new Selftake();//实例化程序模型
+        $organization = new SimpleSelftake();//实例化程序模型
 
         $organization->organization_name = $param['organization_name'];//组织名称
         $organization->parent_id = $param['parent_id'];//多级组织的关系
