@@ -56,7 +56,7 @@ class LoginController extends Controller
         } else {
             $key = config("app.simple_encrypt_key");//获取加密盐（分店专用）
         }
-        if ($account_info->deepth != 1){
+        if ($account_info->deepth != 1 || $account_info->deepth != 0){
             return response()->json(['data' => '您的账号是操作员身份，操作员不能登录后台，谢谢您的配合！', 'status' => '0']);
         }
         $encrypted = md5($password);//加密密码第一重
