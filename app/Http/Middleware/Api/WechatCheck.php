@@ -102,12 +102,17 @@ class WechatCheck
      */
     public function getSignPackage()
     {
+        // 获取微信的信息
+        $appid = config('app.wechat_web_setting.appid');
+
         $res = \Wechat::get_access_token();
         $access_token = $res["access_token"];
 
 
         $res = \Wechat::get_jssdk_ticket($access_token);
         $ticket = $res["ticket"];
+
+
 
 
         // 设置得到签名的参数
