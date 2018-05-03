@@ -41,7 +41,8 @@ class WechatApiCheck
                 break;
             case "api/wechatApi/selftake"://用户默认取货信息
             case "api/wechatApi/address_list"://检测添加收货地址提交数据
-                $re = $this->checkAddressList($request);
+            case "api/wechatApi/selftake_list"://检测添加收货地址提交数据
+                $re = $this->checkZeroneUserId($request);
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/selftake_add"://检测添加取货信息提交数据
@@ -157,9 +158,9 @@ class WechatApiCheck
     }
 
     /**
-     * 检测用户收货地址列表提交数据
+     * 检测零壹id
      */
-    public function checkAddressList($request)
+    public function checkZeroneUserId($request)
     {
         if (empty($request->input('zerone_user_id'))) {
             return self::res(0, response()->json(['msg' => '用户零壹id不能为空', 'status' => '0', 'data' => '']));

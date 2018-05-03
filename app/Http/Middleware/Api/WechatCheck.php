@@ -74,7 +74,6 @@ class WechatCheck
             return;
         }
 
-
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
