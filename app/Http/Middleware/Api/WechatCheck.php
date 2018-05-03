@@ -111,20 +111,14 @@ class WechatCheck
         $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
         $res = HttpCurl::doGet($url);
 
-        $res = json_decode($res,true);
+        $res = json_decode($res, true);
         $access_token = $res["access_token"];
 
         $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$access_token}&type=jsapi";
         $res = HttpCurl::doGet($url);
-        $res = json_decode($res,true);
-        var_dump($res);
-        exit;
+        $res = json_decode($res, true);
+
         $ticket = $res["ticket"];
-
-
-
-
-        $ticket = config('app.wechat_open_setting');
 
         // 设置得到签名的参数
         $url = request()->fullUrl();
@@ -134,8 +128,9 @@ class WechatCheck
         $string = "jsapi_ticket={$ticket}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
         $signature = sha1($string);
         $signPackage = array("appId" => $appid, "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
-        // 返回签名
-        return $signPackage;
+
+
+        request()->attributes->add(['zerone_jssdk_info' => $signPackage]);
     }
 
 }
