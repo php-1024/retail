@@ -62,6 +62,7 @@ class VerifyCsrfToken extends Middleware
         'api/wechatApi/selftake_add',//用户添加取货信息
         'api/wechatApi/selftake_list',//用户取货信息列表
         'api/wechatApi/selftake_edit',//编辑用户取货信息
+        'api/wechatApi/selftake_delete',//删除用户取货信息
         /****wechat接口****/
 
     ];
