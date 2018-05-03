@@ -6,10 +6,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Address;
+use App\Models\SimpleAddress;
 use App\Models\Dispatch;
 use App\Models\Organization;
-use App\Models\Selftake;
+use App\Models\SimpleSelftake;
 use App\Models\SimpleCategory;
 use App\Models\SimpleConfig;
 use App\Models\SimpleGoods;
@@ -409,7 +409,7 @@ class WechatApiController extends Controller
         $store_id = $request->store_id;
 
 
-        $address = Address::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        $address = SimpleAddress::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
         $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
@@ -421,19 +421,10 @@ class WechatApiController extends Controller
      */
     public function selftake(Request $request)
     {
-        // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '7';
-        // 联盟主id
-        $fansmanage_id = $request->fansmanage_id;
-        // 店铺id
-        $store_id = $request->store_id;
-
-
-        $selftake = Selftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询默认取货信息
+        $selftake = SimpleSelftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftake]];
         return response()->json($data);
@@ -468,12 +459,12 @@ class WechatApiController extends Controller
         $status = $request->status;
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
         if (empty($status)) {
-            $status = Address::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
+            $status = SimpleAddress::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
         }
         DB::beginTransaction();
         try {
-            if ($status && !empty(Address::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
-                Address::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
+            if ($status && !empty(SimpleAddress::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
+                SimpleAddress::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
             }
             // 数据处理
             $addressData = [
@@ -489,7 +480,7 @@ class WechatApiController extends Controller
                 'mobile' => $mobile,
                 'status' => $status
             ];
-            $address_id = Address::addAddress($addressData);
+            $address_id = SimpleAddress::addAddress($addressData);
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
@@ -510,10 +501,98 @@ class WechatApiController extends Controller
         // 用户零壹id
         $zerone_user_id = $request->zerone_user_id;
         // 查询收货地址列表
-        $address_list = Address::getList([['zerone_user_id', $zerone_user_id]]);
+        $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
 
+        return response()->json($data);
+    }
+
+    /**
+     * 添加用户取货信息
+     */
+    public function selftake_add(Request $request)
+    {
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 真实姓名
+        $realname = $request->realname;
+        // 性别
+        $sex = $request->sex;
+        // 手机号
+        $mobile = $request->mobile;
+        // 默认取货信息 1为默认
+        $status = $request->status;
+        // 如果没传值，查询是否设置有地址，没有的话为默认地址
+        if (empty($status)) {
+            $status = SimpleSelftake::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
+        }
+        DB::beginTransaction();
+        try {
+            if ($status && !empty(SimpleSelftake::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
+                SimpleSelftake::editSelftake([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
+            }
+            // 数据处理
+            $selftakeData = [
+                'zerone_user_id' => $zerone_user_id,
+                'realname' => $realname,
+                'sex' => $sex,
+                'mobile' => $mobile,
+                'status' => $status,
+            ];
+            $selftake_id = SimpleSelftake::addSelftake($selftakeData);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '添加失败', 'data' => '']);
+        }
+        $data = ['status' => '1', 'msg' => '添加成功', 'data' => ['selftake_id' => $selftake_id]];
+        return response()->json($data);
+    }
+
+    /**
+     * 用户取货信息列表
+     */
+    public function selftake_list(Request $request)
+    {
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 真实姓名
+        $realname = $request->realname;
+        // 性别
+        $sex = $request->sex;
+        // 手机号
+        $mobile = $request->mobile;
+        // 默认取货信息 1为默认
+        $status = $request->status;
+        // 如果没传值，查询是否设置有地址，没有的话为默认地址
+        if (empty($status)) {
+            $status = SimpleSelftake::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
+        }
+        DB::beginTransaction();
+        try {
+            if ($status && !empty(SimpleSelftake::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
+                SimpleSelftake::editSelftake([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
+            }
+            // 数据处理
+            $selftakeData = [
+                'zerone_user_id' => $zerone_user_id,
+                'realname' => $realname,
+                'sex' => $sex,
+                'mobile' => $mobile,
+                'status' => $status,
+            ];
+            $selftake_id = SimpleSelftake::addSelftake($selftakeData);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '添加失败', 'data' => '']);
+        }
+        $data = ['status' => '1', 'msg' => '添加成功', 'data' => ['selftake_id' => $selftake_id]];
         return response()->json($data);
     }
 

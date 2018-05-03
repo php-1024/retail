@@ -6,7 +6,6 @@
 namespace App\Http\Middleware\Api;
 
 use App\Models\WechatAuthorization;
-use App\Services\Curl\HttpCurl;
 use Closure;
 
 class WechatCheck
@@ -18,10 +17,6 @@ class WechatCheck
         switch ($route_name) {
             case "zerone/wechat"://检测店铺列表提交数据
                 $this->checkToken();
-                break;
-
-            case "api/authApi/test11"://检测店铺列表提交数据
-                $this->getSignPackage();
                 break;
         }
         return $next($request);
@@ -79,6 +74,7 @@ class WechatCheck
             return;
         }
 
+
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
@@ -94,35 +90,6 @@ class WechatCheck
         $res = WechatAuthorization::getAuthInfo(["organization_id" => $organization_id], ["authorizer_appid", "authorizer_access_token"]);
         // 判断公众号是否在零壹第三方平台授权过
         return $res;
-    }
-
-
-    /**
-     * 获取 wx.config 里面的签名,JSSDk 所需要的
-     */
-    public function getSignPackage()
-    {
-        // 获取微信的信息
-        $appid = config('app.wechat_web_setting.appid');
-
-        $res = \Wechat::get_access_token();
-        $access_token = $res["access_token"];
-
-
-        $res = \Wechat::get_jssdk_ticket($access_token);
-        $ticket = $res["ticket"];
-
-        // 设置得到签名的参数
-        $url = request()->fullUrl();
-        $timestamp = time();
-        $nonceStr = substr(md5(time()), 0, 16);
-        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
-        $string = "jsapi_ticket={$ticket}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
-        $signature = sha1($string);
-        $signPackage = array("appId" => $appid, "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
-
-
-        request()->attributes->add(['zerone_jssdk_info' => $signPackage]);
     }
 
 }

@@ -9,10 +9,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Address extends Model
+class SimpleSelftake extends Model
 {
     use SoftDeletes;
-    protected $table = 'address';
+    protected $table = 'simple_selftake';
     protected $primaryKey = 'id';
     public $timestamps = true;
     public $dateFormat = 'U';//设置保存的created_at updated_at为时间戳格式
@@ -34,27 +34,20 @@ class Address extends Model
 
 
     //添加数据
-    public static function addAddress($param)
+    public static function addSelftake($param)
     {
-        $address = new Address();//实例化程序模型
-
-        $address->zerone_user_id = $param['zerone_user_id'];//用户零壹id
-        $address->province_id = $param['province_id'];//省份id
-        $address->province_name = $param['province_name'];//省份名称
-        $address->city_id = $param['city_id'];//城市ID
-        $address->city_name = $param['city_name'];//城市名称
-        $address->district_id = $param['district_id'];//地区ID
-        $address->district_name = $param['district_name'];//地区名称
-        $address->address = $param['address'];//详细地址
-        $address->realname = $param['realname'];//收货人真实姓名
-        $address->mobile = $param['mobile'];//手机号码
-        $address->status = $param['status'];//1为默认收货地址
-        $address->save();
-        return $address->id;
+        $selftake = new SimpleSelftake();//实例化程序模型
+        $selftake->zerone_user_id = $param['zerone_user_id'];//零壹id
+        $selftake->realname = $param['realname'];//真实姓名
+        $selftake->mobile = $param['mobile'];//手机号
+        $selftake->sex = $param['sex'];//性别
+        $selftake->status = $param['status'];//状态（1为默认取款信息）
+        $selftake->save();
+        return $selftake->id;
     }
 
     //修改数据
-    public static function editAddress($where, $param)
+    public static function editSelftake($where, $param)
     {
         $model = self::where($where)->first();
         foreach ($param as $key => $val) {
@@ -80,10 +73,5 @@ class Address extends Model
         return self::where($where)->value($pluck);
     }
 
-    //获取分页数据-分店
-    public static function getstore($where, $paginate, $orderby, $sort = 'DESC')
-    {
-        return self::with('OrganizationRetailinfo')->with('account')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
-    }
 }
 
