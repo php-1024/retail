@@ -986,6 +986,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('selftake_add', 'Api\WechatApiController@selftake_add')->middleware('WechatApiCheck');//用户添加取货信息
         Route::any('selftake_list', 'Api\WechatApiController@selftake_list')->middleware('WechatApiCheck');//用户取货信息列表
         Route::any('selftake_edit', 'Api\WechatApiController@selftake_edit')->middleware('WechatApiCheck');//编辑用户取货信息
+        Route::any('selftake_delete', 'Api\WechatApiController@selftake_delete')->middleware('WechatApiCheck');//删除用户取货信息
     });
 
 

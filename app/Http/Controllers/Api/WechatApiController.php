@@ -581,11 +581,12 @@ class WechatApiController extends Controller
         // 手机号
         $mobile = $request->mobile;
 
+        if(empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))){
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+
         DB::beginTransaction();
         try {
-            if(empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))){
-                return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
-            };
             // 修改用户自取信息
             SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
             // 提交事务
@@ -599,6 +600,23 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 用户取货信息编辑
+     */
+    public function selftake_delete(Request $request)
+    {
+        // 自取表id
+        $self_take_id = $request->self_take_id;
+
+        if(empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))){
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+
+        SimpleSelftake::where([['id',$self_take_id]])->forceDelete();
+
+        $data = ['status' => '1', 'msg' => '删除成功', 'data' => ['self_take_id' => $self_take_id]];
+        return response()->json($data);
+    }
 
     /**
      *  计算两组经纬度坐标 之间的距离
