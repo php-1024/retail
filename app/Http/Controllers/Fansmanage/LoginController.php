@@ -200,6 +200,7 @@ class LoginController extends Controller
 
         } else {
             // 返回错误提示
+
             return response()->json(['data' => '您短时间内错误的次数超过' . $allowed_error_times . '次，请稍候再尝试登录 ', 'status' => '0']);
         }
     }
