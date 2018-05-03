@@ -21,10 +21,12 @@ class WechatController extends Controller
     {
         // 获取微信公众号JSSDK 凭证
         $this->getSignPackage();
+        // 获取组织id
+        $organization_id = request()->get("organization_id");
         // 赋值
         $zerone_jssdk_info = (request()->get("zerone_jssdk_info"));
         // 渲染页面
-        return view('Simple/Wechat/display', ['appId' => $zerone_jssdk_info['appId'], 'nonceStr' => $zerone_jssdk_info['nonceStr'], 'timestamp' => $zerone_jssdk_info['timestamp'], 'rawString' => $zerone_jssdk_info['rawString'], 'signature' => $zerone_jssdk_info['signature']]);
+        return view('Simple/Wechat/display', ['appId' => $zerone_jssdk_info['appId'], 'nonceStr' => $zerone_jssdk_info['nonceStr'], 'timestamp' => $zerone_jssdk_info['timestamp'], 'rawString' => $zerone_jssdk_info['rawString'], 'signature' => $zerone_jssdk_info['signature'], 'organization_id' => $organization_id]);
     }
 
 

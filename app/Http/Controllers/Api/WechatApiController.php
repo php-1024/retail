@@ -616,8 +616,6 @@ class WechatApiController extends Controller
 
         DB::beginTransaction();
         try {
-            // 删除用户取货信息
-            SimpleSelftake::where([['id', $self_take_id]])->forceDelete();
             if (SimpleSelftake::getPluck([['id', $self_take_id]], 'status')) {
                 $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id]], 'id');
                 if ($id) {
@@ -625,6 +623,9 @@ class WechatApiController extends Controller
                     SimpleSelftake::editSelftake([['id', $id]], ['status' => '1']);
                 }
             }
+            // 删除用户取货信息
+            SimpleSelftake::where([['id', $self_take_id]])->forceDelete();
+
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
