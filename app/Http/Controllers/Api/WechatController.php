@@ -24,10 +24,8 @@ class WechatController extends Controller
         // 赋值
         $zerone_jssdk_info = (request()->get("zerone_jssdk_info"));
         // 渲染页面
-        return view('Simple/Wechat/display',['appId'=>$zerone_jssdk_info['appId'],'nonceStr'=>$zerone_jssdk_info['nonceStr'],'timestamp'=>$zerone_jssdk_info['timestamp'],'rawString'=>$zerone_jssdk_info['rawString'],'signature'=>$zerone_jssdk_info['signature']]);
+        return view('Simple/Wechat/display', ['appId' => $zerone_jssdk_info['appId'], 'nonceStr' => $zerone_jssdk_info['nonceStr'], 'timestamp' => $zerone_jssdk_info['timestamp'], 'rawString' => $zerone_jssdk_info['rawString'], 'signature' => $zerone_jssdk_info['signature']]);
     }
-
-
 
 
     /**
@@ -37,7 +35,7 @@ class WechatController extends Controller
     {
         $wxid = "gh_c548784211ab";
         $wechat_config = WechatWebAuthorization::getWechatConfig($wxid);
-        $res = WechatWebAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
+        $res = WechatWebAuthorization::updateWechatVoucher($wechat_config, ["jssdk"]);
 
         // 设置得到签名的参数
         $url = request()->fullUrl();
@@ -50,9 +48,6 @@ class WechatController extends Controller
 
         request()->attributes->add(['zerone_jssdk_info' => $signPackage]);
     }
-
-
-
 
 
 }
