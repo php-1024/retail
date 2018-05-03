@@ -468,12 +468,12 @@ class WechatApiController extends Controller
         $status = $request->status;
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
         if (empty($status)) {
-            $status = Address::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? 0 : 1;
+            $status = Address::checkRowExists([['zerone_user_id', $zerone_user_id]]) ? '0' : '1';
         }
         DB::beginTransaction();
         try {
-            if ($status) {
-                Address::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => 0]);
+            if ($status && !empty(Address::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
+                Address::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
             }
             // 数据处理
             $addressData = [
