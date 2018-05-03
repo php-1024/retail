@@ -235,7 +235,7 @@
   	        alert(organization_id);
   	        alert(_token);
   	        alert(keyword);
-  	        $.post({
+  	        /*$.post({
   	        	url: 'http://develop.01nnt.com/api/wechatApi/store_list',
   	        	data: {organization_id: organization_id,_token:_token,keyword:keyword,lat:latitude,lng:longitude},
   	        	function(json){
@@ -243,7 +243,7 @@
   	        			alert();
   	        		}
   	        	}
-  	        })
+  	        })*/
           },
           cancel: function (res) {
             alert('用户拒绝授权获取地理位置');
