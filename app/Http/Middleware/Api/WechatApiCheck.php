@@ -232,6 +232,9 @@ class WechatApiCheck
         if (empty($request->input('self_take_id'))) {
             return self::res(0, response()->json(['msg' => '取货信息ID不能为空', 'status' => '0', 'data' => '']));
         }
+        if (empty($request->input('zerone_user_id'))) {
+            return self::res(0, response()->json(['msg' => '用户零壹id不能为空', 'status' => '0', 'data' => '']));
+        }
         return self::res(1, $request);
     }
 
