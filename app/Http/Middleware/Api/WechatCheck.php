@@ -112,9 +112,6 @@ class WechatCheck
         $res = \Wechat::get_jssdk_ticket($access_token);
         $ticket = $res["ticket"];
 
-
-
-
         // 设置得到签名的参数
         $url = request()->fullUrl();
         $timestamp = time();
