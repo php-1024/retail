@@ -992,6 +992,8 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('shop_auth', 'Api\AuthApiController@getShopAuth')->middleware('WechatCheck');
         // 授权完毕中转站
         Route::any('change_trains', 'Api\AuthApiController@changeTrains')->middleware('WechatCheck');
+
+
         // 测试
         Route::any('test11', 'Api\AuthApiController@test11')->middleware('WechatCheck');
         Route::any('test12', 'Api\AuthApiController@test12')->middleware('WechatCheck');

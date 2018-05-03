@@ -6,7 +6,9 @@
 namespace App\Http\Middleware\Api;
 
 use App\Models\WechatAuthorization;
+use App\Services\Curl\HttpCurl;
 use Closure;
+
 class WechatCheck
 {
     public function handle($request, Closure $next)
@@ -15,7 +17,11 @@ class WechatCheck
         $route_name = $request->path();
         switch ($route_name) {
             case "zerone/wechat"://检测店铺列表提交数据
-                 $this->checkToken();
+                $this->checkToken();
+                break;
+
+            case "api/authApi/test11"://检测店铺列表提交数据
+                $this->getSignPackage();
                 break;
         }
         return $next($request);
@@ -54,7 +60,7 @@ class WechatCheck
         // 判断是否存在 地址
         if (empty(session("zerone_auth_info.initial_url_address"))) {
             Header("Location:" . $url);
-            return ;
+            return;
         }
 
         // 刷新并获取授权令牌
@@ -72,6 +78,7 @@ class WechatCheck
             Header("Location:" . request()->root() . "/api/authApi/shop_auth?organization_id={$organization_id}");
             return;
         }
+
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
@@ -88,5 +95,42 @@ class WechatCheck
         // 判断公众号是否在零壹第三方平台授权过
         return $res;
     }
+
+
+    /**
+     * 获取 wx.config 里面的签名,JSSDk 所需要的
+     * @return array
+     */
+    public function getSignPackage()
+    {
+        // 获取微信的信息
+        $appid = config('app.wechat_web_setting.appid');
+        $appserct = config('app.wechat_web_setting.appserct');
+
+
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appserct}";
+        $res = HttpCurl::doGet($url);
+
+        var_dump($res);
+        exit;
+
+
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi";
+
+
+        $ticket = config('app.wechat_open_setting');
+
+        // 设置得到签名的参数
+        $url = request()->fullUrl();
+        $timestamp = time();
+        $nonceStr = substr(md5(time()), 0, 16);
+        // 这里参数的顺序要按照 key 值 ASCII 码升序排序
+        $string = "jsapi_ticket={$ticket}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        $signature = sha1($string);
+        $signPackage = array("appId" => $appid, "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
+        // 返回签名
+        return $signPackage;
+    }
+
 }
 
