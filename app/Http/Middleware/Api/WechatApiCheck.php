@@ -49,6 +49,10 @@ class WechatApiCheck
                 $re = $this->checkSelftakeAdd($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/wechatApi/selftake_edit"://检测编辑取货信息提交数据
+                $re = $this->checkselftakeEdit($request);
+                return self::format_response($re, $next);
+                break;
 
         }
         return $next($request);
@@ -191,6 +195,31 @@ class WechatApiCheck
         }
         return self::res(1, $request);
     }
+
+    /**
+     * 检测用户收货地址列表提交数据
+     */
+    public function checkselftakeEdit($request)
+    {
+        if (empty($request->input('self_take_id'))) {
+            return self::res(0, response()->json(['msg' => '取货信息ID不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['msg' => '取货人真实姓名不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('sex'))) {
+            return self::res(0, response()->json(['msg' => '性别不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
+        }
+        $mobile= $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+            return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
+        }
+        return self::res(1, $request);
+    }
+
 
 
     /**
