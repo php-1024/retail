@@ -581,7 +581,7 @@ class WechatApiController extends Controller
         // 手机号
         $mobile = $request->mobile;
 
-        if(empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))){
+        if (empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))) {
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
 
@@ -601,19 +601,37 @@ class WechatApiController extends Controller
     }
 
     /**
-     * 用户取货信息编辑
+     * 删除用户取货信息
      */
     public function selftake_delete(Request $request)
     {
         // 自取表id
         $self_take_id = $request->self_take_id;
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
 
-        if(empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))){
+        if (empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))) {
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
 
-        SimpleSelftake::where([['id',$self_take_id]])->forceDelete();
-
+        DB::beginTransaction();
+        try {
+            // 删除用户取货信息
+            SimpleSelftake::where([['id', $self_take_id]])->forceDelete();
+            if (SimpleSelftake::getPluck([['id', $self_take_id]], 'status')) {
+                $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id]], 'id');
+                if ($id) {
+                    // 修改信息为默认地址
+                    SimpleSelftake::editSelftake([['id', $id]], ['status' => '1']);
+                }
+            }
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
+        }
         $data = ['status' => '1', 'msg' => '删除成功', 'data' => ['self_take_id' => $self_take_id]];
         return response()->json($data);
     }
