@@ -6,6 +6,7 @@
 namespace App\Http\Middleware\Api;
 
 use App\Models\WechatAuthorization;
+use App\Models\WechatWebAuthorization;
 use App\Services\Curl\HttpCurl;
 use Closure;
 
@@ -99,36 +100,23 @@ class WechatCheck
 
     /**
      * 获取 wx.config 里面的签名,JSSDk 所需要的
-     * @return array
      */
     public function getSignPackage()
     {
-        // 获取微信的信息
-        $appid = config('app.wechat_web_setting.appid');
-        $appsecret = config('app.wechat_web_setting.appsecret');
+        $wxid = "gh_c548784211ab";
+        $wechat_config = WechatWebAuthorization::getWechatConfig($wxid);
 
-
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
-        $res = HttpCurl::doGet($url);
-
-        $res = json_decode($res, true);
-        $access_token = $res["access_token"];
-
-        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$access_token}&type=jsapi";
-        $res = HttpCurl::doGet($url);
-        $res = json_decode($res, true);
-
-        $ticket = $res["ticket"];
-
+        $res = WechatWebAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
+        dd($res);
+        exit;
         // 设置得到签名的参数
         $url = request()->fullUrl();
         $timestamp = time();
         $nonceStr = substr(md5(time()), 0, 16);
         // 这里参数的顺序要按照 key 值 ASCII 码升序排序
-        $string = "jsapi_ticket={$ticket}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        $string = "jsapi_ticket={$res["jsapi_ticket"]}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
         $signature = sha1($string);
-        $signPackage = array("appId" => $appid, "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
-
+        $signPackage = array("appId" => $res["appid"], "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
 
         request()->attributes->add(['zerone_jssdk_info' => $signPackage]);
     }
