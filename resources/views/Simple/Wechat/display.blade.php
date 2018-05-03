@@ -171,12 +171,13 @@
 		</div>
 		<!-- alert -->
     </div>
+	<script type='text/javascript' src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/selectshop.js" charset='utf-8'></script>
     <script type="text/javascript">
      wx.config({
-        debug: true,
+	      debug: true,
           appId:'{{$appId}}',
           timestamp: '{{$timestamp}}',
           nonceStr: '{{$nonceStr}}',
@@ -186,16 +187,29 @@
             'onMenuShareTimeline',
             'onMenuShareAppMessage',
             'onMenuShareQQ',
-            'onMenuShareWeibo',
-            ...
+            'onMenuShareWeibo'
           ]
       });
+     wx.ready(function(){
+         // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+         // 1 判断当前版本是否支持指定 JS 接口，支持批量判断
+           document.querySelector('#checkJsApi').onclick = function () {
+             wx.checkJsApi({
+               jsApiList: [
+                 'getNetworkType',
+                 'previewImage'
+               ],
+               success: function (res) {
+                 alert(JSON.stringify(res));
+               }
+             });
+           };
+     });
+     wx.error(function(res){
+         // config信息验证失败会执行error函数，如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+         alert(res);
 
+     });
       </script>
-
-    作者：Javen205
-    链接：https://www.jianshu.com/p/bb88f7520b9e
-    來源：简书
-    著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
   </body>
 </html>
