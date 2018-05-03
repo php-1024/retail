@@ -583,8 +583,9 @@ class WechatApiController extends Controller
 
         DB::beginTransaction();
         try {
-            //数据处理
-
+            if(empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))){
+                return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+            };
             // 修改用户自取信息
             SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
             // 提交事务
