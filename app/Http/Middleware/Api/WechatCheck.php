@@ -105,10 +105,10 @@ class WechatCheck
     {
         // 获取微信的信息
         $appid = config('app.wechat_web_setting.appid');
-        $appserct = config('app.wechat_web_setting.appserct');
+        $appsecret = config('app.wechat_web_setting.appsecret');
 
 
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appserct}";
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
         $res = HttpCurl::doGet($url);
 
         var_dump($res);
