@@ -6,7 +6,7 @@
 
 <h1>测试</h1>
 
-
+<script src="https://res.wx.qq.com/mmbizwap/zh_CN/htmledition/js/vconsole/2.5.1/vconsole.min.js"></script>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
 
