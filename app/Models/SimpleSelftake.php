@@ -36,17 +36,14 @@ class SimpleSelftake extends Model
     //添加数据
     public static function addSelftake($param)
     {
-        $organization = new SimpleSelftake();//实例化程序模型
-
-        $organization->organization_name = $param['organization_name'];//组织名称
-        $organization->parent_id = $param['parent_id'];//多级组织的关系
-        $organization->parent_tree = $param['parent_tree'];//上级程序
-        $organization->program_id = $param['program_id'];//组织关系树
-        $organization->asset_id = $param['asset_id'];//下级组织使用程序id（商户使用）
-        $organization->type = $param['type'];//类型 2为服务商
-        $organization->status = $param['status'];//状态 1-正常 0-冻结
-        $organization->save();
-        return $organization->id;
+        $selftake = new SimpleSelftake();//实例化程序模型
+        $selftake->zerone_user_id = $param['zerone_user_id'];//零壹id
+        $selftake->realname = $param['realname'];//真实姓名
+        $selftake->mobile = $param['mobile'];//手机号
+        $selftake->sex = $param['sex'];//性别
+        $selftake->status = $param['status'];//状态（1为默认取款信息）
+        $selftake->save();
+        return $selftake->id;
     }
 
     //修改数据
