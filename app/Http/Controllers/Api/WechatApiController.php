@@ -501,6 +501,22 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 查询用户默认取货信息
+     */
+    public function address_list(Request $request)
+    {
+
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询收货地址列表
+        $address_list = Address::getList([['zerone_user_id', $zerone_user_id]]);
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
+
+        return response()->json($data);
+    }
+
 
     /**
      *  计算两组经纬度坐标 之间的距离

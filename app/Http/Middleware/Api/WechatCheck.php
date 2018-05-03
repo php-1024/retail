@@ -99,25 +99,17 @@ class WechatCheck
 
     /**
      * 获取 wx.config 里面的签名,JSSDk 所需要的
-     * @return array
      */
     public function getSignPackage()
     {
         // 获取微信的信息
         $appid = config('app.wechat_web_setting.appid');
-        $appsecret = config('app.wechat_web_setting.appsecret');
 
-
-        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
-        $res = HttpCurl::doGet($url);
-
-        $res = json_decode($res, true);
+        $res = \Wechat::get_access_token();
         $access_token = $res["access_token"];
 
-        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$access_token}&type=jsapi";
-        $res = HttpCurl::doGet($url);
-        $res = json_decode($res, true);
 
+        $res = \Wechat::get_jssdk_ticket($access_token);
         $ticket = $res["ticket"];
 
         // 设置得到签名的参数

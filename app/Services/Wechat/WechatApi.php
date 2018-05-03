@@ -99,6 +99,35 @@ class WechatApi
 //        return $re;
 //    }
 
+
+    /**
+     * 获取微信接口 access_token
+     * @param string $appid
+     * @param string $appsecret
+     * @return mixed
+     */
+    public function get_access_token($appid = "", $appsecret = "")
+    {
+        $appid = !empty($appid) ? $appid : config('app.wechat_web_setting.appid');
+        $appsecret = !empty($appsecret) ? $appsecret : config('app.wechat_web_setting.appsecret');
+
+        $url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid={$appid}&secret={$appsecret}";
+        $res = \HttpCurl::doGet($url);
+        return $this->resultReturnDispose($res, "json");
+    }
+
+    /**
+     * 获取微信jssdk 凭证信息
+     * @param $access_token
+     * @return mixed
+     */
+    public function get_jssdk_ticket($access_token)
+    {
+        $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$access_token}&type=jsapi";
+        $res = \HttpCurl::doGet($url);
+        return $this->resultReturnDispose($res, "json");
+    }
+
     /**
      * 获取网页授权链接
      * @param string $redirect_uri 回调链接
