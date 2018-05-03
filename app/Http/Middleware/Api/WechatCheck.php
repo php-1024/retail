@@ -105,10 +105,10 @@ class WechatCheck
     {
         $wxid = "gh_c548784211ab";
         $wechat_config = WechatWebAuthorization::getWechatConfig($wxid);
-        dd($wechat_config);
-        exit;
-        $res = WechatWebAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
 
+        $res = WechatWebAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
+        dd($res);
+        exit;
         // 设置得到签名的参数
         $url = request()->fullUrl();
         $timestamp = time();
