@@ -103,9 +103,9 @@ class WechatCheck
      */
     public function getSignPackage()
     {
-        $wxid = "";
+        $wxid = "gh_c548784211ab";
         $wechat_config = WechatWebAuthorization::getWechatConfig($wxid);
-        $res = WechatAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
+        $res = WechatWebAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
 
         // 设置得到签名的参数
         $url = request()->fullUrl();
