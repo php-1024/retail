@@ -27,7 +27,6 @@ class WechatApiCheck
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
             case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
             case "api/wechatApi/address"://检测店铺购物车列表提交数据
-            case "api/wechatApi/selftake"://用户默认取货信息
                 $re = $this->checkRetailId($request);
                 return self::format_response($re, $next);
                 break;
@@ -40,6 +39,7 @@ class WechatApiCheck
                 $re = $this->checkAddressAdd($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/wechatApi/selftake"://用户默认取货信息
             case "api/wechatApi/address_list"://检测添加收货地址提交数据
                 $re = $this->checkAddressList($request);
                 return self::format_response($re, $next);
