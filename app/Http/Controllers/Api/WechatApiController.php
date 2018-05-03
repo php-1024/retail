@@ -617,8 +617,8 @@ class WechatApiController extends Controller
         DB::beginTransaction();
         try {
             if (SimpleSelftake::getPluck([['id', $self_take_id]], 'status')) {
-                echo 1;exit;
                 $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id]], 'id');
+                print_r($id);exit;
                 if ($id) {
                     // 修改信息为默认地址
                     SimpleSelftake::editSelftake([['id', $id]], ['status' => '1']);
