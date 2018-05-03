@@ -116,6 +116,8 @@ class WechatWebAuthorization extends Model
             || time() >= $wechat_config['access_token_expires']
         ) {
             $res = \Wechat::get_access_token();
+            var_dump($res);
+            exit;
             $res_api_access = $res["access_token"];
         }
 
