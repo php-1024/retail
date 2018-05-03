@@ -1,0 +1,71 @@
+body{
+	background: rgb(241,245,248);
+}
+.g-flexview {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 750px;
+    min-width: 300px;
+    overflow: auto;
+    padding-bottom: 1.425rem;
+     background: rgb(241,245,248);
+}
+.main{
+	background: #fff;
+	width: 100%;
+	border-bottom: 0.05rem solid rgb(239,239,239);
+	padding-top: 1.5rem;
+}
+.main .payment_box{
+	margin: 0 auto 0.7rem auto;
+	width: 5.0rem;
+	height: 5.0rem;
+	background: rgb(254,219,67);
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	position: relative;
+}
+.main .payment_box:after{
+	content: "";
+	position: absolute;
+	display: block;
+	width: 2.6rem;
+	height: 2.35rem;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 1.25rem auto;
+	background: url('../images/paymen_chengogng@2x.png') no-repeat;
+	background-size: cover;
+}
+.main p{
+	font-size: 0.7rem;
+	color: rgb(149,156,162);
+	text-align: center;
+	font-weight: 600;
+	margin-bottom: 1.025rem;
+}
+.main h3{
+	font-size: 1.0rem;
+	color: #323232;
+	text-align: center;
+	font-weight: 600;
+	margin-bottom: 1.775rem;
+}
+.payment_btn{
+	margin-top: 1.4rem;
+	width: 100%;
+	padding: 0 0.8rem;
+}
+.payment_btn > a{
+	display: block;
+	width: 100%;
+	height: 2.2rem;
+	line-height: 2.2rem;
+	text-align: center;
+	font-size: 0.8rem;
+	color: #323232;
+	font-weight: 600;
+	background: #fedb43;
+}

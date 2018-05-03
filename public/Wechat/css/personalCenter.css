@@ -1,0 +1,245 @@
+body{
+	background: rgb(241,245,248);
+}
+.g-flexview {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 750px;
+    min-width: 300px;
+    overflow: auto;
+    padding-bottom: 1.425rem;
+     background: rgb(241,245,248);
+}
+.top_bg{
+	width: 100%;
+	height: 7.25rem;
+	background: url('../images/gerenzhongxinbg@2x.png') no-repeat;
+	background-size: 100% 100%;
+	position: relative;
+    z-index: 2;
+}
+.top_bg .top_bg_box{
+	padding: 1.8rem 0.95rem 1.4rem 0.95rem;
+	overflow: hidden;
+	clear: both;
+}
+.top_bg .top_bg_box .col-70{
+	float: left;
+	width: 70%;
+}
+.top_bg .top_bg_box .col-30{
+	float: right;
+    width: 30%;
+    position: relative;
+}
+.top_bg .top_bg_box .username{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0.4rem;
+}
+.top_bg .top_bg_box .username span{
+	font-size: 1.2rem;
+	color: #323232;
+	font-weight: 600;
+}
+.top_bg .top_bg_box .user_state_box{
+	margin-bottom: 0.5rem;
+}
+.top_bg .top_bg_box .user_state_box  .user_state{
+	padding: 0.225rem 0.35rem 0.2rem 0.35rem;
+	font-size: 0.6rem;
+	color: #fff;
+	background: -webkit-linear-gradient(top, rgba(87,87,87,0.9) , rgba(78,78,78,0.8),rgba(10,10,10,1));
+ 	background: -o-linear-gradient(top, rgba(87,87,87,0.9) , rgba(78,78,78,0.8),rgba(10,10,10,1));
+	background: -moz-linear-gradient(top, rgba(87,87,87,0.9) , rgba(78,78,78,0.8),rgba(10,10,10,1));
+	background: linear-gradient(top, rgba(87,87,87,0.9) , rgba(78,78,78,0.8),rgba(10,10,10,1));
+	-webkit-border-radius: 0.175rem;
+	border-radius: 0.175rem;
+}
+.top_bg .top_bg_box .jifen{
+	font-size: 0.7rem;
+	color: #323232;
+}
+.top_bg .top_bg_box .user_img{
+	position: absolute;
+	right: 1.5rem;
+	top: 0;
+	width: 2.55rem;
+	height: 2.55rem;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	border: 0.075rem solid #f1b000;
+}
+.top_bg .top_bg_box .user_img img{
+	width: 100%;
+	height: auto;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+}
+.top_bg .top_bg_box .right_icon{
+	display: block;
+	position: absolute;
+	right: 0;
+	top: 0.875rem;
+	width: 0.5rem;
+	height: 0.9rem;
+	background: url('../images/my_top_into@2x.png') no-repeat;
+	background-size: cover;
+}
+.top_bg .top_bg_box .user_id{
+	font-size: 0.7rem;
+	color: #323232;
+	position: absolute;
+	top: 3.3rem;
+	right: 0;
+}
+.geren_list{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	background: #fff;
+	position: relative;
+}
+.geren_list .bg{
+	position: absolute;
+	left: 0;
+	top: -2rem;
+	width: 100%;
+	height: 2rem;
+	background: #fff;
+	z-index: 1;
+}
+.geren_list .item{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.geren_list > div > p{
+	text-align: center;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.geren_list .dindan_number{
+	font-size: 0.8rem;
+	color: #323232;
+	margin-top: 0.8rem;
+	font-weight: 600;
+}
+.geren_list .dindan_title{
+	font-size: 0.7rem;
+	color: #909090;
+	margin-top: 0.3rem;
+	margin-bottom: 0.4rem;
+	font-weight: 600;
+}
+.guanggao{
+	margin: 0.6rem 0;
+	width: 100%;
+	height: 4.4rem;
+	background-color: rgb(254,219,67);
+	position: relative;
+}
+.guanggao .guanggao_fl{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+.guanggao .guanggao_img{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 3.375rem;
+	height: 3.775rem;
+	background: url('../images/guanggao@2x.png') no-repeat;
+	background-size: cover;
+}
+.guanggao .guanggao_title{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding: 1.2rem 4rem 1.2rem 4rem;
+}
+.guanggao .guanggao_title > div > h3{
+	font-size: 0.8rem;
+	color: #323232;
+	margin-bottom: 0.3rem;
+}
+.guanggao .guanggao_title > div > p{
+	font-size: 0.7rem;
+	color: #323232;
+	font-weight: 600;
+}
+.guanggao .guanggao_btn{
+	display: block;
+	width: 4.2rem;
+	height: 1.5rem;
+	font-size: 0.7rem;
+	color: rgb(56,54,56);
+	font-weight: 600;
+	text-align: center;
+	line-height: 1.5rem;
+	border: 0.075rem solid rgb(56,54,56);
+	-webkit-border-radius: 0.1rem;
+	border-radius: 0.1rem;
+	position: absolute;
+	top: 50%;
+	right: 0.95rem;
+	-webkit-transform:translate(0,-50%);             
+	-moz-transform:translate(0,-50%);             
+	-ms-transform:translate(0,-50%);
+	transform:translate(0,-50%);
+}
+.select_list{
+	padding: 0 0.8rem 0 0.95rem;
+	background: #fff;
+}
+.select_list > a{
+	display: block;
+	padding: 0.825rem 0;
+	border-bottom: 0.025rem solid #f7f8fb;
+	font-size: 0.7rem;
+	color: rgb(50,50,50);
+	font-weight: 600;
+	position: relative;
+}
+.select_list > a:last-child{
+	border-bottom: none;
+}
+.select_list .item_icon:after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    width: 0.325rem;
+    height: 0.6rem;
+    background: url('../images/my_into@2x.png') no-repeat;
+    background-size: cover;
+}
+.bottom{
+	margin-top: 5.25rem;
+}
+.bottom p:nth-child(1){
+	text-align: center;
+	font-size: 0.6rem;
+	margin-bottom: 0.7rem;
+	color: #323232;
+}
+.bottom p:nth-child(2){
+	text-align: center;
+	font-size: 0.6rem;
+	color: #909090;
+}

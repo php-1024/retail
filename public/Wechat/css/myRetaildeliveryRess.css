@@ -1,0 +1,198 @@
+body{
+	background: rgb(241,245,248);
+}
+.g-flexview {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 750px;
+    min-width: 300px;
+        overflow: auto;
+        padding-bottom: 3.425rem;
+         background: rgb(241,245,248);
+}
+.alert_list {
+    padding: .75rem 0;
+    border-bottom: 0.025rem solid #f1f1f1;
+    border-top: 0.025rem solid #fbfbfb;
+    position: relative;
+}
+.alert_list:first-child{
+    border-top: none;
+}
+.radio_address {
+    position: absolute;
+    display: none;
+}
+.radio_address + label {
+    font-size: 0.7rem;
+    color: rgb(71,71,71);
+    font-weight: 500;
+}
+.alert_list label:first-child {
+    margin-bottom: 0.7rem;
+    display: block;
+    color: rgb(50,50,50);
+    font-weight: 600;
+    font-size: 0.7rem;
+}
+.radio_address:checked + label:after{
+    display: block;
+}
+.radio_address+label:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -webkit-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    width: 0.9rem;
+    height: 0.9rem;
+    background: url(../images/add_address_select@2x.png) no-repeat;
+    background-size: cover;
+}
+.radio_address+label:after {
+    position: absolute;
+    display: none;
+    content: '';
+}
+.alert_list .right_height {
+    height: 2rem;
+}
+.update_address {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translate(0,-50%);
+    -moz-transform: translate(0,-50%);
+    -ms-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    display: block;
+    width: 0.775rem;
+    height: 0.775rem;
+    background: url(../images/update_address@2x.png) no-repeat;
+    background-size: cover;
+}
+.radio_address + label {
+    position: relative;
+    display: block;
+    padding-left: 2.25rem;
+    cursor: pointer;
+    vertical-align: middle;
+}
+.preservation{
+	width: 100%;
+	height: 2.45rem;
+	color: #323232;
+	font-size: 0.8rem;
+	text-align: center;
+	line-height: 2.45rem;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	display: block;
+	background-color: #fedb43;
+	font-weight: 600;
+}
+/* 弹出层 */
+.popup_alert{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-flex-direction: row;
+	flex-direction: row;
+	-webkit-justify-content: center;
+	-webkit-align-items: center;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0,0,0,.3);
+	z-index: 99;
+	display: none;
+}
+.quhuoinfo .quhuo{
+	width: 100%;
+	padding: 0 0.725rem;
+	background: #ffffff;
+	z-index: 100;
+	min-height: 11.45rem;
+	-webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+.popup_alert .alert_bottom{
+	position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.popup_alert .quhuo .quhuoinfo{
+	font-size: 0.8rem;
+	color: rgb(0,0,0);
+	text-align: center;
+	margin: .75rem 0 .25rem 0;
+	font-weight: 600;
+}
+.popup_alert .quhuo .alert_list{
+	padding: .75rem 0;
+	border-bottom: 0.025rem solid #f1f1f1;
+	border-top: 0.025rem solid #fbfbfb;
+	position: relative;
+}
+.popup_alert .quhuo .alert_list .right_height{
+    height: 2rem;
+}
+.popup_alert .quhuo .alert_list label:first-child{
+	margin-bottom: 0.7rem;
+	display: block;
+	color: rgb(50,50,50);
+	font-weight: 600;
+}
+.radio_address + label{
+	font-size: 0.65rem;
+	color: #959ea2;
+	font-weight: 500;
+}
+.update_address{
+	position: absolute;
+	top: 50%;
+	right: 0;
+	-webkit-transform:translate(0,-50%);             
+	-moz-transform:translate(0,-50%);             
+	-ms-transform:translate(0,-50%);
+	transform:translate(0,-50%);
+	display: block;
+	width: 0.775rem;
+	height: 0.775rem;
+	background: url('../images/update_address@2x.png') no-repeat;
+	background-size: cover;
+}
+.add_address_btn{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	display: block;
+	width: 100%;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	background:  rgb(253,216,12);
+	font-size: 0.8rem;
+}
+.box{
+    background: #fff;
+}
+.max_height_box{
+    overflow: auto;
+    margin: 0 0.8rem;
+}
+.my_text_align{
+	text-align: center;
+	color: rgb(0,0,00);
+	font-weight: 600;
+}
