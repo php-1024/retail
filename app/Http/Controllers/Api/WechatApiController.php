@@ -493,7 +493,6 @@ class WechatApiController extends Controller
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
-            dd($e);
             // 事件回滚
             DB::rollBack();
             return response()->json(['status' => '0', 'msg' => '添加失败', 'data' => '']);
