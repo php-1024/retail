@@ -237,9 +237,6 @@
   	        	data: {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
   	        		alert("sdasd");
-  	        		if(json.status==1){
-  	        			alert();
-  	        		}
   	        	}
   	        })
           },
