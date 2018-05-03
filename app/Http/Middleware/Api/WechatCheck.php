@@ -6,6 +6,7 @@
 namespace App\Http\Middleware\Api;
 
 use App\Models\WechatAuthorization;
+use App\Models\WechatWebAuthorization;
 use App\Services\Curl\HttpCurl;
 use Closure;
 
@@ -102,25 +103,18 @@ class WechatCheck
      */
     public function getSignPackage()
     {
-        // 获取微信的信息
-        $appid = config('app.wechat_web_setting.appid');
-
-        $res = \Wechat::get_access_token();
-        $access_token = $res["access_token"];
-
-
-        $res = \Wechat::get_jssdk_ticket($access_token);
-        $ticket = $res["ticket"];
+        $wxid = "";
+        $wechat_config = WechatWebAuthorization::getWechatConfig($wxid);
+        $res = WechatAuthorization::updateWechatVoucher($wechat_config,["jssdk"]);
 
         // 设置得到签名的参数
         $url = request()->fullUrl();
         $timestamp = time();
         $nonceStr = substr(md5(time()), 0, 16);
         // 这里参数的顺序要按照 key 值 ASCII 码升序排序
-        $string = "jsapi_ticket={$ticket}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
+        $string = "jsapi_ticket={$res["jsapi_ticket"]}&noncestr=$nonceStr&timestamp=$timestamp&url=$url";
         $signature = sha1($string);
-        $signPackage = array("appId" => $appid, "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
-
+        $signPackage = array("appId" => $res["appid"], "nonceStr" => $nonceStr, "timestamp" => $timestamp, "url" => $url, "rawString" => $string, "signature" => $signature);
 
         request()->attributes->add(['zerone_jssdk_info' => $signPackage]);
     }
