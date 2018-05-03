@@ -22,7 +22,7 @@ class WechatCheck
                 break;
 
             case "api/authApi/test11"://检测店铺列表提交数据
-                $this->getSignPackage();
+                $this->checkToken();
                 break;
         }
         return $next($request);
@@ -80,6 +80,8 @@ class WechatCheck
             return;
         }
 
+        // 获取微信公众号JSSDK 凭证
+        $this->getSignPackage();
         // 添加参数
         request()->attributes->add(['zerone_auth_info' => session("zerone_auth_info")]);
     }
