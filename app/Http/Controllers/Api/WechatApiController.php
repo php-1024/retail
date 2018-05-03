@@ -472,7 +472,7 @@ class WechatApiController extends Controller
         }
         DB::beginTransaction();
         try {
-            if ($status) {
+            if ($status && !empty(Address::checkRowExists([['zerone_user_id', $zerone_user_id]]))) {
                 Address::editAddress([['zerone_user_id', $zerone_user_id]], ['status' => '0']);
             }
             // 数据处理
