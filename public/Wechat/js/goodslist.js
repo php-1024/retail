@@ -10,11 +10,11 @@ $(function(){
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
     		if (json.status == 1) {
-    			var str = "";
+    			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
     			    console.log(json.data.categorylist.length - 1);
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
     				if (i == json.data.categorylist.length - 1) {
-    					str +="<li class='action'><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
+    					str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     					continue;
     				}
     				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
