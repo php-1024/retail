@@ -60,7 +60,7 @@ function getltshop(){
         	})
       },
       cancel: function (res) {
-        alert('用户拒绝授权获取地理位置');
+        alert('我们需要获取你的地理位置喔,请点击左上角重新获取');
       }
     });
 }
