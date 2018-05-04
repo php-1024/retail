@@ -50,10 +50,12 @@ class WechatApiController extends Controller
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
         foreach ($data as $key => $value) {
-            print_r($value);exit;
-
-            // 计算距离
-            $data[$key]['distance'] = $this->GetDistance($lat, $lng, $value['lat'], $value['lng']);
+            if($value['organization_simpleinfo']){
+                // 计算距离
+                $data[$key]['distance'] = $this->GetDistance($lat, $lng, $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
+            }else{
+                $data[$key]['distance'] = '';
+            }
         }
         // 冒泡距离排序
         $data = $this->order($data);
