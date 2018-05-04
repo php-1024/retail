@@ -13,7 +13,7 @@
   <body>
   	<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
   	<input type="hidden" name="organization_id" id="organization_id" value="{{$organization_id}}">
-    <div class="page">
+    <div class="">
 	    <div class="g-flexview">
 			<div class="head">
 				<div class="search_box">
@@ -67,11 +67,6 @@
 
 	<script type='text/javascript' src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
-    <script>
-	  $.config = {
-	    router: false //no recommend
-	  }
-	</script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/selectshop.js" charset='utf-8'></script>
 
