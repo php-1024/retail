@@ -36,7 +36,7 @@ class WechatCheck
         }else{
             $organization_id = session("zerone_auth_info.organization_id");
         }
-        
+
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);
         if ($res === false) {
