@@ -452,7 +452,6 @@ class AndroidSimpleApiCheck
 
         $store_token = base64_encode($store_token . $data['uuid']) . 'lingyi2018';//第一次加密
         $store_token = md5($store_token);//第二次加密
-        dd($store_token);
         if ($store_token != $token) {
             return self::res(0, response()->json(['msg' => 'token值不正确,无权访问', 'status' => '0', 'data' => '']));
         }
