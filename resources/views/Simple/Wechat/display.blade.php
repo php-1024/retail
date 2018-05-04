@@ -11,13 +11,15 @@
     <link rel="stylesheet" href="{{asset('public/Wechat')}}/css/selectshop.css">
   </head>
   <body>
+  	<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+  	<input type="hidden" name="organization_id" id="organization_id" value="{{$organization_id}}">
     <div class="page">
 	    <div class="g-flexview">
 			<div class="head">
 				<div class="search_box">
 					<div class="search_item">
 						<label class="icon_search"></label>
-						<input type="search" name="" placeholder="输入商家信息">
+						<input type="search" id="keyword" name="keyword" placeholder="输入商家信息">
 					</div>
 					<div class="search_right">
 						<div class="search_r_img"></div>
@@ -227,10 +229,22 @@
   	       	var longitude = res.longitude ; // 经度，浮点数，范围为180 ~ -180。
   	        var speed = res.speed; // 速度，以米/每秒计
   	        var accuracy = res.accuracy; // 位置精度
-  	        console.log("+latitude+"+latitude);
-  	        console.log("+longitude+"+longitude);
-  	        console.log("+speed+"+speed);
-  	        console.log("+accuracy+"+accuracy);
+  	        var organization_id=$("#organization_id").val();
+  	        var _token=$("#_token").val();
+  	        var keyword=$("#keyword").val();
+  	        var url = "http://develop.01nnt.com/api/wechatApi/store_list";
+  	        console.log(latitude);
+  	        console.log(longitude);
+  	        console.log(organization_id);
+  	        console.log(_token);
+  	        console.log(url);
+  	        console.log(keyword);
+  	        $.post(
+  	        	url,
+  	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
+  	        	function(json){
+  	        		alert("sdasd");
+	        	})
           },
           cancel: function (res) {
             alert('用户拒绝授权获取地理位置');
