@@ -4,8 +4,6 @@ $(function(){
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();
     var url = "http://develop.01nnt.com/api/wechatApi/category";
-    console.log(fansmanage_id);
-    console.log(store_id);
 	$.showPreloader('加载中');
     $.post(
     	url,
@@ -13,8 +11,9 @@ $(function(){
     	function(json){
     		if (json.status == 1) {
     			var str = "";
+    			    console.log(json.data.categorylist.length - 1);
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				if (i == 1) {
+    				if (i == 0) {
     					str +="<li class='action'><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     					continue;
     				}
