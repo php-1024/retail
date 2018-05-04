@@ -3,10 +3,10 @@ $(function(){
     var fansmanage_id=$("#fansmanage_id").val();
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();
-    var url = "http://develop.01nnt.com/api/wechatApi/category";
+    var class_url = "http://develop.01nnt.com/api/wechatApi/category";
 	$.showPreloader('加载中');
     $.post(
-    	url,
+    	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
     		if (json.status == 1) {
@@ -28,9 +28,20 @@ $(function(){
     			$goods_cs_lt_alert.empty();
     			$goods_cs_lt_alert.append(str);
     		}
+		}
+	);
+	//获取商品列表
+	var goods_list_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+    $.post(
+    	goods_list_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    	function(json){
+    		if (json.status == 1) {
+    			console.log(json);
+    		}
 			$.hidePreloader();
 		}
-	)
+	);
 });
 
 //隐藏alert
