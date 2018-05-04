@@ -46,7 +46,6 @@
 			</div>
 			<div class="shoplist_box">
 				<ul id="shoplist">
-					
 				</ul>
 			</div>
 	    </div>
