@@ -27,8 +27,8 @@
 				</div>
 				<div class="head_bottom">
 					<div class="bottom_left">
-						<span id="month">15
-							<span id="dateri">四月</span>
+						<span id="month">
+							
 						</span>
 						<p class="bottomaddress"><i></i>南山科技园南区一道飞亚达大厦</p>
 					</div>
