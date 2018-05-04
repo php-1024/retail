@@ -58,7 +58,7 @@
                                 </header>
                                 <div class="panel-body ">
                                     <div>
-                                        店铺类型：<label class="label label-success pull-right">
+                                        店铺使用的程序：<label class="label label-success pull-right">
                                             @if($value->asset_id == '10')
                                                 零售retail版
                                             @elseif($value->asset_id == '12')
