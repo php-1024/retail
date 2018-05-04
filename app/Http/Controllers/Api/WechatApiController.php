@@ -35,7 +35,7 @@ class WechatApiController extends Controller
         $lat = $request->lat;
         // 经度
         $lng = $request->lng;
-        $url = "http://maps.google.cn/maps/api/geocode/json?latlng={$lat},{$lng}&language=CN&project=AIzaSyDXMeZxkvEuzWsCHgH28MHDd4KfVMBDmX4";
+        $url = "http://maps.google.cn/maps/api/geocode/json";
         $return = \HttpCurl::doGet($url);
         print_r($return);exit;
         // 精度维度转换（wgs80转gcj02）
