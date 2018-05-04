@@ -155,7 +155,6 @@ class DisplayController extends Controller
         $lng = $request->lng;    //lon 百度经度
         $lat = $request->lat;    //lat 百度纬度
         $bd_gcj = $this->bd09togcj02($lng, $lat);
-        dd($bd_gcj);exit;
         $file_path = '';       //初始化文件路径为空
         $simple_info = [];      //初始化店铺信息
         if ($request->hasFile('simple_logo')) {                          //检测是否有文件上传，有就处理文件
@@ -208,28 +207,7 @@ class DisplayController extends Controller
         }
         return response()->json(['data' => '修改店铺信息成功', 'file_path' => $file_path, 'status' => '1']);
     }
-
-
-    //BD-09(百度)坐标转换成GCJ-02(火星，高德)坐标
-    //@param bd_lon 百度经度
-    //@param bd_lat 百度纬度
-    function bd_decrypt($bd_lon, $bd_lat)
-    {
-        $x_pi = 3.14159265358979324 * 3000.0 / 180.0;
-        $x = $bd_lon - 0.0065;
-        $y = $bd_lat - 0.006;
-        $z = sqrt($x * $x + $y * $y) - 0.00002 * sin($y * $x_pi);
-        $theta = atan2($y, $x) - 0.000003 * cos($x * $x_pi);
-        // $data['gg_lon'] = $z * cos($theta);
-        // $data['gg_lat'] = $z * sin($theta);
-        $gg_lon = $z * cos($theta);
-        $gg_lat = $z * sin($theta);
-        // 保留小数点后六位
-        $data['gg_lon'] = round($gg_lon, 6);
-        $data['gg_lat'] = round($gg_lat, 6);
-        return $data;
-    }
-
+    
     /**
     　　* 百度坐标系 (BD-09) 与 火星坐标系 (GCJ-02)的转换
     　　* 即 百度 转 谷歌、高德
