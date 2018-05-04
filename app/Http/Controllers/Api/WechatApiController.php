@@ -35,6 +35,9 @@ class WechatApiController extends Controller
         $lat = $request->lat;
         // 经度
         $lng = $request->lng;
+        // 精度维度转换（wgs80转gcj02）
+        $re = $this->wgs84togcj02($lng,$lat);
+        print_r($re);exit;
         // 查询条件
         $where[] = ['parent_id', $fansmannage_id];
         // 前端页面搜索
@@ -50,10 +53,10 @@ class WechatApiController extends Controller
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
         foreach ($data as $key => $value) {
-            if($value['organization_simpleinfo']){
+            if ($value['organization_simpleinfo']) {
                 // 计算距离
                 $data[$key]['distance'] = $this->GetDistance($lat, $lng, $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
-            }else{
+            } else {
                 $data[$key]['distance'] = '9999';
             }
         }
@@ -640,6 +643,70 @@ class WechatApiController extends Controller
         $data = ['status' => '1', 'msg' => '删除成功', 'data' => ['self_take_id' => $self_take_id]];
         return response()->json($data);
     }
+
+
+    /**
+     * WGS84转GCj02(北斗转高德)
+     * @param lng
+     * @param lat
+     * @returns {*[]}
+     */
+    private function wgs84togcj02($lng, $lat)
+    {
+        $PI = 3.1415926535897932384626;
+        $a = 6378245.0;
+        $ee = 0.00669342162296594323;
+        if ($this->out_of_china($lng, $lat)) {
+            return array($lng, $lat);
+        } else {
+            $dlat = $this->transformlat($lng - 105.0, $lat - 35.0);
+            $dlng = $this->transformlng($lng - 105.0, $lat - 35.0);
+            $radlat = $lat / 180.0 * $PI;
+            $magic = sin($radlat);
+            $magic = 1 - $PI * $magic * $magic;
+            $sqrtmagic = sqrt($magic);
+            $dlat = ($dlat * 180.0) / (($a * (1 - $ee)) / ($magic * $sqrtmagic) * $PI);
+            $dlng = ($dlng * 180.0) / ($a / $sqrtmagic * cos($radlat) * $PI);
+            $mglat = $lat + $dlat;
+            $mglng = $lng + $dlng;
+            return array($mglng, $mglat);
+        }
+    }
+
+    private function transformlat($lng, $lat)
+    {
+        $PI = 3.1415926535897932384626;
+
+        $ret = -100.0 + 2.0 * $lng + 3.0 * $lat + 0.2 * $lat * $lat + 0.1 * $lng * $lat + 0.2 * sqrt(abs($lng));
+        $ret += (20.0 * sin(6.0 * $lng * $PI) + 20.0 * sin(2.0 * $lng * $PI)) * 2.0 / 3.0;
+        $ret += (20.0 * sin($lat * $PI) + 40.0 * sin($lat / 3.0 * $PI)) * 2.0 / 3.0;
+        $ret += (160.0 * sin($lat / 12.0 * $PI) + 320 * sin($lat * $PI / 30.0)) * 2.0 / 3.0;
+        return $ret;
+    }
+
+
+    private function transformlng($lng, $lat)
+    {
+        $PI = 3.1415926535897932384626;
+
+        $ret = 300.0 + $lng + 2.0 * $lat + 0.1 * $lng * $lng + 0.1 * $lng * $lat + 0.1 * sqrt(abs($lng));
+        $ret += (20.0 * sin(6.0 * $lng * $PI) + 20.0 * sin(2.0 * $lng * $PI)) * 2.0 / 3.0;
+        $ret += (20.0 * sin($lng * $PI) + 40.0 * sin($lng / 3.0 * $PI)) * 2.0 / 3.0;
+        $ret += (150.0 * sin($lng / 12.0 * $PI) + 300.0 * sin($lng / 30.0 * $PI)) * 2.0 / 3.0;
+        return $ret;
+    }
+
+    /**
+     * 判断是否在国内，不在国内则不做偏移
+     * @param $lng
+     * @param $lat
+     * @returns {boolean}
+     */
+    private function out_of_china($lng, $lat)
+    {
+        return ($lng < 72.004 || $lng > 137.8347) || (($lat < 0.8293 || $lat > 55.8271) || false);
+    }
+
 
     /**
      *  计算两组经纬度坐标 之间的距离
