@@ -13,7 +13,7 @@ $(function(){
     			var str = "";
     			    console.log(json.data.categorylist.length - 1);
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				if (i == 0) {
+    				if (i == json.data.categorylist.length - 1) {
     					str +="<li class='action'><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     					continue;
     				}
