@@ -37,6 +37,7 @@ class WechatApiController extends Controller
         $lng = $request->lng;
         // 精度维度转换（wgs80转gcj02）
         $re = $this->wgs84togcj02($lng,$lat);
+        
         // 查询条件
         $where[] = ['parent_id', $fansmannage_id];
         // 前端页面搜索
