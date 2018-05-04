@@ -18,7 +18,7 @@
 	    <div class="g-flexview">
 			<div class="head">
 				<div class="nav">
-					<ul class="clear_after">
+					<ul class="clear_after" id="goods_cs_lt">
 						<li class="action"><a href="javascript:;">热销</a></li>
 						<li><a href="javascript:;">热销</a></li>
 						<li><a href="javascript:;">热销</a></li>

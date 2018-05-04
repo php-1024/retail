@@ -12,7 +12,18 @@ $(function(){
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
     		if (json.status == 1) {
-    			console.log(json);
+    			var str = "";
+    			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
+    				if (i == 1) {
+    					str +="<li class='action'><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
+    					continue;
+    				}
+    				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
+    			}
+    			var $goods_cs_lt = $("#goods_cs_lt");
+    			$goods_cs_lt.empty();
+    			$goods_cs_lt.append(str);
+
     		}
 			$.hidePreloader();
 		}
