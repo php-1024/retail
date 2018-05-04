@@ -171,8 +171,8 @@ class DisplayController extends Controller
                     'simple_owner' => $simple_owner,
                     'simple_owner_mobile' => $simple_owner_mobile,
                     'simple_address' => $simple_address,
-                    'lng' => $bd_gcj['gg_lon'],
-                    'lat' => $bd_gcj['gg_lat'],
+                    'lng' => $bd_gcj['0'],
+                    'lat' => $bd_gcj['1'],
                 ];
             }
         } else {
@@ -182,8 +182,8 @@ class DisplayController extends Controller
                 'simple_owner' => $simple_owner,
                 'simple_owner_mobile' => $simple_owner_mobile,
                 'simple_address' => $simple_address,
-                'lng' => $bd_gcj['gg_lon'],
-                'lat' => $bd_gcj['gg_lat'],
+                'lng' => $bd_gcj['0'],
+                'lat' => $bd_gcj['1'],
             ];
         }
         DB::beginTransaction();
@@ -207,7 +207,7 @@ class DisplayController extends Controller
         }
         return response()->json(['data' => '修改店铺信息成功', 'file_path' => $file_path, 'status' => '1']);
     }
-    
+
     /**
     　　* 百度坐标系 (BD-09) 与 火星坐标系 (GCJ-02)的转换
     　　* 即 百度 转 谷歌、高德
@@ -225,9 +225,6 @@ class DisplayController extends Controller
         $gg_lat = $z * sin($theta);
         return array($gg_lng, $gg_lat);
     }
-
-
-
 
 }
 
