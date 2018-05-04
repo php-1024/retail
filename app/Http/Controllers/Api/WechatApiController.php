@@ -47,12 +47,12 @@ class WechatApiController extends Controller
             $where[] = ['name', 'LIKE', "%{$keyword}%"];
         }
         // 查询店铺信息
-        $data = Organization::getListSimple($where)->toArray();
+        $Orgdata = Organization::getListSimple($where)->toArray();
         // 是否存在店铺
-        if (empty($data)) {
+        if (empty($Orgdata)) {
             return response()->json(['msg' => '查无店铺', 'status' => '0', 'data' => '']);
         }
-        foreach ($data as $key => $value) {
+        foreach ($Orgdata as $key => $value) {
             if ($value['organization_simpleinfo']) {
                 // 计算距离
                 $data[$key]['distance'] = $this->GetDistance($re['1'], $re['0'], $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
@@ -61,13 +61,13 @@ class WechatApiController extends Controller
             }
         }
         // 冒泡距离排序
-        $data = $this->order($data);
-        foreach ($data as $k => $v) {
-            $storelist['$k']['id']= $v['id'];
-            $storelist['$k']['name']= $v['organization_name'];
-            $storelist['$k']['distance']= $v['distance'];
-            $storelist['$k']['logo']= $v['organization_simpleinfo']['simple_logo'];
-            $storelist['$k']['address']= $v['organization_simpleinfo']['simple_address'];
+        $Orgdata = $this->order($Orgdata);
+        foreach ($Orgdata as $k => $v) {
+            $storelist[$k]['id']= $v['id'];
+            $storelist[$k]['name']= $v['organization_name'];
+            $storelist[$k]['distance']= $v['distance'];
+            $storelist[$k]['logo']= $v['organization_simpleinfo']['simple_logo'];
+            $storelist[$k]['address']= $v['organization_simpleinfo']['simple_address'];
         }
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $storelist]];
