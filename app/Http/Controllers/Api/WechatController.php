@@ -24,11 +24,6 @@ class WechatController extends Controller
         $this->getSignPackage();
         // 获取组织id
         $organization_id = request()->get("organization_id");
-
-        $organization_name = Organization::getPluck([['id',$organization_id]],'organization_name');
-
-        Session::put('organization_name', $organization_name);
-        echo session::get('organization_name');
         // 赋值
         $zerone_jssdk_info = (request()->get("zerone_jssdk_info"));
         // 渲染页面
@@ -42,6 +37,10 @@ class WechatController extends Controller
     {
         $store_id = $request->store_id;
 
+        $organization_name = Organization::getPluck([['id',$store_id]],'organization_name');
+
+        Session::put('organization_name', $organization_name);
+        echo session::get('organization_name');
         $fansmanage_id = session("zerone_auth_info.organization_id");
         // 渲染页面
         return view('Simple/Wechat/goodslist', ['store_id' => $store_id, 'fansmanage_id' => $fansmanage_id]);
