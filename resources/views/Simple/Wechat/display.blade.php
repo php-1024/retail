@@ -40,7 +40,7 @@
 			</div>
 			<div class="nav_box">
 				<div class="row">
-			        <div class="col-50 action"><p class="fujinddian">附近的店<span>(5658家)</span></p></div>
+			        <div class="col-50 action"><p class="fujinddian">附近的店<span id="shopnumber"></span></p></div>
 			        <div class="col-50"></div>
 			    </div>
 			</div>
@@ -138,8 +138,10 @@
   	        				$.hidePreloader();
   	        			}
   	        			var $shoplist = $("#shoplist");
+  	        			var $shopnumber = $("#shopnumber");
   	        			$shoplist.empty();
   	        			$shoplist.append(str);
+  	        			$shopnumber.text("("+json.data.storelist.length - 1 +"家)")
   	        		}
 	        	})
           },
