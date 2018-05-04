@@ -6,6 +6,7 @@ $(function(){
 	var arr = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
 	month = arr[parseInt(month+1,10)-1]
 	$("#month").html(dateri+"<span>"+month+"月</span>");
+	$.init();
 });
 //搜索店铺
 function searchshop(){
