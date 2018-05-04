@@ -137,7 +137,7 @@
   	        			}
   	        			var $shoplist = $("#shoplist");
   	        			var $shopnumber = $("#shopnumber");
-  	        			$shoplist.empty();
+  	        			//$shoplist.empty();
   	        			$shoplist.append(str);
   	        			$shopnumber.text("("+json.data.storelist.length+"家)");
         				$.hidePreloader();
