@@ -150,18 +150,26 @@ class StoreController extends Controller
             // 在组织表创建保存店铺信息
             $id = Organization::addOrganization($organization);
 
-            $storeinfo = [
-                'organization_id' => $id,
-                'retail_owner' => $realname,
-                'retail_owner_idcard' => '',
-                'retail_owner_mobile' => $mobile,
-            ];
+
+            // 在分店织信息表创建店铺组织信息
             if ($program_id == 10) {
+                $storeinfo = [
+                    'organization_id' => $id,
+                    'retail_owner' => $realname,
+                    'retail_owner_idcard' => '',
+                    'retail_owner_mobile' => $mobile,
+                ];
                 OrganizationRetailinfo::addOrganizationRetailinfo($storeinfo);
             } elseif ($program_id == 12) {
+                $storeinfo = [
+                    'organization_id' => $id,
+                    'simple_owner' => $realname,
+                    'simple_owner_idcard' => '',
+                    'simple_owner_mobile' => $mobile,
+                ];
                 OrganizationSimpleinfo::addOrganizationSimpleinfo($storeinfo);
             }
-            // 在分店织信息表创建店铺组织信息
+
 
             $accdata = [
                 'organization_id' => $id,

@@ -27,8 +27,8 @@
 				</div>
 				<div class="head_bottom">
 					<div class="bottom_left">
-						<span>15
-							<span>四月</span>
+						<span id="month">15
+							<span id="dateri">四月</span>
 						</span>
 						<p class="bottomaddress"><i></i>南山科技园南区一道飞亚达大厦</p>
 					</div>
@@ -40,121 +40,13 @@
 			</div>
 			<div class="nav_box">
 				<div class="row">
-			        <div class="col-50 action"><p class="fujinddian">附近的店<span>(5658家)</span></p></div>
+			        <div class="col-50 action"><p class="fujinddian">附近的店<span id="shopnumber"></span></p></div>
 			        <div class="col-50"></div>
 			    </div>
 			</div>
 			<div class="shoplist_box">
-				<ul>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-								<section class="shop_juli"><p>地址:广东省深圳市龙岗区龙城广场万汇大厦1606</p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
+				<ul id="shoplist">
+					
 				</ul>
 			</div>
 	    </div>
@@ -240,10 +132,16 @@
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
   	        		if (json.status == 1) {
+  	        			var str;
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				console.log(json.data.storelist[i].organization_name);
+  	        				str += shoplist(json.data.storelist[i].organization_name);
   	        				$.hidePreloader();
   	        			}
+  	        			var $shoplist = $("#shoplist");
+  	        			var $shopnumber = $("#shopnumber");
+  	        			$shoplist.empty();
+  	        			$shoplist.append(str);
+  	        			$shopnumber.text("("+json.data.storelist.length+"家)")
   	        		}
 	        	})
           },
