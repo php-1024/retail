@@ -59,11 +59,11 @@
                                 <div class="panel-body ">
                                     <div>
                                         分店类型：<label class="label label-success pull-right">
-                                            @if($value->OrganizationRetailinfo->type == '0')
-                                                总店
-                                            @else
-                                                分店
-                                            @endif
+                                            {{--@if($value->OrganizationRetailinfo->type == '0')--}}
+                                                {{--总店--}}
+                                            {{--@else--}}
+                                                {{--分店--}}
+                                            {{--@endif--}}
                                         </label>
                                     </div>
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
