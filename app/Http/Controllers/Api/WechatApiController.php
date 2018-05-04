@@ -55,9 +55,9 @@ class WechatApiController extends Controller
         foreach ($Orgdata as $key => $value) {
             if ($value['organization_simpleinfo']) {
                 // 计算距离
-                $data[$key]['distance'] = $this->GetDistance($re['1'], $re['0'], $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
+                $Orgdata[$key]['distance'] = $this->GetDistance($re['1'], $re['0'], $value['organization_simpleinfo']['lat'], $value['organization_simpleinfo']['lng']);
             } else {
-                $data[$key]['distance'] = '9999';
+                $Orgdata[$key]['distance'] = '9999';
             }
         }
         // 冒泡距离排序
