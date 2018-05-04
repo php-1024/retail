@@ -45,7 +45,7 @@
 			    </div>
 			</div>
 			<div class="shoplist_box">
-				<ul>
+				<ul id="shoplist">
 					<li>
 						<a href="javascript:;">
 							<div class="shop_img">
@@ -149,7 +149,9 @@
   	        				shoplist(json.data.storelist[i].organization_name);
   	        				$.hidePreloader();
   	        			}
-  	        			console.log(shoplist);
+  	        			var shoplist = $("#shoplist");
+  	        			shoplist.empty();
+  	        			shoplist.append(shoplist());
   	        		}
 	        	})
           },
