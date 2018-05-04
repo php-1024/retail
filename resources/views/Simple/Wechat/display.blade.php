@@ -18,7 +18,7 @@
 			<div class="head">
 				<div class="search_box">
 					<div class="search_item">
-						<label class="icon_search"></label>
+						<label class="icon_search" onclick="searchshop()"></label>
 						<input type="search" id="keyword" name="keyword" placeholder="输入商家信息">
 					</div>
 					<div class="search_right">

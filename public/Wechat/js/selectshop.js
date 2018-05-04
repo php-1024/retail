@@ -1,3 +1,16 @@
+$(function(){
+	//获取当前月日
+	var myDate = new Date();
+	var month = myDate.getMonth();
+	var dateri = myDate.getDate();
+	var arr = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
+	month = arr[parseInt(month+1,10)-1]
+	$("#month").html(dateri+"<span>"+month+"月</span>");
+});
+function searchshop(){
+	alert();
+}
+
 function shoplist(name,address,logo,distance) {
 	var str = "<li>"+"<a href='javascript:;'>"+
 					"<div class='shop_img'>"+
@@ -13,13 +26,3 @@ function shoplist(name,address,logo,distance) {
 			"</li>";
 	return str;
 }
-
-$(function(){
-	//获取当前月日
-	var myDate = new Date();
-	var month = myDate.getMonth();
-	var dateri = myDate.getDate();
-	var arr = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十', '十一', '十二'];
-	month = arr[parseInt(month+1,10)-1]
-	$("#month").html(dateri+"<span>"+month+"月</span>");
-});
