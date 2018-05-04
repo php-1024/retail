@@ -35,9 +35,7 @@ class WechatController extends Controller
     public function goodslist(Request $request)
     {
 
-        $organization_id = request()->get("organization_id");
 
-        echo $organization_id;exit;
         // 渲染页面
         return view('Simple/Wechat/goodslist');
     }
