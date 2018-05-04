@@ -30,7 +30,7 @@
 						<span id="month">
 							
 						</span>
-						<p class="bottomaddress" onclick="searchshop()"><i></i>定位中</p>
+						<p class="bottomaddress" onclick="searchshop()"><i></i>获取位置信息...</p>
 					</div>
 					<div class="bottom_right">
 						<div class="order_img"></div>
