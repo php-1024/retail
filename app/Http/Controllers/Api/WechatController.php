@@ -25,7 +25,7 @@ class WechatController extends Controller
         // 获取组织id
         $organization_id = request()->get("organization_id");
 
-        $organization_name = Organization::getPluck([['organization_id',$organization_id]],'organization_name');
+        $organization_name = Organization::getPluck([['id',$organization_id]],'organization_name');
 
         Session::put('organization_name', $organization_name);
         echo session::get('organization_name');
