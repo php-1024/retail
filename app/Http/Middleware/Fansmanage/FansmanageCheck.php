@@ -67,6 +67,10 @@ class FansmanageCheck{
             case "fansmanage/wechatmenu/conditional_menu":       //个性化菜单
             /****公众号管理-菜单管理****/
 
+            /****支付设置****/
+            case "fansmanage/paysetting/wechat_setting":          //微信支付设置
+            /****支付设置****/
+
             /****总分店管理****/
             case "fansmanage/store/store_create":            //创建总分店
             case "fansmanage/store/store_list":              //总分店管理
