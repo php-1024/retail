@@ -44,7 +44,7 @@ class WechatApiController extends Controller
         $keyword = $request->keyword;
         // 是否存在搜索条件
         if ($keyword) {
-            $where[] = ['name', 'LIKE', "%{$keyword}%"];
+            $where[] = ['organization_name', 'LIKE', "%{$keyword}%"];
         }
         // 查询店铺信息
         $Orgdata = Organization::getListSimple($where)->toArray();
