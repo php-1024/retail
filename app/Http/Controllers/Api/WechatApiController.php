@@ -37,7 +37,7 @@ class WechatApiController extends Controller
         $lng = $request->lng;
         // 精度维度转换（wgs80转gcj02）
         $re = $this->wgs84togcj02($lng,$lat);
-        
+
         // 查询条件
         $where[] = ['parent_id', $fansmannage_id];
         // 前端页面搜索
@@ -63,8 +63,11 @@ class WechatApiController extends Controller
         // 冒泡距离排序
         $data = $this->order($data);
         foreach ($data as $k => $v) {
-            unset($data[$k]['lat']);
-            unset($data[$k]['lng']);
+            $storelist['$k']['id']= $v['id'];
+            $storelist['$k']['name']= $v['organization_name'];
+            $storelist['$k']['distance']= $v['distance'];
+            $storelist['$k']['logo']= $v['organization_simpleinfo']['simple_logo'];
+            $storelist['$k']['address']= $v['organization_simpleinfo']['simple_address'];
         }
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $data]];
