@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="{{asset('public/Wechat')}}/css/goodslist.css">
   </head>
   <body>
+  	<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
+  	<input type="hidden" name="fansmanage_id" id="fansmanage_id" value="{{$fansmanage_id}}">
+  	<input type="hidden" name="store_id" id="store_id" value="{{$store_id}}">
     <div class="page">
 	    <div class="g-flexview">
 			<div class="head">
