@@ -93,8 +93,6 @@ class WechatApiController extends Controller
      */
     public function category(Request $request)
     {
-
-        Session::put('fansmanage_id', 2);
         // 商户id
         $fansmanage_id = Session::get('fansmanage_id');
         // 店铺id

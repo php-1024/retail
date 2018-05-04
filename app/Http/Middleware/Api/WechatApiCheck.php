@@ -87,8 +87,11 @@ class WechatApiCheck
     /**
      * 店铺分类列表数据提交检测
      */
-    public function checkRetailId($request)
+    public function checkStoreId($request)
     {
+        if (empty($request->input('fansmanage_id'))) {
+            return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
+        }
         if (empty($request->input('store_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
         }
