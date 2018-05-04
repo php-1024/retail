@@ -30,7 +30,7 @@
 						<span id="month">
 							
 						</span>
-						<p class="bottomaddress" onclick="searchshop()"><i></i>南山科技园南区一道飞亚达大厦</p>
+						<p class="bottomaddress" onclick="searchshop()"><i></i>定位中</p>
 					</div>
 					<div class="bottom_right">
 						<div class="order_img"></div>
