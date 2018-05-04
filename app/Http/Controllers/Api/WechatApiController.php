@@ -40,9 +40,9 @@ class WechatApiController extends Controller
         $return = \HttpCurl::doGet($url);
 
         $return = json_decode($return);
-        foreach($return as $key=>$value){
-            print_r($value['0stdClass Object']);
-        }exit;
+//        foreach($return as $key=>$value){
+//            print_r($value['0stdClass Object']);
+//        }exit;
 //        print_r($return['result']);exit;
 //        echo $return['result']['addressComponent']['province'];exit;
         // 精度维度转换（wgs80转gcj02）
