@@ -13,3 +13,12 @@ function shoplist(organization_name) {
 			"</li>";
 	return str;
 }
+
+$(function(){
+	//获取当前月日
+	var myDate = new Date();
+	var month = myDate.getMonth();
+	var dateri = myDate.getDate();
+	console.log("month"+month+1);
+	console.log(dateri);
+});
