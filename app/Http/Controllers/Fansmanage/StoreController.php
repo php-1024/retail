@@ -17,7 +17,6 @@ use App\Models\Organization;
 use App\Models\OrganizationAssets;
 use App\Models\OrganizationFansmanageinfo;
 use App\Models\OrganizationRetailinfo;
-use App\Models\OrganizationSimpleinfo;
 use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
@@ -157,7 +156,7 @@ class StoreController extends Controller
                 'retail_owner_mobile' => $mobile,
             ];
             // 在分店织信息表创建店铺组织信息
-            OrganizationSimpleinfo::addOrganizationSimpleinfo($storeinfo);
+            OrganizationRetailinfo::addOrganizationRetailinfo($storeinfo);
 
             $accdata = [
                 'organization_id' => $id,
