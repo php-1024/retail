@@ -1,4 +1,4 @@
-function shoplist(name,address,logo) {
+function shoplist(name,address,logo,distance) {
 	var str = "<li>"+"<a href='javascript:;'>"+
 					"<div class='shop_img'>"+
 						"<img src='http://develop.01nnt.com/"+logo+"'>"+
@@ -6,7 +6,7 @@ function shoplist(name,address,logo) {
 					"<div class='shop_right'>"+
 						"<section class='shop_name'><h3><span>"+name+"</span></h3></section>"+
 						"<section class='shop_youhui'><p>满120减10</p></section>"+
-						"<section class='shop_juli'><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>"+
+						"<section class='shop_juli'><p>距离<span><em><</em>&nbsp;"+distance+"km</span></p></section>"+
 						"<section class='shop_juli'><p>地址:"+address+"</p></section>"+
 					"</div>"+
 				"</a>"+

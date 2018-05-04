@@ -133,11 +133,11 @@
   	        		if (json.status == 1) {
   	        			var str;
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-        					str += shoplist(json.data.storelist[i].name,json.data.storelist[i].address,json.data.storelist[i].logo);
+        					str += shoplist(json.data.storelist[i].name,json.data.storelist[i].address,json.data.storelist[i].logo,json.data.storelist[i].distance);
   	        			}
   	        			var $shoplist = $("#shoplist");
   	        			var $shopnumber = $("#shopnumber");
-  	        			//$shoplist.empty();
+  	        			$shoplist.empty();
   	        			$shoplist.append(str);
   	        			$shopnumber.text("("+json.data.storelist.length+"家)");
         				$.hidePreloader();
