@@ -65,7 +65,9 @@
 		<!-- alert -->
     </div>
     <script>
-      $.config.router = false
+      $.config = {
+          router: false
+        }
     </script>
 	<script type='text/javascript' src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
