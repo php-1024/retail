@@ -35,6 +35,7 @@ class WechatController extends Controller
     public function goodslist(Request $request)
     {
 
+        echo 1;exit;
         // 渲染页面
         return view('Simple/Wechat/goodslist');
     }
