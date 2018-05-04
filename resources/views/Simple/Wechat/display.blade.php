@@ -59,102 +59,6 @@
 							</div>
 						</a>
 					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
 				</ul>
 			</div>
 	    </div>
@@ -241,9 +145,11 @@
   	        	function(json){
   	        		if (json.status == 1) {
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				console.log(json.data.storelist[i].organization_name);
+  	        				
+  	        				shoplist(json.data.storelist[i].organization_name);
   	        				$.hidePreloader();
   	        			}
+  	        			console.log(shoplist);
   	        		}
 	        	})
           },
