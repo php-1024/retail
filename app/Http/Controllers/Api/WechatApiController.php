@@ -93,7 +93,7 @@ class WechatApiController extends Controller
      */
     public function category(Request $request)
     {
-        // 商户id
+        // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
         $store_id = $request->store_id;
