@@ -19,6 +19,6 @@ $(function(){
 	var myDate = new Date();
 	var month = myDate.getMonth();
 	var dateri = myDate.getDate();
-	console.log("month"+month+1);
+	console.log("month"+parseInt(month+1));
 	console.log(dateri);
 });
