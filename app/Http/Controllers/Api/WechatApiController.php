@@ -38,7 +38,9 @@ class WechatApiController extends Controller
         $url = "http://api.map.baidu.com/geocoder/v2/?ak=Xv2dLyXPQEWxRVZ3GVGWE9SkkfhS4WBW&location={$lat},{$lng}&output=json&pois=1";
 
         $return = \HttpCurl::doGet($url);
-        print_r(json_decode($return));exit;
+
+        $return = json_decode($return);
+        echo $return['result']['addressComponent']['province'];exit;
         // 精度维度转换（wgs80转gcj02）
         $re = $this->wgs84togcj02($lng,$lat);
 
