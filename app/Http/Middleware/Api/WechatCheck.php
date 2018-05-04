@@ -29,8 +29,13 @@ class WechatCheck
      */
     public function checkToken()
     {
-        // 获取组织id
-        $organization_id = request()->get("organization_id");
+        // 判断是组织id是否存在
+        if (empty(session("zerone_auth_info.organization_id"))) {
+            // 获取组织id
+            $organization_id = request()->get("organization_id");
+        }else{
+            $organization_id = session("zerone_auth_info.organization_id");
+        }
 
         // 判断公众号是否授权给零壹第三方公众号平台
         $res = $this->getShopBaseInfo($organization_id);

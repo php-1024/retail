@@ -34,10 +34,10 @@ class WechatController extends Controller
      */
     public function goodslist(Request $request)
     {
-
+        $store_id = $request->store_id;
 
         // 渲染页面
-        return view('Simple/Wechat/goodslist');
+        return view('Simple/Wechat/goodslist',['store_id' => $store_id]);
     }
 
     /**
