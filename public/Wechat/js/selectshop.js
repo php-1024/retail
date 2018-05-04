@@ -1,7 +1,7 @@
 function shoplist(name,address,logo) {
 	var str = "<li>"+"<a href='javascript:;'>"+
 					"<div class='shop_img'>"+
-						"<img src='http://develop.01nnt.com/'"+logo+">"+
+						"<img src='http://develop.01nnt.com/"+logo+"'>"+
 					"</div>"+
 					"<div class='shop_right'>"+
 						"<section class='shop_name'><h3><span>"+name+"</span></h3></section>"+
