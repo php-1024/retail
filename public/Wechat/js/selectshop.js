@@ -11,5 +11,5 @@ function shoplist(organization_name) {
 					"</div>"+
 				"</a>"+
 			"</li>";
-	return srt;
+	return str;
 }
