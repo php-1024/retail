@@ -171,8 +171,8 @@ class DisplayController extends Controller
                     'simple_owner' => $simple_owner,
                     'simple_owner_mobile' => $simple_owner_mobile,
                     'simple_address' => $simple_address,
-                    'lng' => $bd_gcj['gg_lon'],
-                    'lat' => $bd_gcj['gg_lat'],
+                    'lng' => $bd_gcj['0'],
+                    'lat' => $bd_gcj['1'],
                 ];
             }
         } else {
@@ -182,8 +182,8 @@ class DisplayController extends Controller
                 'simple_owner' => $simple_owner,
                 'simple_owner_mobile' => $simple_owner_mobile,
                 'simple_address' => $simple_address,
-                'lng' => $bd_gcj['gg_lon'],
-                'lat' => $bd_gcj['gg_lat'],
+                'lng' => $bd_gcj['0'],
+                'lat' => $bd_gcj['1'],
             ];
         }
         DB::beginTransaction();
