@@ -59,102 +59,6 @@
 							</div>
 						</a>
 					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="javascript:;">
-							<div class="shop_img">
-								<img src="images/emotion@2x.png">
-							</div>
-							<div class="shop_right">
-								<section class="shop_name"><h3><span>半夏花年（南山店）</span></h3></section>
-								<section class="shop_youhui"><p>满120减10</p></section>
-								<section class="shop_juli"><p>小吃快餐<span><em><</em>&nbsp;920m</span></p></section>
-							</div>
-						</a>
-					</li>
 				</ul>
 			</div>
 	    </div>
@@ -233,18 +137,20 @@
   	        var _token=$("#_token").val();
   	        var keyword=$("#keyword").val();
   	        var url = "http://develop.01nnt.com/api/wechatApi/store_list";
-  	        console.log(latitude);
-  	        console.log(longitude);
-  	        console.log(organization_id);
-  	        console.log(_token);
-  	        console.log(url);
-  	        console.log(keyword);
 	         $.showPreloader('加载中');
+	         //获取店铺
   	        $.post(
   	        	url,
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
-  	        		console.log(json);
+  	        		if (json.status == 1) {
+  	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
+  	        				
+  	        				shoplist(json.data.storelist[i].organization_name);
+  	        				$.hidePreloader();
+  	        			}
+  	        			console.log(shoplist);
+  	        		}
 	        	})
           },
           cancel: function (res) {
