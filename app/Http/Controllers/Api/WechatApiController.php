@@ -748,5 +748,4 @@ class WechatApiController extends Controller
         return $arr;
     }
 
-
 }
