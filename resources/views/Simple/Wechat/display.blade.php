@@ -131,7 +131,7 @@
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
   	        		if (json.status == 1) {
-  	        			var str;
+  	        			var str="";
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
         					str += shoplist(json.data.storelist[i].name,json.data.storelist[i].address,json.data.storelist[i].logo,json.data.storelist[i].distance);
   	        			}
