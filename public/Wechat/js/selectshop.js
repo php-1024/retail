@@ -1,5 +1,5 @@
+$.config = {router: false}
 $(function(){
-	$.config = {router: false}
 	//获取当前月日
 	var myDate = new Date();
 	var month = myDate.getMonth();
