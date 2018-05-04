@@ -12,8 +12,8 @@ function searchshop(){
 	getltshop();
 }
 //渲染店铺列表
-function shoplist(name,address,logo,distance) {
-	var str = "<li>"+"<a href='javascript:;'>"+
+function shoplist(name,address,logo,distance,id) {
+	var str = "<li>"+"<a href='http://develop.01nnt.com/zerone/wechat/goodslist?store="+id+"'>"+
 					"<div class='shop_img'>"+
 						"<img src='http://develop.01nnt.com/"+logo+"'>"+
 					"</div>"+
@@ -36,9 +36,9 @@ function getltshop(){
 	        var accuracy = res.accuracy; // 位置精度
 	        var organization_id=$("#organization_id").val();
 	        var _token=$("#_token").val();
+	        //搜索值
 	        var keyword=$("#keyword").val();
 	        var url = "http://develop.01nnt.com/api/wechatApi/store_list";
-	        console.log(keyword);
          $.showPreloader('加载中');
          //获取店铺
 	        $.post(
@@ -48,7 +48,9 @@ function getltshop(){
 	        		if (json.status == 1) {
 	        			var str="";
 	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-    					str += shoplist(json.data.storelist[i].name,json.data.storelist[i].address,json.data.storelist[i].logo,json.data.storelist[i].distance);
+    					str += shoplist(json.data.storelist[i].name,json.data.storelist[i].address,
+    						json.data.storelist[i].logo,json.data.storelist[i].distance,
+    						json.data.storelist[i].id);
 	        			}
 	        			var $shoplist = $("#shoplist");
 	        			var $shopnumber = $("#shopnumber");
