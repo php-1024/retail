@@ -1,3 +1,22 @@
+$(function(){
+	//获取goods分类列表
+    var fansmanage_id=$("#fansmanage_id").val();
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();
+    var url = "http://develop.01nnt.com/api/wechatApi/category";
+	$.showPreloader('加载中');
+    $.post(
+    	url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    	function(json){
+    		if (json.status == 1) {
+    			console.log(json);
+    		}
+			$.hidePreloader();
+		}
+	)
+});
+
 //隐藏alert
 $("#alert").click(function(e){
     return;
