@@ -35,6 +35,7 @@ class WechatController extends Controller
     public function goodslist(Request $request)
     {
         $store_id = $request->store_id;
+        echo $store_id;
         $fansmanage_id = request()->get("organization_id");
 
         // 渲染页面
