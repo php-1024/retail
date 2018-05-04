@@ -68,8 +68,14 @@
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/selectshop.js" charset='utf-8'></script>
+    <script>
+      //打开自动初始化页面的功能
+      //建议不要打开自动初始化，而是自己调用 $.init 方法完成初始化
+      $.config = {
+        autoInit: false
+      }
+    </script>
     <script type="text/javascript">
-    	$.config = {router: false}
      wx.config({
 	      debug: false,
           appId:'{{$appId}}',
