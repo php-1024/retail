@@ -17,6 +17,7 @@ use App\Models\Organization;
 use App\Models\OrganizationAssets;
 use App\Models\OrganizationFansmanageinfo;
 use App\Models\OrganizationRetailinfo;
+use App\Models\OrganizationSimpleinfo;
 use App\Models\Package;
 use App\Models\Program;
 use Illuminate\Http\Request;
@@ -155,8 +156,12 @@ class StoreController extends Controller
                 'retail_owner_idcard' => '',
                 'retail_owner_mobile' => $mobile,
             ];
+            if ($program_id == 10) {
+                OrganizationRetailinfo::addOrganizationRetailinfo($storeinfo);
+            } elseif ($program_id == 12) {
+                OrganizationSimpleinfo::addOrganizationSimpleinfo($storeinfo);
+            }
             // 在分店织信息表创建店铺组织信息
-            OrganizationRetailinfo::addOrganizationRetailinfo($storeinfo);
 
             $accdata = [
                 'organization_id' => $id,
