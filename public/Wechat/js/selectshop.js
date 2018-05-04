@@ -1,4 +1,3 @@
-$.config = {router: false}
 $(function(){
 	//获取当前月日
 	var myDate = new Date();
