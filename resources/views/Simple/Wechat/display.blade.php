@@ -233,13 +233,8 @@
   	        var _token=$("#_token").val();
   	        var keyword=$("#keyword").val();
   	        var url = "http://develop.01nnt.com/api/wechatApi/store_list";
-  	        console.log(latitude);
-  	        console.log(longitude);
-  	        console.log(organization_id);
-  	        console.log(_token);
-  	        console.log(url);
-  	        console.log(keyword);
 	         $.showPreloader('加载中');
+	         //获取店铺
   	        $.post(
   	        	url,
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
