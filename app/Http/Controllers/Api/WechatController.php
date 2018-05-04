@@ -36,8 +36,8 @@ class WechatController extends Controller
     {
         $store_id = $request->store_id;
 
+        print_r(session("zerone_auth_info"));
         $fansmanage_id = request()->get("organization_id");
-        echo $fansmanage_id;
         // 渲染页面
         return view('Simple/Wechat/goodslist', ['store_id' => $store_id, 'fansmanage_id' => $fansmanage_id]);
     }
