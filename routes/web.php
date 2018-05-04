@@ -961,7 +961,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::post('goodscategory', 'Api\AndroidSimpleApiController@goodscategory')->middleware('AndroidSimpleApiCheck');//商品分类接口
         Route::post('goodslist', 'Api\AndroidSimpleApiController@goodslist')->middleware('AndroidSimpleApiCheck');//商品列表接口
         Route::post('order_check', 'Api\AndroidSimpleApiController@order_check')->middleware('AndroidSimpleApiCheck');//订单提交接口
-        Route::post('cancel_order', 'Api\AndroidSimpleApiController@cancel_order')->middleware('AndroidSimpleApiCheck');//取消订单接口
+        Route::post('cancel_order', 'Api\AndroidSimpleApiController@cancel_order');//取消订单接口
         Route::any('order_list', 'Api\AndroidSimpleApiController@order_list')->middleware('AndroidSimpleApiCheck');//订单列表接口
         Route::post('order_detail', 'Api\AndroidSimpleApiController@order_detail')->middleware('AndroidSimpleApiCheck');//订单详情接口
         Route::post('cash_payment', 'Api\AndroidSimpleApiController@cash_payment')->middleware('AndroidSimpleApiCheck');//现金支付接口
