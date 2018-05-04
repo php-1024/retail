@@ -41,7 +41,7 @@ class WechatApiController extends Controller
 
         $return = json_decode($return);
         foreach($return as $key=>$value){
-            print_r($value);
+            print_r($value['0stdClass Object']);
         }exit;
 //        print_r($return['result']);exit;
 //        echo $return['result']['addressComponent']['province'];exit;
