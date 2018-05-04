@@ -224,6 +224,7 @@
      wx.ready(function(){
          // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
          wx.getLocation({
+         	$.showPreloader('加载中');
           success: function (res) {
           	var latitude = res.latitude; // 纬度，浮点数，范围为90 ~ -90
   	       	var longitude = res.longitude ; // 经度，浮点数，范围为180 ~ -180。
@@ -239,7 +240,7 @@
   	        console.log(_token);
   	        console.log(url);
   	        console.log(keyword);
-	         $.showPreloader('加载中');
+	         
   	        $.post(
   	        	url,
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
