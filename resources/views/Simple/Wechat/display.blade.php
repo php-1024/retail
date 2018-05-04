@@ -234,13 +234,12 @@
   	        var keyword=$("#keyword").val();
   	        var url = "http://develop.01nnt.com/api/wechatApi/store_list";
   	        console.log(url);
-  	        $.post({
+  	        $.post(
   	        	url: url,
   	        	data: {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
   	        		alert("sdasd");
-  	        	}
-  	        })
+	        	})
           },
           cancel: function (res) {
             alert('用户拒绝授权获取地理位置');
