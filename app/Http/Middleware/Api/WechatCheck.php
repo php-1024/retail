@@ -29,7 +29,7 @@ class WechatCheck
      */
     public function checkToken()
     {
-        print_r(session("zerone_auth_info"));exit;
+        echo session("zerone_auth_info.organization_id");exit;
         // 判断是否存在 零壹服务用户id
         if (empty(session("zerone_auth_info.zerone_shop_id"))) {
             Header("Location:" . request()->root() . "/api/authApi/zerone_auth?initial_url_address=$url");
