@@ -145,13 +145,12 @@
   	        	function(json){
   	        		if (json.status == 1) {
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				
-  	        				shoplist(json.data.storelist[i].organization_name);
+  	        				var str = shoplist(json.data.storelist[i].organization_name);
   	        				$.hidePreloader();
   	        			}
-  	        			var shoplist = $("#shoplist");
-  	        			shoplist.empty();
-  	        			shoplist.append(shoplist());
+  	        			var $shoplist = $("#shoplist");
+  	        			$shoplist.empty();
+  	        			$shoplist.append(str);
   	        		}
 	        	})
           },
