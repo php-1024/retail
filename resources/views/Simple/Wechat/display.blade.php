@@ -68,8 +68,10 @@
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/selectshop.js" charset='utf-8'></script>
+    <script>
+      $.config.router = false
+    </script>
     <script type="text/javascript">
-    	$.config = {router: false}
      wx.config({
 	      debug: false,
           appId:'{{$appId}}',
