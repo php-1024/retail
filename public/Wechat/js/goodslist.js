@@ -14,7 +14,7 @@ $(function(){
     		}
 			$.hidePreloader();
 		}
-	})
+	)
 });
 
 //隐藏alert
