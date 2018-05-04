@@ -18,7 +18,7 @@
 			<div class="head">
 				<div class="search_box">
 					<div class="search_item">
-						<label class="icon_search"></label>
+						<label class="icon_search" onclick="searchshop()"></label>
 						<input type="search" id="keyword" name="keyword" placeholder="输入商家信息">
 					</div>
 					<div class="search_right">
@@ -46,7 +46,6 @@
 			</div>
 			<div class="shoplist_box">
 				<ul id="shoplist">
-					
 				</ul>
 			</div>
 	    </div>
@@ -132,11 +131,9 @@
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
   	        		if (json.status == 1) {
-  	        			var str;
+  	        			var str="";
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				//for (var j = json.data.storelist[i].organization_simpleinfo.length - 1; j >= 0; j--) {
-  	        					str += shoplist(json.data.storelist[i].organization_name,json.data.storelist[i].organization_simpleinfo.simple_address);
-  	        				//}
+        					str += shoplist(json.data.storelist[i].name,json.data.storelist[i].address,json.data.storelist[i].logo,json.data.storelist[i].distance);
   	        			}
   	        			var $shoplist = $("#shoplist");
   	        			var $shopnumber = $("#shopnumber");

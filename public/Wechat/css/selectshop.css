@@ -200,7 +200,7 @@ body{
 }
 .shoplist_box ul li a .shop_img img{
 	width: 100%;
-	height: auto;
+	height: 100%;
 	-webkit-border-radius: 0.5rem;
 	border-radius: 0.5rem;
 }

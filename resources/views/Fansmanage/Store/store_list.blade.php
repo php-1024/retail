@@ -58,11 +58,11 @@
                                 </header>
                                 <div class="panel-body ">
                                     <div>
-                                        分店类型：<label class="label label-success pull-right">
-                                            @if($value->OrganizationRetailinfo->type == '0')
-                                                总店
-                                            @else
-                                                分店
+                                        店铺使用的程序：<label class="label label-success pull-right">
+                                            @if($value->asset_id == '10')
+                                                零售retail版
+                                            @elseif($value->asset_id == '12')
+                                                零售simple版
                                             @endif
                                         </label>
                                     </div>
