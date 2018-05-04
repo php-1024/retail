@@ -239,12 +239,12 @@
   	        console.log(_token);
   	        console.log(url);
   	        console.log(keyword);
-	         $.showPreloader('加载中...');
+	         $.showPreloader('加载中');
   	        $.post(
   	        	url,
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
-  	        		alert("sdasd");
+  	        		console.log(json);
 	        	})
           },
           cancel: function (res) {
