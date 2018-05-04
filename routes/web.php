@@ -920,7 +920,7 @@ Route::group(['prefix' => 'simple'], function () {
 Route::group(['prefix' => 'zerone'], function () {
     Route::group(['prefix' => 'wechat'], function () {
         Route::any('/', 'Api\WechatController@display')->middleware('WechatCheck');
-        Route::any('goodslist/{organization_id}', 'Api\WechatController@goodslist')->middleware('WechatCheck');
+        Route::any('goodslist', 'Api\WechatController@goodslist')->middleware('WechatCheck');
     });
 
 });
