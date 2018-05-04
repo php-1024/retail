@@ -19,10 +19,14 @@ $(function(){
     				}
     				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     			}
+    			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
     			$goods_cs_lt.empty();
     			$goods_cs_lt.append(str);
-
+    			//赋值弹出框的分类列表
+    			var $goods_cs_lt_alert = $("#goods_cs_lt_alert");
+    			$goods_cs_lt_alert.empty();
+    			$goods_cs_lt_alert.append(str);
     		}
 			$.hidePreloader();
 		}
