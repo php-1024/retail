@@ -28,7 +28,7 @@
 				<div class="head_bottom">
 					<div class="bottom_left">
 						<span id="month">
-							<span id="dateri"></span>
+							
 						</span>
 						<p class="bottomaddress"><i></i>南山科技园南区一道飞亚达大厦</p>
 					</div>
@@ -134,14 +134,16 @@
   	        		if (json.status == 1) {
   	        			var str;
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				str += shoplist(json.data.storelist[i].organization_name);
-  	        				$.hidePreloader();
+  	        				for (var j = json.data.storelist[i]organization_simpleinfo.length - 1; j >= 0; j--) {
+  	        					str += shoplist(json.data.storelist[i].organization_name,json.data.storelist[i]organization_simpleinfo[j].simple_address);
+  	        				}
   	        			}
   	        			var $shoplist = $("#shoplist");
   	        			var $shopnumber = $("#shopnumber");
   	        			$shoplist.empty();
   	        			$shoplist.append(str);
-  	        			$shopnumber.text("("+json.data.storelist.length+"家)")
+  	        			$shopnumber.text("("+json.data.storelist.length+"家)");
+        				$.hidePreloader();
   	        		}
 	        	})
           },
