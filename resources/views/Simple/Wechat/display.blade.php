@@ -244,7 +244,7 @@
   	        	url,
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
-  	        		console.log(json);
+  	        		console.log(json.data);
 	        	})
           },
           cancel: function (res) {
