@@ -213,7 +213,6 @@ class AndroidSimpleApiController extends Controller
         if ($order['status'] != '0') {
             return response()->json(['msg' => '订单状态不是待付款，不能取消', 'status' => '0', 'data' => '']);
         }
-        dd('1212');
         DB::beginTransaction();
         try {
             // 说明该订单的库存还未退回，这里的判断是为了防止用户频繁切换下单减库存，付款减库存设置的检测
