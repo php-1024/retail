@@ -4,6 +4,8 @@ $(function(){
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();
     var url = "http://develop.01nnt.com/api/wechatApi/category";
+    console.log(fansmanage_id);
+    console.log(store_id);
 	$.showPreloader('加载中');
     $.post(
     	url,
