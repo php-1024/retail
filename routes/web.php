@@ -473,6 +473,10 @@ Route::group(['prefix' => 'fansmanage'], function () {
 //        Route::get('user_timeline', 'Fansmanage\UserController@user_timeline')->middleware('FansmanageCheck');          //粉丝用户足迹
     });
 
+    //支付设置
+    Route::group(['prefix' => 'paysetting'], function () {
+        Route::get('wechat_setting', 'Fansmanage\PaysettingController@wechat_setting')->middleware('FansmanageCheck');      //微信支付设置
+    });
 
     //总分店管理
     Route::group(['prefix' => 'store'], function () {
