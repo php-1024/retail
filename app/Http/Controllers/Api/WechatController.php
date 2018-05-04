@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\WechatWebAuthorization;
 use App\Services\Curl\HttpCurl;
@@ -23,6 +24,11 @@ class WechatController extends Controller
         $this->getSignPackage();
         // 获取组织id
         $organization_id = request()->get("organization_id");
+
+        $organization_name = Organization::getPluck([['organization_id',$organization_id]],'organization_name');
+
+        Session::put('organization_name', $organization_name);
+        echo session::get('organization_name');
         // 赋值
         $zerone_jssdk_info = (request()->get("zerone_jssdk_info"));
         // 渲染页面
