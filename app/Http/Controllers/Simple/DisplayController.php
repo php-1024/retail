@@ -154,7 +154,7 @@ class DisplayController extends Controller
         $file = $request->file('simple_logo');                          //获取店铺logo
         $lng = $request->lng;    //lon 百度经度
         $lat = $request->lat;    //lat 百度纬度
-
+        echo $lng.'/'.$lat;exit;
         $bd_gcj = $this->bd_decrypt($lng, $lat);
         $file_path = '';       //初始化文件路径为空
         $simple_info = [];      //初始化店铺信息
@@ -203,7 +203,6 @@ class DisplayController extends Controller
             }
             DB::commit();
         } catch (\Exception $e) {
-            dd($e);
             DB::rollBack();//事件回滚
             return response()->json(['data' => '修改店铺信息失败，请检查', 'status' => '0']);
         }
