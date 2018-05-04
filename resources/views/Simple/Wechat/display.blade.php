@@ -144,8 +144,9 @@
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
   	        		if (json.status == 1) {
+  	        			var str;
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				var str += shoplist(json.data.storelist[i].organization_name);
+  	        				str += shoplist(json.data.storelist[i].organization_name);
   	        				$.hidePreloader();
   	        			}
   	        			var $shoplist = $("#shoplist");
