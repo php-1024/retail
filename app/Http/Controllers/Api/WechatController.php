@@ -38,7 +38,7 @@ class WechatController extends Controller
         $store_id = $request->store_id;
 
         $organization_name = Organization::getPluck([['id',$store_id]],'organization_name');
-        
+
         Session::put('organization_name', $organization_name);
 
         $fansmanage_id = session("zerone_auth_info.organization_id");
