@@ -18,20 +18,7 @@
 	    <div class="g-flexview">
 			<div class="head">
 				<div class="nav">
-					<ul class="clear_after">
-						<li class="action"><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销</a></li>
-						<li><a href="javascript:;">热销热销</a></li>
-						<li><a href="javascript:;">热销热销</a></li>
-						<li><a href="javascript:;">热销热销</a></li>
-						<li><a href="javascript:;">热销热销</a></li>
+					<ul class="clear_after" id="goods_cs_lt">
 					</ul>
 				</div>
 				<div class="nav_right" onclick="goodsclass('goodsclass')">
@@ -382,26 +369,7 @@
 		<!-- alert -->
 		<div class="popup_alert quhuoinfo goodsclass" id="goodsclass">
 			<div class="goodsclass_box_h popup_alert_hook">
-				<ul class="clear_after">
-					<li class="action"><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
-					<li><a href="javascript:;">热销热销</a></li>
+				<ul class="clear_after" id="goods_cs_lt_alert">
 				</ul>
 			</div>
 			<div class="goodsclass_close" onclick="hidegoodsclass('goodsclass')"></div>
