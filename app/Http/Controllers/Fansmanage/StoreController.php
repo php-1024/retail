@@ -239,6 +239,7 @@ class StoreController extends Controller
         // 获取分店信息
         $list = Organization::getstore([['parent_id', $organization_id], ['type', 4]], '10', 'id');
         // 渲染页面
+        dump($list);
         return view('Fansmanage/Store/store_list', ['list' => $list, 'admin_data' => $admin_data, 'route_name' => $route_name, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data]);
     }
 
