@@ -13,7 +13,7 @@
   <body>
   	<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
   	<input type="hidden" name="organization_id" id="organization_id" value="{{$organization_id}}">
-    <div class="">
+    <div class="page">
 	    <div class="g-flexview">
 			<div class="head">
 				<div class="search_box">
