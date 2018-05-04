@@ -29,6 +29,16 @@ class WechatController extends Controller
         return view('Simple/Wechat/display', ['appId' => $zerone_jssdk_info['appId'], 'nonceStr' => $zerone_jssdk_info['nonceStr'], 'timestamp' => $zerone_jssdk_info['timestamp'], 'rawString' => $zerone_jssdk_info['rawString'], 'signature' => $zerone_jssdk_info['signature'], 'organization_id' => $organization_id]);
     }
 
+    /**
+     * 店铺列表
+     */
+    public function goodslist(Request $request)
+    {
+
+
+        // 渲染页面
+        return view('Simple/Wechat/goodslist');
+    }
 
     /**
      * 获取 wx.config 里面的签名,JSSDk 所需要的

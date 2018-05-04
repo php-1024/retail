@@ -919,8 +919,8 @@ Route::group(['prefix' => 'simple'], function () {
 /**********************微信端*********************/
 Route::group(['prefix' => 'zerone'], function () {
     Route::group(['prefix' => 'wechat'], function () {
-        Route::get('/', 'Api\WechatController@display')->middleware('WechatCheck');
-        Route::get('goods_list/{appid}', 'Api\WechatController@goods_list')->middleware('WechatCheck');
+        Route::any('/', 'Api\WechatController@display')->middleware('WechatCheck');
+        Route::any('goodslist', 'Api\WechatController@goodslist')->middleware('WechatCheck');
     });
 
 });
