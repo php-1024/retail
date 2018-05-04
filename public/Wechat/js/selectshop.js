@@ -18,6 +18,7 @@ function searchshop(){
 	        var _token=$("#_token").val();
 	        var keyword=$("#keyword").val();
 	        var url = "http://develop.01nnt.com/api/wechatApi/store_list";
+	        console.log(keyword);
          $.showPreloader('加载中');
          //获取店铺
 	        $.post(
