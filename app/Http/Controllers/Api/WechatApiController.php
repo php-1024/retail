@@ -70,7 +70,7 @@ class WechatApiController extends Controller
             $storelist['$k']['address']= $v['organization_simpleinfo']['simple_address'];
         }
         // 数据返回
-        $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $data]];
+        $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $storelist]];
 
         return response()->json($data);
     }
