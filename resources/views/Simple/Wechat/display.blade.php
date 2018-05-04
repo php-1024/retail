@@ -134,9 +134,9 @@
   	        		if (json.status == 1) {
   	        			var str;
   	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
-  	        				for (var j = json.data.storelist[i].organization_simpleinfo.length - 1; j >= 0; j--) {
-  	        					str += shoplist(json.data.storelist[i].organization_name,json.data.storelist[i].organization_simpleinfo[j].simple_address);
-  	        				}
+  	        				//for (var j = json.data.storelist[i].organization_simpleinfo.length - 1; j >= 0; j--) {
+  	        					str += shoplist(json.data.storelist[i].organization_name,json.data.storelist[i].organization_simpleinfo.simple_address);
+  	        				//}
   	        			}
   	        			var $shoplist = $("#shoplist");
   	        			var $shopnumber = $("#shopnumber");
