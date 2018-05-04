@@ -141,7 +141,7 @@
   	        			var $shopnumber = $("#shopnumber");
   	        			$shoplist.empty();
   	        			$shoplist.append(str);
-  	        			$shopnumber.text("("+json.data.storelist.length - 1 +"家)")
+  	        			$shopnumber.text("("+json.data.storelist.length+"家)")
   	        		}
 	        	})
           },
