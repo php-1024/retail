@@ -94,11 +94,11 @@ class WechatApiController extends Controller
     public function category(Request $request)
     {
         // 商户id
-        $fansmanage_id = Session::get('fansmanage_id');
+        $fansmanage_id = $request->fansmanage_id;
         // 店铺id
         $store_id = $request->store_id;
         // 分类列表
-        $category = SimpleCategory::getList([['fansmanage_id', $fansmanage_id], ['simple_id', $store_id]], 0, 'id', 'DESC');
+        $category = SimpleCategory::getList([['fansmanage_id', $fansmanage_id], ['simple_id', $store_id]], 0, 'id', 'DESC', ['id', 'name', 'displayorder']);
 
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['categorylist' => $category]];
