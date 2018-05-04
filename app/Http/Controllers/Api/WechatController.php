@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Models\WechatWebAuthorization;
 use App\Services\Curl\HttpCurl;
@@ -35,6 +36,10 @@ class WechatController extends Controller
     public function goodslist(Request $request)
     {
         $store_id = $request->store_id;
+
+        $organization_name = Organization::getPluck([['id',$store_id]],'organization_name');
+        
+        Session::put('organization_name', $organization_name);
 
         $fansmanage_id = session("zerone_auth_info.organization_id");
         // 渲染页面

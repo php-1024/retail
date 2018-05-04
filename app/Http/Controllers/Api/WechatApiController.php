@@ -144,11 +144,9 @@ class WechatApiController extends Controller
     public function shopping_cart_add(Request $request)
     {
         // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
+        $user_id = $request->user_id;
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '1';
+        $zerone_user_id = $request->zerone_user_id;
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
@@ -366,11 +364,9 @@ class WechatApiController extends Controller
     public function shopping_cart_list(Request $request)
     {
         // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
+        $user_id = $request->user_id;
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '1';
+        $zerone_user_id = $request->zerone_user_id;
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
