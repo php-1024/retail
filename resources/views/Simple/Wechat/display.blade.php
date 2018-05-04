@@ -244,7 +244,11 @@
   	        	url,
   	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
   	        	function(json){
-  	        		console.log(json.data.storelist);
+  	        		if (json.status == 1) {
+  	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {
+  	        				console.log(json.data.storelist[i].organization_name);
+  	        			}
+  	        		}
 	        	})
           },
           cancel: function (res) {
