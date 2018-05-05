@@ -584,7 +584,7 @@ class WechatApiController extends Controller
         // 默认收货地址 1为默认
         $status = $request->status ? '1' : '0';
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
-        
+
         // 数据处理
         $editData = [
             'province_id' => $province_id,
@@ -599,7 +599,7 @@ class WechatApiController extends Controller
             'status' => $status
         ];
 
-        $address_id = SimpleAddress::editAddress([['id', $address_id]], $editData);
+        SimpleAddress::editAddress([['id', $address_id]], $editData);
 
 
         $data = ['status' => '1', 'msg' => '编辑成功', 'data' => ['address_id' => $address_id]];
