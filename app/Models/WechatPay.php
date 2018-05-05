@@ -20,7 +20,7 @@ class WechatPay extends Model
      * @param array $field
      * @return bool
      */
-    public function getInfo($where = [], $field = [])
+    public static function getInfo($where = [], $field = [])
     {
         $res = self::select($field)->where($where)->first();
         if (!empty($res)) {

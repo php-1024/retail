@@ -50,6 +50,16 @@
                             <header class="panel-heading">
                                 微信支付设置
                             </header>
+
+                            <div class="flex-center position-ref full-height">
+                                <div class="content">
+                                    <div class="title">
+                                        <h1 style="color:#FF0000">请在右侧添加菜单</h1>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="row wrapper">
 
                                 <div class="well">
@@ -74,14 +84,12 @@
                                         <div class="col-sm-8">
 
                                             <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1"
-                                                       value="option1" checked>打开
+                                                <input type="radio" name="optionsRadios" value="1" checked>打开
                                             </label>
 
 
                                             <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="optionsRadios1"
-                                                       value="option1">关闭
+                                                <input type="radio" name="optionsRadios" value="0">关闭
                                             </label>
                                         </div>
 
