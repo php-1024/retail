@@ -441,7 +441,7 @@ class WechatApiController extends Controller
         $dispatch_info = [];
         if ($dispatch->toArray()) {
             foreach ($dispatch->toArray() as $key => $value) {
-                $dispatch_info[$key] = DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal']);
+                $dispatch_info[$key] = DispatchProvince::getList([['dispatch_id', $value['id']]], '', 'id', 'DESC', ['dispatch_id', 'province_id', 'first_weight', 'additional_weight', 'freight', 'renewal']);
             }
 
         }
@@ -461,17 +461,17 @@ class WechatApiController extends Controller
         // 数据处理
         $selftakeinfo = [
             // id
-            'id' =>$selftake['id'],
+            'id' => $selftake['id'],
             // 性别
-            'sex' =>$selftake['sex'],
+            'sex' => $selftake['sex'],
             // 手机号
-            'mobile' =>$selftake['mobile'],
+            'mobile' => $selftake['mobile'],
             // 真实姓名
-            'realname' =>$selftake['realname'],
+            'realname' => $selftake['realname'],
         ];
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftakeinfo]];
-        
+
         return response()->json($data);
     }
 
