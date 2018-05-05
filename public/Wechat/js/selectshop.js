@@ -45,6 +45,7 @@ function getltshop(){
 	        	url,
 	            {'organization_id': organization_id,'_token':_token,'keyword':keyword,'lat':latitude,'lng':longitude},
 	        	function(json){
+					console.log(json);
 	        		if (json.status == 1) {
 	        			var str="";
 	        			for (var i = json.data.storelist.length - 1; i >= 0; i--) {

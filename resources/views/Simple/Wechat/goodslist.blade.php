@@ -39,7 +39,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -76,7 +76,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -113,7 +113,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -150,7 +150,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -187,7 +187,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -224,7 +224,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -261,7 +261,7 @@
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
-							<img src="images/emotion@2x.png">
+							<img src="">
 						</div>
 						<div class="goods_right">
 							<div class="goods_right_item">
@@ -357,8 +357,9 @@
 		</div>
 		<!-- alert -->
     </div>
-    <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
-    <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
-    <script type='text/javascript' src="{{asset('public/Wechat')}}/js/goodslist.js" charset='utf-8'></script>
+
   </body>
+  <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
+  <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
+  <script type='text/javascript' src="{{asset('public/Wechat')}}/js/goodslist.js" charset='utf-8'></script>
 </html>
