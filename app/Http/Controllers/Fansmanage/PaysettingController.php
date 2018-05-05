@@ -57,25 +57,24 @@ class PaysettingController extends Controller
         $route_name = request()->path();
 
 
-//        // 检验参数是否存在
-//        $error_info = $this->validate(request(), [
-//            'appid' => 'required',
-//            'appsecret' => 'required',
-//            'mchid' => 'required',
-//            'api_key' => 'required',
-//            'apiclient_cert_pem' => 'required',
-//            'apiclient_key_pem' => 'required',
-//        ]);
-
-        $rule = [
+        // 检验参数是否存在
+        $this->validate(request(), [
             'appid' => 'required',
             'appsecret' => 'required',
             'mchid' => 'required',
             'api_key' => 'required',
             'apiclient_cert_pem' => 'required',
             'apiclient_key_pem' => 'required',
-        ];
+        ], [
+            "appid.required" => "appid 必须填写",
+            "appsecret.required" => "appsecret 必须填写",
+            "mchid.required" => "mchid 必须填写",
+            "api_key.required" => "api_key 必须填写",
+            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
+            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
+        ]);
 
+        dd(123);
 
         // 获取appid
         $data["appid"] = request()->input('appid');
@@ -91,17 +90,6 @@ class PaysettingController extends Controller
         $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
         // 获取组织id
         $data["organization_id"] = $organization_id = request()->get('organization_id');
-
-        $validate = \Validator::make($data, $rule);
-        if (!$validate->passes()) {
-            dump( back()->with($validate));
-//            dump( $validate->getExplicitKeys($data));
-
-        }
-        dd(111);
-
-
-
 
         // 事务处理
         DB::beginTransaction();
