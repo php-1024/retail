@@ -91,6 +91,7 @@ class PaysettingController extends Controller
         // 获取组织id
         $data["organization_id"] = $organization_id = request()->get('organization_id');
 
+        dd($data);
         $res = $this->validateMsg($data);
         if(!empty($res)){
             return $res;
