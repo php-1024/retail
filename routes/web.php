@@ -456,6 +456,7 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::get('default_reply', 'Fansmanage\MessageController@default_reply')->middleware('FansmanageCheck');//默认回复
     });
 
+
     //公众号管理--菜单管理
     Route::group(['prefix' => 'wechatmenu'], function () {
         Route::get('defined_menu', 'Fansmanage\WechatmenuController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
