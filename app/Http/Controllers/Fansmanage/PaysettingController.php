@@ -65,8 +65,6 @@ class PaysettingController extends Controller
             'api_key' => 'required',
             'apiclient_cert_pem' => 'required',
             'apiclient_key_pem' => 'required',
-        ],[
-            "appid.required" => "应用ID 必须填写",
         ]);
 
         dd("11");
