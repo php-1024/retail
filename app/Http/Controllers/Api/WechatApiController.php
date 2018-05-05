@@ -442,10 +442,8 @@ class WechatApiController extends Controller
         if ($dispatch->toArray()) {
             foreach ($dispatch->toArray() as $key => $value) {
                 $dispatch_info = DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal']);
-                print_r($dispatch_info);
             }
         }
-exit;
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address_info, 'dispatch_info' => $dispatch_info]];
         return response()->json($data);
     }
