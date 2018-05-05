@@ -116,7 +116,7 @@ class PaysettingController extends Controller
             $res = json_encode($error_msg,JSON_UNESCAPED_UNICODE);
             $res = json_decode($res,true);
             dump($res);
-            foreach($error_msg as $val){
+            foreach($res as $val){
                 var_dump($val);
             }
 //            var_dump($error_msg);
