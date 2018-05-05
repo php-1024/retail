@@ -336,7 +336,6 @@ class UserController extends Controller
 
         // 获取粉丝列表
         $list = FansmanageUser::getPaginage([['fansmanage_id', $organization_id]], '', '10', 'id', "DESC");
-        dump($list);
         // 处理数据
         foreach ($list as $key => $value) {
             if (!empty($value["user"])) {
