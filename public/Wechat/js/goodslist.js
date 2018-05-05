@@ -30,27 +30,27 @@ $(function(){
 		}
 	);
 	//获取购物车商品
-	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
-    var shop_user_id=$("#shop_user_id").val();//用户店铺ID
-    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
-    $.post(
-    	cart_list_url,
-        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
-    	function(json){
-            console.log(json);
-    		if (json.status == 1) {
-                var str = "";
-                for (var i = 0; i < json.data.goods_list.length; i++) {
-                    console.log(json.data.goods_list[i].goods_name);
-                    str += cart_list_box(json.data.goods_list[i].goods_name);
-                }
-                var $cart_list = $("#cart_list");
-                $cart_list.empty();
-                $cart_list.append(str);
-                $.hidePreloader();
-    		}
-		}
-	);
+	// var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
+    // var shop_user_id=$("#shop_user_id").val();//用户店铺ID
+    // var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    // $.post(
+    // 	cart_list_url,
+    //     {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
+    // 	function(json){
+    //         console.log(json);
+    // 		if (json.status == 1) {
+    //             var str = "";
+    //             for (var i = 0; i < json.data.goods_list.length; i++) {
+    //                 console.log(json.data.goods_list[i].goods_name);
+    //                 str += cart_list_box(json.data.goods_list[i].goods_name);
+    //             }
+    //             var $cart_list = $("#cart_list");
+    //             $cart_list.empty();
+    //             $cart_list.append(str);
+    //             $.hidePreloader();
+    // 		}
+	// 	}
+	// );
 });
 function cart_list_box(name) {
     str = '<li>'+
