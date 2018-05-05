@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\DispatchProvince;
 use App\Models\SimpleAddress;
 use App\Models\Dispatch;
 use App\Models\Organization;
@@ -440,7 +441,7 @@ class WechatApiController extends Controller
         $dispatch_info = '';
         if ($dispatch->toArray()) {
             foreach ($dispatch->toArray() as $key => $value) {
-                print_r($value['id']);
+                $dispatch_info =  DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal']);
             }
         }
 
