@@ -40,6 +40,7 @@ $(function(){
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
+            console.log(json);
     		if (json.status == 1) {
                 var str = "";
                 for (var i = 0; i < json.data.goods_list.length; i++) {
