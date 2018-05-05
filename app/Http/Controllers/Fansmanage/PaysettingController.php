@@ -89,7 +89,7 @@ class PaysettingController extends Controller
         // 获取支付证书私钥
         $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
         // 获取组织id
-        $data["organization_id"] = $organization_id = request()->get('organization_id');
+        $data["organization_id"] = $organization_id = $admin_data['organization_id'];
 
         dd($data);
         $res = $this->validateMsg($data);
