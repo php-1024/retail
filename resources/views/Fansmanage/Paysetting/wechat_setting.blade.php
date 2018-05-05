@@ -217,7 +217,6 @@
         var data = target.serialize();
 
 
-
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
