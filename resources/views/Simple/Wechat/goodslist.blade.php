@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="{{asset('public/Wechat')}}/css/public/light7.min.css">
     <link rel="stylesheet" href="{{asset('public/Wechat')}}/css/goodslist.css">
+    <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/light7.min.js" charset='utf-8'></script>
   </head>
   <body>
@@ -358,7 +359,6 @@
 		</div>
 		<!-- alert -->
     </div>
-    <script type='text/javascript' src="{{asset('public/Wechat')}}/js/public/jquery.min.js" charset='utf-8'></script>
     <script type='text/javascript' src="{{asset('public/Wechat')}}/js/goodslist.js" charset='utf-8'></script>
   </body>
 </html>
