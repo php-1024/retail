@@ -49,7 +49,7 @@ $(function(){
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
                 }
                 //购物车总价格
-                $("#cart_price").html("金额总计&yen;"+total_price);
+                $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
                 //购物车总数
                 var total = json.data.total;
                 $("#total").text(total);
