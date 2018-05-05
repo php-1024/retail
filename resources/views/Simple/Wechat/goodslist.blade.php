@@ -341,7 +341,7 @@
 					<span>已选商品</span>
 					<span onclick="show('alert')">清空</span>
 				</div>
-				<ul class="cart_list">
+				<ul class="cart_list" id="cart_list">
 					<li>
 						<span>同城送花 (向日葵百合混搭)</span>
 						<span>&yen;158</span>

@@ -39,15 +39,33 @@ $(function(){
     	function(json){
             console.log(json);
     		if (json.status == 1) {
-                for (var i = 0; i < json.data.goods_list.length-1; i++) {
+                var str = "";
+                for (var i = 0; i < json.data.goods_list.length; i++) {
                     console.log(json.data.goods_list[i].goods_name);
+                    str += cart_list_box(json.data.goods_list[i].goods_name);
                 }
+                var $cart_list = $("#cart_list");
+                $cart_list.empty();
+                $cart_list.append(str);
                 $.hidePreloader();
     		}
 		}
 	);
 });
-
+function cart_list_box(name) {
+    str = '<li>'+
+        '<span>'+name+'</span>'+
+        '<span>&yen;158</span>'+
+        '<div class="cart_alert_btn">'+
+            '<div class="goods_btn cart_border action">'+
+                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>'+
+                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+            '</div>'+
+        '</div>'+
+    '</li>';
+    return str;
+}
 //隐藏alert
 $("#alert").click(function(e){
     return;
