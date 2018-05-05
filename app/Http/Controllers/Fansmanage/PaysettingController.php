@@ -26,13 +26,15 @@ class PaysettingController extends Controller
         $son_menu_data = $request->get('son_menu_data');
         // 获取当前的页面路由
         $route_name = $request->path();
+
+
         // 店铺id
         $fansmanage_id = $admin_data['organization_id'];
         // 查询店铺付款信息设置
-//        $data = RetailShengpay::getOne([['fansmanage_id', $fansmanage_id]]);
 
-        return view('Fansmanage/Paysetting/wechat_setting', [ 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        dump($fansmanage_id);
+
+        return view('Fansmanage/Paysetting/wechat_setting', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 }
 
-?>
