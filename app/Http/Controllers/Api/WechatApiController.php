@@ -559,6 +559,10 @@ class WechatApiController extends Controller
     {
         // 地址id
         $address_id = $request->address_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
         // 省份id
         $province_id = $request->province_id;
         // 省份名称
@@ -578,9 +582,9 @@ class WechatApiController extends Controller
         // 手机号码
         $mobile = $request->mobile;
         // 默认收货地址 1为默认
-        $status = $request->status?'1':'0';
+        $status = $request->status ? '1' : '0';
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
-
+        
         // 数据处理
         $editData = [
             'province_id' => $province_id,
@@ -595,7 +599,7 @@ class WechatApiController extends Controller
             'status' => $status
         ];
 
-        $address_id = SimpleAddress::editAddress([['id',$address_id]],$editData);
+        $address_id = SimpleAddress::editAddress([['id', $address_id]], $editData);
 
 
         $data = ['status' => '1', 'msg' => '编辑成功', 'data' => ['address_id' => $address_id]];
@@ -680,17 +684,8 @@ class WechatApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
 
-        DB::beginTransaction();
-        try {
-            // 修改用户自取信息
-            SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
-            // 提交事务
-            DB::commit();
-        } catch (Exception $e) {
-            // 事件回滚
-            DB::rollBack();
-            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
-        }
+        SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
+
         $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['self_take_id' => $self_take_id]];
         return response()->json($data);
     }
