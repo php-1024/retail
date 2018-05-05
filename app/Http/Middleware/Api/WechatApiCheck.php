@@ -53,6 +53,11 @@ class WechatApiCheck
                 $re = $this->checkAddressDelete($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/wechatApi/address_status"://检测设置为默认收货地址提交数据
+                $re = $this->checkAddressStatus($request);
+                return self::format_response($re, $next);
+                break;
+
 
             case "api/wechatApi/selftake"://用户默认取货信息
             case "api/wechatApi/address_list"://检测添加收货地址提交数据
@@ -271,7 +276,19 @@ class WechatApiCheck
         return self::res(1, $request);
     }
 
-
+    /**
+     * 检测设置为默认收货地址提交数据
+     */
+    public function checkAddressStatus($request)
+    {
+        if (empty($request->input('address_id'))) {
+            return self::res(0, response()->json(['msg' => '地址id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('zerone_user_id'))) {
+            return self::res(0, response()->json(['msg' => '零壹id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
 
     /**
      * 检测零壹id

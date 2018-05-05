@@ -618,6 +618,7 @@ class WechatApiController extends Controller
         if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
+
         // 删除数据
         SimpleAddress::deleteAddress([['id', $address_id]]);
 
@@ -625,6 +626,41 @@ class WechatApiController extends Controller
 
         return response()->json($data);
     }
+
+    /**
+     * 设置为默认收货地址
+     */
+    public function address_status(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+
+        DB::beginTransaction();
+        try {
+            $id = SimpleAddress::getPluck([['zerone_user_id', $zerone_user_id],['status','1']],'id');
+            if ($id) {
+                SimpleAddress::editAddress([['id', $id]], ['status' => '0']);
+            }
+            SimpleAddress::editAddress([['id',$address_id]],['status' => '1']);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
+        }
+
+        $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['address_id' => $address_id]];
+
+        return response()->json($data);
+    }
+
 
     /**
      * 添加用户取货信息
