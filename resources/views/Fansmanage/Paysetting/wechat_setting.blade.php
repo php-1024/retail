@@ -150,7 +150,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">商户支付证书(apiclient_cert.pem)</label>
                                             <div class="col-sm-8">
-                                            <textarea class="form-control" id="input-id-1" name="apiclient_cert"
+                                            <textarea class="form-control" id="input-id-1" name="apiclient_cert_pem"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
                                                 <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的
                                                     <code>apiclient_cert.pem</code>
@@ -163,7 +163,7 @@
                                             <label class="col-sm-2 control-label"
                                             >支付证书私钥(apiclient_key.pem)</label>
                                             <div class="col-sm-8">
-                                            <textarea class="form-control" id="input-id-1" name="apiclient_key"
+                                            <textarea class="form-control" id="input-id-1" name="apiclient_key_pem"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
                                                 <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的
                                                     <code>apiclient_key.pem</code>
