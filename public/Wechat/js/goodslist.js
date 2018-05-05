@@ -1,4 +1,5 @@
 $(function(){
+    var total_price = 0;
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
@@ -43,7 +44,10 @@ $(function(){
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     console.log(json.data.goods_list[i].goods_name);
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,json.data.goods_list[i].num);
+                    total_price += parseInt(json.data.goods_list[i].goods_price);
+                    console.log(json.data.goods_list[i].goods_price);
                 }
+                console.log(total_price);
                 //购物车总数
                 var total = json.data.total;
                 $("#total").text(total);
