@@ -92,16 +92,10 @@ class PaysettingController extends Controller
         // 获取组织id
         $data["organization_id"] = $organization_id = request()->get('organization_id');
 
-
-
-
-
         $validate = \Validator::make($data, $rule);
-
-
         if (!$validate->passes()) {
-//            dump( back()->withErrors($validate));
-            dump( $validate->passes());
+            dump( back()->with($validate));
+//            dump( $validate->getExplicitKeys($data));
 
         }
         dd(111);
