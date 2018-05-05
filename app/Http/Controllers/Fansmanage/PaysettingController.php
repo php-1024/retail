@@ -37,6 +37,7 @@ class PaysettingController extends Controller
         $res = WechatAuthorization::getAuthInfo(["organization_id"=>3],["authorizer_appid"]);
 
 
+        dump($res);
 
         return view('Fansmanage/Paysetting/wechat_setting', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
