@@ -25,8 +25,7 @@ class WechatApiCheck
                 break;
             case "api/wechatApi/category"://检测店铺分类提交数据
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
-            case "api/wechatApi/address"://检测店铺购物车列表提交数据
-                $re = $this->checkStoreId($request);
+                $re = $this->checkStoreIdAndFansmanageId($request);
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/shopping_cart_add"://检测店铺购物车商品添加提交数据
@@ -36,6 +35,10 @@ class WechatApiCheck
                 break;
             case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
                 $re = $this->checkFourId($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/wechatApi/address"://检测店铺购物车列表提交数据
+                $re = $this->checkThreeId($request);
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/address_add"://检测添加收货地址提交数据
@@ -90,7 +93,7 @@ class WechatApiCheck
     /**
      * 店铺分类列表数据提交检测
      */
-    public function checkStoreId($request)
+    public function checkStoreIdAndFansmanageId($request)
     {
         if (empty($request->input('fansmanage_id'))) {
             return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
@@ -100,6 +103,25 @@ class WechatApiCheck
         }
         return self::res(1, $request);
     }
+
+    /**
+     * 店铺分类列表数据提交检测
+     */
+    public function checkThreeId($request)
+    {
+        if (empty($request->input('fansmanage_id'))) {
+            return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('store_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('zerone_user_id'))) {
+            return self::res(0, response()->json(['msg' => '零壹id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+
 
     /**
      * 店铺分类列表数据提交检测

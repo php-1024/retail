@@ -410,12 +410,8 @@ class WechatApiController extends Controller
      */
     public function address(Request $request)
     {
-        // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '7';
+        $zerone_user_id = $request->zerone_user_id;
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
