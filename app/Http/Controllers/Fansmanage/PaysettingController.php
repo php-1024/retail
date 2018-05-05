@@ -112,8 +112,8 @@ class PaysettingController extends Controller
         $validate = \Validator::make($data, $rule, $message);
 
         if (!$validate->passes()) {
-            $res = $validate->errors();
-dd(222);
+            $error_msg = $validate->errors();
+            var_dump($error_msg);
         }
 
         dd(123);
