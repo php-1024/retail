@@ -180,7 +180,7 @@
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                        <input type="hidden" name="_token" value="{{$_token}}" >
+                                        <input type="hidden" name="_token" value="{{csrf_token()}}" >
                                         <input type="hidden" id="edit_pay_info_url" value="fansmanage/ajax/editPayInfo">
                                     </form>
                                 </div>
