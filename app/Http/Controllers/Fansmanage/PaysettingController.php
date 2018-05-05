@@ -57,17 +57,25 @@ class PaysettingController extends Controller
         $route_name = request()->path();
 
 
-        // 检验参数是否存在
-        $error_info = $this->validate(request(), [
+//        // 检验参数是否存在
+//        $error_info = $this->validate(request(), [
+//            'appid' => 'required',
+//            'appsecret' => 'required',
+//            'mchid' => 'required',
+//            'api_key' => 'required',
+//            'apiclient_cert_pem' => 'required',
+//            'apiclient_key_pem' => 'required',
+//        ]);
+
+        $rule = [
             'appid' => 'required',
             'appsecret' => 'required',
             'mchid' => 'required',
             'api_key' => 'required',
             'apiclient_cert_pem' => 'required',
             'apiclient_key_pem' => 'required',
-        ]);
+        ];
 
-        dd("11");
 
         // 获取appid
         $data["appid"] = request()->input('appid');
@@ -88,6 +96,15 @@ class PaysettingController extends Controller
 
 
 
+        $validate = \Validator::make($data, $rule);
+
+
+        if (!$validate->passes()) {
+//            dump( back()->withErrors($validate));
+            dump( back()->parseErrors($validate));
+
+        }
+        dd(111);
 
 
 
