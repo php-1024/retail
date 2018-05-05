@@ -6,6 +6,7 @@ $(function(){
     var store_id=$("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
+    $.showPreloader('加载中');
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
@@ -30,7 +31,6 @@ $(function(){
     		}
 		}
 	);
-    $.showPreloader('加载中');
 	//获取购物车商品
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
@@ -58,10 +58,10 @@ $(function(){
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
                 $cart_list.append(str);
-                $.hidePreloader();
     		}
 		}
 	);
+    $.hidePreloader();
 });
 function cart_list_box(name,price,num) {
     str = '<li>'+
