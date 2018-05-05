@@ -44,34 +44,35 @@ class PaysettingController extends Controller
         return view('Fansmanage/Paysetting/wechat_setting', ["authorize_info" => $authorize_info, "pay_info" => $pay_info, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
+
     /**
      * 编辑微信支付参数检测
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception
      */
-    public function editPayInfo($request)
+    public function editPayInfo()
     { // 中间件产生的管理员数据参数
-        $admin_data = $request->get('admin_data');
+        $admin_data = request()->get('admin_data');
         // 获取当前的页面路由
-        $route_name = $request->path();
+        $route_name = request()->path();
 
         dd(request()->all());
 
 
         // 获取appid
-        $data["appid"] = $request->input('appid');
+        $data["appid"] = request()->input('appid');
         // 获取appsecret
-        $data["appsecret"] = $request->input('appsecret');
+        $data["appsecret"] = request()->input('appsecret');
         // 获取商户号
-        $data["mchid"] = $request->input('mchid');
+        $data["mchid"] = request()->input('mchid');
         // 获取api 密钥
-        $data["api_key"] = $request->input('api_key');
+        $data["api_key"] = request()->input('api_key');
         // 获取商户支付证书
-        $data["apiclient_cert_pem"] = $request->input('apiclient_cert_pem');
+        $data["apiclient_cert_pem"] = request()->input('apiclient_cert_pem');
         // 获取支付证书私钥
-        $data["apiclient_key_pem"] = $request->input('apiclient_key_pem');
+        $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
         // 获取组织id
-        $data["organization_id"] = $organization_id = $request->get('organization_id');
+        $data["organization_id"] = $organization_id = request()->get('organization_id');
 
 
         // 事务处理
