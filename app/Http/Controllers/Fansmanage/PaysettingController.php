@@ -35,14 +35,11 @@ class PaysettingController extends Controller
         $pay_info = [];
         // 获取公众号的信息
         $authorize_info = WechatAuthorization::getAuthInfo(["organization_id" => $fansmanage_id], ["authorizer_appid"]);
-        var_dump($authorize_info);
         // 判断是否已经进行第三方授权
         if (!empty($authorize_info)) {
             // 获取支付参数
             $pay_info = WechatPay::getInfo(["organization_id" => $fansmanage_id], ["appid", "appsecret", "mchid", "api_key", "apiclient_cert_pem", "apiclient_key_pem", "status"]);
         }
-
-
         // 渲染页面
         return view('Fansmanage/Paysetting/wechat_setting', ["authorize_info" => $authorize_info, "pay_info" => $pay_info, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
@@ -112,8 +109,6 @@ class PaysettingController extends Controller
             'appsecret' => 'required',
             'mchid' => 'required',
             'api_key' => 'required',
-            'apiclient_cert_pem' => 'required',
-            'apiclient_key_pem' => 'required',
         ];
 
         $message = [
@@ -122,8 +117,6 @@ class PaysettingController extends Controller
             "appsecret.required" => "appsecret 必须填写",
             "mchid.required" => "mchid 必须填写",
             "api_key.required" => "api_key 必须填写",
-            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
-            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
         ];
 
         $validate = \Validator::make($data, $rule, $message);
