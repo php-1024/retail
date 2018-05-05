@@ -206,6 +206,8 @@
 <script src="{{asset('public/Fansmanage/sweetalert')}}/sweetalert.min.js"></script>
 
 <script type="text/javascript">
+
+
     //弹出文本输入框
     function getEditTextForm() {
         var url = $('#default_reply_text_edit_url').val();
