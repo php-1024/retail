@@ -1,4 +1,3 @@
-    $.showPreloader('加载中');
 $(function(){
     var total_price = 0;//购物车总价格
 
@@ -7,7 +6,7 @@ $(function(){
     var store_id=$("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
-
+    $.showPreloader('加载中');
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
