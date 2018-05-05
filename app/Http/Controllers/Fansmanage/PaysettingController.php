@@ -7,6 +7,7 @@
 namespace App\Http\Controllers\Fansmanage;
 
 use App\Http\Controllers\Controller;
+use App\Models\WechatAuthorization;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -30,9 +31,10 @@ class PaysettingController extends Controller
 
         // 店铺id
         $fansmanage_id = $admin_data['organization_id'];
-        // 查询店铺付款信息设置
+        // 获取公众号的信息
+        $res = WechatAuthorization::getAuthInfo(["organization_id"=>$fansmanage_id]);
 
-        dump($fansmanage_id);
+        dump($res);
 
         return view('Fansmanage/Paysetting/wechat_setting', ['admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
