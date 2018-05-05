@@ -118,7 +118,7 @@ class PaysettingController extends Controller
             foreach ($res as $val) {
                 $error_msg = $val[0];
             }
-            return response()->json(['data' => $error_msg, 'status' => '1']);
+            return response()->json(['data' => $error_msg, 'status' => '0']);
         }
 
         // 事务处理
