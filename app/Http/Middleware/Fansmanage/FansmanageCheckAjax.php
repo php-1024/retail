@@ -217,8 +217,11 @@ class FansmanageCheckAjax
             case "fansmanage/ajax/default_reply_article_edit"://修改关注后图文回复弹窗
             case "fansmanage/ajax/wechat_menu_add"://一键同步到微信菜单
             case "fansmanage/ajax/store_label_add_check"://给粉丝添加标签
-            /**支付管理**/
+            /**公众号管理**/
+
+            /**支付设置**/
             case "fansmanage/ajax/editPayInfo"://编辑微信支付信息
+            /**支付设置**/
 
 
 
