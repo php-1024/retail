@@ -86,7 +86,7 @@
 
                                 </div>
                                 <div class="table-responsive">
-                                    <form class="form-horizontal" method="get">
+                                    <form class="form-horizontal" method="get" id="pay_info">
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">微信支付</label>
                                             <div class="col-sm-8">
@@ -175,11 +175,13 @@
                                         <div class="form-group">
                                             <div class="col-sm-12 col-sm-offset-6">
 
-                                                <button type="button" class="btn btn-success" id="addBtn">保存资料</button>
+                                                <button type="button" class="btn btn-success" onclick="getEditTextForm()">保存资料</button>
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
+                                        <input type="hidden" name="_token" value="{{$_token}}" >
+                                        <input type="hidden" id="edit_pay_info_url" value="fansmanage/ajax/editPayInfo">
                                     </form>
                                 </div>
                             @endif
@@ -210,9 +212,11 @@
 
     //弹出文本输入框
     function getEditTextForm() {
-        var url = $('#default_reply_text_edit_url').val();
-        var token = $('#_token').val();
-        var data = {'_token': token};
+        var target = $("#pay_info");
+        var url = $('#edit_pay_info_url').val();
+        var data = target.serialize();
+
+
         $.post(url, data, function (response) {
             if (response.status == '-1') {
                 swal({
@@ -233,27 +237,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

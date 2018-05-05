@@ -586,6 +586,8 @@ Route::group(['prefix' => 'fansmanage'], function () {
         // 店铺信息修改
         Route::post('fansmanage_edit_check', 'Fansmanage\StoreController@fansmanage_edit_check')->middleware('FansmanageCheckAjax');
 
+        // 微信支付信息提交
+        Route::get('editPayInfo', 'Fansmanage\PaysettingController@editPayInfo')->middleware('FansmanageCheck');
     });
 });
 /**********************粉丝管理系统*********************/
