@@ -120,7 +120,7 @@ class PaysettingController extends Controller
         DB::beginTransaction();
         try {
 
-            WechatPay::insertData($data, ["organization_id" => $organization_id]);
+            WechatPay::insertData($data,"update_create" ,["organization_id" => $organization_id]);
 
             // 添加操作日志
             if ($admin_data['is_super'] == 1) {
