@@ -73,17 +73,14 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
                                         <div class="col-sm-8">
                                             <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1"
-                                                           value="option1" checked>打开
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
                                                 </label>
                                             </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2"
-                                                           value="option2">关闭
-                                                </label>
-                                            </div>
+
 
                                         </div>
                                     </div>
