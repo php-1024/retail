@@ -59,7 +59,7 @@ class PaysettingController extends Controller
 
         // 检验参数是否存在
         $error_info = $this->validate(request(), [
-            'appid' => 'required|unique:posts|max:255',
+            'appid' => 'required',
         ]);
 
         dd($error_info);
