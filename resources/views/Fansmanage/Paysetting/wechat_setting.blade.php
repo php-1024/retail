@@ -83,7 +83,7 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">商户支付证书(apiclient_cert.pem)</label>
                                         <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_cert"></textarea>
-                                            <p class="help-block">Example block-level help text here.</p>
+                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 apiclient_cert.pem 用记事本打开并复制文件内容, 填入以上文本框内</p>
                                         </div>
                                     </div>
 
@@ -92,6 +92,7 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">支付证书私钥(apiclient_key.pem)</label>
                                         <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_key"></textarea>
+                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 apiclient_cert.pem 用记事本打开并复制文件内容, 填入以上文本框内</p>
                                         </div>
                                     </div>
 
