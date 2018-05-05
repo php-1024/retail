@@ -435,8 +435,11 @@ class WechatApiController extends Controller
             // 手机号码
             'mobile' => $address['mobile'],
         ];
+        // 运费模板
         $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
-
+        foreach ($dispatch as $key => $value) {
+         print_r($value);
+        }exit;
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address_info, 'dispatch_info' => $dispatch]];
         return response()->json($data);
     }
