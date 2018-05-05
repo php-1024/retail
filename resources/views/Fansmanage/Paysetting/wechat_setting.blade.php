@@ -108,7 +108,8 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" >应用ID(AppId)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="{{$pay_info["appid"]}}">
+
+                                                <input type="text" class="form-control" value="@if($pay_info["appid"]){{$pay_info["appid"]}}@endif">
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -117,7 +118,7 @@
                                             <label class="col-sm-2 control-label"
                                                    >应用密钥(AppSecret)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}">
+                                                <input type="text" class="form-control" value="@if($pay_info["appsecret"]){{$pay_info["appsecret"]}}@endif">
                                             </div>
                                         </div>
 
@@ -126,7 +127,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" >商户号(MchId)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}">
+                                                <input type="text" class="form-control" value="@if($pay_info["mchid"]){{$pay_info["mchid"]}}@endif">
                                             </div>
                                         </div>
 
@@ -135,7 +136,7 @@
                                             <label class="col-sm-2 control-label"
                                                    >Api密钥(paySignKey)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}">
+                                                <input type="text" class="form-control" value="@if($pay_info["api_key"]){{$pay_info["api_key"]}}@endif">
                                             </div>
                                         </div>
 
