@@ -88,7 +88,7 @@
                                 <div class="table-responsive">
                                     <form class="form-horizontal" method="get">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
+                                            <label class="col-sm-2 control-label" >微信支付</label>
                                             <div class="col-sm-8">
 
                                                 <label class="radio-inline">
@@ -106,44 +106,42 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="input-id-1">应用ID(AppId)</label>
+                                            <label class="col-sm-2 control-label" >应用ID(AppId)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="input-id-1" value=""
-                                                       disabled="disabled">
+                                                <input type="text" class="form-control" value="{{$pay_info["appid"]}}">
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-id-1">应用密钥(AppSecret)</label>
+                                                   >应用密钥(AppSecret)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="input-id-1" value=""
-                                                       disabled="disabled">
+                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}">
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="input-id-1">商户号(MchId)</label>
+                                            <label class="col-sm-2 control-label" >商户号(MchId)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="input-id-1" value="">
+                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}">
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-id-1">Api密钥(paySignKey)</label>
+                                                   >Api密钥(paySignKey)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="input-id-1" value="">
+                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}">
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" for="input-id-1">商户支付证书(apiclient_cert.pem)</label>
+                                            <label class="col-sm-2 control-label" >商户支付证书(apiclient_cert.pem)</label>
                                             <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_cert"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
@@ -156,7 +154,7 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"
-                                                   for="input-id-1">支付证书私钥(apiclient_key.pem)</label>
+                                                   >支付证书私钥(apiclient_key.pem)</label>
                                             <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_key"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
