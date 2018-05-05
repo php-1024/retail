@@ -91,7 +91,10 @@ class PaysettingController extends Controller
         // 获取组织id
         $data["organization_id"] = $organization_id = request()->get('organization_id');
 
-
+        $res = $this->validateMsg($data);
+        if(!empty($res)){
+            return $res;
+        }
 
 
         // 事务处理
@@ -134,7 +137,7 @@ class PaysettingController extends Controller
             'apiclient_key_pem' => 'required',
         ];
         $message = [
-            "organization_id.required" => "organization_id 必须填写",
+            "organization_id.required" => "organization_id 必须存在",
             "appid.required" => "appid 必须填写",
             "appsecret.required" => "appsecret 必须填写",
             "mchid.required" => "mchid 必须填写",
