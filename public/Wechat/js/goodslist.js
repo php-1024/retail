@@ -7,7 +7,7 @@ $(function(){
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
     $.showPreloader();
-    
+
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
@@ -44,7 +44,6 @@ $(function(){
     		if (json.status == 1) {
                 var str = "";
                 for (var i = 0; i < json.data.goods_list.length; i++) {
-                    console.log(json.data.goods_list[i].goods_name);
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
@@ -59,6 +58,18 @@ $(function(){
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
                 $cart_list.append(str);
+    		}
+		}
+	);
+    //获取商品列表
+    var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+    $.post(
+    	goodslist_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    	function(json){
+            console.log(json);
+    		if (json.status == 1) {
+
     		}
 		}
 	);
