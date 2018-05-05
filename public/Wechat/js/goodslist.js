@@ -4,11 +4,11 @@ $(function(){
     var store_id=$("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
+    $.showPreloader('加载中');
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
-            $.showPreloader('加载中');
     		if (json.status == 1) {
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
@@ -68,7 +68,6 @@ function cart_list_box(name) {
 }
 //隐藏alert
 $("#alert").click(function(e){
-    return;
     //stopPropagation(e);
     if(!$(e.target).is(".popup_alert_hook *") && !$(e.target).is(".popup_alert_hook")){
         $(".popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
@@ -76,7 +75,7 @@ $("#alert").click(function(e){
               $(".popup_alert").css({display: 'none'});
          },250);
     }
-})
+});
 //因为冒泡了，会执行到下面的方法。
 function stopPropagation(e) {
     var ev = e || window.event;
