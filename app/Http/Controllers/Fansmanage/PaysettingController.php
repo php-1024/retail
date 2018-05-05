@@ -76,9 +76,6 @@ class PaysettingController extends Controller
             'apiclient_key_pem' => 'required',
         ];
 
-        $validate = \Validator::make(request(), $rule);
-
-        dd($validate);
 
         // 获取appid
         $data["appid"] = request()->input('appid');
@@ -99,6 +96,9 @@ class PaysettingController extends Controller
 
 
 
+        $validate = \Validator::make($data, $rule);
+
+        dd($validate);
 
 
 
