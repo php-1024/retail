@@ -74,10 +74,14 @@
                                         <div class="col-sm-8">
                                             <div class="radio">
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                                           value="option1" checked>打开
                                                 </label>
+                                            </div>
+                                            <div class="radio">
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1"
+                                                           value="option1" checked>打开
                                                 </label>
                                             </div>
 
