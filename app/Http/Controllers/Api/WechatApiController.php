@@ -538,9 +538,60 @@ class WechatApiController extends Controller
     }
 
     /**
-     * 查询用户默认取货信息
+     * 查询用户地址信息列表
      */
     public function address_list(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 省份id
+        $province_id = $request->province_id;
+        // 省份名称
+        $province_name = $request->province_name;
+        // 城市ID
+        $city_id = $request->city_id;
+        // 城市名称
+        $city_name = $request->city_name;
+        // 地区ID
+        $district_id = $request->district_id;
+        // 地区名称
+        $district_name = $request->district_name;
+        // 详细地址
+        $address = $request->address;
+        // 收货人真实姓名
+        $realname = $request->realname;
+        // 手机号码
+        $mobile = $request->mobile;
+        // 默认收货地址 1为默认
+        $status = $request->status?'1':'0';
+        // 如果没传值，查询是否设置有地址，没有的话为默认地址
+
+        // 数据处理
+        $editData = [
+            'province_id' => $province_id,
+            'province_name' => $province_name,
+            'city_id' => $city_id,
+            'city_name' => $city_name,
+            'district_id' => $district_id,
+            'district_name' => $district_name,
+            'address' => $address,
+            'realname' => $realname,
+            'mobile' => $mobile,
+            'status' => $status
+        ];
+
+        $address_id = SimpleAddress::editAddress([['id',$address_id]],$editData);
+
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_id' => $address_id]];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 修改用户收货地址信息
+     */
+    public function address_edit(Request $request)
     {
 
         // 用户零壹id

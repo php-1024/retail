@@ -48,9 +48,14 @@ class WechatApiCheck
             case "api/wechatApi/selftake"://用户默认取货信息
             case "api/wechatApi/address_list"://检测添加收货地址提交数据
             case "api/wechatApi/selftake_list"://检测添加收货地址提交数据
+                $re = $this->checkAddressEdit($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/wechatApi/address_edit"://检测添加收货地址提交数据
                 $re = $this->checkZeroneUserId($request);
                 return self::format_response($re, $next);
                 break;
+
             case "api/wechatApi/selftake_add"://检测添加取货信息提交数据
                 $re = $this->checkSelftakeAdd($request);
                 return self::format_response($re, $next);
@@ -211,6 +216,45 @@ class WechatApiCheck
         }
         return self::res(1, $request);
     }
+
+    /**
+     * 检测用户收货地址添加提交数据
+     */
+    public function checkAddressEdit($request)
+    {
+        if (empty($request->input('address_id'))) {
+            return self::res(0, response()->json(['msg' => '地址id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('province_id'))) {
+            return self::res(0, response()->json(['msg' => '省份id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('province_name'))) {
+            return self::res(0, response()->json(['msg' => '省份名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('city_id'))) {
+            return self::res(0, response()->json(['msg' => '城市id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('city_name'))) {
+            return self::res(0, response()->json(['msg' => '城市名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('district_id'))) {
+            return self::res(0, response()->json(['msg' => '地区id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('district_name'))) {
+            return self::res(0, response()->json(['msg' => '地区名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('address'))) {
+            return self::res(0, response()->json(['msg' => '详细地址不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['msg' => '收货人真实姓名不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
 
     /**
      * 检测零壹id
