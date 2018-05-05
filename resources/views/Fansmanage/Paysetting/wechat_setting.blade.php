@@ -81,7 +81,7 @@
 
                                                 <label class="radio-inline">
                                                     <input type="radio" name="optionsRadios" id="optionsRadios1"
-                                                           value="option1" checked>打开
+                                                           value="option1">关闭
                                                 </label>
                                             </div>
 
