@@ -97,7 +97,7 @@
 
 
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="status" value="0" @if($pay_info["status"] == 1) checked @endif>关闭
+                                                    <input type="radio" name="status" value="0" @if($pay_info["status"] == 0) checked @endif>关闭
                                                 </label>
                                             </div>
                                         </div>
