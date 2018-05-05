@@ -1,8 +1,8 @@
 $(function(){
-	//获取goods分类列表
-    var fansmanage_id=$("#fansmanage_id").val();
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
-    var store_id=$("#store_id").val();
+    var store_id=$("#store_id").val();//店铺ID
+	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
 	$.showPreloader('加载中');
     $.post(
@@ -30,16 +30,18 @@ $(function(){
     		}
 		}
 	);
-	//获取商品列表
-	var goods_list_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+	//获取购物车商品
+	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
+    var shop_user_id=$("#shop_user_id").val();//用户店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
     $.post(
-    	goods_list_url,
-        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    	cart_list_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
+            console.log(json);
     		if (json.status == 1) {
-    			console.log(json);
+
     		}
-			$.hidePreloader();
 		}
 	);
 });
