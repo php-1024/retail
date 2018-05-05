@@ -55,7 +55,7 @@ class WechatApiCheck
                 $re = $this->checkZeroneUserId($request);
                 return self::format_response($re, $next);
                 break;
-            
+
             case "api/wechatApi/selftake_add"://检测添加取货信息提交数据
                 $re = $this->checkSelftakeAdd($request);
                 return self::format_response($re, $next);
