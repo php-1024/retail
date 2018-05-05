@@ -60,9 +60,16 @@ class PaysettingController extends Controller
         // 检验参数是否存在
         $error_info = $this->validate(request(), [
             'appid' => 'required',
+            'appsecret' => 'required',
+            'mchid' => 'required',
+            'api_key' => 'required',
+            'apiclient_cert_pem' => 'required',
+            'apiclient_key_pem' => 'required',
+        ],[
+            "appid.required" => "应用ID 必须填写",
         ]);
 
-        dd($error_info);
+        dd("11");
 
         // 获取appid
         $data["appid"] = request()->input('appid');
