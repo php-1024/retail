@@ -92,6 +92,7 @@ class PaysettingController extends Controller
 
             DB::commit();
         } catch (\Exception $e) {
+            var_dump($e->getMessage());
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '编辑微信支付信息失败，请检查', 'status' => '0']);
