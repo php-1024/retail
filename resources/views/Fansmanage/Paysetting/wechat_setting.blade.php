@@ -21,6 +21,14 @@
         .sub-well {
             margin-left: 12px;
         }
+
+        .well {
+            border-radius: 0
+        }
+
+        .wrapper {
+            padding-top: 0
+        }
     </style>
 </head>
 <body class="">
