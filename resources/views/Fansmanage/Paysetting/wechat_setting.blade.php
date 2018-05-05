@@ -142,7 +142,7 @@
                                             >Api密钥(paySignKey)</label>
                                             <div class="col-sm-8">
                                                 <input type="text" class="form-control"
-                                                       value="@if($pay_info["api_key"]){{$pay_info["api_key"]}}@endif">
+                                                       value="@if(!empty($pay_info["api_key"])){{$pay_info["api_key"]}}@endif">
                                             </div>
                                         </div>
 
