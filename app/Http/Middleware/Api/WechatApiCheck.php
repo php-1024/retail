@@ -25,26 +25,42 @@ class WechatApiCheck
                 break;
             case "api/wechatApi/category"://检测店铺分类提交数据
             case "api/wechatApi/goods_list"://检测店铺分类提交数据
-            case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
-            case "api/wechatApi/address"://检测店铺购物车列表提交数据
-                $re = $this->checkStoreId($request);
+                $re = $this->checkStoreIdAndFansmanageId($request);
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/shopping_cart_add"://检测店铺购物车商品添加提交数据
             case "api/wechatApi/shopping_cart_reduce"://检测店铺购物车商品减少提交数据
-                $re = $this->checkShoppingCartAdd($request);
+                $re = $this->checkShoppingCartAddAndReduce($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
+                $re = $this->checkFourId($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/wechatApi/address"://检测店铺购物车列表提交数据
+                $re = $this->checkThreeId($request);
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/address_add"://检测添加收货地址提交数据
                 $re = $this->checkAddressAdd($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/wechatApi/address_edit"://检测编辑收货地址提交数据
+                $re = $this->checkAddressEdit($request);
+                return self::format_response($re, $next);
+                break;
+            case "api/wechatApi/address_delete"://检测编辑收货地址提交数据
+                $re = $this->checkAddressDelete($request);
+                return self::format_response($re, $next);
+                break;
+
             case "api/wechatApi/selftake"://用户默认取货信息
             case "api/wechatApi/address_list"://检测添加收货地址提交数据
             case "api/wechatApi/selftake_list"://检测添加收货地址提交数据
                 $re = $this->checkZeroneUserId($request);
                 return self::format_response($re, $next);
                 break;
+
             case "api/wechatApi/selftake_add"://检测添加取货信息提交数据
                 $re = $this->checkSelftakeAdd($request);
                 return self::format_response($re, $next);
@@ -87,7 +103,7 @@ class WechatApiCheck
     /**
      * 店铺分类列表数据提交检测
      */
-    public function checkStoreId($request)
+    public function checkStoreIdAndFansmanageId($request)
     {
         if (empty($request->input('fansmanage_id'))) {
             return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
@@ -99,9 +115,47 @@ class WechatApiCheck
     }
 
     /**
-     * 检测店铺购物车商品添加提交数据
+     * 店铺分类列表数据提交检测
      */
-    public function checkShoppingCartAdd($request)
+    public function checkThreeId($request)
+    {
+        if (empty($request->input('fansmanage_id'))) {
+            return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('store_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('zerone_user_id'))) {
+            return self::res(0, response()->json(['msg' => '零壹id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+
+    /**
+     * 店铺分类列表数据提交检测
+     */
+    public function checkFourId($request)
+    {
+        if (empty($request->input('fansmanage_id'))) {
+            return self::res(0, response()->json(['msg' => '联盟主id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('store_id'))) {
+            return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('user_id'))) {
+            return self::res(0, response()->json(['msg' => '用户id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('zerone_user_id'))) {
+            return self::res(0, response()->json(['msg' => '零壹id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+    /**
+     * 检测店铺购物车商品添加或减少提交数据
+     */
+    public function checkShoppingCartAddAndReduce($request)
     {
         if (empty($request->input('store_id'))) {
             return self::res(0, response()->json(['msg' => '店铺id不能为空', 'status' => '0', 'data' => '']));
@@ -169,6 +223,57 @@ class WechatApiCheck
     }
 
     /**
+     * 检测用户收货地址编辑提交数据
+     */
+    public function checkAddressEdit($request)
+    {
+        if (empty($request->input('address_id'))) {
+            return self::res(0, response()->json(['msg' => '地址id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('province_id'))) {
+            return self::res(0, response()->json(['msg' => '省份id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('province_name'))) {
+            return self::res(0, response()->json(['msg' => '省份名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('city_id'))) {
+            return self::res(0, response()->json(['msg' => '城市id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('city_name'))) {
+            return self::res(0, response()->json(['msg' => '城市名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('district_id'))) {
+            return self::res(0, response()->json(['msg' => '地区id不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('district_name'))) {
+            return self::res(0, response()->json(['msg' => '地区名称不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('address'))) {
+            return self::res(0, response()->json(['msg' => '详细地址不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('realname'))) {
+            return self::res(0, response()->json(['msg' => '收货人真实姓名不能为空', 'status' => '0', 'data' => '']));
+        }
+        if (empty($request->input('mobile'))) {
+            return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+    /**
+     * 检测删除用户收货地址提交数据
+     */
+    public function checkAddressDelete($request)
+    {
+        if (empty($request->input('address_id'))) {
+            return self::res(0, response()->json(['msg' => '地址id不能为空', 'status' => '0', 'data' => '']));
+        }
+        return self::res(1, $request);
+    }
+
+
+
+    /**
      * 检测零壹id
      */
     public function checkZeroneUserId($request)
@@ -196,8 +301,8 @@ class WechatApiCheck
         if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -220,8 +325,8 @@ class WechatApiCheck
         if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -240,8 +345,6 @@ class WechatApiCheck
         }
         return self::res(1, $request);
     }
-
-
 
 
     /**

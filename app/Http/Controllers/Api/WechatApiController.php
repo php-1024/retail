@@ -6,6 +6,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\DispatchProvince;
 use App\Models\SimpleAddress;
 use App\Models\Dispatch;
 use App\Models\Organization;
@@ -46,7 +47,7 @@ class WechatApiController extends Controller
 //        print_r($return['result']);exit;
 //        echo $return['result']['addressComponent']['province'];exit;
         // 精度维度转换（wgs80转gcj02）
-        $re = $this->wgs84togcj02($lng,$lat);
+        $re = $this->wgs84togcj02($lng, $lat);
 
         // 查询条件
         $where[] = ['parent_id', $fansmannage_id];
@@ -74,11 +75,11 @@ class WechatApiController extends Controller
         // 冒泡距离排序
         $Orgdata = $this->order($Orgdata);
         foreach ($Orgdata as $k => $v) {
-            $storelist[$k]['id']= $v['id'];
-            $storelist[$k]['name']= $v['organization_name'];
-            $storelist[$k]['distance']= $v['distance'];
-            $storelist[$k]['logo']= $v['organization_simpleinfo']['simple_logo'];
-            $storelist[$k]['address']= $v['organization_simpleinfo']['simple_address'];
+            $storelist[$k]['id'] = $v['id'];
+            $storelist[$k]['name'] = $v['organization_name'];
+            $storelist[$k]['distance'] = $v['distance'];
+            $storelist[$k]['logo'] = $v['organization_simpleinfo']['simple_logo'];
+            $storelist[$k]['address'] = $v['organization_simpleinfo']['simple_address'];
         }
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $storelist]];
@@ -265,11 +266,9 @@ class WechatApiController extends Controller
     {
 
         // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
+        $user_id = $request->user_id;
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '1';
+        $zerone_user_id = $request->zerone_user_id;
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
@@ -412,22 +411,41 @@ class WechatApiController extends Controller
      */
     public function address(Request $request)
     {
-        // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '7';
+        $zerone_user_id = $request->zerone_user_id;
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
         $store_id = $request->store_id;
-
-
+        // 查询默认收货地址
         $address = SimpleAddress::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        // 数据处理
+        $address_info = [
+            // ID
+            'id' => $address['id'],
+            // 城市
+            'province_name' => $address['province_name'],
+            // 区县
+            'city_name' => $address['city_name'],
+            // 省份
+            'district_name' => $address['district_name'],
+            // 详细地址
+            'address' => $address['address'],
+            // 收货人姓名
+            'realname' => $address['realname'],
+            // 手机号码
+            'mobile' => $address['mobile'],
+        ];
+        // 运费模板
         $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
+        $dispatch_info = [];
+        if ($dispatch->toArray()) {
+            foreach ($dispatch->toArray() as $key => $value) {
+                $dispatch_info[$key] = DispatchProvince::getList([['dispatch_id', $value['id']]], '', 'id', 'DESC', ['dispatch_id', 'province_id', 'first_weight', 'additional_weight', 'freight', 'renewal']);
+            }
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
+        }
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address_info, 'dispatch_info' => $dispatch_info]];
         return response()->json($data);
     }
 
@@ -440,8 +458,20 @@ class WechatApiController extends Controller
         $zerone_user_id = $request->zerone_user_id;
         // 查询默认取货信息
         $selftake = SimpleSelftake::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        // 数据处理
+        $selftakeinfo = [
+            // id
+            'id' => $selftake['id'],
+            // 性别
+            'sex' => $selftake['sex'],
+            // 手机号
+            'mobile' => $selftake['mobile'],
+            // 真实姓名
+            'realname' => $selftake['realname'],
+        ];
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftake]];
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['selftake_info' => $selftakeinfo]];
+
         return response()->json($data);
     }
 
@@ -508,17 +538,90 @@ class WechatApiController extends Controller
     }
 
     /**
-     * 查询用户默认取货信息
+     * 查询用户地址信息列表
      */
     public function address_list(Request $request)
     {
-
         // 用户零壹id
         $zerone_user_id = $request->zerone_user_id;
         // 查询收货地址列表
         $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 修改用户收货地址信息
+     */
+    public function address_edit(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+        // 省份id
+        $province_id = $request->province_id;
+        // 省份名称
+        $province_name = $request->province_name;
+        // 城市ID
+        $city_id = $request->city_id;
+        // 城市名称
+        $city_name = $request->city_name;
+        // 地区ID
+        $district_id = $request->district_id;
+        // 地区名称
+        $district_name = $request->district_name;
+        // 详细地址
+        $address = $request->address;
+        // 收货人真实姓名
+        $realname = $request->realname;
+        // 手机号码
+        $mobile = $request->mobile;
+        // 默认收货地址 1为默认
+        $status = $request->status ? '1' : '0';
+        // 如果没传值，查询是否设置有地址，没有的话为默认地址
+
+        // 数据处理
+        $editData = [
+            'province_id' => $province_id,
+            'province_name' => $province_name,
+            'city_id' => $city_id,
+            'city_name' => $city_name,
+            'district_id' => $district_id,
+            'district_name' => $district_name,
+            'address' => $address,
+            'realname' => $realname,
+            'mobile' => $mobile,
+            'status' => $status
+        ];
+
+        SimpleAddress::editAddress([['id', $address_id]], $editData);
+
+
+        $data = ['status' => '1', 'msg' => '编辑成功', 'data' => ['address_id' => $address_id]];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 删除用户收货地址信息
+     */
+    public function address_delete(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+        // 删除数据
+        SimpleAddress::deleteAddress([['id', $address_id]]);
+
+        $data = ['status' => '1', 'msg' => '删除成功', 'data' => ['address_id' => $address_id]];
 
         return response()->json($data);
     }
@@ -600,17 +703,8 @@ class WechatApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
 
-        DB::beginTransaction();
-        try {
-            // 修改用户自取信息
-            SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
-            // 提交事务
-            DB::commit();
-        } catch (Exception $e) {
-            // 事件回滚
-            DB::rollBack();
-            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
-        }
+        SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
+
         $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['self_take_id' => $self_take_id]];
         return response()->json($data);
     }

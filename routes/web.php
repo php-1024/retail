@@ -456,6 +456,7 @@ Route::group(['prefix' => 'fansmanage'], function () {
         Route::get('default_reply', 'Fansmanage\MessageController@default_reply')->middleware('FansmanageCheck');//默认回复
     });
 
+
     //公众号管理--菜单管理
     Route::group(['prefix' => 'wechatmenu'], function () {
         Route::get('defined_menu', 'Fansmanage\WechatmenuController@defined_menu')->middleware('FansmanageCheck');//自定义菜单管理页面
@@ -988,6 +989,8 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('selftake', 'Api\WechatApiController@selftake')->middleware('WechatApiCheck');//用户默认取货信息
         Route::any('address_add', 'Api\WechatApiController@address_add')->middleware('WechatApiCheck');//添加收货地址
         Route::any('address_list', 'Api\WechatApiController@address_list')->middleware('WechatApiCheck');//收货地址列表
+        Route::any('address_edit', 'Api\WechatApiController@address_edit')->middleware('WechatApiCheck');//编辑用户收货地址
+        Route::any('address_delete', 'Api\WechatApiController@address_delete')->middleware('WechatApiCheck');//删除用户收货地址
         Route::any('selftake_add', 'Api\WechatApiController@selftake_add')->middleware('WechatApiCheck');//用户添加取货信息
         Route::any('selftake_list', 'Api\WechatApiController@selftake_list')->middleware('WechatApiCheck');//用户取货信息列表
         Route::any('selftake_edit', 'Api\WechatApiController@selftake_edit')->middleware('WechatApiCheck');//编辑用户取货信息
