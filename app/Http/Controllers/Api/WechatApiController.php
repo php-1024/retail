@@ -608,6 +608,25 @@ class WechatApiController extends Controller
     }
 
     /**
+     * 删除用户收货地址信息
+     */
+    public function address_delete(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+        // 删除数据
+        SimpleAddress::deleteAddress([['id', $address_id]]);
+
+        $data = ['status' => '1', 'msg' => '删除成功', 'data' => ['address_id' => $address_id]];
+
+        return response()->json($data);
+    }
+
+    /**
      * 添加用户取货信息
      */
     public function selftake_add(Request $request)
