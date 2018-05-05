@@ -67,14 +67,21 @@ $(function(){
     	goodslist_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
+            var str = "";
             console.log(json);
     		if (json.status == 1) {
-
+                for (var i = 0; i < json.data.goodslist.length; i++) {
+                    str += goods_list_box(json.data.goodslist[i].category_name);
+                }
+                var goodslist = $("#goodslist");
+                goodslist.empty();
+                goodslist.append(str);
     		}
 		}
 	);
     $.hidePreloader();
 });
+//购物车列表
 function cart_list_box(name,price,num) {
     str = '<li>'+
         '<span>'+name+'</span>'+
@@ -87,6 +94,47 @@ function cart_list_box(name,price,num) {
             '</div>'+
         '</div>'+
     '</li>';
+    return str;
+}
+//商品列表
+function goods_list_box(name,price,num) {
+    str = '<div class="gl_item">'+
+        '<div class="gl_item_fl">'+
+            '<div class="goods_img">'+
+                '<img src="">'+
+            '</div>'+
+            '<div class="goods_right">'+
+                '<div class="goods_right_item">'+
+                    '<section class="gri_center">'+
+                        '<h3 class="goods_tltie"><span>同城送花 向日葵百合混搭</span></h3>'+
+                    '</section>'+
+                    '<section class="gri_center">'+
+                        '<p class="goods_details">9朵向日葵 阳光款</p>'+
+                    '</section>'+
+                    '<section class="gri_center">'+
+                        '<p class="goods_distance">'+
+                            '<span>距离</span>'+
+                            '<span><</span>'+
+                            '<span>920m</span>'+
+                            '<span>|</span>'+
+                            '<span>库存：</span>'+
+                            '<span>10</span>'+
+                        '</p>'+
+                    '</section>'+
+                    '<section class="gri_center gri_center_juzhong">'+
+                        '<div class="goods_price">'+
+                            '<span>&yen;158.00</span>'+
+                        '</div>'+
+                        '<div class="goods_btn cart_border">'+
+                            '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
+                            '<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>'+
+                            '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+                        '</div>'+
+                    '</section>'+
+                '</div>'+
+            '</div>'+
+        '</div>'+
+    '</div>'
     return str;
 }
 //隐藏alert

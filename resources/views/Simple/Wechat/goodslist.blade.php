@@ -35,7 +35,7 @@
 					<label class="icon_scavenging"></label>
 			    </div>
 			</div>
-			<div class="goodslist">
+			<div class="goodslist" id="goodslist">
 				<div class="gl_item">
 					<div class="gl_item_fl">
 						<div class="goods_img">
