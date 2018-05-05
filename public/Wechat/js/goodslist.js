@@ -72,7 +72,7 @@ $(function(){
     		if (json.status == 1) {
                 for (var i = 0; i < json.data.goodslist.length; i++) {
                     str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
-                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
+                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0]);
                 }
                 var goodslist = $("#goodslist");
                 goodslist.empty();
