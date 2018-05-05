@@ -1,5 +1,5 @@
 $(function(){
-    var total_price;
+    var total_price = 0;
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
