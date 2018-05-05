@@ -58,6 +58,7 @@
                                 </div>
 
                             </div>
+
                             <div class="table-responsive">
                                 <form class="form-horizontal" method="get">
 
@@ -71,7 +72,7 @@
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">PaySignKey</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">Api密钥</label>
                                         <div class="col-sm-8">
                                             <input type="text" class="form-control" id="input-id-1" value="">
                                         </div>
@@ -79,11 +80,22 @@
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">秘钥</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">商户支付证书(apiclient_cert.pem)</label>
                                         <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                            <textarea class="form-control" id="input-id-1" name="apiclient_cert"></textarea>
                                         </div>
                                     </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">支付证书私钥(apiclient_key.pem)</label>
+                                        <div class="col-sm-8">
+                                            <textarea class="form-control" id="input-id-1" name="apiclient_key"></textarea>
+                                        </div>
+                                    </div>
+
+
+
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
