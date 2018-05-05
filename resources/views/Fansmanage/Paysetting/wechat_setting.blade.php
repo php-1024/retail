@@ -56,7 +56,7 @@
                                     <p class="text-danger">支付授权目录: https://o2o.01nnt.com/wechat/</p>
                                     <p class="text-danger">支付请求实例: https://o2o.01nnt.com/wechat/pay.php/</p>
                                     <p class="text-danger">共享收货地址: 选择"是"</p>
-                                    <p class="text-danger">3.一定要把微信网页授权的地址设置为: o2o.01nnt.com</p>
+                                    <p class="text-danger">3.注意要把微信网页授权的地址设置为: o2o.01nnt.com</p>
                                 </div>
 
                             </div>
