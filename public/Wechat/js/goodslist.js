@@ -71,7 +71,7 @@ $(function(){
             console.log(json);
     		if (json.status == 1) {
                 for (var i = 0; i < json.data.goodslist.length; i++) {
-                    str += goods_list_box(json.data.goodslist[i].category_name);
+                    str += goods_list_box(json.data.goodslist[i].name);
                 }
                 var goodslist = $("#goodslist");
                 goodslist.empty();
@@ -106,7 +106,7 @@ function goods_list_box(name,price,num) {
             '<div class="goods_right">'+
                 '<div class="goods_right_item">'+
                     '<section class="gri_center">'+
-                        '<h3 class="goods_tltie"><span>同城送花 向日葵百合混搭</span></h3>'+
+                        '<h3 class="goods_tltie"><span>'+name+'</span></h3>'+
                     '</section>'+
                     '<section class="gri_center">'+
                         '<p class="goods_details">9朵向日葵 阳光款</p>'+
