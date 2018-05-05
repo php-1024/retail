@@ -542,6 +542,21 @@ class WechatApiController extends Controller
      */
     public function address_list(Request $request)
     {
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询收货地址列表
+        $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 修改用户收货地址信息
+     */
+    public function address_edit(Request $request)
+    {
         // 地址id
         $address_id = $request->address_id;
         // 省份id
@@ -583,23 +598,7 @@ class WechatApiController extends Controller
         $address_id = SimpleAddress::editAddress([['id',$address_id]],$editData);
 
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_id' => $address_id]];
-
-        return response()->json($data);
-    }
-
-    /**
-     * 修改用户收货地址信息
-     */
-    public function address_edit(Request $request)
-    {
-
-        // 用户零壹id
-        $zerone_user_id = $request->zerone_user_id;
-        // 查询收货地址列表
-        $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
-
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
+        $data = ['status' => '1', 'msg' => '编辑成功', 'data' => ['address_id' => $address_id]];
 
         return response()->json($data);
     }
