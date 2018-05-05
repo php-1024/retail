@@ -83,6 +83,7 @@
                                         <label class="col-sm-2 control-label" for="input-id-1">商户支付证书(apiclient_cert.pem)</label>
                                         <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_cert"></textarea>
+                                            <p class="help-block">Example block-level help text here.</p>
                                         </div>
                                     </div>
 
