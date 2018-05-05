@@ -77,6 +77,36 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
+                                        <div class="col-sm-8">
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                                                    Option two can be something else and selecting it will deselect option one
+                                                </label>
+                                            </div>
+                                            <div class="radio disabled">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                                                    Option three is disabled
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
@@ -149,7 +179,30 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script src="{{asset('public/Fansmanage/sweetalert')}}/sweetalert.min.js"></script>
+
 <script type="text/javascript">
+    //弹出文本输入框
+    function getEditTextForm(){
+        var url = $('#default_reply_text_edit_url').val();
+        var token = $('#_token').val();
+        var data = {'_token':token};
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    window.location.reload();
+                });
+                return;
+            }else{
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>
