@@ -112,7 +112,7 @@
                                         <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_cert"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
-                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 apiclient_cert.pem
+                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 <code>apiclient_cert.pem</code>
                                                 用记事本打开并复制文件内容, 填入以上文本框内</p>
                                         </div>
                                     </div>
@@ -124,7 +124,7 @@
                                         <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_key"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
-                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 apiclient_key.pem
+                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 <code>apiclient_key.pem</code>
                                                 用记事本打开并复制文件内容, 填入以上文本框内</p>
                                         </div>
                                     </div>
