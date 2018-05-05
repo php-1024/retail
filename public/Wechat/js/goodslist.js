@@ -1,17 +1,3 @@
-function cart_list_box(name,price,num) {
-    str = '<li>'+
-        '<span>'+name+'</span>'+
-        '<span>&yen;'+price+'</span>'+
-        '<div class="cart_alert_btn">'+
-            '<div class="goods_btn cart_border">'+
-                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                '<a href="javascript:;" class="cart_box delect_cart_inpt">'+num+'</a>'+
-                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
-            '</div>'+
-        '</div>'+
-    '</li>';
-    return str;
-}
 $(function(){
     var total_price = 0;//购物车总价格
 
@@ -20,7 +6,6 @@ $(function(){
     var store_id=$("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
-    $.showPreloader('加载中');
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
@@ -45,6 +30,7 @@ $(function(){
     		}
 		}
 	);
+    $.showPreloader('加载中');
 	//获取购物车商品
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
@@ -77,6 +63,20 @@ $(function(){
 		}
 	);
 });
+function cart_list_box(name,price,num) {
+    str = '<li>'+
+        '<span>'+name+'</span>'+
+        '<span>&yen;'+price+'</span>'+
+        '<div class="cart_alert_btn">'+
+            '<div class="goods_btn cart_border">'+
+                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt">'+num+'</a>'+
+                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+            '</div>'+
+        '</div>'+
+    '</li>';
+    return str;
+}
 //隐藏alert
 $("#alert").click(function(e){
     //stopPropagation(e);
