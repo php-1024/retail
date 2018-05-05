@@ -113,6 +113,7 @@ class PaysettingController extends Controller
 
         if (!$validate->passes()) {
             $error_msg = $validate->errors();
+            dump($error_msg);
             foreach($error_msg as $val){
                 var_dump($val);
             }
