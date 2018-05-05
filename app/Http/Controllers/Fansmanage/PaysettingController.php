@@ -113,7 +113,7 @@ class PaysettingController extends Controller
 
         if (!$validate->passes()) {
             $res = $validate->errors();
-dd($res);
+dd(222);
         }
 
         dd(123);
