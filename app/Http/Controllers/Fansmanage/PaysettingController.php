@@ -104,6 +104,11 @@ class PaysettingController extends Controller
     }
 
 
+    /**
+     * 支付信息验证规则
+     * @param $data
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function validateMsg($data)
     {
         $rule = [
