@@ -20,6 +20,7 @@ class WechatController extends Controller
      */
     public function display(Request $request)
     {
+        print_r(request()->get("zerone_auth_info"));
         // 获取微信公众号JSSDK 凭证
         $this->getSignPackage();
         // 获取组织id
@@ -37,11 +38,16 @@ class WechatController extends Controller
     {
         $store_id = $request->store_id;
 
+        Session::put('store_id', $store_id);
+
         $organization_name = Organization::getPluck([['id',$store_id]],'organization_name');
 
         Session::put('organization_name', $organization_name);
 
         $fansmanage_id = session("zerone_auth_info.organization_id");
+
+        Session::put('fansmanage_id', $fansmanage_id);
+
         // 渲染页面
         return view('Simple/Wechat/goodslist', ['store_id' => $store_id, 'fansmanage_id' => $fansmanage_id]);
     }
