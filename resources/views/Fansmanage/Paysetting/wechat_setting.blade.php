@@ -108,8 +108,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label" for="input-id-1">应用ID(AppId)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="input-id-1" value=""
-                                                       disabled="disabled">
+                                                <input type="text" class="form-control" value="{{$pay_info["appid"]}}">
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -118,7 +117,7 @@
                                             <label class="col-sm-2 control-label"
                                                    for="input-id-1">应用密钥(AppSecret)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" id="input-id-1" value=""
+                                                <input type="text" class="form-control" value="{{$pay_info["appsecret"]}}"
                                                        disabled="disabled">
                                             </div>
                                         </div>
