@@ -89,10 +89,45 @@ class PaysettingController extends Controller
         // 获取支付证书私钥
         $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
         // 获取组织id
-        $data["organization_id"] = $organization_id = request()->get('organization_id');
+        $data["organization_id"] = $organization_id = $admin_data['organization_id'];
 
 
+        // 验证规则
+        $res = $this->validateMsg($data);
+        if(!empty($res)){
+            return $res;
+        }
+
+        // 事务处理
+        DB::beginTransaction();
+        try {
+            WechatPay::insertData($data, "update_create", ["organization_id" => $organization_id]);
+
+            // 添加操作日志
+            if ($admin_data['is_super'] == 1) {
+                // 超级管理员操作商户的记录
+                OperationLog::addOperationLog('1', $organization_id, '1', $route_name, '编辑微信支付信息成功');
+            } else {
+                OperationLog::addOperationLog('4', $organization_id, $admin_data['id'], $route_name, '编辑微信支付信息成功');
+            }
+
+            DB::commit();
+        } catch (\Exception $e) {
+            var_dump($e->getMessage());
+            exit;
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['data' => '编辑微信支付信息失败，请检查', 'status' => '0']);
+        }
+        // 返回提示
+        return response()->json(['data' => '编辑微信支付信息成功', 'status' => '1']);
+    }
+
+
+    public function validateMsg($data)
+    {
         $rule = [
+            'organization_id' => 'required',
             'appid' => 'required',
             'appsecret' => 'required',
             'mchid' => 'required',
@@ -100,7 +135,9 @@ class PaysettingController extends Controller
             'apiclient_cert_pem' => 'required',
             'apiclient_key_pem' => 'required',
         ];
+
         $message = [
+            "organization_id.required" => "organization_id 必须存在",
             "appid.required" => "appid 必须填写",
             "appsecret.required" => "appsecret 必须填写",
             "mchid.required" => "mchid 必须填写",
@@ -113,36 +150,13 @@ class PaysettingController extends Controller
 
         if (!$validate->passes()) {
             $error_msg = $validate->errors();
-            foreach($error_msg as $val){
-                var_dump($val);
+            $res = json_encode($error_msg, JSON_UNESCAPED_UNICODE);
+            $res = json_decode($res, true);
+            foreach ($res as $val) {
+                $error_msg = $val[0];
             }
-//            var_dump($error_msg);
+            return response()->json(['data' => $error_msg, 'status' => '0']);
         }
-
-        dd(123);
-        // 事务处理
-        DB::beginTransaction();
-        try {
-
-            WechatPay::insertData($data,"update_create" ,["organization_id" => $organization_id]);
-
-            // 添加操作日志
-            if ($admin_data['is_super'] == 1) {
-                // 超级管理员操作商户的记录
-                OperationLog::addOperationLog('1', $organization_id, '1', $route_name, '编辑微信支付信息成功');
-            } else {
-                OperationLog::addOperationLog('4', $organization_id, $admin_data['id'], $route_name, '编辑微信支付信息成功');
-            }
-
-            DB::commit();
-        } catch (\Exception $e) {
-            // 事件回滚
-            DB::rollBack();
-            return response()->json(['data' => '编辑微信支付信息失败，请检查', 'status' => '0']);
-        }
-        // 返回提示
-        return response()->json(['data' => '编辑微信支付信息成功', 'status' => '1']);
     }
-
 }
 
