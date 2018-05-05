@@ -544,8 +544,6 @@ class WechatApiController extends Controller
     {
         // 地址id
         $address_id = $request->address_id;
-        // 用户零壹id
-        $zerone_user_id = $request->zerone_user_id;
         // 省份id
         $province_id = $request->province_id;
         // 省份名称
@@ -565,12 +563,11 @@ class WechatApiController extends Controller
         // 手机号码
         $mobile = $request->mobile;
         // 默认收货地址 1为默认
-        $status = $request->status;
+        $status = $request->status?'1':'0';
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
 
         // 数据处理
         $editData = [
-            'zerone_user_id' => $zerone_user_id,
             'province_id' => $province_id,
             'province_name' => $province_name,
             'city_id' => $city_id,
