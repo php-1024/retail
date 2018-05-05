@@ -542,10 +542,27 @@ class WechatApiController extends Controller
      */
     public function address_list(Request $request)
     {
-        // 地址id
-        $address_id = $request->address_id;
         // 用户零壹id
         $zerone_user_id = $request->zerone_user_id;
+        // 查询收货地址列表
+        $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
+
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
+
+        return response()->json($data);
+    }
+
+    /**
+     * 修改用户收货地址信息
+     */
+    public function address_edit(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
         // 省份id
         $province_id = $request->province_id;
         // 省份名称
@@ -565,12 +582,11 @@ class WechatApiController extends Controller
         // 手机号码
         $mobile = $request->mobile;
         // 默认收货地址 1为默认
-        $status = $request->status;
+        $status = $request->status ? '1' : '0';
         // 如果没传值，查询是否设置有地址，没有的话为默认地址
 
         // 数据处理
         $editData = [
-            'zerone_user_id' => $zerone_user_id,
             'province_id' => $province_id,
             'province_name' => $province_name,
             'city_id' => $city_id,
@@ -583,29 +599,68 @@ class WechatApiController extends Controller
             'status' => $status
         ];
 
-        $address_id = SimpleAddress::editAddress([['id',$address_id]],$editData);
+        SimpleAddress::editAddress([['id', $address_id]], $editData);
 
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_id' => $address_id]];
+        $data = ['status' => '1', 'msg' => '编辑成功', 'data' => ['address_id' => $address_id]];
 
         return response()->json($data);
     }
 
     /**
-     * 修改用户收货地址信息
+     * 删除用户收货地址信息
      */
-    public function address_edit(Request $request)
+    public function address_delete(Request $request)
     {
+        // 地址id
+        $address_id = $request->address_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
 
-        // 用户零壹id
-        $zerone_user_id = $request->zerone_user_id;
-        // 查询收货地址列表
-        $address_list = SimpleAddress::getList([['zerone_user_id', $zerone_user_id]]);
+        // 删除数据
+        SimpleAddress::deleteAddress([['id', $address_id]]);
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_list' => $address_list]];
+        $data = ['status' => '1', 'msg' => '删除成功', 'data' => ['address_id' => $address_id]];
 
         return response()->json($data);
     }
+
+    /**
+     * 设置为默认收货地址
+     */
+    public function address_status(Request $request)
+    {
+        // 地址id
+        $address_id = $request->address_id;
+        // 零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询是否存在
+        if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+
+        DB::beginTransaction();
+        try {
+            $id = SimpleAddress::getPluck([['zerone_user_id', $zerone_user_id],['status','1']],'id');
+            if ($id) {
+                SimpleAddress::editAddress([['id', $id]], ['status' => '0']);
+            }
+            SimpleAddress::editAddress([['id',$address_id]],['status' => '1']);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
+        }
+
+        $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['address_id' => $address_id]];
+
+        return response()->json($data);
+    }
+
 
     /**
      * 添加用户取货信息
@@ -684,17 +739,8 @@ class WechatApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
 
-        DB::beginTransaction();
-        try {
-            // 修改用户自取信息
-            SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
-            // 提交事务
-            DB::commit();
-        } catch (Exception $e) {
-            // 事件回滚
-            DB::rollBack();
-            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
-        }
+        SimpleSelftake::editSelftake([['id', $self_take_id]], ['realname' => $realname, 'sex' => $sex, 'mobile' => $mobile]);
+
         $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['self_take_id' => $self_take_id]];
         return response()->json($data);
     }
@@ -736,6 +782,39 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 设置为默认收货地址
+     */
+    public function selftake_status(Request $request)
+    {
+        // 取货id
+        $self_take_id = $request->self_take_id;
+        // 零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询是否存在
+        if (empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+
+        DB::beginTransaction();
+        try {
+            $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id],['status','1']],'id');
+            if ($id) {
+                SimpleSelftake::editSelftake([['id', $id]], ['status' => '0']);
+            }
+            SimpleSelftake::editSelftake([['id',$self_take_id]],['status' => '1']);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
+        }
+
+        $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['self_take_id' => $self_take_id]];
+
+        return response()->json($data);
+    }
 
     /**
      * WGS84转GCj02(北斗转高德)

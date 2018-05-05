@@ -16,6 +16,20 @@
     <script src="{{asset('public/Fansmanage')}}/js/ie/respond.min.js"></script>
     <script src="{{asset('public/Fansmanage')}}/js/ie/excanvas.js"></script>
     <![endif]-->
+
+    <style>
+        .sub-well {
+            margin-left: 12px;
+        }
+
+        .well {
+            border-radius: 0
+        }
+
+        .wrapper {
+            padding-top: 0
+        }
+    </style>
 </head>
 <body class="">
 <section class="vbox">
@@ -44,68 +58,125 @@
                             <header class="panel-heading">
                                 微信支付设置
                             </header>
-                            <div class="row wrapper">
 
-                                <div class="well">
-                                    <h3>温馨提示</h3>
-                                    <p class="text-danger">1.你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
-                                    <p class="text-danger">
-                                        2.零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
-                                    <p class="text-danger">JS API网页支付参数</p>
-                                    <p class="text-danger">支付授权目录: https://o2o.01nnt.com/wechat/</p>
-                                    <p class="text-danger">支付请求实例: https://o2o.01nnt.com/wechat/pay.php//</p>
-                                    <p class="text-danger">共享收货地址: 选择"是"/</p>
+                            @if(!empty($pay_info))
+                                <div class="flex-center position-ref full-height">
+                                    <div class="content">
+                                        <div class="title">
+                                            <h1 style="color:#FF0000">请先进行第三方授权</h1>
+                                        </div>
+                                    </div>
                                 </div>
+                            @else
+                                <div class="row wrapper">
 
-                            </div>
-                            <div class="table-responsive">
-                                <form class="form-horizontal" method="get">
+                                    <div class="well">
+                                        <h3>温馨提示</h3>
+                                        <p class="text-danger">1. 你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
+                                        <p class="text-danger">
+                                            2. 零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">商户号</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
-                                        </div>
+                                        <p class="text-danger sub-well">JS API网页支付参数</p>
+                                        <p class="text-danger sub-well">支付授权目录: https://o2o.01nnt.com/wechat/</p>
+                                        <p class="text-danger sub-well">支付请求实例:
+                                            https://o2o.01nnt.com/wechat/pay.php/</p>
+                                        <p class="text-danger sub-well">共享收货地址: 选择"是"</p>
+                                        <p class="text-danger">3. 注意要把微信网页授权的地址设置为: o2o.01nnt.com</p>
                                     </div>
 
+                                </div>
+                                <div class="table-responsive">
+                                    <form class="form-horizontal" method="get">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" >微信支付</label>
+                                            <div class="col-sm-8">
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">PaySignKey</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="status" value="1" @if($pay_info["status"] == 1) checked @endif>打开
+                                                </label>
+
+
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="status" value="0" @if($pay_info["status"] == 0) checked @endif>关闭
+                                                </label>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">秘钥</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" >应用ID(AppId)</label>
+                                            <div class="col-sm-8">
+
+                                                <input type="text" class="form-control" value="@if($pay_info["appid"]){{$pay_info["appid"]}}@endif">
+                                            </div>
                                         </div>
-                                    </div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">微信网页授权</label>
-                                        <div class="col-sm-8">
-                                            <label>
-                                                <input type="checkbox" checked=""><i></i> 授权回调页面已经设置成o2o.01nnt.com
-                                            </label>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   >应用密钥(AppSecret)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" value="@if($pay_info["appsecret"]){{$pay_info["appsecret"]}}@endif">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12 col-sm-offset-6">
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                            <button type="button" class="btn btn-success" id="addBtn">保存资料</button>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" >商户号(MchId)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" value="@if($pay_info["mchid"]){{$pay_info["mchid"]}}@endif">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                </form>
-                            </div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   >Api密钥(paySignKey)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" value="@if($pay_info["api_key"]){{$pay_info["api_key"]}}@endif">
+                                            </div>
+                                        </div>
+
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" >商户支付证书(apiclient_cert.pem)</label>
+                                            <div class="col-sm-8">
+                                            <textarea class="form-control" id="input-id-1" name="apiclient_cert"
+                                                      placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
+                                                <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的
+                                                    <code>apiclient_cert.pem</code>
+                                                    用记事本打开并复制文件内容, 填入以上文本框内</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   >支付证书私钥(apiclient_key.pem)</label>
+                                            <div class="col-sm-8">
+                                            <textarea class="form-control" id="input-id-1" name="apiclient_key"
+                                                      placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
+                                                <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的
+                                                    <code>apiclient_key.pem</code>
+                                                    用记事本打开并复制文件内容, 填入以上文本框内</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-sm-offset-6">
+
+                                                <button type="button" class="btn btn-success" id="addBtn">保存资料</button>
+                                            </div>
+                                        </div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                    </form>
+                                </div>
+                            @endif
                         </section>
 
                     </section>
@@ -127,7 +198,30 @@
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
 <script type="text/javascript" src="{{asset('public/Fansmanage')}}/js/jPlayer/demo.js"></script>
 <script src="{{asset('public/Fansmanage/sweetalert')}}/sweetalert.min.js"></script>
+
 <script type="text/javascript">
+    //弹出文本输入框
+    function getEditTextForm() {
+        var url = $('#default_reply_text_edit_url').val();
+        var token = $('#_token').val();
+        var data = {'_token': token};
+        $.post(url, data, function (response) {
+            if (response.status == '-1') {
+                swal({
+                    title: "提示信息",
+                    text: response.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                }, function () {
+                    window.location.reload();
+                });
+                return;
+            } else {
+                $('#myModal').html(response);
+                $('#myModal').modal();
+            }
+        });
+    }
 </script>
 </body>
 </html>

@@ -14,6 +14,8 @@
   	<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
   	<input type="hidden" name="fansmanage_id" id="fansmanage_id" value="{{$fansmanage_id}}">
   	<input type="hidden" name="store_id" id="store_id" value="{{$store_id}}">
+  	<input type="hidden" name="shop_user_id" id="shop_user_id" value="{{session("zerone_auth_info.shop_user_id")}}">
+  	<input type="hidden" name="zerone_user_id" id="zerone_user_id" value="{{session("zerone_auth_info.zerone_user_id")}}">
     <div class="page">
 	    <div class="g-flexview">
 			<div class="head">
@@ -300,10 +302,10 @@
 				<div class="cart_left">
 					<div class="cart_kuang clear_after" id="cart_btn_b" onclick="showcart('cart',this)">
 						<div class="cart_kuang_img">
-							<span class="goods_number">1</span>
+							<span class="goods_number" id="goods_total"></span>
 						</div>
 					</div>
-					<h3 class="cart_price">您还未选购商品哦~</h3>
+					<h3 class="cart_price" id="cart_price">您还未选购商品哦~</h3>
 				</div>
 				<div class="cart_right"><a href="javascript:;" onclick="show('alert')">去结算 <i></i></a></div>
 	    	</div>
@@ -330,7 +332,7 @@
 					<div class="open_cart_kuang">
 						<div class="cart_kuang clear_after" onclick="show('cart')">
 							<div class="cart_kuang_img">
-								<span class="goods_number">1</span>
+								<span class="goods_number" id="total"></span>
 							</div>
 						</div>
 					</div>
@@ -339,29 +341,8 @@
 					<span>已选商品</span>
 					<span onclick="show('alert')">清空</span>
 				</div>
-				<ul class="cart_list">
-					<li>
-						<span>同城送花 (向日葵百合混搭)</span>
-						<span>&yen;158</span>
-						<div class="cart_alert_btn">
-							<div class="goods_btn cart_border action">
-								<a href="javascript:;" class="cart_box delect_cart_btn">-</a>
-								<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>
-								<a href="javascript:;" class="cart_box add_cart_btn">+</a>
-							</div>
-						</div>
-					</li>
-					<li>
-						<span>同城送花 (向日葵百合混搭)</span>
-						<span>&yen;158</span>
-						<div class="cart_alert_btn">
-							<div class="goods_btn cart_border">
-								<a href="javascript:;" class="cart_box delect_cart_btn">-</a>
-								<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>
-								<a href="javascript:;" class="cart_box add_cart_btn">+</a>
-							</div>
-						</div>
-					</li>
+				<ul class="cart_list" id="cart_list">
+
 				</ul>
 			</div>
 		</div>
