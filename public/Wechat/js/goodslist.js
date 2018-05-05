@@ -1,3 +1,17 @@
+function cart_list_box(name,price,num) {
+    str = '<li>'+
+        '<span>'+name+'</span>'+
+        '<span>&yen;'+price+'</span>'+
+        '<div class="cart_alert_btn">'+
+            '<div class="goods_btn cart_border">'+
+                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt">'+num+'</a>'+
+                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+            '</div>'+
+        '</div>'+
+    '</li>';
+    return str;
+}
 $(function(){
     var total_price = 0;//购物车总价格
 
@@ -63,20 +77,6 @@ $(function(){
 		}
 	);
 });
-function cart_list_box(name,price,num) {
-    str = '<li>'+
-        '<span>'+name+'</span>'+
-        '<span>&yen;'+price+'</span>'+
-        '<div class="cart_alert_btn">'+
-            '<div class="goods_btn cart_border">'+
-                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                '<a href="javascript:;" class="cart_box delect_cart_inpt">'+num+'</a>'+
-                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
-            '</div>'+
-        '</div>'+
-    '</li>';
-    return str;
-}
 //隐藏alert
 $("#alert").click(function(e){
     //stopPropagation(e);
