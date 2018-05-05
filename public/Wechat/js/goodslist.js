@@ -11,7 +11,6 @@ $(function(){
     	function(json){
     		if (json.status == 1) {
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
-    			    console.log(json.data.categorylist.length - 1);
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
     				if (i == json.data.categorylist.length - 1) {
     					str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
@@ -40,7 +39,10 @@ $(function(){
     	function(json){
             console.log(json);
     		if (json.status == 1) {
-
+                for (var i = 0; i < json.data.goods_list.length-1; i++) {
+                    console.log(json.data.goods_list[i].goods_name);
+                }
+                $.hidePreloader();
     		}
 		}
 	);
