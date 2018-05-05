@@ -16,6 +16,12 @@
     <script src="{{asset('public/Fansmanage')}}/js/ie/respond.min.js"></script>
     <script src="{{asset('public/Fansmanage')}}/js/ie/excanvas.js"></script>
     <![endif]-->
+
+    <style>
+        .sub-well{
+            margin-left: 12px;
+        }
+    </style>
 </head>
 <body class="">
 <section class="vbox">
@@ -48,15 +54,15 @@
 
                                 <div class="well">
                                     <h3>温馨提示</h3>
-                                    <p class="text-danger">1.你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
+                                    <p class="text-danger">1. 你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
                                     <p class="text-danger">
-                                        2.零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
+                                        2. 零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
 
-                                    <p class="text-danger">&nbsp;&nbsp;JS API网页支付参数</p>
-                                    <p class="text-danger">&nbsp;&nbsp;支付授权目录: https://o2o.01nnt.com/wechat/</p>
-                                    <p class="text-danger">&nbsp;&nbsp;支付请求实例: https://o2o.01nnt.com/wechat/pay.php/</p>
-                                    <p class="text-danger">共享收货地址: 选择"是"</p>
-                                    <p class="text-danger">3.注意要把微信网页授权的地址设置为: o2o.01nnt.com</p>
+                                    <p class="text-danger sub-well">JS API网页支付参数</p>
+                                    <p class="text-danger sub-well">支付授权目录: https://o2o.01nnt.com/wechat/</p>
+                                    <p class="text-danger sub-well">支付请求实例: https://o2o.01nnt.com/wechat/pay.php/</p>
+                                    <p class="text-danger sub-well">共享收货地址: 选择"是"</p>
+                                    <p class="text-danger">3. 注意要把微信网页授权的地址设置为: o2o.01nnt.com</p>
                                 </div>
 
                             </div>
