@@ -51,120 +51,127 @@
                                 微信支付设置
                             </header>
 
-                            <div class="flex-center position-ref full-height">
-                                <div class="content">
-                                    <div class="title">
-                                        <h1 style="color:#FF0000">请在右侧添加菜单</h1>
+                            @if(!empty($pay_info))
+                                <div class="flex-center position-ref full-height">
+                                    <div class="content">
+                                        <div class="title">
+                                            <h1 style="color:#FF0000">请先进行第三方授权</h1>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="row wrapper">
 
+                                    <div class="well">
+                                        <h3>温馨提示</h3>
+                                        <p class="text-danger">1. 你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
+                                        <p class="text-danger">
+                                            2. 零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
 
-                            <div class="row wrapper">
+                                        <p class="text-danger sub-well">JS API网页支付参数</p>
+                                        <p class="text-danger sub-well">支付授权目录: https://o2o.01nnt.com/wechat/</p>
+                                        <p class="text-danger sub-well">支付请求实例:
+                                            https://o2o.01nnt.com/wechat/pay.php/</p>
+                                        <p class="text-danger sub-well">共享收货地址: 选择"是"</p>
+                                        <p class="text-danger">3. 注意要把微信网页授权的地址设置为: o2o.01nnt.com</p>
+                                    </div>
 
-                                <div class="well">
-                                    <h3>温馨提示</h3>
-                                    <p class="text-danger">1. 你必须向微信公众平台提交企业信息以及银行账户资料，审核通过并签约后才能使用微信支付功能</p>
-                                    <p class="text-danger">
-                                        2. 零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
-
-                                    <p class="text-danger sub-well">JS API网页支付参数</p>
-                                    <p class="text-danger sub-well">支付授权目录: https://o2o.01nnt.com/wechat/</p>
-                                    <p class="text-danger sub-well">支付请求实例: https://o2o.01nnt.com/wechat/pay.php/</p>
-                                    <p class="text-danger sub-well">共享收货地址: 选择"是"</p>
-                                    <p class="text-danger">3. 注意要把微信网页授权的地址设置为: o2o.01nnt.com</p>
                                 </div>
+                                <div class="table-responsive">
+                                    <form class="form-horizontal" method="get">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
+                                            <div class="col-sm-8">
 
-                            </div>
-
-                            <div class="table-responsive">
-                                <form class="form-horizontal" method="get">
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
-                                        <div class="col-sm-8">
-
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" value="1" checked>打开
-                                            </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="optionsRadios" value="1" checked>打开
+                                                </label>
 
 
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" value="0">关闭
-                                            </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" name="optionsRadios" value="0">关闭
+                                                </label>
+                                            </div>
+
+
                                         </div>
 
 
-                                    </div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">应用ID(AppId)</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="" disabled="disabled">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">应用ID(AppId)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="input-id-1" value=""
+                                                       disabled="disabled">
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">应用密钥(AppSecret)</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="" disabled="disabled">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   for="input-id-1">应用密钥(AppSecret)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="input-id-1" value=""
+                                                       disabled="disabled">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">商户号(MchId)</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">商户号(MchId)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="input-id-1" value="">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">Api密钥(paySignKey)</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   for="input-id-1">Api密钥(paySignKey)</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control" id="input-id-1" value="">
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">商户支付证书(apiclient_cert.pem)</label>
-                                        <div class="col-sm-8">
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-id-1">商户支付证书(apiclient_cert.pem)</label>
+                                            <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_cert"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
-                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 <code>apiclient_cert.pem</code>
-                                                用记事本打开并复制文件内容, 填入以上文本框内</p>
+                                                <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的
+                                                    <code>apiclient_cert.pem</code>
+                                                    用记事本打开并复制文件内容, 填入以上文本框内</p>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label"
-                                               for="input-id-1">支付证书私钥(apiclient_key.pem)</label>
-                                        <div class="col-sm-8">
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label"
+                                                   for="input-id-1">支付证书私钥(apiclient_key.pem)</label>
+                                            <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_key"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
-                                            <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的 <code>apiclient_key.pem</code>
-                                                用记事本打开并复制文件内容, 填入以上文本框内</p>
+                                                <p class="help-block">从商户平台上下载支付证书, 解压并取得其中的
+                                                    <code>apiclient_key.pem</code>
+                                                    用记事本打开并复制文件内容, 填入以上文本框内</p>
+                                            </div>
                                         </div>
-                                    </div>
 
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
-                                    <div class="form-group">
-                                        <div class="col-sm-12 col-sm-offset-6">
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="form-group">
+                                            <div class="col-sm-12 col-sm-offset-6">
 
-                                            <button type="button" class="btn btn-success" id="addBtn">保存资料</button>
+                                                <button type="button" class="btn btn-success" id="addBtn">保存资料</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                </form>
-                            </div>
+                                    </form>
+                                </div>
+                            @endif
                         </section>
 
                     </section>
