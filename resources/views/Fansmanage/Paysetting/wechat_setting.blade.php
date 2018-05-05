@@ -92,16 +92,14 @@
                                             <div class="col-sm-8">
 
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="optionsRadios" value="1" checked>打开
+                                                    <input type="radio" name="status" value="1" @if($pay_info["status"] == 1) checked @endif>打开
                                                 </label>
 
 
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="optionsRadios" value="0">关闭
+                                                    <input type="radio" name="status" value="0" @if($pay_info["status"] == 1) checked @endif>关闭
                                                 </label>
                                             </div>
-
-
                                         </div>
 
 
