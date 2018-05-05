@@ -29,17 +29,18 @@ class PaysettingController extends Controller
         // 获取当前的页面路由
         $route_name = $request->path();
 
-
         // 店铺id
         $fansmanage_id = $admin_data['organization_id'];
-
+        // 支付信息
+        $pay_info = [];
         // 获取公众号的信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id" => $fansmanage_id], ["authorizer_appid"]);
+        $authorize_info = WechatAuthorization::getAuthInfo(["organization_id" => $fansmanage_id], ["authorizer_appid"]);
+
         if (!empty($res)) {
-            $res = WechatPay::getInfo(["organization_id" => $fansmanage_id], ["appid", "appsecret", "mchid", "api_key", "apiclient_cert_pem", "apiclient_key_pem", "status"]);
+            $pay_info = WechatPay::getInfo(["organization_id" => $fansmanage_id], ["appid", "appsecret", "mchid", "api_key", "apiclient_cert_pem", "apiclient_key_pem", "status"]);
         }
 
-        return view('Fansmanage/Paysetting/wechat_setting', ["pay_info" => $res, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+        return view('Fansmanage/Paysetting/wechat_setting', ["authorize_info" => $authorize_info, "pay_info" => $pay_info, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 }
 
