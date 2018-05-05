@@ -438,10 +438,10 @@ class WechatApiController extends Controller
         ];
         // 运费模板
         $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
-        $dispatch_info = '';
+        $dispatch_info = [];
         if ($dispatch->toArray()) {
             foreach ($dispatch->toArray() as $key => $value) {
-                print_r(DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal']));
+                $dispatch_info[$key] = DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal']);
             }
 
         }
