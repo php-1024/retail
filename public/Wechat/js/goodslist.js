@@ -71,7 +71,8 @@ $(function(){
             console.log(json);
     		if (json.status == 1) {
                 for (var i = 0; i < json.data.goodslist.length; i++) {
-                    str += goods_list_box(json.data.goodslist[i].name);
+                    str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
+                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
                 }
                 var goodslist = $("#goodslist");
                 goodslist.empty();
@@ -97,11 +98,11 @@ function cart_list_box(name,price,num) {
     return str;
 }
 //商品列表
-function goods_list_box(name,price,num) {
+function goods_list_box(name,details,stock,price,thumb) {
     str = '<div class="gl_item">'+
         '<div class="gl_item_fl">'+
             '<div class="goods_img">'+
-                '<img src="">'+
+                '<img src="http://develop.01nnt.com/'+thumb+'">'+
             '</div>'+
             '<div class="goods_right">'+
                 '<div class="goods_right_item">'+
@@ -109,21 +110,17 @@ function goods_list_box(name,price,num) {
                         '<h3 class="goods_tltie"><span>'+name+'</span></h3>'+
                     '</section>'+
                     '<section class="gri_center">'+
-                        '<p class="goods_details">9朵向日葵 阳光款</p>'+
+                        '<p class="goods_details">'+details+'</p>'+
                     '</section>'+
                     '<section class="gri_center">'+
                         '<p class="goods_distance">'+
-                            '<span>距离</span>'+
-                            '<span><</span>'+
-                            '<span>920m</span>'+
-                            '<span>|</span>'+
                             '<span>库存：</span>'+
-                            '<span>10</span>'+
+                            '<span>'+stock+'</span>'+
                         '</p>'+
                     '</section>'+
                     '<section class="gri_center gri_center_juzhong">'+
                         '<div class="goods_price">'+
-                            '<span>&yen;158.00</span>'+
+                            '<span>&yen;'+price+'</span>'+
                         '</div>'+
                         '<div class="goods_btn cart_border">'+
                             '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
