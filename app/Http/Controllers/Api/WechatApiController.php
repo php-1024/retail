@@ -46,7 +46,7 @@ class WechatApiController extends Controller
 //        print_r($return['result']);exit;
 //        echo $return['result']['addressComponent']['province'];exit;
         // 精度维度转换（wgs80转gcj02）
-        $re = $this->wgs84togcj02($lng,$lat);
+        $re = $this->wgs84togcj02($lng, $lat);
 
         // 查询条件
         $where[] = ['parent_id', $fansmannage_id];
@@ -74,11 +74,11 @@ class WechatApiController extends Controller
         // 冒泡距离排序
         $Orgdata = $this->order($Orgdata);
         foreach ($Orgdata as $k => $v) {
-            $storelist[$k]['id']= $v['id'];
-            $storelist[$k]['name']= $v['organization_name'];
-            $storelist[$k]['distance']= $v['distance'];
-            $storelist[$k]['logo']= $v['organization_simpleinfo']['simple_logo'];
-            $storelist[$k]['address']= $v['organization_simpleinfo']['simple_address'];
+            $storelist[$k]['id'] = $v['id'];
+            $storelist[$k]['name'] = $v['organization_name'];
+            $storelist[$k]['distance'] = $v['distance'];
+            $storelist[$k]['logo'] = $v['organization_simpleinfo']['simple_logo'];
+            $storelist[$k]['address'] = $v['organization_simpleinfo']['simple_address'];
         }
         // 数据返回
         $data = ['status' => '1', 'msg' => '数据获取成功', 'data' => ['storelist' => $storelist]];
@@ -416,12 +416,28 @@ class WechatApiController extends Controller
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
         $store_id = $request->store_id;
-
-
+        // 查询默认收货地址
         $address = SimpleAddress::getone([['zerone_user_id', $zerone_user_id], ['status', '1']]);
+        // 数据处理
+        $address_info = [
+            // ID
+            'id' => $address['id'],
+            // 城市
+            'province' => $address['province'],
+            // 区县
+            'city' => $address['city'],
+            // 详细地址
+            'district' => $address['district'],
+            // 省份
+            'address' => $address['address'],
+            // 收货人姓名
+            'realname' => $address['realname'],
+            // 手机号码
+            'mobile' => $address['mobile'],
+        ];
         $dispatch = Dispatch::getList([['fansmanage_id', $fansmanage_id], ['store_id', $store_id], ['status', '1']], '', 'id');
 
-        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address, 'dispatch_info' => $dispatch]];
+        $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['address_info' => $address_info, 'dispatch_info' => $dispatch]];
         return response()->json($data);
     }
 
