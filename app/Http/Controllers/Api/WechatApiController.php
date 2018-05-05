@@ -379,7 +379,6 @@ class WechatApiController extends Controller
         } else {
             // 序列化转成数组
             $cart_data = unserialize($cart_data);
-            print_r($cart_data);exit;
             $total = 0;
             $goods_list = [];
             foreach ($cart_data as $key => $value) {
