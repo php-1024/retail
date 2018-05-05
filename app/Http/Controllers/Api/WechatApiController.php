@@ -440,7 +440,7 @@ class WechatApiController extends Controller
         $dispatch_info = '';
         if ($dispatch->toArray()) {
             foreach ($dispatch->toArray() as $key => $value) {
-                dd($value['id']);
+                print_r($value['id']);
             }
         }
 
