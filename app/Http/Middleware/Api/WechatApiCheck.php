@@ -45,17 +45,17 @@ class WechatApiCheck
                 $re = $this->checkAddressAdd($request);
                 return self::format_response($re, $next);
                 break;
+            case "api/wechatApi/address_edit"://检测编辑收货地址提交数据
+                $re = $this->checkAddressEdit($request);
+                return self::format_response($re, $next);
+                break;
             case "api/wechatApi/selftake"://用户默认取货信息
             case "api/wechatApi/address_list"://检测添加收货地址提交数据
             case "api/wechatApi/selftake_list"://检测添加收货地址提交数据
                 $re = $this->checkZeroneUserId($request);
                 return self::format_response($re, $next);
                 break;
-            case "api/wechatApi/address_edit"://检测添加收货地址提交数据
-                $re = $this->checkAddressEdit($request);
-                return self::format_response($re, $next);
-                break;
-
+            
             case "api/wechatApi/selftake_add"://检测添加取货信息提交数据
                 $re = $this->checkSelftakeAdd($request);
                 return self::format_response($re, $next);
