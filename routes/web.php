@@ -476,7 +476,7 @@ Route::group(['prefix' => 'fansmanage'], function () {
 
     //支付设置
     Route::group(['prefix' => 'paysetting'], function () {
-        Route::get('qis', 'Fansmanage\PaysettingController@wechat_setting')->middleware('FansmanageCheck');      //微信支付设置
+        Route::get('wechat_setting', 'Fansmanage\PaysettingController@wechat_setting')->middleware('FansmanageCheck');      //微信支付设置
     });
 
     //总分店管理
