@@ -265,11 +265,9 @@ class WechatApiController extends Controller
     {
 
         // 用户店铺id
-//        $user_id = $request->user_id;
-        $user_id = '1';
+        $user_id = $request->user_id;
         // 用户零壹id
-//        $zerone_user_id = $request->zerone_user_id;
-        $zerone_user_id = '1';
+        $zerone_user_id = $request->zerone_user_id;
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
@@ -375,6 +373,7 @@ class WechatApiController extends Controller
         $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
         // 查看缓存是否存有商品
         $cart_data = Redis::get($key_id);
+        print_r($cart_data);exit;
         // 如果有商品
         if (empty($cart_data)) {
             return response()->json(['status' => '0', 'msg' => '购物车没有商品', 'data' => '']);
