@@ -56,25 +56,25 @@ class PaysettingController extends Controller
         // 获取当前的页面路由
         $route_name = request()->path();
 
-
-        // 检验参数是否存在
-        $this->validate(request(), [
-            'appid' => 'required',
-            'appsecret' => 'required',
-            'mchid' => 'required',
-            'api_key' => 'required',
-            'apiclient_cert_pem' => 'required',
-            'apiclient_key_pem' => 'required',
-        ], [
-            "appid.required" => "appid 必须填写",
-            "appsecret.required" => "appsecret 必须填写",
-            "mchid.required" => "mchid 必须填写",
-            "api_key.required" => "api_key 必须填写",
-            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
-            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
-        ]);
-
-        dd(123);
+//
+//        // 检验参数是否存在
+//        $this->validate(request(), [
+//            'appid' => 'required',
+//            'appsecret' => 'required',
+//            'mchid' => 'required',
+//            'api_key' => 'required',
+//            'apiclient_cert_pem' => 'required',
+//            'apiclient_key_pem' => 'required',
+//        ], [
+//            "appid.required" => "appid 必须填写",
+//            "appsecret.required" => "appsecret 必须填写",
+//            "mchid.required" => "mchid 必须填写",
+//            "api_key.required" => "api_key 必须填写",
+//            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
+//            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
+//        ])->errors();
+//
+//        dd(123);
 
         // 获取appid
         $data["appid"] = request()->input('appid');
@@ -91,6 +91,31 @@ class PaysettingController extends Controller
         // 获取组织id
         $data["organization_id"] = $organization_id = request()->get('organization_id');
 
+
+        $rule = [
+            'appid' => 'required',
+            'appsecret' => 'required',
+            'mchid' => 'required',
+            'api_key' => 'required',
+            'apiclient_cert_pem' => 'required',
+            'apiclient_key_pem' => 'required',
+        ];
+        $message = [
+            "appid.required" => "appid 必须填写",
+            "appsecret.required" => "appsecret 必须填写",
+            "mchid.required" => "mchid 必须填写",
+            "api_key.required" => "api_key 必须填写",
+            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
+            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
+        ];
+
+        $validate = \Validator::make($data, $rule, $message);
+
+        if (!$validate->passes()) {
+            dd($validate->errors());
+        }
+
+        dd(123);
         // 事务处理
         DB::beginTransaction();
         try {
