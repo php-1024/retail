@@ -19,21 +19,20 @@ class SimpleAddress extends Model
     protected $guarded = [];
 
 
-
-    //获取多条信息
+    // 获取多条信息
     public static function getList($where)
     {
         return self::where($where)->get();
     }
 
-    //获取多条信息
+    // 获取多条信息
     public static function getOne($where)
     {
         return self::where($where)->first();
     }
 
 
-    //添加数据
+    // 添加数据
     public static function addAddress($param)
     {
         $address = new SimpleAddress();//实例化程序模型
@@ -53,7 +52,7 @@ class SimpleAddress extends Model
         return $address->id;
     }
 
-    //修改数据
+    // 修改数据
     public static function editAddress($where, $param)
     {
         $model = self::where($where)->first();
@@ -63,7 +62,7 @@ class SimpleAddress extends Model
         $model->save();
     }
 
-    //查询数据是否存在（仅仅查询ID增加数据查询速度）
+    // 查询数据是否存在（仅仅查询ID增加数据查询速度）
     public static function checkRowExists($where)
     {
         $row = self::getPluck($where, 'id');
@@ -74,13 +73,19 @@ class SimpleAddress extends Model
         }
     }
 
-    //获取单行数据的其中一列
+    // 获取单行数据的其中一列
     public static function getPluck($where, $pluck)
     {
         return self::where($where)->value($pluck);
     }
 
-    //获取分页数据-分店
+    // 删除数据
+    public static function deleteAddress($where)
+    {
+        return self::where($where)->forcedelete();
+    }
+
+    // 获取分页数据-分店
     public static function getstore($where, $paginate, $orderby, $sort = 'DESC')
     {
         return self::with('OrganizationRetailinfo')->with('account')->where($where)->orderBy($orderby, $sort)->paginate($paginate);
