@@ -113,13 +113,12 @@ class PaysettingController extends Controller
 
         if (!$validate->passes()) {
             $error_msg = $validate->errors();
-            $res = json_encode($error_msg,JSON_UNESCAPED_UNICODE);
-            $res = json_decode($res,true);
-            dump($res);
-            foreach($res as $val){
-                var_dump($val);
+            $res = json_encode($error_msg, JSON_UNESCAPED_UNICODE);
+            $res = json_decode($res, true);
+            foreach ($res as $val) {
+                $error_msg = $val;
             }
-//            var_dump($error_msg);
+            return response()->json(['data' => $error_msg, 'status' => '1']);
         }
 
         dd(123);
@@ -127,7 +126,7 @@ class PaysettingController extends Controller
         DB::beginTransaction();
         try {
 
-            WechatPay::insertData($data,"update_create" ,["organization_id" => $organization_id]);
+            WechatPay::insertData($data, "update_create", ["organization_id" => $organization_id]);
 
             // 添加操作日志
             if ($admin_data['is_super'] == 1) {
