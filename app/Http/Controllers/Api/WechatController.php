@@ -20,6 +20,7 @@ class WechatController extends Controller
      */
     public function display(Request $request)
     {
+        print_r(session("zerone_auth_info"));
         // 获取微信公众号JSSDK 凭证
         $this->getSignPackage();
         // 获取组织id

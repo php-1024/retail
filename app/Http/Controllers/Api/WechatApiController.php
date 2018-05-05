@@ -137,7 +137,7 @@ class WechatApiController extends Controller
         $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
         return response()->json($data);
     }
-    
+
     /**
      * 购物车添加商品
      */
