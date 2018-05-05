@@ -64,8 +64,11 @@ class PaysettingController extends Controller
         $data["mchid"] = request()->input('mchid');
         // 获取api 密钥
         $data["api_key"] = request()->input('api_key');
+        // 是否打开微信支付
+        $data["status"] = request()->input('status');
         // 获取组织id
         $data["organization_id"] = $organization_id = $admin_data['organization_id'];
+
         // 获取商户支付证书
         $apiclient_cert_pem = request()->input('apiclient_cert_pem');
         !empty($apiclient_cert_pem) ? $data["apiclient_cert_pem"] = $apiclient_cert_pem : false;
