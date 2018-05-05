@@ -72,13 +72,13 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
                                         <div class="col-sm-8">
-                                            <div class="radio">
+
                                                 <label class="radio-inline">
                                                     <input type="radio" name="optionsRadios" id="optionsRadios1"
                                                            value="option1" checked>打开
                                                 </label>
-                                            </div>
-                                            <div class="radio">
+
+
                                                 <label class="radio-inline">
                                                     <input type="radio" name="optionsRadios" id="optionsRadios1"
                                                            value="option1" checked>打开
@@ -86,7 +86,7 @@
                                             </div>
 
 
-                                        </div>
+
                                     </div>
 
                                     <div class="line line-dashed b-b line-lg pull-in"></div>
