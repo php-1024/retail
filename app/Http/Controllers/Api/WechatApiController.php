@@ -618,6 +618,7 @@ class WechatApiController extends Controller
         if (empty(SimpleAddress::checkRowExists([['id', $address_id]]))) {
             return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
         };
+
         // 删除数据
         SimpleAddress::deleteAddress([['id', $address_id]]);
 
