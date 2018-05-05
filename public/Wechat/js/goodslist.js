@@ -42,8 +42,13 @@ $(function(){
                 var str = "";
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     console.log(json.data.goods_list[i].goods_name);
-                    str += cart_list_box(json.data.goods_list[i].goods_name);
+                    str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,json.data.goods_list[i].num);
                 }
+                //购物车总数
+                var total = json.data.total;
+                $("#total").text(total);
+                $("#goods_total").text(total);
+
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
                 $cart_list.append(str);
@@ -52,14 +57,14 @@ $(function(){
 		}
 	);
 });
-function cart_list_box(name) {
+function cart_list_box(name,price,num) {
     str = '<li>'+
         '<span>'+name+'</span>'+
-        '<span>&yen;158</span>'+
+        '<span>&yen;'+price+'</span>'+
         '<div class="cart_alert_btn">'+
-            '<div class="goods_btn cart_border action">'+
+            '<div class="goods_btn cart_border">'+
                 '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                '<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt">'+num+'</a>'+
                 '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
             '</div>'+
         '</div>'+
