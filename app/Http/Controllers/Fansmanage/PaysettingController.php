@@ -35,6 +35,7 @@ class PaysettingController extends Controller
         $pay_info = [];
         // 获取公众号的信息
         $authorize_info = WechatAuthorization::getAuthInfo(["organization_id" => $fansmanage_id], ["authorizer_appid"]);
+        var_dump($authorize_info);
         // 判断是否已经进行第三方授权
         if (!empty($authorize_info)) {
             // 获取支付参数
