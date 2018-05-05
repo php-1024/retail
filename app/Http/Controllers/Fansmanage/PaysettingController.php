@@ -64,17 +64,19 @@ class PaysettingController extends Controller
         $data["mchid"] = request()->input('mchid');
         // 获取api 密钥
         $data["api_key"] = request()->input('api_key');
-        // 获取商户支付证书
-        $data["apiclient_cert_pem"] = request()->input('apiclient_cert_pem');
-        // 获取支付证书私钥
-        $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
         // 获取组织id
         $data["organization_id"] = $organization_id = $admin_data['organization_id'];
+        // 获取商户支付证书
+        $apiclient_cert_pem = request()->input('apiclient_cert_pem');
+        !empty($apiclient_cert_pem) ? $data["apiclient_cert_pem"] = $apiclient_cert_pem : false;
+        // 获取支付证书私钥
+        $apiclient_key_pem = request()->input('apiclient_key_pem');
+        !empty($apiclient_cert_pem) ? $data["apiclient_key_pem"] = $apiclient_key_pem : false;
 
 
         // 验证规则
         $res = $this->validateMsg($data);
-        if(!empty($res)){
+        if (!empty($res)) {
             return $res;
         }
 
