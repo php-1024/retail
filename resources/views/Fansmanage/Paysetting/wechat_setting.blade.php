@@ -53,8 +53,8 @@
                                         2.零壹支持微信支付接口，注意你的零壹访问地址一定不要写错了，这里我们用访问地址代替下面说明中出现的链接，申请微信支付的接口说明如下：</p>
                                     <p class="text-danger">JS API网页支付参数</p>
                                     <p class="text-danger">支付授权目录: https://o2o.01nnt.com/wechat/</p>
-                                    <p class="text-danger">支付请求实例: https://o2o.01nnt.com/wechat/pay.php//</p>
-                                    <p class="text-danger">共享收货地址: 选择"是"/</p>
+                                    <p class="text-danger">支付请求实例: https://o2o.01nnt.com/wechat/pay.php/</p>
+                                    <p class="text-danger">共享收货地址: 选择"是"</p>
                                 </div>
 
                             </div>

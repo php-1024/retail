@@ -75,10 +75,12 @@ class AccountController extends Controller
     }
 
 
+
     /**
      * 修改个人信息提交
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function profile_check(Request $request)
     {
