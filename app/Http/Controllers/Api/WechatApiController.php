@@ -441,7 +441,7 @@ class WechatApiController extends Controller
         $dispatch_info = '';
         if ($dispatch->toArray()) {
             foreach ($dispatch->toArray() as $key => $value) {
-                $dispatch_info[$key] = DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal'])->toArray();
+                print_r(DispatchProvince::getList([['dispatch_id',$value['id']]],'','id','DESC',['dispatch_id','province_id','first_weight','additional_weight','freight','renewal']));
             }
 
         }
