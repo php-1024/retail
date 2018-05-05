@@ -69,27 +69,17 @@
 
                             <div class="table-responsive">
                                 <form class="form-horizontal" method="get">
-
-                                    <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">商户号(MchId)</label>
-                                        <div class="col-sm-8">
-                                            <input type="text" class="form-control" id="input-id-1" value="">
-                                        </div>
-                                    </div>
-                                    <div class="line line-dashed b-b line-lg pull-in"></div>
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
                                         <div class="col-sm-8">
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                                    Option one is this and that&mdash;be sure to include why it's great
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>打开
                                                 </label>
                                             </div>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                                    Option two can be something else and selecting it will deselect option one
+                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">关闭
                                                 </label>
                                             </div>
                                             <div class="radio disabled">
@@ -98,6 +88,15 @@
                                                     Option three is disabled
                                                 </label>
                                             </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="input-id-1">商户号(MchId)</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="input-id-1" value="">
                                         </div>
                                     </div>
 
