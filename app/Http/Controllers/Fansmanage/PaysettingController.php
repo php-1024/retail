@@ -55,6 +55,9 @@ class PaysettingController extends Controller
         // 获取当前的页面路由
         $route_name = $request->path();
 
+        dd(request()->all());
+
+
         // 获取appid
         $data["appid"] = $request->input('appid');
         // 获取appsecret
@@ -74,7 +77,7 @@ class PaysettingController extends Controller
         // 事务处理
         DB::beginTransaction();
         try {
-            
+
             WechatPay::insertData($data, ["organization_id" => $organization_id]);
 
             // 添加操作日志
