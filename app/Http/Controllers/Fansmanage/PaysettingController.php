@@ -103,7 +103,7 @@ class PaysettingController extends Controller
             dump( back()->withErrors($validate));
 
         }
-        dd($validate);
+        dd(111);
 
 
 
