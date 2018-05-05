@@ -1,17 +1,16 @@
 $(function(){
-	//获取goods分类列表
-    var fansmanage_id=$("#fansmanage_id").val();
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
-    var store_id=$("#store_id").val();
+    var store_id=$("#store_id").val();//店铺ID
+	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
-	$.showPreloader('加载中');
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
+            $.showPreloader('加载中');
     		if (json.status == 1) {
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
-    			    console.log(json.data.categorylist.length - 1);
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
     				if (i == json.data.categorylist.length - 1) {
     					str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
@@ -30,20 +29,43 @@ $(function(){
     		}
 		}
 	);
-	//获取商品列表
-	var goods_list_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+	//获取购物车商品
+	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
+    var shop_user_id=$("#shop_user_id").val();//用户店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
     $.post(
-    	goods_list_url,
-        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    	cart_list_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
+            console.log(json);
     		if (json.status == 1) {
-    			console.log(json);
+                var str = "";
+                for (var i = 0; i < json.data.goods_list.length; i++) {
+                    console.log(json.data.goods_list[i].goods_name);
+                    str += cart_list_box(json.data.goods_list[i].goods_name);
+                }
+                var $cart_list = $("#cart_list");
+                $cart_list.empty();
+                $cart_list.append(str);
+                $.hidePreloader();
     		}
-			$.hidePreloader();
 		}
 	);
 });
-
+function cart_list_box(name) {
+    str = '<li>'+
+        '<span>'+name+'</span>'+
+        '<span>&yen;158</span>'+
+        '<div class="cart_alert_btn">'+
+            '<div class="goods_btn cart_border action">'+
+                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>'+
+                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+            '</div>'+
+        '</div>'+
+    '</li>';
+    return str;
+}
 //隐藏alert
 $("#alert").click(function(e){
     return;

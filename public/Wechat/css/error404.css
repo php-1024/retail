@@ -1,0 +1,35 @@
+body{
+	background: rgb(241,245,248);
+}
+.g-flexview {
+    height: 100%;
+    margin: 0 auto;
+    max-width: 750px;
+    min-width: 300px;
+    overflow: auto;
+    background: rgb(255,255,255);
+}
+.error{
+	margin: 6.75rem auto 1rem auto;
+	width: 4.7rem;
+	height: 4.55rem;
+	background: url('../images/error@2x.png') no-repeat;
+	background-size: cover;
+}
+p{
+	font-size: .7rem;
+	text-align: center;
+	color: #909090;
+	margin-bottom: 1.8rem;
+}
+a{
+	display: block;
+	width: 5.5rem;
+	height: 1.8rem;
+	line-height: 1.8rem;
+	text-align: center;
+	font-size: .8rem;
+	color: #323232;
+	background: #fedb13;
+	margin: 0 auto;
+}

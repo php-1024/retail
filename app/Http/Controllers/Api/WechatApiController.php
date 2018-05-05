@@ -782,6 +782,39 @@ class WechatApiController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * 设置为默认收货地址
+     */
+    public function selftake_status(Request $request)
+    {
+        // 取货id
+        $self_take_id = $request->self_take_id;
+        // 零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 查询是否存在
+        if (empty(SimpleSelftake::checkRowExists([['id', $self_take_id]]))) {
+            return response()->json(['status' => '0', 'msg' => '查无数据', 'data' => '']);
+        };
+
+        DB::beginTransaction();
+        try {
+            $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id],['status','1']],'id');
+            if ($id) {
+                SimpleSelftake::editSelftake([['id', $id]], ['status' => '0']);
+            }
+            SimpleSelftake::editSelftake([['id',$self_take_id]],['status' => '1']);
+            // 提交事务
+            DB::commit();
+        } catch (Exception $e) {
+            // 事件回滚
+            DB::rollBack();
+            return response()->json(['status' => '0', 'msg' => '修改失败', 'data' => '']);
+        }
+
+        $data = ['status' => '1', 'msg' => '修改成功', 'data' => ['self_take_id' => $self_take_id]];
+
+        return response()->json($data);
+    }
 
     /**
      * WGS84转GCj02(北斗转高德)

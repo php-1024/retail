@@ -14,6 +14,8 @@
   	<input type="hidden" name="_token" id="_token" value="{{csrf_token()}}">
   	<input type="hidden" name="fansmanage_id" id="fansmanage_id" value="{{$fansmanage_id}}">
   	<input type="hidden" name="store_id" id="store_id" value="{{$store_id}}">
+  	<input type="hidden" name="shop_user_id" id="shop_user_id" value="{{session("zerone_auth_info.shop_user_id")}}">
+  	<input type="hidden" name="zerone_user_id" id="zerone_user_id" value="{{session("zerone_auth_info.zerone_user_id")}}">
     <div class="page">
 	    <div class="g-flexview">
 			<div class="head">
@@ -339,7 +341,7 @@
 					<span>已选商品</span>
 					<span onclick="show('alert')">清空</span>
 				</div>
-				<ul class="cart_list">
+				<ul class="cart_list" id="cart_list">
 					<li>
 						<span>同城送花 (向日葵百合混搭)</span>
 						<span>&yen;158</span>
