@@ -1,9 +1,5 @@
 $(function(){
-    var total_price = 0;
-
-    var price = 0.00;
-    var price1 = 0.00;
-    var price2 = 0.00;
+    var total_price = 0;//购物车总价格
 
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
@@ -51,9 +47,9 @@ $(function(){
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
-                    console.log(json.data.goods_list[i].goods_price);
                 }
-                console.log(total_price);
+                //购物车总价格
+                $("#cart_price").html("金额总计&yen;"+total_price);
                 //购物车总数
                 var total = json.data.total;
                 $("#total").text(total);
