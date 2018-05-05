@@ -30,7 +30,6 @@ $(function(){
     			$goods_cs_lt_alert.append(str);
     		}
 		}
-        $.hidePreloader();
 	);
 	//获取购物车商品
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
@@ -62,7 +61,7 @@ $(function(){
     		}
 		}
 	);
-
+    $.hidePreloader();
 });
 function cart_list_box(name,price,num) {
     str = '<li>'+
