@@ -88,16 +88,18 @@
                                 <div class="table-responsive">
                                     <form class="form-horizontal" method="get">
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" >微信支付</label>
+                                            <label class="col-sm-2 control-label">微信支付</label>
                                             <div class="col-sm-8">
 
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="status" value="1" @if($pay_info["status"] == 1) checked @endif>打开
+                                                    <input type="radio" name="status" value="1"
+                                                           @if(!empty($pay_info["status"])) checked @endif>打开
                                                 </label>
 
 
                                                 <label class="radio-inline">
-                                                    <input type="radio" name="status" value="0" @if($pay_info["status"] == 0) checked @endif>关闭
+                                                    <input type="radio" name="status" value="0"
+                                                           @if(empty($pay_info["status"])) checked @endif>关闭
                                                 </label>
                                             </div>
                                         </div>
@@ -106,43 +108,47 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" >应用ID(AppId)</label>
+                                            <label class="col-sm-2 control-label">应用ID(AppId)</label>
                                             <div class="col-sm-8">
 
-                                                <input type="text" class="form-control" value="@if($pay_info["appid"]){{$pay_info["appid"]}}@endif">
+                                                <input type="text" class="form-control"
+                                                       value="@if(!empty($pay_info["appid"])){{$pay_info["appid"]}}@endif">
                                             </div>
                                         </div>
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"
-                                                   >应用密钥(AppSecret)</label>
+                                            >应用密钥(AppSecret)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="@if($pay_info["appsecret"]){{$pay_info["appsecret"]}}@endif">
+                                                <input type="text" class="form-control"
+                                                       value="@if(!empty($pay_info["appsecret"])){{$pay_info["appsecret"]}}@endif">
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
 
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" >商户号(MchId)</label>
+                                            <label class="col-sm-2 control-label">商户号(MchId)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="@if($pay_info["mchid"]){{$pay_info["mchid"]}}@endif">
+                                                <input type="text" class="form-control"
+                                                       value="@if(!empty($pay_info["mchid"])){{$pay_info["mchid"]}}@endif">
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"
-                                                   >Api密钥(paySignKey)</label>
+                                            >Api密钥(paySignKey)</label>
                                             <div class="col-sm-8">
-                                                <input type="text" class="form-control" value="@if($pay_info["api_key"]){{$pay_info["api_key"]}}@endif">
+                                                <input type="text" class="form-control"
+                                                       value="@if($pay_info["api_key"]){{$pay_info["api_key"]}}@endif">
                                             </div>
                                         </div>
 
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
-                                            <label class="col-sm-2 control-label" >商户支付证书(apiclient_cert.pem)</label>
+                                            <label class="col-sm-2 control-label">商户支付证书(apiclient_cert.pem)</label>
                                             <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_cert"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
@@ -155,7 +161,7 @@
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label"
-                                                   >支付证书私钥(apiclient_key.pem)</label>
+                                            >支付证书私钥(apiclient_key.pem)</label>
                                             <div class="col-sm-8">
                                             <textarea class="form-control" id="input-id-1" name="apiclient_key"
                                                       placeholder="为保证安全性, 不显示证书内容. 若要修改, 请直接输入" rows="6"></textarea>
