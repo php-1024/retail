@@ -78,7 +78,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label" for="input-id-1">商户号(MchId)</label>
+                                        <label class="col-sm-2 control-label" for="input-id-1">微信支付</label>
                                         <div class="col-sm-8">
                                             <div class="radio">
                                                 <label>
