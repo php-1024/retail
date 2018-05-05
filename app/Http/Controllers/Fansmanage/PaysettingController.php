@@ -56,8 +56,13 @@ class PaysettingController extends Controller
         // 获取当前的页面路由
         $route_name = request()->path();
 
-        dd(request()->all());
 
+        // 检验参数是否存在
+        $this->validate(request(), [
+            'appid' => 'required|unique:posts|max:255',
+        ]);
+
+        dd(request());
 
         // 获取appid
         $data["appid"] = request()->input('appid');
@@ -73,6 +78,13 @@ class PaysettingController extends Controller
         $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
         // 获取组织id
         $data["organization_id"] = $organization_id = request()->get('organization_id');
+
+
+
+
+
+
+
 
 
         // 事务处理
