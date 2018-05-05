@@ -32,7 +32,7 @@ class PaysettingController extends Controller
         // 店铺id
         $fansmanage_id = $admin_data['organization_id'];
         // 获取公众号的信息
-        $res = WechatAuthorization::getAuthInfo(["organization_id"=>$fansmanage_id]);
+        $res = WechatAuthorization::getAuthInfo(["organization_id"=>$fansmanage_id],["authorizer_appid"]);
 
         dump($res);
 
