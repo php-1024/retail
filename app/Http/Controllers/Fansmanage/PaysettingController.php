@@ -74,6 +74,7 @@ class PaysettingController extends Controller
             "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
         ]);
 
+        dd(123);
 
         // 获取appid
         $data["appid"] = request()->input('appid');
