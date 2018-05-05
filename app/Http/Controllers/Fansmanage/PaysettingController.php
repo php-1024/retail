@@ -100,7 +100,8 @@ class PaysettingController extends Controller
 
 
         if (!$validate->passes()) {
-            dump( back()->withErrors($validate));
+//            dump( back()->withErrors($validate));
+            dump( back()->parseErrors($validate));
 
         }
         dd(111);
