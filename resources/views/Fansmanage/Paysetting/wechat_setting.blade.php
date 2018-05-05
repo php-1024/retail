@@ -171,6 +171,16 @@
                                             </div>
                                         </div>
 
+
+                                        @if($errors->any())
+                                            <ul class="list-group">
+                                                @foreach($errors->all() as $error)
+                                                    <li class="list-group-item list-group-item-danger">{{$error}}</li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+
+
                                         <div class="line line-dashed b-b line-lg pull-in"></div>
                                         <div class="form-group">
                                             <div class="col-sm-12 col-sm-offset-6">
