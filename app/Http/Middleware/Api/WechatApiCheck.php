@@ -122,7 +122,6 @@ class WechatApiCheck
     }
 
 
-
     /**
      * 店铺分类列表数据提交检测
      */
@@ -241,8 +240,8 @@ class WechatApiCheck
         if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -265,8 +264,8 @@ class WechatApiCheck
         if (empty($request->input('mobile'))) {
             return self::res(0, response()->json(['msg' => '手机号码不能为空', 'status' => '0', 'data' => '']));
         }
-        $mobile= $request->input('mobile');
-        if (!preg_match("/^1[34578]\d{9}$/",$mobile)){
+        $mobile = $request->input('mobile');
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             return self::res(0, response()->json(['data' => '请输入正确手机号码', 'status' => '0']));
         }
         return self::res(1, $request);
@@ -285,8 +284,6 @@ class WechatApiCheck
         }
         return self::res(1, $request);
     }
-
-
 
 
     /**
