@@ -135,14 +135,15 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                     '<section class="gri_center gri_center_juzhong">'+
                         '<div class="goods_price">'+
                             '<span>&yen;'+price+'</span>'+
-                        '</div>'+
-                        '<div class="goods_btn cart_border">';
+                        '</div>';
                         if(number > 0){
-                            str += '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
+                            str += '<div class="goods_btn action">'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
                         }else{
-                            str += '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
-                            '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
+                            str += '<div class="goods_btn cart_border">'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
                         }
 
 
