@@ -166,7 +166,7 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                         '<div class="goods_price">'+
                             '<span>&yen;'+price+'</span>'+
                         '</div>'+
-                        '<div class="goods_btn cart_border">'+
+                        '<div class="goods_btn action">'+
                             '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
                             '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>'+
                             '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
