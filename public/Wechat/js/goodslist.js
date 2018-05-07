@@ -106,7 +106,6 @@ function cart_add(obj){
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
     var user_id=$("#shop_user_id").val();//用户店铺ID
     var num = parseInt($this.prev().text()) + 1;
-    console.log(num+"+++++++++++");
     var data = {
             fansmanage_id:fansmanage_id,
             zerone_user_id:zerone_user_id,
@@ -116,18 +115,20 @@ function cart_add(obj){
             goods_price:goods_price,
             goods_name:goods_name,
             goods_thumb:goods_thumb,
+            num:num,
             stock:stock,
-            _token:_token,
+            _token:_token
     };
-    // $.post(
-    // 	url,
-    //     {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
-    // 	function(json){
-    // 		if (json.status == 1) {
-    //
-    // 		}
-	// 	}
-	// );
+    $.post(
+    	url,
+        data,
+    	function(json){
+            console.log(json);
+    		if (json.status == 1) {
+
+    		}
+		}
+	);
 }
 //购物车列表
 function cart_list_box(name,price,num) {
