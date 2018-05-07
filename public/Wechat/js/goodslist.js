@@ -7,7 +7,7 @@ $j(function(){
     var store_id=$j("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
-    $j.showPreloader();
+    $.showPreloader();
     $j.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
