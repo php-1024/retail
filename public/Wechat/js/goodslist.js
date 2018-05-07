@@ -47,7 +47,7 @@ $(function(){
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
-                    goods_stock.push({id:json.data.goods_list[i].id,stock:json.data.goods_list[i].stock});
+                    goods_stock.push({id:json.data.goods_list[i].goods_id,stock:json.data.goods_list[i].stock});
                 }
                 //购物车总价格
                 $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
