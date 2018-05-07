@@ -42,10 +42,12 @@ $(function(){
             console.log(json);
     		if (json.status == 1) {
                 var str = "";
+                var goods_stock = [];
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
+                    goods_stock.push({id:json.data.goods_list[i].id,stock:json.data.goods_list[i].stock});
                 }
                 //购物车总价格
                 $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
@@ -59,26 +61,27 @@ $(function(){
                 $cart_list.append(str);
     		}
             //获取商品列表
-                var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
-                $.post(
-                	goodslist_url,
-                    {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
-                	function(json){
-                        var str = "";
-                        console.log(json);
-                		if (json.status == 1) {
-                            for (var i = 0; i < json.data.goodslist.length; i++) {
-                                //console.log(json.data.goodslist[i+2].thumb[0].thumb);
-                                str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
-                                json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
+            var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+            console.log("goods_stock+",goods_stock);
+            $.post(
+            	goodslist_url,
+                {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+            	function(json){
+                    var str = "";
+                    console.log(json);
+            		if (json.status == 1) {
+                        for (var i = 0; i < json.data.goodslist.length; i++) {
+                            //console.log(json.data.goodslist[i+2].thumb[0].thumb);
+                            str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
+                            json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
 
-                            }
-                            var $goodslist = $("#goodslist");
-                            $goodslist.empty();
-                            $goodslist.append(str);
-                		}
+                        }
+                        var $goodslist = $("#goodslist");
+                        $goodslist.empty();
+                        $goodslist.append(str);
             		}
-            	);
+        		}
+        	);
 		}
 	);
 
