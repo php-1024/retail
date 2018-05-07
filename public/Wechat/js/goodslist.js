@@ -62,7 +62,11 @@ $(function(){
     		}
             //获取商品列表
             var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
-            console.log("goods_stock+",goods_stock);
+            if(goods_stock){
+                console.log("goods_stock+",goods_stock);
+            }else{
+                console.log("dsadsadasd+",goods_stock);
+            }
             $.post(
             	goodslist_url,
                 {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
