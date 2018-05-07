@@ -36,7 +36,7 @@ class PaysettingController extends Controller
         // 获取公众号的信息
         $authorize_info = WechatAuthorization::getAuthInfo(["organization_id" => $fansmanage_id], ["authorizer_appid"]);
         // 判断是否已经进行第三方授权
-        if (!empty($res)) {
+        if (!empty($authorize_info)) {
             // 获取支付参数
             $pay_info = WechatPay::getInfo(["organization_id" => $fansmanage_id], ["appid", "appsecret", "mchid", "api_key", "apiclient_cert_pem", "apiclient_key_pem", "status"]);
         }
@@ -56,26 +56,6 @@ class PaysettingController extends Controller
         // 获取当前的页面路由
         $route_name = request()->path();
 
-//
-//        // 检验参数是否存在
-//        $this->validate(request(), [
-//            'appid' => 'required',
-//            'appsecret' => 'required',
-//            'mchid' => 'required',
-//            'api_key' => 'required',
-//            'apiclient_cert_pem' => 'required',
-//            'apiclient_key_pem' => 'required',
-//        ], [
-//            "appid.required" => "appid 必须填写",
-//            "appsecret.required" => "appsecret 必须填写",
-//            "mchid.required" => "mchid 必须填写",
-//            "api_key.required" => "api_key 必须填写",
-//            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
-//            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
-//        ])->errors();
-//
-//        dd(123);
-
         // 获取appid
         $data["appid"] = request()->input('appid');
         // 获取appsecret
@@ -84,17 +64,22 @@ class PaysettingController extends Controller
         $data["mchid"] = request()->input('mchid');
         // 获取api 密钥
         $data["api_key"] = request()->input('api_key');
-        // 获取商户支付证书
-        $data["apiclient_cert_pem"] = request()->input('apiclient_cert_pem');
-        // 获取支付证书私钥
-        $data["apiclient_key_pem"] = request()->input('apiclient_key_pem');
+        // 是否打开微信支付
+        $data["status"] = request()->input('status');
         // 获取组织id
         $data["organization_id"] = $organization_id = $admin_data['organization_id'];
+
+        // 获取商户支付证书
+        $apiclient_cert_pem = request()->input('apiclient_cert_pem');
+        !empty($apiclient_cert_pem) ? $data["apiclient_cert_pem"] = $apiclient_cert_pem : false;
+        // 获取支付证书私钥
+        $apiclient_key_pem = request()->input('apiclient_key_pem');
+        !empty($apiclient_cert_pem) ? $data["apiclient_key_pem"] = $apiclient_key_pem : false;
 
 
         // 验证规则
         $res = $this->validateMsg($data);
-        if(!empty($res)){
+        if (!empty($res)) {
             return $res;
         }
 
@@ -102,7 +87,6 @@ class PaysettingController extends Controller
         DB::beginTransaction();
         try {
             WechatPay::insertData($data, "update_create", ["organization_id" => $organization_id]);
-
             // 添加操作日志
             if ($admin_data['is_super'] == 1) {
                 // 超级管理员操作商户的记录
@@ -113,8 +97,6 @@ class PaysettingController extends Controller
 
             DB::commit();
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
-            exit;
             // 事件回滚
             DB::rollBack();
             return response()->json(['data' => '编辑微信支付信息失败，请检查', 'status' => '0']);
@@ -124,6 +106,11 @@ class PaysettingController extends Controller
     }
 
 
+    /**
+     * 支付信息验证规则
+     * @param $data
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function validateMsg($data)
     {
         $rule = [
@@ -132,8 +119,6 @@ class PaysettingController extends Controller
             'appsecret' => 'required',
             'mchid' => 'required',
             'api_key' => 'required',
-            'apiclient_cert_pem' => 'required',
-            'apiclient_key_pem' => 'required',
         ];
 
         $message = [
@@ -142,8 +127,6 @@ class PaysettingController extends Controller
             "appsecret.required" => "appsecret 必须填写",
             "mchid.required" => "mchid 必须填写",
             "api_key.required" => "api_key 必须填写",
-            "apiclient_cert_pem.required" => "apiclient_cert_pem 必须填写",
-            "apiclient_key_pem.required" => "apiclient_key_pem 必须填写",
         ];
 
         $validate = \Validator::make($data, $rule, $message);

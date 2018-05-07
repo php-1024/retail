@@ -59,7 +59,7 @@
                                 微信支付设置
                             </header>
 
-                            @if(!empty($pay_info))
+                            @if(empty($authorize_info))
                                 <div class="flex-center position-ref full-height">
                                     <div class="content">
                                         <div class="title">
