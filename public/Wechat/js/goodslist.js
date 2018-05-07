@@ -105,7 +105,6 @@ function cart_add(obj){
     var store_id=$("#store_id").val();//店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
     var user_id=$("#shop_user_id").val();//用户店铺ID
-    var num = parseInt($this.prev().text()) + 1;
     var data = {
             fansmanage_id:fansmanage_id,
             zerone_user_id:zerone_user_id,
@@ -115,7 +114,7 @@ function cart_add(obj){
             goods_price:goods_price,
             goods_name:goods_name,
             goods_thumb:goods_thumb,
-            num:num,
+            num:1,
             stock:stock,
             _token:_token
     };
