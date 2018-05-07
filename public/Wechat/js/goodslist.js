@@ -95,7 +95,7 @@ $(function(){
 function cart_add(obj){
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_add";
     var $this = $(obj);
-    console.log($this.data(goodsid)+"asdsadasdasdasd");
+    console.log($this.data("goodsid")+"asdsadasdasdasd");
 }
 //购物车列表
 function cart_list_box(name,price,num) {
