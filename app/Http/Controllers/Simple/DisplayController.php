@@ -31,7 +31,6 @@ class DisplayController extends Controller
         $son_menu_data = $request->get('son_menu_data');    //中间件产生的子菜单数据参数
         $route_name = $request->path();                         //获取当前的页面路由
         //只查询自己相关的数据
-        dump($admin_data);
         $where = [
             ['account_id', $admin_data['id']],
             ['program_id', '12'], //查询program_id(12)简版店铺管理系统
