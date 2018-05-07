@@ -48,7 +48,7 @@ $(function(){
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
                     //记录购物车列表数量,渲染商品列表赋值
-                    goods_num.push({id:json.data.goods_list[i].goods_id,stock:json.data.goods_list[i].num});
+                    goods_num.push({id:json.data.goods_list[i].goods_id,num:json.data.goods_list[i].num});
                 }
                 //购物车总价格
                 $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
@@ -72,15 +72,10 @@ $(function(){
 
             		if (json.status == 1) {
                         for (var i = 0; i < json.data.goodslist.length; i++) {
+                            console.log(goods_num);
                             //console.log(json.data.goodslist[i+2].thumb[0].thumb);
                             str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
                             json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
-                            if(goods_num){
-                                if(isgoodsnum(goods_num,json.data.goodslist[i].id)){
-                                    console.log(json.data.goodslist[i].id,"++++++++++++++");
-                                }
-                            }
-
                         }
                         var $goodslist = $("#goodslist");
                         $goodslist.empty();
@@ -146,13 +141,13 @@ function goods_list_box(name,details,stock,price,thumb) {
     return str;
 }
 //找购物车的num
-function isgoodsnum(arr,val){
-    for(var i in arr){
-        if(arr[i].id == val){
-            return true;
-        }
-    }
-}
+// function isgoodsnum(arr,val){
+//     for(var i in arr){
+//         if(arr[i].id == val){
+//             return arr[i].num;
+//         }
+//     }
+// }
 //隐藏alert
 $("#alert").click(function(e){
     //stopPropagation(e);
