@@ -128,6 +128,7 @@ class WechatApiController extends Controller
             $where[] = ['barcode', $scan_code];
         }
         $goodslist = SimpleGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
+        dd($goodslist);
         if (empty($goodslist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
