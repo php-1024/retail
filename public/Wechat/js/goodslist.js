@@ -156,9 +156,9 @@ function stopPropagation(e) {
         window.event.cancelBubble = true;//兼容IE
     }
 }
-$(document).on('click', '#showPreloader_hook', function () {
+function showPreloader(){
     $.showPreloader();
-  });
+}
 function show(obj){
      $("#"+obj).css({display: 'flex'});
     $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
