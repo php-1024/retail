@@ -157,6 +157,7 @@ function stopPropagation(e) {
     }
 }
 function showPreloader(){
+    alert();
     $.showPreloader();
 }
 function show(obj){
