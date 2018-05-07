@@ -137,11 +137,11 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                             '<span>&yen;'+price+'</span>'+
                         '</div>';
                         if(number > 0){
-                            str += '<div class="goods_btn action">'+
+                            str += '<div class="goods_btn cart_border">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
                         }else{
-                            str += '<div class="goods_btn cart_border">'+
+                            str += '<div class="goods_btn action">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
                         }
