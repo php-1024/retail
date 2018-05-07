@@ -108,6 +108,7 @@ function cart_list_box(name,price,num) {
 }
 //商品列表
 function goods_list_box(name,details,stock,price,thumb,number) {
+    var str = "";
     if(number > 0){
         str = '<div class="gl_item">'+
         '<div class="gl_item_fl">'+
