@@ -92,8 +92,10 @@ $(function(){
     $.hidePreloader();
 });
 //添加购物车
-function add_cart(){
+function cart_add(obj){
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_add";
+    var $this = $(obj);
+    console.log($this.data(goodsid)+"asdsadasdasdasd");
 }
 //购物车列表
 function cart_list_box(name,price,num) {
@@ -138,7 +140,7 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                         '</div>';
                         //购物车存在商品数量显示数量和减号
                         if(number > 0){
-                            str += '<div class="goods_btn cart_border">'+
+                        str += '<div class="goods_btn cart_border">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_show"'+
                                     'data-goodsid="'+goods_id+'"'+
                                     'data-goodsname="'+name+'"'+
@@ -153,7 +155,12 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                         }
 
 
-                str +='<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+                        str +='<a href="javascript:;" class="cart_box add_cart_btn"'+
+                                    'data-goodsid="'+goods_id+'"'+
+                                    'data-goodsname="'+name+'"'+
+                                    'data-goodsstock="'+stock+'"'+
+                                    'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
+                                    'data-goodsprice="'+price+'" onclick="cart_add(this)">+</a>'+
                         '</div>'+
                     '</section>'+
                 '</div>'+
