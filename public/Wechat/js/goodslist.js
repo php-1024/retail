@@ -78,7 +78,7 @@ $(function(){
                             }
                             str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
                             json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb,
-                            json.data.goodslist[i].number);
+                            json.data.goodslist[i].number,json.data.goodslist[i].id);
                         }
                         var $goodslist = $("#goodslist");
                         $goodslist.empty();
@@ -111,7 +111,7 @@ function cart_list_box(name,price,num) {
     return str;
 }
 //商品列表
-function goods_list_box(name,details,stock,price,thumb,number) {
+function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
     var str = "";
         str += '<div class="gl_item">'+
         '<div class="gl_item_fl">'+
@@ -139,7 +139,8 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                         //购物车存在商品数量显示数量和减号
                         if(number > 0){
                             str += '<div class="goods_btn cart_border">'+
-                                    '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_btn gs_show"'+
+                                    'data-goodsid="'+goods_id+'">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
                         }else{
                             str += '<div class="goods_btn action">'+
