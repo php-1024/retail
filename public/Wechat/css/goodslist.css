@@ -314,6 +314,12 @@ body{
 .goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .action .add_cart_btn{
 	background-color: rgb(254,219,67);
 }
+.goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .goods_btn .gs_show{
+	visibility: visible;
+}
+.goodslist .gl_item .gl_item_fl .goods_right .goods_right_item .gri_center .goods_btn .gs_hide{
+	visibility: hidden;
+}
 .cart_bottom{
 	position: fixed;
 	bottom: 0;
