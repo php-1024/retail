@@ -138,7 +138,7 @@ class WechatApiController extends Controller
 //                dd($goodslist[$key]['thumb']);
 //            }
         }
-        dd($goodslist);
+        dd($goodslist->thumb);
         $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
         return response()->json($data);
     }
