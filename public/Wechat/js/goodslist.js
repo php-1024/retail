@@ -95,7 +95,39 @@ $(function(){
 function cart_add(obj){
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_add";
     var $this = $(obj);
-    console.log($this.data("goodsid")+"asdsadasdasdasd");
+    var goods_id = $this.data("goodsid");
+    var goods_name = $this.data("goodsname");
+    var stock = $this.data("goodsstock");
+    var goods_thumb = $this.data("goodsthumb");
+    var goods_price = $this.data("goodsprice");
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    var user_id=$("#shop_user_id").val();//用户店铺ID
+    var num = ++parseInt($this.prev().text());
+    console.log(num+"+++++++++++");
+    var data = {
+            fansmanage_id:fansmanage_id,
+            zerone_user_id:zerone_user_id,
+            user_id:user_id,
+            store_id:store_id,
+            goods_id:goods_id,
+            goods_price:goods_price,
+            goods_name:goods_name,
+            goods_thumb:goods_thumb,
+            stock:stock,
+            _token:_token,
+    };
+    // $.post(
+    // 	url,
+    //     {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    // 	function(json){
+    // 		if (json.status == 1) {
+    //
+    // 		}
+	// 	}
+	// );
 }
 //购物车列表
 function cart_list_box(name,price,num) {
@@ -149,7 +181,7 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                                     'data-goodsprice="'+price+'">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
                         }else{
-                            str += '<div class="goods_btn action">'+
+                        str += '<div class="goods_btn action">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
                         }
