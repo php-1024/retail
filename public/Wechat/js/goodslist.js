@@ -140,7 +140,11 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                         if(number > 0){
                             str += '<div class="goods_btn cart_border">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_show"'+
-                                    'data-goodsid="'+goods_id+'">-</a>'+
+                                    'data-goodsid="'+goods_id+'"'+
+                                    'data-goodsname="'+name+'"'+
+                                    'data-goodsstock="'+stock+'"'+
+                                    'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
+                                    'data-goodsprice="'+price+'">-</a>'+
                                     '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
                         }else{
                             str += '<div class="goods_btn action">'+
