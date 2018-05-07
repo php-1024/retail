@@ -64,25 +64,25 @@ jQuery(function(){
 	);
     //获取商品列表
     var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
-    jQuery.post(
-    	goodslist_url,
-        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
-    	function(json){
-            var str = "";
-            console.log(json);
-    		if (json.status == 1) {
-                for (var i = 0; i < json.data.goodslist.length; i++) {
-                    //console.log(json.data.goodslist[i+2].thumb[0].thumb);
-                    str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
-                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
-
-                }
-                var goodslist = jQuery("#goodslist");
-                goodslist.empty();
-                goodslist.append(str);
-    		}
-		}
-	);
+    // jQuery.post(
+    // 	goodslist_url,
+    //     {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    // 	function(json){
+    //         var str = "";
+    //         console.log(json);
+    // 		if (json.status == 1) {
+    //             for (var i = 0; i < json.data.goodslist.length; i++) {
+    //                 //console.log(json.data.goodslist[i+2].thumb[0].thumb);
+    //                 str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
+    //                 json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
+    //
+    //             }
+    //             var goodslist = jQuery("#goodslist");
+    //             goodslist.empty();
+    //             goodslist.append(str);
+    // 		}
+	// 	}
+	// );
     $.hidePreloader();
 });
 //购物车列表
