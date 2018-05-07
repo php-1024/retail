@@ -1,15 +1,14 @@
-jQuery.noConflict();
-jQuery(function(){
+$(function(){
     var total_price = 0;//购物车总价格
 
-    var fansmanage_id=jQuery("#fansmanage_id").val();//联盟主组织ID
-    var _token=jQuery("#_token").val();
-    var store_id=jQuery("#store_id").val();//店铺ID
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
     $.showPreloader();
 
-    jQuery.post(
+    $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
@@ -23,21 +22,21 @@ jQuery(function(){
     				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
-    			var jQuerygoods_cs_lt = jQuery("#goods_cs_lt");
-    			jQuerygoods_cs_lt.empty();
-    			jQuerygoods_cs_lt.append(str);
+    			var $goods_cs_lt = $("#goods_cs_lt");
+    			$goods_cs_lt.empty();
+    			$goods_cs_lt.append(str);
     			//赋值弹出框的分类列表
-    			var jQuerygoods_cs_lt_alert = jQuery("#goods_cs_lt_alert");
-    			jQuerygoods_cs_lt_alert.empty();
-    			jQuerygoods_cs_lt_alert.append(str);
+    			var $goods_cs_lt_alert = $("#goods_cs_lt_alert");
+    			$goods_cs_lt_alert.empty();
+    			$goods_cs_lt_alert.append(str);
     		}
 		}
 	);
 	//获取购物车商品
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
-    var shop_user_id=jQuery("#shop_user_id").val();//用户店铺ID
-    var zerone_user_id=jQuery("#zerone_user_id").val();//用户零壹ID
-    jQuery.post(
+    var shop_user_id=$("#shop_user_id").val();//用户店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    $.post(
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
@@ -50,39 +49,39 @@ jQuery(function(){
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
                 }
                 //购物车总价格
-                jQuery("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
+                $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
                 //购物车总数
                 var total = json.data.total;
-                jQuery("#total").text(total);
-                jQuery("#goods_total").text(total);
+                $("#total").text(total);
+                $("#goods_total").text(total);
 
-                var jQuerycart_list = jQuery("#cart_list");
-                jQuerycart_list.empty();
-                jQuerycart_list.append(str);
+                var $cart_list = $("#cart_list");
+                $cart_list.empty();
+                $cart_list.append(str);
     		}
 		}
 	);
     //获取商品列表
     var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
-    // jQuery.post(
-    // 	goodslist_url,
-    //     {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
-    // 	function(json){
-    //         var str = "";
-    //         console.log(json);
-    // 		if (json.status == 1) {
-    //             for (var i = 0; i < json.data.goodslist.length; i++) {
-    //                 //console.log(json.data.goodslist[i+2].thumb[0].thumb);
-    //                 str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
-    //                 json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
-    //
-    //             }
-    //             var goodslist = jQuery("#goodslist");
-    //             goodslist.empty();
-    //             goodslist.append(str);
-    // 		}
-	// 	}
-	// );
+    $.post(
+    	goodslist_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+    	function(json){
+            var str = "";
+            console.log(json);
+    		if (json.status == 1) {
+                for (var i = 0; i < json.data.goodslist.length; i++) {
+                    //console.log(json.data.goodslist[i+2].thumb[0].thumb);
+                    str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
+                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
+
+                }
+                var goodslist = $("#goodslist");
+                goodslist.empty();
+                goodslist.append(str);
+    		}
+		}
+	);
     $.hidePreloader();
 });
 //购物车列表
@@ -138,12 +137,12 @@ function goods_list_box(name,details,stock,price,thumb) {
     return str;
 }
 //隐藏alert
-jQuery("#alert").click(function(e){
+$("#alert").click(function(e){
     //stopPropagation(e);
-    if(!jQuery(e.target).is(".popup_alert_hook *") && !jQuery(e.target).is(".popup_alert_hook")){
-        jQuery(".popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
+    if(!$(e.target).is(".popup_alert_hook *") && !$(e.target).is(".popup_alert_hook")){
+        $(".popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
            setTimeout(function(){
-              jQuery(".popup_alert").css({display: 'none'});
+              $(".popup_alert").css({display: 'none'});
          },250);
     }
 });
@@ -158,40 +157,40 @@ function stopPropagation(e) {
     }
 }
 function show(obj){
-     jQuery("#"+obj).css({display: 'flex'});
-    jQuery("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
+     $("#"+obj).css({display: 'flex'});
+    $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
 }
 function hide(obj) {
-    jQuery("#"+obj).css({display: 'none'});
-    jQuery("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
+    $("#"+obj).css({display: 'none'});
+    $("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
 }
 function showcart(obj,em){
-    jQuery(em).hide();
-    jQuery("#"+obj).css({display: 'flex'});
-    jQuery("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
+    $(em).hide();
+    $("#"+obj).css({display: 'flex'});
+    $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
 }
 function goodsclass(obj){
-    jQuery("#"+obj).css({display: 'flex'});
-    jQuery("#"+obj+" .popup_alert_hook").removeClass('fadeOutUp').addClass('fadeInDown');
+    $("#"+obj).css({display: 'flex'});
+    $("#"+obj+" .popup_alert_hook").removeClass('fadeOutUp').addClass('fadeInDown');
 }
 function hidegoodsclass(obj){
-    jQuery("#"+obj+" .popup_alert_hook").removeClass('fadeInDown').addClass('fadeOutUp');
+    $("#"+obj+" .popup_alert_hook").removeClass('fadeInDown').addClass('fadeOutUp');
     setTimeout(function(){
-      jQuery("#"+obj).css({display: 'none'});
+      $("#"+obj).css({display: 'none'});
      },250);
 }
 function hidecart(obj,em) {
-    jQuery(em).hidden();
-    jQuery("#"+obj).css({display: 'none'});
-    jQuery("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
+    $(em).hidden();
+    $("#"+obj).css({display: 'none'});
+    $("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
 }
-jQuery("#cart").click(function(e){
+$("#cart").click(function(e){
     //stopPropagation(e);
-    if(!jQuery(e.target).is(".popup_alert_hook *") && !jQuery(e.target).is(".popup_alert_hook")){
-        jQuery(".popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
+    if(!$(e.target).is(".popup_alert_hook *") && !$(e.target).is(".popup_alert_hook")){
+        $(".popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
            setTimeout(function(){
-              jQuery(".popup_alert").css({display: 'none'});
+              $(".popup_alert").css({display: 'none'});
          },250);
-        jQuery("#cart_btn_b").show();
+        $("#cart_btn_b").show();
     }
 })
