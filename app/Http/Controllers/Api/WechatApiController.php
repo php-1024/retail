@@ -135,7 +135,7 @@ class WechatApiController extends Controller
             $goodslist[$key]['category_name'] = SimpleCategory::getPluck([['id', $value['category_id']]], 'name');
             $goodslist[$key]['thumb'] = SimpleGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
             if (count($goodslist[$key]['thumb']) == 0){
-                $thumb = ['thumb' => 'public/thumb.jpg'];
+                $thumb = [['thumb' => 'public/thumb.jpg']];
                 $goodslist[$key]['thumb'] = $thumb;
             }
         }
