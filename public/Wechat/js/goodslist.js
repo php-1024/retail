@@ -42,13 +42,13 @@ $(function(){
             console.log(json);
     		if (json.status == 1) {
                 var str = "";
-                var goods_num = [];
+                var cart_num = [];
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
                     //记录购物车列表数量,渲染商品列表赋值
-                    goods_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
+                    cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
                 $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
@@ -72,10 +72,13 @@ $(function(){
 
             		if (json.status == 1) {
                         for (var i = 0; i < json.data.goodslist.length; i++) {
-                            console.log(goods_num);
+                            if(cart_num[json.data.goodslist[i].id]){
+                                json.data.goodslist[i].number = cart_num[json.data.goodslist[i].id];
+                            }
                             //console.log(json.data.goodslist[i+2].thumb[0].thumb);
                             str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
-                            json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb);
+                            json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb,
+                            json.data.goodslist[i].number);
                         }
                         var $goodslist = $("#goodslist");
                         $goodslist.empty();
@@ -104,7 +107,7 @@ function cart_list_box(name,price,num) {
     return str;
 }
 //商品列表
-function goods_list_box(name,details,stock,price,thumb) {
+function goods_list_box(name,details,stock,price,thumb,number) {
     str = '<div class="gl_item">'+
         '<div class="gl_item_fl">'+
             '<div class="goods_img">'+
@@ -130,7 +133,7 @@ function goods_list_box(name,details,stock,price,thumb) {
                         '</div>'+
                         '<div class="goods_btn cart_border">'+
                             '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                            '<a href="javascript:;" class="cart_box delect_cart_inpt">123</a>'+
+                            '<a href="javascript:;" class="cart_box delect_cart_inpt">'+number+'</a>'+
                             '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
                         '</div>'+
                     '</section>'+
