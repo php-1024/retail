@@ -91,6 +91,10 @@ $(function(){
 
     $.hidePreloader();
 });
+//添加购物车
+function add_cart(){
+    var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_add";
+}
 //购物车列表
 function cart_list_box(name,price,num) {
     str = '<li>'+
@@ -133,51 +137,24 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                         '<div class="goods_price">'+
                             '<span>&yen;'+price+'</span>'+
                         '</div>'+
-                        '<div class="goods_btn cart_border">'+
-                            '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
-                            '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>'+
-                            '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+                        '<div class="goods_btn cart_border">';
+                        if(number > 0){
+                            str += '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
+                        }else{
+                            str += '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
+                            '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
+                        }
+
+
+                str +='<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
                         '</div>'+
                     '</section>'+
                 '</div>'+
             '</div>'+
         '</div>'+
     '</div>'
-}else{
-    str = '<div class="gl_item">'+
-        '<div class="gl_item_fl">'+
-            '<div class="goods_img">'+
-                '<img src="http://develop.01nnt.com/'+thumb+'">'+
-            '</div>'+
-            '<div class="goods_right">'+
-                '<div class="goods_right_item">'+
-                    '<section class="gri_center">'+
-                        '<h3 class="goods_tltie"><span>'+name+'</span></h3>'+
-                    '</section>'+
-                    '<section class="gri_center">'+
-                        '<p class="goods_details">'+details+'</p>'+
-                    '</section>'+
-                    '<section class="gri_center">'+
-                        '<p class="goods_distance">'+
-                            '<span>库存：</span>'+
-                            '<span>'+stock+'</span>'+
-                        '</p>'+
-                    '</section>'+
-                    '<section class="gri_center gri_center_juzhong">'+
-                        '<div class="goods_price">'+
-                            '<span>&yen;'+price+'</span>'+
-                        '</div>'+
-                        '<div class="goods_btn action">'+
-                            '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
-                            '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>'+
-                            '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
-                        '</div>'+
-                    '</section>'+
-                '</div>'+
-            '</div>'+
-        '</div>'+
-    '</div>'
-}
+    }
     return str;
 }
 //隐藏alert
