@@ -136,6 +136,7 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                         '<div class="goods_price">'+
                             '<span>&yen;'+price+'</span>'+
                         '</div>';
+                        //购物车存在商品数量显示数量和减号
                         if(number > 0){
                             str += '<div class="goods_btn cart_border">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_show">-</a>'+
