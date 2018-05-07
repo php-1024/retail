@@ -139,7 +139,7 @@ class WechatApiController extends Controller
 //            }
         }
         foreach ($goodslist as $item=>$value){
-            if ($value->thumb == ''){
+            if (empty($value->thumb)){
                 dump('1');
             }else{
                 dump($value->thumb);
