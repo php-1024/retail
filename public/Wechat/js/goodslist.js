@@ -1,4 +1,4 @@
-var $jj = jQuery.noConflict();
+var $j = jQuery.noConflict();
 $j(function(){
     var total_price = 0;//购物车总价格
 
