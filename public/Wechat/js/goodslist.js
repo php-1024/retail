@@ -72,10 +72,10 @@ $(function(){
 
             		if (json.status == 1) {
                         for (var i = 0; i < json.data.goodslist.length; i++) {
+                            //判断列表与购物车的id存在就读取购物车的数量
                             if(cart_num[json.data.goodslist[i].id]){
                                 json.data.goodslist[i].number = cart_num[json.data.goodslist[i].id];
                             }
-                            //console.log(json.data.goodslist[i+2].thumb[0].thumb);
                             str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
                             json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb,
                             json.data.goodslist[i].number);
@@ -131,7 +131,7 @@ function goods_list_box(name,details,stock,price,thumb,number) {
                         '<div class="goods_price">'+
                             '<span>&yen;'+price+'</span>'+
                         '</div>'+
-                        '<div class="goods_btn cart_border">'+
+                        '<div class="goods_btn">'+
                             '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
                             '<a href="javascript:;" class="cart_box delect_cart_inpt">'+number+'</a>'+
                             '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
@@ -143,14 +143,6 @@ function goods_list_box(name,details,stock,price,thumb,number) {
     '</div>'
     return str;
 }
-//找购物车的num
-// function isgoodsnum(arr,val){
-//     for(var i in arr){
-//         if(arr[i].id == val){
-//             return arr[i].num;
-//         }
-//     }
-// }
 //隐藏alert
 $("#alert").click(function(e){
     //stopPropagation(e);
