@@ -136,12 +136,10 @@ class WechatApiController extends Controller
             $goodslist[$key]['thumb'] = SimpleGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
             if (count($goodslist[$key]['thumb']) == 0){
                 $goodslist[$key]['thumb'] = 'public/thumb.jpg';
-            }else{
-                dump($goodslist[$key]['thumb']);
             }
         }
-//        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
-//        return response()->json($data);
+        $data = ['status' => '1', 'msg' => '获取商品成功', 'data' => ['goodslist' => $goodslist]];
+        return response()->json($data);
     }
 
     /**
