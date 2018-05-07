@@ -114,7 +114,7 @@ function cart_list_box(name,price,num) {
 function goods_list_box(name,details,stock,price,thumb,number) {
     var str = "";
     if(number > 0){
-        str = '<div class="gl_item">'+
+        str += '<div class="gl_item">'+
         '<div class="gl_item_fl">'+
             '<div class="goods_img">'+
                 '<img src="http://develop.01nnt.com/'+thumb+'">'+
