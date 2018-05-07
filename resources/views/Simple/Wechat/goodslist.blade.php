@@ -18,7 +18,6 @@
   	<input type="hidden" name="zerone_user_id" id="zerone_user_id" value="{{session("zerone_auth_info.zerone_user_id")}}">
     <div class="page">
 	    <div class="g-flexview">
-            <div id="showPreloader_hook" onclick="showPreloader()"></div>
 			<div class="head">
 				<div class="nav">
 					<ul class="clear_after" id="goods_cs_lt">

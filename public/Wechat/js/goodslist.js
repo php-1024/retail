@@ -1,5 +1,4 @@
 $(function(){
-    $("#showPreloader_hook").click();
     var total_price = 0;//购物车总价格
 
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
@@ -7,7 +6,7 @@ $(function(){
     var store_id=$("#store_id").val();//店铺ID
 	//获取goods分类列表
     var class_url = "http://develop.01nnt.com/api/wechatApi/category";
-
+    $.showPreloader();
     $.post(
     	class_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
@@ -155,9 +154,6 @@ function stopPropagation(e) {
     else if (window.event) {
         window.event.cancelBubble = true;//兼容IE
     }
-}
-function showPreloader(){
-    $.showPreloader();
 }
 function show(obj){
      $("#"+obj).css({display: 'flex'});
