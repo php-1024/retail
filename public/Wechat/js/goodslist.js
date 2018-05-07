@@ -48,7 +48,7 @@ $(function(){
                         json.data.goods_list[i].num);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
                     //记录购物车列表数量,渲染商品列表赋值
-                    goods_num.push[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
+                    goods_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
                 $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
