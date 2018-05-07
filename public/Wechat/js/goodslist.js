@@ -85,7 +85,7 @@ $(function(){
 });
 //购物车列表
 function cart_list_box(name,price,num) {
-        $.showPreloader();
+    $.showPreloader();
     str = '<li>'+
         '<span>'+name+'</span>'+
         '<span>&yen;'+price+'</span>'+
