@@ -1,5 +1,5 @@
 $(function(){
-    showPreloader_hook();
+    $("#showPreloader_hook").click();
     var total_price = 0;//购物车总价格
 
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
@@ -156,9 +156,9 @@ function stopPropagation(e) {
         window.event.cancelBubble = true;//兼容IE
     }
 }
-function showPreloader_hook(){
+$(document).on('click', '#showPreloader_hook', function () {
     $.showPreloader();
-}
+  });
 function show(obj){
      $("#"+obj).css({display: 'flex'});
     $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
