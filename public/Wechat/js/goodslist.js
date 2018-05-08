@@ -27,7 +27,16 @@ $(function(){
             }
 		}
 	);
-	//获取购物车商品
+    //查询商品列表和购物车列表
+    selectgoods("0","");
+
+});
+//查询商品列表和购物车列表
+function selectgoods(category,keyword_val){
+    //获取购物车商品
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
 	var total_price = 0;//购物车总价格
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
@@ -63,8 +72,8 @@ $(function(){
             }
             //获取商品列表
             var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
-            var category_id = (category) ? category : '0';//分类ID
-            var keyword = (keyword_val) ? keyword_val : $("#search").val();
+            var category_id = category;//分类ID
+            var keyword = keyword_val;
             $.post(
             	goodslist_url,
                 {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
@@ -93,7 +102,7 @@ $(function(){
         	);
 		}
 	);
-});
+}
 //添加商品购物车
 function cart_add(obj){
     $.showIndicator();
