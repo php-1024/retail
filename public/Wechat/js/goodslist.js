@@ -56,7 +56,7 @@ $(function(){
                 var total = json.data.total;
                 $("#total").text(total);
                 $("#goods_total").text(total);
-
+                //购物车列表渲染
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
                 $cart_list.append(str);
@@ -128,6 +128,8 @@ function cart_add(obj){
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
                 $("#goods_id"+json.data.goods_id).text(json.data.num);
+                //购物车总价格
+                totalprice(total_price);
                 $.hideIndicator();
     		}
 		}
