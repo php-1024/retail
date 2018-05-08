@@ -120,12 +120,18 @@ class WechatApiController extends Controller
         $keyword = $request->keyword;
         // 条码
         $scan_code = $request->scan_code;
+        // 分类id
+        $category_id = $request->category_id;
+        // 条件
         $where = [['fansmanage_id', $fansmanage_id], ['simple_id', $store_id], ['status', '1']];
         if ($keyword) {
             $where[] = ['name', 'LIKE', '%' . $keyword . '%'];
         }
         if ($scan_code) {
             $where[] = ['barcode', $scan_code];
+        }
+        if ($category_id) {
+            $where[] = ['category_id', $category_id];
         }
         $goodslist = SimpleGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
         if (empty($goodslist->toArray())) {
@@ -430,7 +436,34 @@ class WechatApiController extends Controller
         $goods_list = array_values($goods_list);
 
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['goods_list' => $goods_list, 'total' => $total]];
+
         return response()->json($data);
+    }
+
+    /**
+     * 清空购物车
+     */
+    public function shopping_cart_empty(Request $request)
+    {
+        // 用户店铺id
+        $user_id = $request->user_id;
+        // 用户零壹id
+        $zerone_user_id = $request->zerone_user_id;
+        // 联盟主id
+        $fansmanage_id = $request->fansmanage_id;
+        // 店铺id
+        $store_id = $request->store_id;
+        // 缓存键值
+        $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
+        // 定义空数组
+        $cart_data = [];
+        // 清空购物车
+        ZeroneRedis::create_shopping_cart($key_id, $cart_data);
+
+        $data = ['status' => '1', 'msg' => '清空成功', 'data' => ['user_id' => $user_id]];
+
+        return response()->json($data);
+
     }
 
     /**

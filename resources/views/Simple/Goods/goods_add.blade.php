@@ -70,7 +70,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
                                                 <div class="col-sm-8">
-                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_thumb('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i></button>
+                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_thumb()"><i class="fa fa-upload"></i></button>
                                                 </div>
                                             </div>
 
@@ -163,10 +163,10 @@
     });
 
     //获取图片上传窗口
-    function add_thumb(organization_id) {
+    function add_thumb() {
         var url = $("#upload_add").val();
         var _token = $("#_token").val();
-        var data = {'organization_id':organization_id,'_token':_token};
+        var data = {'_token':_token};
         $.post(url, data, function (json) {
             if (json.status == -1) {
                 alert('1');
