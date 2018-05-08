@@ -244,10 +244,7 @@ function search_click(){
         }
     });
     var keyword_val = $("#search").val();
-    alert(keyword_val)
-    // setTimeout(function(){
-    //     selectgoods(category_id,keyword_val);
-    // },500);
+    selectgoods(category_id,keyword_val);
 }
 //清空购物车
 function cart_empty(){
