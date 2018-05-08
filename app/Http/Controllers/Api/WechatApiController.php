@@ -235,7 +235,6 @@ class WechatApiController extends Controller
             // 更新缓存
             ZeroneRedis::create_shopping_cart($key_id, $cart_data);
         } else {
-
             // 如果值为1 表示不能
             if ($config != '1') {
                 // 库存不足
@@ -243,7 +242,6 @@ class WechatApiController extends Controller
                     return response()->json(['status' => '0', 'msg' => '商品' . $goods_name . '库存不足', 'data' => '']);
                 }
             }
-
             // 库存
             $stock -= $num;
             // 数据处理
