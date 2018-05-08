@@ -210,6 +210,35 @@ function cart_reduce(obj,status){
 		}
 	);
 }
+//情况购物车
+function cart_empty(){
+    $.showIndicator();
+    var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_empty";
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    var user_id=$("#shop_user_id").val();//用户店铺ID
+    var data = {
+            fansmanage_id:fansmanage_id,
+            zerone_user_id:zerone_user_id,
+            user_id:user_id,
+            store_id:store_id,
+            _token:_token
+    };
+    $.post(
+    	url,
+        data,
+    	function(json){
+    		if (json.status == 1) {
+                $.hideIndicator();
+                $.toast("清空成功");
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
+		}
+	);
+}
 //购物车总价格
 function totalprice(price,status){
     //del判断是减少商品还是添加,true为添加

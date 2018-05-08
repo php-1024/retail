@@ -313,7 +313,7 @@
 		<!-- alert -->
 		<div class="popup_alert" id="alert">
 			<div class="quhuo alert_width popup_alert_hook">
-				<p class="quhuoinfo">确认清空购物车吗?</p>
+				<p class="quhuoinfo" onclick="cart_empty()">确认清空购物车吗?</p>
 				<div class="max_height_box">
 					<!-- <p>我的取货信息我的取货信息我的取货信息</p> -->
 				</div>
