@@ -181,7 +181,7 @@
                 return;
             }else{
                 $('#myModal').html(response);
-                $('#myModal').modal('hide');
+                $('#myModal').modal();
             }
         });
     }
