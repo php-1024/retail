@@ -76,8 +76,9 @@ $editAddress = $tools->GetEditAddressParameters();
 			'getBrandWCPayRequest',
 			<?php echo $jsApiParameters; ?>,
 			function(res){
+			    console.log(res);
 				WeixinJSBridge.log(res.err_msg);
-				console.log(res.err_code+res.err_desc+res.err_msg);
+				// console.log(res.err_code+res.err_desc+res.err_msg);
 			}
 		);
 	}
@@ -117,7 +118,6 @@ $editAddress = $tools->GetEditAddressParameters();
 	}
 
 	window.onload = function(){
-	    console.log(typeof WeixinJSBridge);
 		if (typeof WeixinJSBridge == "undefined"){
 		    if( document.addEventListener ){
 		        document.addEventListener('WeixinJSBridgeReady', editAddress, false);
