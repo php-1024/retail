@@ -63,8 +63,8 @@ $(function(){
             }
             //获取商品列表
             var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
-            var category_id = 0;//分类ID
-            var keyword = "奶";
+            var category_id = (category) ? category : '0';//分类ID
+            var keyword = (keyword_val) ? keyword_val : $("#search").val();
             $.post(
             	goodslist_url,
                 {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
