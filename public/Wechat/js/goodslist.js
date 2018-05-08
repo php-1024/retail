@@ -88,7 +88,7 @@ $(function(){
 		}
 	);
 });
-//添加购物车
+//添加商品购物车
 function cart_add(obj){
     $.showIndicator();
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_add";
@@ -120,17 +120,72 @@ function cart_add(obj){
     	url,
         data,
     	function(json){
-            console.log(json);
     		if (json.status == 1) {
                 //删除点击加号按钮的当前状态
                 $(".cart_border").removeClass('action');
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
-                $("#goods_id"+json.data.goods_id).text(json.data.num);
+                // if(json.data.num == 1){
+                //     $this.prev()
+                // }
+                //设置点击数量
+                $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
                 totalprice(json.data.goods_price);
                 //购物车总数
                 totalnum(1);
+                $.hideIndicator();
+    		}
+		}
+	);
+}
+//减少商品购物车
+function cart_reduce(obj){
+    $.showIndicator();
+    var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_reduce";
+    var $this = $(obj);
+    var goods_id = $this.data("goodsid");
+    var goods_name = $this.data("goodsname");
+    var stock = $this.data("goodsstock");
+    var goods_thumb = $this.data("goodsthumb");
+    var goods_price = $this.data("goodsprice");
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    var user_id=$("#shop_user_id").val();//用户店铺ID
+    var data = {
+            fansmanage_id:fansmanage_id,
+            zerone_user_id:zerone_user_id,
+            user_id:user_id,
+            store_id:store_id,
+            goods_id:goods_id,
+            goods_price:goods_price,
+            goods_name:goods_name,
+            goods_thumb:goods_thumb,
+            num:1,
+            stock:stock,
+            _token:_token
+    };
+    $.post(
+    	url,
+        data,
+    	function(json){
+    		if (json.status == 1) {
+                console.log(json);
+                //删除点击加号按钮的当前状态
+                //$(".cart_border").removeClass('action');
+                //添加点击加号按钮的当前状态
+                //$this.parent().addClass('action');
+                // if(json.data.num == 1){
+                //     $this.prev()
+                // }
+                //设置点击数量
+                //$(".goods_id"+json.data.goods_id).text(json.data.num);
+                //购物车总价格
+                //totalprice(json.data.goods_price);
+                //购物车总数
+                //totalnum(1);
                 $.hideIndicator();
     		}
 		}
@@ -165,7 +220,7 @@ function cart_list_box(name,price,num,goods_id) {
         '<div class="cart_alert_btn">'+
             '<div class="goods_btn cart_border">'+
                 '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt">'+num+'</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt goods_id'+goods_id+'">'+num+'</a>'+
                 '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
             '</div>'+
         '</div>'+
@@ -206,11 +261,16 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                                     'data-goodsname="'+name+'"'+
                                     'data-goodsstock="'+stock+'"'+
                                     'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
-                                    'data-goodsprice="'+price+'">-</a>'+
-                                    '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
+                                    'data-goodsprice="'+price+'" onclick="cart_reduce(this)">-</a>'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show goods_id'+goods_id+'">'+number+'</a>';
                         }else{
                         str += '<div class="goods_btn action">'+
-                                    '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
+                                    '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide"'+
+                                    'data-goodsid="'+goods_id+'"'+
+                                    'data-goodsname="'+name+'"'+
+                                    'data-goodsstock="'+stock+'"'+
+                                    'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
+                                    'data-goodsprice="'+price+'" onclick="cart_reduce(this)">-</a>'+
                                     '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
                         }
 

@@ -46,12 +46,13 @@ class GoodsController extends Controller
         $displayorder = $request->get('displayorder');      //商品排序
         $details = $request->get('details');                //商品详情
         $fansmanage_id = Organization::getPluck(['id' => $admin_data['organization_id']], 'parent_id');
-        $goods_name = SimpleGoods::checkRowExists(['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'name' => $name]);
-        $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
+        $goods_name = SimpleGoods::checkRowExists(['fansmanage_id' => $fansmanage_id, 'simple_id' => $admin_data['organization_id'], 'name' => $name],'id');
+        $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ],'barcode');
         if ($goods_name) {//判断商品名称是已经存在
             return response()->json(['data' => '商品名称重名，请重新输入！', 'status' => '0']);
         }
         if ($is_barcode) {//判断商品条码是否唯一
+            dd($is_barcode);
             return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
         }
         if ($category_id == 0) {
@@ -121,7 +122,7 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
             SimpleGoods::editSimpleGoods(['id' => $goods_id],['barcode'=>'']);//修改商品前现将商品条码设置为空,在检测还有没有重复的商品条码
-            $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ]);
+            $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ],'barcode');
             if ($is_barcode) {//判断商品条码是否唯一
                 return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
             }
