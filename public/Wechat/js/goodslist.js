@@ -59,9 +59,8 @@ function selectgoods(category,keyword_val){
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
-                //记录总价格的值
                 var _this = $("#cart_price");
-                _this.attr('data-totalprice', total_price);
+                _this.attr('data-totalprice', total_price);//记录总价格的值
                 _this.html("金额总计<em>&yen;"+total_price+"</em>");
                 //购物车总数
                 var total = json.data.total;
