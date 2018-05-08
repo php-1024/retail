@@ -176,7 +176,7 @@ function cart_reduce(obj){
     	function(json){
     		if (json.status == 1) {
                 //数量小于的情况下显示数量和减号按钮
-                console.log(json.data.num);
+                console.log(json);
                 if(json.data.num == 0){
                     $this.removeClass('gs_show').addClass('gs_hide');
                     $this.next().removeClass('gs_show').addClass('gs_hide');
