@@ -47,7 +47,7 @@ printf_info($order);
 
 
 $jsApiParameters = $tools->GetJsApiParameters($order);
-
+$jsApiParameters = json_decode($jsApiParameters,true);
 var_dump($jsApiParameters);
 
 //获取共享收货地址js函数参数
