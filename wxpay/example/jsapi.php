@@ -67,7 +67,7 @@ $editAddress = $tools->GetEditAddressParameters();
 			<?php echo $jsApiParameters; ?>,
 			function(res){
 				WeixinJSBridge.log(res.err_msg);
-				alert(res.err_code+res.err_desc+res.err_msg);
+				console.log(res.err_code+res.err_desc+res.err_msg);
 			}
 		);
 	}
@@ -99,8 +99,8 @@ $editAddress = $tools->GetEditAddressParameters();
 				var value3 = res.addressCountiesThirdStageName;
 				var value4 = res.addressDetailInfo;
 				var tel = res.telNumber;
-				
-				alert(value1 + value2 + value3 + value4 + ":" + tel);
+
+                console.log(value1 + value2 + value3 + value4 + ":" + tel);
 			}
 		);
 	}

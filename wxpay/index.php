@@ -59,7 +59,7 @@
     </style>
 </head>
 <body>
-<?php $domain_url = "<?php echo $domain_url;?>"; ?>
+<?php $domain_url = "http://develop.01nnt.com/wxpay"; ?>
 <div align="center">
     <ul>
         <li style="background-color:#FF7F24"><a href="<?php echo $domain_url; ?>/example/jsapi.php">JSAPI支付</a></li>
