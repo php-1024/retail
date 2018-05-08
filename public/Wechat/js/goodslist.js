@@ -10,7 +10,7 @@ $(function(){
     	function(json){
     		if (json.status == 1) {
                 console.log(json);
-    			var str = "<li class='action'><a href='javascript:;' onclick='category_list(0);'>全部</a></li>";
+    			var str = "<li class='action' onclick='category_list(0);'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
     				str +="<li onclick='category_list("+json.data.categorylist[i].id+");'><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
@@ -28,7 +28,7 @@ $(function(){
 		}
 	);
 	//获取购物车商品
-	 var total_price = 0;//购物车总价格
+	var total_price = 0;//购物车总价格
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
@@ -209,35 +209,75 @@ function cart_reduce(obj,status){
 }
 //获取分类查询
 function category_list(category_id){
-    alert();
+    //获取购物车商品
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
-
-    var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+	var total_price = 0;//购物车总价格
+	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
+    var shop_user_id=$("#shop_user_id").val();//用户店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
     $.post(
-    	goodslist_url,
-        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,category_id:category_id},
+    	cart_list_url,
+        {
+            'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
+            'user_id':shop_user_id,
+            'zerone_user_id':zerone_user_id,
+            'category_id':category_id
+        },
     	function(json){
-            var str = "";
-            console.log(json);
-
     		if (json.status == 1) {
-                for (var i = 0; i < json.data.goodslist.length; i++) {
-                    //判断列表与购物车的id存在就读取购物车的数量
-                    if(cart_num[json.data.goodslist[i].id]){
-                        json.data.goodslist[i].number = cart_num[json.data.goodslist[i].id];
-                    }
-                    str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
-                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb,
-                    json.data.goodslist[i].number,json.data.goodslist[i].id);
+                var str = "";
+                var cart_num = [];
+                console.log(json);
+                for (var i = 0; i < json.data.goods_list.length; i++) {
+                    str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
+                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id,json.data.goods_list[i].stock,
+                        json.data.goods_list[i].goods_thumb);
+                    //计算购物车总价格
+                    total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
+                    //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
+                    cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
-                var $goodslist = $("#goodslist");
-                $goodslist.empty();
-                $goodslist.append(str);
+                //购物车总价格
+                totalprice(total_price,true);
+                //购物车总数
+                var total = json.data.total;
+                totalnum(total,true);
+                //购物车列表渲染
+                var $cart_list = $("#cart_list");
+                $cart_list.empty();
+                $cart_list.append(str);
     		}else if (json.status == 0) {
                 alert(msg);
             }
+            //获取商品列表
+            var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+            $.post(
+            	goodslist_url,
+                {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+            	function(json){
+                    var str = "";
+                    console.log(json);
+
+            		if (json.status == 1) {
+                        for (var i = 0; i < json.data.goodslist.length; i++) {
+                            //判断列表与购物车的id存在就读取购物车的数量
+                            if(cart_num[json.data.goodslist[i].id]){
+                                json.data.goodslist[i].number = cart_num[json.data.goodslist[i].id];
+                            }
+                            str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
+                            json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb,
+                            json.data.goodslist[i].number,json.data.goodslist[i].id);
+                        }
+                        var $goodslist = $("#goodslist");
+                        $goodslist.empty();
+                        $goodslist.append(str);
+            		}else if (json.status == 0) {
+                        alert(msg);
+                    }
+        		}
+        	);
 		}
 	);
 }
