@@ -209,6 +209,7 @@ function cart_reduce(obj,status){
 }
 //获取分类查询
 function category_list(category_id){
+    alert();
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
