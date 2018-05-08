@@ -122,6 +122,10 @@ function cart_add(obj){
     	function(json){
             console.log(json);
     		if (json.status == 1) {
+                //删除点击加号按钮的当前状态
+                $(".cart_border").removeClass('action');
+                //添加点击加号按钮的当前状态
+                $this.parent().addClass('action');
                 $("#goods_id"+json.data.goods_id).text(json.data.num);
                 $.hideIndicator();
     		}
