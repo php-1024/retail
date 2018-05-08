@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
 {
     public static $files = array (
-        '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '023d27dca8066ef29e6739335ea73bad' => __DIR__ . '/..' . '/symfony/polyfill-php70/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
+        '1d1b89d124cc9cb8219922c9d5569199' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest.php',
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
-        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '9d172ae573e41b4662cc89f9097505e6' => __DIR__ . '/..' . '/zhuzhichao/ip-location-zh/src/IpLocationZh.php',
@@ -37,6 +37,7 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         array (
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
+            'WXPay\\' => 6,
         ),
         'T' => 
         array (
@@ -119,8 +120,8 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
         ),
         'Zhuzhichao\\IpLocationZh\\' => 
         array (
@@ -137,6 +138,10 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'WXPay\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/wxpay/wxpay/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -342,11 +347,15 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Http\\Controllers\\Agent\\SystemController' => __DIR__ . '/../..' . '/app/Http/Controllers/Agent/SystemController.php',
         'App\\Http\\Controllers\\Api\\AndroidApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AndroidApiController.php',
         'App\\Http\\Controllers\\Api\\AndroidSimpleApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AndroidSimpleApiController.php',
+        'App\\Http\\Controllers\\Api\\AuthApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthApiController.php',
+        'App\\Http\\Controllers\\Api\\WechatApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/WechatApiController.php',
+        'App\\Http\\Controllers\\Api\\WechatController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/WechatController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\Fansmanage\\AccountController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/AccountController.php',
         'App\\Http\\Controllers\\Fansmanage\\ApiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/ApiController.php',
         'App\\Http\\Controllers\\Fansmanage\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/LoginController.php',
         'App\\Http\\Controllers\\Fansmanage\\MessageController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/MessageController.php',
+        'App\\Http\\Controllers\\Fansmanage\\PaysettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/PaysettingController.php',
         'App\\Http\\Controllers\\Fansmanage\\ShopController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/ShopController.php',
         'App\\Http\\Controllers\\Fansmanage\\StoreController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/StoreController.php',
         'App\\Http\\Controllers\\Fansmanage\\TestController' => __DIR__ . '/../..' . '/app/Http/Controllers/Fansmanage/TestController.php',
@@ -396,10 +405,12 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Http\\Controllers\\Zerone\\RoleController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/RoleController.php',
         'App\\Http\\Controllers\\Zerone\\SubordinateController' => __DIR__ . '/../..' . '/app/Http/Controllers/Zerone/SubordinateController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
-        'App\\Http\\Middleware\\Agent\\UserCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent/AgentCheck.php',
+        'App\\Http\\Middleware\\Agent\\AgentCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent/AgentCheck.php',
         'App\\Http\\Middleware\\Agent\\AgentCheckAjax' => __DIR__ . '/../..' . '/app/Http/Middleware/Agent/AgentCheckAjax.php',
         'App\\Http\\Middleware\\Api\\AndroidApiCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/AndroidApiCheck.php',
         'App\\Http\\Middleware\\Api\\AndroidSimpleApiCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/AndroidSimpleApiCheck.php',
+        'App\\Http\\Middleware\\Api\\WechatApiCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/WechatApiCheck.php',
+        'App\\Http\\Middleware\\Api\\WechatCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Api/WechatCheck.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\Fansmanage\\FansmanageCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Fansmanage/FansmanageCheck.php',
         'App\\Http\\Middleware\\Fansmanage\\FansmanageCheckAjax' => __DIR__ . '/../..' . '/app/Http/Middleware/Fansmanage/FansmanageCheckAjax.php',
@@ -412,6 +423,7 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Http\\Middleware\\Tooling\\ToolingCheckAjax' => __DIR__ . '/../..' . '/app/Http/Middleware/Tooling/ToolingCheckAjax.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
+        'App\\Http\\Middleware\\User\\UserCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/User/UserCheck.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Middleware\\Zerone\\ZeroneCheck' => __DIR__ . '/../..' . '/app/Http/Middleware/Zerone/ZeroneCheck.php',
         'App\\Http\\Middleware\\Zerone\\ZeroneCheckAjax' => __DIR__ . '/../..' . '/app/Http/Middleware/Zerone/ZeroneCheckAjax.php',
@@ -467,6 +479,7 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Models\\RoleAccount' => __DIR__ . '/../..' . '/app/Models/RoleAccount.php',
         'App\\Models\\RoleNode' => __DIR__ . '/../..' . '/app/Models/RoleNode.php',
         'App\\Models\\Setup' => __DIR__ . '/../..' . '/app/Models/Setup.php',
+        'App\\Models\\SimpleAddress' => __DIR__ . '/../..' . '/app/Models/SimpleAddress.php',
         'App\\Models\\SimpleCategory' => __DIR__ . '/../..' . '/app/Models/SimpleCategory.php',
         'App\\Models\\SimpleCheckOrder' => __DIR__ . '/../..' . '/app/Models/SimpleCheckOrder.php',
         'App\\Models\\SimpleCheckOrderGoods' => __DIR__ . '/../..' . '/app/Models/SimpleCheckOrderGoods.php',
@@ -479,6 +492,7 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Models\\SimpleOrderGoods' => __DIR__ . '/../..' . '/app/Models/SimpleOrderGoods.php',
         'App\\Models\\SimplePurchaseOrder' => __DIR__ . '/../..' . '/app/Models/SimplePurchaseOrder.php',
         'App\\Models\\SimplePurchaseOrderGoods' => __DIR__ . '/../..' . '/app/Models/SimplePurchaseOrderGoods.php',
+        'App\\Models\\SimpleSelftake' => __DIR__ . '/../..' . '/app/Models/SimpleSelftake.php',
         'App\\Models\\SimpleStock' => __DIR__ . '/../..' . '/app/Models/SimpleStock.php',
         'App\\Models\\SimpleStockLog' => __DIR__ . '/../..' . '/app/Models/SimpleStockLog.php',
         'App\\Models\\SimpleSupplier' => __DIR__ . '/../..' . '/app/Models/SimpleSupplier.php',
@@ -512,6 +526,7 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'App\\Models\\WechatDefinedMenu' => __DIR__ . '/../..' . '/app/Models/WechatDefinedMenu.php',
         'App\\Models\\WechatImage' => __DIR__ . '/../..' . '/app/Models/WechatImage.php',
         'App\\Models\\WechatOpenSetting' => __DIR__ . '/../..' . '/app/Models/WechatOpenSetting.php',
+        'App\\Models\\WechatPay' => __DIR__ . '/../..' . '/app/Models/WechatPay.php',
         'App\\Models\\WechatReply' => __DIR__ . '/../..' . '/app/Models/WechatReply.php',
         'App\\Models\\WechatSubscribeReply' => __DIR__ . '/../..' . '/app/Models/WechatSubscribeReply.php',
         'App\\Models\\WechatWebAuthorization' => __DIR__ . '/../..' . '/app/Models/WechatWebAuthorization.php',
@@ -4026,6 +4041,9 @@ class ComposerStaticInitb9735fcbdebacda65f8b28f1dfce9c00
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'WXPay\\WXPay' => __DIR__ . '/..' . '/wxpay/wxpay/src/WXPay.php',
+        'WXPay\\WXPayConstants' => __DIR__ . '/..' . '/wxpay/wxpay/src/WXPayConstants.php',
+        'WXPay\\WXPayUtil' => __DIR__ . '/..' . '/wxpay/wxpay/src/WXPayUtil.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Whoops\\Exception\\ErrorException' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/ErrorException.php',
         'Whoops\\Exception\\Formatter' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Exception/Formatter.php',
