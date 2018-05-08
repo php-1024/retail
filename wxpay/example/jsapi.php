@@ -104,7 +104,7 @@ $editAddress = json_decode($editAddress,true);
             appId: <?php echo $editAddress["appId"] ?>,
             timeStamp: <?php echo $editAddress["timeStamp"] ?>,
             nonceStr:  <?php echo $editAddress["nonceStr"] ?>,
-            signature: <?php echo $editAddress["signature"] ?>,
+            signature: <?php echo $editAddress["nonceStr"] ?>,
             jsApiList: [
                 'checkJsApi',
                 'onMenuShareTimeline',
