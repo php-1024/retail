@@ -49,6 +49,8 @@ printf_info($order);
 
 $jsApiParameters = $tools->GetJsApiParameters($order);
 
+var_dump($jsApiParameters);
+
 //获取共享收货地址js函数参数
 $editAddress = $tools->GetEditAddressParameters();
 
@@ -107,6 +109,9 @@ $editAddress = $tools->GetEditAddressParameters();
 				var value3 = res.addressCountiesThirdStageName;
 				var value4 = res.addressDetailInfo;
 				var tel = res.telNumber;
+
+				console.log(value1);
+				console.log(tel);
 
                 console.log(value1 + value2 + value3 + value4 + ":" + tel);
 			}
