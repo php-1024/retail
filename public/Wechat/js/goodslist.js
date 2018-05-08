@@ -12,12 +12,8 @@ $(function(){
                 console.log(json);
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				// if (i == json.data.categorylist.length - 1) {
-                    //     console.log(i,"i");
-    				// 	str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
-    				// 	continue;
-    				// }
-    				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li><a href='http://develop.01nnt.com/api/wechatApi/goods_list?fansmanage_id='"+fansmanage_id+"'&store_id='"+store_id+"'&category_id="+
+                    json.data.categorylist[i].id+"'>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
