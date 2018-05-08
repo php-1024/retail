@@ -44,8 +44,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('simple/ajax/goods_add_check') }}">
-                                            <input type="hidden" id="upload_add" value="{{ url('simple/ajax/add_upload') }}">
-                                            <input type="hidden" id="_token" name="_token" value="{{csrf_token()}}">
+                                            <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
                                                 <div class="col-sm-8">
@@ -63,14 +62,6 @@
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品名称</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="name">
-                                                </div>
-                                            </div>
-
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
-                                                <div class="col-sm-8">
-                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_thumb()"><i class="fa fa-upload"></i></button>
                                                 </div>
                                             </div>
 
@@ -132,8 +123,7 @@
         </section>
     </section>
 </section>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-</div>
+
 <script src="{{asset('public/Simple')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Simple')}}/js/bootstrap.js"></script>
@@ -162,29 +152,6 @@
             autogrow: true
         });
     });
-
-    //获取图片上传窗口
-    function add_thumb() {
-        var url = $("#upload_add").val();
-        var _token = $("#_token").val();
-        var data = {'_token':_token};
-        $.post(url,data,function(response){
-            if(response.status=='-1'){
-                swal({
-                    title: "提示信息",
-                    text: response.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    window.location.reload();
-                });
-                return;
-            }else{
-                $('#myModal').html(response);
-                $('#myModal').modal();
-            }
-        });
-    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");
