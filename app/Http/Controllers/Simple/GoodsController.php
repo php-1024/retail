@@ -40,6 +40,7 @@ class GoodsController extends Controller
         foreach($goods as $key=>$val){
             $thumb[] = SimpleGoodsThumb::getList(['goods_id' => $val->id],'0','created_at','DESC');
         }
+        dd($thumb);
         return view('Simple/Goods/add_upload', ['thumb' => $thumb]);
     }
 
