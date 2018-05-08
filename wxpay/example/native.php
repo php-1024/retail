@@ -27,6 +27,8 @@ $url1 = $notify->GetPrePayUrl("123456789");
  * 3、支付完成之后，微信服务器会通知支付成功
  * 4、在支付成功通知中需要查单确认是否真正支付成功（见：notify.php）
  */
+$domain_url = "http://develop.01nnt.com/wxpay";
+
 $input = new WxPayUnifiedOrder();
 $input->SetBody("test1231");
 $input->SetAttach("test");
@@ -36,7 +38,7 @@ $input->SetTime_start(date("YmdHis"));
 $input->SetTime_expire(date("YmdHis", time() + 600));
 $input->SetGoods_tag("test1");
 //$input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
-$input->SetNotify_url("http://wxpay.laravel.xin/example/notify.php");
+$input->SetNotify_url("$domain_url/example/notify.php");
 $input->SetTrade_type("NATIVE");
 $input->SetProduct_id("123456789");
 $result = $notify->GetPayUrl($input);
@@ -51,10 +53,10 @@ $url2 = $result["code_url"];
 </head>
 <body>
 	<div style="margin-left: 10px;color:#556B2F;font-size:30px;font-weight: bolder;">扫描支付模式一</div><br/>
-	<img alt="模式一扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data=<?php echo urlencode($url1);?>" style="width:150px;height:150px;"/>
+	<img alt="模式一扫码支付" src="<?php echo $domain_url;?>/example/qrcode.php?data=<?php echo urlencode($url1);?>" style="width:150px;height:150px;"/>
 	<br/><br/><br/>
 	<div style="margin-left: 10px;color:#556B2F;font-size:30px;font-weight: bolder;">扫描支付模式二</div><br/>
-	<img alt="模式二扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data=<?php echo urlencode($url2);?>" style="width:150px;height:150px;"/>
+	<img alt="模式二扫码支付" src="<?php echo $domain_url;?>/example/qrcode.php?data=<?php echo urlencode($url2);?>" style="width:150px;height:150px;"/>
 	
 </body>
 </html>
