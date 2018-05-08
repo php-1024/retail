@@ -54,15 +54,20 @@ var_dump($jsApiParameters);
 $editAddress = $tools->GetEditAddressParameters();
 
 
-$a_k="9_aeWuKiTlzBxR21jNsPhB3JnaxLZ4IzxaLwIGZgF3xElEjiFRRhioVoYKxYd2okiD4ywJymzuNBLyP9KO-HB80QaTgm1WAU5_ICINbqNL1mbMrSOtvxGZkcJAQOmPIspTW2QcXXOovnhJy059IEUeAHAPLB";
+$a_k = "9_aeWuKiTlzBxR21jNsPhB3JnaxLZ4IzxaLwIGZgF3xElEjiFRRhioVoYKxYd2okiD4ywJymzuNBLyP9KO-HB80QaTgm1WAU5_ICINbqNL1mbMrSOtvxGZkcJAQOmPIspTW2QcXXOovnhJy059IEUeAHAPLB";
 
 $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$a_k}&type=jsapi";
 $res = file_get_contents($url);
-$res = json_decode($res,true);
+$res = json_decode($res, true);
 $ticket = $res["ticket"];
 
+
+var_dump($ticket);
+
 // 设置得到签名的参数
-$url = request()->fullUrl();
+$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+var_dump($url);
+
 $timestamp = time();
 $nonceStr = substr(md5(time()), 0, 16);
 // 这里参数的顺序要按照 key 值 ASCII 码升序排序
@@ -90,7 +95,7 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
     <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
     <script>
         wx.config({
-            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
             appId: '<?php echo $signPackage["appId"]; ?>', // 必填，公众号的唯一标识
             timestamp: '<?php echo $signPackage["timestamp"]; ?>', // 必填，生成签名的时间戳
             nonceStr: '<?php echo $signPackage["nonceStr"]; ?>', // 必填，生成签名的随机串
@@ -99,7 +104,8 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                 'checkJsApi',
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
-                'openAddress'
+                'openAddress',
+                'getBrandWCPayRequest',
             ] // 必填，需要使用的JS接口列表
         });
 
@@ -110,6 +116,7 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
 
                 }
             });
+        })
     </script>
 
     <script type="text/javascript">
@@ -143,7 +150,7 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
         //获取共享地址
         function editAddress() {
             WeixinJSBridge.invoke(
-                'editAddress',
+                'openAddress',
                 <?php echo $editAddress; ?>,
                 function (res) {
                     console.log(res);
@@ -157,19 +164,19 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                 }
             );
         }
-
-        window.onload = function () {
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', editAddress, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', editAddress);
-                    document.attachEvent('onWeixinJSBridgeReady', editAddress);
-                }
-            } else {
-                editAddress();
-            }
-        };
+        editAddress();
+        // window.onload = function () {
+        //     if (typeof WeixinJSBridge == "undefined") {
+        //         if (document.addEventListener) {
+        //             document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+        //         } else if (document.attachEvent) {
+        //             document.attachEvent('WeixinJSBridgeReady', editAddress);
+        //             document.attachEvent('onWeixinJSBridgeReady', editAddress);
+        //         }
+        //     } else {
+        //         editAddress();
+        //     }
+        // };
 
     </script>
 </head>
