@@ -165,7 +165,7 @@ function cart_list_box(name,price,num,goods_id) {
         '<div class="cart_alert_btn">'+
             '<div class="goods_btn cart_border">'+
                 '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt">'+num+'</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_inpt goods_id'+goods_id+'">'+num+'</a>'+
                 '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
             '</div>'+
         '</div>'+
@@ -207,7 +207,7 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                                     'data-goodsstock="'+stock+'"'+
                                     'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
                                     'data-goodsprice="'+price+'">-</a>'+
-                                    '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt gs_show">'+number+'</a>';
+                                    '<a href="javascript:;" class="cart_box delect_cart_inpt gs_show goods_id'+goods_id+'">'+number+'</a>';
                         }else{
                         str += '<div class="goods_btn action">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
