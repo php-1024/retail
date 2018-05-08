@@ -2,6 +2,8 @@
 
 function valid()
 {
+    echo 2134234;
+    exit;
     if (checkSignature()) {
         //返回echostr
         $echostr = $_GET['echostr'];
