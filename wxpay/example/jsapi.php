@@ -102,7 +102,7 @@ $editAddress = json_decode($editAddress,true);
         wx.config({
             debug: true,
             appId: <?php echo $editAddress["appId"] ?>,
-            timestamp: <?php echo $editAddress["timestamp"] ?>,
+            timeStamp: <?php echo $editAddress["timeStamp"] ?>,
             nonceStr:  <?php echo $editAddress["nonceStr"] ?>,
             signature: <?php echo $editAddress["signature"] ?>,
             jsApiList: [
