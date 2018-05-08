@@ -189,6 +189,7 @@ function cart_reduce(obj){
 }
 //购物车总价格
 function totalprice(price,del){
+    //del判断是减少商品还是添加
     var $this = $("#cart_price");
     var old_price = $this.data("totalprice");
     var total = (del== true) ? parseFloat(price) + parseFloat(old_price) : parseFloat(old_price) - parseFloat(price);
