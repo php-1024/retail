@@ -70,7 +70,7 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
                                                 <div class="col-sm-8">
-                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_upload('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i>+加图</button>
+                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_upload('{{$admin_data['organization_id']}}')">+加图</button>
                                                 </div>
                                             </div>
 
