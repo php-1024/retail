@@ -162,6 +162,32 @@
             autogrow: true
         });
     });
+    //获取图片上传窗口
+    function add_upload(organization_id) {
+        var url = $("#add_upload").val();
+        var data = {'organization_id':organization_id};
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                alert('1');
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    alert('1');
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");
@@ -178,32 +204,6 @@
                     confirmButtonText: "确定",
                 },function(){
                     window.location.href = "{{asset("simple/goods/goods_edit?goods_id=")}}"+json.goods_id;
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }
-        });
-    }
-    //获取图片上传窗口
-    function add_upload(organization_id) {
-        var url = $("#add_upload").val();
-        var data = {'organization_id':organization_id};
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    alert('1');
                 });
             }else{
                 swal({
