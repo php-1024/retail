@@ -63,11 +63,16 @@ class WxController extends Controller
     public function refundQuery()
     {
         $reqData = array(
-            'out_trade_no' => '201610265257070987061763',
-            'out_refund_no' => '201610265257070987061763',
+            // 商户订单号
+            'out_trade_no' => '150337637120180508143454',
+            // 商户退款单号
+            'out_refund_no' => '150337637120180508142510',
+            // 订单金额
             'total_fee' => 1,
+            // 申请退款金额(单位：分)
             'refund_fee' => 1,
-            'op_user_id' => '100'
+            // openid
+            'op_user_id' => 'oK2HF1Sy1qdRQyqg69pPN5-rirrg'
         );
 
         $res = $this->wechat->refundQuery($reqData);
