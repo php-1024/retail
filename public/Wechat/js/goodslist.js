@@ -176,7 +176,8 @@ function cart_reduce(obj){
     		if (json.status == 1) {
                 //数量小于的情况下显示数量和减号按钮
                 if(json.data.num == 0){
-                    $this.parent().children('a').removeClass('gs_show').addClass('gs_hide');
+                    $this.removeClass('gs_show').addClass('gs_hide');
+                    $this.next().removeClass('gs_show').addClass('gs_hide');
                 }
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
