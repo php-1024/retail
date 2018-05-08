@@ -186,6 +186,13 @@ class WechatApiController extends Controller
                 if ($value['goods_id'] == $goods_id) {
                     // 添加商品数量
                     $num += $value['num'];
+                    // 如果值为1 表示不能
+                    if ($config != '1') {
+                        // 库存不足
+                        if ($stock - $num < 0) {
+                            return response()->json(['status' => '0', 'msg' => '商品' . $goods_name . '库存不足', 'data' => '']);
+                        }
+                    }
                     // 添加商品数量
                     $cart_data[$key]['num'] = $num;
                     // 缓存的库存
@@ -202,6 +209,15 @@ class WechatApiController extends Controller
             $re = in_array($goods_id, $goods_repeat);
             // 如果没有该商品
             if (empty($re)) {
+                // 如果值为1 表示不能
+                if ($config != '1') {
+                    // 库存不足
+                    if ($stock - $num < 0) {
+                        return response()->json(['status' => '0', 'msg' => '商品' . $goods_name . '库存不足', 'data' => '']);
+                    }
+                }
+                // 库存
+                $stock -= $num;
                 // 数据处理
                 $cart_data[] = [
                     'store_id' => $store_id,
@@ -300,8 +316,6 @@ class WechatApiController extends Controller
         if (empty($cart_data)) {
             return response()->json(['status' => '0', 'msg' => '购物车没商品，无法操作', 'data' => '']);
         } else {
-            // 库存
-            $stock += $num;
             // 序列化转成数组
             $cart_data = unserialize($cart_data);
             $total = 0;
@@ -311,6 +325,9 @@ class WechatApiController extends Controller
                 if ($value['goods_id'] == $goods_id) {
                     // 减少商品数量
                     $cart_data[$key]['num'] = $value['num'] - $num;
+                    // 库存
+                    $stock -= $cart_data[$key]['num'];
+                    // 库存
                     $cart_data[$key]['stock'] = $stock;
                     // 如果数量为0
                     if ($cart_data[$key]['num'] == '0') {

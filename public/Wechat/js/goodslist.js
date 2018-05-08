@@ -1,6 +1,4 @@
 $(function(){
-    var total_price = 0;//购物车总价格
-
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
@@ -31,6 +29,7 @@ $(function(){
 		}
 	);
 	//获取购物车商品
+	 var total_price = 0;//购物车总价格
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
@@ -209,6 +208,8 @@ function totalprice(price,status){
     var old_price = $this.data("totalprice");
     var total = (status== true) ? parseFloat(price) + parseFloat(old_price) : parseFloat(old_price) - parseFloat(price);
     //记录总价格的值
+    console.log(old_price+"@asdasdadsad");
+    console.log(price+"--asdasdadsad");
     $this.attr('data-totalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
@@ -341,9 +342,43 @@ function hide(obj) {
     $("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
 }
 function showcart(obj,em){
-    $(em).hide();
-    $("#"+obj).css({display: 'flex'});
-    $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
+    //获取购物车商品
+    var total_price = 0;//购物车总价格
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
+    var shop_user_id=$("#shop_user_id").val();//用户店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    $.post(
+    	cart_list_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
+    	function(json){
+    		if (json.status == 1) {
+                var str = "";
+                for (var i = 0; i < json.data.goods_list.length; i++) {
+                    str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
+                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id,json.data.goods_list[i].stock,
+                        json.data.goods_list[i].goods_thumb);
+                    //计算购物车总价格
+                    total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
+                }
+                //购物车总价格
+                totalprice(total_price,true);
+                console.log("total_price----"+total_price);
+                //购物车总数
+                var total = json.data.total;
+                totalnum(total,true);
+                //购物车列表渲染
+                var $cart_list = $("#cart_list");
+                $cart_list.empty();
+                $cart_list.append(str);
+                $(em).hide();//隐藏掉在下边的购物车按钮
+                $("#"+obj).css({display: 'flex'});
+                $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
+    		}
+		}
+	);
 }
 function goodsclass(obj){
     $("#"+obj).css({display: 'flex'});
