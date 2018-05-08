@@ -54,7 +54,7 @@ class WxController extends Controller
         $reqData["number"] = "1003022622018050853721122351525761650";
 
         $res = $this->refundQuery($reqData);
-        var_dump($res);
+        echo $res;
     }
 
     public function unifiedOrder()
@@ -81,7 +81,7 @@ class WxController extends Controller
         $reqData[$param["type"]] =$param["number"];
         // 查询接口
         $res = $this->wechat->refundQuery($reqData);
-        echo $this->resDispose($res);
+        return $this->resDispose($res);
     }
 
 
