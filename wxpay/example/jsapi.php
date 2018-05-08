@@ -62,6 +62,8 @@ $res = json_decode($res, true);
 $ticket = $res["ticket"];
 
 
+var_dump($ticket);
+
 // 设置得到签名的参数
 $url = "http://develop.01nnt.com/wxpay/example/jsapi.php";
 $timestamp = time();
