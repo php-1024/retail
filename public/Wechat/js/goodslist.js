@@ -50,7 +50,7 @@ $(function(){
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
-                $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
+                totalprice(total_price);
                 //购物车总数
                 var total = json.data.total;
                 $("#total").text(total);
@@ -131,6 +131,15 @@ function cart_add(obj){
     		}
 		}
 	);
+}
+//购物车总价格
+function totalprice(price){
+    var $this = $("#cart_price");
+    var old_price = $this.data("totalprice");
+    var total = parseFloat(price) + parseFloat(old_price);
+    //记录总价格的值
+    $this.data('totalprice', total.toFixed(2));
+    $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
 //购物车列表
 function cart_list_box(name,price,num,goods_id) {

@@ -305,7 +305,7 @@
 							<span class="goods_number" id="goods_total">0</span>
 						</div>
 					</div>
-					<h3 class="cart_price" id="cart_price">您还未选购商品哦~</h3>
+					<h3 class="cart_price" id="cart_price" data-totalprice="0">您还未选购商品哦~</h3>
 				</div>
 				<div class="cart_right"><a href="javascript:;" onclick="show('alert')">去结算 <i></i></a></div>
 	    	</div>
