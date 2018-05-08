@@ -101,7 +101,8 @@ $editAddress = $tools->GetEditAddressParameters();
 	function editAddress()
 	{
 		WeixinJSBridge.invoke(
-			'editAddress',
+			'openAddress',
+			// 'editAddress',
 			<?php echo $editAddress; ?>,
 			function(res){
 			    console.log(res);
