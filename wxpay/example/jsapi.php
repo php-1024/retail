@@ -117,6 +117,7 @@ $editAddress = $tools->GetEditAddressParameters();
 	}
 
 	window.onload = function(){
+	    console.log(typeof WeixinJSBridge);
 		if (typeof WeixinJSBridge == "undefined"){
 		    if( document.addEventListener ){
 		        document.addEventListener('WeixinJSBridgeReady', editAddress, false);
