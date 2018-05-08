@@ -52,6 +52,7 @@ class GoodsController extends Controller
             return response()->json(['data' => '商品名称重名，请重新输入！', 'status' => '0']);
         }
         if ($is_barcode) {//判断商品条码是否唯一
+            dd($is_barcode);
             return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
         }
         if ($category_id == 0) {
