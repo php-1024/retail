@@ -105,7 +105,6 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
                 'openAddress',
-                // 'editAddress',
                 'getBrandWCPayRequest',
             ] // 必填，需要使用的JS接口列表
         });
