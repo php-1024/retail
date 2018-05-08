@@ -8,7 +8,6 @@
                 <h4 class="modal-title">添加商品图片》》商品图片列表</h4>
             </div>
             <div class="modal-body">
-
                 <div class="form-group">
                     @foreach($thumb as $key=>$val)
                         <div class="col-sm-3" style="margin-bottom:10px">
