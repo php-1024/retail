@@ -45,7 +45,7 @@ $(function(){
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
-                    total_price += parseFloat(json.data.goods_list[i].goods_price);
+                    total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
                     //记录购物车列表数量,渲染商品列表赋值
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
