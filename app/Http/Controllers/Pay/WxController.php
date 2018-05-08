@@ -38,7 +38,7 @@ class WxController extends Controller
 
     public function test13()
     {
-        $this->orderQuery();
+        $this->refundQuery();
     }
 
     public function unifiedOrder()
@@ -49,8 +49,6 @@ class WxController extends Controller
 
     public function orderQuery()
     {
-        echo 123231;
-        exit;
         $resp = $this->wechat->orderQuery(array(
             'out_trade_no' => '201610265257070987061763',
             'total_fee' => 1,
@@ -60,5 +58,20 @@ class WxController extends Controller
             'notify_url' => 'https://www.example.com/wxpay/notify'
         ));
         var_dump($resp);
+    }
+
+    public function refundQuery()
+    {
+        $reqData = array(
+            'out_trade_no' => '201610265257070987061763',
+            'out_refund_no' => '201610265257070987061763',
+            'total_fee' => 1,
+            'refund_fee' => 1,
+            'op_user_id' => '100'
+        );
+
+        $res = $this->wechat->refundQuery($reqData);
+        var_dump($res);
+
     }
 }
