@@ -161,19 +161,19 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                 }
             );
         }
-
-        window.onload = function () {
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', editAddress, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', editAddress);
-                    document.attachEvent('onWeixinJSBridgeReady', editAddress);
-                }
-            } else {
-                editAddress();
-            }
-        };
+        editAddress();
+        // window.onload = function () {
+        //     if (typeof WeixinJSBridge == "undefined") {
+        //         if (document.addEventListener) {
+        //             document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+        //         } else if (document.attachEvent) {
+        //             document.attachEvent('WeixinJSBridgeReady', editAddress);
+        //             document.attachEvent('onWeixinJSBridgeReady', editAddress);
+        //         }
+        //     } else {
+        //         editAddress();
+        //     }
+        // };
 
     </script>
 </head>
