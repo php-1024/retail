@@ -137,6 +137,8 @@ function totalprice(price){
     var $this = $("#cart_price");
     var old_price = $this.data("totalprice");
     var total = parseFloat(price) + parseFloat(old_price);
+    console.log(old_price);
+    console.log(total);
     //记录总价格的值
     $this.data('totalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
