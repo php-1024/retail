@@ -44,7 +44,7 @@ $(function(){
                 var cart_num = [];
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
-                        json.data.goods_list[i].num);
+                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
                     total_price += parseFloat(json.data.goods_list[i].goods_price);
                     //记录购物车列表数量,渲染商品列表赋值
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
@@ -122,20 +122,21 @@ function cart_add(obj){
     	function(json){
             console.log(json);
     		if (json.status == 1) {
+                $("#goods_id"+json.data.goods_id).text(json.data.num);
                 $.hideIndicator();
     		}
 		}
 	);
 }
 //购物车列表
-function cart_list_box(name,price,num) {
+function cart_list_box(name,price,num,goods_id) {
     str = '<li>'+
         '<span>'+name+'</span>'+
         '<span>&yen;'+price+'</span>'+
         '<div class="cart_alert_btn">'+
             '<div class="goods_btn cart_border">'+
                 '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
-                '<a href="javascript:;" class="cart_box delect_cart_inpt">'+num+'</a>'+
+                '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt">'+num+'</a>'+
                 '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
             '</div>'+
         '</div>'+
@@ -181,7 +182,7 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                         }else{
                         str += '<div class="goods_btn action">'+
                                     '<a href="javascript:;" class="cart_box delect_cart_btn gs_hide">-</a>'+
-                                    '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
+                                    '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
                         }
 
 
