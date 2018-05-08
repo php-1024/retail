@@ -125,6 +125,7 @@ function cart_add(obj){
                 $(".cart_border").removeClass('action');
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
+                //等于数量1的情况下显示数量和减号按钮
                 if(json.data.num == 1){
                     $this.parent().children('a').removeClass('gs_hide').addClass('gs_show');
                 }
@@ -173,10 +174,10 @@ function cart_reduce(obj){
         data,
     	function(json){
     		if (json.status == 1) {
-                console.log(json);
-                // if(json.data.num == 1){
-                //     $this.prev()
-                // }
+                //数量小于的情况下显示数量和减号按钮
+                if(json.data.num == 1){
+                    $this.parent().children('a').removeClass('gs_show').addClass('gs_hide');
+                }
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
@@ -270,7 +271,7 @@ function goods_list_box(name,details,stock,price,thumb,number,goods_id) {
                                     'data-goodsstock="'+stock+'"'+
                                     'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
                                     'data-goodsprice="'+price+'" onclick="cart_reduce(this)">-</a>'+
-                                    '<a href="javascript:;" id="goods_id'+goods_id+'" class="cart_box delect_cart_inpt gs_hide">'+number+'</a>';
+                                    '<a href="javascript:;" class="cart_box delect_cart_inpt gs_hide goods_id'+goods_id+'"">'+number+'</a>';
                         }
 
 
