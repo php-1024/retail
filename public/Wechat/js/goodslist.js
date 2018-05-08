@@ -54,7 +54,7 @@ $(function(){
                 totalprice(total_price,true);
                 //购物车总数
                 var total = json.data.total;
-                totalnum(total);
+                totalnum(total,true);
                 //购物车列表渲染
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
@@ -133,7 +133,7 @@ function cart_add(obj){
                 //购物车总价格
                 totalprice(json.data.goods_price,true);
                 //购物车总数
-                totalnum(1);
+                totalnum(1,true);
                 $.hideIndicator();
     		}
 		}
@@ -181,30 +181,28 @@ function cart_reduce(obj){
                 //购物车总价格
                 totalprice(json.data.goods_price,false);
                 //购物车总数
-                totalnum(1,"del");
+                totalnum(1,false);
                 $.hideIndicator();
     		}
 		}
 	);
 }
 //购物车总价格
-function totalprice(price,del){
-    //del判断是减少商品还是添加
+function totalprice(price,status){
+    //del判断是减少商品还是添加,true为添加
     var $this = $("#cart_price");
     var old_price = $this.data("totalprice");
-    var total = (del== true) ? parseFloat(price) + parseFloat(old_price) : parseFloat(old_price) - parseFloat(price);
+    var total = (status== true) ? parseFloat(price) + parseFloat(old_price) : parseFloat(old_price) - parseFloat(price);
     //记录总价格的值
     $this.attr('data-totalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
 //购物车总数
-function totalnum(count,del){
+function totalnum(count,status){
+    //del判断是减少商品还是添加,true为添加
     var $this = $("#goods_totalnum");
     var old_num = $this.data("totalnum");
-    console.log(parseInt(old_num));
-    console.log(parseInt(count));
-    console.log(parseInt(old_num) - parseInt(count));
-    var total = (del == true) ? parseInt(count) + parseInt(old_num) : parseInt(old_num) - parseInt(count);
+    var total = (status == true) ? parseInt(count) + parseInt(old_num) : parseInt(old_num) - parseInt(count);
     //记录总价格的值
     $this.attr('data-totalnum', total);
     $this.text(total);
