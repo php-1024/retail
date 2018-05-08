@@ -17,7 +17,7 @@ require_once 'log.php';
  * 6、在支付成功通知中需要查单确认是否真正支付成功（见：notify.php）
  */
 $notify = new NativePay();
-$url1 = $notify->GetPrePayUrl("123456789");
+$url1 = $notify->GetPrePayUrl("wx0814281039008254a68be1700228958823");
 
 //模式二
 /**
