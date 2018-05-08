@@ -162,6 +162,7 @@
             autogrow: true
         });
     });
+
     //获取图片上传窗口
     function add_thumb(organization_id) {
         var url = $("#upload_add").val();
