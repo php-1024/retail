@@ -45,17 +45,17 @@ $(function(){
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
-                    total_price += parseFloat(json.data.goods_list[i].goods_price);
-                    //记录购物车列表数量,渲染商品列表赋值
+                    //计算购物车总价格
+                    total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
+                    //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
-                $("#cart_price").html("金额总计<em>&yen;"+total_price+"</em>");
+                totalprice(total_price);
                 //购物车总数
                 var total = json.data.total;
-                $("#total").text(total);
-                $("#goods_total").text(total);
-
+                totalnum(total);
+                //购物车列表渲染
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
                 $cart_list.append(str);
@@ -127,10 +127,35 @@ function cart_add(obj){
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
                 $("#goods_id"+json.data.goods_id).text(json.data.num);
+                //购物车总价格
+                totalprice(json.data.goods_price);
+                //购物车总数
+                totalnum(1);
                 $.hideIndicator();
     		}
 		}
 	);
+}
+//购物车总价格
+function totalprice(price){
+    var $this = $("#cart_price");
+    var old_price = $this.data("totalprice");
+    var total = parseFloat(price) + parseFloat(old_price);
+    //记录总价格的值
+    $this.attr('data-totalprice', total.toFixed(2));
+    $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
+}
+//购物车总数
+function totalnum(count){
+    var $this = $("#goods_totalnum");
+    var old_num = $this.data("totalnum");
+    var total = parseInt(count) + parseInt(old_num);
+    //记录总价格的值
+    $this.attr('data-totalnum', total);
+    $this.text(total);
+    //购物车弹出状态的total(两个)
+    $("#total").attr('data-totalnum', total);
+    $("#total").text(total);
 }
 //购物车列表
 function cart_list_box(name,price,num,goods_id) {
