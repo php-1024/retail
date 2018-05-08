@@ -313,13 +313,13 @@
 		<!-- alert -->
 		<div class="popup_alert" id="alert">
 			<div class="quhuo alert_width popup_alert_hook">
-				<p class="quhuoinfo" onclick="cart_empty()">确认清空购物车吗?</p>
+				<p class="quhuoinfo">确认清空购物车吗?</p>
 				<div class="max_height_box">
 					<!-- <p>我的取货信息我的取货信息我的取货信息</p> -->
 				</div>
 				<div class="alert_btn_wz">
 					<a href="javascript:;" class="btn_alert my_text_align btn_alert_bg1" onclick="hide('alert')">取消</a>
-					<a href="javascript:;" class="btn_alert my_text_align btn_alert_bg" onclick="hide('alert')">确认</a>
+					<a href="javascript:;" class="btn_alert my_text_align btn_alert_bg" onclick="cart_empty()">确认</a>
 				</div>
 			</div>
 		</div>
