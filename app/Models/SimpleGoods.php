@@ -114,14 +114,14 @@ class SimpleGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('Organization');
+        $model = self::with('SimpleGoodsThumb')->first();
         if(!empty($search_data['category_id'])){
             $model = $model->where([['category_id',$search_data['category_id']]]);
         }
         if(!empty($search_data['goods_name'])){
             $model = $model->where('name','like','%'.$search_data['goods_name'].'%');
         }
-        return $model->with('SimpleGoodsThumb')->with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->with('Organization')->with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 
