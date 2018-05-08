@@ -122,7 +122,7 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
             SimpleGoods::editSimpleGoods(['id' => $goods_id],['barcode'=>'']);//修改商品前现将商品条码设置为空,在检测还有没有重复的商品条码
-            $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ],'id');
+            $is_barcode = SimpleGoods::checkRowExists(['simple_id' => $admin_data['organization_id'], 'barcode' => $barcode ],'barcode');
             if ($is_barcode) {//判断商品条码是否唯一
                 return response()->json(['data' => '商品条码重复啦，请重新输入！', 'status' => '0']);
             }
