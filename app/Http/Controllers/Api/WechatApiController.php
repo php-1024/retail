@@ -408,6 +408,8 @@ class WechatApiController extends Controller
                 $total += $value['num'];
             }
         }
+        $goods_list = array_values($goods_list);
+
         $data = ['status' => '1', 'msg' => '查询成功', 'data' => ['goods_list' => $goods_list, 'total' => $total]];
         return response()->json($data);
     }
