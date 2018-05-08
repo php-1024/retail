@@ -9,10 +9,9 @@ $(function(){
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
     		if (json.status == 1) {
-                console.log(json);
-    			var str = "<li class='action' onclick='category_list(0);'><a href='javascript:;'>全部</a></li>";
+    			var str = "<li class='action' id='category0' onclick='category_list(0,this);'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li onclick='category_list("+json.data.categorylist[i].id+");'><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li id="'category'+json.data.categorylist[i].id+" onclick='category_list("+json.data.categorylist[i].id+",this);'><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
@@ -228,9 +227,11 @@ function cart_reduce(obj,status){
 	);
 }
 //获取分类查询
-function category_list(category_id){
+function category_list(category_id,obj){
     var keyword_val = $("#search").val();
     selectgoods(category_id,keyword_val)
+    var $this = $(obj);
+    $this.siblings().removeClass('')
 }
 //清空购物车
 function cart_empty(){
