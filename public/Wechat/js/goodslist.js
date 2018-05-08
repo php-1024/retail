@@ -10,10 +10,9 @@ $(function(){
     	function(json){
     		if (json.status == 1) {
                 console.log(json);
-    			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
+    			var str = "<li class='action'><a href='javascript:;' onclick='category_list(0);'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li><a href='http://develop.01nnt.com/api/wechatApi/goods_list?fansmanage_id="+fansmanage_id+"&store_id="+store_id+"&category_id="+
-                    json.data.categorylist[i].id+"' external>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li><a href='javascript:;' onclick='category_list('"+json.data.categorylist[i].id+"');' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
@@ -208,7 +207,40 @@ function cart_reduce(obj,status){
 		}
 	);
 }
-//情况购物车
+//获取分类查询
+function category_list(category_id){
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+
+    var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+    $.post(
+    	goodslist_url,
+        {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,category_id:category_id},
+    	function(json){
+            var str = "";
+            console.log(json);
+
+    		if (json.status == 1) {
+                for (var i = 0; i < json.data.goodslist.length; i++) {
+                    //判断列表与购物车的id存在就读取购物车的数量
+                    if(cart_num[json.data.goodslist[i].id]){
+                        json.data.goodslist[i].number = cart_num[json.data.goodslist[i].id];
+                    }
+                    str += goods_list_box(json.data.goodslist[i].name,json.data.goodslist[i].details,
+                    json.data.goodslist[i].stock,json.data.goodslist[i].price,json.data.goodslist[i].thumb[0].thumb,
+                    json.data.goodslist[i].number,json.data.goodslist[i].id);
+                }
+                var $goodslist = $("#goodslist");
+                $goodslist.empty();
+                $goodslist.append(str);
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
+		}
+	);
+}
+//清空购物车
 function cart_empty(){
     $.showIndicator();
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_empty";
