@@ -47,11 +47,13 @@ printf_info($order);
 
 
 $jsApiParameters = $tools->GetJsApiParameters($order);
-$jsApiParameters = json_decode($jsApiParameters,true);
+
 var_dump($jsApiParameters);
 
 //获取共享收货地址js函数参数
 $editAddress = $tools->GetEditAddressParameters();
+$editAddress = json_decode($editAddress,true);
+var_dump($editAddress);
 
 //③、在支持成功回调通知中处理成功之后的事宜，见 notify.php
 /**
@@ -101,10 +103,10 @@ $editAddress = $tools->GetEditAddressParameters();
 
         wx.config({
             debug: true,
-            appId: <?php echo $editAddress["appId"] ?>,
-            timestamp: <?php echo $editAddress["timestamp"] ?>,
-            nonceStr:  <?php echo $editAddress["nonceStr"] ?>,
-            signature: <?php echo $editAddress["signature"] ?>,
+            appId: "<?php echo $editAddress["appId"] ?>",
+            timeStamp: "<?php echo $editAddress["timeStamp"] ?>",
+            nonceStr:  "<?php echo $editAddress["nonceStr"] ?>",
+            signature: "<?php echo $editAddress["addrSign"] ?>",
             jsApiList: [
                 'checkJsApi',
                 'onMenuShareTimeline',
