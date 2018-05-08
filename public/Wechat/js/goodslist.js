@@ -127,6 +127,7 @@ function cart_add(obj){
                 $this.parent().addClass('action');
                 //等于数量1的情况下显示数量和减号按钮
                 if(json.data.num == 1){
+                    $this.parent().addClass('cart_border');
                     $this.parent().children('a').removeClass('gs_hide').addClass('gs_show');
                 }
                 console.log(json.data.num);
@@ -175,6 +176,7 @@ function cart_reduce(obj){
     	function(json){
     		if (json.status == 1) {
                 //数量小于的情况下显示数量和减号按钮
+                console.log(json.data.num);
                 if(json.data.num == 0){
                     $this.removeClass('gs_show').addClass('gs_hide');
                     $this.next().removeClass('gs_show').addClass('gs_hide');
