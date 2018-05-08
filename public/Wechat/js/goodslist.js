@@ -10,9 +10,10 @@ $(function(){
     	function(json){
     		if (json.status == 1) {
                 console.log(json);
-    			var str = "<li class='action'><a href='javascript:;' onclick='category_list(0);'>全部</a></li>";
+    			var str = "<li class='action' onclick='category_list();'  data-id='0'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li onclick='category_list("+json.data.categorylist[i].id+");'><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li onclick='category_list();' data-id="+json.data.categorylist[i].id+"
+                            ><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
@@ -27,11 +28,21 @@ $(function(){
             }
 		}
 	);
-	//获取购物车商品
-	 var total_price = 0;//购物车总价格
+    //查询购物车列表和商品列表
+    selectgoodslist();
+});
+//查询购物车列表和商品列表
+function selectgoodslist(){
+    //获取购物车商品
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+	var total_price = 0;//购物车总价格
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    var category_id = $("#goods_cs_lt_alert").children('li').hasClass("action").data('id');//分类id
+    console.log(category_id);
     $.post(
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
@@ -90,7 +101,7 @@ $(function(){
         	);
 		}
 	);
-});
+}
 //添加商品购物车
 function cart_add(obj){
     $.showIndicator();
@@ -209,7 +220,6 @@ function cart_reduce(obj,status){
 }
 //获取分类查询
 function category_list(category_id){
-    alert();
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
