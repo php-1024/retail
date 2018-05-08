@@ -33,6 +33,11 @@ class SimpleGoods extends Model{
         return $this->hasMany('App\Models\SimpleGoodsThumb','goods_id','id');
     }
 
+    //和SimpleGoodsThumb表一对一的关系
+    public function GoodsThumb(){//后台商品列表调用第一张缩略图使用
+        return $this->hasOne('App\Models\SimpleGoodsThumb','goods_id','id');
+    }
+
 
 
     //获取单条餐饮商品信息
@@ -114,7 +119,7 @@ class SimpleGoods extends Model{
 
     //获取分页列表
     public static function getPaginage($where,$search_data,$paginate,$orderby,$sort='DESC'){
-        $model = self::with('SimpleGoodsThumb');
+        $model = self::with('GoodsThumb');
         if(!empty($search_data['category_id'])){
             $model = $model->where([['category_id',$search_data['category_id']]]);
         }
