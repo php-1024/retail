@@ -181,6 +181,8 @@ function cart_reduce(obj,status){
                 if(json.data.num == 0){
                     $this.removeClass('gs_show').addClass('gs_hide');
                     $this.next().removeClass('gs_show').addClass('gs_hide');
+                    $(".goods_id"+json.data.goods_id).removeClass('gs_show').addClass('gs_hide');
+                    $(".goods_id"+json.data.goods_id).prev().removeClass('gs_show').addClass('gs_hide');
                 }
                 //购物车减到0的时候remove li
                 if(json.data.num == 0 && status){
