@@ -89,12 +89,8 @@ class SimpleGoods extends Model
     {
         $model = new SimpleGoods();
         if (!empty($limit)) {
-            if ($limit == '1') {
-                $limit1 = 0;
-            } else {
-                $limit1 = 0;
-            }
-            $limit2 = $limit * 20;
+            $limit1 = $limit * 2 - 2;
+            $limit2 = $limit * 2;
             $model = $model->offset($limit1)->limit($limit2);
         }
         if (!empty($select)) {
