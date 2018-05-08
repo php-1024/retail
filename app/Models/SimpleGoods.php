@@ -51,8 +51,7 @@ class SimpleGoods extends Model{
         if(empty($row)){
             return false;
         }else{
-            dd($row);
-            return true;
+            return $row;
         }
     }
 
