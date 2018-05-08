@@ -126,7 +126,7 @@ function cart_add(obj){
                 $(".cart_border").removeClass('action');
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
-                $("#goods_id"+json.data.goods_id).text(json.data.num);
+                $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
                 totalprice(json.data.goods_price);
                 //购物车总数
