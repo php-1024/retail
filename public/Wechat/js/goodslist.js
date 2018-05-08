@@ -237,10 +237,15 @@ function category_list(category_id){
 }
 //商品搜索
 function search_click(){
-    var _li = $("#goods_cs_lt_alert").children('li').hasClass('action');
+    var category_id = "";
+    $("#goods_cs_lt_alert li").each(function(index, el) {
+        if($(this).hasClass('action')){
+            category_id = $(this).data('id');
+        }
+    });
     //var category_id = _li.attr("data-id");
     var keyword_val = $("#search").val();
-    alert(_li.text())
+    alert(category_id);
     //selectgoods(category_id,keyword_val);
 }
 //清空购物车
