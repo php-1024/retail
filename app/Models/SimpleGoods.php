@@ -121,7 +121,7 @@ class SimpleGoods extends Model{
         if(!empty($search_data['goods_name'])){
             $model = $model->where('name','like','%'.$search_data['goods_name'].'%');
         }
-        return $model->with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
+        return $model->with('GoodsThumb')->with('create_account')->with('organization')->with('category')->where($where)->orderBy($orderby,$sort)->paginate($paginate);
     }
 
 
