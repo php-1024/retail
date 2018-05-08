@@ -32,6 +32,13 @@ class GoodsController extends Controller
         return view('Simple/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
+    //商品图片上传窗口
+    public function add_upload(Request $request)
+    {
+        dd($request);
+        return view('Simple/Goods/add_upload', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
+    }
+
     //添加商品数据操作
     public function goods_add_check(Request $request)
     {
