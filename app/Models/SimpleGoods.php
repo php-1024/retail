@@ -91,7 +91,7 @@ class SimpleGoods extends Model
         if (!empty($limit)) {
             $limit1 = $limit * 2 - 2;
             $limit2 = $limit * 2;
-            $model = $model->offset(6)->limit(6);
+            $model = $model->offset(10)->limit(6);
         }
         if (!empty($select)) {
             $model = $model->select($select);
