@@ -1039,7 +1039,7 @@ Route::group(['prefix' => 'pay'], function () {
         Route::any('test10', 'Pay\SftController@test10');//测试函数
         Route::any('test11', 'Pay\SftController@test11')->middleware("UserCheck");//测试函数
         Route::any('test12', 'Pay\SftController@test12');//测试函数
-        Route::any('test13', 'Pay\SftController@test13');//测试函数
+        Route::any('test13', 'Pay\WxController@test13');//测试函数
         Route::any('test14', 'Pay\SftController@test14')->middleware("UserCheck");//测试函数
     });
 });
