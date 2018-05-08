@@ -26,7 +26,9 @@ $(function(){
     			$goods_cs_lt_alert.empty();
     			$goods_cs_lt_alert.append(str);
     		}
-		}
+		}else if (json.status == 0) {
+            alert(msg);
+        }
 	);
 	//获取购物车商品
 	 var total_price = 0;//购物车总价格
@@ -59,7 +61,9 @@ $(function(){
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
                 $cart_list.append(str);
-    		}
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
             //获取商品列表
             var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
             $.post(
@@ -82,7 +86,9 @@ $(function(){
                         var $goodslist = $("#goodslist");
                         $goodslist.empty();
                         $goodslist.append(str);
-            		}
+            		}else if (json.status == 0) {
+                        alert(msg);
+                    }
         		}
         	);
 		}
@@ -130,7 +136,6 @@ function cart_add(obj){
                     $this.parent().addClass('cart_border');
                     $this.parent().children('a').removeClass('gs_hide').addClass('gs_show');
                 }
-                console.log(json.data.num);
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
@@ -138,7 +143,9 @@ function cart_add(obj){
                 //购物车总数
                 totalnum(1,true);
                 $.hideIndicator();
-    		}
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
 		}
 	);
 }
@@ -197,7 +204,9 @@ function cart_reduce(obj,status){
                 //购物车总数
                 totalnum(1,false);
                 $.hideIndicator();
-    		}
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
 		}
 	);
 }
@@ -385,7 +394,9 @@ function showcart(obj,em){
                 $(em).hide();//隐藏掉在下边的购物车按钮
                 $("#"+obj).css({display: 'flex'});
                 $("#"+obj+" .popup_alert_hook").addClass('fadeInUp');
-    		}
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
 		}
 	);
 }
