@@ -37,6 +37,7 @@ class GoodsController extends Controller
     {
         $admin_data = $request->admin_data;
         $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']],'0','created_at','DESC');
+        dd($goods);
         foreach($goods as $key=>$val){
             $thumb = SimpleGoodsThumb::getList(['goods_id' => $val->id],'0','created_at','DESC');
             dd($thumb);
