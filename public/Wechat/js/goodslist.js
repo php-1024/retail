@@ -25,10 +25,10 @@ $(function(){
     			var $goods_cs_lt_alert = $("#goods_cs_lt_alert");
     			$goods_cs_lt_alert.empty();
     			$goods_cs_lt_alert.append(str);
-    		}
-		}else if (json.status == 0) {
-            alert(msg);
-        }
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
+		}
 	);
 	//获取购物车商品
 	 var total_price = 0;//购物车总价格
