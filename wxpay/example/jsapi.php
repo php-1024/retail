@@ -65,7 +65,9 @@ $ticket = $res["ticket"];
 var_dump($ticket);
 
 // 设置得到签名的参数
-$url = "http://develop.01nnt.com/wxpay/example/jsapi.php";
+$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+var_dump($url);
+
 $timestamp = time();
 $nonceStr = substr(md5(time()), 0, 16);
 // 这里参数的顺序要按照 key 值 ASCII 码升序排序
