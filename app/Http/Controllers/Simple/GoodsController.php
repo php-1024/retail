@@ -39,7 +39,7 @@ class GoodsController extends Controller
         $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']],'0','created_at','DESC');
         foreach($goods as $key=>$val){
             $thumb = SimpleGoodsThumb::getList(['goods_id' => $val->id],'0','created_at','DESC');
-            dd($thumb);
+            dd($goods);
         }
         return view('Simple/Goods/add_upload', ['thumb' => $thumb]);
     }
