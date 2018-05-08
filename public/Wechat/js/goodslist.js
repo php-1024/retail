@@ -223,7 +223,7 @@ function category_list(category_id){
             'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
             'user_id':shop_user_id,
             'zerone_user_id':zerone_user_id,
-            category_id:category_id
+            'category_id':category_id
         },
     	function(json){
     		if (json.status == 1) {
