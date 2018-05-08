@@ -67,6 +67,24 @@ class SimpleGoods extends Model{
         return $model->where($where)->orderBy($orderby,$sort)->get();
     }
 
+    //获取餐饮商品列表
+    public static function getListApi($where,$limit=0,$orderby,$sort='DESC',$select=[]){
+        $model = new SimpleGoods();
+        if(!empty($limit)){
+            if($limit == '1'){
+                $limit1 = 0;
+            }else{
+                $limit1 = $limit*1;
+            }
+            $limit2 = $limit *2;
+            $model = $model->offset($limit1)->limit($limit2);
+        }
+        if(!empty($select)){
+            $model = $model->select($select);
+        }
+        return $model->where($where)->orderBy($orderby,$sort)->get();
+    }
+
     //添加餐饮商品
     public static function addSimpleGoods($param){
         $model = new SimpleGoods();

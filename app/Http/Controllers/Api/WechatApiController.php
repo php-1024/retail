@@ -122,6 +122,8 @@ class WechatApiController extends Controller
         $scan_code = $request->scan_code;
         // 分类id
         $category_id = $request->category_id;
+        // 分页
+        $limit = $request->limit;
         // 条件
         $where = [['fansmanage_id', $fansmanage_id], ['simple_id', $store_id], ['status', '1']];
         if ($keyword) {
@@ -133,13 +135,12 @@ class WechatApiController extends Controller
         if ($category_id) {
             $where[] = ['category_id', $category_id];
         }
-        $goodslist = SimpleGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
+        $goodslist = SimpleGoods::getListApi($where, $limit, 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
         if (empty($goodslist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
         foreach ($goodslist as $key => $value) {
             $goodslist[$key]['category_name'] = SimpleCategory::getPluck([['id', $value['category_id']]], 'name');
-            $goodslist[$key]['number'] = '0';
             $goodslist[$key]['thumb'] = SimpleGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
             if (count($goodslist[$key]['thumb']) == 0) {
                 $goodslist[$key]['thumb'] = [['thumb' => 'public/thumb.png']];
