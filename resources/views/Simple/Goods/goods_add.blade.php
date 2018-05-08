@@ -44,7 +44,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('simple/ajax/goods_add_check') }}">
-                                            <input type="hidden" id="addupload" value="{{ url('simple/ajax/add_upload') }}">
+                                            <input type="hidden" id="add_upload" value="{{ url('simple/ajax/add_upload') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
@@ -70,9 +70,10 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
                                                 <div class="col-sm-8">
-                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return addupload('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i>+加图</button>
+                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_upload('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i>+加图</button>
                                                 </div>
                                             </div>
+
 
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
@@ -189,8 +190,8 @@
         });
     }
     //获取图片上传窗口
-    function addupload(organization_id) {
-        var url = $("#addupload").val();
+    function add_upload(organization_id) {
+        var url = $("#add_upload").val();
         var data = {'organization_id':organization_id};
         $.post(url, data, function (json) {
             if (json.status == -1) {
