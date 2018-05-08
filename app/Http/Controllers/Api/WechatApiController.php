@@ -120,12 +120,18 @@ class WechatApiController extends Controller
         $keyword = $request->keyword;
         // 条码
         $scan_code = $request->scan_code;
+        // 分类id
+        $category_id = $request->category_id;
+        // 条件
         $where = [['fansmanage_id', $fansmanage_id], ['simple_id', $store_id], ['status', '1']];
         if ($keyword) {
             $where[] = ['name', 'LIKE', '%' . $keyword . '%'];
         }
         if ($scan_code) {
             $where[] = ['barcode', $scan_code];
+        }
+        if ($category_id) {
+            $where[] = ['category_id', $category_id];
         }
         $goodslist = SimpleGoods::getList($where, '0', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
         if (empty($goodslist->toArray())) {
@@ -454,10 +460,9 @@ class WechatApiController extends Controller
         // 清空购物车
         ZeroneRedis::create_shopping_cart($key_id, $cart_data);
 
-        $data = ['status' => '1', 'msg' => '清空成功', 'data' => ''];
+        $data = ['status' => '1', 'msg' => '清空成功', 'data' => ['user_id' => $user_id]];
 
         return response()->json($data);
-
 
     }
 
