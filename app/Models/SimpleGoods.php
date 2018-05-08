@@ -90,6 +90,7 @@ class SimpleGoods extends Model
         $model = new SimpleGoods();
         if (!empty($limit)) {
             $limit1 = $limit * 2 - 2;
+            echo $limit1;exit;
             $limit2 = $limit * 2;
             $model = $model->offset($limit1)->limit($limit2);
         }
