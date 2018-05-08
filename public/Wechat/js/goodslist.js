@@ -9,12 +9,14 @@ $(function(){
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
     		if (json.status == 1) {
+                console.log(json);
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				if (i == json.data.categorylist.length - 1) {
-    					str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
-    					continue;
-    				}
+    				// if (i == json.data.categorylist.length - 1) {
+                    //     console.log(i,"i");
+    				// 	str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
+    				// 	continue;
+    				// }
     				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
@@ -204,6 +206,35 @@ function cart_reduce(obj,status){
                 //购物车总数
                 totalnum(1,false);
                 $.hideIndicator();
+    		}else if (json.status == 0) {
+                alert(msg);
+            }
+		}
+	);
+}
+//情况购物车
+function cart_empty(){
+    $.showIndicator();
+    var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_empty";
+    var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
+    var _token=$("#_token").val();
+    var store_id=$("#store_id").val();//店铺ID
+    var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    var user_id=$("#shop_user_id").val();//用户店铺ID
+    var data = {
+            fansmanage_id:fansmanage_id,
+            zerone_user_id:zerone_user_id,
+            user_id:user_id,
+            store_id:store_id,
+            _token:_token
+    };
+    $.post(
+    	url,
+        data,
+    	function(json){
+    		if (json.status == 1) {
+                $.hideIndicator();
+                $.toast("清空成功");
     		}else if (json.status == 0) {
                 alert(msg);
             }

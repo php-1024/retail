@@ -319,7 +319,7 @@
 				</div>
 				<div class="alert_btn_wz">
 					<a href="javascript:;" class="btn_alert my_text_align btn_alert_bg1" onclick="hide('alert')">取消</a>
-					<a href="javascript:;" class="btn_alert my_text_align btn_alert_bg" onclick="hide('alert')">确认</a>
+					<a href="javascript:;" class="btn_alert my_text_align btn_alert_bg" onclick="cart_empty()">确认</a>
 				</div>
 			</div>
 		</div>
