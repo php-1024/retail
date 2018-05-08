@@ -129,7 +129,7 @@ function cart_add(obj){
                 $this.parent().addClass('action');
                 $("#goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
-                totalprice(total_price);
+                totalprice(json.data.goods_price);
                 $.hideIndicator();
     		}
 		}
