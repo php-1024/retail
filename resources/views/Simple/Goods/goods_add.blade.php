@@ -61,6 +61,13 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品名称</label>
                                                 <div class="col-sm-8">
+                                                    <input type="text" class="form-control" name="name">+加图
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
+                                                <div class="col-sm-8">
                                                     <input type="text" class="form-control" name="name">
                                                 </div>
                                             </div>
