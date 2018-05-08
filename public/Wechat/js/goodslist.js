@@ -235,6 +235,9 @@ function category_list(category_id){
     $(".category"+category_id).addClass('action');
     hidegoodsclass('goodsclass');
 }
+$(".icon_search").click(function(event) {
+    alert();
+});
 //商品搜索
 function search_click(){
     var category_id = "";
