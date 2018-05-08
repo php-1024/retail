@@ -66,7 +66,7 @@ $editAddress = $tools->GetEditAddressParameters();
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>微信支付样例-支付</title>
 
     <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
@@ -92,7 +92,7 @@ $editAddress = $tools->GetEditAddressParameters();
 		    if( document.addEventListener ){
 		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
 		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+		        document.attachEvent('WeixinJSBridgeReady', jsApiCall);
 		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
 		    }
 		}else{
@@ -101,6 +101,19 @@ $editAddress = $tools->GetEditAddressParameters();
 	}
 	</script>
 	<script type="text/javascript">
+
+        wx.config({
+                debug: false,
+            <?php echo $editAddress; ?>,
+            jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'openAddress'
+        ]
+        });
+
+
 	//获取共享地址
 	function editAddress()
 	{
@@ -123,20 +136,20 @@ $editAddress = $tools->GetEditAddressParameters();
 			}
 		);
 	}
-	
+
 	window.onload = function(){
 		if (typeof WeixinJSBridge == "undefined"){
 		    if( document.addEventListener ){
 		        document.addEventListener('WeixinJSBridgeReady', editAddress, false);
 		    }else if (document.attachEvent){
-		        document.attachEvent('WeixinJSBridgeReady', editAddress); 
+		        document.attachEvent('WeixinJSBridgeReady', editAddress);
 		        document.attachEvent('onWeixinJSBridgeReady', editAddress);
 		    }
 		}else{
 			editAddress();
 		}
 	};
-	
+
 	</script>
 </head>
 <body>
