@@ -54,11 +54,11 @@ var_dump($jsApiParameters);
 $editAddress = $tools->GetEditAddressParameters();
 
 
-$a_k="9_aeWuKiTlzBxR21jNsPhB3JnaxLZ4IzxaLwIGZgF3xElEjiFRRhioVoYKxYd2okiD4ywJymzuNBLyP9KO-HB80QaTgm1WAU5_ICINbqNL1mbMrSOtvxGZkcJAQOmPIspTW2QcXXOovnhJy059IEUeAHAPLB";
+$a_k = "9_aeWuKiTlzBxR21jNsPhB3JnaxLZ4IzxaLwIGZgF3xElEjiFRRhioVoYKxYd2okiD4ywJymzuNBLyP9KO-HB80QaTgm1WAU5_ICINbqNL1mbMrSOtvxGZkcJAQOmPIspTW2QcXXOovnhJy059IEUeAHAPLB";
 
 $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$a_k}&type=jsapi";
 $res = file_get_contents($url);
-$res = json_decode($res,true);
+$res = json_decode($res, true);
 $ticket = $res["ticket"];
 
 
@@ -110,7 +110,8 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                     alert(JSON.stringify(res));
 
                 }
-            });
+            })
+        )}
     </script>
 
     <script type="text/javascript">
