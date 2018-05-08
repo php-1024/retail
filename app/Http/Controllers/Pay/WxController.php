@@ -64,9 +64,10 @@ class WxController extends Controller
     {
         $reqData = array(
             // 商户订单号
-            'out_trade_no' => '150337637120180508143454',
+//            'out_trade_no' => '150337637120180508143454',
             // 商户退款单号
-            'out_refund_no' => '150337637120180508142510',
+//            'out_refund_no' => '150337637120180508142510',
+            'refund_id' => '50000306632018050804503014436',
             // 订单金额
             'total_fee' => 1,
             // 申请退款金额(单位：分)
