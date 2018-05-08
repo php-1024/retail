@@ -315,6 +315,8 @@ class WechatApiController extends Controller
                         unset($cart_data[$key]);
                         // 防止跳出循环，查不到商品
                         $goods_repeat[] = $value['goods_id'];
+                        // 购物车中商品的数量
+                        $num = $value['num'] - $num;
                         // 跳出这次循环
                         continue;
                         // 如果商品减少为负数
