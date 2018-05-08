@@ -105,7 +105,6 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
                 'openAddress',
-                'getBrandWCPayRequest',
                 'chooseWXPay',
             ] // 必填，需要使用的JS接口列表
         });
@@ -114,7 +113,6 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
             wx.openAddress({
                 success: function (res) {
                     alert(JSON.stringify(res));
-
                 }
             });
         })
