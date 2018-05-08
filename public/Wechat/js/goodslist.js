@@ -173,38 +173,34 @@ function cart_reduce(obj){
     	function(json){
     		if (json.status == 1) {
                 console.log(json);
-                //删除点击加号按钮的当前状态
-                //$(".cart_border").removeClass('action');
-                //添加点击加号按钮的当前状态
-                //$this.parent().addClass('action');
                 // if(json.data.num == 1){
                 //     $this.prev()
                 // }
                 //设置点击数量
-                //$(".goods_id"+json.data.goods_id).text(json.data.num);
+                $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
-                //totalprice(json.data.goods_price);
+                totalprice(json.data.goods_price,"del");
                 //购物车总数
-                //totalnum(1);
+                totalnum(1,"del");
                 $.hideIndicator();
     		}
 		}
 	);
 }
 //购物车总价格
-function totalprice(price){
+function totalprice(price,del){
     var $this = $("#cart_price");
     var old_price = $this.data("totalprice");
-    var total = parseFloat(price) + parseFloat(old_price);
+    var total = (del== true) ? parseFloat(price) + parseFloat(old_price) : parseFloat(old_price) - parseFloat(price);
     //记录总价格的值
     $this.attr('data-totalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
 //购物车总数
-function totalnum(count){
+function totalnum(count,del){
     var $this = $("#goods_totalnum");
     var old_num = $this.data("totalnum");
-    var total = parseInt(count) + parseInt(old_num);
+    var total = (del == true) ? parseInt(count) + parseInt(old_num) : parseInt(old_num) - parseInt(count);
     //记录总价格的值
     $this.attr('data-totalnum', total);
     $this.text(total);
