@@ -70,10 +70,9 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
                                                 <div class="col-sm-8">
-                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return upload_add('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i></button>
+                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_thumb('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i></button>
                                                 </div>
                                             </div>
-
 
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
@@ -162,8 +161,9 @@
             autogrow: true
         });
     });
+
     //获取图片上传窗口
-    function upload_add(organization_id) {
+    function add_thumb(organization_id) {
         var url = $("#upload_add").val();
         var _token = $("#_token").val();
         var data = {'organization_id':organization_id,'_token':_token};
