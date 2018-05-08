@@ -44,7 +44,7 @@
                                 <div class="tab-content">
                                     <div class="tab-pane fade in active" id="baseinfo">
                                         <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('simple/ajax/goods_add_check') }}">
-                                            <input type="hidden" id="AddUpload" value="{{ url('simple/ajax/add_upload') }}">
+                                            <input type="hidden" id="add_upload" value="{{ url('simple/ajax/add_upload') }}">
                                             <input type="hidden" name="_token" value="{{csrf_token()}}">
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品分类</label>
@@ -70,9 +70,10 @@
                                             <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
                                                 <div class="col-sm-8">
-                                                    <button onclick="return AddUpload('{{$admin_data['organization_id']}}')" class="btn btn-info dim btn-large-dim" type="button"><i class="fa fa-upload"></i>+加图</button>
+                                                    <button class="btn btn-info dim btn-large-dim" type="button" onclick="return add_upload('{{$admin_data['organization_id']}}')"><i class="fa fa-upload"></i>+加图</button>
                                                 </div>
                                             </div>
+
 
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
@@ -161,6 +162,32 @@
             autogrow: true
         });
     });
+    //获取图片上传窗口
+    function add_upload(organization_id) {
+        var url = $("#add_upload").val();
+        var data = {'organization_id':organization_id};
+        $.post(url, data, function (json) {
+            if (json.status == -1) {
+                alert('1');
+            } else if(json.status == 1) {
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                },function(){
+                    alert('1');
+                });
+            }else{
+                swal({
+                    title: "提示信息",
+                    text: json.data,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定"
+                });
+            }
+        });
+    }
     //提交表单
     function postForm() {
         var target = $("#currentForm");
@@ -177,32 +204,6 @@
                     confirmButtonText: "确定",
                 },function(){
                     window.location.href = "{{asset("simple/goods/goods_edit?goods_id=")}}"+json.goods_id;
-                });
-            }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
-            }
-        });
-    }
-    //获取图片上传窗口
-    function AddUpload(organization_id) {
-        var url = $("#AddUpload").val();
-        var data = {'organization_id':organization_id};
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                window.location.reload();
-            } else if(json.status == 1) {
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定",
-                },function(){
-                    alert('1');
                 });
             }else{
                 swal({

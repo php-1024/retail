@@ -340,6 +340,7 @@ function hide(obj) {
     $("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
 }
 function showcart(obj,em){
+    $.showIndicator();
     //获取购物车商品
     var total_price = 0;//购物车总价格
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
@@ -352,6 +353,7 @@ function showcart(obj,em){
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
+            $.hideIndicator();
     		if (json.status == 1) {
                 var str = "";
                 for (var i = 0; i < json.data.goods_list.length; i++) {
@@ -363,16 +365,19 @@ function showcart(obj,em){
                 }
                 //购物车总价格
                 //记录总价格的值
-                $this.attr('data-totalprice', total_price);
-                $this.html("金额总计<em>&yen;"+total_price+"</em>");
+                var _this = $("#cart_price");
+                _this.attr('data-totalprice', total_price);
+                _this.html("金额总计<em>&yen;"+total_price+"</em>");
                 //购物车总数
                 var total = json.data.total;
                 //记录总价格的值
-                $this.attr('data-totalnum', total);
-                $this.text(total);
+                var _this1 = $("#goods_totalnum");
+                _this1.attr('data-totalnum', total);
+                _this1.text(total);
                 //购物车弹出状态的total(两个)
-                $("#total").attr('data-totalnum', total);
-                $("#total").text(total);
+                var _this2 = $("#total");
+                _this2.attr('data-totalnum', total);
+                _this2.text(total);
                 //购物车列表渲染
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
