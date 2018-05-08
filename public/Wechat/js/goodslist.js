@@ -59,10 +59,19 @@ function selectgoods(category,keyword_val){
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
-                totalprice(total_price,true);
+                //记录总价格的值
+                var _this = $("#cart_price");
+                _this.attr('data-totalprice', total_price);
+                _this.html("金额总计<em>&yen;"+total_price+"</em>");
                 //购物车总数
                 var total = json.data.total;
-                totalnum(total,true);
+                var _this1 = $("#goods_totalnum");
+                _this1.attr('data-totalnum', total);
+                _this1.text(total);
+                //购物车弹出状态的total(两个)
+                var _this2 = $("#total");
+                _this2.attr('data-totalnum', total);
+                _this2.text(total);
                 //购物车列表渲染
                 var $cart_list = $("#cart_list");
                 $cart_list.empty();
