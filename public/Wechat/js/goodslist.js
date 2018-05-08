@@ -240,16 +240,16 @@ $(".icon_search").click(function(event) {
 });
 //商品搜索
 function search_click(){
-    var category_id = "";
-    $("#goods_cs_lt_alert li").each(function(index, el) {
-        if($(this).hasClass('action')){
-            category_id = $(this).data('id');
-        }
-    });
-    var keyword_val = $("#search").val();
-    setTimeout(function(){
-        selectgoods(category_id,keyword_val);
-    },500);
+    // var category_id = "";
+    // $("#goods_cs_lt_alert li").each(function(index, el) {
+    //     if($(this).hasClass('action')){
+    //         category_id = $(this).data('id');
+    //     }
+    // });
+    // var keyword_val = $("#search").val();
+    // setTimeout(function(){
+    //     selectgoods(category_id,keyword_val);
+    // },500);
 }
 //清空购物车
 function cart_empty(){
