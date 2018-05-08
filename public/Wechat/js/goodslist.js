@@ -32,7 +32,6 @@ $(function(){
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
-    var category_id = 0;
     $.post(
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
@@ -64,10 +63,12 @@ $(function(){
             }
             //获取商品列表
             var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
+            var category_id = 0;//分类ID
+            var keyword = "奶";
             $.post(
             	goodslist_url,
                 {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
-                'category_id':category_id},
+                'category_id':category_id,'keyword':keyword},
             	function(json){
                     var str = "";
                     console.log(json);
