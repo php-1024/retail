@@ -42,6 +42,7 @@ $(function(){
     		if (json.status == 1) {
                 var str = "";
                 var cart_num = [];
+                console.log(json);
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
@@ -225,12 +226,14 @@ function cart_list_box(name,price,num,goods_id) {
                 '<a href="javascript:;" class="cart_box delect_cart_btn"'+
                 'data-goodsid="'+goods_id+'"'+
                 'data-goodsname="'+name+'"'+
+                'data-goodsstock="'+stock+'"'+
                 'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
                 'data-goodsprice="'+price+'" onclick="cart_reduce(this)">-</a>'+
                 '<a href="javascript:;" class="cart_box delect_cart_inpt goods_id'+goods_id+'">'+num+'</a>'+
                 '<a href="javascript:;" class="cart_box add_cart_btn"'+
                 'data-goodsid="'+goods_id+'"'+
                 'data-goodsname="'+name+'"'+
+                'data-goodsstock="'+stock+'"'+
                 'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
                 'data-goodsprice="'+price+'" onclick="cart_add(this)">+</a>'+
             '</div>'+
