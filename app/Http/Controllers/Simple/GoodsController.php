@@ -32,17 +32,6 @@ class GoodsController extends Controller
         return view('Simple/Goods/goods_add', ['category' => $category, 'admin_data' => $admin_data, 'menu_data' => $menu_data, 'son_menu_data' => $son_menu_data, 'route_name' => $route_name]);
     }
 
-    //商品图片上传窗口
-    public function add_upload(Request $request)
-    {
-        $admin_data = $request->get('admin_data');
-        $goods = SimpleGoods::getList(['simple_id' => $admin_data['organization_id']],'0','created_at','DESC');
-        foreach($goods as $key=>$val){
-            $thumb[] = SimpleGoodsThumb::getList(['goods_id' => $val->id],'0','created_at','DESC');
-        }
-        return view('Simple/Goods/add_upload', ['thumb' => $thumb]);
-    }
-
     //添加商品数据操作
     public function goods_add_check(Request $request)
     {

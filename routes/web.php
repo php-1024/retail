@@ -901,7 +901,6 @@ Route::group(['prefix' => 'simple'], function () {
         Route::post('category_delete_check', 'Simple\CategoryController@category_delete_check')->middleware('SimpleCheckAjax');          //栏目添加检测
         Route::post('category_edit', 'Simple\CategoryController@category_edit')->middleware('SimpleCheckAjax');                    //栏目编辑页面
         Route::post('category_edit_check', 'Simple\CategoryController@category_edit_check')->middleware('SimpleCheckAjax');        //栏目编辑检测
-        Route::post('add_upload', 'Simple\GoodsController@add_upload')->middleware('SimpleCheckAjax');                             //商品图片上传窗口
         Route::post('goods_add_check', 'Simple\GoodsController@goods_add_check')->middleware('SimpleCheckAjax');                   //商品添加检测
 
         Route::post('goods_delete', 'Simple\GoodsController@goods_delete')->middleware('SimpleCheckAjax');                         //商品删除弹窗
