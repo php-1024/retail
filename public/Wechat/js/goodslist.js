@@ -363,6 +363,7 @@ function showcart(obj,em){
                 }
                 //购物车总价格
                 totalprice(total_price,true);
+                console.log("total_price----"+total_price);
                 //购物车总数
                 var total = json.data.total;
                 totalnum(total,true);
