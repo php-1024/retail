@@ -141,7 +141,7 @@ function totalprice(price){
     var old_price = $this.data("totalprice");
     var total = parseFloat(price) + parseFloat(old_price);
     //记录总价格的值
-    $this.data('totalprice', total.toFixed(2));
+    $this.attr('data-totalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
 //购物车列表
