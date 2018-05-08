@@ -49,6 +49,8 @@ class WxController extends Controller
 
     public function orderQuery()
     {
+        echo 123231;
+        exit;
         $resp = $this->wechat->orderQuery(array(
             'out_trade_no' => '201610265257070987061763',
             'total_fee' => 1,
