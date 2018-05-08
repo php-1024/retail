@@ -89,9 +89,7 @@ class WxController extends Controller
 
     public function resDispose($param)
     {
-        var_dump($param["return_code"]);
-        exit;
-        if ($param["return_code"] != "SUCCESS") {
+        if ($param["return_code"] == "SUCCESS") {
             $res["data"] = $param;
             $res["return_code"] = 1;
             $res["return_msg"] = "SUCCESS";
