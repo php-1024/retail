@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1d0ca05a7573c04e6c706c0c6a333eb",
+    "content-hash": "2336709bee714c126d6679e755a7b85b",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -2321,6 +2321,38 @@
                 "environment"
             ],
             "time": "2016-09-01T10:05:43+00:00"
+        },
+        {
+            "name": "wxpay/wxpay",
+            "version": "0.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wxpay/WXPay-SDK-PHP.git",
+                "reference": "6bf6918257886b35327d86371a05f145997b8deb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/wxpay/WXPay-SDK-PHP/6bf6918257886b35327d86371a05f145997b8deb.zip",
+                "reference": "6bf6918257886b35327d86371a05f145997b8deb",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "WXPay\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "description": "微信支付 PHP SDK",
+            "keywords": [
+                "pay",
+                "sdk",
+                "wechat"
+            ],
+            "time": "2017-03-13T13:19:01+00:00"
         },
         {
             "name": "zhuzhichao/ip-location-zh",
