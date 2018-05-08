@@ -28,7 +28,6 @@ class SimpleCheckAjax
 
             case "simple/ajax/subordinate_edit":        //编辑下属人员信息
             case "simple/ajax/subordinate_lock":        //冻结下属页面
-            case "simple/ajax/add_upload":              //商品图片上传窗口
             case "simple/ajax/goods_thumb":             //商品图片上传页面
             case "simple/ajax/goods_delete":            //商品删除弹窗
             case "simple/ajax/goods_status":            //商品状态修改弹窗
