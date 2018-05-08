@@ -34,7 +34,7 @@ class SimpleGoods extends Model{
     }
 
     //和SimpleGoodsThumb表一对一的关系
-    public function GoodsThumb(){
+    public function GoodsThumb(){//后台商品列表调用第一张缩略图使用
         return $this->hasOne('App\Models\SimpleGoodsThumb','goods_id','id');
     }
 
