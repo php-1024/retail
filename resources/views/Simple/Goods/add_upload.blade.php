@@ -1,6 +1,6 @@
 <div class="table-responsive">
     @foreach($thumb as $key=>$val)
-        $val->thumb
+        {{$val->thumb}}
     @endforeach
 </div>
 
