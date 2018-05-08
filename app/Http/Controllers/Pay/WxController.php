@@ -60,7 +60,7 @@ class WxController extends Controller
         var_dump($resp);
     }
 
-    public function refundQuery($param)
+    public function refundQuery($param= "")
     {
 
 //
