@@ -34,6 +34,7 @@ class WechatApiCheck
                 return self::format_response($re, $next);
                 break;
             case "api/wechatApi/shopping_cart_list"://检测店铺购物车列表提交数据
+            case "api/wechatApi/shopping_cart_empty"://检测店铺购物车列表提交数据
                 $re = $this->checkFourId($request);
                 return self::format_response($re, $next);
                 break;
