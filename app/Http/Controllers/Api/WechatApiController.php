@@ -185,11 +185,11 @@ class WechatApiController extends Controller
                 // 查询缓存中的商品是否存在添加的商品
                 if ($value['goods_id'] == $goods_id) {
                     // 添加商品数量
-                    $cart_data[$key]['num'] = $value['num'] + $num;
-                    // 缓存的库存
-                    $cart_data[$key]['stock'] = $stock;
-                    // 购物车中商品的数量
                     $num += $value['num'];
+                    // 添加商品数量
+                    $cart_data[$key]['num'] = $num;
+                    // 缓存的库存
+                    $cart_data[$key]['stock'] = $stock - $num;
                 }
                 //储存商品id
                 $goods_repeat[] = $value['goods_id'];
