@@ -208,6 +208,7 @@ function totalprice(price,status){
     var old_price = $this.data("totalprice");
     var total = (status== true) ? parseFloat(price) + parseFloat(old_price) : parseFloat(old_price) - parseFloat(price);
     //记录总价格的值
+    console.log(total+"asdasdadsad");
     $this.attr('data-totalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
