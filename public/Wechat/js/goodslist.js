@@ -126,7 +126,7 @@ function cart_add(obj){
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
                 if(json.data.num == 1){
-                    $this.parent().children('a').addClass('action');
+                    $this.parent().children('a').addClass('gs_show');
                 }
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
