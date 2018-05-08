@@ -53,6 +53,8 @@ var_dump($jsApiParameters);
 //获取共享收货地址js函数参数
 $editAddress = $tools->GetEditAddressParameters();
 $editAddress = json_decode($editAddress,true);
+var_dump($editAddress);
+
 //③、在支持成功回调通知中处理成功之后的事宜，见 notify.php
 /**
  * 注意：
