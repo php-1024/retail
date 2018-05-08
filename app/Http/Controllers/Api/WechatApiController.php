@@ -112,7 +112,7 @@ class WechatApiController extends Controller
 //
 //            SimpleGoods::addSimpleGoods($goods_data);
 //        }
-        
+
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
