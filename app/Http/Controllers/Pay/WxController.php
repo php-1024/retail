@@ -76,7 +76,7 @@ class WxController extends Controller
         );
 
         $res = $this->wechat->refundQuery($reqData);
-        var_dump($res);
+        dump($res);
 
     }
 }
