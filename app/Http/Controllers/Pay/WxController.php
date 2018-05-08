@@ -81,7 +81,7 @@ class WxController extends Controller
         $reqData[$param["type"]] =$param["number"];
         // 查询接口
         $res = $this->wechat->refundQuery($reqData);
-        return $this->resDispose($res);
+        echo $this->resDispose($res);
     }
 
 
@@ -97,6 +97,6 @@ class WxController extends Controller
             $res["return_code"] = 0;
             $res["return_msg"] = $param["return_code"];
         }
-        echo json_encode($param,JSON_UNESCAPED_UNICODE);
+        return json_encode($param,JSON_UNESCAPED_UNICODE);
     }
 }
