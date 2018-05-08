@@ -24,6 +24,9 @@ $domain_url = "http://develop.01nnt.com/wxpay";
 $tools = new JsApiPay();
 $openId = $tools->GetOpenid();
 
+
+var_dump($openId);
+
 //②、统一下单
 $input = new WxPayUnifiedOrder();
 $input->SetBody("test");
@@ -36,6 +39,8 @@ $input->SetGoods_tag("test");
 $input->SetNotify_url("{$domain_url}/example/notify.php");
 $input->SetTrade_type("JSAPI");
 $input->SetOpenid($openId);
+
+
 $order = WxPayApi::unifiedOrder($input);
 echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
 printf_info($order);
