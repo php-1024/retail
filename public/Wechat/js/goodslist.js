@@ -38,13 +38,14 @@ $(function(){
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
-            console.log(json);
     		if (json.status == 1) {
                 var str = "";
                 var cart_num = [];
+                console.log(json);
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
-                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
+                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id,json.data.goods_list[i].stock,
+                        json.data.goods_list[i].goods_thumb);
                     //计算购物车总价格
                     total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
                     //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
@@ -143,7 +144,8 @@ function cart_add(obj){
 	);
 }
 //减少商品购物车
-function cart_reduce(obj){
+function cart_reduce(obj,status){
+    //status 判断事件是在购物车里面执行
     $.showIndicator();
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_reduce";
     var $this = $(obj);
@@ -176,10 +178,18 @@ function cart_reduce(obj){
     	function(json){
     		if (json.status == 1) {
                 //数量小于的情况下显示数量和减号按钮
-                console.log(json);
                 if(json.data.num == 0){
+                    //数量为0隐藏减号和数量按钮
                     $this.removeClass('gs_show').addClass('gs_hide');
                     $this.next().removeClass('gs_show').addClass('gs_hide');
+                    //在购物车点击减号按钮的情况下隐藏商品列表减号和数量按钮
+                    $(".goods_id"+json.data.goods_id).removeClass('gs_show').addClass('gs_hide');
+                    $(".goods_id"+json.data.goods_id).prev().removeClass('gs_show').addClass('gs_hide');
+                    $(".goods_id"+json.data.goods_id).parent().removeClass('cart_border').addClass('action');
+                }
+                //购物车减到0的时候remove li
+                if(json.data.num == 0 && status){
+                    $this.closest('li').remove();
                 }
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
@@ -216,7 +226,7 @@ function totalnum(count,status){
     $("#total").text(total);
 }
 //购物车列表
-function cart_list_box(name,price,num,goods_id) {
+function cart_list_box(name,price,num,goods_id,stock,thumb) {
     str = '<li>'+
         '<span>'+name+'</span>'+
         '<span>&yen;'+price+'</span>'+
@@ -227,7 +237,7 @@ function cart_list_box(name,price,num,goods_id) {
                 'data-goodsname="'+name+'"'+
                 'data-goodsstock="'+stock+'"'+
                 'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
-                'data-goodsprice="'+price+'" onclick="cart_reduce(this)">-</a>'+
+                'data-goodsprice="'+price+'" onclick="cart_reduce(this,true)">-</a>'+
                 '<a href="javascript:;" class="cart_box delect_cart_inpt goods_id'+goods_id+'">'+num+'</a>'+
                 '<a href="javascript:;" class="cart_box add_cart_btn"'+
                 'data-goodsid="'+goods_id+'"'+
