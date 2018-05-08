@@ -200,6 +200,9 @@ function totalprice(price,del){
 function totalnum(count,del){
     var $this = $("#goods_totalnum");
     var old_num = $this.data("totalnum");
+    console.log(parseInt(old_num));
+    console.log(parseInt(count));
+    console.log(parseInt(old_num) - parseInt(count));
     var total = (del == true) ? parseInt(count) + parseInt(old_num) : parseInt(old_num) - parseInt(count);
     //记录总价格的值
     $this.attr('data-totalnum', total);
