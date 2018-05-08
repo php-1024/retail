@@ -1,6 +1,4 @@
 $(function(){
-    var total_price = 0;//购物车总价格
-
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
@@ -31,6 +29,7 @@ $(function(){
 		}
 	);
 	//获取购物车商品
+	 var total_price = 0;//购物车总价格
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
@@ -342,6 +341,7 @@ function hide(obj) {
 }
 function showcart(obj,em){
     //获取购物车商品
+    var total_price = 0;//购物车总价格
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
@@ -354,18 +354,16 @@ function showcart(obj,em){
     	function(json){
     		if (json.status == 1) {
                 var str = "";
-                var cart_num = [];
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num,json.data.goods_list[i].goods_id,json.data.goods_list[i].stock,
                         json.data.goods_list[i].goods_thumb);
                     //计算购物车总价格
                     total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
-                    //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
-                    cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
                 totalprice(total_price,true);
+                console.log("total_price----"+total_price);
                 //购物车总数
                 var total = json.data.total;
                 totalnum(total,true);
