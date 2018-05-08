@@ -103,7 +103,7 @@ $editAddress = $tools->GetEditAddressParameters();
 	<script type="text/javascript">
 
         wx.config({
-                debug: false,
+                debug: true,
             <?php echo $editAddress; ?>,
             jsApiList: [
             'checkJsApi',
