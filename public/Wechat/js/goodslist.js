@@ -230,7 +230,6 @@ function cart_reduce(obj,status){
 function category_list(category_id){
     var keyword_val = $("#search").val();
     selectgoods(category_id,keyword_val)
-    var $this = $(obj);
     $(".category"+category_id).siblings().removeClass('action');
     $(".category"+category_id).addClass('action');
 }
