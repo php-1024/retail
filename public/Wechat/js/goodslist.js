@@ -217,6 +217,7 @@ function category_list(category_id){
 	var cart_list_url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_list";
     var shop_user_id=$("#shop_user_id").val();//用户店铺ID
     var zerone_user_id=$("#zerone_user_id").val();//用户零壹ID
+    console.log(category_id);
     $.post(
     	cart_list_url,
         {
