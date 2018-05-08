@@ -45,8 +45,9 @@ $(function(){
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
                         json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
+                    //计算购物车总价格
                     total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
-                    //记录购物车列表数量,渲染商品列表赋值
+                    //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
@@ -137,10 +138,8 @@ function totalprice(price){
     var $this = $("#cart_price");
     var old_price = $this.data("totalprice");
     var total = parseFloat(price) + parseFloat(old_price);
-    console.log(old_price);
-    console.log(total);
     //记录总价格的值
-    $this.data('totalprice', total.toFixed(2));
+    $this.attr('dataTotalprice', total.toFixed(2));
     $this.html("金额总计<em>&yen;"+total.toFixed(2)+"</em>");
 }
 //购物车列表
