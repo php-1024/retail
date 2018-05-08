@@ -61,6 +61,7 @@ $res = file_get_contents($url);
 $res = json_decode($res,true);
 $ticket = $res["ticket"];
 
+var_dump($ticket);
 // 设置得到签名的参数
 $url = request()->fullUrl();
 $timestamp = time();
