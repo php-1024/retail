@@ -122,6 +122,8 @@ class WechatApiController extends Controller
         $scan_code = $request->scan_code;
         // 分类id
         $category_id = $request->category_id;
+        // 分页
+        $limit = $request->limit;
         // 条件
         $where = [['fansmanage_id', $fansmanage_id], ['simple_id', $store_id], ['status', '1']];
         if ($keyword) {
@@ -133,7 +135,7 @@ class WechatApiController extends Controller
         if ($category_id) {
             $where[] = ['category_id', $category_id];
         }
-        $goodslist = SimpleGoods::getListApi($where, '1', 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
+        $goodslist = SimpleGoods::getListApi($where, $limit, 'displayorder', 'asc', ['id', 'name', 'category_id', 'details', 'price', 'stock']);
         if (empty($goodslist->toArray())) {
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
