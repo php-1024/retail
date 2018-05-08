@@ -17,7 +17,8 @@ function printf_info($data)
     }
 }
 
-$domain_url = "http://paysdk.weixin.qq.com";
+$domain_url = "http://develop.01nnt.com/wxpay";
+
 
 //①、获取用户openid
 $tools = new JsApiPay();
