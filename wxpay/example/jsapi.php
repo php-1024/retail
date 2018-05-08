@@ -58,9 +58,8 @@ $a_k="9_aeWuKiTlzBxR21jNsPhB3JnaxLZ4IzxaLwIGZgF3xElEjiFRRhioVoYKxYd2okiD4ywJymzu
 
 $url = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$a_k}&type=jsapi";
 $res = file_get_contents($url);
-var_dump($res);
-
-$ticket = "HoagFKDcsGMVCIY2vOjf9uW6R0BkAV1jPN_F51YnDxdZmgIjen0vb-9nzQt6nMXg0XciU7bKOheQSvrrqhNhSw";
+$res = json_decode($res,true);
+$ticket = $res["ticket"];
 
 // 设置得到签名的参数
 $url = request()->fullUrl();
