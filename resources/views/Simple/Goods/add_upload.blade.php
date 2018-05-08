@@ -11,7 +11,7 @@
 
                 <div class="form-group">
                     @foreach($thumb as $key=>$val)
-                        <img src="http://develop.01nnt.com/uploads/simple/20180425104330148.jpg" />
+                        <img src="http://develop.01nnt.com/uploads/simple/20180425104330148.jpg" style="width: 50px; height: 50px;" onclick="bigthumb(this.src)">
                     @endforeach
                 </div>
             </div>
