@@ -97,6 +97,6 @@ class WxController extends Controller
             $res["return_code"] = 0;
             $res["return_msg"] = $param["return_code"];
         }
-        return json_encode($param,JSON_UNESCAPED_UNICODE);
+        echo json_encode($param,JSON_UNESCAPED_UNICODE);
     }
 }
