@@ -30,12 +30,17 @@ $url1 = $notify->GetPrePayUrl("wx0814281039008254a68be1700228958823");
 $domain_url = "http://develop.01nnt.com/wxpay";
 
 $input = new WxPayUnifiedOrder();
+// 设置支付主体
 $input->SetBody("test1231");
 $input->SetAttach("test");
 $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
-$input->SetTotal_fee("1000");
+// 设置金钱（单位：分）
+$input->SetTotal_fee("10");
+
 $input->SetTime_start(date("YmdHis"));
+
 $input->SetTime_expire(date("YmdHis", time() + 600));
+
 $input->SetGoods_tag("test1");
 //$input->SetNotify_url("http://paysdk.weixin.qq.com/example/notify.php");
 $input->SetNotify_url("$domain_url/example/notify.php");
