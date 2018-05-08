@@ -109,7 +109,9 @@
                             </div>
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
+                            <div id="select_company">
 
+                            </div>
                             <div class="col-sm-12">
                                 <form method="post" class="form-horizontal"  role="form" id="currentForm" action="{{ url('simple/ajax/goods_list') }}">
                                     <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -137,9 +139,6 @@
                             <div style="clear:both"></div>
                             <div class="line line-border b-b pull-in"></div>
                             {{--选择供应商--}}
-                            <div id="select_company">
-
-                            </div>
                             <form method="post" class="form-horizontal"  role="form" id="purchase_goods" action="{{ url('simple/ajax/purchase_goods_check') }}">
                                 <div class="tab-pane">
                                 <div class="col-lg-7">
