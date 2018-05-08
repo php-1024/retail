@@ -71,7 +71,7 @@ class SimpleGoods extends Model{
     public static function getListApi($where,$limit=0,$orderby,$sort='DESC',$select=[]){
         $model = new SimpleGoods();
         if(!empty($limit)){
-            $model = $model->offset($limit)->limit($limit+10);
+            $model = $model->offset($limit)->limit($limit*20);
         }
         if(!empty($select)){
             $model = $model->select($select);
