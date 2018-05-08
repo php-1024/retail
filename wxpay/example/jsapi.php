@@ -111,7 +111,7 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
 
                 }
             });
-        )}
+        })
     </script>
 
     <script type="text/javascript">
