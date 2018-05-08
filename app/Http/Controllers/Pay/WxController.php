@@ -68,10 +68,10 @@ class WxController extends Controller
             // 商户退款单号
 //            'out_refund_no' => '150337637120180508142510',
             'refund_id' => '50000306632018050804503014436',
-            // 订单金额
-            'total_fee' => 1,
-            // 申请退款金额(单位：分)
-            'refund_fee' => 1,
+//             订单金额
+//            'total_fee' => 1,
+//             申请退款金额(单位：分)
+//            'refund_fee' => 1,
             // openid
             'op_user_id' => 'oK2HF1Sy1qdRQyqg69pPN5-rirrg'
         );
