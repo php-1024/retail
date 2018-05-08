@@ -988,6 +988,7 @@ Route::group(['prefix' => 'api'], function () {
         Route::any('shopping_cart_add', 'Api\WechatApiController@shopping_cart_add')->middleware('WechatApiCheck');//购物车添加商品
         Route::any('shopping_cart_reduce', 'Api\WechatApiController@shopping_cart_reduce')->middleware('WechatApiCheck');//购物车减少商品
         Route::any('shopping_cart_list', 'Api\WechatApiController@shopping_cart_list')->middleware('WechatApiCheck');//购物车列表
+        Route::any('shopping_cart_empty', 'Api\WechatApiController@shopping_cart_empty')->middleware('WechatApiCheck');//购物车列表
         Route::any('address', 'Api\WechatApiController@address')->middleware('WechatApiCheck');//查询用户默认收货地址信息
         Route::any('selftake', 'Api\WechatApiController@selftake')->middleware('WechatApiCheck');//用户默认取货信息
         Route::any('address_add', 'Api\WechatApiController@address_add')->middleware('WechatApiCheck');//添加收货地址

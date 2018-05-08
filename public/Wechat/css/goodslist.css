@@ -28,7 +28,6 @@ body{
 	background: rgb(254,219,67);
 }
 .head .nav ul li{
-	padding: 0 0.35rem;
 	float: left;
 	margin-right: 0.15rem;
 	position: relative;
@@ -36,6 +35,8 @@ body{
 .head .nav ul li a{
 	font-size: 0.7rem;
 	color: rgb(50,50,50);
+	padding: 0 0.35rem;
+	display: block;
 }
 .head .nav ul .action:after{
 	content: "";
