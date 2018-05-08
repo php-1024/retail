@@ -135,7 +135,7 @@ class WechatApiController extends Controller
             $goodslist[$key]['category_name'] = SimpleCategory::getPluck([['id', $value['category_id']]], 'name');
             $goodslist[$key]['number'] = '0';
             $goodslist[$key]['thumb'] = SimpleGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
-            if (count($goodslist[$key]['thumb']) == 0){
+            if (count($goodslist[$key]['thumb']) == 0) {
                 $goodslist[$key]['thumb'] = [['thumb' => 'public/thumb.png']];
             }
         }
@@ -195,8 +195,9 @@ class WechatApiController extends Controller
                     }
                     // 添加商品数量
                     $cart_data[$key]['num'] = $num;
+                    $stock -= $num;
                     // 缓存的库存
-                    $cart_data[$key]['stock'] = $stock - $num;
+                    $cart_data[$key]['stock'] = $stock;
                 }
                 //储存商品id
                 $goods_repeat[] = $value['goods_id'];
@@ -671,11 +672,11 @@ class WechatApiController extends Controller
 
         DB::beginTransaction();
         try {
-            $id = SimpleAddress::getPluck([['zerone_user_id', $zerone_user_id],['status','1']],'id');
+            $id = SimpleAddress::getPluck([['zerone_user_id', $zerone_user_id], ['status', '1']], 'id');
             if ($id) {
                 SimpleAddress::editAddress([['id', $id]], ['status' => '0']);
             }
-            SimpleAddress::editAddress([['id',$address_id]],['status' => '1']);
+            SimpleAddress::editAddress([['id', $address_id]], ['status' => '1']);
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
@@ -826,11 +827,11 @@ class WechatApiController extends Controller
 
         DB::beginTransaction();
         try {
-            $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id],['status','1']],'id');
+            $id = SimpleSelftake::getPluck([['zerone_user_id', $zerone_user_id], ['status', '1']], 'id');
             if ($id) {
                 SimpleSelftake::editSelftake([['id', $id]], ['status' => '0']);
             }
-            SimpleSelftake::editSelftake([['id',$self_take_id]],['status' => '1']);
+            SimpleSelftake::editSelftake([['id', $self_take_id]], ['status' => '1']);
             // 提交事务
             DB::commit();
         } catch (Exception $e) {
