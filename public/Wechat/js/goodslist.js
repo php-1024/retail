@@ -38,14 +38,14 @@ $(function(){
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
-            console.log(json);
     		if (json.status == 1) {
                 var str = "";
                 var cart_num = [];
                 console.log(json);
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
-                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id);
+                        json.data.goods_list[i].num,json.data.goods_list[i].goods_id,json.data.goods_list[i].stock,
+                        json.data.goods_list[i].goods_thumb);
                     //计算购物车总价格
                     total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
                     //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
@@ -217,7 +217,7 @@ function totalnum(count,status){
     $("#total").text(total);
 }
 //购物车列表
-function cart_list_box(name,price,num,goods_id) {
+function cart_list_box(name,price,num,goods_id,stock,thumb) {
     str = '<li>'+
         '<span>'+name+'</span>'+
         '<span>&yen;'+price+'</span>'+
