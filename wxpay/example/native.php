@@ -17,7 +17,7 @@ require_once 'log.php';
  * 6、在支付成功通知中需要查单确认是否真正支付成功（见：notify.php）
  */
 $notify = new NativePay();
-$url1 = $notify->GetPrePayUrl("123456789");
+$url1 = $notify->GetPrePayUrl("wx0814281039008254a68be1700228958823");
 
 //模式二
 /**
@@ -33,7 +33,7 @@ $input = new WxPayUnifiedOrder();
 $input->SetBody("test1231");
 $input->SetAttach("test");
 $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
-$input->SetTotal_fee("1");
+$input->SetTotal_fee("1000");
 $input->SetTime_start(date("YmdHis"));
 $input->SetTime_expire(date("YmdHis", time() + 600));
 $input->SetGoods_tag("test1");
