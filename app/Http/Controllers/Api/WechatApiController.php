@@ -171,15 +171,6 @@ class WechatApiController extends Controller
 
         // 查询该店铺是否可以零库存开单
         $config = SimpleConfig::getPluck([['simple_id', $store_id], ['cfg_name', 'allow_zero_stock']], 'cfg_value');
-        // 如果值为1 表示不能
-        if ($config != '1') {
-            // 库存不足
-            if ($stock - $num < 0) {
-                return response()->json(['status' => '0', 'msg' => '商品' . $goods_name . '库存不足', 'data' => '']);
-            }
-        }
-        // 库存
-        $stock -= $num;
         // 缓存键值
         $key_id = 'simple' . $user_id . $zerone_user_id . $fansmanage_id . $store_id;
         // 查看缓存是否存有商品
@@ -227,6 +218,17 @@ class WechatApiController extends Controller
             // 更新缓存
             ZeroneRedis::create_shopping_cart($key_id, $cart_data);
         } else {
+
+            // 如果值为1 表示不能
+            if ($config != '1') {
+                // 库存不足
+                if ($stock - $num < 0) {
+                    return response()->json(['status' => '0', 'msg' => '商品' . $goods_name . '库存不足', 'data' => '']);
+                }
+            }
+
+            // 库存
+            $stock -= $num;
             // 数据处理
             $cart_data[] = [
                 'store_id' => $store_id,
@@ -234,6 +236,7 @@ class WechatApiController extends Controller
                 'goods_name' => $goods_name,
                 'goods_price' => $goods_price,
                 'goods_thumb' => $goods_thumb,
+                'stock' => $stock,
                 'num' => $num,
             ];
             // 新增缓存
