@@ -243,10 +243,10 @@ function search_click(){
             category_id = $(this).data('id');
         }
     });
-    //var category_id = _li.attr("data-id");
     var keyword_val = $("#search").val();
-    alert(category_id);
-    //selectgoods(category_id,keyword_val);
+    setTimeout(function(){
+        selectgoods(category_id,keyword_val);
+    },500);
 }
 //清空购物车
 function cart_empty(){
