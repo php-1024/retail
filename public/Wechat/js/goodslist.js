@@ -340,6 +340,7 @@ function hide(obj) {
     $("#"+obj+" .popup_alert_hook").removeClass('fadeInUp').addClass("fadeOutDown");
 }
 function showcart(obj,em){
+    $.showIndicator();
     //获取购物车商品
     var total_price = 0;//购物车总价格
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
@@ -352,6 +353,7 @@ function showcart(obj,em){
     	cart_list_url,
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,'user_id':shop_user_id,'zerone_user_id':zerone_user_id},
     	function(json){
+            $.hideIndicator();
     		if (json.status == 1) {
                 var str = "";
                 for (var i = 0; i < json.data.goods_list.length; i++) {
