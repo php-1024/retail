@@ -12,7 +12,7 @@ $(function(){
                 console.log(json);
     			var str = "<li class='action'><a href='javascript:;' onclick='category_list(0);'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li><a href='javascript:;' onclick='category_list('"+json.data.categorylist[i].id+"');' external>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li onclick='category_list("+json.data.categorylist[i].id+");'><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
@@ -209,6 +209,7 @@ function cart_reduce(obj,status){
 }
 //获取分类查询
 function category_list(category_id){
+    alert();
     var fansmanage_id=$("#fansmanage_id").val();//联盟主组织ID
     var _token=$("#_token").val();
     var store_id=$("#store_id").val();//店铺ID
