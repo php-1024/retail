@@ -9,10 +9,12 @@ $(function(){
         {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
     	function(json){
     		if (json.status == 1) {
-                console.log(json);
-    			var str = "<li class='action' onclick='category_list(0);'><a href='javascript:;'>全部</a></li>";
+    			var str = "<li class='action category0' data-id='"+0+"' onclick='category_list(0);'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li onclick='category_list("+json.data.categorylist[i].id+");'><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li class='category"+json.data.categorylist[i].id+"'"+
+                     "data-id='"+json.data.categorylist[i].id+"'"+
+                    " onclick='category_list("+json.data.categorylist[i].id+");'>"+
+                     "<a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
@@ -29,7 +31,6 @@ $(function(){
 	);
     //查询商品列表和购物车列表
     selectgoods("0","");
-
 });
 //查询商品列表和购物车列表
 function selectgoods(category,keyword_val){
@@ -60,8 +61,8 @@ function selectgoods(category,keyword_val){
                 }
                 //购物车总价格
                 var _this = $("#cart_price");
-                _this.attr('data-totalprice', total_price);//记录总价格的值
-                _this.html("金额总计<em>&yen;"+total_price+"</em>");
+                _this.attr('data-totalprice', total_price.toFixed(2));//记录总价格的值
+                _this.html("金额总计<em>&yen;"+total_price.toFixed(2)+"</em>");
                 //购物车总数
                 var total = json.data.total;
                 var _this1 = $("#goods_totalnum");
@@ -88,7 +89,6 @@ function selectgoods(category,keyword_val){
                 'category_id':category_id,'keyword':keyword},
             	function(json){
                     var str = "";
-                    console.log(json);
 
             		if (json.status == 1) {
                         for (var i = 0; i < json.data.goodslist.length; i++) {
@@ -230,7 +230,18 @@ function cart_reduce(obj,status){
 //获取分类查询
 function category_list(category_id){
     var keyword_val = $("#search").val();
-    selectgoods(category_id,keyword_val)
+    selectgoods(category_id,keyword_val);
+    $(".category"+category_id).siblings().removeClass('action');
+    $(".category"+category_id).addClass('action');
+    hidegoodsclass('goodsclass');
+}
+//商品搜索
+function search_click(){
+    var _li = $("#goods_cs_lt_alert").children('li').hasClass('action');
+    var category_id = _li.attr("data-id");
+    var keyword_val = $("#search").val();
+    alert(category_id)
+    //selectgoods(category_id,keyword_val);
 }
 //清空购物车
 function cart_empty(){
@@ -426,8 +437,8 @@ function showcart(obj,em){
                 //购物车总价格
                 //记录总价格的值
                 var _this = $("#cart_price");
-                _this.attr('data-totalprice', total_price);
-                _this.html("金额总计<em>&yen;"+total_price+"</em>");
+                _this.attr('data-totalprice', total_price.toFixed(2));
+                _this.html("金额总计<em>&yen;"+total_price.toFixed(2)+"</em>");
                 //购物车总数
                 var total = json.data.total;
                 var _this1 = $("#goods_totalnum");

@@ -94,25 +94,6 @@ class WechatApiController extends Controller
      */
     public function category(Request $request)
     {
-
-//        for($i=0;$i<=50;$i++){
-//
-//            //商品数据
-//            $goods_data = ['fansmanage_id' => '11',
-//                'simple_id' => '13',
-//                'created_by' => '0',
-//                'category_id' => '1',
-//                'name' => '商品'.$i,
-//                'price' => $i+1,
-//                'stock' => '100',
-//                'barcode' => '123456789',
-//                'displayorder' => '0',
-//                'details' => '这是商品详情'
-//            ];
-//
-//            SimpleGoods::addSimpleGoods($goods_data);
-//        }
-
         // 联盟主id
         $fansmanage_id = $request->fansmanage_id;
         // 店铺id
@@ -159,6 +140,7 @@ class WechatApiController extends Controller
             return response()->json(['status' => '0', 'msg' => '没有商品', 'data' => '']);
         }
         foreach ($goodslist as $key => $value) {
+            $goodslist[$key]['price'] = round($value['price'],2);
             $goodslist[$key]['category_name'] = SimpleCategory::getPluck([['id', $value['category_id']]], 'name');
             $goodslist[$key]['thumb'] = SimpleGoodsThumb::where([['goods_id', $value['id']]])->select('thumb')->get();
             if (count($goodslist[$key]['thumb']) == 0) {
