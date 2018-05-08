@@ -232,6 +232,7 @@ function category_list(category_id){
     selectgoods(category_id,keyword_val)
     $(".category"+category_id).siblings().removeClass('action');
     $(".category"+category_id).addClass('action');
+    hidegoodsclass('goodsclass');
 }
 //清空购物车
 function cart_empty(){
