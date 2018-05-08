@@ -223,8 +223,7 @@ function category_list(category_id){
         {
             'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
             'user_id':shop_user_id,
-            'zerone_user_id':zerone_user_id,
-            'category_id':category_id
+            'zerone_user_id':zerone_user_id
         },
     	function(json){
     		if (json.status == 1) {
@@ -256,7 +255,8 @@ function category_list(category_id){
             var goodslist_url = "http://develop.01nnt.com/api/wechatApi/goods_list";
             $.post(
             	goodslist_url,
-                {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id},
+                {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
+                'category_id':category_id},
             	function(json){
                     var str = "";
                     console.log(json);
