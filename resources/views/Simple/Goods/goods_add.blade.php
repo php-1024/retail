@@ -132,7 +132,8 @@
         </section>
     </section>
 </section>
-
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+</div>
 <script src="{{asset('public/Simple')}}/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/Simple')}}/js/bootstrap.js"></script>
@@ -167,25 +168,20 @@
         var url = $("#upload_add").val();
         var _token = $("#_token").val();
         var data = {'_token':_token};
-        $.post(url, data, function (json) {
-            if (json.status == -1) {
-                alert('1');
-            } else if(json.status == 1) {
+        $.post(url,data,function(response){
+            if(response.status=='-1'){
                 swal({
                     title: "提示信息",
-                    text: json.data,
+                    text: response.data,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "确定",
                 },function(){
-                    alert('1');
+                    window.location.reload();
                 });
+                return;
             }else{
-                swal({
-                    title: "提示信息",
-                    text: json.data,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "确定"
-                });
+                $('#myModal').html(response);
+                $('#myModal').modal('hide');
             }
         });
     }
