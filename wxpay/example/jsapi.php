@@ -101,7 +101,7 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
                 'openAddress',
-                'editAddress',
+                // 'editAddress',
                 'getBrandWCPayRequest',
             ] // 必填，需要使用的JS接口列表
         });
@@ -147,7 +147,7 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
         //获取共享地址
         function editAddress() {
             WeixinJSBridge.invoke(
-                'editAddress',
+                'openAddress',
                 <?php echo $editAddress; ?>,
                 function (res) {
                     console.log(res);
