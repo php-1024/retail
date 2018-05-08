@@ -51,7 +51,7 @@ $(function(){
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
-                totalprice(total_price);
+                totalprice(total_price,"");
                 //购物车总数
                 var total = json.data.total;
                 totalnum(total);
