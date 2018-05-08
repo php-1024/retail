@@ -110,6 +110,17 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
         });
 
         wx.ready(function () {
+            wx.checkJsApi({
+                jsApiList: [ 'checkJsApi',
+                    'onMenuShareTimeline',
+                    'onMenuShareAppMessage',
+                    'openAddress',
+                    'chooseWXPay',], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+                success: function(res) {
+                    // 以键值对的形式返回，可用的api值true，不可用为false
+                    // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+                }
+            });
             wx.openAddress({
                 success: function (res) {
                     alert(JSON.stringify(res));
