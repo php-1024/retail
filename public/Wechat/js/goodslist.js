@@ -12,8 +12,8 @@ $(function(){
                 console.log(json);
     			var str = "<li class='action' onclick='category_list();'  data-id='0'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li onclick='category_list();' data-id="+json.data.categorylist[i].id+"
-                            ><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
+    				str +="<li onclick='category_list();' data-id='"+json.data.categorylist[i].id+"'"+
+                            "><a href='javascript:;' external>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
     			var $goods_cs_lt = $("#goods_cs_lt");
