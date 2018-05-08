@@ -235,18 +235,16 @@ function category_list(category_id){
     $(".category"+category_id).addClass('action');
     hidegoodsclass('goodsclass');
 }
-$(".icon_search").click(function(event) {
-    alert();
-});
 //商品搜索
 function search_click(){
-    // var category_id = "";
-    // $("#goods_cs_lt_alert li").each(function(index, el) {
-    //     if($(this).hasClass('action')){
-    //         category_id = $(this).data('id');
-    //     }
-    // });
-    // var keyword_val = $("#search").val();
+    var category_id = "";
+    $("#goods_cs_lt_alert li").each(function(index, el) {
+        if($(this).hasClass('action')){
+            category_id = $(this).data('id');
+        }
+    });
+    var keyword_val = $("#search").val();
+    alert(category_id)
     // setTimeout(function(){
     //     selectgoods(category_id,keyword_val);
     // },500);

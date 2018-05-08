@@ -30,7 +30,7 @@
 			</div>
 			<div class="search">
 			    <div class="search_item">
-			    	<label class="icon_search" ></label>
+			    	<label class="icon_search" onclick="search_click()"></label>
 					<input type="search" id="search" name="" placeholder="七夕礼物 玫瑰">
 					<label class="icon_scavenging"></label>
 			    </div>
