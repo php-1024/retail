@@ -12,10 +12,11 @@ $(function(){
                 console.log(json);
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				if (i == json.data.categorylist.length - 1) {
-    					str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
-    					continue;
-    				}
+    				// if (i == json.data.categorylist.length - 1) {
+                    //     console.log(i,"i");
+    				// 	str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
+    				// 	continue;
+    				// }
     				str +="<li><a href='javascript:;'>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
