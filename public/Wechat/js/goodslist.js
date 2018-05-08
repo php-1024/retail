@@ -222,9 +222,19 @@ function cart_list_box(name,price,num,goods_id) {
         '<span>&yen;'+price+'</span>'+
         '<div class="cart_alert_btn">'+
             '<div class="goods_btn cart_border">'+
-                '<a href="javascript:;" class="cart_box delect_cart_btn">-</a>'+
+                '<a href="javascript:;" class="cart_box delect_cart_btn"'+
+                'data-goodsid="'+goods_id+'"'+
+                'data-goodsname="'+name+'"'+
+                'data-goodsstock="'+stock+'"'+
+                'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
+                'data-goodsprice="'+price+'" onclick="cart_reduce(this)">-</a>'+
                 '<a href="javascript:;" class="cart_box delect_cart_inpt goods_id'+goods_id+'">'+num+'</a>'+
-                '<a href="javascript:;" class="cart_box add_cart_btn">+</a>'+
+                '<a href="javascript:;" class="cart_box add_cart_btn"'+
+                'data-goodsid="'+goods_id+'"'+
+                'data-goodsname="'+name+'"'+
+                'data-goodsstock="'+stock+'"'+
+                'data-goodsthumb="http://develop.01nnt.com/'+thumb+'"'+
+                'data-goodsprice="'+price+'" onclick="cart_add(this)">+</a>'+
             '</div>'+
         '</div>'+
     '</li>';
