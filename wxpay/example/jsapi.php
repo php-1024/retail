@@ -65,7 +65,7 @@ $ticket = $res["ticket"];
 var_dump($ticket);
 
 // 设置得到签名的参数
-$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+$url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING'];
 var_dump($url);
 
 $timestamp = time();
@@ -121,51 +121,52 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
     </script>
 
     <script type="text/javascript">
-        //调用微信JS api 支付
-        function jsApiCall() {
-            WeixinJSBridge.invoke(
-                'getBrandWCPayRequest',
-                <?php echo $jsApiParameters; ?>,
-                function (res) {
-                    console.log(res);
-                    WeixinJSBridge.log(res.err_msg);
-                    // console.log(res.err_code+res.err_desc+res.err_msg);
-                }
-            );
-        }
-
-        function callpay() {
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
-                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
-                }
-            } else {
-                jsApiCall();
-            }
-        }
-    </script>
+        //    //调用微信JS api 支付
+        //    function jsApiCall() {
+        //        WeixinJSBridge.invoke(
+        //            'getBrandWCPayRequest',
+        //            <?php //echo $jsApiParameters; ?>//,
+        //            function (res) {
+        //                console.log(res);
+        //                WeixinJSBridge.log(res.err_msg);
+        //                // console.log(res.err_code+res.err_desc+res.err_msg);
+        //            }
+        //        );
+        //    }
+        //
+        //    function callpay() {
+        //        if (typeof WeixinJSBridge == "undefined") {
+        //            if (document.addEventListener) {
+        //                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+        //            } else if (document.attachEvent) {
+        //                document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+        //                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+        //            }
+        //        } else {
+        //            jsApiCall();
+        //        }
+        //    }
+        //</script>
+    //
     <script type="text/javascript">
-        //获取共享地址
-        function editAddress() {
-            WeixinJSBridge.invoke(
-                'openAddress',
-                <?php echo $editAddress; ?>,
-                function (res) {
-                    console.log(res);
-                    // var value1 = res.proviceFirstStageName;
-                    // var value2 = res.addressCitySecondStageName;
-                    // var value3 = res.addressCountiesThirdStageName;
-                    // var value4 = res.addressDetailInfo;
-                    // var tel = res.telNumber;
-                    //
-                    // console.log(value1 + value2 + value3 + value4 + ":" + tel);
-                }
-            );
-        }
-        editAddress();
+        //    //获取共享地址
+        //    function editAddress() {
+        //        WeixinJSBridge.invoke(
+        //            'openAddress',
+        //            <?php //echo $editAddress; ?>//,
+        //            function (res) {
+        //                console.log(res);
+        //                // var value1 = res.proviceFirstStageName;
+        //                // var value2 = res.addressCitySecondStageName;
+        //                // var value3 = res.addressCountiesThirdStageName;
+        //                // var value4 = res.addressDetailInfo;
+        //                // var tel = res.telNumber;
+        //                //
+        //                // console.log(value1 + value2 + value3 + value4 + ":" + tel);
+        //            }
+        //        );
+        //    }
+        //    editAddress();
         // window.onload = function () {
         //     if (typeof WeixinJSBridge == "undefined") {
         //         if (document.addEventListener) {
@@ -178,7 +179,32 @@ $signPackage = array("appId" => "wx3fb8f4754008e524", "nonceStr" => $nonceStr, "
         //         editAddress();
         //     }
         // };
+        function callpay() {
 
+            wx.ready(function () { // config信息验证后会执行ready方法，所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+                wx.chooseWXPay({
+                    appId: 'wx3fb8f4754008e524  ',
+                    timestamp: '1461300911', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
+                    nonceStr: 'IuchRzJddMW6kWSH', // 支付签名随机串，不长于 32 位
+                    package: 'prepay_id=wx0815571349501608a956306a1583838981 ', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
+                    signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
+                    paySign: '562E13EB834CFD370DAC9E4B6119EA6E', // 支付签名
+                    success: function (res) {
+                        // 支付成功后的回调函数
+                        if (res.errMsg == "chooseWXPay:ok") {
+                            //支付成功
+                            alert('支付成功');
+                        } else {
+                            alert(res.errMsg);
+                        }
+                    },
+                    cancel: function (res) {
+                        //支付取消
+                        alert('支付取消');
+                    }
+                });
+            });
+        }
     </script>
 </head>
 <body>
