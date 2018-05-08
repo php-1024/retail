@@ -244,7 +244,7 @@ function search_click(){
         }
     });
     var keyword_val = $("#search").val();
-    alert(category_id)
+    alert(keyword_val)
     // setTimeout(function(){
     //     selectgoods(category_id,keyword_val);
     // },500);
