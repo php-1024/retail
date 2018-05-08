@@ -302,7 +302,7 @@
 				<div class="cart_left">
 					<div class="cart_kuang clear_after" id="cart_btn_b" onclick="showcart('cart',this)">
 						<div class="cart_kuang_img">
-							<span class="goods_number" id="goods_total">0</span>
+							<span class="goods_number" id="goods_totalnum" data-totalnum="0">0</span>
 						</div>
 					</div>
 					<h3 class="cart_price" id="cart_price" data-totalprice="0">您还未选购商品哦~</h3>
@@ -332,7 +332,7 @@
 					<div class="open_cart_kuang">
 						<div class="cart_kuang clear_after" onclick="show('cart')">
 							<div class="cart_kuang_img">
-								<span class="goods_number" id="total"></span>
+								<span class="goods_number" id="total" data-totalnum="0">0</span>
 							</div>
 						</div>
 					</div>
