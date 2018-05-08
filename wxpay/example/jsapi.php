@@ -101,6 +101,7 @@ $editAddress = $tools->GetEditAddressParameters();
 
         wx.config({
             debug: true,
+            appid: <?php echo $editAddress["appid"] ?>,
             timestamp: <?php echo $editAddress["timestamp"] ?>,
             nonceStr:  <?php echo $editAddress["nonceStr"] ?>,
             signature: <?php echo $editAddress["signature"] ?>,
