@@ -179,8 +179,13 @@ function cart_reduce(obj,status){
     		if (json.status == 1) {
                 //数量小于的情况下显示数量和减号按钮
                 if(json.data.num == 0){
+                    //数量为0隐藏减号和数量按钮
                     $this.removeClass('gs_show').addClass('gs_hide');
                     $this.next().removeClass('gs_show').addClass('gs_hide');
+                    //在购物车点击减号按钮的情况下隐藏商品列表减号和数量按钮
+                    $(".goods_id"+json.data.goods_id).removeClass('gs_show').addClass('gs_hide');
+                    $(".goods_id"+json.data.goods_id).prev().removeClass('gs_show').addClass('gs_hide');
+                    $(".goods_id"+json.data.goods_id).parent().removeClass('cart_border').addClass('action');
                 }
                 //购物车减到0的时候remove li
                 if(json.data.num == 0 && status){

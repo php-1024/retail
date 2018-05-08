@@ -67,6 +67,14 @@
 
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-id-1">商品图片</label>
+                                                <div class="col-sm-8">
+                                                    +加图
+                                                </div>
+                                            </div>
+
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
                                                 <label class="col-sm-2 control-label" for="input-id-1">价格</label>
                                                 <div class="col-sm-8">
                                                     <input type="number" class="form-control" name="price">
