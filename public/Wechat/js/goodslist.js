@@ -59,8 +59,8 @@ function selectgoods(category,keyword_val){
                 }
                 //购物车总价格
                 var _this = $("#cart_price");
-                _this.attr('data-totalprice', total_price);//记录总价格的值
-                _this.html("金额总计<em>&yen;"+total_price+"</em>");
+                _this.attr('data-totalprice', total_price.toFixed(2));//记录总价格的值
+                _this.html("金额总计<em>&yen;"+total_price.toFixed(2)+"</em>");
                 //购物车总数
                 var total = json.data.total;
                 var _this1 = $("#goods_totalnum");
@@ -87,7 +87,6 @@ function selectgoods(category,keyword_val){
                 'category_id':category_id,'keyword':keyword},
             	function(json){
                     var str = "";
-                    console.log(json);
 
             		if (json.status == 1) {
                         for (var i = 0; i < json.data.goodslist.length; i++) {
@@ -428,8 +427,8 @@ function showcart(obj,em){
                 //购物车总价格
                 //记录总价格的值
                 var _this = $("#cart_price");
-                _this.attr('data-totalprice', total_price);
-                _this.html("金额总计<em>&yen;"+total_price+"</em>");
+                _this.attr('data-totalprice', total_price.toFixed(2));
+                _this.html("金额总计<em>&yen;"+total_price.toFixed(2)+"</em>");
                 //购物车总数
                 var total = json.data.total;
                 var _this1 = $("#goods_totalnum");
