@@ -125,9 +125,10 @@ function cart_add(obj){
                 $(".cart_border").removeClass('action');
                 //添加点击加号按钮的当前状态
                 $this.parent().addClass('action');
-                // if(json.data.num == 1){
-                //     $this.prev()
-                // }
+                if(json.data.num == 1){
+                    $this.parent().children('a').removeClass('gs_hide').addClass('gs_show');
+                }
+                console.log(json.data.num);
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
