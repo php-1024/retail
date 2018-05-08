@@ -39,7 +39,6 @@ $(function(){
     	function(json){
     		if (json.status == 1) {
                 var str = "";
-                var cart_num = [];
                 console.log(json);
                 for (var i = 0; i < json.data.goods_list.length; i++) {
                     str += cart_list_box(json.data.goods_list[i].goods_name,json.data.goods_list[i].goods_price,
@@ -47,8 +46,6 @@ $(function(){
                         json.data.goods_list[i].goods_thumb);
                     //计算购物车总价格
                     total_price += parseFloat(json.data.goods_list[i].goods_price) * parseInt(json.data.goods_list[i].num);
-                    //记录购物车列表数量,渲染商品列表赋值商品列表存在购物车的数量
-                    cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
                 totalprice(total_price,true);
