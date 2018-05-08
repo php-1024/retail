@@ -93,7 +93,7 @@ $(function(){
 });
 //添加购物车
 function cart_add(obj){
-    $.showPreloader();
+    $.showIndicator();
     var url = "http://develop.01nnt.com/api/wechatApi/shopping_cart_add";
     var $this = $(obj);
     var goods_id = $this.data("goodsid");
@@ -125,7 +125,7 @@ function cart_add(obj){
     	function(json){
             console.log(json);
     		if (json.status == 1) {
-
+                $.hideIndicator();
     		}
 		}
 	);
