@@ -38,7 +38,23 @@ class WxController extends Controller
 
     public function test13()
     {
-        $this->refundQuery();
+
+//        $reqData = array(
+////            // 商户订单号
+//////            'out_trade_no' => '150337637120180508143454',
+////            // 商户退款单号
+////            'out_refund_no' => '1003022622018050853721122351525761650',
+//////            'refund_id' => '50000306632018050804503014436',
+//////             订单金额
+//////            'total_fee' => 1,
+//////             申请退款金额(单位：分)
+//////            'refund_fee' => 1,
+////        );
+        $reqData["type"] = "out_refund_no";
+        $reqData["number"] = "1003022622018050853721122351525761650";
+
+        $res = $this->refundQuery($reqData);
+        echo $res;
     }
 
     public function unifiedOrder()
@@ -60,29 +76,27 @@ class WxController extends Controller
         var_dump($resp);
     }
 
-    public function refundQuery($param= "")
+    public function refundQuery($param = [])
     {
-
-//
-        $reqData["out_refund_no"] = "1003022622018050853721122351525761650";
-//
-//
-//        $reqData = array(
-//            // 商户订单号
-////            'out_trade_no' => '150337637120180508143454',
-//            // 商户退款单号
-//            'out_refund_no' => '1003022622018050853721122351525761650',
-////            'refund_id' => '50000306632018050804503014436',
-////             订单金额
-////            'total_fee' => 1,
-////             申请退款金额(单位：分)
-////            'refund_fee' => 1,
-//            // openid
-//            'op_user_id' => 'oK2HF1Sy1qdRQyqg69pPN5-rirrg'
-//        );
-
+        $reqData[$param["type"]] =$param["number"];
+        // 查询接口
         $res = $this->wechat->refundQuery($reqData);
-        dump($res);
+        return $this->resDispose($res);
+    }
 
+
+
+
+    public function resDispose($param)
+    {
+        if ($param["return_code"] == "SUCCESS") {
+            $res["data"] = $param;
+            $res["return_code"] = 1;
+            $res["return_msg"] = "SUCCESS";
+        } else {
+            $res["return_code"] = 0;
+            $res["return_msg"] = $param["return_code"];
+        }
+        return json_encode($res,JSON_UNESCAPED_UNICODE);
     }
 }
