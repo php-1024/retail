@@ -51,7 +51,7 @@ $(function(){
                     cart_num[json.data.goods_list[i].goods_id] = json.data.goods_list[i].num;
                 }
                 //购物车总价格
-                totalprice(total_price,"");
+                totalprice(total_price,true);
                 //购物车总数
                 var total = json.data.total;
                 totalnum(total);
@@ -131,7 +131,7 @@ function cart_add(obj){
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
-                totalprice(json.data.goods_price);
+                totalprice(json.data.goods_price,true);
                 //购物车总数
                 totalnum(1);
                 $.hideIndicator();
@@ -179,7 +179,7 @@ function cart_reduce(obj){
                 //设置点击数量
                 $(".goods_id"+json.data.goods_id).text(json.data.num);
                 //购物车总价格
-                totalprice(json.data.goods_price,"del");
+                totalprice(json.data.goods_price,false);
                 //购物车总数
                 totalnum(1,"del");
                 $.hideIndicator();
