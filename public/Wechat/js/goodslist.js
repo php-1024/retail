@@ -12,7 +12,7 @@ $(function(){
                 console.log(json);
     			var str = "<li class='action'><a href='javascript:;'>全部</a></li>";
     			for (var i = json.data.categorylist.length - 1; i >= 0; i--) {
-    				str +="<li><a href='http://develop.01nnt.com/api/wechatApi/goods_list?fansmanage_id='"+fansmanage_id+"'&store_id='"+store_id+"'&category_id="+
+    				str +="<li><a href='http://develop.01nnt.com/api/wechatApi/goods_list?fansmanage_id="+fansmanage_id+"&store_id="+store_id+"&category_id="+
                     json.data.categorylist[i].id+"'>"+json.data.categorylist[i].name+"</a></li>";
     			}
     			//赋值分类列表
