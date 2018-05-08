@@ -231,7 +231,7 @@ function category_list(category_id,obj){
     var keyword_val = $("#search").val();
     selectgoods(category_id,keyword_val)
     var $this = $(obj);
-    $this.siblings().removeClass('')
+    //$this.siblings().removeClass('')
 }
 //清空购物车
 function cart_empty(){
