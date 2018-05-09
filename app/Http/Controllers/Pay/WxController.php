@@ -23,9 +23,9 @@ class WxController extends Controller
     // api 密钥
     private $key = "f1c7979edd28576bfe57e5d36f0a3604";
     // 商户支付证书
-    private $certPemPath = "/uploads/pem/1503376371/apiclient_cert.pem";
+    private $certPemPath = "./uploads/pem/1503376371/apiclient_cert.pem";
     // 支付证书私钥
-    private $keyPemPath = "/uploads/pem/1503376371/apiclient_key.pem";
+    private $keyPemPath = "./uploads/pem/1503376371/apiclient_key.pem";
 
     public $wechat;
 
