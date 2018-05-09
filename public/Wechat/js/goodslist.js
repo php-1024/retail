@@ -86,7 +86,7 @@ function selectgoods(category,keyword_val){
             $.post(
             	goodslist_url,
                 {'fansmanage_id': fansmanage_id,'_token':_token,'store_id':store_id,
-                'category_id':category_id,'keyword':keyword},
+                'category_id':category_id,'keyword':keyword,'limit':1},
             	function(json){
                     var str = "";
 
