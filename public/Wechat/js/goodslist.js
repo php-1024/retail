@@ -115,7 +115,7 @@ function selectgoods(category,keyword_val){
   var loading = false;
 // 注册'infinite'事件处理函数
 $(document).on('infinite', '.infinite-scroll-bottom',function() {
-
+console.log("adas");
   // 如果正在加载，则退出
   if (loading) return;
 
