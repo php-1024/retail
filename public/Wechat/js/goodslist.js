@@ -50,12 +50,9 @@ $(function(){
           $.detachInfiniteScroll($('.infinite-scroll'));
           // 删除加载提示符
           $('.infinite-scroll-preloader').remove();
-          return;
 
           // 添加新条目
           //
-          // 更新最后加载的序号
-          lastIndex = $('.list-container li').length;
           //容器发生改变,如果是js滚动，需要刷新滚动
           $.refreshScroller();
       }, 1000);
