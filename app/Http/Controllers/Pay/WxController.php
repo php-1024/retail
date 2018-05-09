@@ -44,9 +44,6 @@ class WxController extends Controller
 
     public function test13()
     {
-        var_dump(realpath($this->certPemPath),realpath($this->keyPemPath));
-        exit;
-
         $reqData["type"] = "out_refund_no";
         $reqData["number"] = "1003022622018050853721122351525761650";
 
@@ -92,7 +89,6 @@ class WxController extends Controller
         $data["out_refund_no"] = md5(time());
         $data["total_fee"] = 10;
         $data["refund_fee"] = 5;
-
 
         $res = $this->wechat->refund($data);
         return $this->resDispose($res);
