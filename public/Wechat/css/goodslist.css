@@ -6,7 +6,6 @@ body{
     margin: 0 auto;
     max-width: 750px;
     min-width: 300px;
-    overflow: auto;
     background: #fff;
 }
 .head{
@@ -150,9 +149,10 @@ body{
 }
 .goodslist{
 	width: 100%;
-	overflow: auto;
-	border-top: 0.05rem solid rgb(241,245,248);
-	padding-bottom: 4.0rem;
+    height: 100%;
+    overflow: auto;
+    border-top: 0.05rem solid rgb(241,245,248);
+    padding-bottom: 8.0rem;
 }
 .goodslist .gl_item{
 	padding: 1.0rem 0;
