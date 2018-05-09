@@ -110,6 +110,8 @@ function selectgoods(category,keyword_val){
         	);
 		}
 	);
+    var aa =$("#goodslist");
+    $.attachInfiniteScroll(aa);
 }
 // 加载flag
   var loading = false;
