@@ -50,7 +50,7 @@ class WxController extends Controller
 //////             申请退款金额(单位：分)
 //////            'refund_fee' => 1,
 ////        );
-        $reqData["type"] = "out_refund_no";
+        $reqData["type"] = "out_refund_no1";
         $reqData["number"] = "1003022622018050853721122351525761650";
 
         $res = $this->refundQuery($reqData);
