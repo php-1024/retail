@@ -35,7 +35,7 @@
 					<label class="icon_scavenging"></label>
 			    </div>
 			</div>
-			<div class="goodslist infinite-scroll" id="goodslist" data-distance="100">
+			<div class="goodslist content infinite-scroll" id="goodslist" data-distance="100">
 
 			</div>
             <!-- 加载提示符 -->
