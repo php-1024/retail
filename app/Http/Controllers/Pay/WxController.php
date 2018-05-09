@@ -35,8 +35,8 @@ class WxController extends Controller
             $this->appId,
             $this->mchId,     // mch id
             $this->key,
-            $this->certPemPath,
-            $this->keyPemPath,
+            realpath($this->certPemPath),
+            realpath($this->keyPemPath),
             6000
         );
         $this->wechat = $wechat;
@@ -86,7 +86,6 @@ class WxController extends Controller
     {
         $data["transaction_id"] = '4200000137201805085563986988';
 //        $data["out_trade_no"] = '';
-
 
         $data["out_refund_no"] = md5(time());
         $data["total_fee"] = 10;
