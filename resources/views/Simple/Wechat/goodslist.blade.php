@@ -36,9 +36,13 @@
 			    </div>
 			</div>
 			<div class="goodslist">
-                <div class="" id="goodslist">
+                <div class="content infinite-scroll" id="goodslist">
 
                 </div>
+                <!-- 加载提示符 -->
+              <div class="infinite-scroll-preloader">
+                  <div class="preloader"></div>
+              </div>
 			</div>
 
 	    </div>
