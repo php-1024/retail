@@ -33,7 +33,7 @@ $(function(){
     selectgoods("0","");
 });
 // 注册'infinite'事件处理函数
-  var loading = true;// 加载flag
+  var loading = false;// 加载flag
   $(document).on('infinite', '.infinite-scroll-bottom',function() {
 
       // 如果正在加载，则退出
@@ -46,17 +46,14 @@ $(function(){
       setTimeout(function() {
           // 重置加载flag
           loading = false;
-
-          if (lastIndex >= maxItems) {
-              // 加载完毕，则注销无限加载事件，以防不必要的加载
-              $.detachInfiniteScroll($('.infinite-scroll'));
-              // 删除加载提示符
-              $('.infinite-scroll-preloader').remove();
-              return;
-          }
+          // 加载完毕，则注销无限加载事件，以防不必要的加载
+          $.detachInfiniteScroll($('.infinite-scroll'));
+          // 删除加载提示符
+          $('.infinite-scroll-preloader').remove();
+          return;
 
           // 添加新条目
-          addItems(itemsPerLoad, lastIndex);
+          //
           // 更新最后加载的序号
           lastIndex = $('.list-container li').length;
           //容器发生改变,如果是js滚动，需要刷新滚动
