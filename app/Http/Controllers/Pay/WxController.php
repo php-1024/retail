@@ -50,7 +50,7 @@ class WxController extends Controller
 //////             申请退款金额(单位：分)
 //////            'refund_fee' => 1,
 ////        );
-        $reqData["type"] = "out_refund_no";
+        $reqData["type"] = "out_refund_no1";
         $reqData["number"] = "1003022622018050853721122351525761650";
 
         $res = $this->refundQuery($reqData);
@@ -95,7 +95,7 @@ class WxController extends Controller
             $res["return_msg"] = "SUCCESS";
         } else {
             $res["return_code"] = 0;
-            $res["return_msg"] = $param["return_code"];
+            $res["return_msg"] = $param["return_msg"];
         }
         return json_encode($res,JSON_UNESCAPED_UNICODE);
     }
