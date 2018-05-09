@@ -33,6 +33,7 @@ $(function(){
     selectgoods("0","");
 });
 // 注册'infinite'事件处理函数
+  var loading = false;// 加载flag
   $(document).on('infinite', '.infinite-scroll-bottom',function() {
 
       // 如果正在加载，则退出
