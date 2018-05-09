@@ -128,7 +128,6 @@ function selectgoods(category,keyword_val){
                         var $goodslist = $("#goodslist");
                         $goodslist.empty();
                         $goodslist.append(str);
-                        $.refreshScroller();
             		}else if (json.status == 0) {
                         alert(msg);
                     }
