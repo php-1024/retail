@@ -36,7 +36,7 @@
 			    </div>
 			</div>
 			<div class="goodslist">
-                <div class="content infinite-scroll" id="goodslist">
+                <div class="infinite-scroll" id="goodslist">
 
                 </div>
                 <!-- 加载提示符 -->
