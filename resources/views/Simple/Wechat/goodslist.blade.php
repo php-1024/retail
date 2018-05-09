@@ -39,7 +39,7 @@
                 <div class="infinite-scroll infinite-scroll-bottom" id="goodslist" style="height:5rem;overflow:auto;">
 
                 </div>
-                <!-- 加载提示符 -->
+              <!-- 加载提示符 -->
               <div class="infinite-scroll-preloader">
                   <div class="preloader"></div>
               </div>
