@@ -44,7 +44,6 @@ class WxController extends Controller
 
     public function test13()
     {
-
         $reqData["type"] = "out_refund_no";
         $reqData["number"] = "1003022622018050853721122351525761650";
 
