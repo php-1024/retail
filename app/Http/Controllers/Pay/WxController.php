@@ -87,7 +87,7 @@ class WxController extends Controller
 //        $data["out_trade_no"] = '';
 
 //        $data["out_refund_no"] = md5(time());
-        $data["out_refund_no"] = "1111111";
+//        $data["out_refund_no"] = "1111111";
         $data["total_fee"] = 10;
         $data["refund_fee"] = 2;
         $data["refund_desc"] = "12312321";
