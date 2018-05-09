@@ -35,13 +35,16 @@
 					<label class="icon_scavenging"></label>
 			    </div>
 			</div>
-			<div class="goodslist content infinite-scroll infinite-scroll-bottom" id="goodslist" data-distance="50">
+			<div class="goodslist">
+                <div class="content infinite-scroll" id="goodslist">
 
+                </div>
+                <!-- 加载提示符 -->
+              <div class="infinite-scroll-preloader">
+                  <div class="preloader"></div>
+              </div>
 			</div>
-            <!-- 加载提示符 -->
-          <div class="infinite-scroll-preloader">
-              <div class="preloader"></div>
-          </div>
+
 	    </div>
 	    <div class="cart_bottom">
 	    	<div class="cart_fl">
