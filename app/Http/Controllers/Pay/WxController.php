@@ -91,6 +91,7 @@ class WxController extends Controller
         $data["total_fee"] = 10;
         $data["refund_fee"] = 2;
         $data["refund_desc"] = "12312321";
+        $data["notify_url"] = "12312321";
 
         dd($data);
         $res = $this->wechat->refund($data);
