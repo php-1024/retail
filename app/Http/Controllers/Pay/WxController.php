@@ -94,6 +94,7 @@ class WxController extends Controller
             $res["return_code"] = 1;
             $res["return_msg"] = "SUCCESS";
         } else {
+            $res["data"] = $param;
             $res["return_code"] = 0;
             $res["return_msg"] = $param["return_code"];
         }
