@@ -83,8 +83,8 @@ class WxController extends Controller
 
     public function refund($param = [])
     {
-        $data["transaction_id"] = '4200000129201805095842866557';
-//        $data["out_trade_no"] = '';
+//        $data["transaction_id"] = '4200000129201805095842866557';
+        $data["out_trade_no"] = '150337637120180509095053';
 
         $data["out_refund_no"] = md5(time());
 //        $data["out_refund_no"] = "1111111";
