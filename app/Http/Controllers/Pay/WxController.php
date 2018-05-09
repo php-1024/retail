@@ -92,6 +92,7 @@ class WxController extends Controller
         $data["refund_fee"] = 5;
 
 
+        dd($data);
         $res = $this->wechat->refund($data);
         return $this->resDispose($res);
     }
