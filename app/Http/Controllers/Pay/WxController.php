@@ -83,12 +83,12 @@ class WxController extends Controller
 
     public function refund($param = [])
     {
-        $data["transaction_id"] = '4200000137201805085563986988';
+        $data["transaction_id"] = '4200000129201805095842866557';
 //        $data["out_trade_no"] = '';
 
         $data["out_refund_no"] = md5(time());
         $data["total_fee"] = 10;
-        $data["refund_fee"] = 5;
+        $data["refund_fee"] = 2;
 
         $res = $this->wechat->refund($data);
         return $this->resDispose($res);
